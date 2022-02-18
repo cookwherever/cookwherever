@@ -1,0 +1,782 @@
+- table:
+    schema: auth
+    name: provider_requests
+  configuration:
+    custom_root_fields:
+      insert: insertAuthProviderRequests
+      select_aggregate: authProviderRequestsAggregate
+      insert_one: insertAuthProviderRequest
+      select_by_pk: authProviderRequest
+      select: authProviderRequests
+      delete: deleteAuthProviderRequests
+      update: updateAuthProviderRequests
+      delete_by_pk: deleteAuthProviderRequest
+      update_by_pk: updateAuthProviderRequest
+    custom_name: authProviderRequests
+    custom_column_names:
+      redirect_url: redirectUrl
+- table:
+    schema: auth
+    name: providers
+  configuration:
+    custom_root_fields:
+      insert: insertAuthProviders
+      select_aggregate: authProvidersAggregate
+      insert_one: insertAuthProvider
+      select_by_pk: authProvider
+      select: authProviders
+      delete: deleteAuthProviders
+      update: updateAuthProviders
+      delete_by_pk: deleteAuthProvider
+      update_by_pk: updateAuthProvider
+    custom_name: authProviders
+    custom_column_names: {}
+  array_relationships:
+  - name: userProviders
+    using:
+      foreign_key_constraint_on:
+        column: provider_id
+        table:
+          schema: auth
+          name: user_providers
+- table:
+    schema: auth
+    name: refresh_tokens
+  configuration:
+    custom_root_fields:
+      insert: insertAuthRefreshTokens
+      select_aggregate: authRefreshTokensAggregate
+      insert_one: insertAuthRefreshToken
+      select_by_pk: authRefreshToken
+      select: authRefreshTokens
+      delete: deleteAuthRefreshTokens
+      update: updateAuthRefreshTokens
+      delete_by_pk: deleteAuthRefreshToken
+      update_by_pk: updateAuthRefreshToken
+    custom_name: authRefreshTokens
+    custom_column_names:
+      refresh_token: refreshToken
+      expires_at: expiresAt
+      created_at: createdAt
+      user_id: userId
+  object_relationships:
+  - name: user
+    using:
+      foreign_key_constraint_on: user_id
+- table:
+    schema: auth
+    name: roles
+  configuration:
+    custom_root_fields:
+      insert: insertAuthRoles
+      select_aggregate: authRolesAggregate
+      insert_one: insertAuthRole
+      select_by_pk: authRole
+      select: authRoles
+      delete: deleteAuthRoles
+      update: updateAuthRoles
+      delete_by_pk: deleteAuthRole
+      update_by_pk: updateAuthRole
+    custom_name: authRoles
+    custom_column_names: {}
+  array_relationships:
+  - name: userRoles
+    using:
+      foreign_key_constraint_on:
+        column: role
+        table:
+          schema: auth
+          name: user_roles
+  - name: usersByDefaultRole
+    using:
+      foreign_key_constraint_on:
+        column: default_role
+        table:
+          schema: auth
+          name: users
+- table:
+    schema: auth
+    name: user_providers
+  configuration:
+    custom_root_fields:
+      insert: insertAuthUserProviders
+      select_aggregate: authUserProvidersAggregate
+      insert_one: insertAuthUserProvider
+      select_by_pk: authUserProvider
+      select: authUserProviders
+      delete: deleteAuthUserProviders
+      update: updateAuthUserProviders
+      delete_by_pk: deleteAuthUserProvider
+      update_by_pk: updateAuthUserProvider
+    custom_name: authUserProviders
+    custom_column_names:
+      provider_user_id: providerUserId
+      access_token: accessToken
+      provider_id: providerId
+      refresh_token: refreshToken
+      updated_at: updatedAt
+      created_at: createdAt
+      user_id: userId
+  object_relationships:
+  - name: provider
+    using:
+      foreign_key_constraint_on: provider_id
+  - name: user
+    using:
+      foreign_key_constraint_on: user_id
+- table:
+    schema: auth
+    name: user_roles
+  configuration:
+    custom_root_fields:
+      insert: insertAuthUserRoles
+      select_aggregate: authUserRolesAggregate
+      insert_one: insertAuthUserRole
+      select_by_pk: authUserRole
+      select: authUserRoles
+      delete: deleteAuthUserRoles
+      update: updateAuthUserRoles
+      delete_by_pk: deleteAuthUserRole
+      update_by_pk: updateAuthUserRole
+    custom_name: authUserRoles
+    custom_column_names:
+      created_at: createdAt
+      user_id: userId
+  object_relationships:
+  - name: roleByRole
+    using:
+      foreign_key_constraint_on: role
+  - name: user
+    using:
+      foreign_key_constraint_on: user_id
+- table:
+    schema: auth
+    name: users
+  configuration:
+    custom_root_fields:
+      insert: insertUsers
+      select_aggregate: userAggregate
+      insert_one: insertUser
+      select_by_pk: user
+      select: users
+      delete: deleteUsers
+      update: updateUsers
+      delete_by_pk: deleteUser
+      update_by_pk: updateUser
+    custom_name: users
+    custom_column_names:
+      display_name: displayName
+      email_verified: emailVerified
+      phone_number: phoneNumber
+      last_seen: lastSeen
+      otp_hash_expires_at: otpHashExpiresAt
+      otp_method_last_used: otpMethodLastUsed
+      phone_number_verified: phoneNumberVerified
+      updated_at: updatedAt
+      new_email: newEmail
+      password_hash: passwordHash
+      created_at: createdAt
+      avatar_url: avatarUrl
+      default_role: defaultRole
+      active_mfa_type: activeMfaType
+      otp_hash: otpHash
+      totp_secret: totpSecret
+      is_anonymous: isAnonymous
+      ticket_expires_at: ticketExpiresAt
+  object_relationships:
+  - name: defaultRoleByRole
+    using:
+      foreign_key_constraint_on: default_role
+  array_relationships:
+  - name: refreshTokens
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          schema: auth
+          name: refresh_tokens
+  - name: roles
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          schema: auth
+          name: user_roles
+  - name: userProviders
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          schema: auth
+          name: user_providers
+- table:
+    schema: public
+    name: food
+  object_relationships:
+  - name: food_category
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: food_category
+        insertion_order: null
+        column_mapping:
+          food_category_id: id
+  array_relationships:
+  - name: food_attributes
+    using:
+      foreign_key_constraint_on:
+        column: fdc_id
+        table:
+          schema: public
+          name: food_attribute
+  - name: food_nutrients
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: food_nutrient
+        insertion_order: null
+        column_mapping:
+          fdc_id: fdc_id
+  - name: food_portions
+    using:
+      foreign_key_constraint_on:
+        column: fdc_id
+        table:
+          schema: public
+          name: food_portion
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - fdc_id
+      - data_type
+      - description
+      - food_category_id
+      - publication_date
+      - description_tsv
+      filter: {}
+- table:
+    schema: public
+    name: food_attribute
+  object_relationships:
+  - name: food_attribute_type
+    using:
+      foreign_key_constraint_on: food_attribute_type_id
+- table:
+    schema: public
+    name: food_attribute_type
+- table:
+    schema: public
+    name: food_category
+- table:
+    schema: public
+    name: food_nutrient
+  object_relationships:
+  - name: nutrient
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: nutrient
+        insertion_order: null
+        column_mapping:
+          nutrient_id: id
+- table:
+    schema: public
+    name: food_portion
+  object_relationships:
+  - name: measure_unit
+    using:
+      foreign_key_constraint_on: measure_unit_id
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - id
+      - fdc_id
+      - seq_num
+      - amount
+      - measure_unit_id
+      - portion_description
+      - modifier
+      - gram_weight
+      - data_points
+      - footnote
+      - min_year_acquired
+      filter: {}
+- table:
+    schema: public
+    name: measure_unit
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - id
+      - name
+      - ml
+      filter: {}
+- table:
+    schema: public
+    name: nutrient
+- table:
+    schema: public
+    name: recipe_direction_actions
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - id
+      - action
+      - name
+      - quantity
+      - unit
+      - duration
+      - direction_id
+      filter: {}
+- table:
+    schema: public
+    name: recipe_direction_durations
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - id
+      - type
+      - duration
+      - unit_of_time
+      - seq_num
+      - recipe_id
+      filter: {}
+- table:
+    schema: public
+    name: recipe_directions
+  array_relationships:
+  - name: recipe_direction_actions
+    using:
+      foreign_key_constraint_on:
+        column: direction_id
+        table:
+          schema: public
+          name: recipe_direction_actions
+  insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+      - id
+      - seq_num
+      - step
+      - recipe_id
+      backend_only: false
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - id
+      - seq_num
+      - step
+      - recipe_id
+      filter: {}
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - id
+      - seq_num
+      - step
+      - recipe_id
+      filter: {}
+      check: null
+- table:
+    schema: public
+    name: recipe_favorite
+  object_relationships:
+  - name: recipe
+    using:
+      foreign_key_constraint_on: recipe_id
+  insert_permissions:
+  - role: user
+    permission:
+      check:
+        user_id:
+          _eq: X-Hasura-User-Id
+      columns: []
+      backend_only: false
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - id
+      - recipe_id
+      - user_id
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+  delete_permissions:
+  - role: user
+    permission:
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+- table:
+    schema: public
+    name: recipe_ingredient_food_candidate
+  object_relationships:
+  - name: food
+    using:
+      foreign_key_constraint_on: food_candidate_id
+  - name: food_portion
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: food_portion
+        insertion_order: null
+        column_mapping:
+          food_candidate_portion_id: id
+          food_candidate_id: fdc_id
+  insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+      - food_candidate_id
+      - food_candidate_portion_id
+      - id
+      - recipe_ingredient_id
+      backend_only: false
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - food_candidate_id
+      - food_candidate_portion_id
+      - id
+      - recipe_ingredient_id
+      filter: {}
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - food_candidate_id
+      - food_candidate_portion_id
+      - id
+      - recipe_ingredient_id
+      filter: {}
+      check: null
+- table:
+    schema: public
+    name: recipe_ingredient_groups
+  object_relationships:
+  - name: recipe
+    using:
+      foreign_key_constraint_on: recipe_id
+  array_relationships:
+  - name: group_ingredients
+    using:
+      foreign_key_constraint_on:
+        column: group_id
+        table:
+          schema: public
+          name: recipe_ingredients
+  insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+      - id
+      - name
+      - recipe_id
+      - seq_num
+      backend_only: false
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - id
+      - name
+      - recipe_id
+      - seq_num
+      filter: {}
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - id
+      - name
+      - recipe_id
+      - seq_num
+      filter: {}
+      check: null
+- table:
+    schema: public
+    name: recipe_ingredients
+  object_relationships:
+  - name: food
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: food
+        insertion_order: null
+        column_mapping:
+          food_id: fdc_id
+  - name: recipe_ingredient_group
+    using:
+      foreign_key_constraint_on: group_id
+  array_relationships:
+  - name: recipe_ingredient_food_candidates
+    using:
+      foreign_key_constraint_on:
+        column: recipe_ingredient_id
+        table:
+          schema: public
+          name: recipe_ingredient_food_candidate
+  computed_fields:
+  - name: food_candidates
+    definition:
+      function:
+        schema: public
+        name: food_candidates_for_ingredient
+      table_argument: search
+    comment: ""
+  insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+      - id
+      - name
+      - amount
+      - units
+      - comment
+      - food_id
+      - text
+      - seq_num
+      - group_id
+      backend_only: false
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - id
+      - name
+      - amount
+      - units
+      - comment
+      - food_id
+      - text
+      - seq_num
+      - group_id
+      filter: {}
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - id
+      - name
+      - amount
+      - units
+      - comment
+      - food_id
+      - text
+      - seq_num
+      - group_id
+      filter: {}
+      check: null
+- table:
+    schema: public
+    name: recipe_list_items
+  object_relationships:
+  - name: recipe
+    using:
+      foreign_key_constraint_on: recipe_id
+  - name: recipe_list
+    using:
+      foreign_key_constraint_on: recipe_list_id
+  insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+      - id
+      - seq_num
+      - recipe_list_id
+      - recipe_id
+      backend_only: false
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - id
+      - recipe_id
+      - recipe_list_id
+      - seq_num
+      filter:
+        recipe_list:
+          user_id:
+            _eq: X-Hasura-User-Id
+- table:
+    schema: public
+    name: recipe_lists
+  array_relationships:
+  - name: recipe_list_items
+    using:
+      foreign_key_constraint_on:
+        column: recipe_list_id
+        table:
+          schema: public
+          name: recipe_list_items
+  insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      set:
+        user_id: x-hasura-User-Id
+      columns:
+      - name
+      backend_only: false
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - id
+      - name
+      - user_id
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+  delete_permissions:
+  - role: user
+    permission:
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+- table:
+    schema: public
+    name: recipe_tags
+  insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+      - id
+      - name
+      - recipe_id
+      - seq_num
+      backend_only: false
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - id
+      - name
+      - recipe_id
+      - seq_num
+      filter: {}
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - id
+      - name
+      - recipe_id
+      - seq_num
+      filter: {}
+      check: null
+- table:
+    schema: public
+    name: recipes
+  array_relationships:
+  - name: recipe_direction_durations
+    using:
+      foreign_key_constraint_on:
+        column: recipe_id
+        table:
+          schema: public
+          name: recipe_direction_durations
+  - name: recipe_directions
+    using:
+      foreign_key_constraint_on:
+        column: recipe_id
+        table:
+          schema: public
+          name: recipe_directions
+  - name: recipe_ingredient_groups
+    using:
+      foreign_key_constraint_on:
+        column: recipe_id
+        table:
+          schema: public
+          name: recipe_ingredient_groups
+  - name: recipe_tags
+    using:
+      foreign_key_constraint_on:
+        column: recipe_id
+        table:
+          schema: public
+          name: recipe_tags
+  insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+      - id
+      - created_at
+      - updated_at
+      - name
+      - source
+      - image
+      - extraction_metadata
+      backend_only: false
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - created_at
+      - extraction_metadata
+      - id
+      - image
+      - name
+      - source
+      - updated_at
+      - visible
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - created_at
+      - extraction_metadata
+      - id
+      - image
+      - name
+      - source
+      - updated_at
+      - visible
+      filter: {}
+      check: null
+- table:
+    schema: public
+    name: user_config
+  insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      set:
+        user_id: x-hasura-User-Id
+      columns:
+      - printer_url
+      backend_only: false
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - printer_url
+      - user_id
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id

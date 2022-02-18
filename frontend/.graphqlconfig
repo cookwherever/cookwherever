@@ -1,0 +1,16 @@
+{
+  "name": "Food Data GraphQL Schema",
+  "schemaPath": "schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "Default GraphQL Endpoint": {
+        "url": "http://localhost:8080/v1/graphql",
+        "headers": {
+          "user-agent": "JS GraphQL",
+          "x-hasura-admin-secret": "password"
+        },
+        "introspect": false
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "version": "0.0.0",
+  "name": "Food Data Recipe Saver",
+  "manifest_version": 2,
+  "description": "Save your recipes!",
+  "browser_action": {
+    "default_title": "Save a recipe."
+  },
+  "icons": {
+    "16": "img/icon-16.png",
+    "48": "img/icon-48.png",
+    "128": "img/icon-128.png"
+  },
+  "web_accessible_resources": [
+    "inject.html"
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [ "contextMenus", "management", "tabs", "storage", "https://*/*", "http://*/*"],
+  "content_security_policy": "default-src 'self'; script-src 'self' http://localhost:3000 https://localhost:3000 'unsafe-eval'; connect-src http://localhost:5000 http://localhost:3000 https://localhost:3000 https://*.execute-api.us-west-2.amazonaws.com https://food.vanderpot.net; style-src * 'unsafe-inline' 'self' blob:; img-src 'self' data:;"
+}

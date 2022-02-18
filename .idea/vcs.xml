@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/backend" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/etl" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/etl/recipe-scrapers" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/extension" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/recipe-saver" vcs="Git" />
+  </component>
+</project>
