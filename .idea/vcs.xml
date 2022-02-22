@@ -3,6 +3,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/backend" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/backend/etl/recipe-scrapers" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/etl" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/etl/recipe-scrapers" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/extension" vcs="Git" />

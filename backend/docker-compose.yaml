@@ -17,11 +17,12 @@ services:
     restart: always
     environment:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD:-secretpgpassword}@postgres:5432/postgres
-      HASURA_GRAPHQL_JWT_SECRET: ${HASURA_GRAPHQL_JWT_SECRET}
       HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET}
       HASURA_GRAPHQL_UNAUTHORIZED_ROLE: public
       HASURA_GRAPHQL_LOG_LEVEL: debug
       HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
+    env_file:
+      - .env
     ports:
       - '8080:8080'
   hasura-auth:
@@ -38,6 +39,8 @@ services:
       AUTH_SMTP_PORT: 1025
     ports:
       - '4000:4000'
+    volumes:
+      - ./email-templates:/app/email-templates
   mailhog:
     image: mailhog/mailhog
     environment:

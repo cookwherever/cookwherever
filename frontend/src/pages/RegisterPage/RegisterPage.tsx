@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import './LoginPage.scss'
+import './RegisterPage.scss'
 import {Button, Grid, Paper, styled, TextField} from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { Face, Fingerprint } from '@material-ui/icons';
-import { inputChangeHandler } from '../../util/hook-helpers';
-import path from "path";
+import path from 'path';
+import { inputChangeHandler } from '../../utils/hook-helpers';
 
 const RegisterPaper = styled(Paper)(({ theme }) => ({
   margin: theme.spacing() * 2
@@ -21,7 +21,7 @@ interface LoginPageProps {
 export const RegisterPage: React.FunctionComponent<LoginPageProps> = (props) => {
   const history = useHistory();
 
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const login = async () => {
@@ -30,14 +30,14 @@ export const RegisterPage: React.FunctionComponent<LoginPageProps> = (props) => 
       throw new Error('auth url is not set!');
     }
 
-    const resp = await fetch(path.join(authUrl, '/signup/email-password'), {
+    const resp = await fetch(`${authUrl}/signup/email-password`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        'username': username,
+        'email': email,
         'password': password
       })
     })
@@ -55,7 +55,7 @@ export const RegisterPage: React.FunctionComponent<LoginPageProps> = (props) => 
             <Face />
           </Grid>
           <Grid item md={true} sm={true} xs={true}>
-            <TextField onChange={inputChangeHandler(setUsername)} id="username" label="Username" type="email" fullWidth autoFocus required />
+            <TextField onChange={inputChangeHandler(setEmail)} id="username" label="Email" type="email" fullWidth autoFocus required />
           </Grid>
         </Grid>
         <Grid container spacing={8} alignItems="flex-end">

@@ -17,7 +17,7 @@ import { RecipeListsPage } from './pages/RecipeListsPage/RecipeListsPage';
 import {RegisterPage} from "./pages/RegisterPage/RegisterPage";
 
 const httpLink = createHttpLink({
-  uri: 'https://food.vanderpot.net/v1/graphql',
+  uri: 'http://localhost:8080/v1/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {
