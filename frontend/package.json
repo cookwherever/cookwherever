@@ -61,7 +61,6 @@
     "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
-    "node-sass": "^4.14.1",
     "numeric-quantity": "^1.0.2",
     "nyc": "^15.1.0",
     "prettier-eslint": "^11.0.0",
@@ -103,7 +102,8 @@
     "@graphql-codegen/typescript-react-apollo": "^2.2.1",
     "@types/lodash": "^4.14.177",
     "@types/react-highlight-words": "^0.16.3",
-    "generate-react-cli": "^7.0.4"
+    "generate-react-cli": "^7.0.4",
+    "node-sass": "npm:sass@^1.49.8"
   },
   "scripts": {
     "start": "react-scripts start",
