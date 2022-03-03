@@ -1,15 +1,18 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { Pagination } from '@mui/material';
 import { gql, useQuery } from '@apollo/client';
+import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 import { Recipes, Recipes_Aggregate, Recipes_Bool_Exp } from '../../generated/graphql';
 import { RecipeSearch } from '../../types/component-types';
+import { getSourceHostname } from '../../utils/format-recipe';
+import {useHistory} from "react-router-dom";
 
 export const QUERY = gql`
   query RecipesQuery($where: recipes_bool_exp!, $limit: Int = 10, $offset: Int = 0) {
     recipes(where: $where, limit: $limit, offset: $offset, order_by: {updated_at: asc}) {
       id
       name
+      source
       created_at
     }
     recipes_aggregate(where: $where) {
@@ -19,14 +22,6 @@ export const QUERY = gql`
     }
   }
 `
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    button: {
-      backgroundColor: theme.palette.background.default
-    },
-  }),
-);
 
 function getRecipeSearchWhere(whereConditions: Recipes_Bool_Exp[]): Recipes_Bool_Exp {
   if (whereConditions.length === 0) {
@@ -46,11 +41,10 @@ interface RecipesListProps {
 }
 
 export const RecipesList: React.FunctionComponent<RecipesListProps> = (props) => {
-  const classes = useStyles();
-
   const { recipeSearch } = props;
 
   const [page, setPage] = useState(0);
+  const history = useHistory();
 
   useEffect(() => {
     setPage(0);
@@ -61,8 +55,6 @@ export const RecipesList: React.FunctionComponent<RecipesListProps> = (props) =>
   const changePage = (event: ChangeEvent<unknown>, value: number) => {
     setPage(value - 1);
   }
-
-  console.log(recipeSearch);
 
   const whereConditions: Recipes_Bool_Exp[] = [
     {
@@ -134,19 +126,36 @@ export const RecipesList: React.FunctionComponent<RecipesListProps> = (props) =>
   const pageCount = Math.floor(recipeCount.count / resultsPerPage);
 
   return (
-    <div>
-      {recipes.map((recipe: Recipes, idx) => {
-        const recipeImage = recipe.image ? (<img src={recipe.image} />) : null;
-        return (
-          <a key={`recipe-link-${recipe.id}`} href={`/recipe/${recipe.id}`}>
-            <div className="">
-              <h2>{recipe.name}</h2>
-              {recipeImage}
-            </div>
-          </a>
-        )
-      })}
-      <Pagination page={page + 1} count={pageCount} onChange={changePage} />
-    </div>
+    <Container>
+      <Row>
+        {recipes.map((recipe: Recipes, idx) => {
+          const recipeImage = recipe.image || 'https://via.placeholder.com/300x250';
+          return (
+            <Col
+              key={`recipe-link-${recipe.id}`}
+              sm
+              className='my-2'
+            >
+              <Card
+                style={{ width: '18rem', height: '100%' }}
+                className='hover-card'
+                onClick={() => {
+                  history.push(`/recipe/${recipe.id}`)
+                }}
+              >
+                {/*<Card.Img variant="top" src={recipeImage} />*/}
+                <Card.Body>
+                  <Card.Title>{recipe.name}</Card.Title>
+                  <Card.Text>
+                    <a href={recipe.source}>{getSourceHostname(recipe.source)}</a>
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+          )
+        })}
+        <Pagination page={page + 1} count={pageCount} onChange={changePage} />
+      </Row>
+    </Container>
   )
 }

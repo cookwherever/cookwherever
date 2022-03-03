@@ -5,20 +5,19 @@ import { gql, useMutation, useQuery } from '@apollo/client';
 import {
   List,
   ListItem,
-  Container,
   Grid,
   Paper,
   styled,
   Box,
   Typography,
-  Button, FormControl, InputLabel, Select, MenuItem, Fab
+  FormControl, InputLabel, Select, MenuItem, Fab
 } from '@mui/material';
 
 import Highlighter, { FindChunks } from 'react-highlight-words';
-import { Add, Print } from '@material-ui/icons';
-import numericQuantity from 'numeric-quantity';
+import { Col, Row, Container, ListGroup, Button, Form } from 'react-bootstrap';
 import { Recipe_Ingredient_Groups, Recipe_Ingredients, Recipe_Lists, Recipes } from '../../generated/graphql';
 import FoodCandidateList from '../../components/FoodCandidateList/FoodCandidateList';
+import { getSourceHostname } from '../../utils/format-recipe';
 
 
 const InstructionPaper = styled(Paper)(({ theme }) => ({
@@ -121,10 +120,33 @@ interface IngredientListProps {
 
 const Ingredient = (props: {ingredientGroup: Recipe_Ingredient_Groups, reloadRecipe: () => void}) => {
   const { ingredientGroup, reloadRecipe } = props;
+  const getIngredientConversion = (ingredient: Recipe_Ingredients) => {
+    return ingredient.recipe_ingredient_food_candidates.length
+      ? ingredient.recipe_ingredient_food_candidates.map((food_candidate) => {
+        const portion = food_candidate.food_portion;
+        if (!portion) {
+          console.error(`portion is null for ${food_candidate}`);
+          return null;
+        }
+        return (
+          <>
+            &nbsp;- ({food_candidate.food.description}
+            , {portion.gram_weight}g = {portion.amount}
+            {
+              portion.measure_unit && portion.measure_unit.name !== 'undetermined'
+                ? portion.measure_unit.name
+                : (<>{portion.portion_description} {portion.modifier}</>)
+            })
+          </>
+        )
+      })
+      : <FoodCandidateList id={ingredient.id} selectedCallback={reloadRecipe} />
+  };
+
   return (
-    <Box sx={{ width: '100%' }}>
+    <Container>
       <Typography variant='h5'>{ingredientGroup.name}</Typography>
-      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+      <ListGroup>
         {ingredientGroup.group_ingredients.map((ingredient, idx) => {
           console.log(ingredient.amount, ingredient.units);
           ingredient.recipe_ingredient_food_candidates.forEach(i => {
@@ -141,59 +163,28 @@ const Ingredient = (props: {ingredientGroup: Recipe_Ingredient_Groups, reloadRec
             const normalized = ingredient.amount / modifier;
           }
           return (
-            <Grid item xs={6} key='recipe-ingredient-group-ingredient'>
-              <Item>
-                {ingredient.text}
-                ({ingredient.name} {ingredient.amount} {ingredient.units})
-                {
-                  ingredient.recipe_ingredient_food_candidates.length
-                    ? ingredient.recipe_ingredient_food_candidates.map((food_candidate) => {
-                      const portion = food_candidate.food_portion;
-                      if (!portion) {
-                        console.error(`portion is null for ${food_candidate}`);
-                        return null;
-                      }
-                      return (
-                        <>
-                          &nbsp;- ({food_candidate.food.description}
-                          , {portion.gram_weight}g = {portion.amount}
-                          {
-                            portion.measure_unit && portion.measure_unit.name !== 'undetermined'
-                              ? portion.measure_unit.name
-                              : (<>{portion.portion_description} {portion.modifier}</>)
-                          })
-                        </>
-                      )
-                    })
-                    : <FoodCandidateList id={ingredient.id} selectedCallback={reloadRecipe} />
-                }
-              </Item>
-            </Grid>
+            <ListGroup.Item>
+              {ingredient.text} - ({ingredient.name} {ingredient.amount} {ingredient.units})
+            </ListGroup.Item>
           )
         })}
-      </Grid>
-    </Box>
+      </ListGroup>
+    </Container>
   )
 }
 
 export const IngredientList: React.FunctionComponent<IngredientListProps> = (props) => {
   return (
-    <List>
-      {props.ingredientGroups.map((ingredient_group) => (
-        <ListItem key='recipe-ingredient-group'>
-          <Ingredient ingredientGroup={ingredient_group} reloadRecipe={props.reloadRecipe} />
-        </ListItem>
-      ))}
-    </List>
+    <Container>
+      <Row>
+        {props.ingredientGroups.map((ingredient_group) => (
+          <Col sm key='recipe-ingredient-group'>
+            <Ingredient ingredientGroup={ingredient_group} reloadRecipe={props.reloadRecipe} />
+          </Col>
+        ))}
+      </Row>
+    </Container>
   )
-}
-
-function getSourceHostname(source: string) {
-  try {
-    return new URL(source).hostname;
-  } catch (e) {
-    return source;
-  }
 }
 
 interface SaveRecipeProps {
@@ -229,23 +220,24 @@ const SaveRecipe = (props: SaveRecipeProps) => {
   const { recipe_lists } = data as {recipe_lists: Recipe_Lists[]};
 
   return (
-    <FormControl sx={{ flexDirection: 'row' }}>
-      <InputLabel id="recipe-list-select-label">List</InputLabel>
-      <Select
-        labelId="recipe-list-select-label"
-        id="recipe-list-select"
-        value={selectedList}
-        label="List"
-        onChange={(event) => { setSelectedList(event.target.value as number); }}
-      >
-        {recipe_lists.map(list => {
-          return (
-            <MenuItem value={list.id} key={list.id}>{list.name}</MenuItem>
-          )
-        })}
-      </Select>
-      <Button onClick={saveRecipe}>save</Button>
-    </FormControl>
+    <Row className="justify-content-md-center">
+      <Col xs={12} md={8} className="px-1">
+        <Form.Select
+          id="recipe-list-select"
+          value={selectedList}
+          onChange={(event) => { setSelectedList(parseInt(event.target.value, 10)); }}
+        >
+          {recipe_lists.map(list => {
+            return (
+              <option value={list.id} key={list.id}>{list.name}</option>
+            )
+          })}
+        </Form.Select>
+      </Col>
+      <Col md={4} className="px-1">
+        <Button size="sm" onClick={saveRecipe}>Save</Button>
+      </Col>
+    </Row>
   )
 };
 
@@ -266,7 +258,7 @@ const HideRecipe = (props: HideRecipeProps) => {
   }
 
   return (
-    <Button onClick={doHideRecipe}>Hide</Button>
+    <Button size="sm" onClick={doHideRecipe}>Hide</Button>
   )
 };
 
@@ -294,7 +286,12 @@ export const ViewRecipePage: React.FunctionComponent<ViewRecipePageProps> = (pro
     const groupIngredients = g.group_ingredients.map(i => i.name as string);
     return [
       ...ingredients,
-      ...groupIngredients
+      ...groupIngredients.map((i: string | null) => {
+        if (i === null) {
+          return '';
+        }
+        return i.replace(/\W/g, '');
+      })
     ]
   }, [] as string[]);
 
@@ -311,48 +308,62 @@ export const ViewRecipePage: React.FunctionComponent<ViewRecipePageProps> = (pro
 
   return (
     <Container className="ViewRecipePage" data-testid="ViewRecipePage">
-      <Box sx={{ pb: 7 }}>
-        <h1 className="text-4xl pb-8">
-          {recipe.name}
-        </h1>
-        <Grid container spacing={2}>
-          <Grid item>
-            <SaveRecipe recipe={recipe} />
-          </Grid>
-          <Grid item>
-            <Button onClick={printRecipe}>Print</Button>
-          </Grid>
-          <Grid item>
-            <HideRecipe recipe={recipe} />
-          </Grid>
-        </Grid>
-        <div id="recipe-container" className="flex flex-row  justify-around">
-          <a href={recipe.source}>
-            <h3 className="text-sm">{sourceHostname}</h3>
-          </a>
-          <div>
-            <h3>Ingredients</h3>
-            <IngredientList ingredientGroups={recipe.recipe_ingredient_groups} reloadRecipe={reloadRecipe} />
-          </div>
-          <div>
-            <h3>Directions</h3>
-            <Box sx={{ flexGrow: 1 }}>
-              <Grid container spacing={2}>
-                {recipe.recipe_directions.map((direction, idx) => {
-                  return (
-                    <Grid sm={12}>
-                      <InstructionPaper key={idx}>
-                        <Highlighter searchWords={ingredientNames} textToHighlight={direction.step} autoEscape={false} />
-                      </InstructionPaper>
-                    </Grid>
-                  )
-                }
-                )}
-              </Grid>
-            </Box>
-          </div>
-        </div>
-      </Box>
+      <Row className='my-2'>
+        <Col xs={12} md={8}>
+          <h1 className="text-4xl pb-8">
+            {recipe.name}
+          </h1>
+          <h5>from <a href={recipe.source}>{sourceHostname}</a></h5>
+        </Col>
+        <Col className="p-3" xs={6} md={4}>
+          <Form>
+            <Row>
+              <Col md={8}>
+                <Form.Group controlId="formSaveToList">
+                  <SaveRecipe recipe={recipe} />
+                </Form.Group>
+              </Col>
+              <Col md={2}>
+                <Form.Group controlId="formPrint">
+                  <Button size="sm" onClick={printRecipe}>Print</Button>
+                </Form.Group>
+              </Col>
+              <Col md={2}>
+                <Form.Group controlId="formHide">
+                  <HideRecipe recipe={recipe} />
+                </Form.Group>
+              </Col>
+            </Row>
+          </Form>
+        </Col>
+      </Row>
+      <Row>
+        <Container>
+          <Row>
+            <Col xs={6} md={4}>
+              <h3>Ingredients</h3>
+              <IngredientList ingredientGroups={recipe.recipe_ingredient_groups} reloadRecipe={reloadRecipe} />
+            </Col>
+            <Col xs={12} md={8}>
+              <h3>Directions</h3>
+              <Box sx={{ flexGrow: 1 }}>
+                <Grid container spacing={2}>
+                  {recipe.recipe_directions.map((direction, idx) => {
+                      return (
+                        <Grid sm={12}>
+                          <InstructionPaper key={direction.id}>
+                            <Highlighter searchWords={ingredientNames} textToHighlight={direction.step} autoEscape={false} />
+                          </InstructionPaper>
+                        </Grid>
+                      )
+                    }
+                  )}
+                </Grid>
+              </Box>
+            </Col>
+          </Row>
+        </Container>
+      </Row>
     </Container>
   )
 }

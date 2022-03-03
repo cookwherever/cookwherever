@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { Face, Fingerprint } from '@material-ui/icons';
 import path from 'path';
 import { inputChangeHandler } from '../../utils/hook-helpers';
+import { authUrl } from 'src/utils/auth';
 
 const LoginPaper = styled(Paper)(({ theme }) => ({
   margin: theme.spacing() * 2
@@ -25,11 +26,6 @@ export const LoginPage: React.FunctionComponent<LoginPageProps> = (props) => {
   const [password, setPassword] = useState('');
 
   const login = async () => {
-    const authUrl = process.env.REACT_APP_AUTH_URL;
-    if (!authUrl) {
-      throw new Error('auth url is not set!');
-    }
-
     const resp = await fetch(`${authUrl}/signin/email-password`, {
       method: 'POST',
       headers: {
@@ -49,6 +45,10 @@ export const LoginPage: React.FunctionComponent<LoginPageProps> = (props) => {
     const data = await resp.json() as {session: {accessToken: string, user: {email: string}}}
     localStorage.setItem('token', data.session.accessToken);
     history.push('/')
+  }
+
+  const loginWithGoogle = () => {
+    window.location.href = `${authUrl}/signin/provider/google`;
   }
 
   return (
@@ -72,6 +72,9 @@ export const LoginPage: React.FunctionComponent<LoginPageProps> = (props) => {
         </Grid>
         <Grid container justify="center" style={{ marginTop: '10px' }}>
           <Button onClick={login} variant="outlined" color="primary" style={{ textTransform: 'none' }}>Login</Button>
+        </Grid>
+        <Grid container justify="center" style={{ marginTop: '10px' }}>
+          <Button onClick={loginWithGoogle} variant="outlined" color="primary" style={{ textTransform: 'none' }}>Login with Google</Button>
         </Grid>
       </LoginContent>
     </LoginPaper>

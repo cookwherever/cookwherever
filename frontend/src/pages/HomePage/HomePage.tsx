@@ -1,64 +1,111 @@
 import React, { useEffect, useState } from 'react'
 import './HomePage.scss'
-import { Box, Container, Paper, styled } from '@material-ui/core';
 import { AutoField, AutoForm, ListField, SubmitField } from 'uniforms-material';
 import { gql } from '@apollo/client';
 import { buildASTSchema } from 'graphql';
 import { GraphQLBridge } from 'uniforms-bridge-graphql';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Grid } from '@mui/material';
+import { Col, Container, Form, InputGroup, Row } from 'react-bootstrap';
+import ListInput from 'src/components/ListInput';
 import { Recipes } from '../../generated/graphql';
 import SpeechInput from '../../components/SpeechInput/SpeechInput';
 import { RecipesList } from '../../components/RecipesList/RecipesList';
 import { RecipeSearch } from '../../types/component-types';
+import {getRefreshedToken} from "../../utils/auth";
 
 interface HomePageProps {
 
 }
 
-const SearchPaper = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  color: theme.palette.text.secondary,
-  padding: '1em',
-  margin: '1em'
-}));
-
-
-const recipeSchema = gql`
-    type Recipe {
-        name: String
-        source: String
-        ingredients: [String]!
-        tags: [String]!
-    }
-
-    type Query {
-        anything: ID
-    }
-`
-
-const schemaType = buildASTSchema(recipeSchema).getType('Recipe')
-const schemaExtras = {
-  recipe_tags: {
-    label: 'Tags',
-  },
+interface RecipeSearchFormProps {
+  recipeSearch: RecipeSearch
+  setRecipeSearch: React.Dispatch<RecipeSearch>
 }
 
-const schemaValidator = (recipe: Recipes) => {
-  return null
+const RecipeSearchForm: React.FunctionComponent<RecipeSearchFormProps> = ({ recipeSearch, setRecipeSearch }) => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    return null;
+  }
+  return (
+    <Form noValidate validated={false} onSubmit={onSubmit}>
+      <Row className='my-2'>
+        <Form.Group as={Col} md="6" controlId="validationCustom01">
+          <Form.Label>Recipe Name</Form.Label>
+          <Form.Control
+            required
+            type="text"
+            placeholder="Recipe Name"
+            defaultValue="Apple Pie"
+            onChange={(e) => {
+              setRecipeSearch({
+                ...recipeSearch,
+                name: e.target.value
+              })
+            }}
+          />
+        </Form.Group>
+        <Form.Group as={Col} md="6" controlId="validationCustom02">
+          <Form.Label>Source Name</Form.Label>
+          <Form.Control
+            required
+            type="text"
+            placeholder="Source Name"
+            defaultValue="americastestkitchen.com"
+            onChange={(e) => {
+              setRecipeSearch({
+                ...recipeSearch,
+                source: e.target.value
+              })
+            }}
+          />
+        </Form.Group>
+      </Row>
+      <Row className='my-2'>
+        <Col md="6">
+          <Form.Label>Recipes that have these ingredients</Form.Label>
+          <ListInput
+            header="Ingredients"
+            placeholder="Apples"
+            onChange={(ingredients) => {
+              setRecipeSearch({
+                ...recipeSearch,
+                ingredients
+              })
+            }}
+          />
+        </Col>
+        <Col md="6">
+          <Form.Label>Recipes that have these tags</Form.Label>
+          <ListInput
+            header="Tags"
+            placeholder="Dessert"
+            onChange={(tags) => {
+              setRecipeSearch({
+                ...recipeSearch,
+                tags
+              })
+            }}
+          />
+        </Col>
+      </Row>
+    </Form>
+  )
 }
-
-const bridge = new GraphQLBridge(
-  // @ts-ignore
-  schemaType,
-  schemaValidator,
-  schemaExtras
-)
-
 
 export const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
-  const { search, pathname } = useLocation();
+  const { search, pathname, hash } = useLocation();
   const history = useHistory();
+
+  const params = new URLSearchParams(hash.replace('#', ''));
+  console.log(hash, params);
+  const refreshToken = params.get('refreshToken')
+
+  useEffect(() => {
+    if (refreshToken) {
+      getRefreshedToken(refreshToken);
+    }
+  }, [refreshToken])
 
   const urlSearchParams = new URLSearchParams(search);
 
@@ -78,40 +125,19 @@ export const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
     ])
     history.replace({ pathname, search: searchParams.toString() })
   }, [history, pathname, recipeSearch]);
-  
-  const onSubmit = async (submittedRecipeSearch: RecipeSearch) => {
-    setRecipeSearch(submittedRecipeSearch);
-    return null;
-  }
 
   return (
-    <Container className="HomePage" data-testid="HomePage">
-      <Box sx={{ pb: 9 }}>
-        <SearchPaper>
-          <Grid container direction='column' justifyContent='center' alignItems='center'>
-            <Grid item>
-              <AutoForm
-                placeholder={true}
-                schema={bridge}
-                model={recipeSearch}
-                /*
-                // @ts-ignore */
-                onSubmit={onSubmit}
-              >
-                <AutoField name="name" />
-                <AutoField name="source" />
-                <ListField name="ingredients" />
-                <ListField name="tags" />
-                <SubmitField />
-              </AutoForm>
-            </Grid>
-            {/* <Grid item> */}
-            {/*  <SpeechInput /> */}
-            {/* </Grid> */}
-          </Grid>
-        </SearchPaper>
+    <Container>
+      <h1 className='text-center my-2'>Cook Wherever</h1>
+      <Row>
+        <RecipeSearchForm recipeSearch={recipeSearch} setRecipeSearch={setRecipeSearch} />
+        {/* <Grid item> */}
+        {/*  <SpeechInput /> */}
+        {/* </Grid> */}
+      </Row>
+      <Row>
         <RecipesList recipeSearch={recipeSearch} />
-      </Box>
+      </Row>
     </Container>
   );
 }
