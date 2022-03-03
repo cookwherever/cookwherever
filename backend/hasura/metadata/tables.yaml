@@ -602,9 +602,9 @@
       check: {}
       columns:
       - id
-      - seq_num
-      - recipe_list_id
       - recipe_id
+      - recipe_list_id
+      - seq_num
       backend_only: false
   select_permissions:
   - role: user
@@ -614,6 +614,13 @@
       - recipe_id
       - recipe_list_id
       - seq_num
+      filter:
+        recipe_list:
+          user_id:
+            _eq: X-Hasura-User-Id
+  delete_permissions:
+  - role: user
+    permission:
       filter:
         recipe_list:
           user_id:
@@ -636,7 +643,9 @@
       set:
         user_id: x-hasura-User-Id
       columns:
+      - id
       - name
+      - user_id
       backend_only: false
   select_permissions:
   - role: user

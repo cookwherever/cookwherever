@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose -f docker-compose.yaml convert -c -o k8s
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mailhog
+  name: mailhog
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mailhog
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose -f docker-compose.yaml convert -c -o k8s
+        kompose.version: 1.26.0 (40646f47)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: mailhog
+    spec:
+      containers:
+        - env:
+            - name: SMTP_HOST
+              value: mailhog
+            - name: SMTP_PASS
+            - name: SMTP_PORT
+              value: "1025"
+            - name: SMTP_SECURE
+            - name: SMTP_SENDER
+            - name: SMTP_USER
+          image: mailhog/mailhog
+          name: mailhog
+          ports:
+            - containerPort: 1025
+            - containerPort: 8025
+          resources: {}
+          volumeMounts:
+            - mountPath: /maildir
+              name: mailhog-claim0
+      restartPolicy: Always
+      volumes:
+        - name: mailhog-claim0
+          persistentVolumeClaim:
+            claimName: mailhog-claim0
+status: {}

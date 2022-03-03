@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kompose.cmd: kompose -f docker-compose.yaml convert -c -o k8s
+    kompose.service.expose: fooddata-login.vanderpot.net
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: hasura-auth
+  name: hasura-auth
+spec:
+  rules:
+    - host: fooddata-login.vanderpot.net
+      http:
+        paths:
+          - backend:
+              service:
+                name: hasura-auth
+                port:
+                  number: 4000
+            path: /
+            pathType: Prefix
+status:
+  loadBalancer: {}
