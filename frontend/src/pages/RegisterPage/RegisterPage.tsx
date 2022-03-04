@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './RegisterPage.scss'
+
 import {Button, Grid, Paper, styled, TextField} from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { Face, Fingerprint } from '@material-ui/icons';

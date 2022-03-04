@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import './ImageCropper.scss'
+
 import Grid from '@material-ui/core/Grid'
 // eslint-disable-next-line import/no-duplicates
 import ReactCrop from 'react-image-crop';

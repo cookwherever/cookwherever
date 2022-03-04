@@ -10,7 +10,7 @@ $ npx generate-react-cli component SearchIngredientPage --type=page
 */
 
 import React from 'react'
-import './SearchIngredientPage.scss'
+
 
 interface SearchIngredientPageProps {
 

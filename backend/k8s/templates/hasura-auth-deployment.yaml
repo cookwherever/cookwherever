@@ -2,8 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose -f docker-compose.yaml convert -c -o k8s
-    kompose.service.expose: fooddata-login.vanderpot.net
+    kompose.cmd: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
+    kompose.service.expose: login.cookwherever.com
     kompose.version: 1.26.0 (40646f47)
   creationTimestamp: null
   labels:
@@ -18,8 +18,8 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: kompose -f docker-compose.yaml convert -c -o k8s
-        kompose.service.expose: fooddata-login.vanderpot.net
+        kompose.cmd: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
+        kompose.service.expose: login.cookwherever.com
         kompose.version: 1.26.0 (40646f47)
       creationTimestamp: null
       labels:
@@ -63,7 +63,10 @@ spec:
                   key: AUTH_ANONYMOUS_USERS_ENABLED
                   name: env
             - name: AUTH_CLIENT_URL
-              value: https://cookbook.vanderpot.net
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTH_CLIENT_URL
+                  name: env
             - name: AUTH_DISABLE_NEW_USERS
               valueFrom:
                 configMapKeyRef:
@@ -150,15 +153,9 @@ spec:
                   key: AUTH_PORT
                   name: env
             - name: AUTH_PROVIDER_GOOGLE_CLIENT_ID
-              valueFrom:
-                configMapKeyRef:
-                  key: AUTH_PROVIDER_GOOGLE_CLIENT_ID
-                  name: env
+              value: 875893625137-o31bbtcuu3qvou8l617hkd35letm8451.apps.googleusercontent.com
             - name: AUTH_PROVIDER_GOOGLE_CLIENT_SECRET
-              valueFrom:
-                configMapKeyRef:
-                  key: AUTH_PROVIDER_GOOGLE_CLIENT_SECRET
-                  name: env
+              value: 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
             - name: AUTH_PROVIDER_GOOGLE_ENABLED
               valueFrom:
                 configMapKeyRef:
@@ -185,7 +182,10 @@ spec:
                   key: AUTH_REFRESH_TOKEN_EXPIRES_IN
                   name: env
             - name: AUTH_SERVER_URL
-              value: https://fooddata-login.vanderpot.net
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTH_SERVER_URL
+                  name: env
             - name: AUTH_SMS_PASSWORDLESS_ENABLED
               valueFrom:
                 configMapKeyRef:
@@ -263,7 +263,7 @@ spec:
                 configMapKeyRef:
                   key: POSTGRES_PASSWORD
                   name: env
-          image: nhost/hasura-auth:latest
+          image: nhost/hasura-auth:0.2.1
           name: hasura-auth
           ports:
             - containerPort: 4000

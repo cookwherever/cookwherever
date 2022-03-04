@@ -2,8 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose -f docker-compose.yaml convert -c -o k8s
-    kompose.service.expose: fooddata.vanderpot.net
+    kompose.cmd: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
+    kompose.service.expose: api.cookwherever.com
     kompose.version: 1.26.0 (40646f47)
   creationTimestamp: null
   labels:
@@ -18,8 +18,8 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: kompose -f docker-compose.yaml convert -c -o k8s
-        kompose.service.expose: fooddata.vanderpot.net
+        kompose.cmd: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
+        kompose.service.expose: api.cookwherever.com
         kompose.version: 1.26.0 (40646f47)
       creationTimestamp: null
       labels:
@@ -61,6 +61,11 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: AUTH_ANONYMOUS_USERS_ENABLED
+                  name: env
+            - name: AUTH_CLIENT_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTH_CLIENT_URL
                   name: env
             - name: AUTH_DISABLE_NEW_USERS
               valueFrom:
@@ -147,16 +152,6 @@ spec:
                 configMapKeyRef:
                   key: AUTH_PORT
                   name: env
-            - name: AUTH_PROVIDER_GOOGLE_CLIENT_ID
-              valueFrom:
-                configMapKeyRef:
-                  key: AUTH_PROVIDER_GOOGLE_CLIENT_ID
-                  name: env
-            - name: AUTH_PROVIDER_GOOGLE_CLIENT_SECRET
-              valueFrom:
-                configMapKeyRef:
-                  key: AUTH_PROVIDER_GOOGLE_CLIENT_SECRET
-                  name: env
             - name: AUTH_PROVIDER_GOOGLE_ENABLED
               valueFrom:
                 configMapKeyRef:
@@ -181,6 +176,11 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: AUTH_REFRESH_TOKEN_EXPIRES_IN
+                  name: env
+            - name: AUTH_SERVER_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTH_SERVER_URL
                   name: env
             - name: AUTH_SMS_PASSWORDLESS_ENABLED
               valueFrom:

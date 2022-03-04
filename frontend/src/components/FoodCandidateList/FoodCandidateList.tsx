@@ -1,5 +1,5 @@
 import React from 'react';
-import './FoodCandidateList.scss';
+
 import { gql, useMutation, useQuery } from '@apollo/client';
 import {
   Box,

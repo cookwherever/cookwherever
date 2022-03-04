@@ -10,7 +10,7 @@ $ npx generate-react-cli component SaveRecipePage --type=page
 */
 
 import React from 'react'
-import './SaveRecipePage.scss'
+
 import { SaveRecipeForm } from '../../components/SaveRecipeForm/SaveRecipeForm';
 
 interface SaveRecipePageProps {

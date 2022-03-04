@@ -10,7 +10,7 @@ $ npx generate-react-cli component ViewIngredientPage --type=page
 */
 
 import React from 'react'
-import './ViewIngredientPage.scss'
+
 
 interface ViewIngredientPageProps {
 

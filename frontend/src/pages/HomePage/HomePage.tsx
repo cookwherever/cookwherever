@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './HomePage.scss'
+
 import { AutoField, AutoForm, ListField, SubmitField } from 'uniforms-material';
 import { gql } from '@apollo/client';
 import { buildASTSchema } from 'graphql';

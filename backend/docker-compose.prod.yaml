@@ -1,13 +1,15 @@
 version: '3.6'
 services:
   frontend:
-    image: cthompson4321/fooddata-frontend:v0.0.7
+    image: cthompson4321/fooddata-frontend:v0.0.8
     restart: always
     ports:
       - '80:80'
     labels:
-      kompose.service.expose: "cookbook.vanderpot.net"
+      kompose.service.expose: "cookwherever.com"
   hasura-auth:
     environment:
-      AUTH_SERVER_URL: https://fooddata-login.vanderpot.net
-      AUTH_CLIENT_URL: https://cookbook.vanderpot.net
+      AUTH_SERVER_URL: https://login.cookwherever.com
+      AUTH_CLIENT_URL: https://cookwherever.com
+      AUTH_PROVIDER_GOOGLE_CLIENT_ID: 875893625137-o31bbtcuu3qvou8l617hkd35letm8451.apps.googleusercontent.com
+      AUTH_PROVIDER_GOOGLE_CLIENT_SECRET: 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

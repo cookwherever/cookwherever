@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './RecipeListsPage.scss'
+
 import { ApolloCache, DefaultContext, gql, OperationVariables, useMutation, useQuery } from '@apollo/client';
 import {
   Box,

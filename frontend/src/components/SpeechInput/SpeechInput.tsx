@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import styles from './SpeechInput.module.scss';
+
 import {Button} from "@mui/material";
 
 
@@ -74,7 +74,7 @@ const SpeechInput = () => {
   }
 
   return (
-    <div className={styles.SpeechInput}>
+    <div>
       <Button onClick={startInput}>dictate</Button>
       {
         recording && <Button onClick={stopInput}>stop</Button>

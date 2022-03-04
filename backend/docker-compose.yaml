@@ -24,9 +24,9 @@ services:
     ports:
       - '8080:8080'
     labels:
-      kompose.service.expose: "fooddata.vanderpot.net"
+      kompose.service.expose: "api.cookwherever.com"
   hasura-auth:
-    image: nhost/hasura-auth:latest
+    image: nhost/hasura-auth:0.2.1
     depends_on:
       - postgres
       - graphql-engine
@@ -38,7 +38,7 @@ services:
     ports:
       - '4000:4000'
     labels:
-      kompose.service.expose: "fooddata-login.vanderpot.net"
+      kompose.service.expose: "login.cookwherever.com"
   mailhog:
     image: mailhog/mailhog
     environment:
