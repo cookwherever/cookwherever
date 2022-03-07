@@ -43,6 +43,11 @@ def get_recipe(recipe_id, url, page_data):
         print(f"no recipe found for {url}")
         return
 
+    instructions = scraper.instructions().split('\n') if scraper.instructions() else []
+    extended_instructions = []
+    for instruction in instructions:
+        extended_instructions.extend(instruction.split('. '))
+
     return {
         'name': scraper.title(),
         'source': url,
@@ -52,7 +57,7 @@ def get_recipe(recipe_id, url, page_data):
             'time': scraper.total_time(),
         },
         'image': scraper.image(),
-        'recipe_directions': scraper.instructions().split('\n') if scraper.instructions() else [],
+        'recipe_directions': extended_instructions,
         'recipe_ingredient_groups': [
             {
                 'name': None,

@@ -1,3 +1,4 @@
 warcio
 requests
 bs4
+extruct

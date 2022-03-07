@@ -1,12 +1,13 @@
 // src/AppRouter.tsx
 
-import React, {FunctionComponent, Suspense, useEffect, useRef, useState} from 'react'
-import {BrowserRouter as Router, Link, Route, Switch, useHistory, useLocation} from 'react-router-dom'
+import React, { FunctionComponent, Suspense, useEffect, useRef, useState } from 'react'
+import { BrowserRouter as Router, Link, Route, Switch, useHistory, useLocation } from 'react-router-dom'
 import { RecoilRoot } from 'recoil'
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
 import { Home, Bookmark, List, Lock } from '@mui/icons-material';
+import { Container, Nav } from 'react-bootstrap';
 import { ViewIngredientPage } from './pages/ViewIngredientPage/ViewIngredientPage';
 import { SearchIngredientPage } from './pages/SearchIngredientPage/SearchIngredientPage';
 import { SaveRecipePage } from './pages/SaveRecipePage/SaveRecipePage';
@@ -16,14 +17,15 @@ import { LoginPage } from './pages/LoginPage/LoginPage';
 import { RecipeListsPage } from './pages/RecipeListsPage/RecipeListsPage';
 import { RegisterPage } from './pages/RegisterPage/RegisterPage';
 
+import 'bootstrap-icons/font/bootstrap-icons.css'
 import 'bootstrap/dist/css/bootstrap.css';
 import 'src/styles/main.css';
 
-import RecipeVisualizerPage from "./pages/RecipeVisualizerPage/RecipeVisualizerPage";
-import {getRefreshedToken} from "./utils/auth";
+import RecipeVisualizerPage from './pages/RecipeVisualizerPage/RecipeVisualizerPage';
+import {anonymousSignin, getRefreshedToken} from './utils/auth';
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:8080/v1/graphql',
+  uri: process.env.REACT_APP_GRAPHQL_URL
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -33,7 +35,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      ...(token ? { authorization: `Bearer ${token}` } : {}),
     }
   }
 });
@@ -44,11 +46,47 @@ const client = new ApolloClient({
 })
 
 const AppRouter: FunctionComponent = () => {
-  const [value, setValue] = useState(0);
+  // const { hash } = useLocation();
+  //
+  // const params = new URLSearchParams(hash.replace('#', ''));
+  // const refreshToken = params.get('refreshToken')
+  //
+  // useEffect(() => {
+  //   if (refreshToken) {
+  //     getRefreshedToken(refreshToken);
+  //     setLoginType('logged in with Google');
+  //   }
+  // }, [refreshToken]);
+  //
+  // const [loginType, setLoginType] = useState<string>('not logged in');
+  //
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token');
+  //   if (!token) {
+  //     anonymousSignin();
+  //     setLoginType('anonymous');
+  //   }
+  // }, []);
 
   return (
     <ApolloProvider client={client}>
       <Router>
+        <Container>
+          <Nav className="justify-content-center" activeKey="/">
+            <Nav.Item>
+              <Nav.Link href="/">Home</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href="/recipe/save">Save Recipe</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href="/lists">Lists</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href="/login">Login</Nav.Link>
+            </Nav.Item>
+          </Nav>
+        </Container>
         <RecoilRoot>
           <Suspense fallback={<span>Loading...</span>}>
             <Switch>
@@ -64,20 +102,6 @@ const AppRouter: FunctionComponent = () => {
             </Switch>
           </Suspense>
         </RecoilRoot>
-        <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-          <BottomNavigation
-            showLabels
-            value={value}
-            onChange={(event, newValue) => {
-              setValue(newValue);
-            }}
-          >
-            <BottomNavigationAction component={Link} to="/" label="Home" icon={<Home />} />
-            <BottomNavigationAction component={Link} to="/recipe/save" label="Save Recipe" icon={<Bookmark />} />
-            <BottomNavigationAction component={Link} to="/lists" label="Lists" icon={<List />} />
-            <BottomNavigationAction component={Link} to="/login" label="Login" icon={<Lock />} />
-          </BottomNavigation>
-        </Paper>
       </Router>
     </ApolloProvider>
   )

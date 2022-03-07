@@ -1,10 +1,11 @@
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
+export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-const defaultOptions =  {}
+const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -13,113 +14,1135 @@ export type Scalars = {
   Int: number;
   Float: number;
   bigint: any;
+  citext: any;
   float8: any;
   food_data_type_enum: any;
   jsonb: any;
   timestamp: any;
   timestamptz: any;
   tsvector: any;
+  uuid: any;
 };
-
 
 /** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
 export type Boolean_Comparison_Exp = {
-  _eq?: Maybe<Scalars['Boolean']>;
-  _gt?: Maybe<Scalars['Boolean']>;
-  _gte?: Maybe<Scalars['Boolean']>;
-  _in?: Maybe<Array<Scalars['Boolean']>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _lt?: Maybe<Scalars['Boolean']>;
-  _lte?: Maybe<Scalars['Boolean']>;
-  _neq?: Maybe<Scalars['Boolean']>;
-  _nin?: Maybe<Array<Scalars['Boolean']>>;
+  _eq?: InputMaybe<Scalars['Boolean']>;
+  _gt?: InputMaybe<Scalars['Boolean']>;
+  _gte?: InputMaybe<Scalars['Boolean']>;
+  _in?: InputMaybe<Array<Scalars['Boolean']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['Boolean']>;
+  _lte?: InputMaybe<Scalars['Boolean']>;
+  _neq?: InputMaybe<Scalars['Boolean']>;
+  _nin?: InputMaybe<Array<Scalars['Boolean']>>;
 };
 
 /** Boolean expression to compare columns of type "Float". All fields are combined with logical 'AND'. */
 export type Float_Comparison_Exp = {
-  _eq?: Maybe<Scalars['Float']>;
-  _gt?: Maybe<Scalars['Float']>;
-  _gte?: Maybe<Scalars['Float']>;
-  _in?: Maybe<Array<Scalars['Float']>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _lt?: Maybe<Scalars['Float']>;
-  _lte?: Maybe<Scalars['Float']>;
-  _neq?: Maybe<Scalars['Float']>;
-  _nin?: Maybe<Array<Scalars['Float']>>;
+  _eq?: InputMaybe<Scalars['Float']>;
+  _gt?: InputMaybe<Scalars['Float']>;
+  _gte?: InputMaybe<Scalars['Float']>;
+  _in?: InputMaybe<Array<Scalars['Float']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['Float']>;
+  _lte?: InputMaybe<Scalars['Float']>;
+  _neq?: InputMaybe<Scalars['Float']>;
+  _nin?: InputMaybe<Array<Scalars['Float']>>;
 };
 
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 export type Int_Comparison_Exp = {
-  _eq?: Maybe<Scalars['Int']>;
-  _gt?: Maybe<Scalars['Int']>;
-  _gte?: Maybe<Scalars['Int']>;
-  _in?: Maybe<Array<Scalars['Int']>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _lt?: Maybe<Scalars['Int']>;
-  _lte?: Maybe<Scalars['Int']>;
-  _neq?: Maybe<Scalars['Int']>;
-  _nin?: Maybe<Array<Scalars['Int']>>;
+  _eq?: InputMaybe<Scalars['Int']>;
+  _gt?: InputMaybe<Scalars['Int']>;
+  _gte?: InputMaybe<Scalars['Int']>;
+  _in?: InputMaybe<Array<Scalars['Int']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['Int']>;
+  _lte?: InputMaybe<Scalars['Int']>;
+  _neq?: InputMaybe<Scalars['Int']>;
+  _nin?: InputMaybe<Array<Scalars['Int']>>;
 };
 
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
 export type String_Comparison_Exp = {
-  _eq?: Maybe<Scalars['String']>;
-  _gt?: Maybe<Scalars['String']>;
-  _gte?: Maybe<Scalars['String']>;
+  _eq?: InputMaybe<Scalars['String']>;
+  _gt?: InputMaybe<Scalars['String']>;
+  _gte?: InputMaybe<Scalars['String']>;
   /** does the column match the given case-insensitive pattern */
-  _ilike?: Maybe<Scalars['String']>;
-  _in?: Maybe<Array<Scalars['String']>>;
+  _ilike?: InputMaybe<Scalars['String']>;
+  _in?: InputMaybe<Array<Scalars['String']>>;
   /** does the column match the given POSIX regular expression, case insensitive */
-  _iregex?: Maybe<Scalars['String']>;
-  _is_null?: Maybe<Scalars['Boolean']>;
+  _iregex?: InputMaybe<Scalars['String']>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
   /** does the column match the given pattern */
-  _like?: Maybe<Scalars['String']>;
-  _lt?: Maybe<Scalars['String']>;
-  _lte?: Maybe<Scalars['String']>;
-  _neq?: Maybe<Scalars['String']>;
+  _like?: InputMaybe<Scalars['String']>;
+  _lt?: InputMaybe<Scalars['String']>;
+  _lte?: InputMaybe<Scalars['String']>;
+  _neq?: InputMaybe<Scalars['String']>;
   /** does the column NOT match the given case-insensitive pattern */
-  _nilike?: Maybe<Scalars['String']>;
-  _nin?: Maybe<Array<Scalars['String']>>;
+  _nilike?: InputMaybe<Scalars['String']>;
+  _nin?: InputMaybe<Array<Scalars['String']>>;
   /** does the column NOT match the given POSIX regular expression, case insensitive */
-  _niregex?: Maybe<Scalars['String']>;
+  _niregex?: InputMaybe<Scalars['String']>;
   /** does the column NOT match the given pattern */
-  _nlike?: Maybe<Scalars['String']>;
+  _nlike?: InputMaybe<Scalars['String']>;
   /** does the column NOT match the given POSIX regular expression, case sensitive */
-  _nregex?: Maybe<Scalars['String']>;
+  _nregex?: InputMaybe<Scalars['String']>;
   /** does the column NOT match the given SQL regular expression */
-  _nsimilar?: Maybe<Scalars['String']>;
+  _nsimilar?: InputMaybe<Scalars['String']>;
   /** does the column match the given POSIX regular expression, case sensitive */
-  _regex?: Maybe<Scalars['String']>;
+  _regex?: InputMaybe<Scalars['String']>;
   /** does the column match the given SQL regular expression */
-  _similar?: Maybe<Scalars['String']>;
+  _similar?: InputMaybe<Scalars['String']>;
 };
 
+/** columns and relationships of "auth.provider_requests" */
+export type AuthProviderRequests = {
+  __typename?: 'authProviderRequests';
+  id: Scalars['uuid'];
+  redirectUrl: Scalars['String'];
+};
+
+/** aggregated selection of "auth.provider_requests" */
+export type AuthProviderRequests_Aggregate = {
+  __typename?: 'authProviderRequests_aggregate';
+  aggregate?: Maybe<AuthProviderRequests_Aggregate_Fields>;
+  nodes: Array<AuthProviderRequests>;
+};
+
+/** aggregate fields of "auth.provider_requests" */
+export type AuthProviderRequests_Aggregate_Fields = {
+  __typename?: 'authProviderRequests_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<AuthProviderRequests_Max_Fields>;
+  min?: Maybe<AuthProviderRequests_Min_Fields>;
+};
+
+
+/** aggregate fields of "auth.provider_requests" */
+export type AuthProviderRequests_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<AuthProviderRequests_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "auth.provider_requests". All fields are combined with a logical 'AND'. */
+export type AuthProviderRequests_Bool_Exp = {
+  _and?: InputMaybe<Array<AuthProviderRequests_Bool_Exp>>;
+  _not?: InputMaybe<AuthProviderRequests_Bool_Exp>;
+  _or?: InputMaybe<Array<AuthProviderRequests_Bool_Exp>>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  redirectUrl?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "auth.provider_requests" */
+export enum AuthProviderRequests_Constraint {
+  /** unique or primary key constraint */
+  ProviderRequestsPkey = 'provider_requests_pkey'
+}
+
+/** input type for inserting data into table "auth.provider_requests" */
+export type AuthProviderRequests_Insert_Input = {
+  id?: InputMaybe<Scalars['uuid']>;
+  redirectUrl?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type AuthProviderRequests_Max_Fields = {
+  __typename?: 'authProviderRequests_max_fields';
+  id?: Maybe<Scalars['uuid']>;
+  redirectUrl?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type AuthProviderRequests_Min_Fields = {
+  __typename?: 'authProviderRequests_min_fields';
+  id?: Maybe<Scalars['uuid']>;
+  redirectUrl?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "auth.provider_requests" */
+export type AuthProviderRequests_Mutation_Response = {
+  __typename?: 'authProviderRequests_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<AuthProviderRequests>;
+};
+
+/** on conflict condition type for table "auth.provider_requests" */
+export type AuthProviderRequests_On_Conflict = {
+  constraint: AuthProviderRequests_Constraint;
+  update_columns?: Array<AuthProviderRequests_Update_Column>;
+  where?: InputMaybe<AuthProviderRequests_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "auth.provider_requests". */
+export type AuthProviderRequests_Order_By = {
+  id?: InputMaybe<Order_By>;
+  redirectUrl?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: authProviderRequests */
+export type AuthProviderRequests_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "auth.provider_requests" */
+export enum AuthProviderRequests_Select_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  RedirectUrl = 'redirectUrl'
+}
+
+/** input type for updating data in table "auth.provider_requests" */
+export type AuthProviderRequests_Set_Input = {
+  id?: InputMaybe<Scalars['uuid']>;
+  redirectUrl?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "auth.provider_requests" */
+export enum AuthProviderRequests_Update_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  RedirectUrl = 'redirectUrl'
+}
+
+/** columns and relationships of "auth.providers" */
+export type AuthProviders = {
+  __typename?: 'authProviders';
+  id: Scalars['String'];
+  /** An array relationship */
+  userProviders: Array<AuthUserProviders>;
+  /** An aggregate relationship */
+  userProviders_aggregate: AuthUserProviders_Aggregate;
+};
+
+
+/** columns and relationships of "auth.providers" */
+export type AuthProvidersUserProvidersArgs = {
+  distinct_on?: InputMaybe<Array<AuthUserProviders_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthUserProviders_Order_By>>;
+  where?: InputMaybe<AuthUserProviders_Bool_Exp>;
+};
+
+
+/** columns and relationships of "auth.providers" */
+export type AuthProvidersUserProviders_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<AuthUserProviders_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthUserProviders_Order_By>>;
+  where?: InputMaybe<AuthUserProviders_Bool_Exp>;
+};
+
+/** aggregated selection of "auth.providers" */
+export type AuthProviders_Aggregate = {
+  __typename?: 'authProviders_aggregate';
+  aggregate?: Maybe<AuthProviders_Aggregate_Fields>;
+  nodes: Array<AuthProviders>;
+};
+
+/** aggregate fields of "auth.providers" */
+export type AuthProviders_Aggregate_Fields = {
+  __typename?: 'authProviders_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<AuthProviders_Max_Fields>;
+  min?: Maybe<AuthProviders_Min_Fields>;
+};
+
+
+/** aggregate fields of "auth.providers" */
+export type AuthProviders_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<AuthProviders_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "auth.providers". All fields are combined with a logical 'AND'. */
+export type AuthProviders_Bool_Exp = {
+  _and?: InputMaybe<Array<AuthProviders_Bool_Exp>>;
+  _not?: InputMaybe<AuthProviders_Bool_Exp>;
+  _or?: InputMaybe<Array<AuthProviders_Bool_Exp>>;
+  id?: InputMaybe<String_Comparison_Exp>;
+  userProviders?: InputMaybe<AuthUserProviders_Bool_Exp>;
+};
+
+/** unique or primary key constraints on table "auth.providers" */
+export enum AuthProviders_Constraint {
+  /** unique or primary key constraint */
+  ProvidersPkey = 'providers_pkey'
+}
+
+/** input type for inserting data into table "auth.providers" */
+export type AuthProviders_Insert_Input = {
+  id?: InputMaybe<Scalars['String']>;
+  userProviders?: InputMaybe<AuthUserProviders_Arr_Rel_Insert_Input>;
+};
+
+/** aggregate max on columns */
+export type AuthProviders_Max_Fields = {
+  __typename?: 'authProviders_max_fields';
+  id?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type AuthProviders_Min_Fields = {
+  __typename?: 'authProviders_min_fields';
+  id?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "auth.providers" */
+export type AuthProviders_Mutation_Response = {
+  __typename?: 'authProviders_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<AuthProviders>;
+};
+
+/** input type for inserting object relation for remote table "auth.providers" */
+export type AuthProviders_Obj_Rel_Insert_Input = {
+  data: AuthProviders_Insert_Input;
+  /** on conflict condition */
+  on_conflict?: InputMaybe<AuthProviders_On_Conflict>;
+};
+
+/** on conflict condition type for table "auth.providers" */
+export type AuthProviders_On_Conflict = {
+  constraint: AuthProviders_Constraint;
+  update_columns?: Array<AuthProviders_Update_Column>;
+  where?: InputMaybe<AuthProviders_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "auth.providers". */
+export type AuthProviders_Order_By = {
+  id?: InputMaybe<Order_By>;
+  userProviders_aggregate?: InputMaybe<AuthUserProviders_Aggregate_Order_By>;
+};
+
+/** primary key columns input for table: authProviders */
+export type AuthProviders_Pk_Columns_Input = {
+  id: Scalars['String'];
+};
+
+/** select columns of table "auth.providers" */
+export enum AuthProviders_Select_Column {
+  /** column name */
+  Id = 'id'
+}
+
+/** input type for updating data in table "auth.providers" */
+export type AuthProviders_Set_Input = {
+  id?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "auth.providers" */
+export enum AuthProviders_Update_Column {
+  /** column name */
+  Id = 'id'
+}
+
+/** columns and relationships of "auth.refresh_tokens" */
+export type AuthRefreshTokens = {
+  __typename?: 'authRefreshTokens';
+  createdAt: Scalars['timestamptz'];
+  expiresAt: Scalars['timestamptz'];
+  refreshToken: Scalars['uuid'];
+  /** An object relationship */
+  user: Users;
+  userId: Scalars['uuid'];
+};
+
+/** aggregated selection of "auth.refresh_tokens" */
+export type AuthRefreshTokens_Aggregate = {
+  __typename?: 'authRefreshTokens_aggregate';
+  aggregate?: Maybe<AuthRefreshTokens_Aggregate_Fields>;
+  nodes: Array<AuthRefreshTokens>;
+};
+
+/** aggregate fields of "auth.refresh_tokens" */
+export type AuthRefreshTokens_Aggregate_Fields = {
+  __typename?: 'authRefreshTokens_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<AuthRefreshTokens_Max_Fields>;
+  min?: Maybe<AuthRefreshTokens_Min_Fields>;
+};
+
+
+/** aggregate fields of "auth.refresh_tokens" */
+export type AuthRefreshTokens_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<AuthRefreshTokens_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "auth.refresh_tokens" */
+export type AuthRefreshTokens_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<AuthRefreshTokens_Max_Order_By>;
+  min?: InputMaybe<AuthRefreshTokens_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "auth.refresh_tokens" */
+export type AuthRefreshTokens_Arr_Rel_Insert_Input = {
+  data: Array<AuthRefreshTokens_Insert_Input>;
+  /** on conflict condition */
+  on_conflict?: InputMaybe<AuthRefreshTokens_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "auth.refresh_tokens". All fields are combined with a logical 'AND'. */
+export type AuthRefreshTokens_Bool_Exp = {
+  _and?: InputMaybe<Array<AuthRefreshTokens_Bool_Exp>>;
+  _not?: InputMaybe<AuthRefreshTokens_Bool_Exp>;
+  _or?: InputMaybe<Array<AuthRefreshTokens_Bool_Exp>>;
+  createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  expiresAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  refreshToken?: InputMaybe<Uuid_Comparison_Exp>;
+  user?: InputMaybe<Users_Bool_Exp>;
+  userId?: InputMaybe<Uuid_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "auth.refresh_tokens" */
+export enum AuthRefreshTokens_Constraint {
+  /** unique or primary key constraint */
+  RefreshTokensPkey = 'refresh_tokens_pkey'
+}
+
+/** input type for inserting data into table "auth.refresh_tokens" */
+export type AuthRefreshTokens_Insert_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']>;
+  expiresAt?: InputMaybe<Scalars['timestamptz']>;
+  refreshToken?: InputMaybe<Scalars['uuid']>;
+  user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
+  userId?: InputMaybe<Scalars['uuid']>;
+};
+
+/** aggregate max on columns */
+export type AuthRefreshTokens_Max_Fields = {
+  __typename?: 'authRefreshTokens_max_fields';
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  expiresAt?: Maybe<Scalars['timestamptz']>;
+  refreshToken?: Maybe<Scalars['uuid']>;
+  userId?: Maybe<Scalars['uuid']>;
+};
+
+/** order by max() on columns of table "auth.refresh_tokens" */
+export type AuthRefreshTokens_Max_Order_By = {
+  createdAt?: InputMaybe<Order_By>;
+  expiresAt?: InputMaybe<Order_By>;
+  refreshToken?: InputMaybe<Order_By>;
+  userId?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type AuthRefreshTokens_Min_Fields = {
+  __typename?: 'authRefreshTokens_min_fields';
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  expiresAt?: Maybe<Scalars['timestamptz']>;
+  refreshToken?: Maybe<Scalars['uuid']>;
+  userId?: Maybe<Scalars['uuid']>;
+};
+
+/** order by min() on columns of table "auth.refresh_tokens" */
+export type AuthRefreshTokens_Min_Order_By = {
+  createdAt?: InputMaybe<Order_By>;
+  expiresAt?: InputMaybe<Order_By>;
+  refreshToken?: InputMaybe<Order_By>;
+  userId?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "auth.refresh_tokens" */
+export type AuthRefreshTokens_Mutation_Response = {
+  __typename?: 'authRefreshTokens_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<AuthRefreshTokens>;
+};
+
+/** on conflict condition type for table "auth.refresh_tokens" */
+export type AuthRefreshTokens_On_Conflict = {
+  constraint: AuthRefreshTokens_Constraint;
+  update_columns?: Array<AuthRefreshTokens_Update_Column>;
+  where?: InputMaybe<AuthRefreshTokens_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "auth.refresh_tokens". */
+export type AuthRefreshTokens_Order_By = {
+  createdAt?: InputMaybe<Order_By>;
+  expiresAt?: InputMaybe<Order_By>;
+  refreshToken?: InputMaybe<Order_By>;
+  user?: InputMaybe<Users_Order_By>;
+  userId?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: authRefreshTokens */
+export type AuthRefreshTokens_Pk_Columns_Input = {
+  refreshToken: Scalars['uuid'];
+};
+
+/** select columns of table "auth.refresh_tokens" */
+export enum AuthRefreshTokens_Select_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  ExpiresAt = 'expiresAt',
+  /** column name */
+  RefreshToken = 'refreshToken',
+  /** column name */
+  UserId = 'userId'
+}
+
+/** input type for updating data in table "auth.refresh_tokens" */
+export type AuthRefreshTokens_Set_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']>;
+  expiresAt?: InputMaybe<Scalars['timestamptz']>;
+  refreshToken?: InputMaybe<Scalars['uuid']>;
+  userId?: InputMaybe<Scalars['uuid']>;
+};
+
+/** update columns of table "auth.refresh_tokens" */
+export enum AuthRefreshTokens_Update_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  ExpiresAt = 'expiresAt',
+  /** column name */
+  RefreshToken = 'refreshToken',
+  /** column name */
+  UserId = 'userId'
+}
+
+/** columns and relationships of "auth.roles" */
+export type AuthRoles = {
+  __typename?: 'authRoles';
+  role: Scalars['String'];
+  /** An array relationship */
+  userRoles: Array<AuthUserRoles>;
+  /** An aggregate relationship */
+  userRoles_aggregate: AuthUserRoles_Aggregate;
+  /** An array relationship */
+  usersByDefaultRole: Array<Users>;
+  /** An aggregate relationship */
+  usersByDefaultRole_aggregate: Users_Aggregate;
+};
+
+
+/** columns and relationships of "auth.roles" */
+export type AuthRolesUserRolesArgs = {
+  distinct_on?: InputMaybe<Array<AuthUserRoles_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthUserRoles_Order_By>>;
+  where?: InputMaybe<AuthUserRoles_Bool_Exp>;
+};
+
+
+/** columns and relationships of "auth.roles" */
+export type AuthRolesUserRoles_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<AuthUserRoles_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthUserRoles_Order_By>>;
+  where?: InputMaybe<AuthUserRoles_Bool_Exp>;
+};
+
+
+/** columns and relationships of "auth.roles" */
+export type AuthRolesUsersByDefaultRoleArgs = {
+  distinct_on?: InputMaybe<Array<Users_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Users_Order_By>>;
+  where?: InputMaybe<Users_Bool_Exp>;
+};
+
+
+/** columns and relationships of "auth.roles" */
+export type AuthRolesUsersByDefaultRole_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Users_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Users_Order_By>>;
+  where?: InputMaybe<Users_Bool_Exp>;
+};
+
+/** aggregated selection of "auth.roles" */
+export type AuthRoles_Aggregate = {
+  __typename?: 'authRoles_aggregate';
+  aggregate?: Maybe<AuthRoles_Aggregate_Fields>;
+  nodes: Array<AuthRoles>;
+};
+
+/** aggregate fields of "auth.roles" */
+export type AuthRoles_Aggregate_Fields = {
+  __typename?: 'authRoles_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<AuthRoles_Max_Fields>;
+  min?: Maybe<AuthRoles_Min_Fields>;
+};
+
+
+/** aggregate fields of "auth.roles" */
+export type AuthRoles_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<AuthRoles_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "auth.roles". All fields are combined with a logical 'AND'. */
+export type AuthRoles_Bool_Exp = {
+  _and?: InputMaybe<Array<AuthRoles_Bool_Exp>>;
+  _not?: InputMaybe<AuthRoles_Bool_Exp>;
+  _or?: InputMaybe<Array<AuthRoles_Bool_Exp>>;
+  role?: InputMaybe<String_Comparison_Exp>;
+  userRoles?: InputMaybe<AuthUserRoles_Bool_Exp>;
+  usersByDefaultRole?: InputMaybe<Users_Bool_Exp>;
+};
+
+/** unique or primary key constraints on table "auth.roles" */
+export enum AuthRoles_Constraint {
+  /** unique or primary key constraint */
+  RolesPkey = 'roles_pkey'
+}
+
+/** input type for inserting data into table "auth.roles" */
+export type AuthRoles_Insert_Input = {
+  role?: InputMaybe<Scalars['String']>;
+  userRoles?: InputMaybe<AuthUserRoles_Arr_Rel_Insert_Input>;
+  usersByDefaultRole?: InputMaybe<Users_Arr_Rel_Insert_Input>;
+};
+
+/** aggregate max on columns */
+export type AuthRoles_Max_Fields = {
+  __typename?: 'authRoles_max_fields';
+  role?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type AuthRoles_Min_Fields = {
+  __typename?: 'authRoles_min_fields';
+  role?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "auth.roles" */
+export type AuthRoles_Mutation_Response = {
+  __typename?: 'authRoles_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<AuthRoles>;
+};
+
+/** input type for inserting object relation for remote table "auth.roles" */
+export type AuthRoles_Obj_Rel_Insert_Input = {
+  data: AuthRoles_Insert_Input;
+  /** on conflict condition */
+  on_conflict?: InputMaybe<AuthRoles_On_Conflict>;
+};
+
+/** on conflict condition type for table "auth.roles" */
+export type AuthRoles_On_Conflict = {
+  constraint: AuthRoles_Constraint;
+  update_columns?: Array<AuthRoles_Update_Column>;
+  where?: InputMaybe<AuthRoles_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "auth.roles". */
+export type AuthRoles_Order_By = {
+  role?: InputMaybe<Order_By>;
+  userRoles_aggregate?: InputMaybe<AuthUserRoles_Aggregate_Order_By>;
+  usersByDefaultRole_aggregate?: InputMaybe<Users_Aggregate_Order_By>;
+};
+
+/** primary key columns input for table: authRoles */
+export type AuthRoles_Pk_Columns_Input = {
+  role: Scalars['String'];
+};
+
+/** select columns of table "auth.roles" */
+export enum AuthRoles_Select_Column {
+  /** column name */
+  Role = 'role'
+}
+
+/** input type for updating data in table "auth.roles" */
+export type AuthRoles_Set_Input = {
+  role?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "auth.roles" */
+export enum AuthRoles_Update_Column {
+  /** column name */
+  Role = 'role'
+}
+
+/** columns and relationships of "auth.user_providers" */
+export type AuthUserProviders = {
+  __typename?: 'authUserProviders';
+  accessToken: Scalars['String'];
+  createdAt: Scalars['timestamptz'];
+  id: Scalars['uuid'];
+  /** An object relationship */
+  provider: AuthProviders;
+  providerId: Scalars['String'];
+  providerUserId: Scalars['String'];
+  refreshToken?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['timestamptz'];
+  /** An object relationship */
+  user: Users;
+  userId: Scalars['uuid'];
+};
+
+/** aggregated selection of "auth.user_providers" */
+export type AuthUserProviders_Aggregate = {
+  __typename?: 'authUserProviders_aggregate';
+  aggregate?: Maybe<AuthUserProviders_Aggregate_Fields>;
+  nodes: Array<AuthUserProviders>;
+};
+
+/** aggregate fields of "auth.user_providers" */
+export type AuthUserProviders_Aggregate_Fields = {
+  __typename?: 'authUserProviders_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<AuthUserProviders_Max_Fields>;
+  min?: Maybe<AuthUserProviders_Min_Fields>;
+};
+
+
+/** aggregate fields of "auth.user_providers" */
+export type AuthUserProviders_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<AuthUserProviders_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "auth.user_providers" */
+export type AuthUserProviders_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<AuthUserProviders_Max_Order_By>;
+  min?: InputMaybe<AuthUserProviders_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "auth.user_providers" */
+export type AuthUserProviders_Arr_Rel_Insert_Input = {
+  data: Array<AuthUserProviders_Insert_Input>;
+  /** on conflict condition */
+  on_conflict?: InputMaybe<AuthUserProviders_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "auth.user_providers". All fields are combined with a logical 'AND'. */
+export type AuthUserProviders_Bool_Exp = {
+  _and?: InputMaybe<Array<AuthUserProviders_Bool_Exp>>;
+  _not?: InputMaybe<AuthUserProviders_Bool_Exp>;
+  _or?: InputMaybe<Array<AuthUserProviders_Bool_Exp>>;
+  accessToken?: InputMaybe<String_Comparison_Exp>;
+  createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  provider?: InputMaybe<AuthProviders_Bool_Exp>;
+  providerId?: InputMaybe<String_Comparison_Exp>;
+  providerUserId?: InputMaybe<String_Comparison_Exp>;
+  refreshToken?: InputMaybe<String_Comparison_Exp>;
+  updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  user?: InputMaybe<Users_Bool_Exp>;
+  userId?: InputMaybe<Uuid_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "auth.user_providers" */
+export enum AuthUserProviders_Constraint {
+  /** unique or primary key constraint */
+  UserProvidersPkey = 'user_providers_pkey',
+  /** unique or primary key constraint */
+  UserProvidersProviderIdProviderUserIdKey = 'user_providers_provider_id_provider_user_id_key',
+  /** unique or primary key constraint */
+  UserProvidersUserIdProviderIdKey = 'user_providers_user_id_provider_id_key'
+}
+
+/** input type for inserting data into table "auth.user_providers" */
+export type AuthUserProviders_Insert_Input = {
+  accessToken?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  provider?: InputMaybe<AuthProviders_Obj_Rel_Insert_Input>;
+  providerId?: InputMaybe<Scalars['String']>;
+  providerUserId?: InputMaybe<Scalars['String']>;
+  refreshToken?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['timestamptz']>;
+  user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
+  userId?: InputMaybe<Scalars['uuid']>;
+};
+
+/** aggregate max on columns */
+export type AuthUserProviders_Max_Fields = {
+  __typename?: 'authUserProviders_max_fields';
+  accessToken?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  providerId?: Maybe<Scalars['String']>;
+  providerUserId?: Maybe<Scalars['String']>;
+  refreshToken?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+  userId?: Maybe<Scalars['uuid']>;
+};
+
+/** order by max() on columns of table "auth.user_providers" */
+export type AuthUserProviders_Max_Order_By = {
+  accessToken?: InputMaybe<Order_By>;
+  createdAt?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  providerId?: InputMaybe<Order_By>;
+  providerUserId?: InputMaybe<Order_By>;
+  refreshToken?: InputMaybe<Order_By>;
+  updatedAt?: InputMaybe<Order_By>;
+  userId?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type AuthUserProviders_Min_Fields = {
+  __typename?: 'authUserProviders_min_fields';
+  accessToken?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  providerId?: Maybe<Scalars['String']>;
+  providerUserId?: Maybe<Scalars['String']>;
+  refreshToken?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+  userId?: Maybe<Scalars['uuid']>;
+};
+
+/** order by min() on columns of table "auth.user_providers" */
+export type AuthUserProviders_Min_Order_By = {
+  accessToken?: InputMaybe<Order_By>;
+  createdAt?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  providerId?: InputMaybe<Order_By>;
+  providerUserId?: InputMaybe<Order_By>;
+  refreshToken?: InputMaybe<Order_By>;
+  updatedAt?: InputMaybe<Order_By>;
+  userId?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "auth.user_providers" */
+export type AuthUserProviders_Mutation_Response = {
+  __typename?: 'authUserProviders_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<AuthUserProviders>;
+};
+
+/** on conflict condition type for table "auth.user_providers" */
+export type AuthUserProviders_On_Conflict = {
+  constraint: AuthUserProviders_Constraint;
+  update_columns?: Array<AuthUserProviders_Update_Column>;
+  where?: InputMaybe<AuthUserProviders_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "auth.user_providers". */
+export type AuthUserProviders_Order_By = {
+  accessToken?: InputMaybe<Order_By>;
+  createdAt?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  provider?: InputMaybe<AuthProviders_Order_By>;
+  providerId?: InputMaybe<Order_By>;
+  providerUserId?: InputMaybe<Order_By>;
+  refreshToken?: InputMaybe<Order_By>;
+  updatedAt?: InputMaybe<Order_By>;
+  user?: InputMaybe<Users_Order_By>;
+  userId?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: authUserProviders */
+export type AuthUserProviders_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "auth.user_providers" */
+export enum AuthUserProviders_Select_Column {
+  /** column name */
+  AccessToken = 'accessToken',
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ProviderId = 'providerId',
+  /** column name */
+  ProviderUserId = 'providerUserId',
+  /** column name */
+  RefreshToken = 'refreshToken',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  UserId = 'userId'
+}
+
+/** input type for updating data in table "auth.user_providers" */
+export type AuthUserProviders_Set_Input = {
+  accessToken?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  providerId?: InputMaybe<Scalars['String']>;
+  providerUserId?: InputMaybe<Scalars['String']>;
+  refreshToken?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['timestamptz']>;
+  userId?: InputMaybe<Scalars['uuid']>;
+};
+
+/** update columns of table "auth.user_providers" */
+export enum AuthUserProviders_Update_Column {
+  /** column name */
+  AccessToken = 'accessToken',
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ProviderId = 'providerId',
+  /** column name */
+  ProviderUserId = 'providerUserId',
+  /** column name */
+  RefreshToken = 'refreshToken',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  UserId = 'userId'
+}
+
+/** columns and relationships of "auth.user_roles" */
+export type AuthUserRoles = {
+  __typename?: 'authUserRoles';
+  createdAt: Scalars['timestamptz'];
+  id: Scalars['uuid'];
+  role: Scalars['String'];
+  /** An object relationship */
+  roleByRole: AuthRoles;
+  /** An object relationship */
+  user: Users;
+  userId: Scalars['uuid'];
+};
+
+/** aggregated selection of "auth.user_roles" */
+export type AuthUserRoles_Aggregate = {
+  __typename?: 'authUserRoles_aggregate';
+  aggregate?: Maybe<AuthUserRoles_Aggregate_Fields>;
+  nodes: Array<AuthUserRoles>;
+};
+
+/** aggregate fields of "auth.user_roles" */
+export type AuthUserRoles_Aggregate_Fields = {
+  __typename?: 'authUserRoles_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<AuthUserRoles_Max_Fields>;
+  min?: Maybe<AuthUserRoles_Min_Fields>;
+};
+
+
+/** aggregate fields of "auth.user_roles" */
+export type AuthUserRoles_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<AuthUserRoles_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "auth.user_roles" */
+export type AuthUserRoles_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<AuthUserRoles_Max_Order_By>;
+  min?: InputMaybe<AuthUserRoles_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "auth.user_roles" */
+export type AuthUserRoles_Arr_Rel_Insert_Input = {
+  data: Array<AuthUserRoles_Insert_Input>;
+  /** on conflict condition */
+  on_conflict?: InputMaybe<AuthUserRoles_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "auth.user_roles". All fields are combined with a logical 'AND'. */
+export type AuthUserRoles_Bool_Exp = {
+  _and?: InputMaybe<Array<AuthUserRoles_Bool_Exp>>;
+  _not?: InputMaybe<AuthUserRoles_Bool_Exp>;
+  _or?: InputMaybe<Array<AuthUserRoles_Bool_Exp>>;
+  createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  role?: InputMaybe<String_Comparison_Exp>;
+  roleByRole?: InputMaybe<AuthRoles_Bool_Exp>;
+  user?: InputMaybe<Users_Bool_Exp>;
+  userId?: InputMaybe<Uuid_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "auth.user_roles" */
+export enum AuthUserRoles_Constraint {
+  /** unique or primary key constraint */
+  UserRolesPkey = 'user_roles_pkey',
+  /** unique or primary key constraint */
+  UserRolesUserIdRoleKey = 'user_roles_user_id_role_key'
+}
+
+/** input type for inserting data into table "auth.user_roles" */
+export type AuthUserRoles_Insert_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  role?: InputMaybe<Scalars['String']>;
+  roleByRole?: InputMaybe<AuthRoles_Obj_Rel_Insert_Input>;
+  user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
+  userId?: InputMaybe<Scalars['uuid']>;
+};
+
+/** aggregate max on columns */
+export type AuthUserRoles_Max_Fields = {
+  __typename?: 'authUserRoles_max_fields';
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  role?: Maybe<Scalars['String']>;
+  userId?: Maybe<Scalars['uuid']>;
+};
+
+/** order by max() on columns of table "auth.user_roles" */
+export type AuthUserRoles_Max_Order_By = {
+  createdAt?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  role?: InputMaybe<Order_By>;
+  userId?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type AuthUserRoles_Min_Fields = {
+  __typename?: 'authUserRoles_min_fields';
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  role?: Maybe<Scalars['String']>;
+  userId?: Maybe<Scalars['uuid']>;
+};
+
+/** order by min() on columns of table "auth.user_roles" */
+export type AuthUserRoles_Min_Order_By = {
+  createdAt?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  role?: InputMaybe<Order_By>;
+  userId?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "auth.user_roles" */
+export type AuthUserRoles_Mutation_Response = {
+  __typename?: 'authUserRoles_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<AuthUserRoles>;
+};
+
+/** on conflict condition type for table "auth.user_roles" */
+export type AuthUserRoles_On_Conflict = {
+  constraint: AuthUserRoles_Constraint;
+  update_columns?: Array<AuthUserRoles_Update_Column>;
+  where?: InputMaybe<AuthUserRoles_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "auth.user_roles". */
+export type AuthUserRoles_Order_By = {
+  createdAt?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  role?: InputMaybe<Order_By>;
+  roleByRole?: InputMaybe<AuthRoles_Order_By>;
+  user?: InputMaybe<Users_Order_By>;
+  userId?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: authUserRoles */
+export type AuthUserRoles_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "auth.user_roles" */
+export enum AuthUserRoles_Select_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Role = 'role',
+  /** column name */
+  UserId = 'userId'
+}
+
+/** input type for updating data in table "auth.user_roles" */
+export type AuthUserRoles_Set_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  role?: InputMaybe<Scalars['String']>;
+  userId?: InputMaybe<Scalars['uuid']>;
+};
+
+/** update columns of table "auth.user_roles" */
+export enum AuthUserRoles_Update_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Role = 'role',
+  /** column name */
+  UserId = 'userId'
+}
 
 /** Boolean expression to compare columns of type "bigint". All fields are combined with logical 'AND'. */
 export type Bigint_Comparison_Exp = {
-  _eq?: Maybe<Scalars['bigint']>;
-  _gt?: Maybe<Scalars['bigint']>;
-  _gte?: Maybe<Scalars['bigint']>;
-  _in?: Maybe<Array<Scalars['bigint']>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _lt?: Maybe<Scalars['bigint']>;
-  _lte?: Maybe<Scalars['bigint']>;
-  _neq?: Maybe<Scalars['bigint']>;
-  _nin?: Maybe<Array<Scalars['bigint']>>;
+  _eq?: InputMaybe<Scalars['bigint']>;
+  _gt?: InputMaybe<Scalars['bigint']>;
+  _gte?: InputMaybe<Scalars['bigint']>;
+  _in?: InputMaybe<Array<Scalars['bigint']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['bigint']>;
+  _lte?: InputMaybe<Scalars['bigint']>;
+  _neq?: InputMaybe<Scalars['bigint']>;
+  _nin?: InputMaybe<Array<Scalars['bigint']>>;
 };
 
+/** Boolean expression to compare columns of type "citext". All fields are combined with logical 'AND'. */
+export type Citext_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['citext']>;
+  _gt?: InputMaybe<Scalars['citext']>;
+  _gte?: InputMaybe<Scalars['citext']>;
+  /** does the column match the given case-insensitive pattern */
+  _ilike?: InputMaybe<Scalars['citext']>;
+  _in?: InputMaybe<Array<Scalars['citext']>>;
+  /** does the column match the given POSIX regular expression, case insensitive */
+  _iregex?: InputMaybe<Scalars['citext']>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  /** does the column match the given pattern */
+  _like?: InputMaybe<Scalars['citext']>;
+  _lt?: InputMaybe<Scalars['citext']>;
+  _lte?: InputMaybe<Scalars['citext']>;
+  _neq?: InputMaybe<Scalars['citext']>;
+  /** does the column NOT match the given case-insensitive pattern */
+  _nilike?: InputMaybe<Scalars['citext']>;
+  _nin?: InputMaybe<Array<Scalars['citext']>>;
+  /** does the column NOT match the given POSIX regular expression, case insensitive */
+  _niregex?: InputMaybe<Scalars['citext']>;
+  /** does the column NOT match the given pattern */
+  _nlike?: InputMaybe<Scalars['citext']>;
+  /** does the column NOT match the given POSIX regular expression, case sensitive */
+  _nregex?: InputMaybe<Scalars['citext']>;
+  /** does the column NOT match the given SQL regular expression */
+  _nsimilar?: InputMaybe<Scalars['citext']>;
+  /** does the column match the given POSIX regular expression, case sensitive */
+  _regex?: InputMaybe<Scalars['citext']>;
+  /** does the column match the given SQL regular expression */
+  _similar?: InputMaybe<Scalars['citext']>;
+};
 
 /** Boolean expression to compare columns of type "float8". All fields are combined with logical 'AND'. */
 export type Float8_Comparison_Exp = {
-  _eq?: Maybe<Scalars['float8']>;
-  _gt?: Maybe<Scalars['float8']>;
-  _gte?: Maybe<Scalars['float8']>;
-  _in?: Maybe<Array<Scalars['float8']>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _lt?: Maybe<Scalars['float8']>;
-  _lte?: Maybe<Scalars['float8']>;
-  _neq?: Maybe<Scalars['float8']>;
-  _nin?: Maybe<Array<Scalars['float8']>>;
+  _eq?: InputMaybe<Scalars['float8']>;
+  _gt?: InputMaybe<Scalars['float8']>;
+  _gte?: InputMaybe<Scalars['float8']>;
+  _in?: InputMaybe<Array<Scalars['float8']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['float8']>;
+  _lte?: InputMaybe<Scalars['float8']>;
+  _neq?: InputMaybe<Scalars['float8']>;
+  _nin?: InputMaybe<Array<Scalars['float8']>>;
 };
 
 /** columns and relationships of "food" */
@@ -150,61 +1173,61 @@ export type Food = {
 
 /** columns and relationships of "food" */
 export type FoodFood_AttributesArgs = {
-  distinct_on?: Maybe<Array<Food_Attribute_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Attribute_Order_By>>;
-  where?: Maybe<Food_Attribute_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Attribute_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Attribute_Order_By>>;
+  where?: InputMaybe<Food_Attribute_Bool_Exp>;
 };
 
 
 /** columns and relationships of "food" */
 export type FoodFood_Attributes_AggregateArgs = {
-  distinct_on?: Maybe<Array<Food_Attribute_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Attribute_Order_By>>;
-  where?: Maybe<Food_Attribute_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Attribute_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Attribute_Order_By>>;
+  where?: InputMaybe<Food_Attribute_Bool_Exp>;
 };
 
 
 /** columns and relationships of "food" */
 export type FoodFood_NutrientsArgs = {
-  distinct_on?: Maybe<Array<Food_Nutrient_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Nutrient_Order_By>>;
-  where?: Maybe<Food_Nutrient_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Nutrient_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Nutrient_Order_By>>;
+  where?: InputMaybe<Food_Nutrient_Bool_Exp>;
 };
 
 
 /** columns and relationships of "food" */
 export type FoodFood_Nutrients_AggregateArgs = {
-  distinct_on?: Maybe<Array<Food_Nutrient_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Nutrient_Order_By>>;
-  where?: Maybe<Food_Nutrient_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Nutrient_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Nutrient_Order_By>>;
+  where?: InputMaybe<Food_Nutrient_Bool_Exp>;
 };
 
 
 /** columns and relationships of "food" */
 export type FoodFood_PortionsArgs = {
-  distinct_on?: Maybe<Array<Food_Portion_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Portion_Order_By>>;
-  where?: Maybe<Food_Portion_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Portion_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Portion_Order_By>>;
+  where?: InputMaybe<Food_Portion_Bool_Exp>;
 };
 
 
 /** columns and relationships of "food" */
 export type FoodFood_Portions_AggregateArgs = {
-  distinct_on?: Maybe<Array<Food_Portion_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Portion_Order_By>>;
-  where?: Maybe<Food_Portion_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Portion_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Portion_Order_By>>;
+  where?: InputMaybe<Food_Portion_Bool_Exp>;
 };
 
 /** aggregated selection of "food" */
@@ -233,8 +1256,23 @@ export type Food_Aggregate_Fields = {
 
 /** aggregate fields of "food" */
 export type Food_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Food_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<Food_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "food" */
+export type Food_Aggregate_Order_By = {
+  avg?: InputMaybe<Food_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Food_Max_Order_By>;
+  min?: InputMaybe<Food_Min_Order_By>;
+  stddev?: InputMaybe<Food_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Food_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Food_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Food_Sum_Order_By>;
+  var_pop?: InputMaybe<Food_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Food_Var_Samp_Order_By>;
+  variance?: InputMaybe<Food_Variance_Order_By>;
 };
 
 /** columns and relationships of "food_attribute" */
@@ -276,30 +1314,30 @@ export type Food_Attribute_Aggregate_Fields = {
 
 /** aggregate fields of "food_attribute" */
 export type Food_Attribute_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Food_Attribute_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<Food_Attribute_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "food_attribute" */
 export type Food_Attribute_Aggregate_Order_By = {
-  avg?: Maybe<Food_Attribute_Avg_Order_By>;
-  count?: Maybe<Order_By>;
-  max?: Maybe<Food_Attribute_Max_Order_By>;
-  min?: Maybe<Food_Attribute_Min_Order_By>;
-  stddev?: Maybe<Food_Attribute_Stddev_Order_By>;
-  stddev_pop?: Maybe<Food_Attribute_Stddev_Pop_Order_By>;
-  stddev_samp?: Maybe<Food_Attribute_Stddev_Samp_Order_By>;
-  sum?: Maybe<Food_Attribute_Sum_Order_By>;
-  var_pop?: Maybe<Food_Attribute_Var_Pop_Order_By>;
-  var_samp?: Maybe<Food_Attribute_Var_Samp_Order_By>;
-  variance?: Maybe<Food_Attribute_Variance_Order_By>;
+  avg?: InputMaybe<Food_Attribute_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Food_Attribute_Max_Order_By>;
+  min?: InputMaybe<Food_Attribute_Min_Order_By>;
+  stddev?: InputMaybe<Food_Attribute_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Food_Attribute_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Food_Attribute_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Food_Attribute_Sum_Order_By>;
+  var_pop?: InputMaybe<Food_Attribute_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Food_Attribute_Var_Samp_Order_By>;
+  variance?: InputMaybe<Food_Attribute_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "food_attribute" */
 export type Food_Attribute_Arr_Rel_Insert_Input = {
   data: Array<Food_Attribute_Insert_Input>;
   /** on conflict condition */
-  on_conflict?: Maybe<Food_Attribute_On_Conflict>;
+  on_conflict?: InputMaybe<Food_Attribute_On_Conflict>;
 };
 
 /** aggregate avg on columns */
@@ -313,24 +1351,24 @@ export type Food_Attribute_Avg_Fields = {
 
 /** order by avg() on columns of table "food_attribute" */
 export type Food_Attribute_Avg_Order_By = {
-  fdc_id?: Maybe<Order_By>;
-  food_attribute_type_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  food_attribute_type_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "food_attribute". All fields are combined with a logical 'AND'. */
 export type Food_Attribute_Bool_Exp = {
-  _and?: Maybe<Array<Food_Attribute_Bool_Exp>>;
-  _not?: Maybe<Food_Attribute_Bool_Exp>;
-  _or?: Maybe<Array<Food_Attribute_Bool_Exp>>;
-  fdc_id?: Maybe<Int_Comparison_Exp>;
-  food_attribute_type?: Maybe<Food_Attribute_Type_Bool_Exp>;
-  food_attribute_type_id?: Maybe<Int_Comparison_Exp>;
-  id?: Maybe<Int_Comparison_Exp>;
-  name?: Maybe<String_Comparison_Exp>;
-  seq_num?: Maybe<Int_Comparison_Exp>;
-  value?: Maybe<String_Comparison_Exp>;
+  _and?: InputMaybe<Array<Food_Attribute_Bool_Exp>>;
+  _not?: InputMaybe<Food_Attribute_Bool_Exp>;
+  _or?: InputMaybe<Array<Food_Attribute_Bool_Exp>>;
+  fdc_id?: InputMaybe<Int_Comparison_Exp>;
+  food_attribute_type?: InputMaybe<Food_Attribute_Type_Bool_Exp>;
+  food_attribute_type_id?: InputMaybe<Int_Comparison_Exp>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  name?: InputMaybe<String_Comparison_Exp>;
+  seq_num?: InputMaybe<Int_Comparison_Exp>;
+  value?: InputMaybe<String_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "food_attribute" */
@@ -341,21 +1379,21 @@ export enum Food_Attribute_Constraint {
 
 /** input type for incrementing numeric columns in table "food_attribute" */
 export type Food_Attribute_Inc_Input = {
-  fdc_id?: Maybe<Scalars['Int']>;
-  food_attribute_type_id?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  seq_num?: Maybe<Scalars['Int']>;
+  fdc_id?: InputMaybe<Scalars['Int']>;
+  food_attribute_type_id?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  seq_num?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "food_attribute" */
 export type Food_Attribute_Insert_Input = {
-  fdc_id?: Maybe<Scalars['Int']>;
-  food_attribute_type?: Maybe<Food_Attribute_Type_Obj_Rel_Insert_Input>;
-  food_attribute_type_id?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  seq_num?: Maybe<Scalars['Int']>;
-  value?: Maybe<Scalars['String']>;
+  fdc_id?: InputMaybe<Scalars['Int']>;
+  food_attribute_type?: InputMaybe<Food_Attribute_Type_Obj_Rel_Insert_Input>;
+  food_attribute_type_id?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  name?: InputMaybe<Scalars['String']>;
+  seq_num?: InputMaybe<Scalars['Int']>;
+  value?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
@@ -371,12 +1409,12 @@ export type Food_Attribute_Max_Fields = {
 
 /** order by max() on columns of table "food_attribute" */
 export type Food_Attribute_Max_Order_By = {
-  fdc_id?: Maybe<Order_By>;
-  food_attribute_type_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
-  value?: Maybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  food_attribute_type_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -392,12 +1430,12 @@ export type Food_Attribute_Min_Fields = {
 
 /** order by min() on columns of table "food_attribute" */
 export type Food_Attribute_Min_Order_By = {
-  fdc_id?: Maybe<Order_By>;
-  food_attribute_type_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
-  value?: Maybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  food_attribute_type_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "food_attribute" */
@@ -413,18 +1451,18 @@ export type Food_Attribute_Mutation_Response = {
 export type Food_Attribute_On_Conflict = {
   constraint: Food_Attribute_Constraint;
   update_columns?: Array<Food_Attribute_Update_Column>;
-  where?: Maybe<Food_Attribute_Bool_Exp>;
+  where?: InputMaybe<Food_Attribute_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "food_attribute". */
 export type Food_Attribute_Order_By = {
-  fdc_id?: Maybe<Order_By>;
-  food_attribute_type?: Maybe<Food_Attribute_Type_Order_By>;
-  food_attribute_type_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
-  value?: Maybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  food_attribute_type?: InputMaybe<Food_Attribute_Type_Order_By>;
+  food_attribute_type_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: food_attribute */
@@ -450,12 +1488,12 @@ export enum Food_Attribute_Select_Column {
 
 /** input type for updating data in table "food_attribute" */
 export type Food_Attribute_Set_Input = {
-  fdc_id?: Maybe<Scalars['Int']>;
-  food_attribute_type_id?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  seq_num?: Maybe<Scalars['Int']>;
-  value?: Maybe<Scalars['String']>;
+  fdc_id?: InputMaybe<Scalars['Int']>;
+  food_attribute_type_id?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  name?: InputMaybe<Scalars['String']>;
+  seq_num?: InputMaybe<Scalars['Int']>;
+  value?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate stddev on columns */
@@ -469,10 +1507,10 @@ export type Food_Attribute_Stddev_Fields = {
 
 /** order by stddev() on columns of table "food_attribute" */
 export type Food_Attribute_Stddev_Order_By = {
-  fdc_id?: Maybe<Order_By>;
-  food_attribute_type_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  food_attribute_type_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -486,10 +1524,10 @@ export type Food_Attribute_Stddev_Pop_Fields = {
 
 /** order by stddev_pop() on columns of table "food_attribute" */
 export type Food_Attribute_Stddev_Pop_Order_By = {
-  fdc_id?: Maybe<Order_By>;
-  food_attribute_type_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  food_attribute_type_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -503,10 +1541,10 @@ export type Food_Attribute_Stddev_Samp_Fields = {
 
 /** order by stddev_samp() on columns of table "food_attribute" */
 export type Food_Attribute_Stddev_Samp_Order_By = {
-  fdc_id?: Maybe<Order_By>;
-  food_attribute_type_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  food_attribute_type_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
@@ -520,10 +1558,10 @@ export type Food_Attribute_Sum_Fields = {
 
 /** order by sum() on columns of table "food_attribute" */
 export type Food_Attribute_Sum_Order_By = {
-  fdc_id?: Maybe<Order_By>;
-  food_attribute_type_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  food_attribute_type_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "food_attribute_type" */
@@ -560,8 +1598,8 @@ export type Food_Attribute_Type_Aggregate_Fields = {
 
 /** aggregate fields of "food_attribute_type" */
 export type Food_Attribute_Type_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Food_Attribute_Type_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<Food_Attribute_Type_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** aggregate avg on columns */
@@ -572,12 +1610,12 @@ export type Food_Attribute_Type_Avg_Fields = {
 
 /** Boolean expression to filter rows from the table "food_attribute_type". All fields are combined with a logical 'AND'. */
 export type Food_Attribute_Type_Bool_Exp = {
-  _and?: Maybe<Array<Food_Attribute_Type_Bool_Exp>>;
-  _not?: Maybe<Food_Attribute_Type_Bool_Exp>;
-  _or?: Maybe<Array<Food_Attribute_Type_Bool_Exp>>;
-  description?: Maybe<String_Comparison_Exp>;
-  id?: Maybe<Int_Comparison_Exp>;
-  name?: Maybe<String_Comparison_Exp>;
+  _and?: InputMaybe<Array<Food_Attribute_Type_Bool_Exp>>;
+  _not?: InputMaybe<Food_Attribute_Type_Bool_Exp>;
+  _or?: InputMaybe<Array<Food_Attribute_Type_Bool_Exp>>;
+  description?: InputMaybe<String_Comparison_Exp>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  name?: InputMaybe<String_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "food_attribute_type" */
@@ -588,14 +1626,14 @@ export enum Food_Attribute_Type_Constraint {
 
 /** input type for incrementing numeric columns in table "food_attribute_type" */
 export type Food_Attribute_Type_Inc_Input = {
-  id?: Maybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "food_attribute_type" */
 export type Food_Attribute_Type_Insert_Input = {
-  description?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
+  name?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
@@ -627,21 +1665,21 @@ export type Food_Attribute_Type_Mutation_Response = {
 export type Food_Attribute_Type_Obj_Rel_Insert_Input = {
   data: Food_Attribute_Type_Insert_Input;
   /** on conflict condition */
-  on_conflict?: Maybe<Food_Attribute_Type_On_Conflict>;
+  on_conflict?: InputMaybe<Food_Attribute_Type_On_Conflict>;
 };
 
 /** on conflict condition type for table "food_attribute_type" */
 export type Food_Attribute_Type_On_Conflict = {
   constraint: Food_Attribute_Type_Constraint;
   update_columns?: Array<Food_Attribute_Type_Update_Column>;
-  where?: Maybe<Food_Attribute_Type_Bool_Exp>;
+  where?: InputMaybe<Food_Attribute_Type_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "food_attribute_type". */
 export type Food_Attribute_Type_Order_By = {
-  description?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
+  description?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: food_attribute_type */
@@ -661,9 +1699,9 @@ export enum Food_Attribute_Type_Select_Column {
 
 /** input type for updating data in table "food_attribute_type" */
 export type Food_Attribute_Type_Set_Input = {
-  description?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
+  name?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate stddev on columns */
@@ -745,10 +1783,10 @@ export type Food_Attribute_Var_Pop_Fields = {
 
 /** order by var_pop() on columns of table "food_attribute" */
 export type Food_Attribute_Var_Pop_Order_By = {
-  fdc_id?: Maybe<Order_By>;
-  food_attribute_type_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  food_attribute_type_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
@@ -762,10 +1800,10 @@ export type Food_Attribute_Var_Samp_Fields = {
 
 /** order by var_samp() on columns of table "food_attribute" */
 export type Food_Attribute_Var_Samp_Order_By = {
-  fdc_id?: Maybe<Order_By>;
-  food_attribute_type_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  food_attribute_type_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
@@ -779,10 +1817,10 @@ export type Food_Attribute_Variance_Fields = {
 
 /** order by variance() on columns of table "food_attribute" */
 export type Food_Attribute_Variance_Order_By = {
-  fdc_id?: Maybe<Order_By>;
-  food_attribute_type_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  food_attribute_type_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate avg on columns */
@@ -792,21 +1830,27 @@ export type Food_Avg_Fields = {
   food_category_id?: Maybe<Scalars['Float']>;
 };
 
+/** order by avg() on columns of table "food" */
+export type Food_Avg_Order_By = {
+  fdc_id?: InputMaybe<Order_By>;
+  food_category_id?: InputMaybe<Order_By>;
+};
+
 /** Boolean expression to filter rows from the table "food". All fields are combined with a logical 'AND'. */
 export type Food_Bool_Exp = {
-  _and?: Maybe<Array<Food_Bool_Exp>>;
-  _not?: Maybe<Food_Bool_Exp>;
-  _or?: Maybe<Array<Food_Bool_Exp>>;
-  data_type?: Maybe<Food_Data_Type_Enum_Comparison_Exp>;
-  description?: Maybe<String_Comparison_Exp>;
-  description_tsv?: Maybe<Tsvector_Comparison_Exp>;
-  fdc_id?: Maybe<Int_Comparison_Exp>;
-  food_attributes?: Maybe<Food_Attribute_Bool_Exp>;
-  food_category?: Maybe<Food_Category_Bool_Exp>;
-  food_category_id?: Maybe<Int_Comparison_Exp>;
-  food_nutrients?: Maybe<Food_Nutrient_Bool_Exp>;
-  food_portions?: Maybe<Food_Portion_Bool_Exp>;
-  publication_date?: Maybe<Timestamp_Comparison_Exp>;
+  _and?: InputMaybe<Array<Food_Bool_Exp>>;
+  _not?: InputMaybe<Food_Bool_Exp>;
+  _or?: InputMaybe<Array<Food_Bool_Exp>>;
+  data_type?: InputMaybe<Food_Data_Type_Enum_Comparison_Exp>;
+  description?: InputMaybe<String_Comparison_Exp>;
+  description_tsv?: InputMaybe<Tsvector_Comparison_Exp>;
+  fdc_id?: InputMaybe<Int_Comparison_Exp>;
+  food_attributes?: InputMaybe<Food_Attribute_Bool_Exp>;
+  food_category?: InputMaybe<Food_Category_Bool_Exp>;
+  food_category_id?: InputMaybe<Int_Comparison_Exp>;
+  food_nutrients?: InputMaybe<Food_Nutrient_Bool_Exp>;
+  food_portions?: InputMaybe<Food_Portion_Bool_Exp>;
+  publication_date?: InputMaybe<Timestamp_Comparison_Exp>;
 };
 
 /** columns and relationships of "food_category" */
@@ -843,8 +1887,8 @@ export type Food_Category_Aggregate_Fields = {
 
 /** aggregate fields of "food_category" */
 export type Food_Category_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Food_Category_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<Food_Category_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** aggregate avg on columns */
@@ -856,12 +1900,12 @@ export type Food_Category_Avg_Fields = {
 
 /** Boolean expression to filter rows from the table "food_category". All fields are combined with a logical 'AND'. */
 export type Food_Category_Bool_Exp = {
-  _and?: Maybe<Array<Food_Category_Bool_Exp>>;
-  _not?: Maybe<Food_Category_Bool_Exp>;
-  _or?: Maybe<Array<Food_Category_Bool_Exp>>;
-  code?: Maybe<Int_Comparison_Exp>;
-  description?: Maybe<String_Comparison_Exp>;
-  id?: Maybe<Int_Comparison_Exp>;
+  _and?: InputMaybe<Array<Food_Category_Bool_Exp>>;
+  _not?: InputMaybe<Food_Category_Bool_Exp>;
+  _or?: InputMaybe<Array<Food_Category_Bool_Exp>>;
+  code?: InputMaybe<Int_Comparison_Exp>;
+  description?: InputMaybe<String_Comparison_Exp>;
+  id?: InputMaybe<Int_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "food_category" */
@@ -872,15 +1916,15 @@ export enum Food_Category_Constraint {
 
 /** input type for incrementing numeric columns in table "food_category" */
 export type Food_Category_Inc_Input = {
-  code?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
+  code?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "food_category" */
 export type Food_Category_Insert_Input = {
-  code?: Maybe<Scalars['Int']>;
-  description?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
+  code?: InputMaybe<Scalars['Int']>;
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate max on columns */
@@ -912,21 +1956,21 @@ export type Food_Category_Mutation_Response = {
 export type Food_Category_Obj_Rel_Insert_Input = {
   data: Food_Category_Insert_Input;
   /** on conflict condition */
-  on_conflict?: Maybe<Food_Category_On_Conflict>;
+  on_conflict?: InputMaybe<Food_Category_On_Conflict>;
 };
 
 /** on conflict condition type for table "food_category" */
 export type Food_Category_On_Conflict = {
   constraint: Food_Category_Constraint;
   update_columns?: Array<Food_Category_Update_Column>;
-  where?: Maybe<Food_Category_Bool_Exp>;
+  where?: InputMaybe<Food_Category_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "food_category". */
 export type Food_Category_Order_By = {
-  code?: Maybe<Order_By>;
-  description?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
+  code?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: food_category */
@@ -946,9 +1990,9 @@ export enum Food_Category_Select_Column {
 
 /** input type for updating data in table "food_category" */
 export type Food_Category_Set_Input = {
-  code?: Maybe<Scalars['Int']>;
-  description?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
+  code?: InputMaybe<Scalars['Int']>;
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate stddev on columns */
@@ -1016,38 +2060,37 @@ export enum Food_Constraint {
   FoodPkey = 'food_pkey'
 }
 
-
 /** Boolean expression to compare columns of type "food_data_type_enum". All fields are combined with logical 'AND'. */
 export type Food_Data_Type_Enum_Comparison_Exp = {
-  _eq?: Maybe<Scalars['food_data_type_enum']>;
-  _gt?: Maybe<Scalars['food_data_type_enum']>;
-  _gte?: Maybe<Scalars['food_data_type_enum']>;
-  _in?: Maybe<Array<Scalars['food_data_type_enum']>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _lt?: Maybe<Scalars['food_data_type_enum']>;
-  _lte?: Maybe<Scalars['food_data_type_enum']>;
-  _neq?: Maybe<Scalars['food_data_type_enum']>;
-  _nin?: Maybe<Array<Scalars['food_data_type_enum']>>;
+  _eq?: InputMaybe<Scalars['food_data_type_enum']>;
+  _gt?: InputMaybe<Scalars['food_data_type_enum']>;
+  _gte?: InputMaybe<Scalars['food_data_type_enum']>;
+  _in?: InputMaybe<Array<Scalars['food_data_type_enum']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['food_data_type_enum']>;
+  _lte?: InputMaybe<Scalars['food_data_type_enum']>;
+  _neq?: InputMaybe<Scalars['food_data_type_enum']>;
+  _nin?: InputMaybe<Array<Scalars['food_data_type_enum']>>;
 };
 
 /** input type for incrementing numeric columns in table "food" */
 export type Food_Inc_Input = {
-  fdc_id?: Maybe<Scalars['Int']>;
-  food_category_id?: Maybe<Scalars['Int']>;
+  fdc_id?: InputMaybe<Scalars['Int']>;
+  food_category_id?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "food" */
 export type Food_Insert_Input = {
-  data_type?: Maybe<Scalars['food_data_type_enum']>;
-  description?: Maybe<Scalars['String']>;
-  description_tsv?: Maybe<Scalars['tsvector']>;
-  fdc_id?: Maybe<Scalars['Int']>;
-  food_attributes?: Maybe<Food_Attribute_Arr_Rel_Insert_Input>;
-  food_category?: Maybe<Food_Category_Obj_Rel_Insert_Input>;
-  food_category_id?: Maybe<Scalars['Int']>;
-  food_nutrients?: Maybe<Food_Nutrient_Arr_Rel_Insert_Input>;
-  food_portions?: Maybe<Food_Portion_Arr_Rel_Insert_Input>;
-  publication_date?: Maybe<Scalars['timestamp']>;
+  data_type?: InputMaybe<Scalars['food_data_type_enum']>;
+  description?: InputMaybe<Scalars['String']>;
+  description_tsv?: InputMaybe<Scalars['tsvector']>;
+  fdc_id?: InputMaybe<Scalars['Int']>;
+  food_attributes?: InputMaybe<Food_Attribute_Arr_Rel_Insert_Input>;
+  food_category?: InputMaybe<Food_Category_Obj_Rel_Insert_Input>;
+  food_category_id?: InputMaybe<Scalars['Int']>;
+  food_nutrients?: InputMaybe<Food_Nutrient_Arr_Rel_Insert_Input>;
+  food_portions?: InputMaybe<Food_Portion_Arr_Rel_Insert_Input>;
+  publication_date?: InputMaybe<Scalars['timestamp']>;
 };
 
 /** aggregate max on columns */
@@ -1059,6 +2102,14 @@ export type Food_Max_Fields = {
   publication_date?: Maybe<Scalars['timestamp']>;
 };
 
+/** order by max() on columns of table "food" */
+export type Food_Max_Order_By = {
+  description?: InputMaybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  food_category_id?: InputMaybe<Order_By>;
+  publication_date?: InputMaybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type Food_Min_Fields = {
   __typename?: 'food_min_fields';
@@ -1066,6 +2117,14 @@ export type Food_Min_Fields = {
   fdc_id?: Maybe<Scalars['Int']>;
   food_category_id?: Maybe<Scalars['Int']>;
   publication_date?: Maybe<Scalars['timestamp']>;
+};
+
+/** order by min() on columns of table "food" */
+export type Food_Min_Order_By = {
+  description?: InputMaybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  food_category_id?: InputMaybe<Order_By>;
+  publication_date?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "food" */
@@ -1121,30 +2180,30 @@ export type Food_Nutrient_Aggregate_Fields = {
 
 /** aggregate fields of "food_nutrient" */
 export type Food_Nutrient_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Food_Nutrient_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<Food_Nutrient_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "food_nutrient" */
 export type Food_Nutrient_Aggregate_Order_By = {
-  avg?: Maybe<Food_Nutrient_Avg_Order_By>;
-  count?: Maybe<Order_By>;
-  max?: Maybe<Food_Nutrient_Max_Order_By>;
-  min?: Maybe<Food_Nutrient_Min_Order_By>;
-  stddev?: Maybe<Food_Nutrient_Stddev_Order_By>;
-  stddev_pop?: Maybe<Food_Nutrient_Stddev_Pop_Order_By>;
-  stddev_samp?: Maybe<Food_Nutrient_Stddev_Samp_Order_By>;
-  sum?: Maybe<Food_Nutrient_Sum_Order_By>;
-  var_pop?: Maybe<Food_Nutrient_Var_Pop_Order_By>;
-  var_samp?: Maybe<Food_Nutrient_Var_Samp_Order_By>;
-  variance?: Maybe<Food_Nutrient_Variance_Order_By>;
+  avg?: InputMaybe<Food_Nutrient_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Food_Nutrient_Max_Order_By>;
+  min?: InputMaybe<Food_Nutrient_Min_Order_By>;
+  stddev?: InputMaybe<Food_Nutrient_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Food_Nutrient_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Food_Nutrient_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Food_Nutrient_Sum_Order_By>;
+  var_pop?: InputMaybe<Food_Nutrient_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Food_Nutrient_Var_Samp_Order_By>;
+  variance?: InputMaybe<Food_Nutrient_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "food_nutrient" */
 export type Food_Nutrient_Arr_Rel_Insert_Input = {
   data: Array<Food_Nutrient_Insert_Input>;
   /** on conflict condition */
-  on_conflict?: Maybe<Food_Nutrient_On_Conflict>;
+  on_conflict?: InputMaybe<Food_Nutrient_On_Conflict>;
 };
 
 /** aggregate avg on columns */
@@ -1164,35 +2223,35 @@ export type Food_Nutrient_Avg_Fields = {
 
 /** order by avg() on columns of table "food_nutrient" */
 export type Food_Nutrient_Avg_Order_By = {
-  amount?: Maybe<Order_By>;
-  data_points?: Maybe<Order_By>;
-  derivation_id?: Maybe<Order_By>;
-  fdc_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  max?: Maybe<Order_By>;
-  median?: Maybe<Order_By>;
-  min?: Maybe<Order_By>;
-  min_year_acquired?: Maybe<Order_By>;
-  nutrient_id?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  data_points?: InputMaybe<Order_By>;
+  derivation_id?: InputMaybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  max?: InputMaybe<Order_By>;
+  median?: InputMaybe<Order_By>;
+  min?: InputMaybe<Order_By>;
+  min_year_acquired?: InputMaybe<Order_By>;
+  nutrient_id?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "food_nutrient". All fields are combined with a logical 'AND'. */
 export type Food_Nutrient_Bool_Exp = {
-  _and?: Maybe<Array<Food_Nutrient_Bool_Exp>>;
-  _not?: Maybe<Food_Nutrient_Bool_Exp>;
-  _or?: Maybe<Array<Food_Nutrient_Bool_Exp>>;
-  amount?: Maybe<Float8_Comparison_Exp>;
-  data_points?: Maybe<Int_Comparison_Exp>;
-  derivation_id?: Maybe<Int_Comparison_Exp>;
-  fdc_id?: Maybe<Int_Comparison_Exp>;
-  footnote?: Maybe<String_Comparison_Exp>;
-  id?: Maybe<Int_Comparison_Exp>;
-  max?: Maybe<Float8_Comparison_Exp>;
-  median?: Maybe<Float8_Comparison_Exp>;
-  min?: Maybe<Float8_Comparison_Exp>;
-  min_year_acquired?: Maybe<Int_Comparison_Exp>;
-  nutrient?: Maybe<Nutrient_Bool_Exp>;
-  nutrient_id?: Maybe<Int_Comparison_Exp>;
+  _and?: InputMaybe<Array<Food_Nutrient_Bool_Exp>>;
+  _not?: InputMaybe<Food_Nutrient_Bool_Exp>;
+  _or?: InputMaybe<Array<Food_Nutrient_Bool_Exp>>;
+  amount?: InputMaybe<Float8_Comparison_Exp>;
+  data_points?: InputMaybe<Int_Comparison_Exp>;
+  derivation_id?: InputMaybe<Int_Comparison_Exp>;
+  fdc_id?: InputMaybe<Int_Comparison_Exp>;
+  footnote?: InputMaybe<String_Comparison_Exp>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  max?: InputMaybe<Float8_Comparison_Exp>;
+  median?: InputMaybe<Float8_Comparison_Exp>;
+  min?: InputMaybe<Float8_Comparison_Exp>;
+  min_year_acquired?: InputMaybe<Int_Comparison_Exp>;
+  nutrient?: InputMaybe<Nutrient_Bool_Exp>;
+  nutrient_id?: InputMaybe<Int_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "food_nutrient" */
@@ -1203,32 +2262,32 @@ export enum Food_Nutrient_Constraint {
 
 /** input type for incrementing numeric columns in table "food_nutrient" */
 export type Food_Nutrient_Inc_Input = {
-  amount?: Maybe<Scalars['float8']>;
-  data_points?: Maybe<Scalars['Int']>;
-  derivation_id?: Maybe<Scalars['Int']>;
-  fdc_id?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  max?: Maybe<Scalars['float8']>;
-  median?: Maybe<Scalars['float8']>;
-  min?: Maybe<Scalars['float8']>;
-  min_year_acquired?: Maybe<Scalars['Int']>;
-  nutrient_id?: Maybe<Scalars['Int']>;
+  amount?: InputMaybe<Scalars['float8']>;
+  data_points?: InputMaybe<Scalars['Int']>;
+  derivation_id?: InputMaybe<Scalars['Int']>;
+  fdc_id?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  max?: InputMaybe<Scalars['float8']>;
+  median?: InputMaybe<Scalars['float8']>;
+  min?: InputMaybe<Scalars['float8']>;
+  min_year_acquired?: InputMaybe<Scalars['Int']>;
+  nutrient_id?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "food_nutrient" */
 export type Food_Nutrient_Insert_Input = {
-  amount?: Maybe<Scalars['float8']>;
-  data_points?: Maybe<Scalars['Int']>;
-  derivation_id?: Maybe<Scalars['Int']>;
-  fdc_id?: Maybe<Scalars['Int']>;
-  footnote?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
-  max?: Maybe<Scalars['float8']>;
-  median?: Maybe<Scalars['float8']>;
-  min?: Maybe<Scalars['float8']>;
-  min_year_acquired?: Maybe<Scalars['Int']>;
-  nutrient?: Maybe<Nutrient_Obj_Rel_Insert_Input>;
-  nutrient_id?: Maybe<Scalars['Int']>;
+  amount?: InputMaybe<Scalars['float8']>;
+  data_points?: InputMaybe<Scalars['Int']>;
+  derivation_id?: InputMaybe<Scalars['Int']>;
+  fdc_id?: InputMaybe<Scalars['Int']>;
+  footnote?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
+  max?: InputMaybe<Scalars['float8']>;
+  median?: InputMaybe<Scalars['float8']>;
+  min?: InputMaybe<Scalars['float8']>;
+  min_year_acquired?: InputMaybe<Scalars['Int']>;
+  nutrient?: InputMaybe<Nutrient_Obj_Rel_Insert_Input>;
+  nutrient_id?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate max on columns */
@@ -1249,17 +2308,17 @@ export type Food_Nutrient_Max_Fields = {
 
 /** order by max() on columns of table "food_nutrient" */
 export type Food_Nutrient_Max_Order_By = {
-  amount?: Maybe<Order_By>;
-  data_points?: Maybe<Order_By>;
-  derivation_id?: Maybe<Order_By>;
-  fdc_id?: Maybe<Order_By>;
-  footnote?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  max?: Maybe<Order_By>;
-  median?: Maybe<Order_By>;
-  min?: Maybe<Order_By>;
-  min_year_acquired?: Maybe<Order_By>;
-  nutrient_id?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  data_points?: InputMaybe<Order_By>;
+  derivation_id?: InputMaybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  footnote?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  max?: InputMaybe<Order_By>;
+  median?: InputMaybe<Order_By>;
+  min?: InputMaybe<Order_By>;
+  min_year_acquired?: InputMaybe<Order_By>;
+  nutrient_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -1280,17 +2339,17 @@ export type Food_Nutrient_Min_Fields = {
 
 /** order by min() on columns of table "food_nutrient" */
 export type Food_Nutrient_Min_Order_By = {
-  amount?: Maybe<Order_By>;
-  data_points?: Maybe<Order_By>;
-  derivation_id?: Maybe<Order_By>;
-  fdc_id?: Maybe<Order_By>;
-  footnote?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  max?: Maybe<Order_By>;
-  median?: Maybe<Order_By>;
-  min?: Maybe<Order_By>;
-  min_year_acquired?: Maybe<Order_By>;
-  nutrient_id?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  data_points?: InputMaybe<Order_By>;
+  derivation_id?: InputMaybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  footnote?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  max?: InputMaybe<Order_By>;
+  median?: InputMaybe<Order_By>;
+  min?: InputMaybe<Order_By>;
+  min_year_acquired?: InputMaybe<Order_By>;
+  nutrient_id?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "food_nutrient" */
@@ -1306,23 +2365,23 @@ export type Food_Nutrient_Mutation_Response = {
 export type Food_Nutrient_On_Conflict = {
   constraint: Food_Nutrient_Constraint;
   update_columns?: Array<Food_Nutrient_Update_Column>;
-  where?: Maybe<Food_Nutrient_Bool_Exp>;
+  where?: InputMaybe<Food_Nutrient_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "food_nutrient". */
 export type Food_Nutrient_Order_By = {
-  amount?: Maybe<Order_By>;
-  data_points?: Maybe<Order_By>;
-  derivation_id?: Maybe<Order_By>;
-  fdc_id?: Maybe<Order_By>;
-  footnote?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  max?: Maybe<Order_By>;
-  median?: Maybe<Order_By>;
-  min?: Maybe<Order_By>;
-  min_year_acquired?: Maybe<Order_By>;
-  nutrient?: Maybe<Nutrient_Order_By>;
-  nutrient_id?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  data_points?: InputMaybe<Order_By>;
+  derivation_id?: InputMaybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  footnote?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  max?: InputMaybe<Order_By>;
+  median?: InputMaybe<Order_By>;
+  min?: InputMaybe<Order_By>;
+  min_year_acquired?: InputMaybe<Order_By>;
+  nutrient?: InputMaybe<Nutrient_Order_By>;
+  nutrient_id?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: food_nutrient */
@@ -1358,17 +2417,17 @@ export enum Food_Nutrient_Select_Column {
 
 /** input type for updating data in table "food_nutrient" */
 export type Food_Nutrient_Set_Input = {
-  amount?: Maybe<Scalars['float8']>;
-  data_points?: Maybe<Scalars['Int']>;
-  derivation_id?: Maybe<Scalars['Int']>;
-  fdc_id?: Maybe<Scalars['Int']>;
-  footnote?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
-  max?: Maybe<Scalars['float8']>;
-  median?: Maybe<Scalars['float8']>;
-  min?: Maybe<Scalars['float8']>;
-  min_year_acquired?: Maybe<Scalars['Int']>;
-  nutrient_id?: Maybe<Scalars['Int']>;
+  amount?: InputMaybe<Scalars['float8']>;
+  data_points?: InputMaybe<Scalars['Int']>;
+  derivation_id?: InputMaybe<Scalars['Int']>;
+  fdc_id?: InputMaybe<Scalars['Int']>;
+  footnote?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
+  max?: InputMaybe<Scalars['float8']>;
+  median?: InputMaybe<Scalars['float8']>;
+  min?: InputMaybe<Scalars['float8']>;
+  min_year_acquired?: InputMaybe<Scalars['Int']>;
+  nutrient_id?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate stddev on columns */
@@ -1388,16 +2447,16 @@ export type Food_Nutrient_Stddev_Fields = {
 
 /** order by stddev() on columns of table "food_nutrient" */
 export type Food_Nutrient_Stddev_Order_By = {
-  amount?: Maybe<Order_By>;
-  data_points?: Maybe<Order_By>;
-  derivation_id?: Maybe<Order_By>;
-  fdc_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  max?: Maybe<Order_By>;
-  median?: Maybe<Order_By>;
-  min?: Maybe<Order_By>;
-  min_year_acquired?: Maybe<Order_By>;
-  nutrient_id?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  data_points?: InputMaybe<Order_By>;
+  derivation_id?: InputMaybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  max?: InputMaybe<Order_By>;
+  median?: InputMaybe<Order_By>;
+  min?: InputMaybe<Order_By>;
+  min_year_acquired?: InputMaybe<Order_By>;
+  nutrient_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -1417,16 +2476,16 @@ export type Food_Nutrient_Stddev_Pop_Fields = {
 
 /** order by stddev_pop() on columns of table "food_nutrient" */
 export type Food_Nutrient_Stddev_Pop_Order_By = {
-  amount?: Maybe<Order_By>;
-  data_points?: Maybe<Order_By>;
-  derivation_id?: Maybe<Order_By>;
-  fdc_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  max?: Maybe<Order_By>;
-  median?: Maybe<Order_By>;
-  min?: Maybe<Order_By>;
-  min_year_acquired?: Maybe<Order_By>;
-  nutrient_id?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  data_points?: InputMaybe<Order_By>;
+  derivation_id?: InputMaybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  max?: InputMaybe<Order_By>;
+  median?: InputMaybe<Order_By>;
+  min?: InputMaybe<Order_By>;
+  min_year_acquired?: InputMaybe<Order_By>;
+  nutrient_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -1446,16 +2505,16 @@ export type Food_Nutrient_Stddev_Samp_Fields = {
 
 /** order by stddev_samp() on columns of table "food_nutrient" */
 export type Food_Nutrient_Stddev_Samp_Order_By = {
-  amount?: Maybe<Order_By>;
-  data_points?: Maybe<Order_By>;
-  derivation_id?: Maybe<Order_By>;
-  fdc_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  max?: Maybe<Order_By>;
-  median?: Maybe<Order_By>;
-  min?: Maybe<Order_By>;
-  min_year_acquired?: Maybe<Order_By>;
-  nutrient_id?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  data_points?: InputMaybe<Order_By>;
+  derivation_id?: InputMaybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  max?: InputMaybe<Order_By>;
+  median?: InputMaybe<Order_By>;
+  min?: InputMaybe<Order_By>;
+  min_year_acquired?: InputMaybe<Order_By>;
+  nutrient_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
@@ -1475,16 +2534,16 @@ export type Food_Nutrient_Sum_Fields = {
 
 /** order by sum() on columns of table "food_nutrient" */
 export type Food_Nutrient_Sum_Order_By = {
-  amount?: Maybe<Order_By>;
-  data_points?: Maybe<Order_By>;
-  derivation_id?: Maybe<Order_By>;
-  fdc_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  max?: Maybe<Order_By>;
-  median?: Maybe<Order_By>;
-  min?: Maybe<Order_By>;
-  min_year_acquired?: Maybe<Order_By>;
-  nutrient_id?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  data_points?: InputMaybe<Order_By>;
+  derivation_id?: InputMaybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  max?: InputMaybe<Order_By>;
+  median?: InputMaybe<Order_By>;
+  min?: InputMaybe<Order_By>;
+  min_year_acquired?: InputMaybe<Order_By>;
+  nutrient_id?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "food_nutrient" */
@@ -1530,16 +2589,16 @@ export type Food_Nutrient_Var_Pop_Fields = {
 
 /** order by var_pop() on columns of table "food_nutrient" */
 export type Food_Nutrient_Var_Pop_Order_By = {
-  amount?: Maybe<Order_By>;
-  data_points?: Maybe<Order_By>;
-  derivation_id?: Maybe<Order_By>;
-  fdc_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  max?: Maybe<Order_By>;
-  median?: Maybe<Order_By>;
-  min?: Maybe<Order_By>;
-  min_year_acquired?: Maybe<Order_By>;
-  nutrient_id?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  data_points?: InputMaybe<Order_By>;
+  derivation_id?: InputMaybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  max?: InputMaybe<Order_By>;
+  median?: InputMaybe<Order_By>;
+  min?: InputMaybe<Order_By>;
+  min_year_acquired?: InputMaybe<Order_By>;
+  nutrient_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
@@ -1559,16 +2618,16 @@ export type Food_Nutrient_Var_Samp_Fields = {
 
 /** order by var_samp() on columns of table "food_nutrient" */
 export type Food_Nutrient_Var_Samp_Order_By = {
-  amount?: Maybe<Order_By>;
-  data_points?: Maybe<Order_By>;
-  derivation_id?: Maybe<Order_By>;
-  fdc_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  max?: Maybe<Order_By>;
-  median?: Maybe<Order_By>;
-  min?: Maybe<Order_By>;
-  min_year_acquired?: Maybe<Order_By>;
-  nutrient_id?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  data_points?: InputMaybe<Order_By>;
+  derivation_id?: InputMaybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  max?: InputMaybe<Order_By>;
+  median?: InputMaybe<Order_By>;
+  min?: InputMaybe<Order_By>;
+  min_year_acquired?: InputMaybe<Order_By>;
+  nutrient_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
@@ -1588,44 +2647,44 @@ export type Food_Nutrient_Variance_Fields = {
 
 /** order by variance() on columns of table "food_nutrient" */
 export type Food_Nutrient_Variance_Order_By = {
-  amount?: Maybe<Order_By>;
-  data_points?: Maybe<Order_By>;
-  derivation_id?: Maybe<Order_By>;
-  fdc_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  max?: Maybe<Order_By>;
-  median?: Maybe<Order_By>;
-  min?: Maybe<Order_By>;
-  min_year_acquired?: Maybe<Order_By>;
-  nutrient_id?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  data_points?: InputMaybe<Order_By>;
+  derivation_id?: InputMaybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  max?: InputMaybe<Order_By>;
+  median?: InputMaybe<Order_By>;
+  min?: InputMaybe<Order_By>;
+  min_year_acquired?: InputMaybe<Order_By>;
+  nutrient_id?: InputMaybe<Order_By>;
 };
 
 /** input type for inserting object relation for remote table "food" */
 export type Food_Obj_Rel_Insert_Input = {
   data: Food_Insert_Input;
   /** on conflict condition */
-  on_conflict?: Maybe<Food_On_Conflict>;
+  on_conflict?: InputMaybe<Food_On_Conflict>;
 };
 
 /** on conflict condition type for table "food" */
 export type Food_On_Conflict = {
   constraint: Food_Constraint;
   update_columns?: Array<Food_Update_Column>;
-  where?: Maybe<Food_Bool_Exp>;
+  where?: InputMaybe<Food_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "food". */
 export type Food_Order_By = {
-  data_type?: Maybe<Order_By>;
-  description?: Maybe<Order_By>;
-  description_tsv?: Maybe<Order_By>;
-  fdc_id?: Maybe<Order_By>;
-  food_attributes_aggregate?: Maybe<Food_Attribute_Aggregate_Order_By>;
-  food_category?: Maybe<Food_Category_Order_By>;
-  food_category_id?: Maybe<Order_By>;
-  food_nutrients_aggregate?: Maybe<Food_Nutrient_Aggregate_Order_By>;
-  food_portions_aggregate?: Maybe<Food_Portion_Aggregate_Order_By>;
-  publication_date?: Maybe<Order_By>;
+  data_type?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
+  description_tsv?: InputMaybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  food_attributes_aggregate?: InputMaybe<Food_Attribute_Aggregate_Order_By>;
+  food_category?: InputMaybe<Food_Category_Order_By>;
+  food_category_id?: InputMaybe<Order_By>;
+  food_nutrients_aggregate?: InputMaybe<Food_Nutrient_Aggregate_Order_By>;
+  food_portions_aggregate?: InputMaybe<Food_Portion_Aggregate_Order_By>;
+  publication_date?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: food */
@@ -1677,30 +2736,30 @@ export type Food_Portion_Aggregate_Fields = {
 
 /** aggregate fields of "food_portion" */
 export type Food_Portion_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Food_Portion_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<Food_Portion_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "food_portion" */
 export type Food_Portion_Aggregate_Order_By = {
-  avg?: Maybe<Food_Portion_Avg_Order_By>;
-  count?: Maybe<Order_By>;
-  max?: Maybe<Food_Portion_Max_Order_By>;
-  min?: Maybe<Food_Portion_Min_Order_By>;
-  stddev?: Maybe<Food_Portion_Stddev_Order_By>;
-  stddev_pop?: Maybe<Food_Portion_Stddev_Pop_Order_By>;
-  stddev_samp?: Maybe<Food_Portion_Stddev_Samp_Order_By>;
-  sum?: Maybe<Food_Portion_Sum_Order_By>;
-  var_pop?: Maybe<Food_Portion_Var_Pop_Order_By>;
-  var_samp?: Maybe<Food_Portion_Var_Samp_Order_By>;
-  variance?: Maybe<Food_Portion_Variance_Order_By>;
+  avg?: InputMaybe<Food_Portion_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Food_Portion_Max_Order_By>;
+  min?: InputMaybe<Food_Portion_Min_Order_By>;
+  stddev?: InputMaybe<Food_Portion_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Food_Portion_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Food_Portion_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Food_Portion_Sum_Order_By>;
+  var_pop?: InputMaybe<Food_Portion_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Food_Portion_Var_Samp_Order_By>;
+  variance?: InputMaybe<Food_Portion_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "food_portion" */
 export type Food_Portion_Arr_Rel_Insert_Input = {
   data: Array<Food_Portion_Insert_Input>;
   /** on conflict condition */
-  on_conflict?: Maybe<Food_Portion_On_Conflict>;
+  on_conflict?: InputMaybe<Food_Portion_On_Conflict>;
 };
 
 /** aggregate avg on columns */
@@ -1718,33 +2777,33 @@ export type Food_Portion_Avg_Fields = {
 
 /** order by avg() on columns of table "food_portion" */
 export type Food_Portion_Avg_Order_By = {
-  amount?: Maybe<Order_By>;
-  data_points?: Maybe<Order_By>;
-  fdc_id?: Maybe<Order_By>;
-  gram_weight?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  measure_unit_id?: Maybe<Order_By>;
-  min_year_acquired?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  data_points?: InputMaybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  gram_weight?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  measure_unit_id?: InputMaybe<Order_By>;
+  min_year_acquired?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "food_portion". All fields are combined with a logical 'AND'. */
 export type Food_Portion_Bool_Exp = {
-  _and?: Maybe<Array<Food_Portion_Bool_Exp>>;
-  _not?: Maybe<Food_Portion_Bool_Exp>;
-  _or?: Maybe<Array<Food_Portion_Bool_Exp>>;
-  amount?: Maybe<Float8_Comparison_Exp>;
-  data_points?: Maybe<Int_Comparison_Exp>;
-  fdc_id?: Maybe<Int_Comparison_Exp>;
-  footnote?: Maybe<String_Comparison_Exp>;
-  gram_weight?: Maybe<Float8_Comparison_Exp>;
-  id?: Maybe<Int_Comparison_Exp>;
-  measure_unit?: Maybe<Measure_Unit_Bool_Exp>;
-  measure_unit_id?: Maybe<Int_Comparison_Exp>;
-  min_year_acquired?: Maybe<Int_Comparison_Exp>;
-  modifier?: Maybe<String_Comparison_Exp>;
-  portion_description?: Maybe<String_Comparison_Exp>;
-  seq_num?: Maybe<Int_Comparison_Exp>;
+  _and?: InputMaybe<Array<Food_Portion_Bool_Exp>>;
+  _not?: InputMaybe<Food_Portion_Bool_Exp>;
+  _or?: InputMaybe<Array<Food_Portion_Bool_Exp>>;
+  amount?: InputMaybe<Float8_Comparison_Exp>;
+  data_points?: InputMaybe<Int_Comparison_Exp>;
+  fdc_id?: InputMaybe<Int_Comparison_Exp>;
+  footnote?: InputMaybe<String_Comparison_Exp>;
+  gram_weight?: InputMaybe<Float8_Comparison_Exp>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  measure_unit?: InputMaybe<Measure_Unit_Bool_Exp>;
+  measure_unit_id?: InputMaybe<Int_Comparison_Exp>;
+  min_year_acquired?: InputMaybe<Int_Comparison_Exp>;
+  modifier?: InputMaybe<String_Comparison_Exp>;
+  portion_description?: InputMaybe<String_Comparison_Exp>;
+  seq_num?: InputMaybe<Int_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "food_portion" */
@@ -1755,30 +2814,30 @@ export enum Food_Portion_Constraint {
 
 /** input type for incrementing numeric columns in table "food_portion" */
 export type Food_Portion_Inc_Input = {
-  amount?: Maybe<Scalars['float8']>;
-  data_points?: Maybe<Scalars['Int']>;
-  fdc_id?: Maybe<Scalars['Int']>;
-  gram_weight?: Maybe<Scalars['float8']>;
-  id?: Maybe<Scalars['Int']>;
-  measure_unit_id?: Maybe<Scalars['Int']>;
-  min_year_acquired?: Maybe<Scalars['Int']>;
-  seq_num?: Maybe<Scalars['Int']>;
+  amount?: InputMaybe<Scalars['float8']>;
+  data_points?: InputMaybe<Scalars['Int']>;
+  fdc_id?: InputMaybe<Scalars['Int']>;
+  gram_weight?: InputMaybe<Scalars['float8']>;
+  id?: InputMaybe<Scalars['Int']>;
+  measure_unit_id?: InputMaybe<Scalars['Int']>;
+  min_year_acquired?: InputMaybe<Scalars['Int']>;
+  seq_num?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "food_portion" */
 export type Food_Portion_Insert_Input = {
-  amount?: Maybe<Scalars['float8']>;
-  data_points?: Maybe<Scalars['Int']>;
-  fdc_id?: Maybe<Scalars['Int']>;
-  footnote?: Maybe<Scalars['String']>;
-  gram_weight?: Maybe<Scalars['float8']>;
-  id?: Maybe<Scalars['Int']>;
-  measure_unit?: Maybe<Measure_Unit_Obj_Rel_Insert_Input>;
-  measure_unit_id?: Maybe<Scalars['Int']>;
-  min_year_acquired?: Maybe<Scalars['Int']>;
-  modifier?: Maybe<Scalars['String']>;
-  portion_description?: Maybe<Scalars['String']>;
-  seq_num?: Maybe<Scalars['Int']>;
+  amount?: InputMaybe<Scalars['float8']>;
+  data_points?: InputMaybe<Scalars['Int']>;
+  fdc_id?: InputMaybe<Scalars['Int']>;
+  footnote?: InputMaybe<Scalars['String']>;
+  gram_weight?: InputMaybe<Scalars['float8']>;
+  id?: InputMaybe<Scalars['Int']>;
+  measure_unit?: InputMaybe<Measure_Unit_Obj_Rel_Insert_Input>;
+  measure_unit_id?: InputMaybe<Scalars['Int']>;
+  min_year_acquired?: InputMaybe<Scalars['Int']>;
+  modifier?: InputMaybe<Scalars['String']>;
+  portion_description?: InputMaybe<Scalars['String']>;
+  seq_num?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate max on columns */
@@ -1799,17 +2858,17 @@ export type Food_Portion_Max_Fields = {
 
 /** order by max() on columns of table "food_portion" */
 export type Food_Portion_Max_Order_By = {
-  amount?: Maybe<Order_By>;
-  data_points?: Maybe<Order_By>;
-  fdc_id?: Maybe<Order_By>;
-  footnote?: Maybe<Order_By>;
-  gram_weight?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  measure_unit_id?: Maybe<Order_By>;
-  min_year_acquired?: Maybe<Order_By>;
-  modifier?: Maybe<Order_By>;
-  portion_description?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  data_points?: InputMaybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  footnote?: InputMaybe<Order_By>;
+  gram_weight?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  measure_unit_id?: InputMaybe<Order_By>;
+  min_year_acquired?: InputMaybe<Order_By>;
+  modifier?: InputMaybe<Order_By>;
+  portion_description?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -1830,17 +2889,17 @@ export type Food_Portion_Min_Fields = {
 
 /** order by min() on columns of table "food_portion" */
 export type Food_Portion_Min_Order_By = {
-  amount?: Maybe<Order_By>;
-  data_points?: Maybe<Order_By>;
-  fdc_id?: Maybe<Order_By>;
-  footnote?: Maybe<Order_By>;
-  gram_weight?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  measure_unit_id?: Maybe<Order_By>;
-  min_year_acquired?: Maybe<Order_By>;
-  modifier?: Maybe<Order_By>;
-  portion_description?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  data_points?: InputMaybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  footnote?: InputMaybe<Order_By>;
+  gram_weight?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  measure_unit_id?: InputMaybe<Order_By>;
+  min_year_acquired?: InputMaybe<Order_By>;
+  modifier?: InputMaybe<Order_By>;
+  portion_description?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "food_portion" */
@@ -1856,30 +2915,30 @@ export type Food_Portion_Mutation_Response = {
 export type Food_Portion_Obj_Rel_Insert_Input = {
   data: Food_Portion_Insert_Input;
   /** on conflict condition */
-  on_conflict?: Maybe<Food_Portion_On_Conflict>;
+  on_conflict?: InputMaybe<Food_Portion_On_Conflict>;
 };
 
 /** on conflict condition type for table "food_portion" */
 export type Food_Portion_On_Conflict = {
   constraint: Food_Portion_Constraint;
   update_columns?: Array<Food_Portion_Update_Column>;
-  where?: Maybe<Food_Portion_Bool_Exp>;
+  where?: InputMaybe<Food_Portion_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "food_portion". */
 export type Food_Portion_Order_By = {
-  amount?: Maybe<Order_By>;
-  data_points?: Maybe<Order_By>;
-  fdc_id?: Maybe<Order_By>;
-  footnote?: Maybe<Order_By>;
-  gram_weight?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  measure_unit?: Maybe<Measure_Unit_Order_By>;
-  measure_unit_id?: Maybe<Order_By>;
-  min_year_acquired?: Maybe<Order_By>;
-  modifier?: Maybe<Order_By>;
-  portion_description?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  data_points?: InputMaybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  footnote?: InputMaybe<Order_By>;
+  gram_weight?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  measure_unit?: InputMaybe<Measure_Unit_Order_By>;
+  measure_unit_id?: InputMaybe<Order_By>;
+  min_year_acquired?: InputMaybe<Order_By>;
+  modifier?: InputMaybe<Order_By>;
+  portion_description?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: food_portion */
@@ -1915,17 +2974,17 @@ export enum Food_Portion_Select_Column {
 
 /** input type for updating data in table "food_portion" */
 export type Food_Portion_Set_Input = {
-  amount?: Maybe<Scalars['float8']>;
-  data_points?: Maybe<Scalars['Int']>;
-  fdc_id?: Maybe<Scalars['Int']>;
-  footnote?: Maybe<Scalars['String']>;
-  gram_weight?: Maybe<Scalars['float8']>;
-  id?: Maybe<Scalars['Int']>;
-  measure_unit_id?: Maybe<Scalars['Int']>;
-  min_year_acquired?: Maybe<Scalars['Int']>;
-  modifier?: Maybe<Scalars['String']>;
-  portion_description?: Maybe<Scalars['String']>;
-  seq_num?: Maybe<Scalars['Int']>;
+  amount?: InputMaybe<Scalars['float8']>;
+  data_points?: InputMaybe<Scalars['Int']>;
+  fdc_id?: InputMaybe<Scalars['Int']>;
+  footnote?: InputMaybe<Scalars['String']>;
+  gram_weight?: InputMaybe<Scalars['float8']>;
+  id?: InputMaybe<Scalars['Int']>;
+  measure_unit_id?: InputMaybe<Scalars['Int']>;
+  min_year_acquired?: InputMaybe<Scalars['Int']>;
+  modifier?: InputMaybe<Scalars['String']>;
+  portion_description?: InputMaybe<Scalars['String']>;
+  seq_num?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate stddev on columns */
@@ -1943,14 +3002,14 @@ export type Food_Portion_Stddev_Fields = {
 
 /** order by stddev() on columns of table "food_portion" */
 export type Food_Portion_Stddev_Order_By = {
-  amount?: Maybe<Order_By>;
-  data_points?: Maybe<Order_By>;
-  fdc_id?: Maybe<Order_By>;
-  gram_weight?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  measure_unit_id?: Maybe<Order_By>;
-  min_year_acquired?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  data_points?: InputMaybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  gram_weight?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  measure_unit_id?: InputMaybe<Order_By>;
+  min_year_acquired?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -1968,14 +3027,14 @@ export type Food_Portion_Stddev_Pop_Fields = {
 
 /** order by stddev_pop() on columns of table "food_portion" */
 export type Food_Portion_Stddev_Pop_Order_By = {
-  amount?: Maybe<Order_By>;
-  data_points?: Maybe<Order_By>;
-  fdc_id?: Maybe<Order_By>;
-  gram_weight?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  measure_unit_id?: Maybe<Order_By>;
-  min_year_acquired?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  data_points?: InputMaybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  gram_weight?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  measure_unit_id?: InputMaybe<Order_By>;
+  min_year_acquired?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -1993,14 +3052,14 @@ export type Food_Portion_Stddev_Samp_Fields = {
 
 /** order by stddev_samp() on columns of table "food_portion" */
 export type Food_Portion_Stddev_Samp_Order_By = {
-  amount?: Maybe<Order_By>;
-  data_points?: Maybe<Order_By>;
-  fdc_id?: Maybe<Order_By>;
-  gram_weight?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  measure_unit_id?: Maybe<Order_By>;
-  min_year_acquired?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  data_points?: InputMaybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  gram_weight?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  measure_unit_id?: InputMaybe<Order_By>;
+  min_year_acquired?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
@@ -2018,14 +3077,14 @@ export type Food_Portion_Sum_Fields = {
 
 /** order by sum() on columns of table "food_portion" */
 export type Food_Portion_Sum_Order_By = {
-  amount?: Maybe<Order_By>;
-  data_points?: Maybe<Order_By>;
-  fdc_id?: Maybe<Order_By>;
-  gram_weight?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  measure_unit_id?: Maybe<Order_By>;
-  min_year_acquired?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  data_points?: InputMaybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  gram_weight?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  measure_unit_id?: InputMaybe<Order_By>;
+  min_year_acquired?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "food_portion" */
@@ -2069,14 +3128,14 @@ export type Food_Portion_Var_Pop_Fields = {
 
 /** order by var_pop() on columns of table "food_portion" */
 export type Food_Portion_Var_Pop_Order_By = {
-  amount?: Maybe<Order_By>;
-  data_points?: Maybe<Order_By>;
-  fdc_id?: Maybe<Order_By>;
-  gram_weight?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  measure_unit_id?: Maybe<Order_By>;
-  min_year_acquired?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  data_points?: InputMaybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  gram_weight?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  measure_unit_id?: InputMaybe<Order_By>;
+  min_year_acquired?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
@@ -2094,14 +3153,14 @@ export type Food_Portion_Var_Samp_Fields = {
 
 /** order by var_samp() on columns of table "food_portion" */
 export type Food_Portion_Var_Samp_Order_By = {
-  amount?: Maybe<Order_By>;
-  data_points?: Maybe<Order_By>;
-  fdc_id?: Maybe<Order_By>;
-  gram_weight?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  measure_unit_id?: Maybe<Order_By>;
-  min_year_acquired?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  data_points?: InputMaybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  gram_weight?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  measure_unit_id?: InputMaybe<Order_By>;
+  min_year_acquired?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
@@ -2119,14 +3178,14 @@ export type Food_Portion_Variance_Fields = {
 
 /** order by variance() on columns of table "food_portion" */
 export type Food_Portion_Variance_Order_By = {
-  amount?: Maybe<Order_By>;
-  data_points?: Maybe<Order_By>;
-  fdc_id?: Maybe<Order_By>;
-  gram_weight?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  measure_unit_id?: Maybe<Order_By>;
-  min_year_acquired?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  data_points?: InputMaybe<Order_By>;
+  fdc_id?: InputMaybe<Order_By>;
+  gram_weight?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  measure_unit_id?: InputMaybe<Order_By>;
+  min_year_acquired?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** select columns of table "food" */
@@ -2147,12 +3206,12 @@ export enum Food_Select_Column {
 
 /** input type for updating data in table "food" */
 export type Food_Set_Input = {
-  data_type?: Maybe<Scalars['food_data_type_enum']>;
-  description?: Maybe<Scalars['String']>;
-  description_tsv?: Maybe<Scalars['tsvector']>;
-  fdc_id?: Maybe<Scalars['Int']>;
-  food_category_id?: Maybe<Scalars['Int']>;
-  publication_date?: Maybe<Scalars['timestamp']>;
+  data_type?: InputMaybe<Scalars['food_data_type_enum']>;
+  description?: InputMaybe<Scalars['String']>;
+  description_tsv?: InputMaybe<Scalars['tsvector']>;
+  fdc_id?: InputMaybe<Scalars['Int']>;
+  food_category_id?: InputMaybe<Scalars['Int']>;
+  publication_date?: InputMaybe<Scalars['timestamp']>;
 };
 
 /** aggregate stddev on columns */
@@ -2162,11 +3221,23 @@ export type Food_Stddev_Fields = {
   food_category_id?: Maybe<Scalars['Float']>;
 };
 
+/** order by stddev() on columns of table "food" */
+export type Food_Stddev_Order_By = {
+  fdc_id?: InputMaybe<Order_By>;
+  food_category_id?: InputMaybe<Order_By>;
+};
+
 /** aggregate stddev_pop on columns */
 export type Food_Stddev_Pop_Fields = {
   __typename?: 'food_stddev_pop_fields';
   fdc_id?: Maybe<Scalars['Float']>;
   food_category_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "food" */
+export type Food_Stddev_Pop_Order_By = {
+  fdc_id?: InputMaybe<Order_By>;
+  food_category_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -2176,11 +3247,23 @@ export type Food_Stddev_Samp_Fields = {
   food_category_id?: Maybe<Scalars['Float']>;
 };
 
+/** order by stddev_samp() on columns of table "food" */
+export type Food_Stddev_Samp_Order_By = {
+  fdc_id?: InputMaybe<Order_By>;
+  food_category_id?: InputMaybe<Order_By>;
+};
+
 /** aggregate sum on columns */
 export type Food_Sum_Fields = {
   __typename?: 'food_sum_fields';
   fdc_id?: Maybe<Scalars['Int']>;
   food_category_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "food" */
+export type Food_Sum_Order_By = {
+  fdc_id?: InputMaybe<Order_By>;
+  food_category_id?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "food" */
@@ -2206,11 +3289,23 @@ export type Food_Var_Pop_Fields = {
   food_category_id?: Maybe<Scalars['Float']>;
 };
 
+/** order by var_pop() on columns of table "food" */
+export type Food_Var_Pop_Order_By = {
+  fdc_id?: InputMaybe<Order_By>;
+  food_category_id?: InputMaybe<Order_By>;
+};
+
 /** aggregate var_samp on columns */
 export type Food_Var_Samp_Fields = {
   __typename?: 'food_var_samp_fields';
   fdc_id?: Maybe<Scalars['Float']>;
   food_category_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "food" */
+export type Food_Var_Samp_Order_By = {
+  fdc_id?: InputMaybe<Order_By>;
+  food_category_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
@@ -2220,28 +3315,33 @@ export type Food_Variance_Fields = {
   food_category_id?: Maybe<Scalars['Float']>;
 };
 
+/** order by variance() on columns of table "food" */
+export type Food_Variance_Order_By = {
+  fdc_id?: InputMaybe<Order_By>;
+  food_category_id?: InputMaybe<Order_By>;
+};
 
 /** Boolean expression to compare columns of type "jsonb". All fields are combined with logical 'AND'. */
 export type Jsonb_Comparison_Exp = {
   /** is the column contained in the given json value */
-  _contained_in?: Maybe<Scalars['jsonb']>;
+  _contained_in?: InputMaybe<Scalars['jsonb']>;
   /** does the column contain the given json value at the top level */
-  _contains?: Maybe<Scalars['jsonb']>;
-  _eq?: Maybe<Scalars['jsonb']>;
-  _gt?: Maybe<Scalars['jsonb']>;
-  _gte?: Maybe<Scalars['jsonb']>;
+  _contains?: InputMaybe<Scalars['jsonb']>;
+  _eq?: InputMaybe<Scalars['jsonb']>;
+  _gt?: InputMaybe<Scalars['jsonb']>;
+  _gte?: InputMaybe<Scalars['jsonb']>;
   /** does the string exist as a top-level key in the column */
-  _has_key?: Maybe<Scalars['String']>;
+  _has_key?: InputMaybe<Scalars['String']>;
   /** do all of these strings exist as top-level keys in the column */
-  _has_keys_all?: Maybe<Array<Scalars['String']>>;
+  _has_keys_all?: InputMaybe<Array<Scalars['String']>>;
   /** do any of these strings exist as top-level keys in the column */
-  _has_keys_any?: Maybe<Array<Scalars['String']>>;
-  _in?: Maybe<Array<Scalars['jsonb']>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _lt?: Maybe<Scalars['jsonb']>;
-  _lte?: Maybe<Scalars['jsonb']>;
-  _neq?: Maybe<Scalars['jsonb']>;
-  _nin?: Maybe<Array<Scalars['jsonb']>>;
+  _has_keys_any?: InputMaybe<Array<Scalars['String']>>;
+  _in?: InputMaybe<Array<Scalars['jsonb']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['jsonb']>;
+  _lte?: InputMaybe<Scalars['jsonb']>;
+  _neq?: InputMaybe<Scalars['jsonb']>;
+  _nin?: InputMaybe<Array<Scalars['jsonb']>>;
 };
 
 /** columns and relationships of "measure_unit" */
@@ -2278,8 +3378,8 @@ export type Measure_Unit_Aggregate_Fields = {
 
 /** aggregate fields of "measure_unit" */
 export type Measure_Unit_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Measure_Unit_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<Measure_Unit_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** aggregate avg on columns */
@@ -2291,12 +3391,12 @@ export type Measure_Unit_Avg_Fields = {
 
 /** Boolean expression to filter rows from the table "measure_unit". All fields are combined with a logical 'AND'. */
 export type Measure_Unit_Bool_Exp = {
-  _and?: Maybe<Array<Measure_Unit_Bool_Exp>>;
-  _not?: Maybe<Measure_Unit_Bool_Exp>;
-  _or?: Maybe<Array<Measure_Unit_Bool_Exp>>;
-  id?: Maybe<Int_Comparison_Exp>;
-  ml?: Maybe<Float8_Comparison_Exp>;
-  name?: Maybe<String_Comparison_Exp>;
+  _and?: InputMaybe<Array<Measure_Unit_Bool_Exp>>;
+  _not?: InputMaybe<Measure_Unit_Bool_Exp>;
+  _or?: InputMaybe<Array<Measure_Unit_Bool_Exp>>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  ml?: InputMaybe<Float8_Comparison_Exp>;
+  name?: InputMaybe<String_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "measure_unit" */
@@ -2307,15 +3407,15 @@ export enum Measure_Unit_Constraint {
 
 /** input type for incrementing numeric columns in table "measure_unit" */
 export type Measure_Unit_Inc_Input = {
-  id?: Maybe<Scalars['Int']>;
-  ml?: Maybe<Scalars['float8']>;
+  id?: InputMaybe<Scalars['Int']>;
+  ml?: InputMaybe<Scalars['float8']>;
 };
 
 /** input type for inserting data into table "measure_unit" */
 export type Measure_Unit_Insert_Input = {
-  id?: Maybe<Scalars['Int']>;
-  ml?: Maybe<Scalars['float8']>;
-  name?: Maybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
+  ml?: InputMaybe<Scalars['float8']>;
+  name?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
@@ -2347,21 +3447,21 @@ export type Measure_Unit_Mutation_Response = {
 export type Measure_Unit_Obj_Rel_Insert_Input = {
   data: Measure_Unit_Insert_Input;
   /** on conflict condition */
-  on_conflict?: Maybe<Measure_Unit_On_Conflict>;
+  on_conflict?: InputMaybe<Measure_Unit_On_Conflict>;
 };
 
 /** on conflict condition type for table "measure_unit" */
 export type Measure_Unit_On_Conflict = {
   constraint: Measure_Unit_Constraint;
   update_columns?: Array<Measure_Unit_Update_Column>;
-  where?: Maybe<Measure_Unit_Bool_Exp>;
+  where?: InputMaybe<Measure_Unit_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "measure_unit". */
 export type Measure_Unit_Order_By = {
-  id?: Maybe<Order_By>;
-  ml?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  ml?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: measure_unit */
@@ -2381,9 +3481,9 @@ export enum Measure_Unit_Select_Column {
 
 /** input type for updating data in table "measure_unit" */
 export type Measure_Unit_Set_Input = {
-  id?: Maybe<Scalars['Int']>;
-  ml?: Maybe<Scalars['float8']>;
-  name?: Maybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
+  ml?: InputMaybe<Scalars['float8']>;
+  name?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate stddev on columns */
@@ -2448,6 +3548,34 @@ export type Measure_Unit_Variance_Fields = {
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
+  /** delete single row from the table: "auth.providers" */
+  deleteAuthProvider?: Maybe<AuthProviders>;
+  /** delete single row from the table: "auth.provider_requests" */
+  deleteAuthProviderRequest?: Maybe<AuthProviderRequests>;
+  /** delete data from the table: "auth.provider_requests" */
+  deleteAuthProviderRequests?: Maybe<AuthProviderRequests_Mutation_Response>;
+  /** delete data from the table: "auth.providers" */
+  deleteAuthProviders?: Maybe<AuthProviders_Mutation_Response>;
+  /** delete single row from the table: "auth.refresh_tokens" */
+  deleteAuthRefreshToken?: Maybe<AuthRefreshTokens>;
+  /** delete data from the table: "auth.refresh_tokens" */
+  deleteAuthRefreshTokens?: Maybe<AuthRefreshTokens_Mutation_Response>;
+  /** delete single row from the table: "auth.roles" */
+  deleteAuthRole?: Maybe<AuthRoles>;
+  /** delete data from the table: "auth.roles" */
+  deleteAuthRoles?: Maybe<AuthRoles_Mutation_Response>;
+  /** delete single row from the table: "auth.user_providers" */
+  deleteAuthUserProvider?: Maybe<AuthUserProviders>;
+  /** delete data from the table: "auth.user_providers" */
+  deleteAuthUserProviders?: Maybe<AuthUserProviders_Mutation_Response>;
+  /** delete single row from the table: "auth.user_roles" */
+  deleteAuthUserRole?: Maybe<AuthUserRoles>;
+  /** delete data from the table: "auth.user_roles" */
+  deleteAuthUserRoles?: Maybe<AuthUserRoles_Mutation_Response>;
+  /** delete single row from the table: "auth.users" */
+  deleteUser?: Maybe<Users>;
+  /** delete data from the table: "auth.users" */
+  deleteUsers?: Maybe<Users_Mutation_Response>;
   /** delete data from the table: "food" */
   delete_food?: Maybe<Food_Mutation_Response>;
   /** delete data from the table: "food_attribute" */
@@ -2528,6 +3656,34 @@ export type Mutation_Root = {
   delete_user_config?: Maybe<User_Config_Mutation_Response>;
   /** delete single row from the table: "user_config" */
   delete_user_config_by_pk?: Maybe<User_Config>;
+  /** insert a single row into the table: "auth.providers" */
+  insertAuthProvider?: Maybe<AuthProviders>;
+  /** insert a single row into the table: "auth.provider_requests" */
+  insertAuthProviderRequest?: Maybe<AuthProviderRequests>;
+  /** insert data into the table: "auth.provider_requests" */
+  insertAuthProviderRequests?: Maybe<AuthProviderRequests_Mutation_Response>;
+  /** insert data into the table: "auth.providers" */
+  insertAuthProviders?: Maybe<AuthProviders_Mutation_Response>;
+  /** insert a single row into the table: "auth.refresh_tokens" */
+  insertAuthRefreshToken?: Maybe<AuthRefreshTokens>;
+  /** insert data into the table: "auth.refresh_tokens" */
+  insertAuthRefreshTokens?: Maybe<AuthRefreshTokens_Mutation_Response>;
+  /** insert a single row into the table: "auth.roles" */
+  insertAuthRole?: Maybe<AuthRoles>;
+  /** insert data into the table: "auth.roles" */
+  insertAuthRoles?: Maybe<AuthRoles_Mutation_Response>;
+  /** insert a single row into the table: "auth.user_providers" */
+  insertAuthUserProvider?: Maybe<AuthUserProviders>;
+  /** insert data into the table: "auth.user_providers" */
+  insertAuthUserProviders?: Maybe<AuthUserProviders_Mutation_Response>;
+  /** insert a single row into the table: "auth.user_roles" */
+  insertAuthUserRole?: Maybe<AuthUserRoles>;
+  /** insert data into the table: "auth.user_roles" */
+  insertAuthUserRoles?: Maybe<AuthUserRoles_Mutation_Response>;
+  /** insert a single row into the table: "auth.users" */
+  insertUser?: Maybe<Users>;
+  /** insert data into the table: "auth.users" */
+  insertUsers?: Maybe<Users_Mutation_Response>;
   /** insert data into the table: "food" */
   insert_food?: Maybe<Food_Mutation_Response>;
   /** insert data into the table: "food_attribute" */
@@ -2608,6 +3764,34 @@ export type Mutation_Root = {
   insert_user_config?: Maybe<User_Config_Mutation_Response>;
   /** insert a single row into the table: "user_config" */
   insert_user_config_one?: Maybe<User_Config>;
+  /** update single row of the table: "auth.providers" */
+  updateAuthProvider?: Maybe<AuthProviders>;
+  /** update single row of the table: "auth.provider_requests" */
+  updateAuthProviderRequest?: Maybe<AuthProviderRequests>;
+  /** update data of the table: "auth.provider_requests" */
+  updateAuthProviderRequests?: Maybe<AuthProviderRequests_Mutation_Response>;
+  /** update data of the table: "auth.providers" */
+  updateAuthProviders?: Maybe<AuthProviders_Mutation_Response>;
+  /** update single row of the table: "auth.refresh_tokens" */
+  updateAuthRefreshToken?: Maybe<AuthRefreshTokens>;
+  /** update data of the table: "auth.refresh_tokens" */
+  updateAuthRefreshTokens?: Maybe<AuthRefreshTokens_Mutation_Response>;
+  /** update single row of the table: "auth.roles" */
+  updateAuthRole?: Maybe<AuthRoles>;
+  /** update data of the table: "auth.roles" */
+  updateAuthRoles?: Maybe<AuthRoles_Mutation_Response>;
+  /** update single row of the table: "auth.user_providers" */
+  updateAuthUserProvider?: Maybe<AuthUserProviders>;
+  /** update data of the table: "auth.user_providers" */
+  updateAuthUserProviders?: Maybe<AuthUserProviders_Mutation_Response>;
+  /** update single row of the table: "auth.user_roles" */
+  updateAuthUserRole?: Maybe<AuthUserRoles>;
+  /** update data of the table: "auth.user_roles" */
+  updateAuthUserRoles?: Maybe<AuthUserRoles_Mutation_Response>;
+  /** update single row of the table: "auth.users" */
+  updateUser?: Maybe<Users>;
+  /** update data of the table: "auth.users" */
+  updateUsers?: Maybe<Users_Mutation_Response>;
   /** update data of the table: "food" */
   update_food?: Maybe<Food_Mutation_Response>;
   /** update data of the table: "food_attribute" */
@@ -2688,6 +3872,90 @@ export type Mutation_Root = {
   update_user_config?: Maybe<User_Config_Mutation_Response>;
   /** update single row of the table: "user_config" */
   update_user_config_by_pk?: Maybe<User_Config>;
+};
+
+
+/** mutation root */
+export type Mutation_RootDeleteAuthProviderArgs = {
+  id: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDeleteAuthProviderRequestArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDeleteAuthProviderRequestsArgs = {
+  where: AuthProviderRequests_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDeleteAuthProvidersArgs = {
+  where: AuthProviders_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDeleteAuthRefreshTokenArgs = {
+  refreshToken: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDeleteAuthRefreshTokensArgs = {
+  where: AuthRefreshTokens_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDeleteAuthRoleArgs = {
+  role: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDeleteAuthRolesArgs = {
+  where: AuthRoles_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDeleteAuthUserProviderArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDeleteAuthUserProvidersArgs = {
+  where: AuthUserProviders_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDeleteAuthUserRoleArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDeleteAuthUserRolesArgs = {
+  where: AuthUserRoles_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDeleteUserArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDeleteUsersArgs = {
+  where: Users_Bool_Exp;
 };
 
 
@@ -2932,621 +4200,827 @@ export type Mutation_RootDelete_User_Config_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsertAuthProviderArgs = {
+  object: AuthProviders_Insert_Input;
+  on_conflict?: InputMaybe<AuthProviders_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsertAuthProviderRequestArgs = {
+  object: AuthProviderRequests_Insert_Input;
+  on_conflict?: InputMaybe<AuthProviderRequests_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsertAuthProviderRequestsArgs = {
+  objects: Array<AuthProviderRequests_Insert_Input>;
+  on_conflict?: InputMaybe<AuthProviderRequests_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsertAuthProvidersArgs = {
+  objects: Array<AuthProviders_Insert_Input>;
+  on_conflict?: InputMaybe<AuthProviders_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsertAuthRefreshTokenArgs = {
+  object: AuthRefreshTokens_Insert_Input;
+  on_conflict?: InputMaybe<AuthRefreshTokens_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsertAuthRefreshTokensArgs = {
+  objects: Array<AuthRefreshTokens_Insert_Input>;
+  on_conflict?: InputMaybe<AuthRefreshTokens_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsertAuthRoleArgs = {
+  object: AuthRoles_Insert_Input;
+  on_conflict?: InputMaybe<AuthRoles_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsertAuthRolesArgs = {
+  objects: Array<AuthRoles_Insert_Input>;
+  on_conflict?: InputMaybe<AuthRoles_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsertAuthUserProviderArgs = {
+  object: AuthUserProviders_Insert_Input;
+  on_conflict?: InputMaybe<AuthUserProviders_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsertAuthUserProvidersArgs = {
+  objects: Array<AuthUserProviders_Insert_Input>;
+  on_conflict?: InputMaybe<AuthUserProviders_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsertAuthUserRoleArgs = {
+  object: AuthUserRoles_Insert_Input;
+  on_conflict?: InputMaybe<AuthUserRoles_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsertAuthUserRolesArgs = {
+  objects: Array<AuthUserRoles_Insert_Input>;
+  on_conflict?: InputMaybe<AuthUserRoles_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsertUserArgs = {
+  object: Users_Insert_Input;
+  on_conflict?: InputMaybe<Users_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsertUsersArgs = {
+  objects: Array<Users_Insert_Input>;
+  on_conflict?: InputMaybe<Users_On_Conflict>;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsert_FoodArgs = {
   objects: Array<Food_Insert_Input>;
-  on_conflict?: Maybe<Food_On_Conflict>;
+  on_conflict?: InputMaybe<Food_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Food_AttributeArgs = {
   objects: Array<Food_Attribute_Insert_Input>;
-  on_conflict?: Maybe<Food_Attribute_On_Conflict>;
+  on_conflict?: InputMaybe<Food_Attribute_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Food_Attribute_OneArgs = {
   object: Food_Attribute_Insert_Input;
-  on_conflict?: Maybe<Food_Attribute_On_Conflict>;
+  on_conflict?: InputMaybe<Food_Attribute_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Food_Attribute_TypeArgs = {
   objects: Array<Food_Attribute_Type_Insert_Input>;
-  on_conflict?: Maybe<Food_Attribute_Type_On_Conflict>;
+  on_conflict?: InputMaybe<Food_Attribute_Type_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Food_Attribute_Type_OneArgs = {
   object: Food_Attribute_Type_Insert_Input;
-  on_conflict?: Maybe<Food_Attribute_Type_On_Conflict>;
+  on_conflict?: InputMaybe<Food_Attribute_Type_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Food_CategoryArgs = {
   objects: Array<Food_Category_Insert_Input>;
-  on_conflict?: Maybe<Food_Category_On_Conflict>;
+  on_conflict?: InputMaybe<Food_Category_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Food_Category_OneArgs = {
   object: Food_Category_Insert_Input;
-  on_conflict?: Maybe<Food_Category_On_Conflict>;
+  on_conflict?: InputMaybe<Food_Category_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Food_NutrientArgs = {
   objects: Array<Food_Nutrient_Insert_Input>;
-  on_conflict?: Maybe<Food_Nutrient_On_Conflict>;
+  on_conflict?: InputMaybe<Food_Nutrient_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Food_Nutrient_OneArgs = {
   object: Food_Nutrient_Insert_Input;
-  on_conflict?: Maybe<Food_Nutrient_On_Conflict>;
+  on_conflict?: InputMaybe<Food_Nutrient_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Food_OneArgs = {
   object: Food_Insert_Input;
-  on_conflict?: Maybe<Food_On_Conflict>;
+  on_conflict?: InputMaybe<Food_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Food_PortionArgs = {
   objects: Array<Food_Portion_Insert_Input>;
-  on_conflict?: Maybe<Food_Portion_On_Conflict>;
+  on_conflict?: InputMaybe<Food_Portion_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Food_Portion_OneArgs = {
   object: Food_Portion_Insert_Input;
-  on_conflict?: Maybe<Food_Portion_On_Conflict>;
+  on_conflict?: InputMaybe<Food_Portion_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Measure_UnitArgs = {
   objects: Array<Measure_Unit_Insert_Input>;
-  on_conflict?: Maybe<Measure_Unit_On_Conflict>;
+  on_conflict?: InputMaybe<Measure_Unit_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Measure_Unit_OneArgs = {
   object: Measure_Unit_Insert_Input;
-  on_conflict?: Maybe<Measure_Unit_On_Conflict>;
+  on_conflict?: InputMaybe<Measure_Unit_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_NutrientArgs = {
   objects: Array<Nutrient_Insert_Input>;
-  on_conflict?: Maybe<Nutrient_On_Conflict>;
+  on_conflict?: InputMaybe<Nutrient_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Nutrient_OneArgs = {
   object: Nutrient_Insert_Input;
-  on_conflict?: Maybe<Nutrient_On_Conflict>;
+  on_conflict?: InputMaybe<Nutrient_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Recipe_Direction_ActionsArgs = {
   objects: Array<Recipe_Direction_Actions_Insert_Input>;
-  on_conflict?: Maybe<Recipe_Direction_Actions_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_Direction_Actions_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Recipe_Direction_Actions_OneArgs = {
   object: Recipe_Direction_Actions_Insert_Input;
-  on_conflict?: Maybe<Recipe_Direction_Actions_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_Direction_Actions_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Recipe_Direction_DurationsArgs = {
   objects: Array<Recipe_Direction_Durations_Insert_Input>;
-  on_conflict?: Maybe<Recipe_Direction_Durations_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_Direction_Durations_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Recipe_Direction_Durations_OneArgs = {
   object: Recipe_Direction_Durations_Insert_Input;
-  on_conflict?: Maybe<Recipe_Direction_Durations_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_Direction_Durations_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Recipe_DirectionsArgs = {
   objects: Array<Recipe_Directions_Insert_Input>;
-  on_conflict?: Maybe<Recipe_Directions_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_Directions_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Recipe_Directions_OneArgs = {
   object: Recipe_Directions_Insert_Input;
-  on_conflict?: Maybe<Recipe_Directions_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_Directions_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Recipe_FavoriteArgs = {
   objects: Array<Recipe_Favorite_Insert_Input>;
-  on_conflict?: Maybe<Recipe_Favorite_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_Favorite_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Recipe_Favorite_OneArgs = {
   object: Recipe_Favorite_Insert_Input;
-  on_conflict?: Maybe<Recipe_Favorite_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_Favorite_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Recipe_Ingredient_Food_CandidateArgs = {
   objects: Array<Recipe_Ingredient_Food_Candidate_Insert_Input>;
-  on_conflict?: Maybe<Recipe_Ingredient_Food_Candidate_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_Ingredient_Food_Candidate_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Recipe_Ingredient_Food_Candidate_OneArgs = {
   object: Recipe_Ingredient_Food_Candidate_Insert_Input;
-  on_conflict?: Maybe<Recipe_Ingredient_Food_Candidate_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_Ingredient_Food_Candidate_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Recipe_Ingredient_GroupsArgs = {
   objects: Array<Recipe_Ingredient_Groups_Insert_Input>;
-  on_conflict?: Maybe<Recipe_Ingredient_Groups_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_Ingredient_Groups_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Recipe_Ingredient_Groups_OneArgs = {
   object: Recipe_Ingredient_Groups_Insert_Input;
-  on_conflict?: Maybe<Recipe_Ingredient_Groups_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_Ingredient_Groups_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Recipe_IngredientsArgs = {
   objects: Array<Recipe_Ingredients_Insert_Input>;
-  on_conflict?: Maybe<Recipe_Ingredients_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_Ingredients_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Recipe_Ingredients_OneArgs = {
   object: Recipe_Ingredients_Insert_Input;
-  on_conflict?: Maybe<Recipe_Ingredients_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_Ingredients_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Recipe_List_ItemsArgs = {
   objects: Array<Recipe_List_Items_Insert_Input>;
-  on_conflict?: Maybe<Recipe_List_Items_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_List_Items_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Recipe_List_Items_OneArgs = {
   object: Recipe_List_Items_Insert_Input;
-  on_conflict?: Maybe<Recipe_List_Items_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_List_Items_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Recipe_ListsArgs = {
   objects: Array<Recipe_Lists_Insert_Input>;
-  on_conflict?: Maybe<Recipe_Lists_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_Lists_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Recipe_Lists_OneArgs = {
   object: Recipe_Lists_Insert_Input;
-  on_conflict?: Maybe<Recipe_Lists_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_Lists_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Recipe_TagsArgs = {
   objects: Array<Recipe_Tags_Insert_Input>;
-  on_conflict?: Maybe<Recipe_Tags_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_Tags_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Recipe_Tags_OneArgs = {
   object: Recipe_Tags_Insert_Input;
-  on_conflict?: Maybe<Recipe_Tags_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_Tags_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_RecipesArgs = {
   objects: Array<Recipes_Insert_Input>;
-  on_conflict?: Maybe<Recipes_On_Conflict>;
+  on_conflict?: InputMaybe<Recipes_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_Recipes_OneArgs = {
   object: Recipes_Insert_Input;
-  on_conflict?: Maybe<Recipes_On_Conflict>;
+  on_conflict?: InputMaybe<Recipes_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_User_ConfigArgs = {
   objects: Array<User_Config_Insert_Input>;
-  on_conflict?: Maybe<User_Config_On_Conflict>;
+  on_conflict?: InputMaybe<User_Config_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_User_Config_OneArgs = {
   object: User_Config_Insert_Input;
-  on_conflict?: Maybe<User_Config_On_Conflict>;
+  on_conflict?: InputMaybe<User_Config_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateAuthProviderArgs = {
+  _set?: InputMaybe<AuthProviders_Set_Input>;
+  pk_columns: AuthProviders_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateAuthProviderRequestArgs = {
+  _set?: InputMaybe<AuthProviderRequests_Set_Input>;
+  pk_columns: AuthProviderRequests_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateAuthProviderRequestsArgs = {
+  _set?: InputMaybe<AuthProviderRequests_Set_Input>;
+  where: AuthProviderRequests_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateAuthProvidersArgs = {
+  _set?: InputMaybe<AuthProviders_Set_Input>;
+  where: AuthProviders_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateAuthRefreshTokenArgs = {
+  _set?: InputMaybe<AuthRefreshTokens_Set_Input>;
+  pk_columns: AuthRefreshTokens_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateAuthRefreshTokensArgs = {
+  _set?: InputMaybe<AuthRefreshTokens_Set_Input>;
+  where: AuthRefreshTokens_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateAuthRoleArgs = {
+  _set?: InputMaybe<AuthRoles_Set_Input>;
+  pk_columns: AuthRoles_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateAuthRolesArgs = {
+  _set?: InputMaybe<AuthRoles_Set_Input>;
+  where: AuthRoles_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateAuthUserProviderArgs = {
+  _set?: InputMaybe<AuthUserProviders_Set_Input>;
+  pk_columns: AuthUserProviders_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateAuthUserProvidersArgs = {
+  _set?: InputMaybe<AuthUserProviders_Set_Input>;
+  where: AuthUserProviders_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateAuthUserRoleArgs = {
+  _set?: InputMaybe<AuthUserRoles_Set_Input>;
+  pk_columns: AuthUserRoles_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateAuthUserRolesArgs = {
+  _set?: InputMaybe<AuthUserRoles_Set_Input>;
+  where: AuthUserRoles_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateUserArgs = {
+  _append?: InputMaybe<Users_Append_Input>;
+  _delete_at_path?: InputMaybe<Users_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<Users_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<Users_Delete_Key_Input>;
+  _prepend?: InputMaybe<Users_Prepend_Input>;
+  _set?: InputMaybe<Users_Set_Input>;
+  pk_columns: Users_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateUsersArgs = {
+  _append?: InputMaybe<Users_Append_Input>;
+  _delete_at_path?: InputMaybe<Users_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<Users_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<Users_Delete_Key_Input>;
+  _prepend?: InputMaybe<Users_Prepend_Input>;
+  _set?: InputMaybe<Users_Set_Input>;
+  where: Users_Bool_Exp;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_FoodArgs = {
-  _inc?: Maybe<Food_Inc_Input>;
-  _set?: Maybe<Food_Set_Input>;
+  _inc?: InputMaybe<Food_Inc_Input>;
+  _set?: InputMaybe<Food_Set_Input>;
   where: Food_Bool_Exp;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Food_AttributeArgs = {
-  _inc?: Maybe<Food_Attribute_Inc_Input>;
-  _set?: Maybe<Food_Attribute_Set_Input>;
+  _inc?: InputMaybe<Food_Attribute_Inc_Input>;
+  _set?: InputMaybe<Food_Attribute_Set_Input>;
   where: Food_Attribute_Bool_Exp;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Food_Attribute_By_PkArgs = {
-  _inc?: Maybe<Food_Attribute_Inc_Input>;
-  _set?: Maybe<Food_Attribute_Set_Input>;
+  _inc?: InputMaybe<Food_Attribute_Inc_Input>;
+  _set?: InputMaybe<Food_Attribute_Set_Input>;
   pk_columns: Food_Attribute_Pk_Columns_Input;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Food_Attribute_TypeArgs = {
-  _inc?: Maybe<Food_Attribute_Type_Inc_Input>;
-  _set?: Maybe<Food_Attribute_Type_Set_Input>;
+  _inc?: InputMaybe<Food_Attribute_Type_Inc_Input>;
+  _set?: InputMaybe<Food_Attribute_Type_Set_Input>;
   where: Food_Attribute_Type_Bool_Exp;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Food_Attribute_Type_By_PkArgs = {
-  _inc?: Maybe<Food_Attribute_Type_Inc_Input>;
-  _set?: Maybe<Food_Attribute_Type_Set_Input>;
+  _inc?: InputMaybe<Food_Attribute_Type_Inc_Input>;
+  _set?: InputMaybe<Food_Attribute_Type_Set_Input>;
   pk_columns: Food_Attribute_Type_Pk_Columns_Input;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Food_By_PkArgs = {
-  _inc?: Maybe<Food_Inc_Input>;
-  _set?: Maybe<Food_Set_Input>;
+  _inc?: InputMaybe<Food_Inc_Input>;
+  _set?: InputMaybe<Food_Set_Input>;
   pk_columns: Food_Pk_Columns_Input;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Food_CategoryArgs = {
-  _inc?: Maybe<Food_Category_Inc_Input>;
-  _set?: Maybe<Food_Category_Set_Input>;
+  _inc?: InputMaybe<Food_Category_Inc_Input>;
+  _set?: InputMaybe<Food_Category_Set_Input>;
   where: Food_Category_Bool_Exp;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Food_Category_By_PkArgs = {
-  _inc?: Maybe<Food_Category_Inc_Input>;
-  _set?: Maybe<Food_Category_Set_Input>;
+  _inc?: InputMaybe<Food_Category_Inc_Input>;
+  _set?: InputMaybe<Food_Category_Set_Input>;
   pk_columns: Food_Category_Pk_Columns_Input;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Food_NutrientArgs = {
-  _inc?: Maybe<Food_Nutrient_Inc_Input>;
-  _set?: Maybe<Food_Nutrient_Set_Input>;
+  _inc?: InputMaybe<Food_Nutrient_Inc_Input>;
+  _set?: InputMaybe<Food_Nutrient_Set_Input>;
   where: Food_Nutrient_Bool_Exp;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Food_Nutrient_By_PkArgs = {
-  _inc?: Maybe<Food_Nutrient_Inc_Input>;
-  _set?: Maybe<Food_Nutrient_Set_Input>;
+  _inc?: InputMaybe<Food_Nutrient_Inc_Input>;
+  _set?: InputMaybe<Food_Nutrient_Set_Input>;
   pk_columns: Food_Nutrient_Pk_Columns_Input;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Food_PortionArgs = {
-  _inc?: Maybe<Food_Portion_Inc_Input>;
-  _set?: Maybe<Food_Portion_Set_Input>;
+  _inc?: InputMaybe<Food_Portion_Inc_Input>;
+  _set?: InputMaybe<Food_Portion_Set_Input>;
   where: Food_Portion_Bool_Exp;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Food_Portion_By_PkArgs = {
-  _inc?: Maybe<Food_Portion_Inc_Input>;
-  _set?: Maybe<Food_Portion_Set_Input>;
+  _inc?: InputMaybe<Food_Portion_Inc_Input>;
+  _set?: InputMaybe<Food_Portion_Set_Input>;
   pk_columns: Food_Portion_Pk_Columns_Input;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Measure_UnitArgs = {
-  _inc?: Maybe<Measure_Unit_Inc_Input>;
-  _set?: Maybe<Measure_Unit_Set_Input>;
+  _inc?: InputMaybe<Measure_Unit_Inc_Input>;
+  _set?: InputMaybe<Measure_Unit_Set_Input>;
   where: Measure_Unit_Bool_Exp;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Measure_Unit_By_PkArgs = {
-  _inc?: Maybe<Measure_Unit_Inc_Input>;
-  _set?: Maybe<Measure_Unit_Set_Input>;
+  _inc?: InputMaybe<Measure_Unit_Inc_Input>;
+  _set?: InputMaybe<Measure_Unit_Set_Input>;
   pk_columns: Measure_Unit_Pk_Columns_Input;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_NutrientArgs = {
-  _inc?: Maybe<Nutrient_Inc_Input>;
-  _set?: Maybe<Nutrient_Set_Input>;
+  _inc?: InputMaybe<Nutrient_Inc_Input>;
+  _set?: InputMaybe<Nutrient_Set_Input>;
   where: Nutrient_Bool_Exp;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Nutrient_By_PkArgs = {
-  _inc?: Maybe<Nutrient_Inc_Input>;
-  _set?: Maybe<Nutrient_Set_Input>;
+  _inc?: InputMaybe<Nutrient_Inc_Input>;
+  _set?: InputMaybe<Nutrient_Set_Input>;
   pk_columns: Nutrient_Pk_Columns_Input;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Recipe_Direction_ActionsArgs = {
-  _append?: Maybe<Recipe_Direction_Actions_Append_Input>;
-  _delete_at_path?: Maybe<Recipe_Direction_Actions_Delete_At_Path_Input>;
-  _delete_elem?: Maybe<Recipe_Direction_Actions_Delete_Elem_Input>;
-  _delete_key?: Maybe<Recipe_Direction_Actions_Delete_Key_Input>;
-  _inc?: Maybe<Recipe_Direction_Actions_Inc_Input>;
-  _prepend?: Maybe<Recipe_Direction_Actions_Prepend_Input>;
-  _set?: Maybe<Recipe_Direction_Actions_Set_Input>;
+  _append?: InputMaybe<Recipe_Direction_Actions_Append_Input>;
+  _delete_at_path?: InputMaybe<Recipe_Direction_Actions_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<Recipe_Direction_Actions_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<Recipe_Direction_Actions_Delete_Key_Input>;
+  _inc?: InputMaybe<Recipe_Direction_Actions_Inc_Input>;
+  _prepend?: InputMaybe<Recipe_Direction_Actions_Prepend_Input>;
+  _set?: InputMaybe<Recipe_Direction_Actions_Set_Input>;
   where: Recipe_Direction_Actions_Bool_Exp;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Recipe_Direction_Actions_By_PkArgs = {
-  _append?: Maybe<Recipe_Direction_Actions_Append_Input>;
-  _delete_at_path?: Maybe<Recipe_Direction_Actions_Delete_At_Path_Input>;
-  _delete_elem?: Maybe<Recipe_Direction_Actions_Delete_Elem_Input>;
-  _delete_key?: Maybe<Recipe_Direction_Actions_Delete_Key_Input>;
-  _inc?: Maybe<Recipe_Direction_Actions_Inc_Input>;
-  _prepend?: Maybe<Recipe_Direction_Actions_Prepend_Input>;
-  _set?: Maybe<Recipe_Direction_Actions_Set_Input>;
+  _append?: InputMaybe<Recipe_Direction_Actions_Append_Input>;
+  _delete_at_path?: InputMaybe<Recipe_Direction_Actions_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<Recipe_Direction_Actions_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<Recipe_Direction_Actions_Delete_Key_Input>;
+  _inc?: InputMaybe<Recipe_Direction_Actions_Inc_Input>;
+  _prepend?: InputMaybe<Recipe_Direction_Actions_Prepend_Input>;
+  _set?: InputMaybe<Recipe_Direction_Actions_Set_Input>;
   pk_columns: Recipe_Direction_Actions_Pk_Columns_Input;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Recipe_Direction_DurationsArgs = {
-  _inc?: Maybe<Recipe_Direction_Durations_Inc_Input>;
-  _set?: Maybe<Recipe_Direction_Durations_Set_Input>;
+  _inc?: InputMaybe<Recipe_Direction_Durations_Inc_Input>;
+  _set?: InputMaybe<Recipe_Direction_Durations_Set_Input>;
   where: Recipe_Direction_Durations_Bool_Exp;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Recipe_Direction_Durations_By_PkArgs = {
-  _inc?: Maybe<Recipe_Direction_Durations_Inc_Input>;
-  _set?: Maybe<Recipe_Direction_Durations_Set_Input>;
+  _inc?: InputMaybe<Recipe_Direction_Durations_Inc_Input>;
+  _set?: InputMaybe<Recipe_Direction_Durations_Set_Input>;
   pk_columns: Recipe_Direction_Durations_Pk_Columns_Input;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Recipe_DirectionsArgs = {
-  _inc?: Maybe<Recipe_Directions_Inc_Input>;
-  _set?: Maybe<Recipe_Directions_Set_Input>;
+  _inc?: InputMaybe<Recipe_Directions_Inc_Input>;
+  _set?: InputMaybe<Recipe_Directions_Set_Input>;
   where: Recipe_Directions_Bool_Exp;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Recipe_Directions_By_PkArgs = {
-  _inc?: Maybe<Recipe_Directions_Inc_Input>;
-  _set?: Maybe<Recipe_Directions_Set_Input>;
+  _inc?: InputMaybe<Recipe_Directions_Inc_Input>;
+  _set?: InputMaybe<Recipe_Directions_Set_Input>;
   pk_columns: Recipe_Directions_Pk_Columns_Input;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Recipe_FavoriteArgs = {
-  _inc?: Maybe<Recipe_Favorite_Inc_Input>;
-  _set?: Maybe<Recipe_Favorite_Set_Input>;
+  _inc?: InputMaybe<Recipe_Favorite_Inc_Input>;
+  _set?: InputMaybe<Recipe_Favorite_Set_Input>;
   where: Recipe_Favorite_Bool_Exp;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Recipe_Favorite_By_PkArgs = {
-  _inc?: Maybe<Recipe_Favorite_Inc_Input>;
-  _set?: Maybe<Recipe_Favorite_Set_Input>;
+  _inc?: InputMaybe<Recipe_Favorite_Inc_Input>;
+  _set?: InputMaybe<Recipe_Favorite_Set_Input>;
   pk_columns: Recipe_Favorite_Pk_Columns_Input;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Recipe_Ingredient_Food_CandidateArgs = {
-  _inc?: Maybe<Recipe_Ingredient_Food_Candidate_Inc_Input>;
-  _set?: Maybe<Recipe_Ingredient_Food_Candidate_Set_Input>;
+  _inc?: InputMaybe<Recipe_Ingredient_Food_Candidate_Inc_Input>;
+  _set?: InputMaybe<Recipe_Ingredient_Food_Candidate_Set_Input>;
   where: Recipe_Ingredient_Food_Candidate_Bool_Exp;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Recipe_Ingredient_Food_Candidate_By_PkArgs = {
-  _inc?: Maybe<Recipe_Ingredient_Food_Candidate_Inc_Input>;
-  _set?: Maybe<Recipe_Ingredient_Food_Candidate_Set_Input>;
+  _inc?: InputMaybe<Recipe_Ingredient_Food_Candidate_Inc_Input>;
+  _set?: InputMaybe<Recipe_Ingredient_Food_Candidate_Set_Input>;
   pk_columns: Recipe_Ingredient_Food_Candidate_Pk_Columns_Input;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Recipe_Ingredient_GroupsArgs = {
-  _inc?: Maybe<Recipe_Ingredient_Groups_Inc_Input>;
-  _set?: Maybe<Recipe_Ingredient_Groups_Set_Input>;
+  _inc?: InputMaybe<Recipe_Ingredient_Groups_Inc_Input>;
+  _set?: InputMaybe<Recipe_Ingredient_Groups_Set_Input>;
   where: Recipe_Ingredient_Groups_Bool_Exp;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Recipe_Ingredient_Groups_By_PkArgs = {
-  _inc?: Maybe<Recipe_Ingredient_Groups_Inc_Input>;
-  _set?: Maybe<Recipe_Ingredient_Groups_Set_Input>;
+  _inc?: InputMaybe<Recipe_Ingredient_Groups_Inc_Input>;
+  _set?: InputMaybe<Recipe_Ingredient_Groups_Set_Input>;
   pk_columns: Recipe_Ingredient_Groups_Pk_Columns_Input;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Recipe_IngredientsArgs = {
-  _inc?: Maybe<Recipe_Ingredients_Inc_Input>;
-  _set?: Maybe<Recipe_Ingredients_Set_Input>;
+  _inc?: InputMaybe<Recipe_Ingredients_Inc_Input>;
+  _set?: InputMaybe<Recipe_Ingredients_Set_Input>;
   where: Recipe_Ingredients_Bool_Exp;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Recipe_Ingredients_By_PkArgs = {
-  _inc?: Maybe<Recipe_Ingredients_Inc_Input>;
-  _set?: Maybe<Recipe_Ingredients_Set_Input>;
+  _inc?: InputMaybe<Recipe_Ingredients_Inc_Input>;
+  _set?: InputMaybe<Recipe_Ingredients_Set_Input>;
   pk_columns: Recipe_Ingredients_Pk_Columns_Input;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Recipe_List_ItemsArgs = {
-  _inc?: Maybe<Recipe_List_Items_Inc_Input>;
-  _set?: Maybe<Recipe_List_Items_Set_Input>;
+  _inc?: InputMaybe<Recipe_List_Items_Inc_Input>;
+  _set?: InputMaybe<Recipe_List_Items_Set_Input>;
   where: Recipe_List_Items_Bool_Exp;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Recipe_List_Items_By_PkArgs = {
-  _inc?: Maybe<Recipe_List_Items_Inc_Input>;
-  _set?: Maybe<Recipe_List_Items_Set_Input>;
+  _inc?: InputMaybe<Recipe_List_Items_Inc_Input>;
+  _set?: InputMaybe<Recipe_List_Items_Set_Input>;
   pk_columns: Recipe_List_Items_Pk_Columns_Input;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Recipe_ListsArgs = {
-  _inc?: Maybe<Recipe_Lists_Inc_Input>;
-  _set?: Maybe<Recipe_Lists_Set_Input>;
+  _inc?: InputMaybe<Recipe_Lists_Inc_Input>;
+  _set?: InputMaybe<Recipe_Lists_Set_Input>;
   where: Recipe_Lists_Bool_Exp;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Recipe_Lists_By_PkArgs = {
-  _inc?: Maybe<Recipe_Lists_Inc_Input>;
-  _set?: Maybe<Recipe_Lists_Set_Input>;
+  _inc?: InputMaybe<Recipe_Lists_Inc_Input>;
+  _set?: InputMaybe<Recipe_Lists_Set_Input>;
   pk_columns: Recipe_Lists_Pk_Columns_Input;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Recipe_TagsArgs = {
-  _inc?: Maybe<Recipe_Tags_Inc_Input>;
-  _set?: Maybe<Recipe_Tags_Set_Input>;
+  _inc?: InputMaybe<Recipe_Tags_Inc_Input>;
+  _set?: InputMaybe<Recipe_Tags_Set_Input>;
   where: Recipe_Tags_Bool_Exp;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Recipe_Tags_By_PkArgs = {
-  _inc?: Maybe<Recipe_Tags_Inc_Input>;
-  _set?: Maybe<Recipe_Tags_Set_Input>;
+  _inc?: InputMaybe<Recipe_Tags_Inc_Input>;
+  _set?: InputMaybe<Recipe_Tags_Set_Input>;
   pk_columns: Recipe_Tags_Pk_Columns_Input;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_RecipesArgs = {
-  _append?: Maybe<Recipes_Append_Input>;
-  _delete_at_path?: Maybe<Recipes_Delete_At_Path_Input>;
-  _delete_elem?: Maybe<Recipes_Delete_Elem_Input>;
-  _delete_key?: Maybe<Recipes_Delete_Key_Input>;
-  _inc?: Maybe<Recipes_Inc_Input>;
-  _prepend?: Maybe<Recipes_Prepend_Input>;
-  _set?: Maybe<Recipes_Set_Input>;
+  _append?: InputMaybe<Recipes_Append_Input>;
+  _delete_at_path?: InputMaybe<Recipes_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<Recipes_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<Recipes_Delete_Key_Input>;
+  _inc?: InputMaybe<Recipes_Inc_Input>;
+  _prepend?: InputMaybe<Recipes_Prepend_Input>;
+  _set?: InputMaybe<Recipes_Set_Input>;
   where: Recipes_Bool_Exp;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Recipes_By_PkArgs = {
-  _append?: Maybe<Recipes_Append_Input>;
-  _delete_at_path?: Maybe<Recipes_Delete_At_Path_Input>;
-  _delete_elem?: Maybe<Recipes_Delete_Elem_Input>;
-  _delete_key?: Maybe<Recipes_Delete_Key_Input>;
-  _inc?: Maybe<Recipes_Inc_Input>;
-  _prepend?: Maybe<Recipes_Prepend_Input>;
-  _set?: Maybe<Recipes_Set_Input>;
+  _append?: InputMaybe<Recipes_Append_Input>;
+  _delete_at_path?: InputMaybe<Recipes_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<Recipes_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<Recipes_Delete_Key_Input>;
+  _inc?: InputMaybe<Recipes_Inc_Input>;
+  _prepend?: InputMaybe<Recipes_Prepend_Input>;
+  _set?: InputMaybe<Recipes_Set_Input>;
   pk_columns: Recipes_Pk_Columns_Input;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_User_ConfigArgs = {
-  _inc?: Maybe<User_Config_Inc_Input>;
-  _set?: Maybe<User_Config_Set_Input>;
+  _inc?: InputMaybe<User_Config_Inc_Input>;
+  _set?: InputMaybe<User_Config_Set_Input>;
   where: User_Config_Bool_Exp;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_User_Config_By_PkArgs = {
-  _inc?: Maybe<User_Config_Inc_Input>;
-  _set?: Maybe<User_Config_Set_Input>;
+  _inc?: InputMaybe<User_Config_Inc_Input>;
+  _set?: InputMaybe<User_Config_Set_Input>;
   pk_columns: User_Config_Pk_Columns_Input;
 };
 
@@ -3586,8 +5060,8 @@ export type Nutrient_Aggregate_Fields = {
 
 /** aggregate fields of "nutrient" */
 export type Nutrient_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Nutrient_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<Nutrient_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** aggregate avg on columns */
@@ -3600,14 +5074,14 @@ export type Nutrient_Avg_Fields = {
 
 /** Boolean expression to filter rows from the table "nutrient". All fields are combined with a logical 'AND'. */
 export type Nutrient_Bool_Exp = {
-  _and?: Maybe<Array<Nutrient_Bool_Exp>>;
-  _not?: Maybe<Nutrient_Bool_Exp>;
-  _or?: Maybe<Array<Nutrient_Bool_Exp>>;
-  id?: Maybe<Int_Comparison_Exp>;
-  name?: Maybe<String_Comparison_Exp>;
-  nutrient_nbr?: Maybe<Int_Comparison_Exp>;
-  rank?: Maybe<Int_Comparison_Exp>;
-  unit_name?: Maybe<String_Comparison_Exp>;
+  _and?: InputMaybe<Array<Nutrient_Bool_Exp>>;
+  _not?: InputMaybe<Nutrient_Bool_Exp>;
+  _or?: InputMaybe<Array<Nutrient_Bool_Exp>>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  name?: InputMaybe<String_Comparison_Exp>;
+  nutrient_nbr?: InputMaybe<Int_Comparison_Exp>;
+  rank?: InputMaybe<Int_Comparison_Exp>;
+  unit_name?: InputMaybe<String_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "nutrient" */
@@ -3618,18 +5092,18 @@ export enum Nutrient_Constraint {
 
 /** input type for incrementing numeric columns in table "nutrient" */
 export type Nutrient_Inc_Input = {
-  id?: Maybe<Scalars['Int']>;
-  nutrient_nbr?: Maybe<Scalars['Int']>;
-  rank?: Maybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  nutrient_nbr?: InputMaybe<Scalars['Int']>;
+  rank?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "nutrient" */
 export type Nutrient_Insert_Input = {
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  nutrient_nbr?: Maybe<Scalars['Int']>;
-  rank?: Maybe<Scalars['Int']>;
-  unit_name?: Maybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
+  name?: InputMaybe<Scalars['String']>;
+  nutrient_nbr?: InputMaybe<Scalars['Int']>;
+  rank?: InputMaybe<Scalars['Int']>;
+  unit_name?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
@@ -3665,23 +5139,23 @@ export type Nutrient_Mutation_Response = {
 export type Nutrient_Obj_Rel_Insert_Input = {
   data: Nutrient_Insert_Input;
   /** on conflict condition */
-  on_conflict?: Maybe<Nutrient_On_Conflict>;
+  on_conflict?: InputMaybe<Nutrient_On_Conflict>;
 };
 
 /** on conflict condition type for table "nutrient" */
 export type Nutrient_On_Conflict = {
   constraint: Nutrient_Constraint;
   update_columns?: Array<Nutrient_Update_Column>;
-  where?: Maybe<Nutrient_Bool_Exp>;
+  where?: InputMaybe<Nutrient_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "nutrient". */
 export type Nutrient_Order_By = {
-  id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  nutrient_nbr?: Maybe<Order_By>;
-  rank?: Maybe<Order_By>;
-  unit_name?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  nutrient_nbr?: InputMaybe<Order_By>;
+  rank?: InputMaybe<Order_By>;
+  unit_name?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: nutrient */
@@ -3705,11 +5179,11 @@ export enum Nutrient_Select_Column {
 
 /** input type for updating data in table "nutrient" */
 export type Nutrient_Set_Input = {
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  nutrient_nbr?: Maybe<Scalars['Int']>;
-  rank?: Maybe<Scalars['Int']>;
-  unit_name?: Maybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
+  name?: InputMaybe<Scalars['String']>;
+  nutrient_nbr?: InputMaybe<Scalars['Int']>;
+  rank?: InputMaybe<Scalars['Int']>;
+  unit_name?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate stddev on columns */
@@ -3800,6 +5274,42 @@ export enum Order_By {
 
 export type Query_Root = {
   __typename?: 'query_root';
+  /** fetch data from the table: "auth.providers" using primary key columns */
+  authProvider?: Maybe<AuthProviders>;
+  /** fetch data from the table: "auth.provider_requests" using primary key columns */
+  authProviderRequest?: Maybe<AuthProviderRequests>;
+  /** fetch data from the table: "auth.provider_requests" */
+  authProviderRequests: Array<AuthProviderRequests>;
+  /** fetch aggregated fields from the table: "auth.provider_requests" */
+  authProviderRequestsAggregate: AuthProviderRequests_Aggregate;
+  /** fetch data from the table: "auth.providers" */
+  authProviders: Array<AuthProviders>;
+  /** fetch aggregated fields from the table: "auth.providers" */
+  authProvidersAggregate: AuthProviders_Aggregate;
+  /** fetch data from the table: "auth.refresh_tokens" using primary key columns */
+  authRefreshToken?: Maybe<AuthRefreshTokens>;
+  /** fetch data from the table: "auth.refresh_tokens" */
+  authRefreshTokens: Array<AuthRefreshTokens>;
+  /** fetch aggregated fields from the table: "auth.refresh_tokens" */
+  authRefreshTokensAggregate: AuthRefreshTokens_Aggregate;
+  /** fetch data from the table: "auth.roles" using primary key columns */
+  authRole?: Maybe<AuthRoles>;
+  /** fetch data from the table: "auth.roles" */
+  authRoles: Array<AuthRoles>;
+  /** fetch aggregated fields from the table: "auth.roles" */
+  authRolesAggregate: AuthRoles_Aggregate;
+  /** fetch data from the table: "auth.user_providers" using primary key columns */
+  authUserProvider?: Maybe<AuthUserProviders>;
+  /** fetch data from the table: "auth.user_providers" */
+  authUserProviders: Array<AuthUserProviders>;
+  /** fetch aggregated fields from the table: "auth.user_providers" */
+  authUserProvidersAggregate: AuthUserProviders_Aggregate;
+  /** fetch data from the table: "auth.user_roles" using primary key columns */
+  authUserRole?: Maybe<AuthUserRoles>;
+  /** fetch data from the table: "auth.user_roles" */
+  authUserRoles: Array<AuthUserRoles>;
+  /** fetch aggregated fields from the table: "auth.user_roles" */
+  authUserRolesAggregate: AuthUserRoles_Aggregate;
   /** fetch data from the table: "food" */
   food: Array<Food>;
   /** fetch aggregated fields from the table: "food" */
@@ -3922,48 +5432,192 @@ export type Query_Root = {
   search_recipes: Array<Recipes>;
   /** execute function "search_recipes" and query aggregates on result of table type "recipes" */
   search_recipes_aggregate: Recipes_Aggregate;
+  /** fetch data from the table: "auth.users" using primary key columns */
+  user?: Maybe<Users>;
+  /** fetch aggregated fields from the table: "auth.users" */
+  userAggregate: Users_Aggregate;
   /** fetch data from the table: "user_config" */
   user_config: Array<User_Config>;
   /** fetch aggregated fields from the table: "user_config" */
   user_config_aggregate: User_Config_Aggregate;
   /** fetch data from the table: "user_config" using primary key columns */
   user_config_by_pk?: Maybe<User_Config>;
+  /** fetch data from the table: "auth.users" */
+  users: Array<Users>;
+};
+
+
+export type Query_RootAuthProviderArgs = {
+  id: Scalars['String'];
+};
+
+
+export type Query_RootAuthProviderRequestArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Query_RootAuthProviderRequestsArgs = {
+  distinct_on?: InputMaybe<Array<AuthProviderRequests_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthProviderRequests_Order_By>>;
+  where?: InputMaybe<AuthProviderRequests_Bool_Exp>;
+};
+
+
+export type Query_RootAuthProviderRequestsAggregateArgs = {
+  distinct_on?: InputMaybe<Array<AuthProviderRequests_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthProviderRequests_Order_By>>;
+  where?: InputMaybe<AuthProviderRequests_Bool_Exp>;
+};
+
+
+export type Query_RootAuthProvidersArgs = {
+  distinct_on?: InputMaybe<Array<AuthProviders_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthProviders_Order_By>>;
+  where?: InputMaybe<AuthProviders_Bool_Exp>;
+};
+
+
+export type Query_RootAuthProvidersAggregateArgs = {
+  distinct_on?: InputMaybe<Array<AuthProviders_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthProviders_Order_By>>;
+  where?: InputMaybe<AuthProviders_Bool_Exp>;
+};
+
+
+export type Query_RootAuthRefreshTokenArgs = {
+  refreshToken: Scalars['uuid'];
+};
+
+
+export type Query_RootAuthRefreshTokensArgs = {
+  distinct_on?: InputMaybe<Array<AuthRefreshTokens_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthRefreshTokens_Order_By>>;
+  where?: InputMaybe<AuthRefreshTokens_Bool_Exp>;
+};
+
+
+export type Query_RootAuthRefreshTokensAggregateArgs = {
+  distinct_on?: InputMaybe<Array<AuthRefreshTokens_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthRefreshTokens_Order_By>>;
+  where?: InputMaybe<AuthRefreshTokens_Bool_Exp>;
+};
+
+
+export type Query_RootAuthRoleArgs = {
+  role: Scalars['String'];
+};
+
+
+export type Query_RootAuthRolesArgs = {
+  distinct_on?: InputMaybe<Array<AuthRoles_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthRoles_Order_By>>;
+  where?: InputMaybe<AuthRoles_Bool_Exp>;
+};
+
+
+export type Query_RootAuthRolesAggregateArgs = {
+  distinct_on?: InputMaybe<Array<AuthRoles_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthRoles_Order_By>>;
+  where?: InputMaybe<AuthRoles_Bool_Exp>;
+};
+
+
+export type Query_RootAuthUserProviderArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Query_RootAuthUserProvidersArgs = {
+  distinct_on?: InputMaybe<Array<AuthUserProviders_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthUserProviders_Order_By>>;
+  where?: InputMaybe<AuthUserProviders_Bool_Exp>;
+};
+
+
+export type Query_RootAuthUserProvidersAggregateArgs = {
+  distinct_on?: InputMaybe<Array<AuthUserProviders_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthUserProviders_Order_By>>;
+  where?: InputMaybe<AuthUserProviders_Bool_Exp>;
+};
+
+
+export type Query_RootAuthUserRoleArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Query_RootAuthUserRolesArgs = {
+  distinct_on?: InputMaybe<Array<AuthUserRoles_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthUserRoles_Order_By>>;
+  where?: InputMaybe<AuthUserRoles_Bool_Exp>;
+};
+
+
+export type Query_RootAuthUserRolesAggregateArgs = {
+  distinct_on?: InputMaybe<Array<AuthUserRoles_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthUserRoles_Order_By>>;
+  where?: InputMaybe<AuthUserRoles_Bool_Exp>;
 };
 
 
 export type Query_RootFoodArgs = {
-  distinct_on?: Maybe<Array<Food_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Order_By>>;
-  where?: Maybe<Food_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Order_By>>;
+  where?: InputMaybe<Food_Bool_Exp>;
 };
 
 
 export type Query_RootFood_AggregateArgs = {
-  distinct_on?: Maybe<Array<Food_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Order_By>>;
-  where?: Maybe<Food_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Order_By>>;
+  where?: InputMaybe<Food_Bool_Exp>;
 };
 
 
 export type Query_RootFood_AttributeArgs = {
-  distinct_on?: Maybe<Array<Food_Attribute_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Attribute_Order_By>>;
-  where?: Maybe<Food_Attribute_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Attribute_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Attribute_Order_By>>;
+  where?: InputMaybe<Food_Attribute_Bool_Exp>;
 };
 
 
 export type Query_RootFood_Attribute_AggregateArgs = {
-  distinct_on?: Maybe<Array<Food_Attribute_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Attribute_Order_By>>;
-  where?: Maybe<Food_Attribute_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Attribute_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Attribute_Order_By>>;
+  where?: InputMaybe<Food_Attribute_Bool_Exp>;
 };
 
 
@@ -3973,20 +5627,20 @@ export type Query_RootFood_Attribute_By_PkArgs = {
 
 
 export type Query_RootFood_Attribute_TypeArgs = {
-  distinct_on?: Maybe<Array<Food_Attribute_Type_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Attribute_Type_Order_By>>;
-  where?: Maybe<Food_Attribute_Type_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Attribute_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Attribute_Type_Order_By>>;
+  where?: InputMaybe<Food_Attribute_Type_Bool_Exp>;
 };
 
 
 export type Query_RootFood_Attribute_Type_AggregateArgs = {
-  distinct_on?: Maybe<Array<Food_Attribute_Type_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Attribute_Type_Order_By>>;
-  where?: Maybe<Food_Attribute_Type_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Attribute_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Attribute_Type_Order_By>>;
+  where?: InputMaybe<Food_Attribute_Type_Bool_Exp>;
 };
 
 
@@ -4001,20 +5655,20 @@ export type Query_RootFood_By_PkArgs = {
 
 
 export type Query_RootFood_CategoryArgs = {
-  distinct_on?: Maybe<Array<Food_Category_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Category_Order_By>>;
-  where?: Maybe<Food_Category_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Category_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Category_Order_By>>;
+  where?: InputMaybe<Food_Category_Bool_Exp>;
 };
 
 
 export type Query_RootFood_Category_AggregateArgs = {
-  distinct_on?: Maybe<Array<Food_Category_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Category_Order_By>>;
-  where?: Maybe<Food_Category_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Category_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Category_Order_By>>;
+  where?: InputMaybe<Food_Category_Bool_Exp>;
 };
 
 
@@ -4024,20 +5678,20 @@ export type Query_RootFood_Category_By_PkArgs = {
 
 
 export type Query_RootFood_NutrientArgs = {
-  distinct_on?: Maybe<Array<Food_Nutrient_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Nutrient_Order_By>>;
-  where?: Maybe<Food_Nutrient_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Nutrient_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Nutrient_Order_By>>;
+  where?: InputMaybe<Food_Nutrient_Bool_Exp>;
 };
 
 
 export type Query_RootFood_Nutrient_AggregateArgs = {
-  distinct_on?: Maybe<Array<Food_Nutrient_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Nutrient_Order_By>>;
-  where?: Maybe<Food_Nutrient_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Nutrient_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Nutrient_Order_By>>;
+  where?: InputMaybe<Food_Nutrient_Bool_Exp>;
 };
 
 
@@ -4047,20 +5701,20 @@ export type Query_RootFood_Nutrient_By_PkArgs = {
 
 
 export type Query_RootFood_PortionArgs = {
-  distinct_on?: Maybe<Array<Food_Portion_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Portion_Order_By>>;
-  where?: Maybe<Food_Portion_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Portion_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Portion_Order_By>>;
+  where?: InputMaybe<Food_Portion_Bool_Exp>;
 };
 
 
 export type Query_RootFood_Portion_AggregateArgs = {
-  distinct_on?: Maybe<Array<Food_Portion_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Portion_Order_By>>;
-  where?: Maybe<Food_Portion_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Portion_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Portion_Order_By>>;
+  where?: InputMaybe<Food_Portion_Bool_Exp>;
 };
 
 
@@ -4070,20 +5724,20 @@ export type Query_RootFood_Portion_By_PkArgs = {
 
 
 export type Query_RootMeasure_UnitArgs = {
-  distinct_on?: Maybe<Array<Measure_Unit_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Measure_Unit_Order_By>>;
-  where?: Maybe<Measure_Unit_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Measure_Unit_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Measure_Unit_Order_By>>;
+  where?: InputMaybe<Measure_Unit_Bool_Exp>;
 };
 
 
 export type Query_RootMeasure_Unit_AggregateArgs = {
-  distinct_on?: Maybe<Array<Measure_Unit_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Measure_Unit_Order_By>>;
-  where?: Maybe<Measure_Unit_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Measure_Unit_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Measure_Unit_Order_By>>;
+  where?: InputMaybe<Measure_Unit_Bool_Exp>;
 };
 
 
@@ -4093,20 +5747,20 @@ export type Query_RootMeasure_Unit_By_PkArgs = {
 
 
 export type Query_RootNutrientArgs = {
-  distinct_on?: Maybe<Array<Nutrient_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Nutrient_Order_By>>;
-  where?: Maybe<Nutrient_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Nutrient_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Nutrient_Order_By>>;
+  where?: InputMaybe<Nutrient_Bool_Exp>;
 };
 
 
 export type Query_RootNutrient_AggregateArgs = {
-  distinct_on?: Maybe<Array<Nutrient_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Nutrient_Order_By>>;
-  where?: Maybe<Nutrient_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Nutrient_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Nutrient_Order_By>>;
+  where?: InputMaybe<Nutrient_Bool_Exp>;
 };
 
 
@@ -4116,20 +5770,20 @@ export type Query_RootNutrient_By_PkArgs = {
 
 
 export type Query_RootRecipe_Direction_ActionsArgs = {
-  distinct_on?: Maybe<Array<Recipe_Direction_Actions_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Direction_Actions_Order_By>>;
-  where?: Maybe<Recipe_Direction_Actions_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Direction_Actions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Direction_Actions_Order_By>>;
+  where?: InputMaybe<Recipe_Direction_Actions_Bool_Exp>;
 };
 
 
 export type Query_RootRecipe_Direction_Actions_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_Direction_Actions_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Direction_Actions_Order_By>>;
-  where?: Maybe<Recipe_Direction_Actions_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Direction_Actions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Direction_Actions_Order_By>>;
+  where?: InputMaybe<Recipe_Direction_Actions_Bool_Exp>;
 };
 
 
@@ -4139,20 +5793,20 @@ export type Query_RootRecipe_Direction_Actions_By_PkArgs = {
 
 
 export type Query_RootRecipe_Direction_DurationsArgs = {
-  distinct_on?: Maybe<Array<Recipe_Direction_Durations_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Direction_Durations_Order_By>>;
-  where?: Maybe<Recipe_Direction_Durations_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Direction_Durations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Direction_Durations_Order_By>>;
+  where?: InputMaybe<Recipe_Direction_Durations_Bool_Exp>;
 };
 
 
 export type Query_RootRecipe_Direction_Durations_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_Direction_Durations_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Direction_Durations_Order_By>>;
-  where?: Maybe<Recipe_Direction_Durations_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Direction_Durations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Direction_Durations_Order_By>>;
+  where?: InputMaybe<Recipe_Direction_Durations_Bool_Exp>;
 };
 
 
@@ -4162,20 +5816,20 @@ export type Query_RootRecipe_Direction_Durations_By_PkArgs = {
 
 
 export type Query_RootRecipe_DirectionsArgs = {
-  distinct_on?: Maybe<Array<Recipe_Directions_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Directions_Order_By>>;
-  where?: Maybe<Recipe_Directions_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Directions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Directions_Order_By>>;
+  where?: InputMaybe<Recipe_Directions_Bool_Exp>;
 };
 
 
 export type Query_RootRecipe_Directions_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_Directions_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Directions_Order_By>>;
-  where?: Maybe<Recipe_Directions_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Directions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Directions_Order_By>>;
+  where?: InputMaybe<Recipe_Directions_Bool_Exp>;
 };
 
 
@@ -4185,20 +5839,20 @@ export type Query_RootRecipe_Directions_By_PkArgs = {
 
 
 export type Query_RootRecipe_FavoriteArgs = {
-  distinct_on?: Maybe<Array<Recipe_Favorite_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Favorite_Order_By>>;
-  where?: Maybe<Recipe_Favorite_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Favorite_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Favorite_Order_By>>;
+  where?: InputMaybe<Recipe_Favorite_Bool_Exp>;
 };
 
 
 export type Query_RootRecipe_Favorite_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_Favorite_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Favorite_Order_By>>;
-  where?: Maybe<Recipe_Favorite_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Favorite_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Favorite_Order_By>>;
+  where?: InputMaybe<Recipe_Favorite_Bool_Exp>;
 };
 
 
@@ -4208,20 +5862,20 @@ export type Query_RootRecipe_Favorite_By_PkArgs = {
 
 
 export type Query_RootRecipe_Ingredient_Food_CandidateArgs = {
-  distinct_on?: Maybe<Array<Recipe_Ingredient_Food_Candidate_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Ingredient_Food_Candidate_Order_By>>;
-  where?: Maybe<Recipe_Ingredient_Food_Candidate_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Ingredient_Food_Candidate_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Ingredient_Food_Candidate_Order_By>>;
+  where?: InputMaybe<Recipe_Ingredient_Food_Candidate_Bool_Exp>;
 };
 
 
 export type Query_RootRecipe_Ingredient_Food_Candidate_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_Ingredient_Food_Candidate_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Ingredient_Food_Candidate_Order_By>>;
-  where?: Maybe<Recipe_Ingredient_Food_Candidate_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Ingredient_Food_Candidate_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Ingredient_Food_Candidate_Order_By>>;
+  where?: InputMaybe<Recipe_Ingredient_Food_Candidate_Bool_Exp>;
 };
 
 
@@ -4231,20 +5885,20 @@ export type Query_RootRecipe_Ingredient_Food_Candidate_By_PkArgs = {
 
 
 export type Query_RootRecipe_Ingredient_GroupsArgs = {
-  distinct_on?: Maybe<Array<Recipe_Ingredient_Groups_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Ingredient_Groups_Order_By>>;
-  where?: Maybe<Recipe_Ingredient_Groups_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Ingredient_Groups_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Ingredient_Groups_Order_By>>;
+  where?: InputMaybe<Recipe_Ingredient_Groups_Bool_Exp>;
 };
 
 
 export type Query_RootRecipe_Ingredient_Groups_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_Ingredient_Groups_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Ingredient_Groups_Order_By>>;
-  where?: Maybe<Recipe_Ingredient_Groups_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Ingredient_Groups_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Ingredient_Groups_Order_By>>;
+  where?: InputMaybe<Recipe_Ingredient_Groups_Bool_Exp>;
 };
 
 
@@ -4254,20 +5908,20 @@ export type Query_RootRecipe_Ingredient_Groups_By_PkArgs = {
 
 
 export type Query_RootRecipe_IngredientsArgs = {
-  distinct_on?: Maybe<Array<Recipe_Ingredients_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Ingredients_Order_By>>;
-  where?: Maybe<Recipe_Ingredients_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Ingredients_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Ingredients_Order_By>>;
+  where?: InputMaybe<Recipe_Ingredients_Bool_Exp>;
 };
 
 
 export type Query_RootRecipe_Ingredients_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_Ingredients_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Ingredients_Order_By>>;
-  where?: Maybe<Recipe_Ingredients_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Ingredients_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Ingredients_Order_By>>;
+  where?: InputMaybe<Recipe_Ingredients_Bool_Exp>;
 };
 
 
@@ -4277,20 +5931,20 @@ export type Query_RootRecipe_Ingredients_By_PkArgs = {
 
 
 export type Query_RootRecipe_List_ItemsArgs = {
-  distinct_on?: Maybe<Array<Recipe_List_Items_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_List_Items_Order_By>>;
-  where?: Maybe<Recipe_List_Items_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_List_Items_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_List_Items_Order_By>>;
+  where?: InputMaybe<Recipe_List_Items_Bool_Exp>;
 };
 
 
 export type Query_RootRecipe_List_Items_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_List_Items_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_List_Items_Order_By>>;
-  where?: Maybe<Recipe_List_Items_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_List_Items_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_List_Items_Order_By>>;
+  where?: InputMaybe<Recipe_List_Items_Bool_Exp>;
 };
 
 
@@ -4300,20 +5954,20 @@ export type Query_RootRecipe_List_Items_By_PkArgs = {
 
 
 export type Query_RootRecipe_ListsArgs = {
-  distinct_on?: Maybe<Array<Recipe_Lists_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Lists_Order_By>>;
-  where?: Maybe<Recipe_Lists_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Lists_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Lists_Order_By>>;
+  where?: InputMaybe<Recipe_Lists_Bool_Exp>;
 };
 
 
 export type Query_RootRecipe_Lists_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_Lists_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Lists_Order_By>>;
-  where?: Maybe<Recipe_Lists_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Lists_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Lists_Order_By>>;
+  where?: InputMaybe<Recipe_Lists_Bool_Exp>;
 };
 
 
@@ -4323,20 +5977,20 @@ export type Query_RootRecipe_Lists_By_PkArgs = {
 
 
 export type Query_RootRecipe_TagsArgs = {
-  distinct_on?: Maybe<Array<Recipe_Tags_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Tags_Order_By>>;
-  where?: Maybe<Recipe_Tags_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Tags_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Tags_Order_By>>;
+  where?: InputMaybe<Recipe_Tags_Bool_Exp>;
 };
 
 
 export type Query_RootRecipe_Tags_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_Tags_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Tags_Order_By>>;
-  where?: Maybe<Recipe_Tags_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Tags_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Tags_Order_By>>;
+  where?: InputMaybe<Recipe_Tags_Bool_Exp>;
 };
 
 
@@ -4346,20 +6000,20 @@ export type Query_RootRecipe_Tags_By_PkArgs = {
 
 
 export type Query_RootRecipesArgs = {
-  distinct_on?: Maybe<Array<Recipes_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipes_Order_By>>;
-  where?: Maybe<Recipes_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipes_Order_By>>;
+  where?: InputMaybe<Recipes_Bool_Exp>;
 };
 
 
 export type Query_RootRecipes_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipes_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipes_Order_By>>;
-  where?: Maybe<Recipes_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipes_Order_By>>;
+  where?: InputMaybe<Recipes_Bool_Exp>;
 };
 
 
@@ -4370,64 +6024,87 @@ export type Query_RootRecipes_By_PkArgs = {
 
 export type Query_RootSearch_FoodsArgs = {
   args: Search_Foods_Args;
-  distinct_on?: Maybe<Array<Food_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Order_By>>;
-  where?: Maybe<Food_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Order_By>>;
+  where?: InputMaybe<Food_Bool_Exp>;
 };
 
 
 export type Query_RootSearch_Foods_AggregateArgs = {
   args: Search_Foods_Args;
-  distinct_on?: Maybe<Array<Food_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Order_By>>;
-  where?: Maybe<Food_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Order_By>>;
+  where?: InputMaybe<Food_Bool_Exp>;
 };
 
 
 export type Query_RootSearch_RecipesArgs = {
   args: Search_Recipes_Args;
-  distinct_on?: Maybe<Array<Recipes_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipes_Order_By>>;
-  where?: Maybe<Recipes_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipes_Order_By>>;
+  where?: InputMaybe<Recipes_Bool_Exp>;
 };
 
 
 export type Query_RootSearch_Recipes_AggregateArgs = {
   args: Search_Recipes_Args;
-  distinct_on?: Maybe<Array<Recipes_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipes_Order_By>>;
-  where?: Maybe<Recipes_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipes_Order_By>>;
+  where?: InputMaybe<Recipes_Bool_Exp>;
+};
+
+
+export type Query_RootUserArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Query_RootUserAggregateArgs = {
+  distinct_on?: InputMaybe<Array<Users_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Users_Order_By>>;
+  where?: InputMaybe<Users_Bool_Exp>;
 };
 
 
 export type Query_RootUser_ConfigArgs = {
-  distinct_on?: Maybe<Array<User_Config_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<User_Config_Order_By>>;
-  where?: Maybe<User_Config_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<User_Config_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<User_Config_Order_By>>;
+  where?: InputMaybe<User_Config_Bool_Exp>;
 };
 
 
 export type Query_RootUser_Config_AggregateArgs = {
-  distinct_on?: Maybe<Array<User_Config_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<User_Config_Order_By>>;
-  where?: Maybe<User_Config_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<User_Config_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<User_Config_Order_By>>;
+  where?: InputMaybe<User_Config_Bool_Exp>;
 };
 
 
 export type Query_RootUser_Config_By_PkArgs = {
   user_id: Scalars['Int'];
+};
+
+
+export type Query_RootUsersArgs = {
+  distinct_on?: InputMaybe<Array<Users_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Users_Order_By>>;
+  where?: InputMaybe<Users_Bool_Exp>;
 };
 
 /** columns and relationships of "recipe_direction_actions" */
@@ -4445,7 +6122,7 @@ export type Recipe_Direction_Actions = {
 
 /** columns and relationships of "recipe_direction_actions" */
 export type Recipe_Direction_ActionsNameArgs = {
-  path?: Maybe<Scalars['String']>;
+  path?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregated selection of "recipe_direction_actions" */
@@ -4474,35 +6151,35 @@ export type Recipe_Direction_Actions_Aggregate_Fields = {
 
 /** aggregate fields of "recipe_direction_actions" */
 export type Recipe_Direction_Actions_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Recipe_Direction_Actions_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<Recipe_Direction_Actions_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "recipe_direction_actions" */
 export type Recipe_Direction_Actions_Aggregate_Order_By = {
-  avg?: Maybe<Recipe_Direction_Actions_Avg_Order_By>;
-  count?: Maybe<Order_By>;
-  max?: Maybe<Recipe_Direction_Actions_Max_Order_By>;
-  min?: Maybe<Recipe_Direction_Actions_Min_Order_By>;
-  stddev?: Maybe<Recipe_Direction_Actions_Stddev_Order_By>;
-  stddev_pop?: Maybe<Recipe_Direction_Actions_Stddev_Pop_Order_By>;
-  stddev_samp?: Maybe<Recipe_Direction_Actions_Stddev_Samp_Order_By>;
-  sum?: Maybe<Recipe_Direction_Actions_Sum_Order_By>;
-  var_pop?: Maybe<Recipe_Direction_Actions_Var_Pop_Order_By>;
-  var_samp?: Maybe<Recipe_Direction_Actions_Var_Samp_Order_By>;
-  variance?: Maybe<Recipe_Direction_Actions_Variance_Order_By>;
+  avg?: InputMaybe<Recipe_Direction_Actions_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Recipe_Direction_Actions_Max_Order_By>;
+  min?: InputMaybe<Recipe_Direction_Actions_Min_Order_By>;
+  stddev?: InputMaybe<Recipe_Direction_Actions_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Recipe_Direction_Actions_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Recipe_Direction_Actions_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Recipe_Direction_Actions_Sum_Order_By>;
+  var_pop?: InputMaybe<Recipe_Direction_Actions_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Recipe_Direction_Actions_Var_Samp_Order_By>;
+  variance?: InputMaybe<Recipe_Direction_Actions_Variance_Order_By>;
 };
 
 /** append existing jsonb value of filtered columns with new jsonb value */
 export type Recipe_Direction_Actions_Append_Input = {
-  name?: Maybe<Scalars['jsonb']>;
+  name?: InputMaybe<Scalars['jsonb']>;
 };
 
 /** input type for inserting array relation for remote table "recipe_direction_actions" */
 export type Recipe_Direction_Actions_Arr_Rel_Insert_Input = {
   data: Array<Recipe_Direction_Actions_Insert_Input>;
   /** on conflict condition */
-  on_conflict?: Maybe<Recipe_Direction_Actions_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_Direction_Actions_On_Conflict>;
 };
 
 /** aggregate avg on columns */
@@ -4516,24 +6193,24 @@ export type Recipe_Direction_Actions_Avg_Fields = {
 
 /** order by avg() on columns of table "recipe_direction_actions" */
 export type Recipe_Direction_Actions_Avg_Order_By = {
-  direction_id?: Maybe<Order_By>;
-  duration?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  quantity?: Maybe<Order_By>;
+  direction_id?: InputMaybe<Order_By>;
+  duration?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  quantity?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "recipe_direction_actions". All fields are combined with a logical 'AND'. */
 export type Recipe_Direction_Actions_Bool_Exp = {
-  _and?: Maybe<Array<Recipe_Direction_Actions_Bool_Exp>>;
-  _not?: Maybe<Recipe_Direction_Actions_Bool_Exp>;
-  _or?: Maybe<Array<Recipe_Direction_Actions_Bool_Exp>>;
-  action?: Maybe<String_Comparison_Exp>;
-  direction_id?: Maybe<Int_Comparison_Exp>;
-  duration?: Maybe<Int_Comparison_Exp>;
-  id?: Maybe<Int_Comparison_Exp>;
-  name?: Maybe<Jsonb_Comparison_Exp>;
-  quantity?: Maybe<Float8_Comparison_Exp>;
-  unit?: Maybe<String_Comparison_Exp>;
+  _and?: InputMaybe<Array<Recipe_Direction_Actions_Bool_Exp>>;
+  _not?: InputMaybe<Recipe_Direction_Actions_Bool_Exp>;
+  _or?: InputMaybe<Array<Recipe_Direction_Actions_Bool_Exp>>;
+  action?: InputMaybe<String_Comparison_Exp>;
+  direction_id?: InputMaybe<Int_Comparison_Exp>;
+  duration?: InputMaybe<Int_Comparison_Exp>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  name?: InputMaybe<Jsonb_Comparison_Exp>;
+  quantity?: InputMaybe<Float8_Comparison_Exp>;
+  unit?: InputMaybe<String_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "recipe_direction_actions" */
@@ -4544,36 +6221,36 @@ export enum Recipe_Direction_Actions_Constraint {
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
 export type Recipe_Direction_Actions_Delete_At_Path_Input = {
-  name?: Maybe<Array<Scalars['String']>>;
+  name?: InputMaybe<Array<Scalars['String']>>;
 };
 
 /** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
 export type Recipe_Direction_Actions_Delete_Elem_Input = {
-  name?: Maybe<Scalars['Int']>;
+  name?: InputMaybe<Scalars['Int']>;
 };
 
 /** delete key/value pair or string element. key/value pairs are matched based on their key value */
 export type Recipe_Direction_Actions_Delete_Key_Input = {
-  name?: Maybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
 };
 
 /** input type for incrementing numeric columns in table "recipe_direction_actions" */
 export type Recipe_Direction_Actions_Inc_Input = {
-  direction_id?: Maybe<Scalars['Int']>;
-  duration?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  quantity?: Maybe<Scalars['float8']>;
+  direction_id?: InputMaybe<Scalars['Int']>;
+  duration?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  quantity?: InputMaybe<Scalars['float8']>;
 };
 
 /** input type for inserting data into table "recipe_direction_actions" */
 export type Recipe_Direction_Actions_Insert_Input = {
-  action?: Maybe<Scalars['String']>;
-  direction_id?: Maybe<Scalars['Int']>;
-  duration?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['jsonb']>;
-  quantity?: Maybe<Scalars['float8']>;
-  unit?: Maybe<Scalars['String']>;
+  action?: InputMaybe<Scalars['String']>;
+  direction_id?: InputMaybe<Scalars['Int']>;
+  duration?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  name?: InputMaybe<Scalars['jsonb']>;
+  quantity?: InputMaybe<Scalars['float8']>;
+  unit?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
@@ -4589,12 +6266,12 @@ export type Recipe_Direction_Actions_Max_Fields = {
 
 /** order by max() on columns of table "recipe_direction_actions" */
 export type Recipe_Direction_Actions_Max_Order_By = {
-  action?: Maybe<Order_By>;
-  direction_id?: Maybe<Order_By>;
-  duration?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  quantity?: Maybe<Order_By>;
-  unit?: Maybe<Order_By>;
+  action?: InputMaybe<Order_By>;
+  direction_id?: InputMaybe<Order_By>;
+  duration?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  quantity?: InputMaybe<Order_By>;
+  unit?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -4610,12 +6287,12 @@ export type Recipe_Direction_Actions_Min_Fields = {
 
 /** order by min() on columns of table "recipe_direction_actions" */
 export type Recipe_Direction_Actions_Min_Order_By = {
-  action?: Maybe<Order_By>;
-  direction_id?: Maybe<Order_By>;
-  duration?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  quantity?: Maybe<Order_By>;
-  unit?: Maybe<Order_By>;
+  action?: InputMaybe<Order_By>;
+  direction_id?: InputMaybe<Order_By>;
+  duration?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  quantity?: InputMaybe<Order_By>;
+  unit?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "recipe_direction_actions" */
@@ -4631,18 +6308,18 @@ export type Recipe_Direction_Actions_Mutation_Response = {
 export type Recipe_Direction_Actions_On_Conflict = {
   constraint: Recipe_Direction_Actions_Constraint;
   update_columns?: Array<Recipe_Direction_Actions_Update_Column>;
-  where?: Maybe<Recipe_Direction_Actions_Bool_Exp>;
+  where?: InputMaybe<Recipe_Direction_Actions_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "recipe_direction_actions". */
 export type Recipe_Direction_Actions_Order_By = {
-  action?: Maybe<Order_By>;
-  direction_id?: Maybe<Order_By>;
-  duration?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  quantity?: Maybe<Order_By>;
-  unit?: Maybe<Order_By>;
+  action?: InputMaybe<Order_By>;
+  direction_id?: InputMaybe<Order_By>;
+  duration?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  quantity?: InputMaybe<Order_By>;
+  unit?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: recipe_direction_actions */
@@ -4652,7 +6329,7 @@ export type Recipe_Direction_Actions_Pk_Columns_Input = {
 
 /** prepend existing jsonb value of filtered columns with new jsonb value */
 export type Recipe_Direction_Actions_Prepend_Input = {
-  name?: Maybe<Scalars['jsonb']>;
+  name?: InputMaybe<Scalars['jsonb']>;
 };
 
 /** select columns of table "recipe_direction_actions" */
@@ -4675,13 +6352,13 @@ export enum Recipe_Direction_Actions_Select_Column {
 
 /** input type for updating data in table "recipe_direction_actions" */
 export type Recipe_Direction_Actions_Set_Input = {
-  action?: Maybe<Scalars['String']>;
-  direction_id?: Maybe<Scalars['Int']>;
-  duration?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['jsonb']>;
-  quantity?: Maybe<Scalars['float8']>;
-  unit?: Maybe<Scalars['String']>;
+  action?: InputMaybe<Scalars['String']>;
+  direction_id?: InputMaybe<Scalars['Int']>;
+  duration?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  name?: InputMaybe<Scalars['jsonb']>;
+  quantity?: InputMaybe<Scalars['float8']>;
+  unit?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate stddev on columns */
@@ -4695,10 +6372,10 @@ export type Recipe_Direction_Actions_Stddev_Fields = {
 
 /** order by stddev() on columns of table "recipe_direction_actions" */
 export type Recipe_Direction_Actions_Stddev_Order_By = {
-  direction_id?: Maybe<Order_By>;
-  duration?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  quantity?: Maybe<Order_By>;
+  direction_id?: InputMaybe<Order_By>;
+  duration?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  quantity?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -4712,10 +6389,10 @@ export type Recipe_Direction_Actions_Stddev_Pop_Fields = {
 
 /** order by stddev_pop() on columns of table "recipe_direction_actions" */
 export type Recipe_Direction_Actions_Stddev_Pop_Order_By = {
-  direction_id?: Maybe<Order_By>;
-  duration?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  quantity?: Maybe<Order_By>;
+  direction_id?: InputMaybe<Order_By>;
+  duration?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  quantity?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -4729,10 +6406,10 @@ export type Recipe_Direction_Actions_Stddev_Samp_Fields = {
 
 /** order by stddev_samp() on columns of table "recipe_direction_actions" */
 export type Recipe_Direction_Actions_Stddev_Samp_Order_By = {
-  direction_id?: Maybe<Order_By>;
-  duration?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  quantity?: Maybe<Order_By>;
+  direction_id?: InputMaybe<Order_By>;
+  duration?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  quantity?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
@@ -4746,10 +6423,10 @@ export type Recipe_Direction_Actions_Sum_Fields = {
 
 /** order by sum() on columns of table "recipe_direction_actions" */
 export type Recipe_Direction_Actions_Sum_Order_By = {
-  direction_id?: Maybe<Order_By>;
-  duration?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  quantity?: Maybe<Order_By>;
+  direction_id?: InputMaybe<Order_By>;
+  duration?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  quantity?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "recipe_direction_actions" */
@@ -4781,10 +6458,10 @@ export type Recipe_Direction_Actions_Var_Pop_Fields = {
 
 /** order by var_pop() on columns of table "recipe_direction_actions" */
 export type Recipe_Direction_Actions_Var_Pop_Order_By = {
-  direction_id?: Maybe<Order_By>;
-  duration?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  quantity?: Maybe<Order_By>;
+  direction_id?: InputMaybe<Order_By>;
+  duration?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  quantity?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
@@ -4798,10 +6475,10 @@ export type Recipe_Direction_Actions_Var_Samp_Fields = {
 
 /** order by var_samp() on columns of table "recipe_direction_actions" */
 export type Recipe_Direction_Actions_Var_Samp_Order_By = {
-  direction_id?: Maybe<Order_By>;
-  duration?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  quantity?: Maybe<Order_By>;
+  direction_id?: InputMaybe<Order_By>;
+  duration?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  quantity?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
@@ -4815,10 +6492,10 @@ export type Recipe_Direction_Actions_Variance_Fields = {
 
 /** order by variance() on columns of table "recipe_direction_actions" */
 export type Recipe_Direction_Actions_Variance_Order_By = {
-  direction_id?: Maybe<Order_By>;
-  duration?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  quantity?: Maybe<Order_By>;
+  direction_id?: InputMaybe<Order_By>;
+  duration?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  quantity?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "recipe_direction_durations" */
@@ -4858,30 +6535,30 @@ export type Recipe_Direction_Durations_Aggregate_Fields = {
 
 /** aggregate fields of "recipe_direction_durations" */
 export type Recipe_Direction_Durations_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Recipe_Direction_Durations_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<Recipe_Direction_Durations_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "recipe_direction_durations" */
 export type Recipe_Direction_Durations_Aggregate_Order_By = {
-  avg?: Maybe<Recipe_Direction_Durations_Avg_Order_By>;
-  count?: Maybe<Order_By>;
-  max?: Maybe<Recipe_Direction_Durations_Max_Order_By>;
-  min?: Maybe<Recipe_Direction_Durations_Min_Order_By>;
-  stddev?: Maybe<Recipe_Direction_Durations_Stddev_Order_By>;
-  stddev_pop?: Maybe<Recipe_Direction_Durations_Stddev_Pop_Order_By>;
-  stddev_samp?: Maybe<Recipe_Direction_Durations_Stddev_Samp_Order_By>;
-  sum?: Maybe<Recipe_Direction_Durations_Sum_Order_By>;
-  var_pop?: Maybe<Recipe_Direction_Durations_Var_Pop_Order_By>;
-  var_samp?: Maybe<Recipe_Direction_Durations_Var_Samp_Order_By>;
-  variance?: Maybe<Recipe_Direction_Durations_Variance_Order_By>;
+  avg?: InputMaybe<Recipe_Direction_Durations_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Recipe_Direction_Durations_Max_Order_By>;
+  min?: InputMaybe<Recipe_Direction_Durations_Min_Order_By>;
+  stddev?: InputMaybe<Recipe_Direction_Durations_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Recipe_Direction_Durations_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Recipe_Direction_Durations_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Recipe_Direction_Durations_Sum_Order_By>;
+  var_pop?: InputMaybe<Recipe_Direction_Durations_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Recipe_Direction_Durations_Var_Samp_Order_By>;
+  variance?: InputMaybe<Recipe_Direction_Durations_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "recipe_direction_durations" */
 export type Recipe_Direction_Durations_Arr_Rel_Insert_Input = {
   data: Array<Recipe_Direction_Durations_Insert_Input>;
   /** on conflict condition */
-  on_conflict?: Maybe<Recipe_Direction_Durations_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_Direction_Durations_On_Conflict>;
 };
 
 /** aggregate avg on columns */
@@ -4895,23 +6572,23 @@ export type Recipe_Direction_Durations_Avg_Fields = {
 
 /** order by avg() on columns of table "recipe_direction_durations" */
 export type Recipe_Direction_Durations_Avg_Order_By = {
-  duration?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  duration?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "recipe_direction_durations". All fields are combined with a logical 'AND'. */
 export type Recipe_Direction_Durations_Bool_Exp = {
-  _and?: Maybe<Array<Recipe_Direction_Durations_Bool_Exp>>;
-  _not?: Maybe<Recipe_Direction_Durations_Bool_Exp>;
-  _or?: Maybe<Array<Recipe_Direction_Durations_Bool_Exp>>;
-  duration?: Maybe<Int_Comparison_Exp>;
-  id?: Maybe<Int_Comparison_Exp>;
-  recipe_id?: Maybe<Int_Comparison_Exp>;
-  seq_num?: Maybe<Int_Comparison_Exp>;
-  type?: Maybe<String_Comparison_Exp>;
-  unit_of_time?: Maybe<String_Comparison_Exp>;
+  _and?: InputMaybe<Array<Recipe_Direction_Durations_Bool_Exp>>;
+  _not?: InputMaybe<Recipe_Direction_Durations_Bool_Exp>;
+  _or?: InputMaybe<Array<Recipe_Direction_Durations_Bool_Exp>>;
+  duration?: InputMaybe<Int_Comparison_Exp>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  recipe_id?: InputMaybe<Int_Comparison_Exp>;
+  seq_num?: InputMaybe<Int_Comparison_Exp>;
+  type?: InputMaybe<String_Comparison_Exp>;
+  unit_of_time?: InputMaybe<String_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "recipe_direction_durations" */
@@ -4922,20 +6599,20 @@ export enum Recipe_Direction_Durations_Constraint {
 
 /** input type for incrementing numeric columns in table "recipe_direction_durations" */
 export type Recipe_Direction_Durations_Inc_Input = {
-  duration?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  recipe_id?: Maybe<Scalars['Int']>;
-  seq_num?: Maybe<Scalars['Int']>;
+  duration?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  recipe_id?: InputMaybe<Scalars['Int']>;
+  seq_num?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "recipe_direction_durations" */
 export type Recipe_Direction_Durations_Insert_Input = {
-  duration?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  recipe_id?: Maybe<Scalars['Int']>;
-  seq_num?: Maybe<Scalars['Int']>;
-  type?: Maybe<Scalars['String']>;
-  unit_of_time?: Maybe<Scalars['String']>;
+  duration?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  recipe_id?: InputMaybe<Scalars['Int']>;
+  seq_num?: InputMaybe<Scalars['Int']>;
+  type?: InputMaybe<Scalars['String']>;
+  unit_of_time?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
@@ -4951,12 +6628,12 @@ export type Recipe_Direction_Durations_Max_Fields = {
 
 /** order by max() on columns of table "recipe_direction_durations" */
 export type Recipe_Direction_Durations_Max_Order_By = {
-  duration?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
-  type?: Maybe<Order_By>;
-  unit_of_time?: Maybe<Order_By>;
+  duration?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  type?: InputMaybe<Order_By>;
+  unit_of_time?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -4972,12 +6649,12 @@ export type Recipe_Direction_Durations_Min_Fields = {
 
 /** order by min() on columns of table "recipe_direction_durations" */
 export type Recipe_Direction_Durations_Min_Order_By = {
-  duration?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
-  type?: Maybe<Order_By>;
-  unit_of_time?: Maybe<Order_By>;
+  duration?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  type?: InputMaybe<Order_By>;
+  unit_of_time?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "recipe_direction_durations" */
@@ -4993,17 +6670,17 @@ export type Recipe_Direction_Durations_Mutation_Response = {
 export type Recipe_Direction_Durations_On_Conflict = {
   constraint: Recipe_Direction_Durations_Constraint;
   update_columns?: Array<Recipe_Direction_Durations_Update_Column>;
-  where?: Maybe<Recipe_Direction_Durations_Bool_Exp>;
+  where?: InputMaybe<Recipe_Direction_Durations_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "recipe_direction_durations". */
 export type Recipe_Direction_Durations_Order_By = {
-  duration?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
-  type?: Maybe<Order_By>;
-  unit_of_time?: Maybe<Order_By>;
+  duration?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  type?: InputMaybe<Order_By>;
+  unit_of_time?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: recipe_direction_durations */
@@ -5029,12 +6706,12 @@ export enum Recipe_Direction_Durations_Select_Column {
 
 /** input type for updating data in table "recipe_direction_durations" */
 export type Recipe_Direction_Durations_Set_Input = {
-  duration?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  recipe_id?: Maybe<Scalars['Int']>;
-  seq_num?: Maybe<Scalars['Int']>;
-  type?: Maybe<Scalars['String']>;
-  unit_of_time?: Maybe<Scalars['String']>;
+  duration?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  recipe_id?: InputMaybe<Scalars['Int']>;
+  seq_num?: InputMaybe<Scalars['Int']>;
+  type?: InputMaybe<Scalars['String']>;
+  unit_of_time?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate stddev on columns */
@@ -5048,10 +6725,10 @@ export type Recipe_Direction_Durations_Stddev_Fields = {
 
 /** order by stddev() on columns of table "recipe_direction_durations" */
 export type Recipe_Direction_Durations_Stddev_Order_By = {
-  duration?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  duration?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -5065,10 +6742,10 @@ export type Recipe_Direction_Durations_Stddev_Pop_Fields = {
 
 /** order by stddev_pop() on columns of table "recipe_direction_durations" */
 export type Recipe_Direction_Durations_Stddev_Pop_Order_By = {
-  duration?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  duration?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -5082,10 +6759,10 @@ export type Recipe_Direction_Durations_Stddev_Samp_Fields = {
 
 /** order by stddev_samp() on columns of table "recipe_direction_durations" */
 export type Recipe_Direction_Durations_Stddev_Samp_Order_By = {
-  duration?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  duration?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
@@ -5099,10 +6776,10 @@ export type Recipe_Direction_Durations_Sum_Fields = {
 
 /** order by sum() on columns of table "recipe_direction_durations" */
 export type Recipe_Direction_Durations_Sum_Order_By = {
-  duration?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  duration?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "recipe_direction_durations" */
@@ -5132,10 +6809,10 @@ export type Recipe_Direction_Durations_Var_Pop_Fields = {
 
 /** order by var_pop() on columns of table "recipe_direction_durations" */
 export type Recipe_Direction_Durations_Var_Pop_Order_By = {
-  duration?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  duration?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
@@ -5149,10 +6826,10 @@ export type Recipe_Direction_Durations_Var_Samp_Fields = {
 
 /** order by var_samp() on columns of table "recipe_direction_durations" */
 export type Recipe_Direction_Durations_Var_Samp_Order_By = {
-  duration?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  duration?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
@@ -5166,10 +6843,10 @@ export type Recipe_Direction_Durations_Variance_Fields = {
 
 /** order by variance() on columns of table "recipe_direction_durations" */
 export type Recipe_Direction_Durations_Variance_Order_By = {
-  duration?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  duration?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "recipe_directions" */
@@ -5183,26 +6860,27 @@ export type Recipe_Directions = {
   recipe_id: Scalars['Int'];
   seq_num: Scalars['Int'];
   step: Scalars['String'];
+  video_timestamp?: Maybe<Scalars['Int']>;
 };
 
 
 /** columns and relationships of "recipe_directions" */
 export type Recipe_DirectionsRecipe_Direction_ActionsArgs = {
-  distinct_on?: Maybe<Array<Recipe_Direction_Actions_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Direction_Actions_Order_By>>;
-  where?: Maybe<Recipe_Direction_Actions_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Direction_Actions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Direction_Actions_Order_By>>;
+  where?: InputMaybe<Recipe_Direction_Actions_Bool_Exp>;
 };
 
 
 /** columns and relationships of "recipe_directions" */
 export type Recipe_DirectionsRecipe_Direction_Actions_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_Direction_Actions_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Direction_Actions_Order_By>>;
-  where?: Maybe<Recipe_Direction_Actions_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Direction_Actions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Direction_Actions_Order_By>>;
+  where?: InputMaybe<Recipe_Direction_Actions_Bool_Exp>;
 };
 
 /** aggregated selection of "recipe_directions" */
@@ -5231,30 +6909,30 @@ export type Recipe_Directions_Aggregate_Fields = {
 
 /** aggregate fields of "recipe_directions" */
 export type Recipe_Directions_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Recipe_Directions_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<Recipe_Directions_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "recipe_directions" */
 export type Recipe_Directions_Aggregate_Order_By = {
-  avg?: Maybe<Recipe_Directions_Avg_Order_By>;
-  count?: Maybe<Order_By>;
-  max?: Maybe<Recipe_Directions_Max_Order_By>;
-  min?: Maybe<Recipe_Directions_Min_Order_By>;
-  stddev?: Maybe<Recipe_Directions_Stddev_Order_By>;
-  stddev_pop?: Maybe<Recipe_Directions_Stddev_Pop_Order_By>;
-  stddev_samp?: Maybe<Recipe_Directions_Stddev_Samp_Order_By>;
-  sum?: Maybe<Recipe_Directions_Sum_Order_By>;
-  var_pop?: Maybe<Recipe_Directions_Var_Pop_Order_By>;
-  var_samp?: Maybe<Recipe_Directions_Var_Samp_Order_By>;
-  variance?: Maybe<Recipe_Directions_Variance_Order_By>;
+  avg?: InputMaybe<Recipe_Directions_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Recipe_Directions_Max_Order_By>;
+  min?: InputMaybe<Recipe_Directions_Min_Order_By>;
+  stddev?: InputMaybe<Recipe_Directions_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Recipe_Directions_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Recipe_Directions_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Recipe_Directions_Sum_Order_By>;
+  var_pop?: InputMaybe<Recipe_Directions_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Recipe_Directions_Var_Samp_Order_By>;
+  variance?: InputMaybe<Recipe_Directions_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "recipe_directions" */
 export type Recipe_Directions_Arr_Rel_Insert_Input = {
   data: Array<Recipe_Directions_Insert_Input>;
   /** on conflict condition */
-  on_conflict?: Maybe<Recipe_Directions_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_Directions_On_Conflict>;
 };
 
 /** aggregate avg on columns */
@@ -5263,25 +6941,28 @@ export type Recipe_Directions_Avg_Fields = {
   id?: Maybe<Scalars['Float']>;
   recipe_id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
+  video_timestamp?: Maybe<Scalars['Float']>;
 };
 
 /** order by avg() on columns of table "recipe_directions" */
 export type Recipe_Directions_Avg_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  video_timestamp?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "recipe_directions". All fields are combined with a logical 'AND'. */
 export type Recipe_Directions_Bool_Exp = {
-  _and?: Maybe<Array<Recipe_Directions_Bool_Exp>>;
-  _not?: Maybe<Recipe_Directions_Bool_Exp>;
-  _or?: Maybe<Array<Recipe_Directions_Bool_Exp>>;
-  id?: Maybe<Int_Comparison_Exp>;
-  recipe_direction_actions?: Maybe<Recipe_Direction_Actions_Bool_Exp>;
-  recipe_id?: Maybe<Int_Comparison_Exp>;
-  seq_num?: Maybe<Int_Comparison_Exp>;
-  step?: Maybe<String_Comparison_Exp>;
+  _and?: InputMaybe<Array<Recipe_Directions_Bool_Exp>>;
+  _not?: InputMaybe<Recipe_Directions_Bool_Exp>;
+  _or?: InputMaybe<Array<Recipe_Directions_Bool_Exp>>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  recipe_direction_actions?: InputMaybe<Recipe_Direction_Actions_Bool_Exp>;
+  recipe_id?: InputMaybe<Int_Comparison_Exp>;
+  seq_num?: InputMaybe<Int_Comparison_Exp>;
+  step?: InputMaybe<String_Comparison_Exp>;
+  video_timestamp?: InputMaybe<Int_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "recipe_directions" */
@@ -5294,18 +6975,20 @@ export enum Recipe_Directions_Constraint {
 
 /** input type for incrementing numeric columns in table "recipe_directions" */
 export type Recipe_Directions_Inc_Input = {
-  id?: Maybe<Scalars['Int']>;
-  recipe_id?: Maybe<Scalars['Int']>;
-  seq_num?: Maybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  recipe_id?: InputMaybe<Scalars['Int']>;
+  seq_num?: InputMaybe<Scalars['Int']>;
+  video_timestamp?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "recipe_directions" */
 export type Recipe_Directions_Insert_Input = {
-  id?: Maybe<Scalars['Int']>;
-  recipe_direction_actions?: Maybe<Recipe_Direction_Actions_Arr_Rel_Insert_Input>;
-  recipe_id?: Maybe<Scalars['Int']>;
-  seq_num?: Maybe<Scalars['Int']>;
-  step?: Maybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
+  recipe_direction_actions?: InputMaybe<Recipe_Direction_Actions_Arr_Rel_Insert_Input>;
+  recipe_id?: InputMaybe<Scalars['Int']>;
+  seq_num?: InputMaybe<Scalars['Int']>;
+  step?: InputMaybe<Scalars['String']>;
+  video_timestamp?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate max on columns */
@@ -5315,14 +6998,16 @@ export type Recipe_Directions_Max_Fields = {
   recipe_id?: Maybe<Scalars['Int']>;
   seq_num?: Maybe<Scalars['Int']>;
   step?: Maybe<Scalars['String']>;
+  video_timestamp?: Maybe<Scalars['Int']>;
 };
 
 /** order by max() on columns of table "recipe_directions" */
 export type Recipe_Directions_Max_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
-  step?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  step?: InputMaybe<Order_By>;
+  video_timestamp?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -5332,14 +7017,16 @@ export type Recipe_Directions_Min_Fields = {
   recipe_id?: Maybe<Scalars['Int']>;
   seq_num?: Maybe<Scalars['Int']>;
   step?: Maybe<Scalars['String']>;
+  video_timestamp?: Maybe<Scalars['Int']>;
 };
 
 /** order by min() on columns of table "recipe_directions" */
 export type Recipe_Directions_Min_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
-  step?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  step?: InputMaybe<Order_By>;
+  video_timestamp?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "recipe_directions" */
@@ -5355,16 +7042,17 @@ export type Recipe_Directions_Mutation_Response = {
 export type Recipe_Directions_On_Conflict = {
   constraint: Recipe_Directions_Constraint;
   update_columns?: Array<Recipe_Directions_Update_Column>;
-  where?: Maybe<Recipe_Directions_Bool_Exp>;
+  where?: InputMaybe<Recipe_Directions_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "recipe_directions". */
 export type Recipe_Directions_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_direction_actions_aggregate?: Maybe<Recipe_Direction_Actions_Aggregate_Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
-  step?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_direction_actions_aggregate?: InputMaybe<Recipe_Direction_Actions_Aggregate_Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  step?: InputMaybe<Order_By>;
+  video_timestamp?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: recipe_directions */
@@ -5381,15 +7069,18 @@ export enum Recipe_Directions_Select_Column {
   /** column name */
   SeqNum = 'seq_num',
   /** column name */
-  Step = 'step'
+  Step = 'step',
+  /** column name */
+  VideoTimestamp = 'video_timestamp'
 }
 
 /** input type for updating data in table "recipe_directions" */
 export type Recipe_Directions_Set_Input = {
-  id?: Maybe<Scalars['Int']>;
-  recipe_id?: Maybe<Scalars['Int']>;
-  seq_num?: Maybe<Scalars['Int']>;
-  step?: Maybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
+  recipe_id?: InputMaybe<Scalars['Int']>;
+  seq_num?: InputMaybe<Scalars['Int']>;
+  step?: InputMaybe<Scalars['String']>;
+  video_timestamp?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate stddev on columns */
@@ -5398,13 +7089,15 @@ export type Recipe_Directions_Stddev_Fields = {
   id?: Maybe<Scalars['Float']>;
   recipe_id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
+  video_timestamp?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev() on columns of table "recipe_directions" */
 export type Recipe_Directions_Stddev_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  video_timestamp?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -5413,13 +7106,15 @@ export type Recipe_Directions_Stddev_Pop_Fields = {
   id?: Maybe<Scalars['Float']>;
   recipe_id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
+  video_timestamp?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_pop() on columns of table "recipe_directions" */
 export type Recipe_Directions_Stddev_Pop_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  video_timestamp?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -5428,13 +7123,15 @@ export type Recipe_Directions_Stddev_Samp_Fields = {
   id?: Maybe<Scalars['Float']>;
   recipe_id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
+  video_timestamp?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_samp() on columns of table "recipe_directions" */
 export type Recipe_Directions_Stddev_Samp_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  video_timestamp?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
@@ -5443,13 +7140,15 @@ export type Recipe_Directions_Sum_Fields = {
   id?: Maybe<Scalars['Int']>;
   recipe_id?: Maybe<Scalars['Int']>;
   seq_num?: Maybe<Scalars['Int']>;
+  video_timestamp?: Maybe<Scalars['Int']>;
 };
 
 /** order by sum() on columns of table "recipe_directions" */
 export type Recipe_Directions_Sum_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  video_timestamp?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "recipe_directions" */
@@ -5461,7 +7160,9 @@ export enum Recipe_Directions_Update_Column {
   /** column name */
   SeqNum = 'seq_num',
   /** column name */
-  Step = 'step'
+  Step = 'step',
+  /** column name */
+  VideoTimestamp = 'video_timestamp'
 }
 
 /** aggregate var_pop on columns */
@@ -5470,13 +7171,15 @@ export type Recipe_Directions_Var_Pop_Fields = {
   id?: Maybe<Scalars['Float']>;
   recipe_id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
+  video_timestamp?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_pop() on columns of table "recipe_directions" */
 export type Recipe_Directions_Var_Pop_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  video_timestamp?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
@@ -5485,13 +7188,15 @@ export type Recipe_Directions_Var_Samp_Fields = {
   id?: Maybe<Scalars['Float']>;
   recipe_id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
+  video_timestamp?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_samp() on columns of table "recipe_directions" */
 export type Recipe_Directions_Var_Samp_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  video_timestamp?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
@@ -5500,13 +7205,15 @@ export type Recipe_Directions_Variance_Fields = {
   id?: Maybe<Scalars['Float']>;
   recipe_id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
+  video_timestamp?: Maybe<Scalars['Float']>;
 };
 
 /** order by variance() on columns of table "recipe_directions" */
 export type Recipe_Directions_Variance_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  video_timestamp?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "recipe_favorite" */
@@ -5545,8 +7252,8 @@ export type Recipe_Favorite_Aggregate_Fields = {
 
 /** aggregate fields of "recipe_favorite" */
 export type Recipe_Favorite_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Recipe_Favorite_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<Recipe_Favorite_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** aggregate avg on columns */
@@ -5559,13 +7266,13 @@ export type Recipe_Favorite_Avg_Fields = {
 
 /** Boolean expression to filter rows from the table "recipe_favorite". All fields are combined with a logical 'AND'. */
 export type Recipe_Favorite_Bool_Exp = {
-  _and?: Maybe<Array<Recipe_Favorite_Bool_Exp>>;
-  _not?: Maybe<Recipe_Favorite_Bool_Exp>;
-  _or?: Maybe<Array<Recipe_Favorite_Bool_Exp>>;
-  id?: Maybe<Bigint_Comparison_Exp>;
-  recipe?: Maybe<Recipes_Bool_Exp>;
-  recipe_id?: Maybe<Int_Comparison_Exp>;
-  user_id?: Maybe<Int_Comparison_Exp>;
+  _and?: InputMaybe<Array<Recipe_Favorite_Bool_Exp>>;
+  _not?: InputMaybe<Recipe_Favorite_Bool_Exp>;
+  _or?: InputMaybe<Array<Recipe_Favorite_Bool_Exp>>;
+  id?: InputMaybe<Bigint_Comparison_Exp>;
+  recipe?: InputMaybe<Recipes_Bool_Exp>;
+  recipe_id?: InputMaybe<Int_Comparison_Exp>;
+  user_id?: InputMaybe<Int_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "recipe_favorite" */
@@ -5576,17 +7283,17 @@ export enum Recipe_Favorite_Constraint {
 
 /** input type for incrementing numeric columns in table "recipe_favorite" */
 export type Recipe_Favorite_Inc_Input = {
-  id?: Maybe<Scalars['bigint']>;
-  recipe_id?: Maybe<Scalars['Int']>;
-  user_id?: Maybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['bigint']>;
+  recipe_id?: InputMaybe<Scalars['Int']>;
+  user_id?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "recipe_favorite" */
 export type Recipe_Favorite_Insert_Input = {
-  id?: Maybe<Scalars['bigint']>;
-  recipe?: Maybe<Recipes_Obj_Rel_Insert_Input>;
-  recipe_id?: Maybe<Scalars['Int']>;
-  user_id?: Maybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['bigint']>;
+  recipe?: InputMaybe<Recipes_Obj_Rel_Insert_Input>;
+  recipe_id?: InputMaybe<Scalars['Int']>;
+  user_id?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate max on columns */
@@ -5618,15 +7325,15 @@ export type Recipe_Favorite_Mutation_Response = {
 export type Recipe_Favorite_On_Conflict = {
   constraint: Recipe_Favorite_Constraint;
   update_columns?: Array<Recipe_Favorite_Update_Column>;
-  where?: Maybe<Recipe_Favorite_Bool_Exp>;
+  where?: InputMaybe<Recipe_Favorite_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "recipe_favorite". */
 export type Recipe_Favorite_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe?: Maybe<Recipes_Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  user_id?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe?: InputMaybe<Recipes_Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: recipe_favorite */
@@ -5646,9 +7353,9 @@ export enum Recipe_Favorite_Select_Column {
 
 /** input type for updating data in table "recipe_favorite" */
 export type Recipe_Favorite_Set_Input = {
-  id?: Maybe<Scalars['bigint']>;
-  recipe_id?: Maybe<Scalars['Int']>;
-  user_id?: Maybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['bigint']>;
+  recipe_id?: InputMaybe<Scalars['Int']>;
+  user_id?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate stddev on columns */
@@ -5756,30 +7463,30 @@ export type Recipe_Ingredient_Food_Candidate_Aggregate_Fields = {
 
 /** aggregate fields of "recipe_ingredient_food_candidate" */
 export type Recipe_Ingredient_Food_Candidate_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Recipe_Ingredient_Food_Candidate_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<Recipe_Ingredient_Food_Candidate_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "recipe_ingredient_food_candidate" */
 export type Recipe_Ingredient_Food_Candidate_Aggregate_Order_By = {
-  avg?: Maybe<Recipe_Ingredient_Food_Candidate_Avg_Order_By>;
-  count?: Maybe<Order_By>;
-  max?: Maybe<Recipe_Ingredient_Food_Candidate_Max_Order_By>;
-  min?: Maybe<Recipe_Ingredient_Food_Candidate_Min_Order_By>;
-  stddev?: Maybe<Recipe_Ingredient_Food_Candidate_Stddev_Order_By>;
-  stddev_pop?: Maybe<Recipe_Ingredient_Food_Candidate_Stddev_Pop_Order_By>;
-  stddev_samp?: Maybe<Recipe_Ingredient_Food_Candidate_Stddev_Samp_Order_By>;
-  sum?: Maybe<Recipe_Ingredient_Food_Candidate_Sum_Order_By>;
-  var_pop?: Maybe<Recipe_Ingredient_Food_Candidate_Var_Pop_Order_By>;
-  var_samp?: Maybe<Recipe_Ingredient_Food_Candidate_Var_Samp_Order_By>;
-  variance?: Maybe<Recipe_Ingredient_Food_Candidate_Variance_Order_By>;
+  avg?: InputMaybe<Recipe_Ingredient_Food_Candidate_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Recipe_Ingredient_Food_Candidate_Max_Order_By>;
+  min?: InputMaybe<Recipe_Ingredient_Food_Candidate_Min_Order_By>;
+  stddev?: InputMaybe<Recipe_Ingredient_Food_Candidate_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Recipe_Ingredient_Food_Candidate_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Recipe_Ingredient_Food_Candidate_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Recipe_Ingredient_Food_Candidate_Sum_Order_By>;
+  var_pop?: InputMaybe<Recipe_Ingredient_Food_Candidate_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Recipe_Ingredient_Food_Candidate_Var_Samp_Order_By>;
+  variance?: InputMaybe<Recipe_Ingredient_Food_Candidate_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "recipe_ingredient_food_candidate" */
 export type Recipe_Ingredient_Food_Candidate_Arr_Rel_Insert_Input = {
   data: Array<Recipe_Ingredient_Food_Candidate_Insert_Input>;
   /** on conflict condition */
-  on_conflict?: Maybe<Recipe_Ingredient_Food_Candidate_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_Ingredient_Food_Candidate_On_Conflict>;
 };
 
 /** aggregate avg on columns */
@@ -5793,23 +7500,23 @@ export type Recipe_Ingredient_Food_Candidate_Avg_Fields = {
 
 /** order by avg() on columns of table "recipe_ingredient_food_candidate" */
 export type Recipe_Ingredient_Food_Candidate_Avg_Order_By = {
-  food_candidate_id?: Maybe<Order_By>;
-  food_candidate_portion_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  recipe_ingredient_id?: Maybe<Order_By>;
+  food_candidate_id?: InputMaybe<Order_By>;
+  food_candidate_portion_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_ingredient_id?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "recipe_ingredient_food_candidate". All fields are combined with a logical 'AND'. */
 export type Recipe_Ingredient_Food_Candidate_Bool_Exp = {
-  _and?: Maybe<Array<Recipe_Ingredient_Food_Candidate_Bool_Exp>>;
-  _not?: Maybe<Recipe_Ingredient_Food_Candidate_Bool_Exp>;
-  _or?: Maybe<Array<Recipe_Ingredient_Food_Candidate_Bool_Exp>>;
-  food?: Maybe<Food_Bool_Exp>;
-  food_candidate_id?: Maybe<Int_Comparison_Exp>;
-  food_candidate_portion_id?: Maybe<Int_Comparison_Exp>;
-  food_portion?: Maybe<Food_Portion_Bool_Exp>;
-  id?: Maybe<Int_Comparison_Exp>;
-  recipe_ingredient_id?: Maybe<Int_Comparison_Exp>;
+  _and?: InputMaybe<Array<Recipe_Ingredient_Food_Candidate_Bool_Exp>>;
+  _not?: InputMaybe<Recipe_Ingredient_Food_Candidate_Bool_Exp>;
+  _or?: InputMaybe<Array<Recipe_Ingredient_Food_Candidate_Bool_Exp>>;
+  food?: InputMaybe<Food_Bool_Exp>;
+  food_candidate_id?: InputMaybe<Int_Comparison_Exp>;
+  food_candidate_portion_id?: InputMaybe<Int_Comparison_Exp>;
+  food_portion?: InputMaybe<Food_Portion_Bool_Exp>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  recipe_ingredient_id?: InputMaybe<Int_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "recipe_ingredient_food_candidate" */
@@ -5822,20 +7529,20 @@ export enum Recipe_Ingredient_Food_Candidate_Constraint {
 
 /** input type for incrementing numeric columns in table "recipe_ingredient_food_candidate" */
 export type Recipe_Ingredient_Food_Candidate_Inc_Input = {
-  food_candidate_id?: Maybe<Scalars['Int']>;
-  food_candidate_portion_id?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  recipe_ingredient_id?: Maybe<Scalars['Int']>;
+  food_candidate_id?: InputMaybe<Scalars['Int']>;
+  food_candidate_portion_id?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  recipe_ingredient_id?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "recipe_ingredient_food_candidate" */
 export type Recipe_Ingredient_Food_Candidate_Insert_Input = {
-  food?: Maybe<Food_Obj_Rel_Insert_Input>;
-  food_candidate_id?: Maybe<Scalars['Int']>;
-  food_candidate_portion_id?: Maybe<Scalars['Int']>;
-  food_portion?: Maybe<Food_Portion_Obj_Rel_Insert_Input>;
-  id?: Maybe<Scalars['Int']>;
-  recipe_ingredient_id?: Maybe<Scalars['Int']>;
+  food?: InputMaybe<Food_Obj_Rel_Insert_Input>;
+  food_candidate_id?: InputMaybe<Scalars['Int']>;
+  food_candidate_portion_id?: InputMaybe<Scalars['Int']>;
+  food_portion?: InputMaybe<Food_Portion_Obj_Rel_Insert_Input>;
+  id?: InputMaybe<Scalars['Int']>;
+  recipe_ingredient_id?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate max on columns */
@@ -5849,10 +7556,10 @@ export type Recipe_Ingredient_Food_Candidate_Max_Fields = {
 
 /** order by max() on columns of table "recipe_ingredient_food_candidate" */
 export type Recipe_Ingredient_Food_Candidate_Max_Order_By = {
-  food_candidate_id?: Maybe<Order_By>;
-  food_candidate_portion_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  recipe_ingredient_id?: Maybe<Order_By>;
+  food_candidate_id?: InputMaybe<Order_By>;
+  food_candidate_portion_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_ingredient_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -5866,10 +7573,10 @@ export type Recipe_Ingredient_Food_Candidate_Min_Fields = {
 
 /** order by min() on columns of table "recipe_ingredient_food_candidate" */
 export type Recipe_Ingredient_Food_Candidate_Min_Order_By = {
-  food_candidate_id?: Maybe<Order_By>;
-  food_candidate_portion_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  recipe_ingredient_id?: Maybe<Order_By>;
+  food_candidate_id?: InputMaybe<Order_By>;
+  food_candidate_portion_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_ingredient_id?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "recipe_ingredient_food_candidate" */
@@ -5885,17 +7592,17 @@ export type Recipe_Ingredient_Food_Candidate_Mutation_Response = {
 export type Recipe_Ingredient_Food_Candidate_On_Conflict = {
   constraint: Recipe_Ingredient_Food_Candidate_Constraint;
   update_columns?: Array<Recipe_Ingredient_Food_Candidate_Update_Column>;
-  where?: Maybe<Recipe_Ingredient_Food_Candidate_Bool_Exp>;
+  where?: InputMaybe<Recipe_Ingredient_Food_Candidate_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "recipe_ingredient_food_candidate". */
 export type Recipe_Ingredient_Food_Candidate_Order_By = {
-  food?: Maybe<Food_Order_By>;
-  food_candidate_id?: Maybe<Order_By>;
-  food_candidate_portion_id?: Maybe<Order_By>;
-  food_portion?: Maybe<Food_Portion_Order_By>;
-  id?: Maybe<Order_By>;
-  recipe_ingredient_id?: Maybe<Order_By>;
+  food?: InputMaybe<Food_Order_By>;
+  food_candidate_id?: InputMaybe<Order_By>;
+  food_candidate_portion_id?: InputMaybe<Order_By>;
+  food_portion?: InputMaybe<Food_Portion_Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_ingredient_id?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: recipe_ingredient_food_candidate */
@@ -5917,10 +7624,10 @@ export enum Recipe_Ingredient_Food_Candidate_Select_Column {
 
 /** input type for updating data in table "recipe_ingredient_food_candidate" */
 export type Recipe_Ingredient_Food_Candidate_Set_Input = {
-  food_candidate_id?: Maybe<Scalars['Int']>;
-  food_candidate_portion_id?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  recipe_ingredient_id?: Maybe<Scalars['Int']>;
+  food_candidate_id?: InputMaybe<Scalars['Int']>;
+  food_candidate_portion_id?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  recipe_ingredient_id?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate stddev on columns */
@@ -5934,10 +7641,10 @@ export type Recipe_Ingredient_Food_Candidate_Stddev_Fields = {
 
 /** order by stddev() on columns of table "recipe_ingredient_food_candidate" */
 export type Recipe_Ingredient_Food_Candidate_Stddev_Order_By = {
-  food_candidate_id?: Maybe<Order_By>;
-  food_candidate_portion_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  recipe_ingredient_id?: Maybe<Order_By>;
+  food_candidate_id?: InputMaybe<Order_By>;
+  food_candidate_portion_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_ingredient_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -5951,10 +7658,10 @@ export type Recipe_Ingredient_Food_Candidate_Stddev_Pop_Fields = {
 
 /** order by stddev_pop() on columns of table "recipe_ingredient_food_candidate" */
 export type Recipe_Ingredient_Food_Candidate_Stddev_Pop_Order_By = {
-  food_candidate_id?: Maybe<Order_By>;
-  food_candidate_portion_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  recipe_ingredient_id?: Maybe<Order_By>;
+  food_candidate_id?: InputMaybe<Order_By>;
+  food_candidate_portion_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_ingredient_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -5968,10 +7675,10 @@ export type Recipe_Ingredient_Food_Candidate_Stddev_Samp_Fields = {
 
 /** order by stddev_samp() on columns of table "recipe_ingredient_food_candidate" */
 export type Recipe_Ingredient_Food_Candidate_Stddev_Samp_Order_By = {
-  food_candidate_id?: Maybe<Order_By>;
-  food_candidate_portion_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  recipe_ingredient_id?: Maybe<Order_By>;
+  food_candidate_id?: InputMaybe<Order_By>;
+  food_candidate_portion_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_ingredient_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
@@ -5985,10 +7692,10 @@ export type Recipe_Ingredient_Food_Candidate_Sum_Fields = {
 
 /** order by sum() on columns of table "recipe_ingredient_food_candidate" */
 export type Recipe_Ingredient_Food_Candidate_Sum_Order_By = {
-  food_candidate_id?: Maybe<Order_By>;
-  food_candidate_portion_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  recipe_ingredient_id?: Maybe<Order_By>;
+  food_candidate_id?: InputMaybe<Order_By>;
+  food_candidate_portion_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_ingredient_id?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "recipe_ingredient_food_candidate" */
@@ -6014,10 +7721,10 @@ export type Recipe_Ingredient_Food_Candidate_Var_Pop_Fields = {
 
 /** order by var_pop() on columns of table "recipe_ingredient_food_candidate" */
 export type Recipe_Ingredient_Food_Candidate_Var_Pop_Order_By = {
-  food_candidate_id?: Maybe<Order_By>;
-  food_candidate_portion_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  recipe_ingredient_id?: Maybe<Order_By>;
+  food_candidate_id?: InputMaybe<Order_By>;
+  food_candidate_portion_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_ingredient_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
@@ -6031,10 +7738,10 @@ export type Recipe_Ingredient_Food_Candidate_Var_Samp_Fields = {
 
 /** order by var_samp() on columns of table "recipe_ingredient_food_candidate" */
 export type Recipe_Ingredient_Food_Candidate_Var_Samp_Order_By = {
-  food_candidate_id?: Maybe<Order_By>;
-  food_candidate_portion_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  recipe_ingredient_id?: Maybe<Order_By>;
+  food_candidate_id?: InputMaybe<Order_By>;
+  food_candidate_portion_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_ingredient_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
@@ -6048,10 +7755,10 @@ export type Recipe_Ingredient_Food_Candidate_Variance_Fields = {
 
 /** order by variance() on columns of table "recipe_ingredient_food_candidate" */
 export type Recipe_Ingredient_Food_Candidate_Variance_Order_By = {
-  food_candidate_id?: Maybe<Order_By>;
-  food_candidate_portion_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  recipe_ingredient_id?: Maybe<Order_By>;
+  food_candidate_id?: InputMaybe<Order_By>;
+  food_candidate_portion_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_ingredient_id?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "recipe_ingredient_groups" */
@@ -6072,21 +7779,21 @@ export type Recipe_Ingredient_Groups = {
 
 /** columns and relationships of "recipe_ingredient_groups" */
 export type Recipe_Ingredient_GroupsGroup_IngredientsArgs = {
-  distinct_on?: Maybe<Array<Recipe_Ingredients_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Ingredients_Order_By>>;
-  where?: Maybe<Recipe_Ingredients_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Ingredients_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Ingredients_Order_By>>;
+  where?: InputMaybe<Recipe_Ingredients_Bool_Exp>;
 };
 
 
 /** columns and relationships of "recipe_ingredient_groups" */
 export type Recipe_Ingredient_GroupsGroup_Ingredients_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_Ingredients_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Ingredients_Order_By>>;
-  where?: Maybe<Recipe_Ingredients_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Ingredients_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Ingredients_Order_By>>;
+  where?: InputMaybe<Recipe_Ingredients_Bool_Exp>;
 };
 
 /** aggregated selection of "recipe_ingredient_groups" */
@@ -6115,30 +7822,30 @@ export type Recipe_Ingredient_Groups_Aggregate_Fields = {
 
 /** aggregate fields of "recipe_ingredient_groups" */
 export type Recipe_Ingredient_Groups_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Recipe_Ingredient_Groups_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<Recipe_Ingredient_Groups_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "recipe_ingredient_groups" */
 export type Recipe_Ingredient_Groups_Aggregate_Order_By = {
-  avg?: Maybe<Recipe_Ingredient_Groups_Avg_Order_By>;
-  count?: Maybe<Order_By>;
-  max?: Maybe<Recipe_Ingredient_Groups_Max_Order_By>;
-  min?: Maybe<Recipe_Ingredient_Groups_Min_Order_By>;
-  stddev?: Maybe<Recipe_Ingredient_Groups_Stddev_Order_By>;
-  stddev_pop?: Maybe<Recipe_Ingredient_Groups_Stddev_Pop_Order_By>;
-  stddev_samp?: Maybe<Recipe_Ingredient_Groups_Stddev_Samp_Order_By>;
-  sum?: Maybe<Recipe_Ingredient_Groups_Sum_Order_By>;
-  var_pop?: Maybe<Recipe_Ingredient_Groups_Var_Pop_Order_By>;
-  var_samp?: Maybe<Recipe_Ingredient_Groups_Var_Samp_Order_By>;
-  variance?: Maybe<Recipe_Ingredient_Groups_Variance_Order_By>;
+  avg?: InputMaybe<Recipe_Ingredient_Groups_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Recipe_Ingredient_Groups_Max_Order_By>;
+  min?: InputMaybe<Recipe_Ingredient_Groups_Min_Order_By>;
+  stddev?: InputMaybe<Recipe_Ingredient_Groups_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Recipe_Ingredient_Groups_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Recipe_Ingredient_Groups_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Recipe_Ingredient_Groups_Sum_Order_By>;
+  var_pop?: InputMaybe<Recipe_Ingredient_Groups_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Recipe_Ingredient_Groups_Var_Samp_Order_By>;
+  variance?: InputMaybe<Recipe_Ingredient_Groups_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "recipe_ingredient_groups" */
 export type Recipe_Ingredient_Groups_Arr_Rel_Insert_Input = {
   data: Array<Recipe_Ingredient_Groups_Insert_Input>;
   /** on conflict condition */
-  on_conflict?: Maybe<Recipe_Ingredient_Groups_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_Ingredient_Groups_On_Conflict>;
 };
 
 /** aggregate avg on columns */
@@ -6151,22 +7858,22 @@ export type Recipe_Ingredient_Groups_Avg_Fields = {
 
 /** order by avg() on columns of table "recipe_ingredient_groups" */
 export type Recipe_Ingredient_Groups_Avg_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "recipe_ingredient_groups". All fields are combined with a logical 'AND'. */
 export type Recipe_Ingredient_Groups_Bool_Exp = {
-  _and?: Maybe<Array<Recipe_Ingredient_Groups_Bool_Exp>>;
-  _not?: Maybe<Recipe_Ingredient_Groups_Bool_Exp>;
-  _or?: Maybe<Array<Recipe_Ingredient_Groups_Bool_Exp>>;
-  group_ingredients?: Maybe<Recipe_Ingredients_Bool_Exp>;
-  id?: Maybe<Int_Comparison_Exp>;
-  name?: Maybe<String_Comparison_Exp>;
-  recipe?: Maybe<Recipes_Bool_Exp>;
-  recipe_id?: Maybe<Int_Comparison_Exp>;
-  seq_num?: Maybe<Int_Comparison_Exp>;
+  _and?: InputMaybe<Array<Recipe_Ingredient_Groups_Bool_Exp>>;
+  _not?: InputMaybe<Recipe_Ingredient_Groups_Bool_Exp>;
+  _or?: InputMaybe<Array<Recipe_Ingredient_Groups_Bool_Exp>>;
+  group_ingredients?: InputMaybe<Recipe_Ingredients_Bool_Exp>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  name?: InputMaybe<String_Comparison_Exp>;
+  recipe?: InputMaybe<Recipes_Bool_Exp>;
+  recipe_id?: InputMaybe<Int_Comparison_Exp>;
+  seq_num?: InputMaybe<Int_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "recipe_ingredient_groups" */
@@ -6179,19 +7886,19 @@ export enum Recipe_Ingredient_Groups_Constraint {
 
 /** input type for incrementing numeric columns in table "recipe_ingredient_groups" */
 export type Recipe_Ingredient_Groups_Inc_Input = {
-  id?: Maybe<Scalars['Int']>;
-  recipe_id?: Maybe<Scalars['Int']>;
-  seq_num?: Maybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  recipe_id?: InputMaybe<Scalars['Int']>;
+  seq_num?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "recipe_ingredient_groups" */
 export type Recipe_Ingredient_Groups_Insert_Input = {
-  group_ingredients?: Maybe<Recipe_Ingredients_Arr_Rel_Insert_Input>;
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  recipe?: Maybe<Recipes_Obj_Rel_Insert_Input>;
-  recipe_id?: Maybe<Scalars['Int']>;
-  seq_num?: Maybe<Scalars['Int']>;
+  group_ingredients?: InputMaybe<Recipe_Ingredients_Arr_Rel_Insert_Input>;
+  id?: InputMaybe<Scalars['Int']>;
+  name?: InputMaybe<Scalars['String']>;
+  recipe?: InputMaybe<Recipes_Obj_Rel_Insert_Input>;
+  recipe_id?: InputMaybe<Scalars['Int']>;
+  seq_num?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate max on columns */
@@ -6205,10 +7912,10 @@ export type Recipe_Ingredient_Groups_Max_Fields = {
 
 /** order by max() on columns of table "recipe_ingredient_groups" */
 export type Recipe_Ingredient_Groups_Max_Order_By = {
-  id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -6222,10 +7929,10 @@ export type Recipe_Ingredient_Groups_Min_Fields = {
 
 /** order by min() on columns of table "recipe_ingredient_groups" */
 export type Recipe_Ingredient_Groups_Min_Order_By = {
-  id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "recipe_ingredient_groups" */
@@ -6241,24 +7948,24 @@ export type Recipe_Ingredient_Groups_Mutation_Response = {
 export type Recipe_Ingredient_Groups_Obj_Rel_Insert_Input = {
   data: Recipe_Ingredient_Groups_Insert_Input;
   /** on conflict condition */
-  on_conflict?: Maybe<Recipe_Ingredient_Groups_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_Ingredient_Groups_On_Conflict>;
 };
 
 /** on conflict condition type for table "recipe_ingredient_groups" */
 export type Recipe_Ingredient_Groups_On_Conflict = {
   constraint: Recipe_Ingredient_Groups_Constraint;
   update_columns?: Array<Recipe_Ingredient_Groups_Update_Column>;
-  where?: Maybe<Recipe_Ingredient_Groups_Bool_Exp>;
+  where?: InputMaybe<Recipe_Ingredient_Groups_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "recipe_ingredient_groups". */
 export type Recipe_Ingredient_Groups_Order_By = {
-  group_ingredients_aggregate?: Maybe<Recipe_Ingredients_Aggregate_Order_By>;
-  id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  recipe?: Maybe<Recipes_Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  group_ingredients_aggregate?: InputMaybe<Recipe_Ingredients_Aggregate_Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  recipe?: InputMaybe<Recipes_Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: recipe_ingredient_groups */
@@ -6280,10 +7987,10 @@ export enum Recipe_Ingredient_Groups_Select_Column {
 
 /** input type for updating data in table "recipe_ingredient_groups" */
 export type Recipe_Ingredient_Groups_Set_Input = {
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  recipe_id?: Maybe<Scalars['Int']>;
-  seq_num?: Maybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  name?: InputMaybe<Scalars['String']>;
+  recipe_id?: InputMaybe<Scalars['Int']>;
+  seq_num?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate stddev on columns */
@@ -6296,9 +8003,9 @@ export type Recipe_Ingredient_Groups_Stddev_Fields = {
 
 /** order by stddev() on columns of table "recipe_ingredient_groups" */
 export type Recipe_Ingredient_Groups_Stddev_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -6311,9 +8018,9 @@ export type Recipe_Ingredient_Groups_Stddev_Pop_Fields = {
 
 /** order by stddev_pop() on columns of table "recipe_ingredient_groups" */
 export type Recipe_Ingredient_Groups_Stddev_Pop_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -6326,9 +8033,9 @@ export type Recipe_Ingredient_Groups_Stddev_Samp_Fields = {
 
 /** order by stddev_samp() on columns of table "recipe_ingredient_groups" */
 export type Recipe_Ingredient_Groups_Stddev_Samp_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
@@ -6341,9 +8048,9 @@ export type Recipe_Ingredient_Groups_Sum_Fields = {
 
 /** order by sum() on columns of table "recipe_ingredient_groups" */
 export type Recipe_Ingredient_Groups_Sum_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "recipe_ingredient_groups" */
@@ -6368,9 +8075,9 @@ export type Recipe_Ingredient_Groups_Var_Pop_Fields = {
 
 /** order by var_pop() on columns of table "recipe_ingredient_groups" */
 export type Recipe_Ingredient_Groups_Var_Pop_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
@@ -6383,9 +8090,9 @@ export type Recipe_Ingredient_Groups_Var_Samp_Fields = {
 
 /** order by var_samp() on columns of table "recipe_ingredient_groups" */
 export type Recipe_Ingredient_Groups_Var_Samp_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
@@ -6398,9 +8105,9 @@ export type Recipe_Ingredient_Groups_Variance_Fields = {
 
 /** order by variance() on columns of table "recipe_ingredient_groups" */
 export type Recipe_Ingredient_Groups_Variance_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "recipe_ingredients" */
@@ -6425,36 +8132,37 @@ export type Recipe_Ingredients = {
   seq_num?: Maybe<Scalars['Int']>;
   text: Scalars['String'];
   units?: Maybe<Scalars['String']>;
+  video_timestamp?: Maybe<Scalars['Int']>;
 };
 
 
 /** columns and relationships of "recipe_ingredients" */
 export type Recipe_IngredientsFood_CandidatesArgs = {
-  distinct_on?: Maybe<Array<Food_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Order_By>>;
-  where?: Maybe<Food_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Order_By>>;
+  where?: InputMaybe<Food_Bool_Exp>;
 };
 
 
 /** columns and relationships of "recipe_ingredients" */
 export type Recipe_IngredientsRecipe_Ingredient_Food_CandidatesArgs = {
-  distinct_on?: Maybe<Array<Recipe_Ingredient_Food_Candidate_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Ingredient_Food_Candidate_Order_By>>;
-  where?: Maybe<Recipe_Ingredient_Food_Candidate_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Ingredient_Food_Candidate_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Ingredient_Food_Candidate_Order_By>>;
+  where?: InputMaybe<Recipe_Ingredient_Food_Candidate_Bool_Exp>;
 };
 
 
 /** columns and relationships of "recipe_ingredients" */
 export type Recipe_IngredientsRecipe_Ingredient_Food_Candidates_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_Ingredient_Food_Candidate_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Ingredient_Food_Candidate_Order_By>>;
-  where?: Maybe<Recipe_Ingredient_Food_Candidate_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Ingredient_Food_Candidate_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Ingredient_Food_Candidate_Order_By>>;
+  where?: InputMaybe<Recipe_Ingredient_Food_Candidate_Bool_Exp>;
 };
 
 /** aggregated selection of "recipe_ingredients" */
@@ -6483,30 +8191,30 @@ export type Recipe_Ingredients_Aggregate_Fields = {
 
 /** aggregate fields of "recipe_ingredients" */
 export type Recipe_Ingredients_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Recipe_Ingredients_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<Recipe_Ingredients_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "recipe_ingredients" */
 export type Recipe_Ingredients_Aggregate_Order_By = {
-  avg?: Maybe<Recipe_Ingredients_Avg_Order_By>;
-  count?: Maybe<Order_By>;
-  max?: Maybe<Recipe_Ingredients_Max_Order_By>;
-  min?: Maybe<Recipe_Ingredients_Min_Order_By>;
-  stddev?: Maybe<Recipe_Ingredients_Stddev_Order_By>;
-  stddev_pop?: Maybe<Recipe_Ingredients_Stddev_Pop_Order_By>;
-  stddev_samp?: Maybe<Recipe_Ingredients_Stddev_Samp_Order_By>;
-  sum?: Maybe<Recipe_Ingredients_Sum_Order_By>;
-  var_pop?: Maybe<Recipe_Ingredients_Var_Pop_Order_By>;
-  var_samp?: Maybe<Recipe_Ingredients_Var_Samp_Order_By>;
-  variance?: Maybe<Recipe_Ingredients_Variance_Order_By>;
+  avg?: InputMaybe<Recipe_Ingredients_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Recipe_Ingredients_Max_Order_By>;
+  min?: InputMaybe<Recipe_Ingredients_Min_Order_By>;
+  stddev?: InputMaybe<Recipe_Ingredients_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Recipe_Ingredients_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Recipe_Ingredients_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Recipe_Ingredients_Sum_Order_By>;
+  var_pop?: InputMaybe<Recipe_Ingredients_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Recipe_Ingredients_Var_Samp_Order_By>;
+  variance?: InputMaybe<Recipe_Ingredients_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "recipe_ingredients" */
 export type Recipe_Ingredients_Arr_Rel_Insert_Input = {
   data: Array<Recipe_Ingredients_Insert_Input>;
   /** on conflict condition */
-  on_conflict?: Maybe<Recipe_Ingredients_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_Ingredients_On_Conflict>;
 };
 
 /** aggregate avg on columns */
@@ -6517,35 +8225,38 @@ export type Recipe_Ingredients_Avg_Fields = {
   group_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
+  video_timestamp?: Maybe<Scalars['Float']>;
 };
 
 /** order by avg() on columns of table "recipe_ingredients" */
 export type Recipe_Ingredients_Avg_Order_By = {
-  amount?: Maybe<Order_By>;
-  food_id?: Maybe<Order_By>;
-  group_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  food_id?: InputMaybe<Order_By>;
+  group_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  video_timestamp?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "recipe_ingredients". All fields are combined with a logical 'AND'. */
 export type Recipe_Ingredients_Bool_Exp = {
-  _and?: Maybe<Array<Recipe_Ingredients_Bool_Exp>>;
-  _not?: Maybe<Recipe_Ingredients_Bool_Exp>;
-  _or?: Maybe<Array<Recipe_Ingredients_Bool_Exp>>;
-  amount?: Maybe<Float_Comparison_Exp>;
-  comment?: Maybe<String_Comparison_Exp>;
-  food?: Maybe<Food_Bool_Exp>;
-  food_candidates?: Maybe<Food_Bool_Exp>;
-  food_id?: Maybe<Int_Comparison_Exp>;
-  group_id?: Maybe<Int_Comparison_Exp>;
-  id?: Maybe<Int_Comparison_Exp>;
-  name?: Maybe<String_Comparison_Exp>;
-  recipe_ingredient_food_candidates?: Maybe<Recipe_Ingredient_Food_Candidate_Bool_Exp>;
-  recipe_ingredient_group?: Maybe<Recipe_Ingredient_Groups_Bool_Exp>;
-  seq_num?: Maybe<Int_Comparison_Exp>;
-  text?: Maybe<String_Comparison_Exp>;
-  units?: Maybe<String_Comparison_Exp>;
+  _and?: InputMaybe<Array<Recipe_Ingredients_Bool_Exp>>;
+  _not?: InputMaybe<Recipe_Ingredients_Bool_Exp>;
+  _or?: InputMaybe<Array<Recipe_Ingredients_Bool_Exp>>;
+  amount?: InputMaybe<Float_Comparison_Exp>;
+  comment?: InputMaybe<String_Comparison_Exp>;
+  food?: InputMaybe<Food_Bool_Exp>;
+  food_candidates?: InputMaybe<Food_Bool_Exp>;
+  food_id?: InputMaybe<Int_Comparison_Exp>;
+  group_id?: InputMaybe<Int_Comparison_Exp>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  name?: InputMaybe<String_Comparison_Exp>;
+  recipe_ingredient_food_candidates?: InputMaybe<Recipe_Ingredient_Food_Candidate_Bool_Exp>;
+  recipe_ingredient_group?: InputMaybe<Recipe_Ingredient_Groups_Bool_Exp>;
+  seq_num?: InputMaybe<Int_Comparison_Exp>;
+  text?: InputMaybe<String_Comparison_Exp>;
+  units?: InputMaybe<String_Comparison_Exp>;
+  video_timestamp?: InputMaybe<Int_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "recipe_ingredients" */
@@ -6558,27 +8269,29 @@ export enum Recipe_Ingredients_Constraint {
 
 /** input type for incrementing numeric columns in table "recipe_ingredients" */
 export type Recipe_Ingredients_Inc_Input = {
-  amount?: Maybe<Scalars['Float']>;
-  food_id?: Maybe<Scalars['Int']>;
-  group_id?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  seq_num?: Maybe<Scalars['Int']>;
+  amount?: InputMaybe<Scalars['Float']>;
+  food_id?: InputMaybe<Scalars['Int']>;
+  group_id?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  seq_num?: InputMaybe<Scalars['Int']>;
+  video_timestamp?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "recipe_ingredients" */
 export type Recipe_Ingredients_Insert_Input = {
-  amount?: Maybe<Scalars['Float']>;
-  comment?: Maybe<Scalars['String']>;
-  food?: Maybe<Food_Obj_Rel_Insert_Input>;
-  food_id?: Maybe<Scalars['Int']>;
-  group_id?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  recipe_ingredient_food_candidates?: Maybe<Recipe_Ingredient_Food_Candidate_Arr_Rel_Insert_Input>;
-  recipe_ingredient_group?: Maybe<Recipe_Ingredient_Groups_Obj_Rel_Insert_Input>;
-  seq_num?: Maybe<Scalars['Int']>;
-  text?: Maybe<Scalars['String']>;
-  units?: Maybe<Scalars['String']>;
+  amount?: InputMaybe<Scalars['Float']>;
+  comment?: InputMaybe<Scalars['String']>;
+  food?: InputMaybe<Food_Obj_Rel_Insert_Input>;
+  food_id?: InputMaybe<Scalars['Int']>;
+  group_id?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  name?: InputMaybe<Scalars['String']>;
+  recipe_ingredient_food_candidates?: InputMaybe<Recipe_Ingredient_Food_Candidate_Arr_Rel_Insert_Input>;
+  recipe_ingredient_group?: InputMaybe<Recipe_Ingredient_Groups_Obj_Rel_Insert_Input>;
+  seq_num?: InputMaybe<Scalars['Int']>;
+  text?: InputMaybe<Scalars['String']>;
+  units?: InputMaybe<Scalars['String']>;
+  video_timestamp?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate max on columns */
@@ -6593,19 +8306,21 @@ export type Recipe_Ingredients_Max_Fields = {
   seq_num?: Maybe<Scalars['Int']>;
   text?: Maybe<Scalars['String']>;
   units?: Maybe<Scalars['String']>;
+  video_timestamp?: Maybe<Scalars['Int']>;
 };
 
 /** order by max() on columns of table "recipe_ingredients" */
 export type Recipe_Ingredients_Max_Order_By = {
-  amount?: Maybe<Order_By>;
-  comment?: Maybe<Order_By>;
-  food_id?: Maybe<Order_By>;
-  group_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
-  text?: Maybe<Order_By>;
-  units?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  comment?: InputMaybe<Order_By>;
+  food_id?: InputMaybe<Order_By>;
+  group_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  text?: InputMaybe<Order_By>;
+  units?: InputMaybe<Order_By>;
+  video_timestamp?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -6620,19 +8335,21 @@ export type Recipe_Ingredients_Min_Fields = {
   seq_num?: Maybe<Scalars['Int']>;
   text?: Maybe<Scalars['String']>;
   units?: Maybe<Scalars['String']>;
+  video_timestamp?: Maybe<Scalars['Int']>;
 };
 
 /** order by min() on columns of table "recipe_ingredients" */
 export type Recipe_Ingredients_Min_Order_By = {
-  amount?: Maybe<Order_By>;
-  comment?: Maybe<Order_By>;
-  food_id?: Maybe<Order_By>;
-  group_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
-  text?: Maybe<Order_By>;
-  units?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  comment?: InputMaybe<Order_By>;
+  food_id?: InputMaybe<Order_By>;
+  group_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  text?: InputMaybe<Order_By>;
+  units?: InputMaybe<Order_By>;
+  video_timestamp?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "recipe_ingredients" */
@@ -6648,23 +8365,25 @@ export type Recipe_Ingredients_Mutation_Response = {
 export type Recipe_Ingredients_On_Conflict = {
   constraint: Recipe_Ingredients_Constraint;
   update_columns?: Array<Recipe_Ingredients_Update_Column>;
-  where?: Maybe<Recipe_Ingredients_Bool_Exp>;
+  where?: InputMaybe<Recipe_Ingredients_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "recipe_ingredients". */
 export type Recipe_Ingredients_Order_By = {
-  amount?: Maybe<Order_By>;
-  comment?: Maybe<Order_By>;
-  food?: Maybe<Food_Order_By>;
-  food_id?: Maybe<Order_By>;
-  group_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  recipe_ingredient_food_candidates_aggregate?: Maybe<Recipe_Ingredient_Food_Candidate_Aggregate_Order_By>;
-  recipe_ingredient_group?: Maybe<Recipe_Ingredient_Groups_Order_By>;
-  seq_num?: Maybe<Order_By>;
-  text?: Maybe<Order_By>;
-  units?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  comment?: InputMaybe<Order_By>;
+  food?: InputMaybe<Food_Order_By>;
+  food_candidates_aggregate?: InputMaybe<Food_Aggregate_Order_By>;
+  food_id?: InputMaybe<Order_By>;
+  group_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  recipe_ingredient_food_candidates_aggregate?: InputMaybe<Recipe_Ingredient_Food_Candidate_Aggregate_Order_By>;
+  recipe_ingredient_group?: InputMaybe<Recipe_Ingredient_Groups_Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  text?: InputMaybe<Order_By>;
+  units?: InputMaybe<Order_By>;
+  video_timestamp?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: recipe_ingredients */
@@ -6691,20 +8410,23 @@ export enum Recipe_Ingredients_Select_Column {
   /** column name */
   Text = 'text',
   /** column name */
-  Units = 'units'
+  Units = 'units',
+  /** column name */
+  VideoTimestamp = 'video_timestamp'
 }
 
 /** input type for updating data in table "recipe_ingredients" */
 export type Recipe_Ingredients_Set_Input = {
-  amount?: Maybe<Scalars['Float']>;
-  comment?: Maybe<Scalars['String']>;
-  food_id?: Maybe<Scalars['Int']>;
-  group_id?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  seq_num?: Maybe<Scalars['Int']>;
-  text?: Maybe<Scalars['String']>;
-  units?: Maybe<Scalars['String']>;
+  amount?: InputMaybe<Scalars['Float']>;
+  comment?: InputMaybe<Scalars['String']>;
+  food_id?: InputMaybe<Scalars['Int']>;
+  group_id?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  name?: InputMaybe<Scalars['String']>;
+  seq_num?: InputMaybe<Scalars['Int']>;
+  text?: InputMaybe<Scalars['String']>;
+  units?: InputMaybe<Scalars['String']>;
+  video_timestamp?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate stddev on columns */
@@ -6715,15 +8437,17 @@ export type Recipe_Ingredients_Stddev_Fields = {
   group_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
+  video_timestamp?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev() on columns of table "recipe_ingredients" */
 export type Recipe_Ingredients_Stddev_Order_By = {
-  amount?: Maybe<Order_By>;
-  food_id?: Maybe<Order_By>;
-  group_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  food_id?: InputMaybe<Order_By>;
+  group_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  video_timestamp?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -6734,15 +8458,17 @@ export type Recipe_Ingredients_Stddev_Pop_Fields = {
   group_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
+  video_timestamp?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_pop() on columns of table "recipe_ingredients" */
 export type Recipe_Ingredients_Stddev_Pop_Order_By = {
-  amount?: Maybe<Order_By>;
-  food_id?: Maybe<Order_By>;
-  group_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  food_id?: InputMaybe<Order_By>;
+  group_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  video_timestamp?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -6753,15 +8479,17 @@ export type Recipe_Ingredients_Stddev_Samp_Fields = {
   group_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
+  video_timestamp?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_samp() on columns of table "recipe_ingredients" */
 export type Recipe_Ingredients_Stddev_Samp_Order_By = {
-  amount?: Maybe<Order_By>;
-  food_id?: Maybe<Order_By>;
-  group_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  food_id?: InputMaybe<Order_By>;
+  group_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  video_timestamp?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
@@ -6772,15 +8500,17 @@ export type Recipe_Ingredients_Sum_Fields = {
   group_id?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
   seq_num?: Maybe<Scalars['Int']>;
+  video_timestamp?: Maybe<Scalars['Int']>;
 };
 
 /** order by sum() on columns of table "recipe_ingredients" */
 export type Recipe_Ingredients_Sum_Order_By = {
-  amount?: Maybe<Order_By>;
-  food_id?: Maybe<Order_By>;
-  group_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  food_id?: InputMaybe<Order_By>;
+  group_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  video_timestamp?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "recipe_ingredients" */
@@ -6802,7 +8532,9 @@ export enum Recipe_Ingredients_Update_Column {
   /** column name */
   Text = 'text',
   /** column name */
-  Units = 'units'
+  Units = 'units',
+  /** column name */
+  VideoTimestamp = 'video_timestamp'
 }
 
 /** aggregate var_pop on columns */
@@ -6813,15 +8545,17 @@ export type Recipe_Ingredients_Var_Pop_Fields = {
   group_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
+  video_timestamp?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_pop() on columns of table "recipe_ingredients" */
 export type Recipe_Ingredients_Var_Pop_Order_By = {
-  amount?: Maybe<Order_By>;
-  food_id?: Maybe<Order_By>;
-  group_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  food_id?: InputMaybe<Order_By>;
+  group_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  video_timestamp?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
@@ -6832,15 +8566,17 @@ export type Recipe_Ingredients_Var_Samp_Fields = {
   group_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
+  video_timestamp?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_samp() on columns of table "recipe_ingredients" */
 export type Recipe_Ingredients_Var_Samp_Order_By = {
-  amount?: Maybe<Order_By>;
-  food_id?: Maybe<Order_By>;
-  group_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  food_id?: InputMaybe<Order_By>;
+  group_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  video_timestamp?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
@@ -6851,15 +8587,17 @@ export type Recipe_Ingredients_Variance_Fields = {
   group_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
+  video_timestamp?: Maybe<Scalars['Float']>;
 };
 
 /** order by variance() on columns of table "recipe_ingredients" */
 export type Recipe_Ingredients_Variance_Order_By = {
-  amount?: Maybe<Order_By>;
-  food_id?: Maybe<Order_By>;
-  group_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  amount?: InputMaybe<Order_By>;
+  food_id?: InputMaybe<Order_By>;
+  group_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
+  video_timestamp?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "recipe_list_items" */
@@ -6901,30 +8639,30 @@ export type Recipe_List_Items_Aggregate_Fields = {
 
 /** aggregate fields of "recipe_list_items" */
 export type Recipe_List_Items_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Recipe_List_Items_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<Recipe_List_Items_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "recipe_list_items" */
 export type Recipe_List_Items_Aggregate_Order_By = {
-  avg?: Maybe<Recipe_List_Items_Avg_Order_By>;
-  count?: Maybe<Order_By>;
-  max?: Maybe<Recipe_List_Items_Max_Order_By>;
-  min?: Maybe<Recipe_List_Items_Min_Order_By>;
-  stddev?: Maybe<Recipe_List_Items_Stddev_Order_By>;
-  stddev_pop?: Maybe<Recipe_List_Items_Stddev_Pop_Order_By>;
-  stddev_samp?: Maybe<Recipe_List_Items_Stddev_Samp_Order_By>;
-  sum?: Maybe<Recipe_List_Items_Sum_Order_By>;
-  var_pop?: Maybe<Recipe_List_Items_Var_Pop_Order_By>;
-  var_samp?: Maybe<Recipe_List_Items_Var_Samp_Order_By>;
-  variance?: Maybe<Recipe_List_Items_Variance_Order_By>;
+  avg?: InputMaybe<Recipe_List_Items_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Recipe_List_Items_Max_Order_By>;
+  min?: InputMaybe<Recipe_List_Items_Min_Order_By>;
+  stddev?: InputMaybe<Recipe_List_Items_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Recipe_List_Items_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Recipe_List_Items_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Recipe_List_Items_Sum_Order_By>;
+  var_pop?: InputMaybe<Recipe_List_Items_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Recipe_List_Items_Var_Samp_Order_By>;
+  variance?: InputMaybe<Recipe_List_Items_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "recipe_list_items" */
 export type Recipe_List_Items_Arr_Rel_Insert_Input = {
   data: Array<Recipe_List_Items_Insert_Input>;
   /** on conflict condition */
-  on_conflict?: Maybe<Recipe_List_Items_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_List_Items_On_Conflict>;
 };
 
 /** aggregate avg on columns */
@@ -6938,23 +8676,23 @@ export type Recipe_List_Items_Avg_Fields = {
 
 /** order by avg() on columns of table "recipe_list_items" */
 export type Recipe_List_Items_Avg_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  recipe_list_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  recipe_list_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "recipe_list_items". All fields are combined with a logical 'AND'. */
 export type Recipe_List_Items_Bool_Exp = {
-  _and?: Maybe<Array<Recipe_List_Items_Bool_Exp>>;
-  _not?: Maybe<Recipe_List_Items_Bool_Exp>;
-  _or?: Maybe<Array<Recipe_List_Items_Bool_Exp>>;
-  id?: Maybe<Int_Comparison_Exp>;
-  recipe?: Maybe<Recipes_Bool_Exp>;
-  recipe_id?: Maybe<Int_Comparison_Exp>;
-  recipe_list?: Maybe<Recipe_Lists_Bool_Exp>;
-  recipe_list_id?: Maybe<Int_Comparison_Exp>;
-  seq_num?: Maybe<Int_Comparison_Exp>;
+  _and?: InputMaybe<Array<Recipe_List_Items_Bool_Exp>>;
+  _not?: InputMaybe<Recipe_List_Items_Bool_Exp>;
+  _or?: InputMaybe<Array<Recipe_List_Items_Bool_Exp>>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  recipe?: InputMaybe<Recipes_Bool_Exp>;
+  recipe_id?: InputMaybe<Int_Comparison_Exp>;
+  recipe_list?: InputMaybe<Recipe_Lists_Bool_Exp>;
+  recipe_list_id?: InputMaybe<Int_Comparison_Exp>;
+  seq_num?: InputMaybe<Int_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "recipe_list_items" */
@@ -6965,20 +8703,20 @@ export enum Recipe_List_Items_Constraint {
 
 /** input type for incrementing numeric columns in table "recipe_list_items" */
 export type Recipe_List_Items_Inc_Input = {
-  id?: Maybe<Scalars['Int']>;
-  recipe_id?: Maybe<Scalars['Int']>;
-  recipe_list_id?: Maybe<Scalars['Int']>;
-  seq_num?: Maybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  recipe_id?: InputMaybe<Scalars['Int']>;
+  recipe_list_id?: InputMaybe<Scalars['Int']>;
+  seq_num?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "recipe_list_items" */
 export type Recipe_List_Items_Insert_Input = {
-  id?: Maybe<Scalars['Int']>;
-  recipe?: Maybe<Recipes_Obj_Rel_Insert_Input>;
-  recipe_id?: Maybe<Scalars['Int']>;
-  recipe_list?: Maybe<Recipe_Lists_Obj_Rel_Insert_Input>;
-  recipe_list_id?: Maybe<Scalars['Int']>;
-  seq_num?: Maybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  recipe?: InputMaybe<Recipes_Obj_Rel_Insert_Input>;
+  recipe_id?: InputMaybe<Scalars['Int']>;
+  recipe_list?: InputMaybe<Recipe_Lists_Obj_Rel_Insert_Input>;
+  recipe_list_id?: InputMaybe<Scalars['Int']>;
+  seq_num?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate max on columns */
@@ -6992,10 +8730,10 @@ export type Recipe_List_Items_Max_Fields = {
 
 /** order by max() on columns of table "recipe_list_items" */
 export type Recipe_List_Items_Max_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  recipe_list_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  recipe_list_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -7009,10 +8747,10 @@ export type Recipe_List_Items_Min_Fields = {
 
 /** order by min() on columns of table "recipe_list_items" */
 export type Recipe_List_Items_Min_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  recipe_list_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  recipe_list_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "recipe_list_items" */
@@ -7028,17 +8766,17 @@ export type Recipe_List_Items_Mutation_Response = {
 export type Recipe_List_Items_On_Conflict = {
   constraint: Recipe_List_Items_Constraint;
   update_columns?: Array<Recipe_List_Items_Update_Column>;
-  where?: Maybe<Recipe_List_Items_Bool_Exp>;
+  where?: InputMaybe<Recipe_List_Items_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "recipe_list_items". */
 export type Recipe_List_Items_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe?: Maybe<Recipes_Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  recipe_list?: Maybe<Recipe_Lists_Order_By>;
-  recipe_list_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe?: InputMaybe<Recipes_Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  recipe_list?: InputMaybe<Recipe_Lists_Order_By>;
+  recipe_list_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: recipe_list_items */
@@ -7060,10 +8798,10 @@ export enum Recipe_List_Items_Select_Column {
 
 /** input type for updating data in table "recipe_list_items" */
 export type Recipe_List_Items_Set_Input = {
-  id?: Maybe<Scalars['Int']>;
-  recipe_id?: Maybe<Scalars['Int']>;
-  recipe_list_id?: Maybe<Scalars['Int']>;
-  seq_num?: Maybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  recipe_id?: InputMaybe<Scalars['Int']>;
+  recipe_list_id?: InputMaybe<Scalars['Int']>;
+  seq_num?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate stddev on columns */
@@ -7077,10 +8815,10 @@ export type Recipe_List_Items_Stddev_Fields = {
 
 /** order by stddev() on columns of table "recipe_list_items" */
 export type Recipe_List_Items_Stddev_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  recipe_list_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  recipe_list_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -7094,10 +8832,10 @@ export type Recipe_List_Items_Stddev_Pop_Fields = {
 
 /** order by stddev_pop() on columns of table "recipe_list_items" */
 export type Recipe_List_Items_Stddev_Pop_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  recipe_list_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  recipe_list_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -7111,10 +8849,10 @@ export type Recipe_List_Items_Stddev_Samp_Fields = {
 
 /** order by stddev_samp() on columns of table "recipe_list_items" */
 export type Recipe_List_Items_Stddev_Samp_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  recipe_list_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  recipe_list_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
@@ -7128,10 +8866,10 @@ export type Recipe_List_Items_Sum_Fields = {
 
 /** order by sum() on columns of table "recipe_list_items" */
 export type Recipe_List_Items_Sum_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  recipe_list_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  recipe_list_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "recipe_list_items" */
@@ -7157,10 +8895,10 @@ export type Recipe_List_Items_Var_Pop_Fields = {
 
 /** order by var_pop() on columns of table "recipe_list_items" */
 export type Recipe_List_Items_Var_Pop_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  recipe_list_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  recipe_list_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
@@ -7174,10 +8912,10 @@ export type Recipe_List_Items_Var_Samp_Fields = {
 
 /** order by var_samp() on columns of table "recipe_list_items" */
 export type Recipe_List_Items_Var_Samp_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  recipe_list_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  recipe_list_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
@@ -7191,10 +8929,10 @@ export type Recipe_List_Items_Variance_Fields = {
 
 /** order by variance() on columns of table "recipe_list_items" */
 export type Recipe_List_Items_Variance_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  recipe_list_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  recipe_list_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "recipe_lists" */
@@ -7206,27 +8944,27 @@ export type Recipe_Lists = {
   recipe_list_items: Array<Recipe_List_Items>;
   /** An aggregate relationship */
   recipe_list_items_aggregate: Recipe_List_Items_Aggregate;
-  user_id: Scalars['Int'];
+  user_id: Scalars['uuid'];
 };
 
 
 /** columns and relationships of "recipe_lists" */
 export type Recipe_ListsRecipe_List_ItemsArgs = {
-  distinct_on?: Maybe<Array<Recipe_List_Items_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_List_Items_Order_By>>;
-  where?: Maybe<Recipe_List_Items_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_List_Items_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_List_Items_Order_By>>;
+  where?: InputMaybe<Recipe_List_Items_Bool_Exp>;
 };
 
 
 /** columns and relationships of "recipe_lists" */
 export type Recipe_ListsRecipe_List_Items_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_List_Items_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_List_Items_Order_By>>;
-  where?: Maybe<Recipe_List_Items_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_List_Items_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_List_Items_Order_By>>;
+  where?: InputMaybe<Recipe_List_Items_Bool_Exp>;
 };
 
 /** aggregated selection of "recipe_lists" */
@@ -7255,26 +8993,25 @@ export type Recipe_Lists_Aggregate_Fields = {
 
 /** aggregate fields of "recipe_lists" */
 export type Recipe_Lists_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Recipe_Lists_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<Recipe_Lists_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** aggregate avg on columns */
 export type Recipe_Lists_Avg_Fields = {
   __typename?: 'recipe_lists_avg_fields';
   id?: Maybe<Scalars['Float']>;
-  user_id?: Maybe<Scalars['Float']>;
 };
 
 /** Boolean expression to filter rows from the table "recipe_lists". All fields are combined with a logical 'AND'. */
 export type Recipe_Lists_Bool_Exp = {
-  _and?: Maybe<Array<Recipe_Lists_Bool_Exp>>;
-  _not?: Maybe<Recipe_Lists_Bool_Exp>;
-  _or?: Maybe<Array<Recipe_Lists_Bool_Exp>>;
-  id?: Maybe<Int_Comparison_Exp>;
-  name?: Maybe<String_Comparison_Exp>;
-  recipe_list_items?: Maybe<Recipe_List_Items_Bool_Exp>;
-  user_id?: Maybe<Int_Comparison_Exp>;
+  _and?: InputMaybe<Array<Recipe_Lists_Bool_Exp>>;
+  _not?: InputMaybe<Recipe_Lists_Bool_Exp>;
+  _or?: InputMaybe<Array<Recipe_Lists_Bool_Exp>>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  name?: InputMaybe<String_Comparison_Exp>;
+  recipe_list_items?: InputMaybe<Recipe_List_Items_Bool_Exp>;
+  user_id?: InputMaybe<Uuid_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "recipe_lists" */
@@ -7285,16 +9022,15 @@ export enum Recipe_Lists_Constraint {
 
 /** input type for incrementing numeric columns in table "recipe_lists" */
 export type Recipe_Lists_Inc_Input = {
-  id?: Maybe<Scalars['Int']>;
-  user_id?: Maybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "recipe_lists" */
 export type Recipe_Lists_Insert_Input = {
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  recipe_list_items?: Maybe<Recipe_List_Items_Arr_Rel_Insert_Input>;
-  user_id?: Maybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  name?: InputMaybe<Scalars['String']>;
+  recipe_list_items?: InputMaybe<Recipe_List_Items_Arr_Rel_Insert_Input>;
+  user_id?: InputMaybe<Scalars['uuid']>;
 };
 
 /** aggregate max on columns */
@@ -7302,7 +9038,7 @@ export type Recipe_Lists_Max_Fields = {
   __typename?: 'recipe_lists_max_fields';
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
-  user_id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['uuid']>;
 };
 
 /** aggregate min on columns */
@@ -7310,7 +9046,7 @@ export type Recipe_Lists_Min_Fields = {
   __typename?: 'recipe_lists_min_fields';
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
-  user_id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['uuid']>;
 };
 
 /** response of any mutation on the table "recipe_lists" */
@@ -7326,22 +9062,22 @@ export type Recipe_Lists_Mutation_Response = {
 export type Recipe_Lists_Obj_Rel_Insert_Input = {
   data: Recipe_Lists_Insert_Input;
   /** on conflict condition */
-  on_conflict?: Maybe<Recipe_Lists_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_Lists_On_Conflict>;
 };
 
 /** on conflict condition type for table "recipe_lists" */
 export type Recipe_Lists_On_Conflict = {
   constraint: Recipe_Lists_Constraint;
   update_columns?: Array<Recipe_Lists_Update_Column>;
-  where?: Maybe<Recipe_Lists_Bool_Exp>;
+  where?: InputMaybe<Recipe_Lists_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "recipe_lists". */
 export type Recipe_Lists_Order_By = {
-  id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  recipe_list_items_aggregate?: Maybe<Recipe_List_Items_Aggregate_Order_By>;
-  user_id?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  recipe_list_items_aggregate?: InputMaybe<Recipe_List_Items_Aggregate_Order_By>;
+  user_id?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: recipe_lists */
@@ -7361,37 +9097,33 @@ export enum Recipe_Lists_Select_Column {
 
 /** input type for updating data in table "recipe_lists" */
 export type Recipe_Lists_Set_Input = {
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  user_id?: Maybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  name?: InputMaybe<Scalars['String']>;
+  user_id?: InputMaybe<Scalars['uuid']>;
 };
 
 /** aggregate stddev on columns */
 export type Recipe_Lists_Stddev_Fields = {
   __typename?: 'recipe_lists_stddev_fields';
   id?: Maybe<Scalars['Float']>;
-  user_id?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Recipe_Lists_Stddev_Pop_Fields = {
   __typename?: 'recipe_lists_stddev_pop_fields';
   id?: Maybe<Scalars['Float']>;
-  user_id?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Recipe_Lists_Stddev_Samp_Fields = {
   __typename?: 'recipe_lists_stddev_samp_fields';
   id?: Maybe<Scalars['Float']>;
-  user_id?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate sum on columns */
 export type Recipe_Lists_Sum_Fields = {
   __typename?: 'recipe_lists_sum_fields';
   id?: Maybe<Scalars['Int']>;
-  user_id?: Maybe<Scalars['Int']>;
 };
 
 /** update columns of table "recipe_lists" */
@@ -7408,21 +9140,18 @@ export enum Recipe_Lists_Update_Column {
 export type Recipe_Lists_Var_Pop_Fields = {
   __typename?: 'recipe_lists_var_pop_fields';
   id?: Maybe<Scalars['Float']>;
-  user_id?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate var_samp on columns */
 export type Recipe_Lists_Var_Samp_Fields = {
   __typename?: 'recipe_lists_var_samp_fields';
   id?: Maybe<Scalars['Float']>;
-  user_id?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate variance on columns */
 export type Recipe_Lists_Variance_Fields = {
   __typename?: 'recipe_lists_variance_fields';
   id?: Maybe<Scalars['Float']>;
-  user_id?: Maybe<Scalars['Float']>;
 };
 
 /** columns and relationships of "recipe_tags" */
@@ -7460,30 +9189,30 @@ export type Recipe_Tags_Aggregate_Fields = {
 
 /** aggregate fields of "recipe_tags" */
 export type Recipe_Tags_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Recipe_Tags_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<Recipe_Tags_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "recipe_tags" */
 export type Recipe_Tags_Aggregate_Order_By = {
-  avg?: Maybe<Recipe_Tags_Avg_Order_By>;
-  count?: Maybe<Order_By>;
-  max?: Maybe<Recipe_Tags_Max_Order_By>;
-  min?: Maybe<Recipe_Tags_Min_Order_By>;
-  stddev?: Maybe<Recipe_Tags_Stddev_Order_By>;
-  stddev_pop?: Maybe<Recipe_Tags_Stddev_Pop_Order_By>;
-  stddev_samp?: Maybe<Recipe_Tags_Stddev_Samp_Order_By>;
-  sum?: Maybe<Recipe_Tags_Sum_Order_By>;
-  var_pop?: Maybe<Recipe_Tags_Var_Pop_Order_By>;
-  var_samp?: Maybe<Recipe_Tags_Var_Samp_Order_By>;
-  variance?: Maybe<Recipe_Tags_Variance_Order_By>;
+  avg?: InputMaybe<Recipe_Tags_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Recipe_Tags_Max_Order_By>;
+  min?: InputMaybe<Recipe_Tags_Min_Order_By>;
+  stddev?: InputMaybe<Recipe_Tags_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Recipe_Tags_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Recipe_Tags_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Recipe_Tags_Sum_Order_By>;
+  var_pop?: InputMaybe<Recipe_Tags_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Recipe_Tags_Var_Samp_Order_By>;
+  variance?: InputMaybe<Recipe_Tags_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "recipe_tags" */
 export type Recipe_Tags_Arr_Rel_Insert_Input = {
   data: Array<Recipe_Tags_Insert_Input>;
   /** on conflict condition */
-  on_conflict?: Maybe<Recipe_Tags_On_Conflict>;
+  on_conflict?: InputMaybe<Recipe_Tags_On_Conflict>;
 };
 
 /** aggregate avg on columns */
@@ -7496,20 +9225,20 @@ export type Recipe_Tags_Avg_Fields = {
 
 /** order by avg() on columns of table "recipe_tags" */
 export type Recipe_Tags_Avg_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "recipe_tags". All fields are combined with a logical 'AND'. */
 export type Recipe_Tags_Bool_Exp = {
-  _and?: Maybe<Array<Recipe_Tags_Bool_Exp>>;
-  _not?: Maybe<Recipe_Tags_Bool_Exp>;
-  _or?: Maybe<Array<Recipe_Tags_Bool_Exp>>;
-  id?: Maybe<Int_Comparison_Exp>;
-  name?: Maybe<String_Comparison_Exp>;
-  recipe_id?: Maybe<Int_Comparison_Exp>;
-  seq_num?: Maybe<Int_Comparison_Exp>;
+  _and?: InputMaybe<Array<Recipe_Tags_Bool_Exp>>;
+  _not?: InputMaybe<Recipe_Tags_Bool_Exp>;
+  _or?: InputMaybe<Array<Recipe_Tags_Bool_Exp>>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  name?: InputMaybe<String_Comparison_Exp>;
+  recipe_id?: InputMaybe<Int_Comparison_Exp>;
+  seq_num?: InputMaybe<Int_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "recipe_tags" */
@@ -7522,17 +9251,17 @@ export enum Recipe_Tags_Constraint {
 
 /** input type for incrementing numeric columns in table "recipe_tags" */
 export type Recipe_Tags_Inc_Input = {
-  id?: Maybe<Scalars['Int']>;
-  recipe_id?: Maybe<Scalars['Int']>;
-  seq_num?: Maybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  recipe_id?: InputMaybe<Scalars['Int']>;
+  seq_num?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "recipe_tags" */
 export type Recipe_Tags_Insert_Input = {
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  recipe_id?: Maybe<Scalars['Int']>;
-  seq_num?: Maybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  name?: InputMaybe<Scalars['String']>;
+  recipe_id?: InputMaybe<Scalars['Int']>;
+  seq_num?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate max on columns */
@@ -7546,10 +9275,10 @@ export type Recipe_Tags_Max_Fields = {
 
 /** order by max() on columns of table "recipe_tags" */
 export type Recipe_Tags_Max_Order_By = {
-  id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -7563,10 +9292,10 @@ export type Recipe_Tags_Min_Fields = {
 
 /** order by min() on columns of table "recipe_tags" */
 export type Recipe_Tags_Min_Order_By = {
-  id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "recipe_tags" */
@@ -7582,15 +9311,15 @@ export type Recipe_Tags_Mutation_Response = {
 export type Recipe_Tags_On_Conflict = {
   constraint: Recipe_Tags_Constraint;
   update_columns?: Array<Recipe_Tags_Update_Column>;
-  where?: Maybe<Recipe_Tags_Bool_Exp>;
+  where?: InputMaybe<Recipe_Tags_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "recipe_tags". */
 export type Recipe_Tags_Order_By = {
-  id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: recipe_tags */
@@ -7612,10 +9341,10 @@ export enum Recipe_Tags_Select_Column {
 
 /** input type for updating data in table "recipe_tags" */
 export type Recipe_Tags_Set_Input = {
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  recipe_id?: Maybe<Scalars['Int']>;
-  seq_num?: Maybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  name?: InputMaybe<Scalars['String']>;
+  recipe_id?: InputMaybe<Scalars['Int']>;
+  seq_num?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate stddev on columns */
@@ -7628,9 +9357,9 @@ export type Recipe_Tags_Stddev_Fields = {
 
 /** order by stddev() on columns of table "recipe_tags" */
 export type Recipe_Tags_Stddev_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -7643,9 +9372,9 @@ export type Recipe_Tags_Stddev_Pop_Fields = {
 
 /** order by stddev_pop() on columns of table "recipe_tags" */
 export type Recipe_Tags_Stddev_Pop_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -7658,9 +9387,9 @@ export type Recipe_Tags_Stddev_Samp_Fields = {
 
 /** order by stddev_samp() on columns of table "recipe_tags" */
 export type Recipe_Tags_Stddev_Samp_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
@@ -7673,9 +9402,9 @@ export type Recipe_Tags_Sum_Fields = {
 
 /** order by sum() on columns of table "recipe_tags" */
 export type Recipe_Tags_Sum_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "recipe_tags" */
@@ -7700,9 +9429,9 @@ export type Recipe_Tags_Var_Pop_Fields = {
 
 /** order by var_pop() on columns of table "recipe_tags" */
 export type Recipe_Tags_Var_Pop_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
@@ -7715,9 +9444,9 @@ export type Recipe_Tags_Var_Samp_Fields = {
 
 /** order by var_samp() on columns of table "recipe_tags" */
 export type Recipe_Tags_Var_Samp_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
@@ -7730,9 +9459,9 @@ export type Recipe_Tags_Variance_Fields = {
 
 /** order by variance() on columns of table "recipe_tags" */
 export type Recipe_Tags_Variance_Order_By = {
-  id?: Maybe<Order_By>;
-  recipe_id?: Maybe<Order_By>;
-  seq_num?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipe_id?: InputMaybe<Order_By>;
+  seq_num?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "recipes" */
@@ -7761,93 +9490,94 @@ export type Recipes = {
   recipe_tags_aggregate: Recipe_Tags_Aggregate;
   source: Scalars['String'];
   updated_at: Scalars['timestamptz'];
+  video?: Maybe<Scalars['String']>;
   visible: Scalars['Boolean'];
 };
 
 
 /** columns and relationships of "recipes" */
 export type RecipesExtraction_MetadataArgs = {
-  path?: Maybe<Scalars['String']>;
+  path?: InputMaybe<Scalars['String']>;
 };
 
 
 /** columns and relationships of "recipes" */
 export type RecipesRecipe_Direction_DurationsArgs = {
-  distinct_on?: Maybe<Array<Recipe_Direction_Durations_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Direction_Durations_Order_By>>;
-  where?: Maybe<Recipe_Direction_Durations_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Direction_Durations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Direction_Durations_Order_By>>;
+  where?: InputMaybe<Recipe_Direction_Durations_Bool_Exp>;
 };
 
 
 /** columns and relationships of "recipes" */
 export type RecipesRecipe_Direction_Durations_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_Direction_Durations_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Direction_Durations_Order_By>>;
-  where?: Maybe<Recipe_Direction_Durations_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Direction_Durations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Direction_Durations_Order_By>>;
+  where?: InputMaybe<Recipe_Direction_Durations_Bool_Exp>;
 };
 
 
 /** columns and relationships of "recipes" */
 export type RecipesRecipe_DirectionsArgs = {
-  distinct_on?: Maybe<Array<Recipe_Directions_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Directions_Order_By>>;
-  where?: Maybe<Recipe_Directions_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Directions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Directions_Order_By>>;
+  where?: InputMaybe<Recipe_Directions_Bool_Exp>;
 };
 
 
 /** columns and relationships of "recipes" */
 export type RecipesRecipe_Directions_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_Directions_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Directions_Order_By>>;
-  where?: Maybe<Recipe_Directions_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Directions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Directions_Order_By>>;
+  where?: InputMaybe<Recipe_Directions_Bool_Exp>;
 };
 
 
 /** columns and relationships of "recipes" */
 export type RecipesRecipe_Ingredient_GroupsArgs = {
-  distinct_on?: Maybe<Array<Recipe_Ingredient_Groups_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Ingredient_Groups_Order_By>>;
-  where?: Maybe<Recipe_Ingredient_Groups_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Ingredient_Groups_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Ingredient_Groups_Order_By>>;
+  where?: InputMaybe<Recipe_Ingredient_Groups_Bool_Exp>;
 };
 
 
 /** columns and relationships of "recipes" */
 export type RecipesRecipe_Ingredient_Groups_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_Ingredient_Groups_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Ingredient_Groups_Order_By>>;
-  where?: Maybe<Recipe_Ingredient_Groups_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Ingredient_Groups_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Ingredient_Groups_Order_By>>;
+  where?: InputMaybe<Recipe_Ingredient_Groups_Bool_Exp>;
 };
 
 
 /** columns and relationships of "recipes" */
 export type RecipesRecipe_TagsArgs = {
-  distinct_on?: Maybe<Array<Recipe_Tags_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Tags_Order_By>>;
-  where?: Maybe<Recipe_Tags_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Tags_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Tags_Order_By>>;
+  where?: InputMaybe<Recipe_Tags_Bool_Exp>;
 };
 
 
 /** columns and relationships of "recipes" */
 export type RecipesRecipe_Tags_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_Tags_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Tags_Order_By>>;
-  where?: Maybe<Recipe_Tags_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Tags_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Tags_Order_By>>;
+  where?: InputMaybe<Recipe_Tags_Bool_Exp>;
 };
 
 /** aggregated selection of "recipes" */
@@ -7876,13 +9606,13 @@ export type Recipes_Aggregate_Fields = {
 
 /** aggregate fields of "recipes" */
 export type Recipes_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Recipes_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<Recipes_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** append existing jsonb value of filtered columns with new jsonb value */
 export type Recipes_Append_Input = {
-  extraction_metadata?: Maybe<Scalars['jsonb']>;
+  extraction_metadata?: InputMaybe<Scalars['jsonb']>;
 };
 
 /** aggregate avg on columns */
@@ -7893,21 +9623,22 @@ export type Recipes_Avg_Fields = {
 
 /** Boolean expression to filter rows from the table "recipes". All fields are combined with a logical 'AND'. */
 export type Recipes_Bool_Exp = {
-  _and?: Maybe<Array<Recipes_Bool_Exp>>;
-  _not?: Maybe<Recipes_Bool_Exp>;
-  _or?: Maybe<Array<Recipes_Bool_Exp>>;
-  created_at?: Maybe<Timestamptz_Comparison_Exp>;
-  extraction_metadata?: Maybe<Jsonb_Comparison_Exp>;
-  id?: Maybe<Int_Comparison_Exp>;
-  image?: Maybe<String_Comparison_Exp>;
-  name?: Maybe<String_Comparison_Exp>;
-  recipe_direction_durations?: Maybe<Recipe_Direction_Durations_Bool_Exp>;
-  recipe_directions?: Maybe<Recipe_Directions_Bool_Exp>;
-  recipe_ingredient_groups?: Maybe<Recipe_Ingredient_Groups_Bool_Exp>;
-  recipe_tags?: Maybe<Recipe_Tags_Bool_Exp>;
-  source?: Maybe<String_Comparison_Exp>;
-  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
-  visible?: Maybe<Boolean_Comparison_Exp>;
+  _and?: InputMaybe<Array<Recipes_Bool_Exp>>;
+  _not?: InputMaybe<Recipes_Bool_Exp>;
+  _or?: InputMaybe<Array<Recipes_Bool_Exp>>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  extraction_metadata?: InputMaybe<Jsonb_Comparison_Exp>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  image?: InputMaybe<String_Comparison_Exp>;
+  name?: InputMaybe<String_Comparison_Exp>;
+  recipe_direction_durations?: InputMaybe<Recipe_Direction_Durations_Bool_Exp>;
+  recipe_directions?: InputMaybe<Recipe_Directions_Bool_Exp>;
+  recipe_ingredient_groups?: InputMaybe<Recipe_Ingredient_Groups_Bool_Exp>;
+  recipe_tags?: InputMaybe<Recipe_Tags_Bool_Exp>;
+  source?: InputMaybe<String_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  video?: InputMaybe<String_Comparison_Exp>;
+  visible?: InputMaybe<Boolean_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "recipes" */
@@ -7920,38 +9651,39 @@ export enum Recipes_Constraint {
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
 export type Recipes_Delete_At_Path_Input = {
-  extraction_metadata?: Maybe<Array<Scalars['String']>>;
+  extraction_metadata?: InputMaybe<Array<Scalars['String']>>;
 };
 
 /** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
 export type Recipes_Delete_Elem_Input = {
-  extraction_metadata?: Maybe<Scalars['Int']>;
+  extraction_metadata?: InputMaybe<Scalars['Int']>;
 };
 
 /** delete key/value pair or string element. key/value pairs are matched based on their key value */
 export type Recipes_Delete_Key_Input = {
-  extraction_metadata?: Maybe<Scalars['String']>;
+  extraction_metadata?: InputMaybe<Scalars['String']>;
 };
 
 /** input type for incrementing numeric columns in table "recipes" */
 export type Recipes_Inc_Input = {
-  id?: Maybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "recipes" */
 export type Recipes_Insert_Input = {
-  created_at?: Maybe<Scalars['timestamptz']>;
-  extraction_metadata?: Maybe<Scalars['jsonb']>;
-  id?: Maybe<Scalars['Int']>;
-  image?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  recipe_direction_durations?: Maybe<Recipe_Direction_Durations_Arr_Rel_Insert_Input>;
-  recipe_directions?: Maybe<Recipe_Directions_Arr_Rel_Insert_Input>;
-  recipe_ingredient_groups?: Maybe<Recipe_Ingredient_Groups_Arr_Rel_Insert_Input>;
-  recipe_tags?: Maybe<Recipe_Tags_Arr_Rel_Insert_Input>;
-  source?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-  visible?: Maybe<Scalars['Boolean']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  extraction_metadata?: InputMaybe<Scalars['jsonb']>;
+  id?: InputMaybe<Scalars['Int']>;
+  image?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  recipe_direction_durations?: InputMaybe<Recipe_Direction_Durations_Arr_Rel_Insert_Input>;
+  recipe_directions?: InputMaybe<Recipe_Directions_Arr_Rel_Insert_Input>;
+  recipe_ingredient_groups?: InputMaybe<Recipe_Ingredient_Groups_Arr_Rel_Insert_Input>;
+  recipe_tags?: InputMaybe<Recipe_Tags_Arr_Rel_Insert_Input>;
+  source?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+  video?: InputMaybe<Scalars['String']>;
+  visible?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** aggregate max on columns */
@@ -7963,6 +9695,7 @@ export type Recipes_Max_Fields = {
   name?: Maybe<Scalars['String']>;
   source?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
+  video?: Maybe<Scalars['String']>;
 };
 
 /** aggregate min on columns */
@@ -7974,6 +9707,7 @@ export type Recipes_Min_Fields = {
   name?: Maybe<Scalars['String']>;
   source?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
+  video?: Maybe<Scalars['String']>;
 };
 
 /** response of any mutation on the table "recipes" */
@@ -7989,30 +9723,31 @@ export type Recipes_Mutation_Response = {
 export type Recipes_Obj_Rel_Insert_Input = {
   data: Recipes_Insert_Input;
   /** on conflict condition */
-  on_conflict?: Maybe<Recipes_On_Conflict>;
+  on_conflict?: InputMaybe<Recipes_On_Conflict>;
 };
 
 /** on conflict condition type for table "recipes" */
 export type Recipes_On_Conflict = {
   constraint: Recipes_Constraint;
   update_columns?: Array<Recipes_Update_Column>;
-  where?: Maybe<Recipes_Bool_Exp>;
+  where?: InputMaybe<Recipes_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "recipes". */
 export type Recipes_Order_By = {
-  created_at?: Maybe<Order_By>;
-  extraction_metadata?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  image?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  recipe_direction_durations_aggregate?: Maybe<Recipe_Direction_Durations_Aggregate_Order_By>;
-  recipe_directions_aggregate?: Maybe<Recipe_Directions_Aggregate_Order_By>;
-  recipe_ingredient_groups_aggregate?: Maybe<Recipe_Ingredient_Groups_Aggregate_Order_By>;
-  recipe_tags_aggregate?: Maybe<Recipe_Tags_Aggregate_Order_By>;
-  source?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
-  visible?: Maybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  extraction_metadata?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  image?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  recipe_direction_durations_aggregate?: InputMaybe<Recipe_Direction_Durations_Aggregate_Order_By>;
+  recipe_directions_aggregate?: InputMaybe<Recipe_Directions_Aggregate_Order_By>;
+  recipe_ingredient_groups_aggregate?: InputMaybe<Recipe_Ingredient_Groups_Aggregate_Order_By>;
+  recipe_tags_aggregate?: InputMaybe<Recipe_Tags_Aggregate_Order_By>;
+  source?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  video?: InputMaybe<Order_By>;
+  visible?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: recipes */
@@ -8022,7 +9757,7 @@ export type Recipes_Pk_Columns_Input = {
 
 /** prepend existing jsonb value of filtered columns with new jsonb value */
 export type Recipes_Prepend_Input = {
-  extraction_metadata?: Maybe<Scalars['jsonb']>;
+  extraction_metadata?: InputMaybe<Scalars['jsonb']>;
 };
 
 /** select columns of table "recipes" */
@@ -8042,19 +9777,22 @@ export enum Recipes_Select_Column {
   /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
+  Video = 'video',
+  /** column name */
   Visible = 'visible'
 }
 
 /** input type for updating data in table "recipes" */
 export type Recipes_Set_Input = {
-  created_at?: Maybe<Scalars['timestamptz']>;
-  extraction_metadata?: Maybe<Scalars['jsonb']>;
-  id?: Maybe<Scalars['Int']>;
-  image?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  source?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-  visible?: Maybe<Scalars['Boolean']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  extraction_metadata?: InputMaybe<Scalars['jsonb']>;
+  id?: InputMaybe<Scalars['Int']>;
+  image?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  source?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+  video?: InputMaybe<Scalars['String']>;
+  visible?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** aggregate stddev on columns */
@@ -8098,6 +9836,8 @@ export enum Recipes_Update_Column {
   /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
+  Video = 'video',
+  /** column name */
   Visible = 'visible'
 }
 
@@ -8120,15 +9860,51 @@ export type Recipes_Variance_Fields = {
 };
 
 export type Search_Foods_Args = {
-  search?: Maybe<Scalars['String']>;
+  search?: InputMaybe<Scalars['String']>;
 };
 
 export type Search_Recipes_Args = {
-  search?: Maybe<Scalars['String']>;
+  search?: InputMaybe<Scalars['String']>;
 };
 
 export type Subscription_Root = {
   __typename?: 'subscription_root';
+  /** fetch data from the table: "auth.providers" using primary key columns */
+  authProvider?: Maybe<AuthProviders>;
+  /** fetch data from the table: "auth.provider_requests" using primary key columns */
+  authProviderRequest?: Maybe<AuthProviderRequests>;
+  /** fetch data from the table: "auth.provider_requests" */
+  authProviderRequests: Array<AuthProviderRequests>;
+  /** fetch aggregated fields from the table: "auth.provider_requests" */
+  authProviderRequestsAggregate: AuthProviderRequests_Aggregate;
+  /** fetch data from the table: "auth.providers" */
+  authProviders: Array<AuthProviders>;
+  /** fetch aggregated fields from the table: "auth.providers" */
+  authProvidersAggregate: AuthProviders_Aggregate;
+  /** fetch data from the table: "auth.refresh_tokens" using primary key columns */
+  authRefreshToken?: Maybe<AuthRefreshTokens>;
+  /** fetch data from the table: "auth.refresh_tokens" */
+  authRefreshTokens: Array<AuthRefreshTokens>;
+  /** fetch aggregated fields from the table: "auth.refresh_tokens" */
+  authRefreshTokensAggregate: AuthRefreshTokens_Aggregate;
+  /** fetch data from the table: "auth.roles" using primary key columns */
+  authRole?: Maybe<AuthRoles>;
+  /** fetch data from the table: "auth.roles" */
+  authRoles: Array<AuthRoles>;
+  /** fetch aggregated fields from the table: "auth.roles" */
+  authRolesAggregate: AuthRoles_Aggregate;
+  /** fetch data from the table: "auth.user_providers" using primary key columns */
+  authUserProvider?: Maybe<AuthUserProviders>;
+  /** fetch data from the table: "auth.user_providers" */
+  authUserProviders: Array<AuthUserProviders>;
+  /** fetch aggregated fields from the table: "auth.user_providers" */
+  authUserProvidersAggregate: AuthUserProviders_Aggregate;
+  /** fetch data from the table: "auth.user_roles" using primary key columns */
+  authUserRole?: Maybe<AuthUserRoles>;
+  /** fetch data from the table: "auth.user_roles" */
+  authUserRoles: Array<AuthUserRoles>;
+  /** fetch aggregated fields from the table: "auth.user_roles" */
+  authUserRolesAggregate: AuthUserRoles_Aggregate;
   /** fetch data from the table: "food" */
   food: Array<Food>;
   /** fetch aggregated fields from the table: "food" */
@@ -8251,48 +10027,192 @@ export type Subscription_Root = {
   search_recipes: Array<Recipes>;
   /** execute function "search_recipes" and query aggregates on result of table type "recipes" */
   search_recipes_aggregate: Recipes_Aggregate;
+  /** fetch data from the table: "auth.users" using primary key columns */
+  user?: Maybe<Users>;
+  /** fetch aggregated fields from the table: "auth.users" */
+  userAggregate: Users_Aggregate;
   /** fetch data from the table: "user_config" */
   user_config: Array<User_Config>;
   /** fetch aggregated fields from the table: "user_config" */
   user_config_aggregate: User_Config_Aggregate;
   /** fetch data from the table: "user_config" using primary key columns */
   user_config_by_pk?: Maybe<User_Config>;
+  /** fetch data from the table: "auth.users" */
+  users: Array<Users>;
+};
+
+
+export type Subscription_RootAuthProviderArgs = {
+  id: Scalars['String'];
+};
+
+
+export type Subscription_RootAuthProviderRequestArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootAuthProviderRequestsArgs = {
+  distinct_on?: InputMaybe<Array<AuthProviderRequests_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthProviderRequests_Order_By>>;
+  where?: InputMaybe<AuthProviderRequests_Bool_Exp>;
+};
+
+
+export type Subscription_RootAuthProviderRequestsAggregateArgs = {
+  distinct_on?: InputMaybe<Array<AuthProviderRequests_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthProviderRequests_Order_By>>;
+  where?: InputMaybe<AuthProviderRequests_Bool_Exp>;
+};
+
+
+export type Subscription_RootAuthProvidersArgs = {
+  distinct_on?: InputMaybe<Array<AuthProviders_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthProviders_Order_By>>;
+  where?: InputMaybe<AuthProviders_Bool_Exp>;
+};
+
+
+export type Subscription_RootAuthProvidersAggregateArgs = {
+  distinct_on?: InputMaybe<Array<AuthProviders_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthProviders_Order_By>>;
+  where?: InputMaybe<AuthProviders_Bool_Exp>;
+};
+
+
+export type Subscription_RootAuthRefreshTokenArgs = {
+  refreshToken: Scalars['uuid'];
+};
+
+
+export type Subscription_RootAuthRefreshTokensArgs = {
+  distinct_on?: InputMaybe<Array<AuthRefreshTokens_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthRefreshTokens_Order_By>>;
+  where?: InputMaybe<AuthRefreshTokens_Bool_Exp>;
+};
+
+
+export type Subscription_RootAuthRefreshTokensAggregateArgs = {
+  distinct_on?: InputMaybe<Array<AuthRefreshTokens_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthRefreshTokens_Order_By>>;
+  where?: InputMaybe<AuthRefreshTokens_Bool_Exp>;
+};
+
+
+export type Subscription_RootAuthRoleArgs = {
+  role: Scalars['String'];
+};
+
+
+export type Subscription_RootAuthRolesArgs = {
+  distinct_on?: InputMaybe<Array<AuthRoles_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthRoles_Order_By>>;
+  where?: InputMaybe<AuthRoles_Bool_Exp>;
+};
+
+
+export type Subscription_RootAuthRolesAggregateArgs = {
+  distinct_on?: InputMaybe<Array<AuthRoles_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthRoles_Order_By>>;
+  where?: InputMaybe<AuthRoles_Bool_Exp>;
+};
+
+
+export type Subscription_RootAuthUserProviderArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootAuthUserProvidersArgs = {
+  distinct_on?: InputMaybe<Array<AuthUserProviders_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthUserProviders_Order_By>>;
+  where?: InputMaybe<AuthUserProviders_Bool_Exp>;
+};
+
+
+export type Subscription_RootAuthUserProvidersAggregateArgs = {
+  distinct_on?: InputMaybe<Array<AuthUserProviders_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthUserProviders_Order_By>>;
+  where?: InputMaybe<AuthUserProviders_Bool_Exp>;
+};
+
+
+export type Subscription_RootAuthUserRoleArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootAuthUserRolesArgs = {
+  distinct_on?: InputMaybe<Array<AuthUserRoles_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthUserRoles_Order_By>>;
+  where?: InputMaybe<AuthUserRoles_Bool_Exp>;
+};
+
+
+export type Subscription_RootAuthUserRolesAggregateArgs = {
+  distinct_on?: InputMaybe<Array<AuthUserRoles_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthUserRoles_Order_By>>;
+  where?: InputMaybe<AuthUserRoles_Bool_Exp>;
 };
 
 
 export type Subscription_RootFoodArgs = {
-  distinct_on?: Maybe<Array<Food_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Order_By>>;
-  where?: Maybe<Food_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Order_By>>;
+  where?: InputMaybe<Food_Bool_Exp>;
 };
 
 
 export type Subscription_RootFood_AggregateArgs = {
-  distinct_on?: Maybe<Array<Food_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Order_By>>;
-  where?: Maybe<Food_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Order_By>>;
+  where?: InputMaybe<Food_Bool_Exp>;
 };
 
 
 export type Subscription_RootFood_AttributeArgs = {
-  distinct_on?: Maybe<Array<Food_Attribute_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Attribute_Order_By>>;
-  where?: Maybe<Food_Attribute_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Attribute_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Attribute_Order_By>>;
+  where?: InputMaybe<Food_Attribute_Bool_Exp>;
 };
 
 
 export type Subscription_RootFood_Attribute_AggregateArgs = {
-  distinct_on?: Maybe<Array<Food_Attribute_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Attribute_Order_By>>;
-  where?: Maybe<Food_Attribute_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Attribute_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Attribute_Order_By>>;
+  where?: InputMaybe<Food_Attribute_Bool_Exp>;
 };
 
 
@@ -8302,20 +10222,20 @@ export type Subscription_RootFood_Attribute_By_PkArgs = {
 
 
 export type Subscription_RootFood_Attribute_TypeArgs = {
-  distinct_on?: Maybe<Array<Food_Attribute_Type_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Attribute_Type_Order_By>>;
-  where?: Maybe<Food_Attribute_Type_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Attribute_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Attribute_Type_Order_By>>;
+  where?: InputMaybe<Food_Attribute_Type_Bool_Exp>;
 };
 
 
 export type Subscription_RootFood_Attribute_Type_AggregateArgs = {
-  distinct_on?: Maybe<Array<Food_Attribute_Type_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Attribute_Type_Order_By>>;
-  where?: Maybe<Food_Attribute_Type_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Attribute_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Attribute_Type_Order_By>>;
+  where?: InputMaybe<Food_Attribute_Type_Bool_Exp>;
 };
 
 
@@ -8330,20 +10250,20 @@ export type Subscription_RootFood_By_PkArgs = {
 
 
 export type Subscription_RootFood_CategoryArgs = {
-  distinct_on?: Maybe<Array<Food_Category_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Category_Order_By>>;
-  where?: Maybe<Food_Category_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Category_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Category_Order_By>>;
+  where?: InputMaybe<Food_Category_Bool_Exp>;
 };
 
 
 export type Subscription_RootFood_Category_AggregateArgs = {
-  distinct_on?: Maybe<Array<Food_Category_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Category_Order_By>>;
-  where?: Maybe<Food_Category_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Category_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Category_Order_By>>;
+  where?: InputMaybe<Food_Category_Bool_Exp>;
 };
 
 
@@ -8353,20 +10273,20 @@ export type Subscription_RootFood_Category_By_PkArgs = {
 
 
 export type Subscription_RootFood_NutrientArgs = {
-  distinct_on?: Maybe<Array<Food_Nutrient_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Nutrient_Order_By>>;
-  where?: Maybe<Food_Nutrient_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Nutrient_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Nutrient_Order_By>>;
+  where?: InputMaybe<Food_Nutrient_Bool_Exp>;
 };
 
 
 export type Subscription_RootFood_Nutrient_AggregateArgs = {
-  distinct_on?: Maybe<Array<Food_Nutrient_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Nutrient_Order_By>>;
-  where?: Maybe<Food_Nutrient_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Nutrient_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Nutrient_Order_By>>;
+  where?: InputMaybe<Food_Nutrient_Bool_Exp>;
 };
 
 
@@ -8376,20 +10296,20 @@ export type Subscription_RootFood_Nutrient_By_PkArgs = {
 
 
 export type Subscription_RootFood_PortionArgs = {
-  distinct_on?: Maybe<Array<Food_Portion_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Portion_Order_By>>;
-  where?: Maybe<Food_Portion_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Portion_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Portion_Order_By>>;
+  where?: InputMaybe<Food_Portion_Bool_Exp>;
 };
 
 
 export type Subscription_RootFood_Portion_AggregateArgs = {
-  distinct_on?: Maybe<Array<Food_Portion_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Portion_Order_By>>;
-  where?: Maybe<Food_Portion_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Portion_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Portion_Order_By>>;
+  where?: InputMaybe<Food_Portion_Bool_Exp>;
 };
 
 
@@ -8399,20 +10319,20 @@ export type Subscription_RootFood_Portion_By_PkArgs = {
 
 
 export type Subscription_RootMeasure_UnitArgs = {
-  distinct_on?: Maybe<Array<Measure_Unit_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Measure_Unit_Order_By>>;
-  where?: Maybe<Measure_Unit_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Measure_Unit_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Measure_Unit_Order_By>>;
+  where?: InputMaybe<Measure_Unit_Bool_Exp>;
 };
 
 
 export type Subscription_RootMeasure_Unit_AggregateArgs = {
-  distinct_on?: Maybe<Array<Measure_Unit_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Measure_Unit_Order_By>>;
-  where?: Maybe<Measure_Unit_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Measure_Unit_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Measure_Unit_Order_By>>;
+  where?: InputMaybe<Measure_Unit_Bool_Exp>;
 };
 
 
@@ -8422,20 +10342,20 @@ export type Subscription_RootMeasure_Unit_By_PkArgs = {
 
 
 export type Subscription_RootNutrientArgs = {
-  distinct_on?: Maybe<Array<Nutrient_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Nutrient_Order_By>>;
-  where?: Maybe<Nutrient_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Nutrient_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Nutrient_Order_By>>;
+  where?: InputMaybe<Nutrient_Bool_Exp>;
 };
 
 
 export type Subscription_RootNutrient_AggregateArgs = {
-  distinct_on?: Maybe<Array<Nutrient_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Nutrient_Order_By>>;
-  where?: Maybe<Nutrient_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Nutrient_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Nutrient_Order_By>>;
+  where?: InputMaybe<Nutrient_Bool_Exp>;
 };
 
 
@@ -8445,20 +10365,20 @@ export type Subscription_RootNutrient_By_PkArgs = {
 
 
 export type Subscription_RootRecipe_Direction_ActionsArgs = {
-  distinct_on?: Maybe<Array<Recipe_Direction_Actions_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Direction_Actions_Order_By>>;
-  where?: Maybe<Recipe_Direction_Actions_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Direction_Actions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Direction_Actions_Order_By>>;
+  where?: InputMaybe<Recipe_Direction_Actions_Bool_Exp>;
 };
 
 
 export type Subscription_RootRecipe_Direction_Actions_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_Direction_Actions_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Direction_Actions_Order_By>>;
-  where?: Maybe<Recipe_Direction_Actions_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Direction_Actions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Direction_Actions_Order_By>>;
+  where?: InputMaybe<Recipe_Direction_Actions_Bool_Exp>;
 };
 
 
@@ -8468,20 +10388,20 @@ export type Subscription_RootRecipe_Direction_Actions_By_PkArgs = {
 
 
 export type Subscription_RootRecipe_Direction_DurationsArgs = {
-  distinct_on?: Maybe<Array<Recipe_Direction_Durations_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Direction_Durations_Order_By>>;
-  where?: Maybe<Recipe_Direction_Durations_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Direction_Durations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Direction_Durations_Order_By>>;
+  where?: InputMaybe<Recipe_Direction_Durations_Bool_Exp>;
 };
 
 
 export type Subscription_RootRecipe_Direction_Durations_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_Direction_Durations_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Direction_Durations_Order_By>>;
-  where?: Maybe<Recipe_Direction_Durations_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Direction_Durations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Direction_Durations_Order_By>>;
+  where?: InputMaybe<Recipe_Direction_Durations_Bool_Exp>;
 };
 
 
@@ -8491,20 +10411,20 @@ export type Subscription_RootRecipe_Direction_Durations_By_PkArgs = {
 
 
 export type Subscription_RootRecipe_DirectionsArgs = {
-  distinct_on?: Maybe<Array<Recipe_Directions_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Directions_Order_By>>;
-  where?: Maybe<Recipe_Directions_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Directions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Directions_Order_By>>;
+  where?: InputMaybe<Recipe_Directions_Bool_Exp>;
 };
 
 
 export type Subscription_RootRecipe_Directions_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_Directions_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Directions_Order_By>>;
-  where?: Maybe<Recipe_Directions_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Directions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Directions_Order_By>>;
+  where?: InputMaybe<Recipe_Directions_Bool_Exp>;
 };
 
 
@@ -8514,20 +10434,20 @@ export type Subscription_RootRecipe_Directions_By_PkArgs = {
 
 
 export type Subscription_RootRecipe_FavoriteArgs = {
-  distinct_on?: Maybe<Array<Recipe_Favorite_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Favorite_Order_By>>;
-  where?: Maybe<Recipe_Favorite_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Favorite_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Favorite_Order_By>>;
+  where?: InputMaybe<Recipe_Favorite_Bool_Exp>;
 };
 
 
 export type Subscription_RootRecipe_Favorite_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_Favorite_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Favorite_Order_By>>;
-  where?: Maybe<Recipe_Favorite_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Favorite_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Favorite_Order_By>>;
+  where?: InputMaybe<Recipe_Favorite_Bool_Exp>;
 };
 
 
@@ -8537,20 +10457,20 @@ export type Subscription_RootRecipe_Favorite_By_PkArgs = {
 
 
 export type Subscription_RootRecipe_Ingredient_Food_CandidateArgs = {
-  distinct_on?: Maybe<Array<Recipe_Ingredient_Food_Candidate_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Ingredient_Food_Candidate_Order_By>>;
-  where?: Maybe<Recipe_Ingredient_Food_Candidate_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Ingredient_Food_Candidate_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Ingredient_Food_Candidate_Order_By>>;
+  where?: InputMaybe<Recipe_Ingredient_Food_Candidate_Bool_Exp>;
 };
 
 
 export type Subscription_RootRecipe_Ingredient_Food_Candidate_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_Ingredient_Food_Candidate_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Ingredient_Food_Candidate_Order_By>>;
-  where?: Maybe<Recipe_Ingredient_Food_Candidate_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Ingredient_Food_Candidate_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Ingredient_Food_Candidate_Order_By>>;
+  where?: InputMaybe<Recipe_Ingredient_Food_Candidate_Bool_Exp>;
 };
 
 
@@ -8560,20 +10480,20 @@ export type Subscription_RootRecipe_Ingredient_Food_Candidate_By_PkArgs = {
 
 
 export type Subscription_RootRecipe_Ingredient_GroupsArgs = {
-  distinct_on?: Maybe<Array<Recipe_Ingredient_Groups_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Ingredient_Groups_Order_By>>;
-  where?: Maybe<Recipe_Ingredient_Groups_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Ingredient_Groups_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Ingredient_Groups_Order_By>>;
+  where?: InputMaybe<Recipe_Ingredient_Groups_Bool_Exp>;
 };
 
 
 export type Subscription_RootRecipe_Ingredient_Groups_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_Ingredient_Groups_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Ingredient_Groups_Order_By>>;
-  where?: Maybe<Recipe_Ingredient_Groups_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Ingredient_Groups_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Ingredient_Groups_Order_By>>;
+  where?: InputMaybe<Recipe_Ingredient_Groups_Bool_Exp>;
 };
 
 
@@ -8583,20 +10503,20 @@ export type Subscription_RootRecipe_Ingredient_Groups_By_PkArgs = {
 
 
 export type Subscription_RootRecipe_IngredientsArgs = {
-  distinct_on?: Maybe<Array<Recipe_Ingredients_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Ingredients_Order_By>>;
-  where?: Maybe<Recipe_Ingredients_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Ingredients_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Ingredients_Order_By>>;
+  where?: InputMaybe<Recipe_Ingredients_Bool_Exp>;
 };
 
 
 export type Subscription_RootRecipe_Ingredients_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_Ingredients_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Ingredients_Order_By>>;
-  where?: Maybe<Recipe_Ingredients_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Ingredients_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Ingredients_Order_By>>;
+  where?: InputMaybe<Recipe_Ingredients_Bool_Exp>;
 };
 
 
@@ -8606,20 +10526,20 @@ export type Subscription_RootRecipe_Ingredients_By_PkArgs = {
 
 
 export type Subscription_RootRecipe_List_ItemsArgs = {
-  distinct_on?: Maybe<Array<Recipe_List_Items_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_List_Items_Order_By>>;
-  where?: Maybe<Recipe_List_Items_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_List_Items_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_List_Items_Order_By>>;
+  where?: InputMaybe<Recipe_List_Items_Bool_Exp>;
 };
 
 
 export type Subscription_RootRecipe_List_Items_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_List_Items_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_List_Items_Order_By>>;
-  where?: Maybe<Recipe_List_Items_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_List_Items_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_List_Items_Order_By>>;
+  where?: InputMaybe<Recipe_List_Items_Bool_Exp>;
 };
 
 
@@ -8629,20 +10549,20 @@ export type Subscription_RootRecipe_List_Items_By_PkArgs = {
 
 
 export type Subscription_RootRecipe_ListsArgs = {
-  distinct_on?: Maybe<Array<Recipe_Lists_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Lists_Order_By>>;
-  where?: Maybe<Recipe_Lists_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Lists_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Lists_Order_By>>;
+  where?: InputMaybe<Recipe_Lists_Bool_Exp>;
 };
 
 
 export type Subscription_RootRecipe_Lists_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_Lists_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Lists_Order_By>>;
-  where?: Maybe<Recipe_Lists_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Lists_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Lists_Order_By>>;
+  where?: InputMaybe<Recipe_Lists_Bool_Exp>;
 };
 
 
@@ -8652,20 +10572,20 @@ export type Subscription_RootRecipe_Lists_By_PkArgs = {
 
 
 export type Subscription_RootRecipe_TagsArgs = {
-  distinct_on?: Maybe<Array<Recipe_Tags_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Tags_Order_By>>;
-  where?: Maybe<Recipe_Tags_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Tags_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Tags_Order_By>>;
+  where?: InputMaybe<Recipe_Tags_Bool_Exp>;
 };
 
 
 export type Subscription_RootRecipe_Tags_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipe_Tags_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipe_Tags_Order_By>>;
-  where?: Maybe<Recipe_Tags_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipe_Tags_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Tags_Order_By>>;
+  where?: InputMaybe<Recipe_Tags_Bool_Exp>;
 };
 
 
@@ -8675,20 +10595,20 @@ export type Subscription_RootRecipe_Tags_By_PkArgs = {
 
 
 export type Subscription_RootRecipesArgs = {
-  distinct_on?: Maybe<Array<Recipes_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipes_Order_By>>;
-  where?: Maybe<Recipes_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipes_Order_By>>;
+  where?: InputMaybe<Recipes_Bool_Exp>;
 };
 
 
 export type Subscription_RootRecipes_AggregateArgs = {
-  distinct_on?: Maybe<Array<Recipes_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipes_Order_By>>;
-  where?: Maybe<Recipes_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipes_Order_By>>;
+  where?: InputMaybe<Recipes_Bool_Exp>;
 };
 
 
@@ -8699,59 +10619,73 @@ export type Subscription_RootRecipes_By_PkArgs = {
 
 export type Subscription_RootSearch_FoodsArgs = {
   args: Search_Foods_Args;
-  distinct_on?: Maybe<Array<Food_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Order_By>>;
-  where?: Maybe<Food_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Order_By>>;
+  where?: InputMaybe<Food_Bool_Exp>;
 };
 
 
 export type Subscription_RootSearch_Foods_AggregateArgs = {
   args: Search_Foods_Args;
-  distinct_on?: Maybe<Array<Food_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Food_Order_By>>;
-  where?: Maybe<Food_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Food_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Food_Order_By>>;
+  where?: InputMaybe<Food_Bool_Exp>;
 };
 
 
 export type Subscription_RootSearch_RecipesArgs = {
   args: Search_Recipes_Args;
-  distinct_on?: Maybe<Array<Recipes_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipes_Order_By>>;
-  where?: Maybe<Recipes_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipes_Order_By>>;
+  where?: InputMaybe<Recipes_Bool_Exp>;
 };
 
 
 export type Subscription_RootSearch_Recipes_AggregateArgs = {
   args: Search_Recipes_Args;
-  distinct_on?: Maybe<Array<Recipes_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Recipes_Order_By>>;
-  where?: Maybe<Recipes_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Recipes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipes_Order_By>>;
+  where?: InputMaybe<Recipes_Bool_Exp>;
+};
+
+
+export type Subscription_RootUserArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootUserAggregateArgs = {
+  distinct_on?: InputMaybe<Array<Users_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Users_Order_By>>;
+  where?: InputMaybe<Users_Bool_Exp>;
 };
 
 
 export type Subscription_RootUser_ConfigArgs = {
-  distinct_on?: Maybe<Array<User_Config_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<User_Config_Order_By>>;
-  where?: Maybe<User_Config_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<User_Config_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<User_Config_Order_By>>;
+  where?: InputMaybe<User_Config_Bool_Exp>;
 };
 
 
 export type Subscription_RootUser_Config_AggregateArgs = {
-  distinct_on?: Maybe<Array<User_Config_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<User_Config_Order_By>>;
-  where?: Maybe<User_Config_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<User_Config_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<User_Config_Order_By>>;
+  where?: InputMaybe<User_Config_Bool_Exp>;
 };
 
 
@@ -8760,45 +10694,51 @@ export type Subscription_RootUser_Config_By_PkArgs = {
 };
 
 
-/** Boolean expression to compare columns of type "timestamp". All fields are combined with logical 'AND'. */
-export type Timestamp_Comparison_Exp = {
-  _eq?: Maybe<Scalars['timestamp']>;
-  _gt?: Maybe<Scalars['timestamp']>;
-  _gte?: Maybe<Scalars['timestamp']>;
-  _in?: Maybe<Array<Scalars['timestamp']>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _lt?: Maybe<Scalars['timestamp']>;
-  _lte?: Maybe<Scalars['timestamp']>;
-  _neq?: Maybe<Scalars['timestamp']>;
-  _nin?: Maybe<Array<Scalars['timestamp']>>;
+export type Subscription_RootUsersArgs = {
+  distinct_on?: InputMaybe<Array<Users_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Users_Order_By>>;
+  where?: InputMaybe<Users_Bool_Exp>;
 };
 
+/** Boolean expression to compare columns of type "timestamp". All fields are combined with logical 'AND'. */
+export type Timestamp_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['timestamp']>;
+  _gt?: InputMaybe<Scalars['timestamp']>;
+  _gte?: InputMaybe<Scalars['timestamp']>;
+  _in?: InputMaybe<Array<Scalars['timestamp']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['timestamp']>;
+  _lte?: InputMaybe<Scalars['timestamp']>;
+  _neq?: InputMaybe<Scalars['timestamp']>;
+  _nin?: InputMaybe<Array<Scalars['timestamp']>>;
+};
 
 /** Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'. */
 export type Timestamptz_Comparison_Exp = {
-  _eq?: Maybe<Scalars['timestamptz']>;
-  _gt?: Maybe<Scalars['timestamptz']>;
-  _gte?: Maybe<Scalars['timestamptz']>;
-  _in?: Maybe<Array<Scalars['timestamptz']>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _lt?: Maybe<Scalars['timestamptz']>;
-  _lte?: Maybe<Scalars['timestamptz']>;
-  _neq?: Maybe<Scalars['timestamptz']>;
-  _nin?: Maybe<Array<Scalars['timestamptz']>>;
+  _eq?: InputMaybe<Scalars['timestamptz']>;
+  _gt?: InputMaybe<Scalars['timestamptz']>;
+  _gte?: InputMaybe<Scalars['timestamptz']>;
+  _in?: InputMaybe<Array<Scalars['timestamptz']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['timestamptz']>;
+  _lte?: InputMaybe<Scalars['timestamptz']>;
+  _neq?: InputMaybe<Scalars['timestamptz']>;
+  _nin?: InputMaybe<Array<Scalars['timestamptz']>>;
 };
-
 
 /** Boolean expression to compare columns of type "tsvector". All fields are combined with logical 'AND'. */
 export type Tsvector_Comparison_Exp = {
-  _eq?: Maybe<Scalars['tsvector']>;
-  _gt?: Maybe<Scalars['tsvector']>;
-  _gte?: Maybe<Scalars['tsvector']>;
-  _in?: Maybe<Array<Scalars['tsvector']>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _lt?: Maybe<Scalars['tsvector']>;
-  _lte?: Maybe<Scalars['tsvector']>;
-  _neq?: Maybe<Scalars['tsvector']>;
-  _nin?: Maybe<Array<Scalars['tsvector']>>;
+  _eq?: InputMaybe<Scalars['tsvector']>;
+  _gt?: InputMaybe<Scalars['tsvector']>;
+  _gte?: InputMaybe<Scalars['tsvector']>;
+  _in?: InputMaybe<Array<Scalars['tsvector']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['tsvector']>;
+  _lte?: InputMaybe<Scalars['tsvector']>;
+  _neq?: InputMaybe<Scalars['tsvector']>;
+  _nin?: InputMaybe<Array<Scalars['tsvector']>>;
 };
 
 /** columns and relationships of "user_config" */
@@ -8834,8 +10774,8 @@ export type User_Config_Aggregate_Fields = {
 
 /** aggregate fields of "user_config" */
 export type User_Config_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<User_Config_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<User_Config_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** aggregate avg on columns */
@@ -8846,11 +10786,11 @@ export type User_Config_Avg_Fields = {
 
 /** Boolean expression to filter rows from the table "user_config". All fields are combined with a logical 'AND'. */
 export type User_Config_Bool_Exp = {
-  _and?: Maybe<Array<User_Config_Bool_Exp>>;
-  _not?: Maybe<User_Config_Bool_Exp>;
-  _or?: Maybe<Array<User_Config_Bool_Exp>>;
-  printer_url?: Maybe<String_Comparison_Exp>;
-  user_id?: Maybe<Int_Comparison_Exp>;
+  _and?: InputMaybe<Array<User_Config_Bool_Exp>>;
+  _not?: InputMaybe<User_Config_Bool_Exp>;
+  _or?: InputMaybe<Array<User_Config_Bool_Exp>>;
+  printer_url?: InputMaybe<String_Comparison_Exp>;
+  user_id?: InputMaybe<Int_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "user_config" */
@@ -8861,13 +10801,13 @@ export enum User_Config_Constraint {
 
 /** input type for incrementing numeric columns in table "user_config" */
 export type User_Config_Inc_Input = {
-  user_id?: Maybe<Scalars['Int']>;
+  user_id?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "user_config" */
 export type User_Config_Insert_Input = {
-  printer_url?: Maybe<Scalars['String']>;
-  user_id?: Maybe<Scalars['Int']>;
+  printer_url?: InputMaybe<Scalars['String']>;
+  user_id?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate max on columns */
@@ -8897,13 +10837,13 @@ export type User_Config_Mutation_Response = {
 export type User_Config_On_Conflict = {
   constraint: User_Config_Constraint;
   update_columns?: Array<User_Config_Update_Column>;
-  where?: Maybe<User_Config_Bool_Exp>;
+  where?: InputMaybe<User_Config_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "user_config". */
 export type User_Config_Order_By = {
-  printer_url?: Maybe<Order_By>;
-  user_id?: Maybe<Order_By>;
+  printer_url?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: user_config */
@@ -8921,8 +10861,8 @@ export enum User_Config_Select_Column {
 
 /** input type for updating data in table "user_config" */
 export type User_Config_Set_Input = {
-  printer_url?: Maybe<Scalars['String']>;
-  user_id?: Maybe<Scalars['Int']>;
+  printer_url?: InputMaybe<Scalars['String']>;
+  user_id?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate stddev on columns */
@@ -8975,201 +10915,627 @@ export type User_Config_Variance_Fields = {
   user_id?: Maybe<Scalars['Float']>;
 };
 
+/** columns and relationships of "auth.users" */
+export type Users = {
+  __typename?: 'users';
+  activeMfaType?: Maybe<Scalars['String']>;
+  avatarUrl: Scalars['String'];
+  createdAt: Scalars['timestamptz'];
+  defaultRole: Scalars['String'];
+  /** An object relationship */
+  defaultRoleByRole: AuthRoles;
+  disabled: Scalars['Boolean'];
+  displayName: Scalars['String'];
+  email?: Maybe<Scalars['citext']>;
+  emailVerified: Scalars['Boolean'];
+  id: Scalars['uuid'];
+  isAnonymous: Scalars['Boolean'];
+  lastSeen?: Maybe<Scalars['timestamptz']>;
+  locale: Scalars['String'];
+  metadata?: Maybe<Scalars['jsonb']>;
+  newEmail?: Maybe<Scalars['citext']>;
+  otpHash?: Maybe<Scalars['String']>;
+  otpHashExpiresAt: Scalars['timestamptz'];
+  otpMethodLastUsed?: Maybe<Scalars['String']>;
+  passwordHash?: Maybe<Scalars['String']>;
+  phoneNumber?: Maybe<Scalars['String']>;
+  phoneNumberVerified: Scalars['Boolean'];
+  /** An array relationship */
+  refreshTokens: Array<AuthRefreshTokens>;
+  /** An aggregate relationship */
+  refreshTokens_aggregate: AuthRefreshTokens_Aggregate;
+  /** An array relationship */
+  roles: Array<AuthUserRoles>;
+  /** An aggregate relationship */
+  roles_aggregate: AuthUserRoles_Aggregate;
+  ticket?: Maybe<Scalars['String']>;
+  ticketExpiresAt: Scalars['timestamptz'];
+  totpSecret?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['timestamptz'];
+  /** An array relationship */
+  userProviders: Array<AuthUserProviders>;
+  /** An aggregate relationship */
+  userProviders_aggregate: AuthUserProviders_Aggregate;
+};
+
+
+/** columns and relationships of "auth.users" */
+export type UsersMetadataArgs = {
+  path?: InputMaybe<Scalars['String']>;
+};
+
+
+/** columns and relationships of "auth.users" */
+export type UsersRefreshTokensArgs = {
+  distinct_on?: InputMaybe<Array<AuthRefreshTokens_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthRefreshTokens_Order_By>>;
+  where?: InputMaybe<AuthRefreshTokens_Bool_Exp>;
+};
+
+
+/** columns and relationships of "auth.users" */
+export type UsersRefreshTokens_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<AuthRefreshTokens_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthRefreshTokens_Order_By>>;
+  where?: InputMaybe<AuthRefreshTokens_Bool_Exp>;
+};
+
+
+/** columns and relationships of "auth.users" */
+export type UsersRolesArgs = {
+  distinct_on?: InputMaybe<Array<AuthUserRoles_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthUserRoles_Order_By>>;
+  where?: InputMaybe<AuthUserRoles_Bool_Exp>;
+};
+
+
+/** columns and relationships of "auth.users" */
+export type UsersRoles_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<AuthUserRoles_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthUserRoles_Order_By>>;
+  where?: InputMaybe<AuthUserRoles_Bool_Exp>;
+};
+
+
+/** columns and relationships of "auth.users" */
+export type UsersUserProvidersArgs = {
+  distinct_on?: InputMaybe<Array<AuthUserProviders_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthUserProviders_Order_By>>;
+  where?: InputMaybe<AuthUserProviders_Bool_Exp>;
+};
+
+
+/** columns and relationships of "auth.users" */
+export type UsersUserProviders_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<AuthUserProviders_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthUserProviders_Order_By>>;
+  where?: InputMaybe<AuthUserProviders_Bool_Exp>;
+};
+
+/** aggregated selection of "auth.users" */
+export type Users_Aggregate = {
+  __typename?: 'users_aggregate';
+  aggregate?: Maybe<Users_Aggregate_Fields>;
+  nodes: Array<Users>;
+};
+
+/** aggregate fields of "auth.users" */
+export type Users_Aggregate_Fields = {
+  __typename?: 'users_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Users_Max_Fields>;
+  min?: Maybe<Users_Min_Fields>;
+};
+
+
+/** aggregate fields of "auth.users" */
+export type Users_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Users_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "auth.users" */
+export type Users_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Users_Max_Order_By>;
+  min?: InputMaybe<Users_Min_Order_By>;
+};
+
+/** append existing jsonb value of filtered columns with new jsonb value */
+export type Users_Append_Input = {
+  metadata?: InputMaybe<Scalars['jsonb']>;
+};
+
+/** input type for inserting array relation for remote table "auth.users" */
+export type Users_Arr_Rel_Insert_Input = {
+  data: Array<Users_Insert_Input>;
+  /** on conflict condition */
+  on_conflict?: InputMaybe<Users_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "auth.users". All fields are combined with a logical 'AND'. */
+export type Users_Bool_Exp = {
+  _and?: InputMaybe<Array<Users_Bool_Exp>>;
+  _not?: InputMaybe<Users_Bool_Exp>;
+  _or?: InputMaybe<Array<Users_Bool_Exp>>;
+  activeMfaType?: InputMaybe<String_Comparison_Exp>;
+  avatarUrl?: InputMaybe<String_Comparison_Exp>;
+  createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  defaultRole?: InputMaybe<String_Comparison_Exp>;
+  defaultRoleByRole?: InputMaybe<AuthRoles_Bool_Exp>;
+  disabled?: InputMaybe<Boolean_Comparison_Exp>;
+  displayName?: InputMaybe<String_Comparison_Exp>;
+  email?: InputMaybe<Citext_Comparison_Exp>;
+  emailVerified?: InputMaybe<Boolean_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  isAnonymous?: InputMaybe<Boolean_Comparison_Exp>;
+  lastSeen?: InputMaybe<Timestamptz_Comparison_Exp>;
+  locale?: InputMaybe<String_Comparison_Exp>;
+  metadata?: InputMaybe<Jsonb_Comparison_Exp>;
+  newEmail?: InputMaybe<Citext_Comparison_Exp>;
+  otpHash?: InputMaybe<String_Comparison_Exp>;
+  otpHashExpiresAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  otpMethodLastUsed?: InputMaybe<String_Comparison_Exp>;
+  passwordHash?: InputMaybe<String_Comparison_Exp>;
+  phoneNumber?: InputMaybe<String_Comparison_Exp>;
+  phoneNumberVerified?: InputMaybe<Boolean_Comparison_Exp>;
+  refreshTokens?: InputMaybe<AuthRefreshTokens_Bool_Exp>;
+  roles?: InputMaybe<AuthUserRoles_Bool_Exp>;
+  ticket?: InputMaybe<String_Comparison_Exp>;
+  ticketExpiresAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  totpSecret?: InputMaybe<String_Comparison_Exp>;
+  updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  userProviders?: InputMaybe<AuthUserProviders_Bool_Exp>;
+};
+
+/** unique or primary key constraints on table "auth.users" */
+export enum Users_Constraint {
+  /** unique or primary key constraint */
+  UsersEmailKey = 'users_email_key',
+  /** unique or primary key constraint */
+  UsersPhoneNumberKey = 'users_phone_number_key',
+  /** unique or primary key constraint */
+  UsersPkey = 'users_pkey'
+}
+
+/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+export type Users_Delete_At_Path_Input = {
+  metadata?: InputMaybe<Array<Scalars['String']>>;
+};
+
+/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+export type Users_Delete_Elem_Input = {
+  metadata?: InputMaybe<Scalars['Int']>;
+};
+
+/** delete key/value pair or string element. key/value pairs are matched based on their key value */
+export type Users_Delete_Key_Input = {
+  metadata?: InputMaybe<Scalars['String']>;
+};
+
+/** input type for inserting data into table "auth.users" */
+export type Users_Insert_Input = {
+  activeMfaType?: InputMaybe<Scalars['String']>;
+  avatarUrl?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['timestamptz']>;
+  defaultRole?: InputMaybe<Scalars['String']>;
+  defaultRoleByRole?: InputMaybe<AuthRoles_Obj_Rel_Insert_Input>;
+  disabled?: InputMaybe<Scalars['Boolean']>;
+  displayName?: InputMaybe<Scalars['String']>;
+  email?: InputMaybe<Scalars['citext']>;
+  emailVerified?: InputMaybe<Scalars['Boolean']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  isAnonymous?: InputMaybe<Scalars['Boolean']>;
+  lastSeen?: InputMaybe<Scalars['timestamptz']>;
+  locale?: InputMaybe<Scalars['String']>;
+  metadata?: InputMaybe<Scalars['jsonb']>;
+  newEmail?: InputMaybe<Scalars['citext']>;
+  otpHash?: InputMaybe<Scalars['String']>;
+  otpHashExpiresAt?: InputMaybe<Scalars['timestamptz']>;
+  otpMethodLastUsed?: InputMaybe<Scalars['String']>;
+  passwordHash?: InputMaybe<Scalars['String']>;
+  phoneNumber?: InputMaybe<Scalars['String']>;
+  phoneNumberVerified?: InputMaybe<Scalars['Boolean']>;
+  refreshTokens?: InputMaybe<AuthRefreshTokens_Arr_Rel_Insert_Input>;
+  roles?: InputMaybe<AuthUserRoles_Arr_Rel_Insert_Input>;
+  ticket?: InputMaybe<Scalars['String']>;
+  ticketExpiresAt?: InputMaybe<Scalars['timestamptz']>;
+  totpSecret?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['timestamptz']>;
+  userProviders?: InputMaybe<AuthUserProviders_Arr_Rel_Insert_Input>;
+};
+
+/** aggregate max on columns */
+export type Users_Max_Fields = {
+  __typename?: 'users_max_fields';
+  activeMfaType?: Maybe<Scalars['String']>;
+  avatarUrl?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  defaultRole?: Maybe<Scalars['String']>;
+  displayName?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['citext']>;
+  id?: Maybe<Scalars['uuid']>;
+  lastSeen?: Maybe<Scalars['timestamptz']>;
+  locale?: Maybe<Scalars['String']>;
+  newEmail?: Maybe<Scalars['citext']>;
+  otpHash?: Maybe<Scalars['String']>;
+  otpHashExpiresAt?: Maybe<Scalars['timestamptz']>;
+  otpMethodLastUsed?: Maybe<Scalars['String']>;
+  passwordHash?: Maybe<Scalars['String']>;
+  phoneNumber?: Maybe<Scalars['String']>;
+  ticket?: Maybe<Scalars['String']>;
+  ticketExpiresAt?: Maybe<Scalars['timestamptz']>;
+  totpSecret?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by max() on columns of table "auth.users" */
+export type Users_Max_Order_By = {
+  activeMfaType?: InputMaybe<Order_By>;
+  avatarUrl?: InputMaybe<Order_By>;
+  createdAt?: InputMaybe<Order_By>;
+  defaultRole?: InputMaybe<Order_By>;
+  displayName?: InputMaybe<Order_By>;
+  email?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  lastSeen?: InputMaybe<Order_By>;
+  locale?: InputMaybe<Order_By>;
+  newEmail?: InputMaybe<Order_By>;
+  otpHash?: InputMaybe<Order_By>;
+  otpHashExpiresAt?: InputMaybe<Order_By>;
+  otpMethodLastUsed?: InputMaybe<Order_By>;
+  passwordHash?: InputMaybe<Order_By>;
+  phoneNumber?: InputMaybe<Order_By>;
+  ticket?: InputMaybe<Order_By>;
+  ticketExpiresAt?: InputMaybe<Order_By>;
+  totpSecret?: InputMaybe<Order_By>;
+  updatedAt?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Users_Min_Fields = {
+  __typename?: 'users_min_fields';
+  activeMfaType?: Maybe<Scalars['String']>;
+  avatarUrl?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  defaultRole?: Maybe<Scalars['String']>;
+  displayName?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['citext']>;
+  id?: Maybe<Scalars['uuid']>;
+  lastSeen?: Maybe<Scalars['timestamptz']>;
+  locale?: Maybe<Scalars['String']>;
+  newEmail?: Maybe<Scalars['citext']>;
+  otpHash?: Maybe<Scalars['String']>;
+  otpHashExpiresAt?: Maybe<Scalars['timestamptz']>;
+  otpMethodLastUsed?: Maybe<Scalars['String']>;
+  passwordHash?: Maybe<Scalars['String']>;
+  phoneNumber?: Maybe<Scalars['String']>;
+  ticket?: Maybe<Scalars['String']>;
+  ticketExpiresAt?: Maybe<Scalars['timestamptz']>;
+  totpSecret?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by min() on columns of table "auth.users" */
+export type Users_Min_Order_By = {
+  activeMfaType?: InputMaybe<Order_By>;
+  avatarUrl?: InputMaybe<Order_By>;
+  createdAt?: InputMaybe<Order_By>;
+  defaultRole?: InputMaybe<Order_By>;
+  displayName?: InputMaybe<Order_By>;
+  email?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  lastSeen?: InputMaybe<Order_By>;
+  locale?: InputMaybe<Order_By>;
+  newEmail?: InputMaybe<Order_By>;
+  otpHash?: InputMaybe<Order_By>;
+  otpHashExpiresAt?: InputMaybe<Order_By>;
+  otpMethodLastUsed?: InputMaybe<Order_By>;
+  passwordHash?: InputMaybe<Order_By>;
+  phoneNumber?: InputMaybe<Order_By>;
+  ticket?: InputMaybe<Order_By>;
+  ticketExpiresAt?: InputMaybe<Order_By>;
+  totpSecret?: InputMaybe<Order_By>;
+  updatedAt?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "auth.users" */
+export type Users_Mutation_Response = {
+  __typename?: 'users_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Users>;
+};
+
+/** input type for inserting object relation for remote table "auth.users" */
+export type Users_Obj_Rel_Insert_Input = {
+  data: Users_Insert_Input;
+  /** on conflict condition */
+  on_conflict?: InputMaybe<Users_On_Conflict>;
+};
+
+/** on conflict condition type for table "auth.users" */
+export type Users_On_Conflict = {
+  constraint: Users_Constraint;
+  update_columns?: Array<Users_Update_Column>;
+  where?: InputMaybe<Users_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "auth.users". */
+export type Users_Order_By = {
+  activeMfaType?: InputMaybe<Order_By>;
+  avatarUrl?: InputMaybe<Order_By>;
+  createdAt?: InputMaybe<Order_By>;
+  defaultRole?: InputMaybe<Order_By>;
+  defaultRoleByRole?: InputMaybe<AuthRoles_Order_By>;
+  disabled?: InputMaybe<Order_By>;
+  displayName?: InputMaybe<Order_By>;
+  email?: InputMaybe<Order_By>;
+  emailVerified?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  isAnonymous?: InputMaybe<Order_By>;
+  lastSeen?: InputMaybe<Order_By>;
+  locale?: InputMaybe<Order_By>;
+  metadata?: InputMaybe<Order_By>;
+  newEmail?: InputMaybe<Order_By>;
+  otpHash?: InputMaybe<Order_By>;
+  otpHashExpiresAt?: InputMaybe<Order_By>;
+  otpMethodLastUsed?: InputMaybe<Order_By>;
+  passwordHash?: InputMaybe<Order_By>;
+  phoneNumber?: InputMaybe<Order_By>;
+  phoneNumberVerified?: InputMaybe<Order_By>;
+  refreshTokens_aggregate?: InputMaybe<AuthRefreshTokens_Aggregate_Order_By>;
+  roles_aggregate?: InputMaybe<AuthUserRoles_Aggregate_Order_By>;
+  ticket?: InputMaybe<Order_By>;
+  ticketExpiresAt?: InputMaybe<Order_By>;
+  totpSecret?: InputMaybe<Order_By>;
+  updatedAt?: InputMaybe<Order_By>;
+  userProviders_aggregate?: InputMaybe<AuthUserProviders_Aggregate_Order_By>;
+};
+
+/** primary key columns input for table: users */
+export type Users_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** prepend existing jsonb value of filtered columns with new jsonb value */
+export type Users_Prepend_Input = {
+  metadata?: InputMaybe<Scalars['jsonb']>;
+};
+
+/** select columns of table "auth.users" */
+export enum Users_Select_Column {
+  /** column name */
+  ActiveMfaType = 'activeMfaType',
+  /** column name */
+  AvatarUrl = 'avatarUrl',
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  DefaultRole = 'defaultRole',
+  /** column name */
+  Disabled = 'disabled',
+  /** column name */
+  DisplayName = 'displayName',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  EmailVerified = 'emailVerified',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  IsAnonymous = 'isAnonymous',
+  /** column name */
+  LastSeen = 'lastSeen',
+  /** column name */
+  Locale = 'locale',
+  /** column name */
+  Metadata = 'metadata',
+  /** column name */
+  NewEmail = 'newEmail',
+  /** column name */
+  OtpHash = 'otpHash',
+  /** column name */
+  OtpHashExpiresAt = 'otpHashExpiresAt',
+  /** column name */
+  OtpMethodLastUsed = 'otpMethodLastUsed',
+  /** column name */
+  PasswordHash = 'passwordHash',
+  /** column name */
+  PhoneNumber = 'phoneNumber',
+  /** column name */
+  PhoneNumberVerified = 'phoneNumberVerified',
+  /** column name */
+  Ticket = 'ticket',
+  /** column name */
+  TicketExpiresAt = 'ticketExpiresAt',
+  /** column name */
+  TotpSecret = 'totpSecret',
+  /** column name */
+  UpdatedAt = 'updatedAt'
+}
+
+/** input type for updating data in table "auth.users" */
+export type Users_Set_Input = {
+  activeMfaType?: InputMaybe<Scalars['String']>;
+  avatarUrl?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['timestamptz']>;
+  defaultRole?: InputMaybe<Scalars['String']>;
+  disabled?: InputMaybe<Scalars['Boolean']>;
+  displayName?: InputMaybe<Scalars['String']>;
+  email?: InputMaybe<Scalars['citext']>;
+  emailVerified?: InputMaybe<Scalars['Boolean']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  isAnonymous?: InputMaybe<Scalars['Boolean']>;
+  lastSeen?: InputMaybe<Scalars['timestamptz']>;
+  locale?: InputMaybe<Scalars['String']>;
+  metadata?: InputMaybe<Scalars['jsonb']>;
+  newEmail?: InputMaybe<Scalars['citext']>;
+  otpHash?: InputMaybe<Scalars['String']>;
+  otpHashExpiresAt?: InputMaybe<Scalars['timestamptz']>;
+  otpMethodLastUsed?: InputMaybe<Scalars['String']>;
+  passwordHash?: InputMaybe<Scalars['String']>;
+  phoneNumber?: InputMaybe<Scalars['String']>;
+  phoneNumberVerified?: InputMaybe<Scalars['Boolean']>;
+  ticket?: InputMaybe<Scalars['String']>;
+  ticketExpiresAt?: InputMaybe<Scalars['timestamptz']>;
+  totpSecret?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** update columns of table "auth.users" */
+export enum Users_Update_Column {
+  /** column name */
+  ActiveMfaType = 'activeMfaType',
+  /** column name */
+  AvatarUrl = 'avatarUrl',
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  DefaultRole = 'defaultRole',
+  /** column name */
+  Disabled = 'disabled',
+  /** column name */
+  DisplayName = 'displayName',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  EmailVerified = 'emailVerified',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  IsAnonymous = 'isAnonymous',
+  /** column name */
+  LastSeen = 'lastSeen',
+  /** column name */
+  Locale = 'locale',
+  /** column name */
+  Metadata = 'metadata',
+  /** column name */
+  NewEmail = 'newEmail',
+  /** column name */
+  OtpHash = 'otpHash',
+  /** column name */
+  OtpHashExpiresAt = 'otpHashExpiresAt',
+  /** column name */
+  OtpMethodLastUsed = 'otpMethodLastUsed',
+  /** column name */
+  PasswordHash = 'passwordHash',
+  /** column name */
+  PhoneNumber = 'phoneNumber',
+  /** column name */
+  PhoneNumberVerified = 'phoneNumberVerified',
+  /** column name */
+  Ticket = 'ticket',
+  /** column name */
+  TicketExpiresAt = 'ticketExpiresAt',
+  /** column name */
+  TotpSecret = 'totpSecret',
+  /** column name */
+  UpdatedAt = 'updatedAt'
+}
+
+/** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
+export type Uuid_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['uuid']>;
+  _gt?: InputMaybe<Scalars['uuid']>;
+  _gte?: InputMaybe<Scalars['uuid']>;
+  _in?: InputMaybe<Array<Scalars['uuid']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['uuid']>;
+  _lte?: InputMaybe<Scalars['uuid']>;
+  _neq?: InputMaybe<Scalars['uuid']>;
+  _nin?: InputMaybe<Array<Scalars['uuid']>>;
+};
+
 export type RecipeFoodCandidatesQueryVariables = Exact<{
   id: Scalars['Int'];
 }>;
 
 
-export type RecipeFoodCandidatesQuery = (
-  { __typename?: 'query_root' }
-  & { recipe_ingredients_by_pk?: Maybe<(
-    { __typename?: 'recipe_ingredients' }
-    & Pick<Recipe_Ingredients, 'name'>
-    & { food_candidates?: Maybe<Array<(
-      { __typename?: 'food' }
-      & Pick<Food, 'fdc_id' | 'description'>
-      & { food_portions: Array<(
-        { __typename?: 'food_portion' }
-        & Pick<Food_Portion, 'id' | 'amount' | 'gram_weight' | 'modifier' | 'measure_unit_id'>
-        & { measure_unit?: Maybe<(
-          { __typename?: 'measure_unit' }
-          & Pick<Measure_Unit, 'ml' | 'name'>
-        )> }
-      )> }
-    )>> }
-  )> }
-);
+export type RecipeFoodCandidatesQuery = { __typename?: 'query_root', recipe_ingredients_by_pk?: { __typename?: 'recipe_ingredients', name?: string | null, food_candidates?: Array<{ __typename?: 'food', fdc_id: number, description?: string | null, food_portions: Array<{ __typename?: 'food_portion', id: number, amount?: any | null, gram_weight?: any | null, modifier?: string | null, measure_unit_id?: number | null, measure_unit?: { __typename?: 'measure_unit', ml?: any | null, name?: string | null } | null }> }> | null } | null };
 
 export type InsertFoodCandidateForIngredientMutationVariables = Exact<{
   object: Recipe_Ingredient_Food_Candidate_Insert_Input;
 }>;
 
 
-export type InsertFoodCandidateForIngredientMutation = (
-  { __typename?: 'mutation_root' }
-  & { insert_recipe_ingredient_food_candidate_one?: Maybe<(
-    { __typename?: 'recipe_ingredient_food_candidate' }
-    & Pick<Recipe_Ingredient_Food_Candidate, 'id'>
-  )> }
-);
+export type InsertFoodCandidateForIngredientMutation = { __typename?: 'mutation_root', insert_recipe_ingredient_food_candidate_one?: { __typename?: 'recipe_ingredient_food_candidate', id: number } | null };
 
 export type RecipesQueryQueryVariables = Exact<{
   where: Recipes_Bool_Exp;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type RecipesQueryQuery = (
-  { __typename?: 'query_root' }
-  & { recipes: Array<(
-    { __typename?: 'recipes' }
-    & Pick<Recipes, 'id' | 'name' | 'created_at'>
-  )>, recipes_aggregate: (
-    { __typename?: 'recipes_aggregate' }
-    & { aggregate?: Maybe<(
-      { __typename?: 'recipes_aggregate_fields' }
-      & Pick<Recipes_Aggregate_Fields, 'count'>
-    )> }
-  ) }
-);
+export type RecipesQueryQuery = { __typename?: 'query_root', recipes: Array<{ __typename?: 'recipes', id: number, name: string, source: string, created_at: any }>, recipes_aggregate: { __typename?: 'recipes_aggregate', aggregate?: { __typename?: 'recipes_aggregate_fields', count: number } | null } };
 
 export type InsertRecipeMutationVariables = Exact<{
   recipe: Recipes_Insert_Input;
 }>;
 
 
-export type InsertRecipeMutation = (
-  { __typename?: 'mutation_root' }
-  & { insert_recipes_one?: Maybe<(
-    { __typename?: 'recipes' }
-    & Pick<Recipes, 'id'>
-  )> }
-);
+export type InsertRecipeMutation = { __typename?: 'mutation_root', insert_recipes_one?: { __typename?: 'recipes', id: number } | null };
 
 export type GetUserRecipeListsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetUserRecipeListsQuery = (
-  { __typename?: 'query_root' }
-  & { recipe_lists: Array<(
-    { __typename?: 'recipe_lists' }
-    & Pick<Recipe_Lists, 'id' | 'name'>
-    & { recipe_list_items: Array<(
-      { __typename?: 'recipe_list_items' }
-      & Pick<Recipe_List_Items, 'id' | 'seq_num'>
-      & { recipe: (
-        { __typename?: 'recipes' }
-        & Pick<Recipes, 'id' | 'name'>
-      ) }
-    )> }
-  )> }
-);
+export type GetUserRecipeListsQuery = { __typename?: 'query_root', recipe_lists: Array<{ __typename?: 'recipe_lists', id: number, name?: string | null, recipe_list_items: Array<{ __typename?: 'recipe_list_items', id: number, seq_num?: number | null, recipe: { __typename?: 'recipes', id: number, name: string } }> }> };
 
 export type InsertRecipeListMutationVariables = Exact<{
-  name?: Maybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type InsertRecipeListMutation = (
-  { __typename?: 'mutation_root' }
-  & { insert_recipe_lists_one?: Maybe<(
-    { __typename?: 'recipe_lists' }
-    & Pick<Recipe_Lists, 'id'>
-  )> }
-);
+export type InsertRecipeListMutation = { __typename?: 'mutation_root', insert_recipe_lists_one?: { __typename?: 'recipe_lists', id: number } | null };
 
 export type DeleteRecipeListMutationVariables = Exact<{
-  id?: Maybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type DeleteRecipeListMutation = (
-  { __typename?: 'mutation_root' }
-  & { delete_recipe_lists?: Maybe<(
-    { __typename?: 'recipe_lists_mutation_response' }
-    & Pick<Recipe_Lists_Mutation_Response, 'affected_rows'>
-  )> }
-);
+export type DeleteRecipeListMutation = { __typename?: 'mutation_root', delete_recipe_lists?: { __typename?: 'recipe_lists_mutation_response', affected_rows: number } | null };
 
 export type ViewRecipeQueryQueryVariables = Exact<{
   id: Scalars['Int'];
 }>;
 
 
-export type ViewRecipeQueryQuery = (
-  { __typename?: 'query_root' }
-  & { recipes_by_pk?: Maybe<(
-    { __typename?: 'recipes' }
-    & Pick<Recipes, 'id' | 'name' | 'created_at' | 'source' | 'updated_at'>
-    & { recipe_ingredient_groups: Array<(
-      { __typename?: 'recipe_ingredient_groups' }
-      & Pick<Recipe_Ingredient_Groups, 'name'>
-      & { group_ingredients: Array<(
-        { __typename?: 'recipe_ingredients' }
-        & Pick<Recipe_Ingredients, 'id' | 'seq_num' | 'text' | 'name' | 'amount' | 'comment' | 'units'>
-        & { recipe_ingredient_food_candidates: Array<(
-          { __typename?: 'recipe_ingredient_food_candidate' }
-          & { food_portion?: Maybe<(
-            { __typename?: 'food_portion' }
-            & Pick<Food_Portion, 'gram_weight' | 'amount' | 'modifier' | 'portion_description'>
-            & { measure_unit?: Maybe<(
-              { __typename?: 'measure_unit' }
-              & Pick<Measure_Unit, 'name'>
-            )> }
-          )>, food: (
-            { __typename?: 'food' }
-            & Pick<Food, 'description'>
-          ) }
-        )> }
-      )> }
-    )>, recipe_directions: Array<(
-      { __typename?: 'recipe_directions' }
-      & Pick<Recipe_Directions, 'seq_num' | 'step'>
-    )>, recipe_tags: Array<(
-      { __typename?: 'recipe_tags' }
-      & Pick<Recipe_Tags, 'name' | 'id'>
-    )> }
-  )> }
-);
+export type ViewRecipeQueryQuery = { __typename?: 'query_root', recipes_by_pk?: { __typename?: 'recipes', id: number, name: string, created_at: any, source: string, updated_at: any, video?: string | null, recipe_ingredient_groups: Array<{ __typename?: 'recipe_ingredient_groups', name?: string | null, group_ingredients: Array<{ __typename?: 'recipe_ingredients', id: number, seq_num?: number | null, text: string, name?: string | null, amount?: number | null, comment?: string | null, units?: string | null, video_timestamp?: number | null, recipe_ingredient_food_candidates: Array<{ __typename?: 'recipe_ingredient_food_candidate', food_portion?: { __typename?: 'food_portion', gram_weight?: any | null, amount?: any | null, modifier?: string | null, portion_description?: string | null, measure_unit?: { __typename?: 'measure_unit', name?: string | null } | null } | null, food: { __typename?: 'food', description?: string | null } }> }> }>, recipe_directions: Array<{ __typename?: 'recipe_directions', seq_num: number, step: string, video_timestamp?: number | null }>, recipe_tags: Array<{ __typename?: 'recipe_tags', name: string, id: number }> } | null };
 
 export type GetRecipeListsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetRecipeListsQuery = (
-  { __typename?: 'query_root' }
-  & { recipe_lists: Array<(
-    { __typename?: 'recipe_lists' }
-    & Pick<Recipe_Lists, 'id' | 'name'>
-  )> }
-);
+export type GetRecipeListsQuery = { __typename?: 'query_root', recipe_lists: Array<{ __typename?: 'recipe_lists', id: number, name?: string | null }> };
 
 export type InsertRecipeIntoListMutationVariables = Exact<{
-  recipe_id?: Maybe<Scalars['Int']>;
-  recipe_list_id?: Maybe<Scalars['Int']>;
+  recipe_id?: InputMaybe<Scalars['Int']>;
+  recipe_list_id?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type InsertRecipeIntoListMutation = (
-  { __typename?: 'mutation_root' }
-  & { insert_recipe_list_items_one?: Maybe<(
-    { __typename?: 'recipe_list_items' }
-    & Pick<Recipe_List_Items, 'id'>
-  )> }
-);
+export type InsertRecipeIntoListMutation = { __typename?: 'mutation_root', insert_recipe_list_items_one?: { __typename?: 'recipe_list_items', id: number } | null };
 
 export type HideRecipeMutationVariables = Exact<{
-  id: Scalars['Int'];
+  id?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type HideRecipeMutation = (
-  { __typename?: 'mutation_root' }
-  & { update_recipes_by_pk?: Maybe<(
-    { __typename?: 'recipes' }
-    & Pick<Recipes, 'visible'>
-  )> }
-);
+export type HideRecipeMutation = { __typename?: 'mutation_root', update_recipes_by_pk?: { __typename?: 'recipes', id: number } | null };
 
 
 export const RecipeFoodCandidatesDocument = gql`
@@ -9268,6 +11634,7 @@ export const RecipesQueryDocument = gql`
   ) {
     id
     name
+    source
     created_at
   }
   recipes_aggregate(where: $where) {
@@ -9460,6 +11827,7 @@ export const ViewRecipeQueryDocument = gql`
     created_at
     source
     updated_at
+    video
     recipe_ingredient_groups(order_by: {seq_num: asc}) {
       name
       group_ingredients(order_by: {seq_num: asc}) {
@@ -9470,6 +11838,7 @@ export const ViewRecipeQueryDocument = gql`
         amount
         comment
         units
+        video_timestamp
         recipe_ingredient_food_candidates {
           food_portion {
             gram_weight
@@ -9489,6 +11858,7 @@ export const ViewRecipeQueryDocument = gql`
     recipe_directions(order_by: {seq_num: asc}) {
       seq_num
       step
+      video_timestamp
     }
     recipe_tags(order_by: {seq_num: asc}) {
       name
@@ -9597,9 +11967,9 @@ export type InsertRecipeIntoListMutationHookResult = ReturnType<typeof useInsert
 export type InsertRecipeIntoListMutationResult = Apollo.MutationResult<InsertRecipeIntoListMutation>;
 export type InsertRecipeIntoListMutationOptions = Apollo.BaseMutationOptions<InsertRecipeIntoListMutation, InsertRecipeIntoListMutationVariables>;
 export const HideRecipeDocument = gql`
-    mutation HideRecipe($id: Int!) {
+    mutation HideRecipe($id: Int = 0) {
   update_recipes_by_pk(pk_columns: {id: $id}, _set: {visible: false}) {
-    visible
+    id
   }
 }
     `;

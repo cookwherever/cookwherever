@@ -1,12 +1,6 @@
 module.exports = {
   schema: [
-    {
-      'https://food.vanderpot.net/v1/graphql': {
-        headers: {
-          'x-hasura-admin-secret': 'ilikefood123',
-        },
-      },
-    },
+    './schema.graphql'
   ],
   documents: ['./src/**/*.{js,jsx,ts,tsx}'],
   overwrite: true,

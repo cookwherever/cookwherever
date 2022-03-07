@@ -4,6 +4,7 @@ metadata:
   annotations:
     kompose.cmd: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
     kompose.service.expose: api.cookwherever.com
+    kompose.service.expose.tls-secret: cookwherever-com-tls
     kompose.version: 1.26.0 (40646f47)
   creationTimestamp: null
   labels:
@@ -20,6 +21,7 @@ spec:
       annotations:
         kompose.cmd: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
         kompose.service.expose: api.cookwherever.com
+        kompose.service.expose.tls-secret: cookwherever-com-tls
         kompose.version: 1.26.0 (40646f47)
       creationTimestamp: null
       labels:
@@ -61,11 +63,6 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: AUTH_ANONYMOUS_USERS_ENABLED
-                  name: env
-            - name: AUTH_CLIENT_URL
-              valueFrom:
-                configMapKeyRef:
-                  key: AUTH_CLIENT_URL
                   name: env
             - name: AUTH_DISABLE_NEW_USERS
               valueFrom:
@@ -177,11 +174,6 @@ spec:
                 configMapKeyRef:
                   key: AUTH_REFRESH_TOKEN_EXPIRES_IN
                   name: env
-            - name: AUTH_SERVER_URL
-              valueFrom:
-                configMapKeyRef:
-                  key: AUTH_SERVER_URL
-                  name: env
             - name: AUTH_SMS_PASSWORDLESS_ENABLED
               valueFrom:
                 configMapKeyRef:
@@ -257,7 +249,7 @@ spec:
             - name: HASURA_GRAPHQL_LOG_LEVEL
               value: debug
             - name: HASURA_GRAPHQL_UNAUTHORIZED_ROLE
-              value: public
+              value: anonymous
             - name: POSTGRES_PASSWORD
               valueFrom:
                 configMapKeyRef:

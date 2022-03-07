@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useCallback, useState} from 'react'
 
 
 import { gql, useMutation, useQuery } from '@apollo/client';
@@ -18,6 +18,7 @@ import { Col, Row, Container, ListGroup, Button, Form } from 'react-bootstrap';
 import { Recipe_Ingredient_Groups, Recipe_Ingredients, Recipe_Lists, Recipes } from '../../generated/graphql';
 import FoodCandidateList from '../../components/FoodCandidateList/FoodCandidateList';
 import { getSourceHostname } from '../../utils/format-recipe';
+import { VideoPlayer } from '../../components/VideoPlayer';
 
 
 const InstructionPaper = styled(Paper)(({ theme }) => ({
@@ -49,6 +50,7 @@ export const QUERY = gql`
       created_at
       source
       updated_at
+      video
       recipe_ingredient_groups(order_by: { seq_num: asc }) {
         name
         group_ingredients(order_by: { seq_num: asc }) {
@@ -59,6 +61,7 @@ export const QUERY = gql`
           amount 
           comment
           units
+          video_timestamp
           recipe_ingredient_food_candidates {
             food_portion {
               gram_weight
@@ -76,8 +79,10 @@ export const QUERY = gql`
         }
       }
       recipe_directions(order_by: { seq_num: asc }) {
+        id
         seq_num
         step
+        video_timestamp
       }
       recipe_tags(order_by: { seq_num: asc }) {
         name
@@ -116,9 +121,64 @@ mutation HideRecipe($id: Int = 0) {
 interface IngredientListProps {
   ingredientGroups: Recipe_Ingredient_Groups[];
   reloadRecipe: () => void;
+  setTimestamp: React.Dispatch<number>;
 }
 
-const Ingredient = (props: {ingredientGroup: Recipe_Ingredient_Groups, reloadRecipe: () => void}) => {
+interface IngredientGroupProps {
+  ingredientGroup: Recipe_Ingredient_Groups;
+  reloadRecipe: () => void;
+  setTimestamp: React.Dispatch<number>;
+}
+
+interface IngredientGroupItemProps {
+  ingredient: Recipe_Ingredients
+  setTimestamp: React.Dispatch<number>;
+}
+
+const IngredientGroupItem: React.FunctionComponent<IngredientGroupItemProps> = ({ ingredient, setTimestamp }) => {
+  console.log(ingredient.amount, ingredient.units);
+
+  const lookup: Record<string, number> = {
+    teaspoon: 1,
+    tablespoon: 3,
+    cup: 4 * 4 * 3,
+  };
+
+  if (ingredient.amount && ingredient.units) {
+    const modifier = lookup[ingredient.units];
+    const normalized = ingredient.amount / modifier;
+  }
+
+  const parsedInfo =  (<>- ({ingredient.name} {ingredient.amount} {ingredient.units})</>)
+
+  const doSetTimestamp = () => {
+    if (!ingredient.video_timestamp) return;
+    setTimestamp(ingredient.video_timestamp);
+  }
+
+  return (
+    <ListGroup.Item key={ingredient.id} onClick={doSetTimestamp}>
+      {ingredient.video_timestamp ? (
+        <Row>
+          <Col md={10}>
+            {ingredient.text}
+          </Col>
+          <Col md={2}>
+            <div onClick={doSetTimestamp}><i style={{ cursor: 'pointer' }} className='bi bi-play-circle' /></div>
+          </Col>
+        </Row>
+      ) : (
+        <Row>
+          <Col>
+            {ingredient.text}
+          </Col>
+        </Row>
+      )}
+    </ListGroup.Item>
+  )
+}
+
+const IngredientGroup = (props: IngredientGroupProps) => {
   const { ingredientGroup, reloadRecipe } = props;
   const getIngredientConversion = (ingredient: Recipe_Ingredients) => {
     return ingredient.recipe_ingredient_food_candidates.length
@@ -144,46 +204,24 @@ const Ingredient = (props: {ingredientGroup: Recipe_Ingredient_Groups, reloadRec
   };
 
   return (
-    <Container>
+    <>
       <Typography variant='h5'>{ingredientGroup.name}</Typography>
       <ListGroup>
-        {ingredientGroup.group_ingredients.map((ingredient, idx) => {
-          console.log(ingredient.amount, ingredient.units);
-          ingredient.recipe_ingredient_food_candidates.forEach(i => {
-            console.log(i);
-          });
-          const lookup: Record<string, number> = {
-            teaspoon: 1,
-            tablespoon: 3,
-            cup: 4 * 4 * 3,
-          };
-
-          if (ingredient.amount && ingredient.units) {
-            const modifier = lookup[ingredient.units];
-            const normalized = ingredient.amount / modifier;
-          }
-          return (
-            <ListGroup.Item>
-              {ingredient.text} - ({ingredient.name} {ingredient.amount} {ingredient.units})
-            </ListGroup.Item>
-          )
-        })}
+        {ingredientGroup.group_ingredients.map((ingredient, idx) => (<IngredientGroupItem key={ingredient.id} ingredient={ingredient} setTimestamp={props.setTimestamp} />))}
       </ListGroup>
-    </Container>
+    </>
   )
 }
 
 export const IngredientList: React.FunctionComponent<IngredientListProps> = (props) => {
   return (
-    <Container>
-      <Row>
-        {props.ingredientGroups.map((ingredient_group) => (
-          <Col sm key='recipe-ingredient-group'>
-            <Ingredient ingredientGroup={ingredient_group} reloadRecipe={props.reloadRecipe} />
-          </Col>
-        ))}
-      </Row>
-    </Container>
+    <>
+      {props.ingredientGroups.map((ingredient_group) => (
+        <Col sm key='recipe-ingredient-group'>
+          <IngredientGroup setTimestamp={props.setTimestamp} ingredientGroup={ingredient_group} reloadRecipe={props.reloadRecipe} />
+        </Col>
+      ))}
+    </>
   )
 }
 
@@ -265,6 +303,9 @@ const HideRecipe = (props: HideRecipeProps) => {
 export const ViewRecipePage: React.FunctionComponent<ViewRecipePageProps> = (props) => {
   const { id } = props.match.params;
 
+  const [timestamp, setTimestamp] = useState<number | null>(null);
+  const [currentDirection, setCurrentDirection] = useState<number | null>(null);
+
   const { loading, error, data, refetch } = useQuery(QUERY, {
     variables: {
       id
@@ -308,61 +349,78 @@ export const ViewRecipePage: React.FunctionComponent<ViewRecipePageProps> = (pro
 
   return (
     <Container className="ViewRecipePage" data-testid="ViewRecipePage">
-      <Row className='my-2'>
-        <Col xs={12} md={8}>
+      <Row className='my-3'>
+        <Col md={9}>
           <h1 className="text-4xl pb-8">
             {recipe.name}
           </h1>
-          <h5>from <a href={recipe.source}>{sourceHostname}</a></h5>
         </Col>
-        <Col className="p-3" xs={6} md={4}>
-          <Form>
-            <Row>
-              <Col md={8}>
-                <Form.Group controlId="formSaveToList">
-                  <SaveRecipe recipe={recipe} />
-                </Form.Group>
-              </Col>
-              <Col md={2}>
-                <Form.Group controlId="formPrint">
-                  <Button size="sm" onClick={printRecipe}>Print</Button>
-                </Form.Group>
-              </Col>
-              <Col md={2}>
-                <Form.Group controlId="formHide">
-                  <HideRecipe recipe={recipe} />
-                </Form.Group>
-              </Col>
-            </Row>
-          </Form>
+        <Col md={3}>
+          <h5 className='text-right' style={{ transform: 'translateY(50%)', top: '50%' }}>from <a href={recipe.source}>{sourceHostname}</a></h5>
         </Col>
+        {/* <Form> */}
+        {/*  <Row> */}
+        {/*    <Col md={8}> */}
+        {/*      <Form.Group controlId="formSaveToList"> */}
+        {/*        <SaveRecipe recipe={recipe} /> */}
+        {/*      </Form.Group> */}
+        {/*    </Col> */}
+        {/*    <Col md={2}> */}
+        {/*      <Form.Group controlId="formPrint"> */}
+        {/*        <Button size="sm" onClick={printRecipe}>Print</Button> */}
+        {/*      </Form.Group> */}
+        {/*    </Col> */}
+        {/*    <Col md={2}> */}
+        {/*      <Form.Group controlId="formHide"> */}
+        {/*        <HideRecipe recipe={recipe} /> */}
+        {/*      </Form.Group> */}
+        {/*    </Col> */}
+        {/*  </Row> */}
+        {/* </Form> */}
       </Row>
       <Row>
-        <Container>
-          <Row>
-            <Col xs={6} md={4}>
-              <h3>Ingredients</h3>
-              <IngredientList ingredientGroups={recipe.recipe_ingredient_groups} reloadRecipe={reloadRecipe} />
+        <Col xs={12} md={3} className='my-3'>
+          <h3>Prepare</h3>
+          <IngredientList setTimestamp={setTimestamp} ingredientGroups={recipe.recipe_ingredient_groups} reloadRecipe={reloadRecipe} />
+        </Col>
+        <Col xs={12} md={6} className='my-3'>
+          <h3>Directions</h3>
+          <ListGroup>
+            {recipe.recipe_directions.map((direction, idx) => {
+              const goToTimestamp = () => {
+                if (!direction.video_timestamp) return;
+                setTimestamp(direction.video_timestamp);
+              }
+              return (
+                <ListGroup.Item
+                  key={direction.id}
+                  className={['recipe-direction', direction.id === currentDirection ? 'recipe-direction-current' : ''].join(' ')}
+                  onClick={() => {
+                    setCurrentDirection(direction.id);
+                  }}
+                >
+                  <Row>
+                    <Col className='fs-5' md={11}>
+                      {/* <Highlighter searchWords={ingredientNames} textToHighlight={direction.step} autoEscape={false} /> */}
+                      <p>{direction.step}</p>
+                    </Col>
+                    <Col md={1}>
+                      {direction.video_timestamp && <div className='fs-2' onClick={goToTimestamp}><i style={{ cursor: 'pointer' }} className='bi bi-play-circle' /></div>}
+                    </Col>
+                  </Row>
+                </ListGroup.Item>
+              )
+            })}
+          </ListGroup>
+        </Col>
+        {
+          recipe.video && (
+            <Col xs={12} md={3}>
+              <h3>Watch</h3>
+              <VideoPlayer url={recipe.video} timestamp={timestamp} />
             </Col>
-            <Col xs={12} md={8}>
-              <h3>Directions</h3>
-              <Box sx={{ flexGrow: 1 }}>
-                <Grid container spacing={2}>
-                  {recipe.recipe_directions.map((direction, idx) => {
-                      return (
-                        <Grid sm={12}>
-                          <InstructionPaper key={direction.id}>
-                            <Highlighter searchWords={ingredientNames} textToHighlight={direction.step} autoEscape={false} />
-                          </InstructionPaper>
-                        </Grid>
-                      )
-                    }
-                  )}
-                </Grid>
-              </Box>
-            </Col>
-          </Row>
-        </Container>
+          )
+        }
       </Row>
     </Container>
   )

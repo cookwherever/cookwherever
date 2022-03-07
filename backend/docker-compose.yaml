@@ -1,22 +1,12 @@
 version: '3.6'
 services:
-  postgres:
-    image: postgres
-    restart: always
-    volumes:
-      - ./docker/data/db:/var/lib/postgresql/data
-      - ./docker/initdb.d:/docker-entrypoint-initdb.d:ro
-    environment:
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-secretpgpassword}
-    ports:
-      - '5432:5432'
   graphql-engine:
     image: hasura/graphql-engine:v2.1.1
     depends_on:
       - postgres
     restart: always
     environment:
-      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: public
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: anonymous
       HASURA_GRAPHQL_LOG_LEVEL: debug
       HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
     env_file:
@@ -25,6 +15,7 @@ services:
       - '8080:8080'
     labels:
       kompose.service.expose: "api.cookwherever.com"
+      kompose.service.expose.tls-secret: "cookwherever-com-tls"
   hasura-auth:
     image: nhost/hasura-auth:0.2.1
     depends_on:
@@ -33,12 +24,19 @@ services:
     env_file:
       - .env
     environment:
+      AUTH_CLIENT_URL: http://localhost:3000
+      AUTH_SERVER_URL: http://localhost:4000
       AUTH_SMTP_HOST: mailhog
       AUTH_SMTP_PORT: 1025
+      AUTH_PROVIDER_GOOGLE_CLIENT_ID: 875893625137-deq8eei4brrdlre3er989koj0437nd5t.apps.googleusercontent.com
+      AUTH_PROVIDER_GOOGLE_CLIENT_SECRET: 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
+    volumes:
+      - ./hasura-auth/migrations:/app/migrations
     ports:
       - '4000:4000'
     labels:
       kompose.service.expose: "login.cookwherever.com"
+      kompose.service.expose.tls-secret: "cookwherever-com-tls"
   mailhog:
     image: mailhog/mailhog
     environment:

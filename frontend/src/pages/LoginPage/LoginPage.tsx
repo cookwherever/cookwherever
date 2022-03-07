@@ -44,6 +44,7 @@ export const LoginPage: React.FunctionComponent<LoginPageProps> = (props) => {
 
     const data = await resp.json() as {session: {accessToken: string, user: {email: string}}}
     localStorage.setItem('token', data.session.accessToken);
+    localStorage.setItem('loginType', 'email-password');
     history.push('/')
   }
 

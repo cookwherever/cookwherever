@@ -247,6 +247,16 @@
           schema: public
           name: food_portion
   select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+      - fdc_id
+      - food_category_id
+      - description
+      - publication_date
+      - description_tsv
+      - data_type
+      filter: {}
   - role: user
     permission:
       columns:
@@ -291,6 +301,21 @@
     using:
       foreign_key_constraint_on: measure_unit_id
   select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+      - footnote
+      - modifier
+      - portion_description
+      - amount
+      - gram_weight
+      - data_points
+      - fdc_id
+      - id
+      - measure_unit_id
+      - min_year_acquired
+      - seq_num
+      filter: {}
   - role: user
     permission:
       columns:
@@ -310,6 +335,13 @@
     schema: public
     name: measure_unit
   select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+      - name
+      - ml
+      - id
+      filter: {}
   - role: user
     permission:
       columns:
@@ -371,13 +403,23 @@
       - recipe_id
       backend_only: false
   select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+      - id
+      - recipe_id
+      - seq_num
+      - video_timestamp
+      - step
+      filter: {}
   - role: user
     permission:
       columns:
       - id
+      - recipe_id
       - seq_num
       - step
-      - recipe_id
+      - video_timestamp
       filter: {}
   update_permissions:
   - role: user
@@ -448,6 +490,14 @@
       - recipe_ingredient_id
       backend_only: false
   select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+      - food_candidate_id
+      - food_candidate_portion_id
+      - id
+      - recipe_ingredient_id
+      filter: {}
   - role: user
     permission:
       columns:
@@ -492,6 +542,14 @@
       - seq_num
       backend_only: false
   select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+      - id
+      - recipe_id
+      - seq_num
+      - name
+      filter: {}
   - role: user
     permission:
       columns:
@@ -558,18 +616,33 @@
       - group_id
       backend_only: false
   select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+      - food_id
+      - group_id
+      - id
+      - seq_num
+      - video_timestamp
+      - amount
+      - comment
+      - name
+      - text
+      - units
+      filter: {}
   - role: user
     permission:
       columns:
-      - id
-      - name
       - amount
-      - units
       - comment
       - food_id
-      - text
-      - seq_num
       - group_id
+      - id
+      - name
+      - seq_num
+      - text
+      - units
+      - video_timestamp
       filter: {}
   update_permissions:
   - role: user
@@ -685,6 +758,14 @@
       - seq_num
       backend_only: false
   select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+      - id
+      - recipe_id
+      - seq_num
+      - name
+      filter: {}
   - role: user
     permission:
       columns:
@@ -749,6 +830,20 @@
       - extraction_metadata
       backend_only: false
   select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+      - visible
+      - id
+      - extraction_metadata
+      - image
+      - name
+      - source
+      - video
+      - created_at
+      - updated_at
+      filter: {}
+      allow_aggregations: true
   - role: user
     permission:
       columns:
@@ -759,6 +854,7 @@
       - name
       - source
       - updated_at
+      - video
       - visible
       filter: {}
       allow_aggregations: true

@@ -1,3 +1,5 @@
+import os
+
 import requests
 import json
 
@@ -33,7 +35,11 @@ def execute_create_recipes(recipes):
         }
     }
 
-    resp = requests.post("https://food.vanderpot.net/v1/graphql", headers=headers, data=json.dumps(body))
+    graphql_env = os.environ.get('GRAPHQL_URL')
+
+    graphql_url = graphql_env if graphql_env is not None else "http://localhost:8080/v1/graphql"
+
+    resp = requests.post(graphql_url, headers=headers, data=json.dumps(body))
     if resp.status_code != 200:
         print(resp.status_code)
         print(resp.text)

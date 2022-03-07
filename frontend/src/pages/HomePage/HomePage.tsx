@@ -98,7 +98,6 @@ export const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
   const history = useHistory();
 
   const params = new URLSearchParams(hash.replace('#', ''));
-  console.log(hash, params);
   const refreshToken = params.get('refreshToken')
 
   useEffect(() => {

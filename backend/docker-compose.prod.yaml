@@ -1,12 +1,13 @@
 version: '3.6'
 services:
   frontend:
-    image: cthompson4321/fooddata-frontend:v0.0.8
+    image: cthompson4321/fooddata-frontend:v0.0.11
     restart: always
     ports:
       - '80:80'
     labels:
       kompose.service.expose: "cookwherever.com"
+      kompose.service.expose.tls-secret: "cookwherever-com-tls"
   hasura-auth:
     environment:
       AUTH_SERVER_URL: https://login.cookwherever.com

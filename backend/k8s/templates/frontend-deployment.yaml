@@ -4,6 +4,7 @@ metadata:
   annotations:
     kompose.cmd: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
     kompose.service.expose: cookwherever.com
+    kompose.service.expose.tls-secret: cookwherever-com-tls
     kompose.version: 1.26.0 (40646f47)
   creationTimestamp: null
   labels:
@@ -20,13 +21,14 @@ spec:
       annotations:
         kompose.cmd: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
         kompose.service.expose: cookwherever.com
+        kompose.service.expose.tls-secret: cookwherever-com-tls
         kompose.version: 1.26.0 (40646f47)
       creationTimestamp: null
       labels:
         io.kompose.service: frontend
     spec:
       containers:
-        - image: cthompson4321/fooddata-frontend:v0.0.8
+        - image: cthompson4321/fooddata-frontend:v0.0.11
           name: frontend
           ports:
             - containerPort: 80

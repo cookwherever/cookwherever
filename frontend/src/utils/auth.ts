@@ -19,4 +19,23 @@ export const getRefreshedToken = async (refreshToken: string): Promise<void> => 
 
   const data = await resp.json() as {accessToken: string, user: {email: string}}
   localStorage.setItem('token', data.accessToken);
+  localStorage.setItem('loginType', 'oauth');
+}
+
+export const anonymousSignin = async (): Promise<void> => {
+  const resp = await fetch(`${authUrl}/signin/anonymous`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+  })
+
+  if (!resp.ok) {
+    throw new Error('unable to sign in anonymously');
+  }
+
+  const data = await resp.json() as {accessToken: string, user: {email: string}}
+  localStorage.setItem('token', data.accessToken);
+  localStorage.setItem('loginType', 'anonymous');
 }
