@@ -2,18 +2,19 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Pagination } from '@mui/material';
 import { gql, useQuery } from '@apollo/client';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
-import { Recipes, Recipes_Aggregate, Recipes_Bool_Exp } from '../../generated/graphql';
+import {Recipes, Recipes_Aggregate, Recipes_Bool_Exp, useRecipesQueryQuery} from '../../generated/graphql';
 import { RecipeSearch } from '../../types/component-types';
 import { getSourceHostname } from '../../utils/format-recipe';
 import {useHistory} from "react-router-dom";
 
 export const QUERY = gql`
-  query RecipesQuery($where: recipes_bool_exp!, $limit: Int = 10, $offset: Int = 0) {
-    recipes(where: $where, limit: $limit, offset: $offset, order_by: {updated_at: asc}) {
+  query RecipesQuery($search: String, $where: recipes_bool_exp!, $limit: Int = 10, $offset: Int = 0) {
+    search_recipes(args: {search: $search}, where: $where, limit: $limit, offset: $offset, order_by: {updated_at: asc}) {
       id
       name
       source
       created_at
+      image
     }
     recipes_aggregate(where: $where) {
         aggregate {
@@ -64,14 +65,6 @@ export const RecipesList: React.FunctionComponent<RecipesListProps> = (props) =>
     }
   ];
 
-  if (recipeSearch.name !== '') {
-    whereConditions.push({
-      name: {
-        _ilike: `%${recipeSearch.name}%`
-      }
-    });
-  }
-
   if (recipeSearch.source !== '') {
     whereConditions.push({
       source: {
@@ -96,8 +89,9 @@ export const RecipesList: React.FunctionComponent<RecipesListProps> = (props) =>
 
   const where: Recipes_Bool_Exp = getRecipeSearchWhere(whereConditions);
 
-  const { loading, error, data } = useQuery(QUERY, {
+  const { loading, error, data } = useRecipesQueryQuery({
     variables: {
+      search: recipeSearch.name,
       where,
       limit: resultsPerPage,
       offset: resultsPerPage * page
@@ -106,17 +100,15 @@ export const RecipesList: React.FunctionComponent<RecipesListProps> = (props) =>
 
   if (loading) return (<h4>'Loading...'</h4>);
   if (error) return (<h4>{`Error! ${error.message}`}</h4>);
+  if (!data) return (<h4>No data!</h4>);
 
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  const { recipes, recipes_aggregate } = data as {recipes_aggregate: Recipes_Aggregate, recipes: Recipes[]};
-
-  if (recipes.length === 0) {
+  if (!data.search_recipes || data.search_recipes.length === 0) {
     return (
       <p>Search for a recipe!</p>
     )
   }
 
-  const recipeCount = recipes_aggregate.aggregate;
+  const recipeCount = data.recipes_aggregate.aggregate;
   if (!recipeCount) {
     return (
       <p>Search for a recipe!</p>
@@ -128,7 +120,9 @@ export const RecipesList: React.FunctionComponent<RecipesListProps> = (props) =>
   return (
     <Container>
       <Row>
-        {recipes.map((recipe: Recipes, idx) => {
+        {data.search_recipes.map((recipe, idx) => {
+          if (!recipe) return null;
+
           const recipeImage = recipe.image || 'https://via.placeholder.com/300x250';
           return (
             <Col

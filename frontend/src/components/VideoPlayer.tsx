@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState } from 'react';
 import YouTube from 'react-youtube';
 import { YouTubePlayer } from 'youtube-player/dist/types';
 
@@ -7,7 +7,7 @@ interface VideoPlayerProps {
   timestamp: number | null;
 }
 
-export const VideoPlayer: React.FunctionComponent<VideoPlayerProps> = ({url, timestamp}) => {
+export const VideoPlayer: React.FunctionComponent<VideoPlayerProps> = ({ url, timestamp }) => {
   const parsedUrl = new URL(url);
   const videoId = parsedUrl.searchParams.get('v') || '';
   const [player, setPlayer] = useState<YouTubePlayer | null>(null);
@@ -29,7 +29,7 @@ export const VideoPlayer: React.FunctionComponent<VideoPlayerProps> = ({url, tim
 
   return (
     <div className='youtube-player'>
-      <YouTube videoId={videoId} opts={opts} onReady={onReady} />
+      <YouTube videoId={videoId} opts={opts} onReady={onReady} onStateChange={(event) => {console.log(event)}} />
     </div>
   )
 }

@@ -11476,13 +11476,14 @@ export type InsertFoodCandidateForIngredientMutationVariables = Exact<{
 export type InsertFoodCandidateForIngredientMutation = { __typename?: 'mutation_root', insert_recipe_ingredient_food_candidate_one?: { __typename?: 'recipe_ingredient_food_candidate', id: number } | null };
 
 export type RecipesQueryQueryVariables = Exact<{
+  search?: InputMaybe<Scalars['String']>;
   where: Recipes_Bool_Exp;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type RecipesQueryQuery = { __typename?: 'query_root', recipes: Array<{ __typename?: 'recipes', id: number, name: string, source: string, created_at: any }>, recipes_aggregate: { __typename?: 'recipes_aggregate', aggregate?: { __typename?: 'recipes_aggregate_fields', count: number } | null } };
+export type RecipesQueryQuery = { __typename?: 'query_root', search_recipes: Array<{ __typename?: 'recipes', id: number, name: string, source: string, created_at: any, image?: string | null }>, recipes_aggregate: { __typename?: 'recipes_aggregate', aggregate?: { __typename?: 'recipes_aggregate_fields', count: number } | null } };
 
 export type InsertRecipeMutationVariables = Exact<{
   recipe: Recipes_Insert_Input;
@@ -11490,6 +11491,26 @@ export type InsertRecipeMutationVariables = Exact<{
 
 
 export type InsertRecipeMutation = { __typename?: 'mutation_root', insert_recipes_one?: { __typename?: 'recipes', id: number } | null };
+
+export type GetRecipeListsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetRecipeListsQuery = { __typename?: 'query_root', recipe_lists: Array<{ __typename?: 'recipe_lists', id: number, name?: string | null }> };
+
+export type InsertRecipeIntoListMutationVariables = Exact<{
+  recipe_id?: InputMaybe<Scalars['Int']>;
+  recipe_list_id?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type InsertRecipeIntoListMutation = { __typename?: 'mutation_root', insert_recipe_list_items_one?: { __typename?: 'recipe_list_items', id: number } | null };
+
+export type HideRecipeMutationVariables = Exact<{
+  id?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type HideRecipeMutation = { __typename?: 'mutation_root', update_recipes_by_pk?: { __typename?: 'recipes', id: number } | null };
 
 export type GetUserRecipeListsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -11515,27 +11536,23 @@ export type ViewRecipeQueryQueryVariables = Exact<{
 }>;
 
 
-export type ViewRecipeQueryQuery = { __typename?: 'query_root', recipes_by_pk?: { __typename?: 'recipes', id: number, name: string, created_at: any, source: string, updated_at: any, video?: string | null, recipe_ingredient_groups: Array<{ __typename?: 'recipe_ingredient_groups', name?: string | null, group_ingredients: Array<{ __typename?: 'recipe_ingredients', id: number, seq_num?: number | null, text: string, name?: string | null, amount?: number | null, comment?: string | null, units?: string | null, video_timestamp?: number | null, recipe_ingredient_food_candidates: Array<{ __typename?: 'recipe_ingredient_food_candidate', food_portion?: { __typename?: 'food_portion', gram_weight?: any | null, amount?: any | null, modifier?: string | null, portion_description?: string | null, measure_unit?: { __typename?: 'measure_unit', name?: string | null } | null } | null, food: { __typename?: 'food', description?: string | null } }> }> }>, recipe_directions: Array<{ __typename?: 'recipe_directions', seq_num: number, step: string, video_timestamp?: number | null }>, recipe_tags: Array<{ __typename?: 'recipe_tags', name: string, id: number }> } | null };
+export type ViewRecipeQueryQuery = { __typename?: 'query_root', recipes_by_pk?: { __typename?: 'recipes', id: number, name: string, created_at: any, source: string, updated_at: any, video?: string | null, recipe_ingredient_groups: Array<{ __typename?: 'recipe_ingredient_groups', name?: string | null, group_ingredients: Array<{ __typename?: 'recipe_ingredients', id: number, seq_num?: number | null, text: string, name?: string | null, amount?: number | null, comment?: string | null, units?: string | null, video_timestamp?: number | null, recipe_ingredient_food_candidates: Array<{ __typename?: 'recipe_ingredient_food_candidate', food_portion?: { __typename?: 'food_portion', gram_weight?: any | null, amount?: any | null, modifier?: string | null, portion_description?: string | null, measure_unit?: { __typename?: 'measure_unit', name?: string | null } | null } | null, food: { __typename?: 'food', description?: string | null } }> }> }>, recipe_directions: Array<{ __typename?: 'recipe_directions', id: number, seq_num: number, step: string, video_timestamp?: number | null }>, recipe_tags: Array<{ __typename?: 'recipe_tags', name: string, id: number }> } | null };
 
-export type GetRecipeListsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetRecipeListsQuery = { __typename?: 'query_root', recipe_lists: Array<{ __typename?: 'recipe_lists', id: number, name?: string | null }> };
-
-export type InsertRecipeIntoListMutationVariables = Exact<{
-  recipe_id?: InputMaybe<Scalars['Int']>;
-  recipe_list_id?: InputMaybe<Scalars['Int']>;
+export type UpsertDirectionVideoTimestampMutationVariables = Exact<{
+  video_timestamp?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Int_Comparison_Exp>;
 }>;
 
 
-export type InsertRecipeIntoListMutation = { __typename?: 'mutation_root', insert_recipe_list_items_one?: { __typename?: 'recipe_list_items', id: number } | null };
+export type UpsertDirectionVideoTimestampMutation = { __typename?: 'mutation_root', update_recipe_directions?: { __typename?: 'recipe_directions_mutation_response', affected_rows: number } | null };
 
-export type HideRecipeMutationVariables = Exact<{
-  id?: InputMaybe<Scalars['Int']>;
+export type UpsertIngredientVideoTimestampMutationVariables = Exact<{
+  id?: InputMaybe<Int_Comparison_Exp>;
+  video_timestamp?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type HideRecipeMutation = { __typename?: 'mutation_root', update_recipes_by_pk?: { __typename?: 'recipes', id: number } | null };
+export type UpsertIngredientVideoTimestampMutation = { __typename?: 'mutation_root', update_recipe_ingredients?: { __typename?: 'recipe_ingredients_mutation_response', affected_rows: number } | null };
 
 
 export const RecipeFoodCandidatesDocument = gql`
@@ -11625,8 +11642,9 @@ export type InsertFoodCandidateForIngredientMutationHookResult = ReturnType<type
 export type InsertFoodCandidateForIngredientMutationResult = Apollo.MutationResult<InsertFoodCandidateForIngredientMutation>;
 export type InsertFoodCandidateForIngredientMutationOptions = Apollo.BaseMutationOptions<InsertFoodCandidateForIngredientMutation, InsertFoodCandidateForIngredientMutationVariables>;
 export const RecipesQueryDocument = gql`
-    query RecipesQuery($where: recipes_bool_exp!, $limit: Int = 10, $offset: Int = 0) {
-  recipes(
+    query RecipesQuery($search: String, $where: recipes_bool_exp!, $limit: Int = 10, $offset: Int = 0) {
+  search_recipes(
+    args: {search: $search}
     where: $where
     limit: $limit
     offset: $offset
@@ -11636,6 +11654,7 @@ export const RecipesQueryDocument = gql`
     name
     source
     created_at
+    image
   }
   recipes_aggregate(where: $where) {
     aggregate {
@@ -11657,6 +11676,7 @@ export const RecipesQueryDocument = gql`
  * @example
  * const { data, loading, error } = useRecipesQueryQuery({
  *   variables: {
+ *      search: // value for 'search'
  *      where: // value for 'where'
  *      limit: // value for 'limit'
  *      offset: // value for 'offset'
@@ -11710,6 +11730,110 @@ export function useInsertRecipeMutation(baseOptions?: Apollo.MutationHookOptions
 export type InsertRecipeMutationHookResult = ReturnType<typeof useInsertRecipeMutation>;
 export type InsertRecipeMutationResult = Apollo.MutationResult<InsertRecipeMutation>;
 export type InsertRecipeMutationOptions = Apollo.BaseMutationOptions<InsertRecipeMutation, InsertRecipeMutationVariables>;
+export const GetRecipeListsDocument = gql`
+    query GetRecipeLists {
+  recipe_lists {
+    id
+    name
+  }
+}
+    `;
+
+/**
+ * __useGetRecipeListsQuery__
+ *
+ * To run a query within a React component, call `useGetRecipeListsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetRecipeListsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetRecipeListsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetRecipeListsQuery(baseOptions?: Apollo.QueryHookOptions<GetRecipeListsQuery, GetRecipeListsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetRecipeListsQuery, GetRecipeListsQueryVariables>(GetRecipeListsDocument, options);
+      }
+export function useGetRecipeListsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetRecipeListsQuery, GetRecipeListsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetRecipeListsQuery, GetRecipeListsQueryVariables>(GetRecipeListsDocument, options);
+        }
+export type GetRecipeListsQueryHookResult = ReturnType<typeof useGetRecipeListsQuery>;
+export type GetRecipeListsLazyQueryHookResult = ReturnType<typeof useGetRecipeListsLazyQuery>;
+export type GetRecipeListsQueryResult = Apollo.QueryResult<GetRecipeListsQuery, GetRecipeListsQueryVariables>;
+export const InsertRecipeIntoListDocument = gql`
+    mutation InsertRecipeIntoList($recipe_id: Int = 10, $recipe_list_id: Int = 10) {
+  insert_recipe_list_items_one(
+    object: {recipe_id: $recipe_id, recipe_list_id: $recipe_list_id}
+  ) {
+    id
+  }
+}
+    `;
+export type InsertRecipeIntoListMutationFn = Apollo.MutationFunction<InsertRecipeIntoListMutation, InsertRecipeIntoListMutationVariables>;
+
+/**
+ * __useInsertRecipeIntoListMutation__
+ *
+ * To run a mutation, you first call `useInsertRecipeIntoListMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInsertRecipeIntoListMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [insertRecipeIntoListMutation, { data, loading, error }] = useInsertRecipeIntoListMutation({
+ *   variables: {
+ *      recipe_id: // value for 'recipe_id'
+ *      recipe_list_id: // value for 'recipe_list_id'
+ *   },
+ * });
+ */
+export function useInsertRecipeIntoListMutation(baseOptions?: Apollo.MutationHookOptions<InsertRecipeIntoListMutation, InsertRecipeIntoListMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<InsertRecipeIntoListMutation, InsertRecipeIntoListMutationVariables>(InsertRecipeIntoListDocument, options);
+      }
+export type InsertRecipeIntoListMutationHookResult = ReturnType<typeof useInsertRecipeIntoListMutation>;
+export type InsertRecipeIntoListMutationResult = Apollo.MutationResult<InsertRecipeIntoListMutation>;
+export type InsertRecipeIntoListMutationOptions = Apollo.BaseMutationOptions<InsertRecipeIntoListMutation, InsertRecipeIntoListMutationVariables>;
+export const HideRecipeDocument = gql`
+    mutation HideRecipe($id: Int = 0) {
+  update_recipes_by_pk(pk_columns: {id: $id}, _set: {visible: false}) {
+    id
+  }
+}
+    `;
+export type HideRecipeMutationFn = Apollo.MutationFunction<HideRecipeMutation, HideRecipeMutationVariables>;
+
+/**
+ * __useHideRecipeMutation__
+ *
+ * To run a mutation, you first call `useHideRecipeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useHideRecipeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [hideRecipeMutation, { data, loading, error }] = useHideRecipeMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useHideRecipeMutation(baseOptions?: Apollo.MutationHookOptions<HideRecipeMutation, HideRecipeMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<HideRecipeMutation, HideRecipeMutationVariables>(HideRecipeDocument, options);
+      }
+export type HideRecipeMutationHookResult = ReturnType<typeof useHideRecipeMutation>;
+export type HideRecipeMutationResult = Apollo.MutationResult<HideRecipeMutation>;
+export type HideRecipeMutationOptions = Apollo.BaseMutationOptions<HideRecipeMutation, HideRecipeMutationVariables>;
 export const GetUserRecipeListsDocument = gql`
     query GetUserRecipeLists {
   recipe_lists {
@@ -11856,6 +11980,7 @@ export const ViewRecipeQueryDocument = gql`
       }
     }
     recipe_directions(order_by: {seq_num: asc}) {
+      id
       seq_num
       step
       video_timestamp
@@ -11895,107 +12020,77 @@ export function useViewRecipeQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type ViewRecipeQueryQueryHookResult = ReturnType<typeof useViewRecipeQueryQuery>;
 export type ViewRecipeQueryLazyQueryHookResult = ReturnType<typeof useViewRecipeQueryLazyQuery>;
 export type ViewRecipeQueryQueryResult = Apollo.QueryResult<ViewRecipeQueryQuery, ViewRecipeQueryQueryVariables>;
-export const GetRecipeListsDocument = gql`
-    query GetRecipeLists {
-  recipe_lists {
-    id
-    name
-  }
-}
-    `;
-
-/**
- * __useGetRecipeListsQuery__
- *
- * To run a query within a React component, call `useGetRecipeListsQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetRecipeListsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetRecipeListsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useGetRecipeListsQuery(baseOptions?: Apollo.QueryHookOptions<GetRecipeListsQuery, GetRecipeListsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetRecipeListsQuery, GetRecipeListsQueryVariables>(GetRecipeListsDocument, options);
-      }
-export function useGetRecipeListsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetRecipeListsQuery, GetRecipeListsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetRecipeListsQuery, GetRecipeListsQueryVariables>(GetRecipeListsDocument, options);
-        }
-export type GetRecipeListsQueryHookResult = ReturnType<typeof useGetRecipeListsQuery>;
-export type GetRecipeListsLazyQueryHookResult = ReturnType<typeof useGetRecipeListsLazyQuery>;
-export type GetRecipeListsQueryResult = Apollo.QueryResult<GetRecipeListsQuery, GetRecipeListsQueryVariables>;
-export const InsertRecipeIntoListDocument = gql`
-    mutation InsertRecipeIntoList($recipe_id: Int = 10, $recipe_list_id: Int = 10) {
-  insert_recipe_list_items_one(
-    object: {recipe_id: $recipe_id, recipe_list_id: $recipe_list_id}
+export const UpsertDirectionVideoTimestampDocument = gql`
+    mutation UpsertDirectionVideoTimestamp($video_timestamp: Int, $id: Int_comparison_exp) {
+  update_recipe_directions(
+    where: {id: $id}
+    _set: {video_timestamp: $video_timestamp}
   ) {
-    id
+    affected_rows
   }
 }
     `;
-export type InsertRecipeIntoListMutationFn = Apollo.MutationFunction<InsertRecipeIntoListMutation, InsertRecipeIntoListMutationVariables>;
+export type UpsertDirectionVideoTimestampMutationFn = Apollo.MutationFunction<UpsertDirectionVideoTimestampMutation, UpsertDirectionVideoTimestampMutationVariables>;
 
 /**
- * __useInsertRecipeIntoListMutation__
+ * __useUpsertDirectionVideoTimestampMutation__
  *
- * To run a mutation, you first call `useInsertRecipeIntoListMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useInsertRecipeIntoListMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useUpsertDirectionVideoTimestampMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpsertDirectionVideoTimestampMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [insertRecipeIntoListMutation, { data, loading, error }] = useInsertRecipeIntoListMutation({
+ * const [upsertDirectionVideoTimestampMutation, { data, loading, error }] = useUpsertDirectionVideoTimestampMutation({
  *   variables: {
- *      recipe_id: // value for 'recipe_id'
- *      recipe_list_id: // value for 'recipe_list_id'
- *   },
- * });
- */
-export function useInsertRecipeIntoListMutation(baseOptions?: Apollo.MutationHookOptions<InsertRecipeIntoListMutation, InsertRecipeIntoListMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<InsertRecipeIntoListMutation, InsertRecipeIntoListMutationVariables>(InsertRecipeIntoListDocument, options);
-      }
-export type InsertRecipeIntoListMutationHookResult = ReturnType<typeof useInsertRecipeIntoListMutation>;
-export type InsertRecipeIntoListMutationResult = Apollo.MutationResult<InsertRecipeIntoListMutation>;
-export type InsertRecipeIntoListMutationOptions = Apollo.BaseMutationOptions<InsertRecipeIntoListMutation, InsertRecipeIntoListMutationVariables>;
-export const HideRecipeDocument = gql`
-    mutation HideRecipe($id: Int = 0) {
-  update_recipes_by_pk(pk_columns: {id: $id}, _set: {visible: false}) {
-    id
-  }
-}
-    `;
-export type HideRecipeMutationFn = Apollo.MutationFunction<HideRecipeMutation, HideRecipeMutationVariables>;
-
-/**
- * __useHideRecipeMutation__
- *
- * To run a mutation, you first call `useHideRecipeMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useHideRecipeMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [hideRecipeMutation, { data, loading, error }] = useHideRecipeMutation({
- *   variables: {
+ *      video_timestamp: // value for 'video_timestamp'
  *      id: // value for 'id'
  *   },
  * });
  */
-export function useHideRecipeMutation(baseOptions?: Apollo.MutationHookOptions<HideRecipeMutation, HideRecipeMutationVariables>) {
+export function useUpsertDirectionVideoTimestampMutation(baseOptions?: Apollo.MutationHookOptions<UpsertDirectionVideoTimestampMutation, UpsertDirectionVideoTimestampMutationVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<HideRecipeMutation, HideRecipeMutationVariables>(HideRecipeDocument, options);
+        return Apollo.useMutation<UpsertDirectionVideoTimestampMutation, UpsertDirectionVideoTimestampMutationVariables>(UpsertDirectionVideoTimestampDocument, options);
       }
-export type HideRecipeMutationHookResult = ReturnType<typeof useHideRecipeMutation>;
-export type HideRecipeMutationResult = Apollo.MutationResult<HideRecipeMutation>;
-export type HideRecipeMutationOptions = Apollo.BaseMutationOptions<HideRecipeMutation, HideRecipeMutationVariables>;
+export type UpsertDirectionVideoTimestampMutationHookResult = ReturnType<typeof useUpsertDirectionVideoTimestampMutation>;
+export type UpsertDirectionVideoTimestampMutationResult = Apollo.MutationResult<UpsertDirectionVideoTimestampMutation>;
+export type UpsertDirectionVideoTimestampMutationOptions = Apollo.BaseMutationOptions<UpsertDirectionVideoTimestampMutation, UpsertDirectionVideoTimestampMutationVariables>;
+export const UpsertIngredientVideoTimestampDocument = gql`
+    mutation UpsertIngredientVideoTimestamp($id: Int_comparison_exp, $video_timestamp: Int) {
+  update_recipe_ingredients(
+    where: {id: $id}
+    _set: {video_timestamp: $video_timestamp}
+  ) {
+    affected_rows
+  }
+}
+    `;
+export type UpsertIngredientVideoTimestampMutationFn = Apollo.MutationFunction<UpsertIngredientVideoTimestampMutation, UpsertIngredientVideoTimestampMutationVariables>;
+
+/**
+ * __useUpsertIngredientVideoTimestampMutation__
+ *
+ * To run a mutation, you first call `useUpsertIngredientVideoTimestampMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpsertIngredientVideoTimestampMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [upsertIngredientVideoTimestampMutation, { data, loading, error }] = useUpsertIngredientVideoTimestampMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      video_timestamp: // value for 'video_timestamp'
+ *   },
+ * });
+ */
+export function useUpsertIngredientVideoTimestampMutation(baseOptions?: Apollo.MutationHookOptions<UpsertIngredientVideoTimestampMutation, UpsertIngredientVideoTimestampMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpsertIngredientVideoTimestampMutation, UpsertIngredientVideoTimestampMutationVariables>(UpsertIngredientVideoTimestampDocument, options);
+      }
+export type UpsertIngredientVideoTimestampMutationHookResult = ReturnType<typeof useUpsertIngredientVideoTimestampMutation>;
+export type UpsertIngredientVideoTimestampMutationResult = Apollo.MutationResult<UpsertIngredientVideoTimestampMutation>;
+export type UpsertIngredientVideoTimestampMutationOptions = Apollo.BaseMutationOptions<UpsertIngredientVideoTimestampMutation, UpsertIngredientVideoTimestampMutationVariables>;

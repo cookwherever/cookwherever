@@ -88,6 +88,9 @@ class AbstractScraper:
         """The number of servings or items in the recipe"""
         raise NotImplementedError("This should be implemented.")
 
+    def tags(self):
+        raise NotImplementedError("This should be implemented.")
+
     def image(self):
         raise NotImplementedError("This should be implemented.")
 

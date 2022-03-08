@@ -35,8 +35,7 @@ const RecipeSearchForm: React.FunctionComponent<RecipeSearchFormProps> = ({ reci
           <Form.Control
             required
             type="text"
-            placeholder="Recipe Name"
-            defaultValue="Apple Pie"
+            placeholder="Apple Pie"
             onChange={(e) => {
               setRecipeSearch({
                 ...recipeSearch,
@@ -50,8 +49,7 @@ const RecipeSearchForm: React.FunctionComponent<RecipeSearchFormProps> = ({ reci
           <Form.Control
             required
             type="text"
-            placeholder="Source Name"
-            defaultValue="americastestkitchen.com"
+            placeholder="seriouseats.com"
             onChange={(e) => {
               setRecipeSearch({
                 ...recipeSearch,

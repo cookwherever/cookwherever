@@ -1,3 +1,5 @@
+import string
+
 from ._abstract import AbstractScraper
 from ._utils import get_minutes, get_yields, normalize_string
 
@@ -13,6 +15,9 @@ class SeriousEats(AbstractScraper):
 
     def title(self):
         return self.soup.find("h1").get_text()
+
+    def tags(self):
+        return [tag.get_text().strip() for tag in self.soup.findAll("li", {"class": "tag-nav__item"})]
 
     def is_article(self):
         return self.soup.find("div", {"class": "article__container"}) is not None
