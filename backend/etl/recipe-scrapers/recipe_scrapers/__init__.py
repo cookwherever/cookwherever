@@ -106,6 +106,7 @@ from .nihhealthyeating import NIHHealthyEating
 from .nourishedbynutrition import NourishedByNutrition
 from .nutritionbynathalie import NutritionByNathalie
 from .nytimes import NYTimes
+from .joshuaweissman import JoshuaWeissman
 from .ohsheglows import OhSheGlows
 from .onehundredonecookbooks import OneHundredOneCookBooks
 from .paleorunningmomma import PaleoRunningMomma
@@ -261,7 +262,6 @@ SCRAPERS = {
     LeCremeDeLaCrumb.host(): LeCremeDeLaCrumb,
     LittleSpiceJar.host(): LittleSpiceJar,
     LivelyTable.host(): LivelyTable,
-    Lovingitvegan.host(): Lovingitvegan,
     Marmiton.host(): Marmiton,
     MarthaStewart.host(): MarthaStewart,
     Matprat.host(): Matprat,
@@ -278,6 +278,7 @@ SCRAPERS = {
     MyRecipes.host(): MyRecipes,
     NIHHealthyEating.host(): NIHHealthyEating,
     NYTimes.host(): NYTimes,
+    JoshuaWeissman.host(): JoshuaWeissman,
     NourishedByNutrition.host(): NourishedByNutrition,
     NutritionByNathalie.host(): NutritionByNathalie,
     OhSheGlows.host(): OhSheGlows,

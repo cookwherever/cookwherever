@@ -14,6 +14,11 @@ class Epicurious(AbstractScraper):
         recipe_json = self.soup.find('script', {'type': 'application/ld+json'}).get_text()
         return json.loads(recipe_json)
 
+    def tags(self):
+        tag_wrapper = self.soup.find('div', {'data-testid': 'TagCloudWrapper'})
+        tag_anchors = tag_wrapper.findAll('a')
+        return [tag_anchor.get_text().strip() for tag_anchor in tag_anchors]
+
     def title(self):
         return self.recipe['name']
 

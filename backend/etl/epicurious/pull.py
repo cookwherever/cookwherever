@@ -73,6 +73,7 @@ def get_recipe(recipe_id, url, page_data):
                 'ingredients': scraper.ingredients() if scraper.ingredients() else []
             }
         ],
+        'recipe_tags': scraper.tags()
     }
 
 

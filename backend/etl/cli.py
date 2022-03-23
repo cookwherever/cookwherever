@@ -11,20 +11,24 @@ import atk
 import nyt
 import seriouseats
 import epicurious
+import joshuaweissman
 import requests  # requests must be imported after capture_http
 import concurrent.futures
 from warcio.archiveiterator import ArchiveIterator
 
+from slugify import slugify
 from graphql import execute_create_recipes
 from ingredients import save_parsed_ingredients
 from parse_ingredients import load_parsed_ingredients
 from util import debug
+from urllib.parse import urlparse
 
 recipe_providers = {
     "atk": atk,
     "nyt": nyt,
     "seriouseats": seriouseats,
-    "epicurious": epicurious
+    "epicurious": epicurious,
+    "joshuaweissman": joshuaweissman
 }
 
 
@@ -44,6 +48,8 @@ def load_content_from_url(provider_name, recipe_id):
             content = record.content_stream().read()
             if len(content) < 1024:
                 continue
+            with open('/tmp/test', 'wb') as f:
+                f.write(content)
             url = record.rec_headers.get_header('WARC-Target-URI')
             return url, content
     return None, None
@@ -53,7 +59,7 @@ def load_url(name, recipe_id, url, headers):
     if url is None:
         print(f"{recipe_id} url is None")
 
-    print(f"pulling {name} {recipe_id}")
+    print(f"pulling {name} {recipe_id}: {url}")
     web_archive_file = f"archive/{name}/{recipe_id}.warc.gz"
     if os.path.exists(web_archive_file):
         print(f"cached {name} {recipe_id}")
@@ -64,6 +70,7 @@ def load_url(name, recipe_id, url, headers):
 
     if resp.status_code != 200:
         print(f"failed to pull {name} {recipe_id}")
+        debug(resp.text)
         os.remove(web_archive_file)
 
 
@@ -180,6 +187,16 @@ def normalize_recipes(provider, recipe_id):
 
 
 def format_recipe(recipe_file, recipe):
+    try:
+        parsed_source = urlparse(recipe.get('source'))
+        source_name = parsed_source.hostname.split('.')[-2]
+    except Exception as e:
+        source_name = recipe.get('source')
+
+    recipe_slug = slugify(f"{source_name}-{recipe.get('name')}")
+
+    print(recipe_slug)
+
     directions = recipe.get('recipe_directions')
 
     if directions is None:
@@ -190,12 +207,12 @@ def format_recipe(recipe_file, recipe):
         for i, step in enumerate(directions)
     ]
 
-    tags = recipe.get('recipe_tags')
+    tags = [t for t in set(recipe.get('recipe_tags'))] if recipe.get('recipe_tags') is not None else []
 
     formatted_tags = []
     if tags is not None:
         formatted_tags = [
-            {"seq_num": i, "name": name}
+            {"seq_num": i, "name": name.lower()}
             for i, name in enumerate(tags)
         ]
 
@@ -223,6 +240,8 @@ def format_recipe(recipe_file, recipe):
         "name": recipe.get("name"),
         "source": recipe.get("source"),
         "image": recipe.get("image"),
+        "slug": recipe_slug,
+        "video": recipe.get("video"),
         "recipe_directions": {
             "data": formatted_directions,
             "on_conflict": {
@@ -269,7 +288,7 @@ def upsert_processed_recipes(provider, recipe_id):
 
         recipes_to_save.append(recipe)
 
-        if n % 20 == 0:
+        if n % 30 == 0:
             ids = None
             while True:
                 ids = execute_create_recipes(recipes_to_save)
@@ -355,9 +374,6 @@ def main():
 
     provider = sys.argv[2] if len(sys.argv) >= 3 else None
     recipe_id = sys.argv[3] if len(sys.argv) >= 4 else None
-
-    if recipe_id is not None:
-        recipe_id = int(recipe_id)
 
     if step == 'cache':
         cache_recipe_content(provider, recipe_id)

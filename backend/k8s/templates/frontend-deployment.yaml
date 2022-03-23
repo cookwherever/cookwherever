@@ -28,7 +28,7 @@ spec:
         io.kompose.service: frontend
     spec:
       containers:
-        - image: cthompson4321/fooddata-frontend:v0.0.11
+        - image: cthompson4321/fooddata-frontend:v0.0.12
           name: frontend
           ports:
             - containerPort: 80

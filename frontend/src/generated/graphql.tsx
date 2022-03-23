@@ -6861,6 +6861,7 @@ export type Recipe_Directions = {
   seq_num: Scalars['Int'];
   step: Scalars['String'];
   video_timestamp?: Maybe<Scalars['Int']>;
+  video_timestamp_end?: Maybe<Scalars['Int']>;
 };
 
 
@@ -6942,6 +6943,7 @@ export type Recipe_Directions_Avg_Fields = {
   recipe_id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
   video_timestamp?: Maybe<Scalars['Float']>;
+  video_timestamp_end?: Maybe<Scalars['Float']>;
 };
 
 /** order by avg() on columns of table "recipe_directions" */
@@ -6950,6 +6952,7 @@ export type Recipe_Directions_Avg_Order_By = {
   recipe_id?: InputMaybe<Order_By>;
   seq_num?: InputMaybe<Order_By>;
   video_timestamp?: InputMaybe<Order_By>;
+  video_timestamp_end?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "recipe_directions". All fields are combined with a logical 'AND'. */
@@ -6963,6 +6966,7 @@ export type Recipe_Directions_Bool_Exp = {
   seq_num?: InputMaybe<Int_Comparison_Exp>;
   step?: InputMaybe<String_Comparison_Exp>;
   video_timestamp?: InputMaybe<Int_Comparison_Exp>;
+  video_timestamp_end?: InputMaybe<Int_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "recipe_directions" */
@@ -6979,6 +6983,7 @@ export type Recipe_Directions_Inc_Input = {
   recipe_id?: InputMaybe<Scalars['Int']>;
   seq_num?: InputMaybe<Scalars['Int']>;
   video_timestamp?: InputMaybe<Scalars['Int']>;
+  video_timestamp_end?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "recipe_directions" */
@@ -6989,6 +6994,7 @@ export type Recipe_Directions_Insert_Input = {
   seq_num?: InputMaybe<Scalars['Int']>;
   step?: InputMaybe<Scalars['String']>;
   video_timestamp?: InputMaybe<Scalars['Int']>;
+  video_timestamp_end?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate max on columns */
@@ -6999,6 +7005,7 @@ export type Recipe_Directions_Max_Fields = {
   seq_num?: Maybe<Scalars['Int']>;
   step?: Maybe<Scalars['String']>;
   video_timestamp?: Maybe<Scalars['Int']>;
+  video_timestamp_end?: Maybe<Scalars['Int']>;
 };
 
 /** order by max() on columns of table "recipe_directions" */
@@ -7008,6 +7015,7 @@ export type Recipe_Directions_Max_Order_By = {
   seq_num?: InputMaybe<Order_By>;
   step?: InputMaybe<Order_By>;
   video_timestamp?: InputMaybe<Order_By>;
+  video_timestamp_end?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -7018,6 +7026,7 @@ export type Recipe_Directions_Min_Fields = {
   seq_num?: Maybe<Scalars['Int']>;
   step?: Maybe<Scalars['String']>;
   video_timestamp?: Maybe<Scalars['Int']>;
+  video_timestamp_end?: Maybe<Scalars['Int']>;
 };
 
 /** order by min() on columns of table "recipe_directions" */
@@ -7027,6 +7036,7 @@ export type Recipe_Directions_Min_Order_By = {
   seq_num?: InputMaybe<Order_By>;
   step?: InputMaybe<Order_By>;
   video_timestamp?: InputMaybe<Order_By>;
+  video_timestamp_end?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "recipe_directions" */
@@ -7053,6 +7063,7 @@ export type Recipe_Directions_Order_By = {
   seq_num?: InputMaybe<Order_By>;
   step?: InputMaybe<Order_By>;
   video_timestamp?: InputMaybe<Order_By>;
+  video_timestamp_end?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: recipe_directions */
@@ -7071,7 +7082,9 @@ export enum Recipe_Directions_Select_Column {
   /** column name */
   Step = 'step',
   /** column name */
-  VideoTimestamp = 'video_timestamp'
+  VideoTimestamp = 'video_timestamp',
+  /** column name */
+  VideoTimestampEnd = 'video_timestamp_end'
 }
 
 /** input type for updating data in table "recipe_directions" */
@@ -7081,6 +7094,7 @@ export type Recipe_Directions_Set_Input = {
   seq_num?: InputMaybe<Scalars['Int']>;
   step?: InputMaybe<Scalars['String']>;
   video_timestamp?: InputMaybe<Scalars['Int']>;
+  video_timestamp_end?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate stddev on columns */
@@ -7090,6 +7104,7 @@ export type Recipe_Directions_Stddev_Fields = {
   recipe_id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
   video_timestamp?: Maybe<Scalars['Float']>;
+  video_timestamp_end?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev() on columns of table "recipe_directions" */
@@ -7098,6 +7113,7 @@ export type Recipe_Directions_Stddev_Order_By = {
   recipe_id?: InputMaybe<Order_By>;
   seq_num?: InputMaybe<Order_By>;
   video_timestamp?: InputMaybe<Order_By>;
+  video_timestamp_end?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -7107,6 +7123,7 @@ export type Recipe_Directions_Stddev_Pop_Fields = {
   recipe_id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
   video_timestamp?: Maybe<Scalars['Float']>;
+  video_timestamp_end?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_pop() on columns of table "recipe_directions" */
@@ -7115,6 +7132,7 @@ export type Recipe_Directions_Stddev_Pop_Order_By = {
   recipe_id?: InputMaybe<Order_By>;
   seq_num?: InputMaybe<Order_By>;
   video_timestamp?: InputMaybe<Order_By>;
+  video_timestamp_end?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -7124,6 +7142,7 @@ export type Recipe_Directions_Stddev_Samp_Fields = {
   recipe_id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
   video_timestamp?: Maybe<Scalars['Float']>;
+  video_timestamp_end?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_samp() on columns of table "recipe_directions" */
@@ -7132,6 +7151,7 @@ export type Recipe_Directions_Stddev_Samp_Order_By = {
   recipe_id?: InputMaybe<Order_By>;
   seq_num?: InputMaybe<Order_By>;
   video_timestamp?: InputMaybe<Order_By>;
+  video_timestamp_end?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
@@ -7141,6 +7161,7 @@ export type Recipe_Directions_Sum_Fields = {
   recipe_id?: Maybe<Scalars['Int']>;
   seq_num?: Maybe<Scalars['Int']>;
   video_timestamp?: Maybe<Scalars['Int']>;
+  video_timestamp_end?: Maybe<Scalars['Int']>;
 };
 
 /** order by sum() on columns of table "recipe_directions" */
@@ -7149,6 +7170,7 @@ export type Recipe_Directions_Sum_Order_By = {
   recipe_id?: InputMaybe<Order_By>;
   seq_num?: InputMaybe<Order_By>;
   video_timestamp?: InputMaybe<Order_By>;
+  video_timestamp_end?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "recipe_directions" */
@@ -7162,7 +7184,9 @@ export enum Recipe_Directions_Update_Column {
   /** column name */
   Step = 'step',
   /** column name */
-  VideoTimestamp = 'video_timestamp'
+  VideoTimestamp = 'video_timestamp',
+  /** column name */
+  VideoTimestampEnd = 'video_timestamp_end'
 }
 
 /** aggregate var_pop on columns */
@@ -7172,6 +7196,7 @@ export type Recipe_Directions_Var_Pop_Fields = {
   recipe_id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
   video_timestamp?: Maybe<Scalars['Float']>;
+  video_timestamp_end?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_pop() on columns of table "recipe_directions" */
@@ -7180,6 +7205,7 @@ export type Recipe_Directions_Var_Pop_Order_By = {
   recipe_id?: InputMaybe<Order_By>;
   seq_num?: InputMaybe<Order_By>;
   video_timestamp?: InputMaybe<Order_By>;
+  video_timestamp_end?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
@@ -7189,6 +7215,7 @@ export type Recipe_Directions_Var_Samp_Fields = {
   recipe_id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
   video_timestamp?: Maybe<Scalars['Float']>;
+  video_timestamp_end?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_samp() on columns of table "recipe_directions" */
@@ -7197,6 +7224,7 @@ export type Recipe_Directions_Var_Samp_Order_By = {
   recipe_id?: InputMaybe<Order_By>;
   seq_num?: InputMaybe<Order_By>;
   video_timestamp?: InputMaybe<Order_By>;
+  video_timestamp_end?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
@@ -7206,6 +7234,7 @@ export type Recipe_Directions_Variance_Fields = {
   recipe_id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
   video_timestamp?: Maybe<Scalars['Float']>;
+  video_timestamp_end?: Maybe<Scalars['Float']>;
 };
 
 /** order by variance() on columns of table "recipe_directions" */
@@ -7214,6 +7243,7 @@ export type Recipe_Directions_Variance_Order_By = {
   recipe_id?: InputMaybe<Order_By>;
   seq_num?: InputMaybe<Order_By>;
   video_timestamp?: InputMaybe<Order_By>;
+  video_timestamp_end?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "recipe_favorite" */
@@ -8133,6 +8163,7 @@ export type Recipe_Ingredients = {
   text: Scalars['String'];
   units?: Maybe<Scalars['String']>;
   video_timestamp?: Maybe<Scalars['Int']>;
+  video_timestamp_end?: Maybe<Scalars['Int']>;
 };
 
 
@@ -8226,6 +8257,7 @@ export type Recipe_Ingredients_Avg_Fields = {
   id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
   video_timestamp?: Maybe<Scalars['Float']>;
+  video_timestamp_end?: Maybe<Scalars['Float']>;
 };
 
 /** order by avg() on columns of table "recipe_ingredients" */
@@ -8236,6 +8268,7 @@ export type Recipe_Ingredients_Avg_Order_By = {
   id?: InputMaybe<Order_By>;
   seq_num?: InputMaybe<Order_By>;
   video_timestamp?: InputMaybe<Order_By>;
+  video_timestamp_end?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "recipe_ingredients". All fields are combined with a logical 'AND'. */
@@ -8257,6 +8290,7 @@ export type Recipe_Ingredients_Bool_Exp = {
   text?: InputMaybe<String_Comparison_Exp>;
   units?: InputMaybe<String_Comparison_Exp>;
   video_timestamp?: InputMaybe<Int_Comparison_Exp>;
+  video_timestamp_end?: InputMaybe<Int_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "recipe_ingredients" */
@@ -8275,6 +8309,7 @@ export type Recipe_Ingredients_Inc_Input = {
   id?: InputMaybe<Scalars['Int']>;
   seq_num?: InputMaybe<Scalars['Int']>;
   video_timestamp?: InputMaybe<Scalars['Int']>;
+  video_timestamp_end?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "recipe_ingredients" */
@@ -8292,6 +8327,7 @@ export type Recipe_Ingredients_Insert_Input = {
   text?: InputMaybe<Scalars['String']>;
   units?: InputMaybe<Scalars['String']>;
   video_timestamp?: InputMaybe<Scalars['Int']>;
+  video_timestamp_end?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate max on columns */
@@ -8307,6 +8343,7 @@ export type Recipe_Ingredients_Max_Fields = {
   text?: Maybe<Scalars['String']>;
   units?: Maybe<Scalars['String']>;
   video_timestamp?: Maybe<Scalars['Int']>;
+  video_timestamp_end?: Maybe<Scalars['Int']>;
 };
 
 /** order by max() on columns of table "recipe_ingredients" */
@@ -8321,6 +8358,7 @@ export type Recipe_Ingredients_Max_Order_By = {
   text?: InputMaybe<Order_By>;
   units?: InputMaybe<Order_By>;
   video_timestamp?: InputMaybe<Order_By>;
+  video_timestamp_end?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -8336,6 +8374,7 @@ export type Recipe_Ingredients_Min_Fields = {
   text?: Maybe<Scalars['String']>;
   units?: Maybe<Scalars['String']>;
   video_timestamp?: Maybe<Scalars['Int']>;
+  video_timestamp_end?: Maybe<Scalars['Int']>;
 };
 
 /** order by min() on columns of table "recipe_ingredients" */
@@ -8350,6 +8389,7 @@ export type Recipe_Ingredients_Min_Order_By = {
   text?: InputMaybe<Order_By>;
   units?: InputMaybe<Order_By>;
   video_timestamp?: InputMaybe<Order_By>;
+  video_timestamp_end?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "recipe_ingredients" */
@@ -8384,6 +8424,7 @@ export type Recipe_Ingredients_Order_By = {
   text?: InputMaybe<Order_By>;
   units?: InputMaybe<Order_By>;
   video_timestamp?: InputMaybe<Order_By>;
+  video_timestamp_end?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: recipe_ingredients */
@@ -8412,7 +8453,9 @@ export enum Recipe_Ingredients_Select_Column {
   /** column name */
   Units = 'units',
   /** column name */
-  VideoTimestamp = 'video_timestamp'
+  VideoTimestamp = 'video_timestamp',
+  /** column name */
+  VideoTimestampEnd = 'video_timestamp_end'
 }
 
 /** input type for updating data in table "recipe_ingredients" */
@@ -8427,6 +8470,7 @@ export type Recipe_Ingredients_Set_Input = {
   text?: InputMaybe<Scalars['String']>;
   units?: InputMaybe<Scalars['String']>;
   video_timestamp?: InputMaybe<Scalars['Int']>;
+  video_timestamp_end?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate stddev on columns */
@@ -8438,6 +8482,7 @@ export type Recipe_Ingredients_Stddev_Fields = {
   id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
   video_timestamp?: Maybe<Scalars['Float']>;
+  video_timestamp_end?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev() on columns of table "recipe_ingredients" */
@@ -8448,6 +8493,7 @@ export type Recipe_Ingredients_Stddev_Order_By = {
   id?: InputMaybe<Order_By>;
   seq_num?: InputMaybe<Order_By>;
   video_timestamp?: InputMaybe<Order_By>;
+  video_timestamp_end?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -8459,6 +8505,7 @@ export type Recipe_Ingredients_Stddev_Pop_Fields = {
   id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
   video_timestamp?: Maybe<Scalars['Float']>;
+  video_timestamp_end?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_pop() on columns of table "recipe_ingredients" */
@@ -8469,6 +8516,7 @@ export type Recipe_Ingredients_Stddev_Pop_Order_By = {
   id?: InputMaybe<Order_By>;
   seq_num?: InputMaybe<Order_By>;
   video_timestamp?: InputMaybe<Order_By>;
+  video_timestamp_end?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -8480,6 +8528,7 @@ export type Recipe_Ingredients_Stddev_Samp_Fields = {
   id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
   video_timestamp?: Maybe<Scalars['Float']>;
+  video_timestamp_end?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_samp() on columns of table "recipe_ingredients" */
@@ -8490,6 +8539,7 @@ export type Recipe_Ingredients_Stddev_Samp_Order_By = {
   id?: InputMaybe<Order_By>;
   seq_num?: InputMaybe<Order_By>;
   video_timestamp?: InputMaybe<Order_By>;
+  video_timestamp_end?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
@@ -8501,6 +8551,7 @@ export type Recipe_Ingredients_Sum_Fields = {
   id?: Maybe<Scalars['Int']>;
   seq_num?: Maybe<Scalars['Int']>;
   video_timestamp?: Maybe<Scalars['Int']>;
+  video_timestamp_end?: Maybe<Scalars['Int']>;
 };
 
 /** order by sum() on columns of table "recipe_ingredients" */
@@ -8511,6 +8562,7 @@ export type Recipe_Ingredients_Sum_Order_By = {
   id?: InputMaybe<Order_By>;
   seq_num?: InputMaybe<Order_By>;
   video_timestamp?: InputMaybe<Order_By>;
+  video_timestamp_end?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "recipe_ingredients" */
@@ -8534,7 +8586,9 @@ export enum Recipe_Ingredients_Update_Column {
   /** column name */
   Units = 'units',
   /** column name */
-  VideoTimestamp = 'video_timestamp'
+  VideoTimestamp = 'video_timestamp',
+  /** column name */
+  VideoTimestampEnd = 'video_timestamp_end'
 }
 
 /** aggregate var_pop on columns */
@@ -8546,6 +8600,7 @@ export type Recipe_Ingredients_Var_Pop_Fields = {
   id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
   video_timestamp?: Maybe<Scalars['Float']>;
+  video_timestamp_end?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_pop() on columns of table "recipe_ingredients" */
@@ -8556,6 +8611,7 @@ export type Recipe_Ingredients_Var_Pop_Order_By = {
   id?: InputMaybe<Order_By>;
   seq_num?: InputMaybe<Order_By>;
   video_timestamp?: InputMaybe<Order_By>;
+  video_timestamp_end?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
@@ -8567,6 +8623,7 @@ export type Recipe_Ingredients_Var_Samp_Fields = {
   id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
   video_timestamp?: Maybe<Scalars['Float']>;
+  video_timestamp_end?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_samp() on columns of table "recipe_ingredients" */
@@ -8577,6 +8634,7 @@ export type Recipe_Ingredients_Var_Samp_Order_By = {
   id?: InputMaybe<Order_By>;
   seq_num?: InputMaybe<Order_By>;
   video_timestamp?: InputMaybe<Order_By>;
+  video_timestamp_end?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
@@ -8588,6 +8646,7 @@ export type Recipe_Ingredients_Variance_Fields = {
   id?: Maybe<Scalars['Float']>;
   seq_num?: Maybe<Scalars['Float']>;
   video_timestamp?: Maybe<Scalars['Float']>;
+  video_timestamp_end?: Maybe<Scalars['Float']>;
 };
 
 /** order by variance() on columns of table "recipe_ingredients" */
@@ -8598,6 +8657,7 @@ export type Recipe_Ingredients_Variance_Order_By = {
   id?: InputMaybe<Order_By>;
   seq_num?: InputMaybe<Order_By>;
   video_timestamp?: InputMaybe<Order_By>;
+  video_timestamp_end?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "recipe_list_items" */
@@ -9488,6 +9548,7 @@ export type Recipes = {
   recipe_tags: Array<Recipe_Tags>;
   /** fetch aggregated fields from the table: "recipe_tags" */
   recipe_tags_aggregate: Recipe_Tags_Aggregate;
+  slug?: Maybe<Scalars['String']>;
   source: Scalars['String'];
   updated_at: Scalars['timestamptz'];
   video?: Maybe<Scalars['String']>;
@@ -9635,6 +9696,7 @@ export type Recipes_Bool_Exp = {
   recipe_directions?: InputMaybe<Recipe_Directions_Bool_Exp>;
   recipe_ingredient_groups?: InputMaybe<Recipe_Ingredient_Groups_Bool_Exp>;
   recipe_tags?: InputMaybe<Recipe_Tags_Bool_Exp>;
+  slug?: InputMaybe<String_Comparison_Exp>;
   source?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   video?: InputMaybe<String_Comparison_Exp>;
@@ -9680,6 +9742,7 @@ export type Recipes_Insert_Input = {
   recipe_directions?: InputMaybe<Recipe_Directions_Arr_Rel_Insert_Input>;
   recipe_ingredient_groups?: InputMaybe<Recipe_Ingredient_Groups_Arr_Rel_Insert_Input>;
   recipe_tags?: InputMaybe<Recipe_Tags_Arr_Rel_Insert_Input>;
+  slug?: InputMaybe<Scalars['String']>;
   source?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   video?: InputMaybe<Scalars['String']>;
@@ -9693,6 +9756,7 @@ export type Recipes_Max_Fields = {
   id?: Maybe<Scalars['Int']>;
   image?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  slug?: Maybe<Scalars['String']>;
   source?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   video?: Maybe<Scalars['String']>;
@@ -9705,6 +9769,7 @@ export type Recipes_Min_Fields = {
   id?: Maybe<Scalars['Int']>;
   image?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  slug?: Maybe<Scalars['String']>;
   source?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   video?: Maybe<Scalars['String']>;
@@ -9744,6 +9809,7 @@ export type Recipes_Order_By = {
   recipe_directions_aggregate?: InputMaybe<Recipe_Directions_Aggregate_Order_By>;
   recipe_ingredient_groups_aggregate?: InputMaybe<Recipe_Ingredient_Groups_Aggregate_Order_By>;
   recipe_tags_aggregate?: InputMaybe<Recipe_Tags_Aggregate_Order_By>;
+  slug?: InputMaybe<Order_By>;
   source?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   video?: InputMaybe<Order_By>;
@@ -9773,6 +9839,8 @@ export enum Recipes_Select_Column {
   /** column name */
   Name = 'name',
   /** column name */
+  Slug = 'slug',
+  /** column name */
   Source = 'source',
   /** column name */
   UpdatedAt = 'updated_at',
@@ -9789,6 +9857,7 @@ export type Recipes_Set_Input = {
   id?: InputMaybe<Scalars['Int']>;
   image?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
+  slug?: InputMaybe<Scalars['String']>;
   source?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   video?: InputMaybe<Scalars['String']>;
@@ -9831,6 +9900,8 @@ export enum Recipes_Update_Column {
   Image = 'image',
   /** column name */
   Name = 'name',
+  /** column name */
+  Slug = 'slug',
   /** column name */
   Source = 'source',
   /** column name */
@@ -11475,6 +11546,24 @@ export type InsertFoodCandidateForIngredientMutationVariables = Exact<{
 
 export type InsertFoodCandidateForIngredientMutation = { __typename?: 'mutation_root', insert_recipe_ingredient_food_candidate_one?: { __typename?: 'recipe_ingredient_food_candidate', id: number } | null };
 
+export type UpsertIngredientVideoTimestampMutationVariables = Exact<{
+  id?: InputMaybe<Int_Comparison_Exp>;
+  video_timestamp?: InputMaybe<Scalars['Int']>;
+  video_timestamp_end?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type UpsertIngredientVideoTimestampMutation = { __typename?: 'mutation_root', update_recipe_ingredients?: { __typename?: 'recipe_ingredients_mutation_response', affected_rows: number } | null };
+
+export type UpsertDirectionVideoTimestampMutationVariables = Exact<{
+  video_timestamp?: InputMaybe<Scalars['Int']>;
+  video_timestamp_end?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type UpsertDirectionVideoTimestampMutation = { __typename?: 'mutation_root', update_recipe_directions?: { __typename?: 'recipe_directions_mutation_response', affected_rows: number } | null };
+
 export type RecipesQueryQueryVariables = Exact<{
   search?: InputMaybe<Scalars['String']>;
   where: Recipes_Bool_Exp;
@@ -11483,7 +11572,7 @@ export type RecipesQueryQueryVariables = Exact<{
 }>;
 
 
-export type RecipesQueryQuery = { __typename?: 'query_root', search_recipes: Array<{ __typename?: 'recipes', id: number, name: string, source: string, created_at: any, image?: string | null }>, recipes_aggregate: { __typename?: 'recipes_aggregate', aggregate?: { __typename?: 'recipes_aggregate_fields', count: number } | null } };
+export type RecipesQueryQuery = { __typename?: 'query_root', search_recipes: Array<{ __typename?: 'recipes', id: number, slug?: string | null, name: string, source: string, created_at: any, image?: string | null }>, search_recipes_aggregate: { __typename?: 'recipes_aggregate', aggregate?: { __typename?: 'recipes_aggregate_fields', count: number } | null } };
 
 export type InsertRecipeMutationVariables = Exact<{
   recipe: Recipes_Insert_Input;
@@ -11532,27 +11621,19 @@ export type DeleteRecipeListMutationVariables = Exact<{
 export type DeleteRecipeListMutation = { __typename?: 'mutation_root', delete_recipe_lists?: { __typename?: 'recipe_lists_mutation_response', affected_rows: number } | null };
 
 export type ViewRecipeQueryQueryVariables = Exact<{
-  id: Scalars['Int'];
+  id?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type ViewRecipeQueryQuery = { __typename?: 'query_root', recipes_by_pk?: { __typename?: 'recipes', id: number, name: string, created_at: any, source: string, updated_at: any, video?: string | null, recipe_ingredient_groups: Array<{ __typename?: 'recipe_ingredient_groups', name?: string | null, group_ingredients: Array<{ __typename?: 'recipe_ingredients', id: number, seq_num?: number | null, text: string, name?: string | null, amount?: number | null, comment?: string | null, units?: string | null, video_timestamp?: number | null, recipe_ingredient_food_candidates: Array<{ __typename?: 'recipe_ingredient_food_candidate', food_portion?: { __typename?: 'food_portion', gram_weight?: any | null, amount?: any | null, modifier?: string | null, portion_description?: string | null, measure_unit?: { __typename?: 'measure_unit', name?: string | null } | null } | null, food: { __typename?: 'food', description?: string | null } }> }> }>, recipe_directions: Array<{ __typename?: 'recipe_directions', id: number, seq_num: number, step: string, video_timestamp?: number | null }>, recipe_tags: Array<{ __typename?: 'recipe_tags', name: string, id: number }> } | null };
+export type ViewRecipeQueryQuery = { __typename?: 'query_root', recipes: Array<{ __typename?: 'recipes', id: number, slug?: string | null, name: string, created_at: any, source: string, updated_at: any, video?: string | null, recipe_ingredient_groups: Array<{ __typename?: 'recipe_ingredient_groups', name?: string | null, group_ingredients: Array<{ __typename?: 'recipe_ingredients', id: number, seq_num?: number | null, text: string, name?: string | null, amount?: number | null, comment?: string | null, units?: string | null, video_timestamp?: number | null, video_timestamp_end?: number | null, recipe_ingredient_food_candidates: Array<{ __typename?: 'recipe_ingredient_food_candidate', food_portion?: { __typename?: 'food_portion', gram_weight?: any | null, amount?: any | null, modifier?: string | null, portion_description?: string | null, measure_unit?: { __typename?: 'measure_unit', name?: string | null } | null } | null, food: { __typename?: 'food', description?: string | null } }> }> }>, recipe_directions: Array<{ __typename?: 'recipe_directions', id: number, seq_num: number, step: string, video_timestamp?: number | null, video_timestamp_end?: number | null }>, recipe_tags: Array<{ __typename?: 'recipe_tags', name: string, id: number }> }> };
 
-export type UpsertDirectionVideoTimestampMutationVariables = Exact<{
-  video_timestamp?: InputMaybe<Scalars['Int']>;
-  id?: InputMaybe<Int_Comparison_Exp>;
+export type UpdateRecipeVideoMutationVariables = Exact<{
+  id?: InputMaybe<Scalars['Int']>;
+  video?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type UpsertDirectionVideoTimestampMutation = { __typename?: 'mutation_root', update_recipe_directions?: { __typename?: 'recipe_directions_mutation_response', affected_rows: number } | null };
-
-export type UpsertIngredientVideoTimestampMutationVariables = Exact<{
-  id?: InputMaybe<Int_Comparison_Exp>;
-  video_timestamp?: InputMaybe<Scalars['Int']>;
-}>;
-
-
-export type UpsertIngredientVideoTimestampMutation = { __typename?: 'mutation_root', update_recipe_ingredients?: { __typename?: 'recipe_ingredients_mutation_response', affected_rows: number } | null };
+export type UpdateRecipeVideoMutation = { __typename?: 'mutation_root', update_recipes?: { __typename?: 'recipes_mutation_response', affected_rows: number } | null };
 
 
 export const RecipeFoodCandidatesDocument = gql`
@@ -11641,6 +11722,82 @@ export function useInsertFoodCandidateForIngredientMutation(baseOptions?: Apollo
 export type InsertFoodCandidateForIngredientMutationHookResult = ReturnType<typeof useInsertFoodCandidateForIngredientMutation>;
 export type InsertFoodCandidateForIngredientMutationResult = Apollo.MutationResult<InsertFoodCandidateForIngredientMutation>;
 export type InsertFoodCandidateForIngredientMutationOptions = Apollo.BaseMutationOptions<InsertFoodCandidateForIngredientMutation, InsertFoodCandidateForIngredientMutationVariables>;
+export const UpsertIngredientVideoTimestampDocument = gql`
+    mutation UpsertIngredientVideoTimestamp($id: Int_comparison_exp, $video_timestamp: Int, $video_timestamp_end: Int) {
+  update_recipe_ingredients(
+    where: {id: $id}
+    _set: {video_timestamp: $video_timestamp, video_timestamp_end: $video_timestamp_end}
+  ) {
+    affected_rows
+  }
+}
+    `;
+export type UpsertIngredientVideoTimestampMutationFn = Apollo.MutationFunction<UpsertIngredientVideoTimestampMutation, UpsertIngredientVideoTimestampMutationVariables>;
+
+/**
+ * __useUpsertIngredientVideoTimestampMutation__
+ *
+ * To run a mutation, you first call `useUpsertIngredientVideoTimestampMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpsertIngredientVideoTimestampMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [upsertIngredientVideoTimestampMutation, { data, loading, error }] = useUpsertIngredientVideoTimestampMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      video_timestamp: // value for 'video_timestamp'
+ *      video_timestamp_end: // value for 'video_timestamp_end'
+ *   },
+ * });
+ */
+export function useUpsertIngredientVideoTimestampMutation(baseOptions?: Apollo.MutationHookOptions<UpsertIngredientVideoTimestampMutation, UpsertIngredientVideoTimestampMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpsertIngredientVideoTimestampMutation, UpsertIngredientVideoTimestampMutationVariables>(UpsertIngredientVideoTimestampDocument, options);
+      }
+export type UpsertIngredientVideoTimestampMutationHookResult = ReturnType<typeof useUpsertIngredientVideoTimestampMutation>;
+export type UpsertIngredientVideoTimestampMutationResult = Apollo.MutationResult<UpsertIngredientVideoTimestampMutation>;
+export type UpsertIngredientVideoTimestampMutationOptions = Apollo.BaseMutationOptions<UpsertIngredientVideoTimestampMutation, UpsertIngredientVideoTimestampMutationVariables>;
+export const UpsertDirectionVideoTimestampDocument = gql`
+    mutation UpsertDirectionVideoTimestamp($video_timestamp: Int, $video_timestamp_end: Int, $id: Int) {
+  update_recipe_directions(
+    where: {id: {_eq: $id}}
+    _set: {video_timestamp: $video_timestamp, video_timestamp_end: $video_timestamp_end}
+  ) {
+    affected_rows
+  }
+}
+    `;
+export type UpsertDirectionVideoTimestampMutationFn = Apollo.MutationFunction<UpsertDirectionVideoTimestampMutation, UpsertDirectionVideoTimestampMutationVariables>;
+
+/**
+ * __useUpsertDirectionVideoTimestampMutation__
+ *
+ * To run a mutation, you first call `useUpsertDirectionVideoTimestampMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpsertDirectionVideoTimestampMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [upsertDirectionVideoTimestampMutation, { data, loading, error }] = useUpsertDirectionVideoTimestampMutation({
+ *   variables: {
+ *      video_timestamp: // value for 'video_timestamp'
+ *      video_timestamp_end: // value for 'video_timestamp_end'
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useUpsertDirectionVideoTimestampMutation(baseOptions?: Apollo.MutationHookOptions<UpsertDirectionVideoTimestampMutation, UpsertDirectionVideoTimestampMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpsertDirectionVideoTimestampMutation, UpsertDirectionVideoTimestampMutationVariables>(UpsertDirectionVideoTimestampDocument, options);
+      }
+export type UpsertDirectionVideoTimestampMutationHookResult = ReturnType<typeof useUpsertDirectionVideoTimestampMutation>;
+export type UpsertDirectionVideoTimestampMutationResult = Apollo.MutationResult<UpsertDirectionVideoTimestampMutation>;
+export type UpsertDirectionVideoTimestampMutationOptions = Apollo.BaseMutationOptions<UpsertDirectionVideoTimestampMutation, UpsertDirectionVideoTimestampMutationVariables>;
 export const RecipesQueryDocument = gql`
     query RecipesQuery($search: String, $where: recipes_bool_exp!, $limit: Int = 10, $offset: Int = 0) {
   search_recipes(
@@ -11651,12 +11808,13 @@ export const RecipesQueryDocument = gql`
     order_by: {updated_at: asc}
   ) {
     id
+    slug
     name
     source
     created_at
     image
   }
-  recipes_aggregate(where: $where) {
+  search_recipes_aggregate(args: {search: $search}, where: $where) {
     aggregate {
       count
     }
@@ -11944,9 +12102,10 @@ export type DeleteRecipeListMutationHookResult = ReturnType<typeof useDeleteReci
 export type DeleteRecipeListMutationResult = Apollo.MutationResult<DeleteRecipeListMutation>;
 export type DeleteRecipeListMutationOptions = Apollo.BaseMutationOptions<DeleteRecipeListMutation, DeleteRecipeListMutationVariables>;
 export const ViewRecipeQueryDocument = gql`
-    query ViewRecipeQuery($id: Int!) {
-  recipes_by_pk(id: $id) {
+    query ViewRecipeQuery($id: Int) {
+  recipes(where: {id: {_eq: $id}}) {
     id
+    slug
     name
     created_at
     source
@@ -11963,6 +12122,7 @@ export const ViewRecipeQueryDocument = gql`
         comment
         units
         video_timestamp
+        video_timestamp_end
         recipe_ingredient_food_candidates {
           food_portion {
             gram_weight
@@ -11984,6 +12144,7 @@ export const ViewRecipeQueryDocument = gql`
       seq_num
       step
       video_timestamp
+      video_timestamp_end
     }
     recipe_tags(order_by: {seq_num: asc}) {
       name
@@ -12009,7 +12170,7 @@ export const ViewRecipeQueryDocument = gql`
  *   },
  * });
  */
-export function useViewRecipeQueryQuery(baseOptions: Apollo.QueryHookOptions<ViewRecipeQueryQuery, ViewRecipeQueryQueryVariables>) {
+export function useViewRecipeQueryQuery(baseOptions?: Apollo.QueryHookOptions<ViewRecipeQueryQuery, ViewRecipeQueryQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<ViewRecipeQueryQuery, ViewRecipeQueryQueryVariables>(ViewRecipeQueryDocument, options);
       }
@@ -12020,77 +12181,37 @@ export function useViewRecipeQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type ViewRecipeQueryQueryHookResult = ReturnType<typeof useViewRecipeQueryQuery>;
 export type ViewRecipeQueryLazyQueryHookResult = ReturnType<typeof useViewRecipeQueryLazyQuery>;
 export type ViewRecipeQueryQueryResult = Apollo.QueryResult<ViewRecipeQueryQuery, ViewRecipeQueryQueryVariables>;
-export const UpsertDirectionVideoTimestampDocument = gql`
-    mutation UpsertDirectionVideoTimestamp($video_timestamp: Int, $id: Int_comparison_exp) {
-  update_recipe_directions(
-    where: {id: $id}
-    _set: {video_timestamp: $video_timestamp}
-  ) {
+export const UpdateRecipeVideoDocument = gql`
+    mutation UpdateRecipeVideo($id: Int, $video: String = "") {
+  update_recipes(where: {id: {_eq: $id}}, _set: {video: $video}) {
     affected_rows
   }
 }
     `;
-export type UpsertDirectionVideoTimestampMutationFn = Apollo.MutationFunction<UpsertDirectionVideoTimestampMutation, UpsertDirectionVideoTimestampMutationVariables>;
+export type UpdateRecipeVideoMutationFn = Apollo.MutationFunction<UpdateRecipeVideoMutation, UpdateRecipeVideoMutationVariables>;
 
 /**
- * __useUpsertDirectionVideoTimestampMutation__
+ * __useUpdateRecipeVideoMutation__
  *
- * To run a mutation, you first call `useUpsertDirectionVideoTimestampMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpsertDirectionVideoTimestampMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useUpdateRecipeVideoMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateRecipeVideoMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [upsertDirectionVideoTimestampMutation, { data, loading, error }] = useUpsertDirectionVideoTimestampMutation({
+ * const [updateRecipeVideoMutation, { data, loading, error }] = useUpdateRecipeVideoMutation({
  *   variables: {
- *      video_timestamp: // value for 'video_timestamp'
  *      id: // value for 'id'
+ *      video: // value for 'video'
  *   },
  * });
  */
-export function useUpsertDirectionVideoTimestampMutation(baseOptions?: Apollo.MutationHookOptions<UpsertDirectionVideoTimestampMutation, UpsertDirectionVideoTimestampMutationVariables>) {
+export function useUpdateRecipeVideoMutation(baseOptions?: Apollo.MutationHookOptions<UpdateRecipeVideoMutation, UpdateRecipeVideoMutationVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpsertDirectionVideoTimestampMutation, UpsertDirectionVideoTimestampMutationVariables>(UpsertDirectionVideoTimestampDocument, options);
+        return Apollo.useMutation<UpdateRecipeVideoMutation, UpdateRecipeVideoMutationVariables>(UpdateRecipeVideoDocument, options);
       }
-export type UpsertDirectionVideoTimestampMutationHookResult = ReturnType<typeof useUpsertDirectionVideoTimestampMutation>;
-export type UpsertDirectionVideoTimestampMutationResult = Apollo.MutationResult<UpsertDirectionVideoTimestampMutation>;
-export type UpsertDirectionVideoTimestampMutationOptions = Apollo.BaseMutationOptions<UpsertDirectionVideoTimestampMutation, UpsertDirectionVideoTimestampMutationVariables>;
-export const UpsertIngredientVideoTimestampDocument = gql`
-    mutation UpsertIngredientVideoTimestamp($id: Int_comparison_exp, $video_timestamp: Int) {
-  update_recipe_ingredients(
-    where: {id: $id}
-    _set: {video_timestamp: $video_timestamp}
-  ) {
-    affected_rows
-  }
-}
-    `;
-export type UpsertIngredientVideoTimestampMutationFn = Apollo.MutationFunction<UpsertIngredientVideoTimestampMutation, UpsertIngredientVideoTimestampMutationVariables>;
-
-/**
- * __useUpsertIngredientVideoTimestampMutation__
- *
- * To run a mutation, you first call `useUpsertIngredientVideoTimestampMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpsertIngredientVideoTimestampMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [upsertIngredientVideoTimestampMutation, { data, loading, error }] = useUpsertIngredientVideoTimestampMutation({
- *   variables: {
- *      id: // value for 'id'
- *      video_timestamp: // value for 'video_timestamp'
- *   },
- * });
- */
-export function useUpsertIngredientVideoTimestampMutation(baseOptions?: Apollo.MutationHookOptions<UpsertIngredientVideoTimestampMutation, UpsertIngredientVideoTimestampMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpsertIngredientVideoTimestampMutation, UpsertIngredientVideoTimestampMutationVariables>(UpsertIngredientVideoTimestampDocument, options);
-      }
-export type UpsertIngredientVideoTimestampMutationHookResult = ReturnType<typeof useUpsertIngredientVideoTimestampMutation>;
-export type UpsertIngredientVideoTimestampMutationResult = Apollo.MutationResult<UpsertIngredientVideoTimestampMutation>;
-export type UpsertIngredientVideoTimestampMutationOptions = Apollo.BaseMutationOptions<UpsertIngredientVideoTimestampMutation, UpsertIngredientVideoTimestampMutationVariables>;
+export type UpdateRecipeVideoMutationHookResult = ReturnType<typeof useUpdateRecipeVideoMutation>;
+export type UpdateRecipeVideoMutationResult = Apollo.MutationResult<UpdateRecipeVideoMutation>;
+export type UpdateRecipeVideoMutationOptions = Apollo.BaseMutationOptions<UpdateRecipeVideoMutation, UpdateRecipeVideoMutationVariables>;

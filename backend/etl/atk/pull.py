@@ -49,8 +49,6 @@ def process_recipe(recipe_id, content):
         direction_seperator = double_return if double_return in instruction else single_return
         instructions.extend(instruction.split(direction_seperator))
 
-    print(instructions)
-
     source = api_recipe.get('web_url')
 
     ingredient_groups = api_recipe.get('recipe_ingredient_groups')

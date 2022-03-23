@@ -3,7 +3,7 @@ import { Button, Table, Form } from 'react-bootstrap';
 
 export interface ListProps {
   onChange?: (items: string[]) => void;
-  value?: [];
+  value?: string[];
   maxListCount?: number;
   header?: string;
   placeholder?: string;

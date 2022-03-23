@@ -1,29 +1,39 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 
 import { gql, useMutation, useQuery } from '@apollo/client';
 
-import { Col, Row, Container, Button, Form, Badge } from 'react-bootstrap';
-import { Recipes } from '../../generated/graphql';
+import { Col, Row, Container, Button, Form, Badge, InputGroup, FormControl } from 'react-bootstrap';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import useDebouncedCallback from '@restart/hooks/useDebouncedCallback';
+import {
+  Recipes,
+  useRecipesQueryQuery,
+  useUpdateRecipeVideoMutation,
+  useViewRecipeQueryQuery
+} from '../../generated/graphql';
 import { getSourceHostname } from '../../utils/format-recipe';
 import { VideoPlayer } from '../../components/VideoPlayer';
 import { RecipeDirections } from '../../components/RecipeDirections';
 import { IngredientList } from '../../components/IngredientList';
 import { RecipeOffCanvas } from '../../components/RecipeOffCanvas';
+import { userState, viewModeState } from '../../recoil/atoms/auth';
+import { inDeveloperMode } from '../../recoil/selectors/view-mode';
+import { recipeViewerState } from '../../recoil/atoms/recipe';
 
 interface ViewRecipePageProps {
-  id: number
   match: {
     params: {
-      id: string
+      slug: string
     }
   }
 }
 
 export const QUERY = gql`
-  query ViewRecipeQuery($id: Int!) {
-    recipes_by_pk(id: $id) {
+  query ViewRecipeQuery($id: Int) {
+    recipes(where: {id: {_eq: $id}}) {
       id
+      slug
       name
       created_at
       source
@@ -40,6 +50,7 @@ export const QUERY = gql`
           comment
           units
           video_timestamp
+          video_timestamp_end
           recipe_ingredient_food_candidates {
             food_portion {
               gram_weight
@@ -61,6 +72,7 @@ export const QUERY = gql`
         seq_num
         step
         video_timestamp
+        video_timestamp_end
       }
       recipe_tags(order_by: { seq_num: asc }) {
         name
@@ -70,21 +82,13 @@ export const QUERY = gql`
   }
 `
 
-const INSERT_DIRECTION_VIDEO_TIMESTAMP = gql`
-mutation UpsertDirectionVideoTimestamp($video_timestamp: Int, $id: Int_comparison_exp) {
-  update_recipe_directions(where: {id: $id}, _set: {video_timestamp: $video_timestamp}) {
+export const UPDATE_RECIPE_VIDEO_URL = gql`
+mutation UpdateRecipeVideo($id: Int, $video: String = "") {
+  update_recipes(where: {id: {_eq: $id}}, _set: {video: $video}) {
     affected_rows
   }
 }
 `
-
-const INSERT_INGREDIENT_VIDEO_TIMESTAMP = gql`
-mutation UpsertIngredientVideoTimestamp($id: Int_comparison_exp, $video_timestamp: Int) {
-  update_recipe_ingredients(where: {id: $id}, _set: {video_timestamp: $video_timestamp}) {
-    affected_rows
-  }
-}
-`;
 
 export interface DirectionVideoStep {
   type: 'direction';
@@ -113,64 +117,96 @@ export function isIngredientVideoStep(step: VideoStep, type: string, group_idx: 
   return false;
 }
 
-export const ViewRecipePage: React.FunctionComponent<ViewRecipePageProps> = (props) => {
-  const { id } = props.match.params;
+interface ViewModeSelectorProps {
+  
+}
 
-  const [timestamp, setTimestamp] = useState<number | null>(null);
+const ViewModeSelector: React.FunctionComponent<ViewModeSelectorProps> = ({}) => {
+  const [viewMode, setViewMode] = useRecoilState(viewModeState);
+  
+  const toggleDeveloperMode = () => {
+    setViewMode(viewMode === 'developer' ? 'view' : 'developer')
+  }
+  
+  return (
+    <>
+      <Form.Check
+        type="switch"
+        label="developer"
+        checked={viewMode === 'developer'}
+        onClick={toggleDeveloperMode}
+      />
+    </>
+  )
+}
 
-  const [currentVideoStep, setCurrentVideoStep] = useState<VideoStep | null>(null);
+interface VideoMetadataFormProps {
+  recipe: Recipes
+}
 
-  const [showRecipeOffCanvas, setShowRecipeOffCanvas] = useState(false);
+const VideoMetadataForm: React.FunctionComponent<VideoMetadataFormProps> = ({ recipe }) => {
+  const [videoUrl, setVideoUrl] = useState<string>(recipe.video || '');
+  const debouncedSetVideoUrl = useDebouncedCallback(setVideoUrl, 500);
 
-  const callbacks = { setTimestamp }
-
-  const [insertDirectionTimestamp, { loading: insertDirectionTimestampLoading, error: insertDirectionTimestampError }] = useMutation(INSERT_DIRECTION_VIDEO_TIMESTAMP);
-  const [insertIngredientTimestamp, { loading: insertIngredientTimestampLoading, error: insertIngredientTimestampError }] = useMutation(INSERT_INGREDIENT_VIDEO_TIMESTAMP);
-
-  const { loading, error, data, refetch } = useQuery(QUERY, {
+  const [updateRecipeVideoMutation] = useUpdateRecipeVideoMutation({
     variables: {
-      id
+      id: recipe.id
     }
   });
 
-  const reloadRecipe = async () => {
-    await refetch();
-  }
+  useEffect(() => {
+    updateRecipeVideoMutation({
+      variables: {
+        video: videoUrl
+      }
+    })
+  }, [videoUrl])
 
-  if (loading) return (<h4>'Loading...'</h4>);
+  return (
+    <>
+      <InputGroup className="mb-3">
+        <InputGroup.Text style={{ cursor: 'pointer' }}>Video</InputGroup.Text>
+        <FormControl
+          defaultValue={videoUrl}
+          onChange={(event) => {debouncedSetVideoUrl(event.target.value)}}
+        />
+      </InputGroup>
+    </>
+  )
+}
+
+export const ViewRecipePage: React.FunctionComponent<ViewRecipePageProps> = ({ match: { params: { slug } } }) => {
+  const developerMode = useRecoilValue(inDeveloperMode);
+  const [recipeState, setRecipeState] = useRecoilState(recipeViewerState);
+  const { invalidated: recipeInvalidated } = recipeState;
+
+  const [showRecipeOffCanvas, setShowRecipeOffCanvas] = useState(false);
+
+  const id = slug.split('-').pop();
+
+  const { loading, error, data, refetch } = useViewRecipeQueryQuery({
+    variables: {
+      id: parseInt(id || '0', 10),
+    }
+  });
+
+  useEffect(() => {
+    if (!recipeInvalidated) return;
+
+    setRecipeState({
+      ...recipeState,
+      invalidated: false
+    })
+    refetch();
+  }, [recipeInvalidated])
+
+  if (loading) return null;
   if (error) return (<h4>{`Error! ${error.message}`}</h4>);
+  if (!data) return (<h4>Recipe does not exist!</h4>);
 
-  const { recipes_by_pk: recipe } = data as {recipes_by_pk: Recipes};
+  const recipe = data.recipes[0] as Recipes;
 
-  const markVideoStep = async () => {
-    if (currentVideoStep === null) {
-      console.error('no current video step selected.');
-      return;
-    }
-
-    if (currentVideoStep.type === 'direction') {
-      const direction = recipe.recipe_directions[currentVideoStep.idx];
-
-      await insertDirectionTimestamp({
-        variables: {
-          id: direction.id,
-          video_timestamp: 0
-        }
-      });
-    } else if (currentVideoStep.type === 'ingredient') {
-      const ingredientGroup = recipe.recipe_ingredient_groups[currentVideoStep.group_idx];
-      const ingredient = ingredientGroup.group_ingredients[currentVideoStep.ingredient_idx];
-
-      await insertIngredientTimestamp({
-        variables: {
-          id: ingredient.id,
-          video_timestamp: 0
-        }
-      });
-    } else {
-      console.error('unknown video step type.');
-    }
-  }
+  if (!recipe) return (<h4>Recipe does not exist!</h4>);
 
   const sourceHostname = getSourceHostname(recipe.source);
 
@@ -194,15 +230,18 @@ export const ViewRecipePage: React.FunctionComponent<ViewRecipePageProps> = (pro
           <h1 className="text-4xl pb-8">
             {recipe.name}
           </h1>
+          <ViewModeSelector />
         </Col>
       </Row>
       <Row>
         <Col md={12}>
-          <Button variant="outline-dark" size='sm' onClick={() => setShowRecipeOffCanvas(true)} className="fs-8" style={{cursor: 'pointer', userSelect: 'none'}}><i className='bi bi-star' /></Button>
+          <Button variant="outline-dark" size='sm' onClick={() => setShowRecipeOffCanvas(true)} className="fs-8" style={{ cursor: 'pointer', userSelect: 'none' }}>
+            <i className='bi bi-star' />
+          </Button>
           <h5 className='text-right mx-3' style={{ transform: 'translateY(50%)', top: '50%', display: 'inline' }}>from <a href={recipe.source}>{sourceHostname}</a></h5>
           {recipe.recipe_tags.map((tag) => {
             return (
-              <Badge key={tag.id} className="mx-1 fs-6" style={{cursor: 'pointer', userSelect: 'none'}} bg="light" text="muted">{tag.name}</Badge>
+              <Badge key={tag.id} className="mx-1 fs-6" style={{ cursor: 'pointer', userSelect: 'none' }} bg="light" text="muted">{tag.name}</Badge>
             )
           })}
         </Col>
@@ -210,24 +249,41 @@ export const ViewRecipePage: React.FunctionComponent<ViewRecipePageProps> = (pro
       <Row>
         <Col xs={12} md={3} className='my-3'>
           <h3>Prepare</h3>
-          <IngredientList callbacks={callbacks} ingredientGroups={recipe.recipe_ingredient_groups} reloadRecipe={reloadRecipe} />
+          <IngredientList ingredientGroups={recipe.recipe_ingredient_groups} />
         </Col>
         {
-          recipe.video ? (
+          recipe.video || developerMode ? (
             <>
               <Col xs={12} md={6} className='my-3'>
                 <h3>Directions</h3>
-                <RecipeDirections recipe={recipe} callbacks={callbacks} />
+                <RecipeDirections recipe={recipe} showStepNumbers={false} />
               </Col>
               <Col xs={12} md={3} className='my-3'>
                 <h3>Watch</h3>
-                <VideoPlayer url={recipe.video} timestamp={timestamp} />
+                {
+                  developerMode && (
+                    <Row>
+                      <Col md={12}>
+                        <VideoMetadataForm recipe={recipe} />
+                      </Col>
+                    </Row>
+                  )
+                }
+                {
+                  recipe.video && (
+                    <Row>
+                      <Col md={12}>
+                        <VideoPlayer recipe={recipe} />
+                      </Col>
+                    </Row>
+                  )
+                }
               </Col>
             </>
           ) : (
             <Col xs={12} md={9} className='my-3'>
               <h3>Directions</h3>
-              <RecipeDirections recipe={recipe} callbacks={callbacks} />
+              <RecipeDirections recipe={recipe} showStepNumbers={false} />
             </Col>
           )
         }

@@ -1,22 +1,27 @@
 import React from 'react';
 import { Col } from 'react-bootstrap';
+import { gql } from '@apollo/client';
 import { Recipe_Ingredient_Groups } from '../generated/graphql';
 import { IngredientGroup } from './IngredientGroup';
 
-interface IngredientListProps {
-  ingredientGroups: Recipe_Ingredient_Groups[];
-  reloadRecipe: () => void;
-  callbacks: {
-    setTimestamp: React.Dispatch<number>;
+const INSERT_INGREDIENT_VIDEO_TIMESTAMP = gql`
+mutation UpsertIngredientVideoTimestamp($id: Int_comparison_exp, $video_timestamp: Int, $video_timestamp_end: Int) {
+  update_recipe_ingredients(where: {id: $id}, _set: {video_timestamp: $video_timestamp, video_timestamp_end: $video_timestamp_end}) {
+    affected_rows
   }
 }
+`;
 
-export const IngredientList: React.FunctionComponent<IngredientListProps> = ({ ingredientGroups, reloadRecipe, callbacks }) => {
+interface IngredientListProps {
+  ingredientGroups: Recipe_Ingredient_Groups[];
+}
+
+export const IngredientList: React.FunctionComponent<IngredientListProps> = ({ ingredientGroups }) => {
   return (
     <>
       {ingredientGroups.map((ingredient_group) => (
         <Col sm key='recipe-ingredient-group'>
-          <IngredientGroup callbacks={callbacks} ingredientGroup={ingredient_group} reloadRecipe={reloadRecipe} />
+          <IngredientGroup ingredientGroup={ingredient_group} />
         </Col>
       ))}
     </>

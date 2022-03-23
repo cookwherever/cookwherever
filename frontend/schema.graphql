@@ -8158,6 +8158,7 @@ type recipe_directions {
   seq_num: Int!
   step: String!
   video_timestamp: Int
+  video_timestamp_end: Int
 }
 
 """
@@ -8218,6 +8219,7 @@ type recipe_directions_avg_fields {
   recipe_id: Float
   seq_num: Float
   video_timestamp: Float
+  video_timestamp_end: Float
 }
 
 """
@@ -8228,6 +8230,7 @@ input recipe_directions_avg_order_by {
   recipe_id: order_by
   seq_num: order_by
   video_timestamp: order_by
+  video_timestamp_end: order_by
 }
 
 """
@@ -8243,6 +8246,7 @@ input recipe_directions_bool_exp {
   seq_num: Int_comparison_exp
   step: String_comparison_exp
   video_timestamp: Int_comparison_exp
+  video_timestamp_end: Int_comparison_exp
 }
 
 """
@@ -8264,6 +8268,7 @@ input recipe_directions_inc_input {
   recipe_id: Int
   seq_num: Int
   video_timestamp: Int
+  video_timestamp_end: Int
 }
 
 """
@@ -8276,6 +8281,7 @@ input recipe_directions_insert_input {
   seq_num: Int
   step: String
   video_timestamp: Int
+  video_timestamp_end: Int
 }
 
 """aggregate max on columns"""
@@ -8285,6 +8291,7 @@ type recipe_directions_max_fields {
   seq_num: Int
   step: String
   video_timestamp: Int
+  video_timestamp_end: Int
 }
 
 """
@@ -8296,6 +8303,7 @@ input recipe_directions_max_order_by {
   seq_num: order_by
   step: order_by
   video_timestamp: order_by
+  video_timestamp_end: order_by
 }
 
 """aggregate min on columns"""
@@ -8305,6 +8313,7 @@ type recipe_directions_min_fields {
   seq_num: Int
   step: String
   video_timestamp: Int
+  video_timestamp_end: Int
 }
 
 """
@@ -8316,6 +8325,7 @@ input recipe_directions_min_order_by {
   seq_num: order_by
   step: order_by
   video_timestamp: order_by
+  video_timestamp_end: order_by
 }
 
 """
@@ -8346,6 +8356,7 @@ input recipe_directions_order_by {
   seq_num: order_by
   step: order_by
   video_timestamp: order_by
+  video_timestamp_end: order_by
 }
 
 """primary key columns input for table: recipe_directions"""
@@ -8371,6 +8382,9 @@ enum recipe_directions_select_column {
 
   """column name"""
   video_timestamp
+
+  """column name"""
+  video_timestamp_end
 }
 
 """
@@ -8382,6 +8396,7 @@ input recipe_directions_set_input {
   seq_num: Int
   step: String
   video_timestamp: Int
+  video_timestamp_end: Int
 }
 
 """aggregate stddev on columns"""
@@ -8390,6 +8405,7 @@ type recipe_directions_stddev_fields {
   recipe_id: Float
   seq_num: Float
   video_timestamp: Float
+  video_timestamp_end: Float
 }
 
 """
@@ -8400,6 +8416,7 @@ input recipe_directions_stddev_order_by {
   recipe_id: order_by
   seq_num: order_by
   video_timestamp: order_by
+  video_timestamp_end: order_by
 }
 
 """aggregate stddev_pop on columns"""
@@ -8408,6 +8425,7 @@ type recipe_directions_stddev_pop_fields {
   recipe_id: Float
   seq_num: Float
   video_timestamp: Float
+  video_timestamp_end: Float
 }
 
 """
@@ -8418,6 +8436,7 @@ input recipe_directions_stddev_pop_order_by {
   recipe_id: order_by
   seq_num: order_by
   video_timestamp: order_by
+  video_timestamp_end: order_by
 }
 
 """aggregate stddev_samp on columns"""
@@ -8426,6 +8445,7 @@ type recipe_directions_stddev_samp_fields {
   recipe_id: Float
   seq_num: Float
   video_timestamp: Float
+  video_timestamp_end: Float
 }
 
 """
@@ -8436,6 +8456,7 @@ input recipe_directions_stddev_samp_order_by {
   recipe_id: order_by
   seq_num: order_by
   video_timestamp: order_by
+  video_timestamp_end: order_by
 }
 
 """aggregate sum on columns"""
@@ -8444,6 +8465,7 @@ type recipe_directions_sum_fields {
   recipe_id: Int
   seq_num: Int
   video_timestamp: Int
+  video_timestamp_end: Int
 }
 
 """
@@ -8454,6 +8476,7 @@ input recipe_directions_sum_order_by {
   recipe_id: order_by
   seq_num: order_by
   video_timestamp: order_by
+  video_timestamp_end: order_by
 }
 
 """
@@ -8474,6 +8497,9 @@ enum recipe_directions_update_column {
 
   """column name"""
   video_timestamp
+
+  """column name"""
+  video_timestamp_end
 }
 
 """aggregate var_pop on columns"""
@@ -8482,6 +8508,7 @@ type recipe_directions_var_pop_fields {
   recipe_id: Float
   seq_num: Float
   video_timestamp: Float
+  video_timestamp_end: Float
 }
 
 """
@@ -8492,6 +8519,7 @@ input recipe_directions_var_pop_order_by {
   recipe_id: order_by
   seq_num: order_by
   video_timestamp: order_by
+  video_timestamp_end: order_by
 }
 
 """aggregate var_samp on columns"""
@@ -8500,6 +8528,7 @@ type recipe_directions_var_samp_fields {
   recipe_id: Float
   seq_num: Float
   video_timestamp: Float
+  video_timestamp_end: Float
 }
 
 """
@@ -8510,6 +8539,7 @@ input recipe_directions_var_samp_order_by {
   recipe_id: order_by
   seq_num: order_by
   video_timestamp: order_by
+  video_timestamp_end: order_by
 }
 
 """aggregate variance on columns"""
@@ -8518,6 +8548,7 @@ type recipe_directions_variance_fields {
   recipe_id: Float
   seq_num: Float
   video_timestamp: Float
+  video_timestamp_end: Float
 }
 
 """
@@ -8528,6 +8559,7 @@ input recipe_directions_variance_order_by {
   recipe_id: order_by
   seq_num: order_by
   video_timestamp: order_by
+  video_timestamp_end: order_by
 }
 
 """
@@ -9599,6 +9631,7 @@ type recipe_ingredients {
   text: String!
   units: String
   video_timestamp: Int
+  video_timestamp_end: Int
 }
 
 """
@@ -9661,6 +9694,7 @@ type recipe_ingredients_avg_fields {
   id: Float
   seq_num: Float
   video_timestamp: Float
+  video_timestamp_end: Float
 }
 
 """
@@ -9673,6 +9707,7 @@ input recipe_ingredients_avg_order_by {
   id: order_by
   seq_num: order_by
   video_timestamp: order_by
+  video_timestamp_end: order_by
 }
 
 """
@@ -9696,6 +9731,7 @@ input recipe_ingredients_bool_exp {
   text: String_comparison_exp
   units: String_comparison_exp
   video_timestamp: Int_comparison_exp
+  video_timestamp_end: Int_comparison_exp
 }
 
 """
@@ -9719,6 +9755,7 @@ input recipe_ingredients_inc_input {
   id: Int
   seq_num: Int
   video_timestamp: Int
+  video_timestamp_end: Int
 }
 
 """
@@ -9738,6 +9775,7 @@ input recipe_ingredients_insert_input {
   text: String
   units: String
   video_timestamp: Int
+  video_timestamp_end: Int
 }
 
 """aggregate max on columns"""
@@ -9752,6 +9790,7 @@ type recipe_ingredients_max_fields {
   text: String
   units: String
   video_timestamp: Int
+  video_timestamp_end: Int
 }
 
 """
@@ -9768,6 +9807,7 @@ input recipe_ingredients_max_order_by {
   text: order_by
   units: order_by
   video_timestamp: order_by
+  video_timestamp_end: order_by
 }
 
 """aggregate min on columns"""
@@ -9782,6 +9822,7 @@ type recipe_ingredients_min_fields {
   text: String
   units: String
   video_timestamp: Int
+  video_timestamp_end: Int
 }
 
 """
@@ -9798,6 +9839,7 @@ input recipe_ingredients_min_order_by {
   text: order_by
   units: order_by
   video_timestamp: order_by
+  video_timestamp_end: order_by
 }
 
 """
@@ -9836,6 +9878,7 @@ input recipe_ingredients_order_by {
   text: order_by
   units: order_by
   video_timestamp: order_by
+  video_timestamp_end: order_by
 }
 
 """primary key columns input for table: recipe_ingredients"""
@@ -9876,6 +9919,9 @@ enum recipe_ingredients_select_column {
 
   """column name"""
   video_timestamp
+
+  """column name"""
+  video_timestamp_end
 }
 
 """
@@ -9892,6 +9938,7 @@ input recipe_ingredients_set_input {
   text: String
   units: String
   video_timestamp: Int
+  video_timestamp_end: Int
 }
 
 """aggregate stddev on columns"""
@@ -9902,6 +9949,7 @@ type recipe_ingredients_stddev_fields {
   id: Float
   seq_num: Float
   video_timestamp: Float
+  video_timestamp_end: Float
 }
 
 """
@@ -9914,6 +9962,7 @@ input recipe_ingredients_stddev_order_by {
   id: order_by
   seq_num: order_by
   video_timestamp: order_by
+  video_timestamp_end: order_by
 }
 
 """aggregate stddev_pop on columns"""
@@ -9924,6 +9973,7 @@ type recipe_ingredients_stddev_pop_fields {
   id: Float
   seq_num: Float
   video_timestamp: Float
+  video_timestamp_end: Float
 }
 
 """
@@ -9936,6 +9986,7 @@ input recipe_ingredients_stddev_pop_order_by {
   id: order_by
   seq_num: order_by
   video_timestamp: order_by
+  video_timestamp_end: order_by
 }
 
 """aggregate stddev_samp on columns"""
@@ -9946,6 +9997,7 @@ type recipe_ingredients_stddev_samp_fields {
   id: Float
   seq_num: Float
   video_timestamp: Float
+  video_timestamp_end: Float
 }
 
 """
@@ -9958,6 +10010,7 @@ input recipe_ingredients_stddev_samp_order_by {
   id: order_by
   seq_num: order_by
   video_timestamp: order_by
+  video_timestamp_end: order_by
 }
 
 """aggregate sum on columns"""
@@ -9968,6 +10021,7 @@ type recipe_ingredients_sum_fields {
   id: Int
   seq_num: Int
   video_timestamp: Int
+  video_timestamp_end: Int
 }
 
 """
@@ -9980,6 +10034,7 @@ input recipe_ingredients_sum_order_by {
   id: order_by
   seq_num: order_by
   video_timestamp: order_by
+  video_timestamp_end: order_by
 }
 
 """
@@ -10015,6 +10070,9 @@ enum recipe_ingredients_update_column {
 
   """column name"""
   video_timestamp
+
+  """column name"""
+  video_timestamp_end
 }
 
 """aggregate var_pop on columns"""
@@ -10025,6 +10083,7 @@ type recipe_ingredients_var_pop_fields {
   id: Float
   seq_num: Float
   video_timestamp: Float
+  video_timestamp_end: Float
 }
 
 """
@@ -10037,6 +10096,7 @@ input recipe_ingredients_var_pop_order_by {
   id: order_by
   seq_num: order_by
   video_timestamp: order_by
+  video_timestamp_end: order_by
 }
 
 """aggregate var_samp on columns"""
@@ -10047,6 +10107,7 @@ type recipe_ingredients_var_samp_fields {
   id: Float
   seq_num: Float
   video_timestamp: Float
+  video_timestamp_end: Float
 }
 
 """
@@ -10059,6 +10120,7 @@ input recipe_ingredients_var_samp_order_by {
   id: order_by
   seq_num: order_by
   video_timestamp: order_by
+  video_timestamp_end: order_by
 }
 
 """aggregate variance on columns"""
@@ -10069,6 +10131,7 @@ type recipe_ingredients_variance_fields {
   id: Float
   seq_num: Float
   video_timestamp: Float
+  video_timestamp_end: Float
 }
 
 """
@@ -10081,6 +10144,7 @@ input recipe_ingredients_variance_order_by {
   id: order_by
   seq_num: order_by
   video_timestamp: order_by
+  video_timestamp_end: order_by
 }
 
 """
@@ -11203,6 +11267,7 @@ type recipes {
     """filter the rows returned"""
     where: recipe_tags_bool_exp
   ): recipe_tags_aggregate!
+  slug: String
   source: String!
   updated_at: timestamptz!
   video: String
@@ -11260,6 +11325,7 @@ input recipes_bool_exp {
   recipe_directions: recipe_directions_bool_exp
   recipe_ingredient_groups: recipe_ingredient_groups_bool_exp
   recipe_tags: recipe_tags_bool_exp
+  slug: String_comparison_exp
   source: String_comparison_exp
   updated_at: timestamptz_comparison_exp
   video: String_comparison_exp
@@ -11318,6 +11384,7 @@ input recipes_insert_input {
   recipe_directions: recipe_directions_arr_rel_insert_input
   recipe_ingredient_groups: recipe_ingredient_groups_arr_rel_insert_input
   recipe_tags: recipe_tags_arr_rel_insert_input
+  slug: String
   source: String
   updated_at: timestamptz
   video: String
@@ -11330,6 +11397,7 @@ type recipes_max_fields {
   id: Int
   image: String
   name: String
+  slug: String
   source: String
   updated_at: timestamptz
   video: String
@@ -11341,6 +11409,7 @@ type recipes_min_fields {
   id: Int
   image: String
   name: String
+  slug: String
   source: String
   updated_at: timestamptz
   video: String
@@ -11387,6 +11456,7 @@ input recipes_order_by {
   recipe_directions_aggregate: recipe_directions_aggregate_order_by
   recipe_ingredient_groups_aggregate: recipe_ingredient_groups_aggregate_order_by
   recipe_tags_aggregate: recipe_tags_aggregate_order_by
+  slug: order_by
   source: order_by
   updated_at: order_by
   video: order_by
@@ -11423,6 +11493,9 @@ enum recipes_select_column {
   name
 
   """column name"""
+  slug
+
+  """column name"""
   source
 
   """column name"""
@@ -11444,6 +11517,7 @@ input recipes_set_input {
   id: Int
   image: String
   name: String
+  slug: String
   source: String
   updated_at: timestamptz
   video: String
@@ -11488,6 +11562,9 @@ enum recipes_update_column {
 
   """column name"""
   name
+
+  """column name"""
+  slug
 
   """column name"""
   source

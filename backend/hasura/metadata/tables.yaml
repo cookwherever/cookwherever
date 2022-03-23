@@ -304,17 +304,17 @@
   - role: anonymous
     permission:
       columns:
-      - footnote
-      - modifier
-      - portion_description
+      - id
+      - fdc_id
+      - seq_num
       - amount
+      - measure_unit_id
+      - portion_description
+      - modifier
       - gram_weight
       - data_points
-      - fdc_id
-      - id
-      - measure_unit_id
+      - footnote
       - min_year_acquired
-      - seq_num
       filter: {}
   - role: user
     permission:
@@ -410,6 +410,7 @@
       - recipe_id
       - seq_num
       - video_timestamp
+      - video_timestamp_end
       - step
       filter: {}
   - role: user
@@ -420,6 +421,7 @@
       - seq_num
       - step
       - video_timestamp
+      - video_timestamp_end
       filter: {}
   update_permissions:
   - role: user
@@ -429,6 +431,8 @@
       - seq_num
       - step
       - recipe_id
+      - video_timestamp
+      - video_timestamp_end
       filter: {}
       check: null
 - table:
@@ -614,21 +618,24 @@
       - text
       - seq_num
       - group_id
+      - video_timestamp
+      - video_timestamp_end
       backend_only: false
   select_permissions:
   - role: anonymous
     permission:
       columns:
-      - food_id
-      - group_id
       - id
-      - seq_num
-      - video_timestamp
-      - amount
-      - comment
       - name
-      - text
+      - amount
       - units
+      - comment
+      - food_id
+      - text
+      - seq_num
+      - group_id
+      - video_timestamp
+      - video_timestamp_end
       filter: {}
   - role: user
     permission:
@@ -643,6 +650,7 @@
       - text
       - units
       - video_timestamp
+      - video_timestamp_end
       filter: {}
   update_permissions:
   - role: user
@@ -657,6 +665,8 @@
       - text
       - seq_num
       - group_id
+      - video_timestamp
+      - video_timestamp_end
       filter: {}
       check: null
 - table:
@@ -833,16 +843,22 @@
   - role: anonymous
     permission:
       columns:
-      - visible
       - id
-      - extraction_metadata
-      - image
-      - name
-      - source
-      - video
       - created_at
       - updated_at
-      filter: {}
+      - name
+      - source
+      - image
+      - extraction_metadata
+      - visible
+      - video
+      - slug
+      filter:
+        _or:
+        - source:
+            _like: '%seriouseats%'
+        - source:
+            _like: '%epicurious%'
       allow_aggregations: true
   - role: user
     permission:
@@ -852,6 +868,7 @@
       - id
       - image
       - name
+      - slug
       - source
       - updated_at
       - video
@@ -869,6 +886,7 @@
       - name
       - source
       - updated_at
+      - video
       - visible
       filter: {}
       check: null

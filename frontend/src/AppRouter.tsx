@@ -8,6 +8,7 @@ import { setContext } from '@apollo/client/link/context';
 import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
 import { Home, Bookmark, List, Lock } from '@mui/icons-material';
 import { Container, Nav } from 'react-bootstrap';
+import RecoilizeDebugger from 'recoilize';
 import { ViewIngredientPage } from './pages/ViewIngredientPage/ViewIngredientPage';
 import { SearchIngredientPage } from './pages/SearchIngredientPage/SearchIngredientPage';
 import { SaveRecipePage } from './pages/SaveRecipePage/SaveRecipePage';
@@ -22,7 +23,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'src/styles/main.css';
 
 import RecipeVisualizerPage from './pages/RecipeVisualizerPage/RecipeVisualizerPage';
-import {anonymousSignin, getRefreshedToken} from './utils/auth';
+import { anonymousSignin, getRefreshedToken } from './utils/auth';
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL_URL
@@ -88,6 +89,7 @@ const AppRouter: FunctionComponent = () => {
           </Nav>
         </Container>
         <RecoilRoot>
+          <RecoilizeDebugger />
           <Suspense fallback={<span>Loading...</span>}>
             <Switch>
               <Route exact path="/" component={HomePage} />
@@ -97,7 +99,7 @@ const AppRouter: FunctionComponent = () => {
               <Route path="/ingredient/search" component={SearchIngredientPage} />
               <Route path="/recipe/save" component={SaveRecipePage} />
               <Route path="/recipe/visualize" component={RecipeVisualizerPage} />
-              <Route path="/recipe/:id" component={ViewRecipePage} />
+              <Route path="/recipe/:slug" component={ViewRecipePage} />
               <Route path="/lists" component={RecipeListsPage} />
             </Switch>
           </Suspense>

@@ -11,7 +11,7 @@ mutation CreateRecipe(
     objects: $recipes
     on_conflict: {
         constraint: recipes_source_key,
-        update_columns: [name, image, extraction_metadata, updated_at],
+        update_columns: [name, image, extraction_metadata, updated_at, slug],
     }
   ) {
     returning {

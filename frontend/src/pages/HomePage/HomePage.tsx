@@ -1,18 +1,12 @@
 import React, { useEffect, useState } from 'react'
 
-import { AutoField, AutoForm, ListField, SubmitField } from 'uniforms-material';
-import { gql } from '@apollo/client';
-import { buildASTSchema } from 'graphql';
-import { GraphQLBridge } from 'uniforms-bridge-graphql';
 import { useHistory, useLocation } from 'react-router-dom';
-import { Grid } from '@mui/material';
 import { Col, Container, Form, InputGroup, Row } from 'react-bootstrap';
 import ListInput from 'src/components/ListInput';
-import { Recipes } from '../../generated/graphql';
-import SpeechInput from '../../components/SpeechInput/SpeechInput';
 import { RecipesList } from '../../components/RecipesList/RecipesList';
 import { RecipeSearch } from '../../types/component-types';
 import {getRefreshedToken} from "../../utils/auth";
+import useDebouncedCallback from "@restart/hooks/useDebouncedCallback";
 
 interface HomePageProps {
 
@@ -36,6 +30,7 @@ const RecipeSearchForm: React.FunctionComponent<RecipeSearchFormProps> = ({ reci
             required
             type="text"
             placeholder="Apple Pie"
+            defaultValue={recipeSearch.name || undefined}
             onChange={(e) => {
               setRecipeSearch({
                 ...recipeSearch,
@@ -50,6 +45,7 @@ const RecipeSearchForm: React.FunctionComponent<RecipeSearchFormProps> = ({ reci
             required
             type="text"
             placeholder="seriouseats.com"
+            defaultValue={recipeSearch.source || undefined}
             onChange={(e) => {
               setRecipeSearch({
                 ...recipeSearch,
@@ -65,6 +61,7 @@ const RecipeSearchForm: React.FunctionComponent<RecipeSearchFormProps> = ({ reci
           <ListInput
             header="Ingredients"
             placeholder="Apples"
+            value={recipeSearch.ingredients || []}
             onChange={(ingredients) => {
               setRecipeSearch({
                 ...recipeSearch,
@@ -78,6 +75,7 @@ const RecipeSearchForm: React.FunctionComponent<RecipeSearchFormProps> = ({ reci
           <ListInput
             header="Tags"
             placeholder="Dessert"
+            value={recipeSearch.tags || []}
             onChange={(tags) => {
               setRecipeSearch({
                 ...recipeSearch,
@@ -113,6 +111,8 @@ export const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
     tags: urlSearchParams.getAll('tags')
   });
 
+  const debouncedRecipeSearch = useDebouncedCallback(setRecipeSearch, 500);
+
   useEffect(() => {
     const searchParams = new URLSearchParams([
       ['name', recipeSearch.name],
@@ -127,7 +127,7 @@ export const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
     <Container>
       <h1 className='text-center my-2'>Cook Wherever</h1>
       <Row>
-        <RecipeSearchForm recipeSearch={recipeSearch} setRecipeSearch={setRecipeSearch} />
+        <RecipeSearchForm recipeSearch={recipeSearch} setRecipeSearch={debouncedRecipeSearch} />
         {/* <Grid item> */}
         {/*  <SpeechInput /> */}
         {/* </Grid> */}

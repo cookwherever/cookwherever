@@ -1,5 +1,4 @@
 from recipe_scrapers import scrape_me
-import json
 
 from ingredients import normalize_ingredient_groups
 
@@ -50,7 +49,7 @@ def get_recipe(recipe_id, url, page_data):
                 'ingredients': scraper.ingredients() if scraper.ingredients() else []
             }
         ],
-        'recipe_tags': [],
+        'recipe_tags': scraper.tags(),
         'extraction_metadata': {
             'recipe_id': recipe_id,
             'nutrients': scraper.nutrients(),

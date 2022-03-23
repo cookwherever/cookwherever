@@ -1,15 +1,15 @@
 from ._abstract import AbstractScraper
 
 
-class NYTimes(AbstractScraper):
+class JoshuaWeissman(AbstractScraper):
     WITH_SCHEMA = True
 
     @classmethod
     def host(cls):
-        return "cooking.nytimes.com"
+        return "joshuaweissman.com"
 
     def title(self):
-        return self.schema.title()
+        return self.soup.find('h1', {'class': 'blog-post-title-font'})
 
     def total_time(self):
         try:
@@ -36,6 +36,9 @@ class NYTimes(AbstractScraper):
             return None
 
     def ingredients(self):
+        return self.schema.ingredients()
+
+    def ingredient_groups(self):
         return self.schema.ingredients()
 
     def instructions(self):

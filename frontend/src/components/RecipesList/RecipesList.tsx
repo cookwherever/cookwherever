@@ -11,12 +11,13 @@ export const QUERY = gql`
   query RecipesQuery($search: String, $where: recipes_bool_exp!, $limit: Int = 10, $offset: Int = 0) {
     search_recipes(args: {search: $search}, where: $where, limit: $limit, offset: $offset, order_by: {updated_at: asc}) {
       id
+      slug
       name
       source
       created_at
       image
     }
-    recipes_aggregate(where: $where) {
+    search_recipes_aggregate(args: {search: $search}, where: $where) {
         aggregate {
             count
         }
@@ -87,6 +88,18 @@ export const RecipesList: React.FunctionComponent<RecipesListProps> = (props) =>
     }
   }
 
+  if (recipeSearch.tags.length > 0) {
+    for (const tag of recipeSearch.tags) {
+      whereConditions.push({
+        recipe_tags: {
+          name: {
+            _eq: tag
+          }
+        }
+      })
+    }
+  }
+
   const where: Recipes_Bool_Exp = getRecipeSearchWhere(whereConditions);
 
   const { loading, error, data } = useRecipesQueryQuery({
@@ -108,7 +121,7 @@ export const RecipesList: React.FunctionComponent<RecipesListProps> = (props) =>
     )
   }
 
-  const recipeCount = data.recipes_aggregate.aggregate;
+  const recipeCount = data.search_recipes_aggregate.aggregate;
   if (!recipeCount) {
     return (
       <p>Search for a recipe!</p>
@@ -126,7 +139,7 @@ export const RecipesList: React.FunctionComponent<RecipesListProps> = (props) =>
           const recipeImage = recipe.image || 'https://via.placeholder.com/300x250';
           return (
             <Col
-              key={`recipe-link-${recipe.id}`}
+              key={recipe.id}
               sm
               className='my-2'
             >
@@ -134,7 +147,7 @@ export const RecipesList: React.FunctionComponent<RecipesListProps> = (props) =>
                 style={{ width: '18rem', height: '100%' }}
                 className='hover-card'
                 onClick={() => {
-                  history.push(`/recipe/${recipe.id}`)
+                  history.push(`/recipe/${recipe.slug}-${recipe.id}`)
                 }}
               >
                 {/*<Card.Img variant="top" src={recipeImage} />*/}
