@@ -15,6 +15,7 @@
       <excludeFolder url="file://$MODULE_DIR$/backend/etl/env" />
       <excludeFolder url="file://$MODULE_DIR$/backend/etl/normalized" />
       <excludeFolder url="file://$MODULE_DIR$/backend/etl/recipes" />
+      <excludeFolder url="file://$MODULE_DIR$/wiki/.layouts/.cache" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.8 (env)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
