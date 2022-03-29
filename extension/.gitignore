@@ -1,11 +1,4 @@
-node_modules
 npm-debug.log
-.DS_Store
-
-build/
-dev/
-
-*.zip
-*.crx
-*.pem
-update.xml
+node_modules/
+dist/
+tmp/

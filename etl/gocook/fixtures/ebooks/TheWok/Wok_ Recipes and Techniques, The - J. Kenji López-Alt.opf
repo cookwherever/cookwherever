@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="uuid_id" version="2.0">
+    <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+        <dc:identifier opf:scheme="calibre" id="calibre_id">10</dc:identifier>
+        <dc:identifier opf:scheme="uuid" id="uuid_id">7551e996-5567-4a9d-bd8d-54c8e27aa7bd</dc:identifier>
+        <dc:title>The Wok: Recipes and Techniques</dc:title>
+        <dc:creator opf:file-as="López-Alt, J. Kenji" opf:role="aut">J. Kenji López-Alt</dc:creator>
+        <dc:contributor opf:file-as="calibre" opf:role="bkp">calibre (5.33.2) [https://calibre-ebook.com]</dc:contributor>
+        <dc:date>2022-03-08T08:00:00+00:00</dc:date>
+        <dc:publisher>W. W. Norton &amp; Company</dc:publisher>
+        <dc:identifier opf:scheme="MOBI-ASIN">B098TZ6TX3</dc:identifier>
+        <dc:language>eng</dc:language>
+        <meta name="calibre:author_link_map" content="{&quot;J. Kenji López-Alt&quot;: &quot;&quot;}"/>
+        <meta name="calibre:timestamp" content="2022-03-27T03:19:32+00:00"/>
+        <meta name="calibre:title_sort" content="Wok: Recipes and Techniques, The"/>
+    </metadata>
+    <guide>
+        <reference type="cover" title="Cover" href="Wok_ Recipes and Techniques, The - J. Kenji López-Alt.jpg"/>
+    </guide>
+</package>
