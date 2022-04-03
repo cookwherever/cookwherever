@@ -18,11 +18,18 @@ export interface CurrentRecipeStep {
   timestampEnd?: number;
 }
 
+export interface Timer {
+  id: string;
+  stepNumber: number;
+  time: number;
+}
+
 export interface RecipeState {
   invalidated: boolean;
   reportedTimestamp: number | undefined;
   focusedDirectionTimestamp: FocusedDirectionTimestamp;
   currentRecipeStep: CurrentRecipeStep | null;
+  timers: Timer[]
 }
 
 export const recipeViewerState = atom<RecipeState>({
@@ -31,7 +38,8 @@ export const recipeViewerState = atom<RecipeState>({
     invalidated: false,
     reportedTimestamp: undefined,
     focusedDirectionTimestamp: initialFocusedDirectionTimestamp,
-    currentRecipeStep: null
+    currentRecipeStep: null,
+    timers: []
   },
 })
 

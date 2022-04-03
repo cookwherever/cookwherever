@@ -11,10 +11,9 @@ import requests  # requests must be imported after capture_http
 import concurrent.futures
 from warcio.archiveiterator import ArchiveIterator
 
-from slugify import slugify
 from graphql import execute_create_recipes
 from recipe.ingredients import save_parsed_ingredients, load_parsed_ingredients
-from util import debug
+from util import debug, slugify
 from urllib.parse import urlparse
 
 from recipe.providers import recipe_providers
@@ -181,7 +180,7 @@ def format_recipe(recipe_file, recipe):
     except Exception as e:
         source_name = recipe.get('source')
 
-    recipe_slug = slugify(f"{source_name}-{recipe.get('name')}")
+    recipe_slug = slugify.slugify(f"{source_name}-{recipe.get('name')}")
 
     print(recipe_slug)
 
@@ -205,6 +204,7 @@ def format_recipe(recipe_file, recipe):
         ]
 
     ingredient_groups = recipe.get('recipe_ingredient_groups')
+    print(ingredient_groups)
 
     formatted_recipe_ingredient_groups = [{
         "seq_num": i,

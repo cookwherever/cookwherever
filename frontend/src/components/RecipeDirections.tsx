@@ -1,15 +1,17 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Col, FormControl, InputGroup, ListGroup, Row } from 'react-bootstrap';
-import { gql, useMutation } from '@apollo/client';
-import useDebouncedCallback from '@restart/hooks/useDebouncedCallback';
+import { gql } from '@apollo/client';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { Recipe_Directions, Recipes, useUpsertDirectionVideoTimestampMutation } from '../generated/graphql';
 import { inDeveloperMode } from '../recoil/selectors/view-mode';
 import {
-  focusedDirectionTimestampState, recipeViewerState,
-  reportedTimestampState,
+  recipeViewerState,
   TimestampPosition
 } from '../recoil/atoms/recipe';
+import { Span } from './Annotator/span';
+import { TextAnnotator } from './Annotator/TextAnnotator';
+import { parseDuration } from '../utils/parse-duration';
+import {uuid} from "../utils/uuid";
 
 const INSERT_DIRECTION_VIDEO_TIMESTAMP = gql`
 mutation UpsertDirectionVideoTimestamp($video_timestamp: Int, $video_timestamp_end: Int, $id: Int) {
@@ -58,11 +60,60 @@ const RecipeDirectionRow: React.FunctionComponent<RecipeDirectionRowProps> = ({
 
   const stepNumber = showStepNumbers ? `${idx + 1}.` : '';
 
+  const [annotatorState, setAnnotatorState] = useState<Span[]>([]);
+
+  useEffect(() => {
+    const regex = /(\d+|\d+ to \d+)\s(seconds?|minutes?|hours?|days?)/g
+
+    const annotatorValue: Span[] = [];
+
+    while (true) {
+      const match = regex.exec(direction.step);
+      if (!match) break;
+
+      console.log(match);
+
+      const startIdx = regex.lastIndex - match[0].length;
+      const endIdx = regex.lastIndex;
+
+      annotatorValue.push({
+        start: startIdx,
+        end: endIdx,
+        tag: 'time'
+      })
+    }
+    setAnnotatorState(annotatorValue);
+  }, [direction])
+
   const directionStep = (
     <Row>
       <Col className='fs-5' md={getDirectionStepWidth()}>
         {/* <Highlighter searchWords={ingredientNames} textToHighlight={direction.step} autoEscape={false} /> */}
-        <p>{stepNumber}{direction.step}</p>
+        { stepNumber }
+        <TextAnnotator
+          content={direction.step}
+          value={annotatorState}
+          onAnnotatorChange={value => setAnnotatorState(value)}
+          highlightClicked={(s) => {
+            const duration = parseDuration(s);
+            setRecipeState({
+              ...recipeState,
+              timers: [
+                ...recipeState.timers,
+                {
+                  id: uuid(),
+                  stepNumber: idx + 1,
+                  time: duration
+                }
+              ]
+            })
+          }}
+          getSpan={span => ({
+            ...span,
+            tag: 'time',
+            color: '#84d2ff',
+          })}
+        />
       </Col>
       {direction.video_timestamp && seekToVideoButton}
     </Row>
@@ -130,7 +181,7 @@ const RecipeDirectionRow: React.FunctionComponent<RecipeDirectionRowProps> = ({
 
     const developerMenu = (
       <Row>
-        <Col md={{span: 3, offset: 6}}>
+        <Col md={{ span: 3, offset: 6 }}>
           <InputGroup className="mb-3">
             <InputGroup.Text
               className={isFocusedInput('start') ? 'btn-primary' : ''}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 
 import { gql, useMutation, useQuery } from '@apollo/client';
@@ -6,6 +7,7 @@ import { gql, useMutation, useQuery } from '@apollo/client';
 import { Col, Row, Container, Button, Form, Badge, InputGroup, FormControl } from 'react-bootstrap';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import useDebouncedCallback from '@restart/hooks/useDebouncedCallback';
+import Timer from 'react-compound-timer';
 import {
   Recipes,
   useRecipesQueryQuery,
@@ -250,6 +252,37 @@ export const ViewRecipePage: React.FunctionComponent<ViewRecipePageProps> = ({ m
         <Col xs={12} md={3} className='my-3'>
           <h3>Prepare</h3>
           <IngredientList ingredientGroups={recipe.recipe_ingredient_groups} />
+          <>
+            {recipeState.timers.map((timer, idx) => (
+              <CountdownCircleTimer
+                isPlaying
+                duration={timer.time / 1000}
+                colors={['#004777', '#F7B801', '#A30000', '#A30000']}
+                colorsTime={[7, 5, 2, 0]}
+              >
+                {({ remainingTime }) => {
+                  const hours = Math.floor(remainingTime / 3600)
+                  const minutes = Math.floor((remainingTime % 3600) / 60)
+                  const seconds = remainingTime % 60
+
+                  const padTime = (value: number) => {
+                    return (`00${  value}`).slice(-2);
+                  }
+
+                  return (
+                    <Container>
+                      <Row className='justify-content-center align-items-center'>
+                        {`Direction ${timer.stepNumber}`}
+                      </Row>
+                      <Row className='justify-content-center align-items-center'>
+                        {`${padTime(hours)}:${padTime(minutes)}:${padTime(seconds)}`}
+                      </Row>
+                    </Container>
+                  )
+                }}
+              </CountdownCircleTimer>
+            ))}
+          </>
         </Col>
         {
           recipe.video || developerMode ? (

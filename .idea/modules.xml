@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/food-data.iml" filepath="$PROJECT_DIR$/.idea/food-data.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/cookwherever.iml" filepath="$PROJECT_DIR$/.idea/cookwherever.iml" />
       <module fileurl="file://$PROJECT_DIR$/../homelab-manifests/homelab-manifests.iml" filepath="$PROJECT_DIR$/../homelab-manifests/homelab-manifests.iml" />
     </modules>
   </component>
