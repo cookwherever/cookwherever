@@ -756,6 +756,26 @@
           _eq: X-Hasura-User-Id
 - table:
     schema: public
+    name: recipe_source_providers
+  select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+      - description
+      - name
+      - url
+      - id
+      filter: {}
+  - role: user
+    permission:
+      columns:
+      - description
+      - name
+      - url
+      - id
+      filter: {}
+- table:
+    schema: public
     name: recipe_tags
   insert_permissions:
   - role: user
@@ -797,6 +817,10 @@
 - table:
     schema: public
     name: recipes
+  object_relationships:
+  - name: recipe_source_provider
+    using:
+      foreign_key_constraint_on: source_provider_id
   array_relationships:
   - name: recipe_direction_durations
     using:
@@ -843,16 +867,16 @@
   - role: anonymous
     permission:
       columns:
-      - id
       - created_at
-      - updated_at
+      - extraction_metadata
+      - id
+      - image
       - name
       - source
-      - image
-      - extraction_metadata
-      - visible
+      - source_provider_id
+      - updated_at
       - video
-      - slug
+      - visible
       filter:
         _or:
         - source:
@@ -870,6 +894,7 @@
       - name
       - slug
       - source
+      - source_provider_id
       - updated_at
       - video
       - visible

@@ -11,7 +11,7 @@ export interface SplitProps extends MarkProps {
 
 // eslint-disable-next-line react/require-default-props
 const Split = (props: SplitProps) => {
-  if (props.mark) return <Mark {...props} />
+  if (props.mark && props.color) return <Mark {...props} />
 
   return (
     <span
@@ -32,7 +32,7 @@ type TextBaseProps<T> = {
   content: string
   value: T[]
   onAnnotatorChange: (value: T[]) => void
-  highlightClicked: (value: string) => void
+  highlightClicked: (tag: string, value: string) => void
   // eslint-disable-next-line react/require-default-props
   getSpan?: (span: TextSpan) => T
   // TODO: determine whether to overwrite or leave intersecting ranges.
@@ -77,18 +77,18 @@ export const TextAnnotator = <T extends Span>(props: TextAnnotatorProps<T>) => {
       [start, end] = [end, start]
     }
 
-    props.onAnnotatorChange([...props.value, getSpan({ start, end, text: content.slice(start, end), tag: '' })])
+    props.onAnnotatorChange([...props.value, getSpan({ start, end, text: content.slice(start, end), tag: '', color: '' })])
 
     selection.empty()
   }
 
-  const handleSplitClick = (highlightClicked: (value: string) => void) => ({ start, end }: {start: number, end: number}) => {
+  const handleSplitClick = (highlightClicked: (tag: string, value: string) => void) => ({ start, end }: {start: number, end: number}) => {
     // Find and remove the matching split.
     const splitIndex = props.value.findIndex(s => s.start === start && s.end === end)
 
     const split = props.value[splitIndex];
     const value = props.content.substring(split.start, split.end);
-    highlightClicked(value);
+    highlightClicked(split.tag, value);
     // if (splitIndex >= 0) {
     //   props.onAnnotatorChange([...props.value.slice(0, splitIndex), ...props.value.slice(splitIndex + 1)])
     // }

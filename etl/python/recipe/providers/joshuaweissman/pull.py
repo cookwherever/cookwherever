@@ -1,6 +1,8 @@
 import json
 
 import requests
+
+from ...constants import joshua_weissman_provider
 from ...ingredients import normalize_ingredient_groups
 
 headers = {
@@ -100,6 +102,7 @@ def get_recipe(recipe_id, url, page_data):
     return {
         'name': recipe['title'],
         'source': source_url,
+        'source_provider_id': joshua_weissman_provider['id'],
         'image': None,
         'recipe_directions': directions,
         'recipe_ingredient_groups': ingredient_groups,

@@ -1,0 +1,41 @@
+LET doc = PARSE(IO::FS::READ(@file))
+
+LET ingredients = (
+	FOR ing IN ELEMENTS(doc, 'p')
+    FILTER ATTR_GET(ing, 'align').align == null
+
+    LET isLink = ELEMENT_EXISTS(ing, 'div > a')
+    FILTER isLink OR ELEMENT_EXISTS(ing, 'div')
+
+    LET linkUrl = isLink ? (
+      ATTR_GET(ELEMENT(ing, 'a'), 'href').href
+    ) : null
+
+    LET name = isLink ? INNER_TEXT(ELEMENT(ing, 'a')) : INNER_TEXT(ELEMENT(ing, 'div'))
+
+    INNER_TEXT_SET(ing, 'div', '')
+
+    LET formattedName = TRIM(REGEX_SPLIT(name, '\s.*:')[0])
+		RETURN {
+      name: formattedName,
+      link: isLink,
+      text: isLink ? linkUrl : REGEX_REPLACE(INNER_TEXT(ing), '\n\s*', ' ')
+    }
+)
+
+LET tableIngredients = (
+  FOR ing IN ELEMENTS(doc, 'table')
+    DEBUG(INNER_TEXT(ing))
+    FILTER ELEMENT_EXISTS(ing, 'td > b')
+    LET name = INNER_TEXT(ELEMENT(ing, 'b'))
+    LET formattedName = TRIM(REGEX_SPLIT(name, '(Notes):')[0])
+    RETURN {
+      name: formattedName,
+      link: false,
+      text: TRIM(REGEX_REPLACE(INNER_TEXT(ing, 'tr:nth-child(1)'),  '\n\s*', ' '))
+    }
+)
+
+RETURN {
+  ingredients: UNION(ingredients, tableIngredients)
+}

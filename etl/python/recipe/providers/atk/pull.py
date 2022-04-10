@@ -1,7 +1,7 @@
 import json
 from bs4 import BeautifulSoup
 
-from ...constants import LINE_NUMBER_RE
+from ...constants import LINE_NUMBER_RE, atk_provider
 from ...ingredients import normalize_ingredient_groups
 
 headers = {
@@ -88,6 +88,7 @@ def process_recipe(recipe_id, content):
     return {
         "name": name,
         "source": source,
+        "source_provider_id": atk_provider['id'],
         "image": image,
         "recipe_directions": instructions,
         "recipe_ingredient_groups": recipe_ingredient_groups,

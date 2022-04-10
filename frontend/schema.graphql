@@ -4334,6 +4334,19 @@ type mutation_root {
   delete_recipe_lists_by_pk(id: Int!): recipe_lists
 
   """
+  delete data from the table: "recipe_source_providers"
+  """
+  delete_recipe_source_providers(
+    """filter the rows which have to be deleted"""
+    where: recipe_source_providers_bool_exp!
+  ): recipe_source_providers_mutation_response
+
+  """
+  delete single row from the table: "recipe_source_providers"
+  """
+  delete_recipe_source_providers_by_pk(id: uuid!): recipe_source_providers
+
+  """
   delete data from the table: "recipe_tags"
   """
   delete_recipe_tags(
@@ -4899,6 +4912,28 @@ type mutation_root {
     """on conflict condition"""
     on_conflict: recipe_lists_on_conflict
   ): recipe_lists
+
+  """
+  insert data into the table: "recipe_source_providers"
+  """
+  insert_recipe_source_providers(
+    """the rows to be inserted"""
+    objects: [recipe_source_providers_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: recipe_source_providers_on_conflict
+  ): recipe_source_providers_mutation_response
+
+  """
+  insert a single row into the table: "recipe_source_providers"
+  """
+  insert_recipe_source_providers_one(
+    """the row to be inserted"""
+    object: recipe_source_providers_insert_input!
+
+    """on conflict condition"""
+    on_conflict: recipe_source_providers_on_conflict
+  ): recipe_source_providers
 
   """
   insert data into the table: "recipe_tags"
@@ -5631,6 +5666,26 @@ type mutation_root {
     _set: recipe_lists_set_input
     pk_columns: recipe_lists_pk_columns_input!
   ): recipe_lists
+
+  """
+  update data of the table: "recipe_source_providers"
+  """
+  update_recipe_source_providers(
+    """sets the columns of the filtered rows to the given values"""
+    _set: recipe_source_providers_set_input
+
+    """filter the rows which have to be updated"""
+    where: recipe_source_providers_bool_exp!
+  ): recipe_source_providers_mutation_response
+
+  """
+  update single row of the table: "recipe_source_providers"
+  """
+  update_recipe_source_providers_by_pk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: recipe_source_providers_set_input
+    pk_columns: recipe_source_providers_pk_columns_input!
+  ): recipe_source_providers
 
   """
   update data of the table: "recipe_tags"
@@ -7012,6 +7067,51 @@ type query_root {
 
   """fetch data from the table: "recipe_lists" using primary key columns"""
   recipe_lists_by_pk(id: Int!): recipe_lists
+
+  """
+  fetch data from the table: "recipe_source_providers"
+  """
+  recipe_source_providers(
+    """distinct select on columns"""
+    distinct_on: [recipe_source_providers_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [recipe_source_providers_order_by!]
+
+    """filter the rows returned"""
+    where: recipe_source_providers_bool_exp
+  ): [recipe_source_providers!]!
+
+  """
+  fetch aggregated fields from the table: "recipe_source_providers"
+  """
+  recipe_source_providers_aggregate(
+    """distinct select on columns"""
+    distinct_on: [recipe_source_providers_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [recipe_source_providers_order_by!]
+
+    """filter the rows returned"""
+    where: recipe_source_providers_bool_exp
+  ): recipe_source_providers_aggregate!
+
+  """
+  fetch data from the table: "recipe_source_providers" using primary key columns
+  """
+  recipe_source_providers_by_pk(id: uuid!): recipe_source_providers
 
   """
   fetch data from the table: "recipe_tags"
@@ -10762,6 +10862,171 @@ type recipe_lists_variance_fields {
 }
 
 """
+Sources from where recipes come from.
+
+
+columns and relationships of "recipe_source_providers"
+
+"""
+type recipe_source_providers {
+  description: String!
+  id: uuid!
+  name: String!
+  url: String!
+}
+
+"""
+aggregated selection of "recipe_source_providers"
+"""
+type recipe_source_providers_aggregate {
+  aggregate: recipe_source_providers_aggregate_fields
+  nodes: [recipe_source_providers!]!
+}
+
+"""
+aggregate fields of "recipe_source_providers"
+"""
+type recipe_source_providers_aggregate_fields {
+  count(columns: [recipe_source_providers_select_column!], distinct: Boolean): Int!
+  max: recipe_source_providers_max_fields
+  min: recipe_source_providers_min_fields
+}
+
+"""
+Boolean expression to filter rows from the table "recipe_source_providers". All fields are combined with a logical 'AND'.
+"""
+input recipe_source_providers_bool_exp {
+  _and: [recipe_source_providers_bool_exp!]
+  _not: recipe_source_providers_bool_exp
+  _or: [recipe_source_providers_bool_exp!]
+  description: String_comparison_exp
+  id: uuid_comparison_exp
+  name: String_comparison_exp
+  url: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "recipe_source_providers"
+"""
+enum recipe_source_providers_constraint {
+  """unique or primary key constraint"""
+  recipe_sources_pkey
+}
+
+"""
+input type for inserting data into table "recipe_source_providers"
+"""
+input recipe_source_providers_insert_input {
+  description: String
+  id: uuid
+  name: String
+  url: String
+}
+
+"""aggregate max on columns"""
+type recipe_source_providers_max_fields {
+  description: String
+  id: uuid
+  name: String
+  url: String
+}
+
+"""aggregate min on columns"""
+type recipe_source_providers_min_fields {
+  description: String
+  id: uuid
+  name: String
+  url: String
+}
+
+"""
+response of any mutation on the table "recipe_source_providers"
+"""
+type recipe_source_providers_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [recipe_source_providers!]!
+}
+
+"""
+input type for inserting object relation for remote table "recipe_source_providers"
+"""
+input recipe_source_providers_obj_rel_insert_input {
+  data: recipe_source_providers_insert_input!
+
+  """on conflict condition"""
+  on_conflict: recipe_source_providers_on_conflict
+}
+
+"""
+on conflict condition type for table "recipe_source_providers"
+"""
+input recipe_source_providers_on_conflict {
+  constraint: recipe_source_providers_constraint!
+  update_columns: [recipe_source_providers_update_column!]! = []
+  where: recipe_source_providers_bool_exp
+}
+
+"""Ordering options when selecting data from "recipe_source_providers"."""
+input recipe_source_providers_order_by {
+  description: order_by
+  id: order_by
+  name: order_by
+  url: order_by
+}
+
+"""primary key columns input for table: recipe_source_providers"""
+input recipe_source_providers_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "recipe_source_providers"
+"""
+enum recipe_source_providers_select_column {
+  """column name"""
+  description
+
+  """column name"""
+  id
+
+  """column name"""
+  name
+
+  """column name"""
+  url
+}
+
+"""
+input type for updating data in table "recipe_source_providers"
+"""
+input recipe_source_providers_set_input {
+  description: String
+  id: uuid
+  name: String
+  url: String
+}
+
+"""
+update columns of table "recipe_source_providers"
+"""
+enum recipe_source_providers_update_column {
+  """column name"""
+  description
+
+  """column name"""
+  id
+
+  """column name"""
+  name
+
+  """column name"""
+  url
+}
+
+"""
 columns and relationships of "recipe_tags"
 """
 type recipe_tags {
@@ -11228,6 +11493,9 @@ type recipes {
     where: recipe_ingredient_groups_bool_exp
   ): recipe_ingredient_groups_aggregate!
 
+  """An object relationship"""
+  recipe_source_provider: recipe_source_providers
+
   """
   fetch data from the table: "recipe_tags"
   """
@@ -11269,6 +11537,7 @@ type recipes {
   ): recipe_tags_aggregate!
   slug: String
   source: String!
+  source_provider_id: uuid
   updated_at: timestamptz!
   video: String
   visible: Boolean!
@@ -11324,9 +11593,11 @@ input recipes_bool_exp {
   recipe_direction_durations: recipe_direction_durations_bool_exp
   recipe_directions: recipe_directions_bool_exp
   recipe_ingredient_groups: recipe_ingredient_groups_bool_exp
+  recipe_source_provider: recipe_source_providers_bool_exp
   recipe_tags: recipe_tags_bool_exp
   slug: String_comparison_exp
   source: String_comparison_exp
+  source_provider_id: uuid_comparison_exp
   updated_at: timestamptz_comparison_exp
   video: String_comparison_exp
   visible: Boolean_comparison_exp
@@ -11383,9 +11654,11 @@ input recipes_insert_input {
   recipe_direction_durations: recipe_direction_durations_arr_rel_insert_input
   recipe_directions: recipe_directions_arr_rel_insert_input
   recipe_ingredient_groups: recipe_ingredient_groups_arr_rel_insert_input
+  recipe_source_provider: recipe_source_providers_obj_rel_insert_input
   recipe_tags: recipe_tags_arr_rel_insert_input
   slug: String
   source: String
+  source_provider_id: uuid
   updated_at: timestamptz
   video: String
   visible: Boolean
@@ -11399,6 +11672,7 @@ type recipes_max_fields {
   name: String
   slug: String
   source: String
+  source_provider_id: uuid
   updated_at: timestamptz
   video: String
 }
@@ -11411,6 +11685,7 @@ type recipes_min_fields {
   name: String
   slug: String
   source: String
+  source_provider_id: uuid
   updated_at: timestamptz
   video: String
 }
@@ -11455,9 +11730,11 @@ input recipes_order_by {
   recipe_direction_durations_aggregate: recipe_direction_durations_aggregate_order_by
   recipe_directions_aggregate: recipe_directions_aggregate_order_by
   recipe_ingredient_groups_aggregate: recipe_ingredient_groups_aggregate_order_by
+  recipe_source_provider: recipe_source_providers_order_by
   recipe_tags_aggregate: recipe_tags_aggregate_order_by
   slug: order_by
   source: order_by
+  source_provider_id: order_by
   updated_at: order_by
   video: order_by
   visible: order_by
@@ -11499,6 +11776,9 @@ enum recipes_select_column {
   source
 
   """column name"""
+  source_provider_id
+
+  """column name"""
   updated_at
 
   """column name"""
@@ -11519,6 +11799,7 @@ input recipes_set_input {
   name: String
   slug: String
   source: String
+  source_provider_id: uuid
   updated_at: timestamptz
   video: String
   visible: Boolean
@@ -11568,6 +11849,9 @@ enum recipes_update_column {
 
   """column name"""
   source
+
+  """column name"""
+  source_provider_id
 
   """column name"""
   updated_at
@@ -12593,6 +12877,51 @@ type subscription_root {
 
   """fetch data from the table: "recipe_lists" using primary key columns"""
   recipe_lists_by_pk(id: Int!): recipe_lists
+
+  """
+  fetch data from the table: "recipe_source_providers"
+  """
+  recipe_source_providers(
+    """distinct select on columns"""
+    distinct_on: [recipe_source_providers_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [recipe_source_providers_order_by!]
+
+    """filter the rows returned"""
+    where: recipe_source_providers_bool_exp
+  ): [recipe_source_providers!]!
+
+  """
+  fetch aggregated fields from the table: "recipe_source_providers"
+  """
+  recipe_source_providers_aggregate(
+    """distinct select on columns"""
+    distinct_on: [recipe_source_providers_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [recipe_source_providers_order_by!]
+
+    """filter the rows returned"""
+    where: recipe_source_providers_bool_exp
+  ): recipe_source_providers_aggregate!
+
+  """
+  fetch data from the table: "recipe_source_providers" using primary key columns
+  """
+  recipe_source_providers_by_pk(id: uuid!): recipe_source_providers
 
   """
   fetch data from the table: "recipe_tags"

@@ -68,8 +68,8 @@ export const RecipesList: React.FunctionComponent<RecipesListProps> = (props) =>
 
   if (recipeSearch.source !== '') {
     whereConditions.push({
-      source: {
-        _ilike: `%${recipeSearch.source}%`
+      source_provider_id: {
+        _eq: recipeSearch.source
       }
     });
   }

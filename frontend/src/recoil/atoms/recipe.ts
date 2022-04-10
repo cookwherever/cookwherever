@@ -1,5 +1,7 @@
 import {atom, selector} from 'recoil';
-import {Recipes} from "../../generated/graphql";
+import {
+  Recipes,
+} from '../../generated/graphql';
 
 export type TimestampPosition = 'start' | 'end';
 
@@ -30,6 +32,7 @@ export interface RecipeState {
   focusedDirectionTimestamp: FocusedDirectionTimestamp;
   currentRecipeStep: CurrentRecipeStep | null;
   timers: Timer[]
+  recipe: Recipes
 }
 
 export const recipeViewerState = atom<RecipeState>({
@@ -39,7 +42,31 @@ export const recipeViewerState = atom<RecipeState>({
     reportedTimestamp: undefined,
     focusedDirectionTimestamp: initialFocusedDirectionTimestamp,
     currentRecipeStep: null,
-    timers: []
+    timers: [],
+    recipe: {
+      created_at: 0,
+      id: 0,
+      name: '',
+      recipe_direction_durations: [],
+      recipe_direction_durations_aggregate: {
+        nodes: [],
+      },
+      recipe_directions: [],
+      recipe_directions_aggregate: {
+        nodes: [],
+      },
+      recipe_ingredient_groups: [],
+      recipe_ingredient_groups_aggregate: {
+        nodes: [],
+      },
+      recipe_tags: [],
+      recipe_tags_aggregate: {
+        nodes: [],
+      },
+      source: '',
+      updated_at: 0,
+      visible: false
+    }
   },
 })
 

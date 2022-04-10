@@ -3644,6 +3644,10 @@ export type Mutation_Root = {
   delete_recipe_lists?: Maybe<Recipe_Lists_Mutation_Response>;
   /** delete single row from the table: "recipe_lists" */
   delete_recipe_lists_by_pk?: Maybe<Recipe_Lists>;
+  /** delete data from the table: "recipe_source_providers" */
+  delete_recipe_source_providers?: Maybe<Recipe_Source_Providers_Mutation_Response>;
+  /** delete single row from the table: "recipe_source_providers" */
+  delete_recipe_source_providers_by_pk?: Maybe<Recipe_Source_Providers>;
   /** delete data from the table: "recipe_tags" */
   delete_recipe_tags?: Maybe<Recipe_Tags_Mutation_Response>;
   /** delete single row from the table: "recipe_tags" */
@@ -3752,6 +3756,10 @@ export type Mutation_Root = {
   insert_recipe_lists?: Maybe<Recipe_Lists_Mutation_Response>;
   /** insert a single row into the table: "recipe_lists" */
   insert_recipe_lists_one?: Maybe<Recipe_Lists>;
+  /** insert data into the table: "recipe_source_providers" */
+  insert_recipe_source_providers?: Maybe<Recipe_Source_Providers_Mutation_Response>;
+  /** insert a single row into the table: "recipe_source_providers" */
+  insert_recipe_source_providers_one?: Maybe<Recipe_Source_Providers>;
   /** insert data into the table: "recipe_tags" */
   insert_recipe_tags?: Maybe<Recipe_Tags_Mutation_Response>;
   /** insert a single row into the table: "recipe_tags" */
@@ -3860,6 +3868,10 @@ export type Mutation_Root = {
   update_recipe_lists?: Maybe<Recipe_Lists_Mutation_Response>;
   /** update single row of the table: "recipe_lists" */
   update_recipe_lists_by_pk?: Maybe<Recipe_Lists>;
+  /** update data of the table: "recipe_source_providers" */
+  update_recipe_source_providers?: Maybe<Recipe_Source_Providers_Mutation_Response>;
+  /** update single row of the table: "recipe_source_providers" */
+  update_recipe_source_providers_by_pk?: Maybe<Recipe_Source_Providers>;
   /** update data of the table: "recipe_tags" */
   update_recipe_tags?: Maybe<Recipe_Tags_Mutation_Response>;
   /** update single row of the table: "recipe_tags" */
@@ -4160,6 +4172,18 @@ export type Mutation_RootDelete_Recipe_ListsArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Recipe_Lists_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Recipe_Source_ProvidersArgs = {
+  where: Recipe_Source_Providers_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Recipe_Source_Providers_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -4532,6 +4556,20 @@ export type Mutation_RootInsert_Recipe_ListsArgs = {
 export type Mutation_RootInsert_Recipe_Lists_OneArgs = {
   object: Recipe_Lists_Insert_Input;
   on_conflict?: InputMaybe<Recipe_Lists_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Recipe_Source_ProvidersArgs = {
+  objects: Array<Recipe_Source_Providers_Insert_Input>;
+  on_conflict?: InputMaybe<Recipe_Source_Providers_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Recipe_Source_Providers_OneArgs = {
+  object: Recipe_Source_Providers_Insert_Input;
+  on_conflict?: InputMaybe<Recipe_Source_Providers_On_Conflict>;
 };
 
 
@@ -4964,6 +5002,20 @@ export type Mutation_RootUpdate_Recipe_Lists_By_PkArgs = {
   _inc?: InputMaybe<Recipe_Lists_Inc_Input>;
   _set?: InputMaybe<Recipe_Lists_Set_Input>;
   pk_columns: Recipe_Lists_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Recipe_Source_ProvidersArgs = {
+  _set?: InputMaybe<Recipe_Source_Providers_Set_Input>;
+  where: Recipe_Source_Providers_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Recipe_Source_Providers_By_PkArgs = {
+  _set?: InputMaybe<Recipe_Source_Providers_Set_Input>;
+  pk_columns: Recipe_Source_Providers_Pk_Columns_Input;
 };
 
 
@@ -5412,6 +5464,12 @@ export type Query_Root = {
   recipe_lists_aggregate: Recipe_Lists_Aggregate;
   /** fetch data from the table: "recipe_lists" using primary key columns */
   recipe_lists_by_pk?: Maybe<Recipe_Lists>;
+  /** fetch data from the table: "recipe_source_providers" */
+  recipe_source_providers: Array<Recipe_Source_Providers>;
+  /** fetch aggregated fields from the table: "recipe_source_providers" */
+  recipe_source_providers_aggregate: Recipe_Source_Providers_Aggregate;
+  /** fetch data from the table: "recipe_source_providers" using primary key columns */
+  recipe_source_providers_by_pk?: Maybe<Recipe_Source_Providers>;
   /** fetch data from the table: "recipe_tags" */
   recipe_tags: Array<Recipe_Tags>;
   /** fetch aggregated fields from the table: "recipe_tags" */
@@ -5973,6 +6031,29 @@ export type Query_RootRecipe_Lists_AggregateArgs = {
 
 export type Query_RootRecipe_Lists_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+
+export type Query_RootRecipe_Source_ProvidersArgs = {
+  distinct_on?: InputMaybe<Array<Recipe_Source_Providers_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Source_Providers_Order_By>>;
+  where?: InputMaybe<Recipe_Source_Providers_Bool_Exp>;
+};
+
+
+export type Query_RootRecipe_Source_Providers_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Recipe_Source_Providers_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Source_Providers_Order_By>>;
+  where?: InputMaybe<Recipe_Source_Providers_Bool_Exp>;
+};
+
+
+export type Query_RootRecipe_Source_Providers_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -9214,6 +9295,153 @@ export type Recipe_Lists_Variance_Fields = {
   id?: Maybe<Scalars['Float']>;
 };
 
+/**
+ * Sources from where recipes come from.
+ *
+ *
+ * columns and relationships of "recipe_source_providers"
+ */
+export type Recipe_Source_Providers = {
+  __typename?: 'recipe_source_providers';
+  description: Scalars['String'];
+  id: Scalars['uuid'];
+  name: Scalars['String'];
+  url: Scalars['String'];
+};
+
+/** aggregated selection of "recipe_source_providers" */
+export type Recipe_Source_Providers_Aggregate = {
+  __typename?: 'recipe_source_providers_aggregate';
+  aggregate?: Maybe<Recipe_Source_Providers_Aggregate_Fields>;
+  nodes: Array<Recipe_Source_Providers>;
+};
+
+/** aggregate fields of "recipe_source_providers" */
+export type Recipe_Source_Providers_Aggregate_Fields = {
+  __typename?: 'recipe_source_providers_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Recipe_Source_Providers_Max_Fields>;
+  min?: Maybe<Recipe_Source_Providers_Min_Fields>;
+};
+
+
+/** aggregate fields of "recipe_source_providers" */
+export type Recipe_Source_Providers_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Recipe_Source_Providers_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "recipe_source_providers". All fields are combined with a logical 'AND'. */
+export type Recipe_Source_Providers_Bool_Exp = {
+  _and?: InputMaybe<Array<Recipe_Source_Providers_Bool_Exp>>;
+  _not?: InputMaybe<Recipe_Source_Providers_Bool_Exp>;
+  _or?: InputMaybe<Array<Recipe_Source_Providers_Bool_Exp>>;
+  description?: InputMaybe<String_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  name?: InputMaybe<String_Comparison_Exp>;
+  url?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "recipe_source_providers" */
+export enum Recipe_Source_Providers_Constraint {
+  /** unique or primary key constraint */
+  RecipeSourcesPkey = 'recipe_sources_pkey'
+}
+
+/** input type for inserting data into table "recipe_source_providers" */
+export type Recipe_Source_Providers_Insert_Input = {
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  name?: InputMaybe<Scalars['String']>;
+  url?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Recipe_Source_Providers_Max_Fields = {
+  __typename?: 'recipe_source_providers_max_fields';
+  description?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
+  name?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Recipe_Source_Providers_Min_Fields = {
+  __typename?: 'recipe_source_providers_min_fields';
+  description?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
+  name?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "recipe_source_providers" */
+export type Recipe_Source_Providers_Mutation_Response = {
+  __typename?: 'recipe_source_providers_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Recipe_Source_Providers>;
+};
+
+/** input type for inserting object relation for remote table "recipe_source_providers" */
+export type Recipe_Source_Providers_Obj_Rel_Insert_Input = {
+  data: Recipe_Source_Providers_Insert_Input;
+  /** on conflict condition */
+  on_conflict?: InputMaybe<Recipe_Source_Providers_On_Conflict>;
+};
+
+/** on conflict condition type for table "recipe_source_providers" */
+export type Recipe_Source_Providers_On_Conflict = {
+  constraint: Recipe_Source_Providers_Constraint;
+  update_columns?: Array<Recipe_Source_Providers_Update_Column>;
+  where?: InputMaybe<Recipe_Source_Providers_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "recipe_source_providers". */
+export type Recipe_Source_Providers_Order_By = {
+  description?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  url?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: recipe_source_providers */
+export type Recipe_Source_Providers_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "recipe_source_providers" */
+export enum Recipe_Source_Providers_Select_Column {
+  /** column name */
+  Description = 'description',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  Url = 'url'
+}
+
+/** input type for updating data in table "recipe_source_providers" */
+export type Recipe_Source_Providers_Set_Input = {
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  name?: InputMaybe<Scalars['String']>;
+  url?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "recipe_source_providers" */
+export enum Recipe_Source_Providers_Update_Column {
+  /** column name */
+  Description = 'description',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  Url = 'url'
+}
+
 /** columns and relationships of "recipe_tags" */
 export type Recipe_Tags = {
   __typename?: 'recipe_tags';
@@ -9544,12 +9772,15 @@ export type Recipes = {
   recipe_ingredient_groups: Array<Recipe_Ingredient_Groups>;
   /** An aggregate relationship */
   recipe_ingredient_groups_aggregate: Recipe_Ingredient_Groups_Aggregate;
+  /** An object relationship */
+  recipe_source_provider?: Maybe<Recipe_Source_Providers>;
   /** fetch data from the table: "recipe_tags" */
   recipe_tags: Array<Recipe_Tags>;
   /** fetch aggregated fields from the table: "recipe_tags" */
   recipe_tags_aggregate: Recipe_Tags_Aggregate;
   slug?: Maybe<Scalars['String']>;
   source: Scalars['String'];
+  source_provider_id?: Maybe<Scalars['uuid']>;
   updated_at: Scalars['timestamptz'];
   video?: Maybe<Scalars['String']>;
   visible: Scalars['Boolean'];
@@ -9695,9 +9926,11 @@ export type Recipes_Bool_Exp = {
   recipe_direction_durations?: InputMaybe<Recipe_Direction_Durations_Bool_Exp>;
   recipe_directions?: InputMaybe<Recipe_Directions_Bool_Exp>;
   recipe_ingredient_groups?: InputMaybe<Recipe_Ingredient_Groups_Bool_Exp>;
+  recipe_source_provider?: InputMaybe<Recipe_Source_Providers_Bool_Exp>;
   recipe_tags?: InputMaybe<Recipe_Tags_Bool_Exp>;
   slug?: InputMaybe<String_Comparison_Exp>;
   source?: InputMaybe<String_Comparison_Exp>;
+  source_provider_id?: InputMaybe<Uuid_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   video?: InputMaybe<String_Comparison_Exp>;
   visible?: InputMaybe<Boolean_Comparison_Exp>;
@@ -9741,9 +9974,11 @@ export type Recipes_Insert_Input = {
   recipe_direction_durations?: InputMaybe<Recipe_Direction_Durations_Arr_Rel_Insert_Input>;
   recipe_directions?: InputMaybe<Recipe_Directions_Arr_Rel_Insert_Input>;
   recipe_ingredient_groups?: InputMaybe<Recipe_Ingredient_Groups_Arr_Rel_Insert_Input>;
+  recipe_source_provider?: InputMaybe<Recipe_Source_Providers_Obj_Rel_Insert_Input>;
   recipe_tags?: InputMaybe<Recipe_Tags_Arr_Rel_Insert_Input>;
   slug?: InputMaybe<Scalars['String']>;
   source?: InputMaybe<Scalars['String']>;
+  source_provider_id?: InputMaybe<Scalars['uuid']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   video?: InputMaybe<Scalars['String']>;
   visible?: InputMaybe<Scalars['Boolean']>;
@@ -9758,6 +9993,7 @@ export type Recipes_Max_Fields = {
   name?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
   source?: Maybe<Scalars['String']>;
+  source_provider_id?: Maybe<Scalars['uuid']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   video?: Maybe<Scalars['String']>;
 };
@@ -9771,6 +10007,7 @@ export type Recipes_Min_Fields = {
   name?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
   source?: Maybe<Scalars['String']>;
+  source_provider_id?: Maybe<Scalars['uuid']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   video?: Maybe<Scalars['String']>;
 };
@@ -9808,9 +10045,11 @@ export type Recipes_Order_By = {
   recipe_direction_durations_aggregate?: InputMaybe<Recipe_Direction_Durations_Aggregate_Order_By>;
   recipe_directions_aggregate?: InputMaybe<Recipe_Directions_Aggregate_Order_By>;
   recipe_ingredient_groups_aggregate?: InputMaybe<Recipe_Ingredient_Groups_Aggregate_Order_By>;
+  recipe_source_provider?: InputMaybe<Recipe_Source_Providers_Order_By>;
   recipe_tags_aggregate?: InputMaybe<Recipe_Tags_Aggregate_Order_By>;
   slug?: InputMaybe<Order_By>;
   source?: InputMaybe<Order_By>;
+  source_provider_id?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   video?: InputMaybe<Order_By>;
   visible?: InputMaybe<Order_By>;
@@ -9843,6 +10082,8 @@ export enum Recipes_Select_Column {
   /** column name */
   Source = 'source',
   /** column name */
+  SourceProviderId = 'source_provider_id',
+  /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
   Video = 'video',
@@ -9859,6 +10100,7 @@ export type Recipes_Set_Input = {
   name?: InputMaybe<Scalars['String']>;
   slug?: InputMaybe<Scalars['String']>;
   source?: InputMaybe<Scalars['String']>;
+  source_provider_id?: InputMaybe<Scalars['uuid']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   video?: InputMaybe<Scalars['String']>;
   visible?: InputMaybe<Scalars['Boolean']>;
@@ -9904,6 +10146,8 @@ export enum Recipes_Update_Column {
   Slug = 'slug',
   /** column name */
   Source = 'source',
+  /** column name */
+  SourceProviderId = 'source_provider_id',
   /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
@@ -10078,6 +10322,12 @@ export type Subscription_Root = {
   recipe_lists_aggregate: Recipe_Lists_Aggregate;
   /** fetch data from the table: "recipe_lists" using primary key columns */
   recipe_lists_by_pk?: Maybe<Recipe_Lists>;
+  /** fetch data from the table: "recipe_source_providers" */
+  recipe_source_providers: Array<Recipe_Source_Providers>;
+  /** fetch aggregated fields from the table: "recipe_source_providers" */
+  recipe_source_providers_aggregate: Recipe_Source_Providers_Aggregate;
+  /** fetch data from the table: "recipe_source_providers" using primary key columns */
+  recipe_source_providers_by_pk?: Maybe<Recipe_Source_Providers>;
   /** fetch data from the table: "recipe_tags" */
   recipe_tags: Array<Recipe_Tags>;
   /** fetch aggregated fields from the table: "recipe_tags" */
@@ -10639,6 +10889,29 @@ export type Subscription_RootRecipe_Lists_AggregateArgs = {
 
 export type Subscription_RootRecipe_Lists_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+
+export type Subscription_RootRecipe_Source_ProvidersArgs = {
+  distinct_on?: InputMaybe<Array<Recipe_Source_Providers_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Source_Providers_Order_By>>;
+  where?: InputMaybe<Recipe_Source_Providers_Bool_Exp>;
+};
+
+
+export type Subscription_RootRecipe_Source_Providers_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Recipe_Source_Providers_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Recipe_Source_Providers_Order_By>>;
+  where?: InputMaybe<Recipe_Source_Providers_Bool_Exp>;
+};
+
+
+export type Subscription_RootRecipe_Source_Providers_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -11601,6 +11874,11 @@ export type HideRecipeMutationVariables = Exact<{
 
 export type HideRecipeMutation = { __typename?: 'mutation_root', update_recipes_by_pk?: { __typename?: 'recipes', id: number } | null };
 
+export type GetRecipeSourceProvidersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetRecipeSourceProvidersQuery = { __typename?: 'query_root', recipe_source_providers: Array<{ __typename?: 'recipe_source_providers', id: any, name: string }> };
+
 export type GetUserRecipeListsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -11992,6 +12270,41 @@ export function useHideRecipeMutation(baseOptions?: Apollo.MutationHookOptions<H
 export type HideRecipeMutationHookResult = ReturnType<typeof useHideRecipeMutation>;
 export type HideRecipeMutationResult = Apollo.MutationResult<HideRecipeMutation>;
 export type HideRecipeMutationOptions = Apollo.BaseMutationOptions<HideRecipeMutation, HideRecipeMutationVariables>;
+export const GetRecipeSourceProvidersDocument = gql`
+    query GetRecipeSourceProviders {
+  recipe_source_providers(order_by: {name: asc}) {
+    id
+    name
+  }
+}
+    `;
+
+/**
+ * __useGetRecipeSourceProvidersQuery__
+ *
+ * To run a query within a React component, call `useGetRecipeSourceProvidersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetRecipeSourceProvidersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetRecipeSourceProvidersQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetRecipeSourceProvidersQuery(baseOptions?: Apollo.QueryHookOptions<GetRecipeSourceProvidersQuery, GetRecipeSourceProvidersQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetRecipeSourceProvidersQuery, GetRecipeSourceProvidersQueryVariables>(GetRecipeSourceProvidersDocument, options);
+      }
+export function useGetRecipeSourceProvidersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetRecipeSourceProvidersQuery, GetRecipeSourceProvidersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetRecipeSourceProvidersQuery, GetRecipeSourceProvidersQueryVariables>(GetRecipeSourceProvidersDocument, options);
+        }
+export type GetRecipeSourceProvidersQueryHookResult = ReturnType<typeof useGetRecipeSourceProvidersQuery>;
+export type GetRecipeSourceProvidersLazyQueryHookResult = ReturnType<typeof useGetRecipeSourceProvidersLazyQuery>;
+export type GetRecipeSourceProvidersQueryResult = Apollo.QueryResult<GetRecipeSourceProvidersQuery, GetRecipeSourceProvidersQueryVariables>;
 export const GetUserRecipeListsDocument = gql`
     query GetUserRecipeLists {
   recipe_lists {

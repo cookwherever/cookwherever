@@ -4,17 +4,21 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"os"
+	"path"
+	"path/filepath"
+	"strings"
+
 	"github.com/MontFerret/ferret/pkg/compiler"
 	"github.com/MontFerret/ferret/pkg/drivers"
 	"github.com/MontFerret/ferret/pkg/drivers/http"
 	"github.com/MontFerret/ferret/pkg/runtime"
 	"github.com/MontFerret/ferret/pkg/runtime/core"
 	"github.com/MontFerret/ferret/pkg/runtime/values"
-	"gocook/util"
-	"os"
-	"path"
-	"path/filepath"
-	"strings"
+	"github.com/cookwherever/cookwherever/gocook/pkg/util"
+	"github.com/rs/zerolog"
+	"github.com/rs/zerolog/log"
 )
 
 type ProcessedRecipe struct {
@@ -25,6 +29,16 @@ type ProcessedRecipe struct {
 	IngredientGroups   map[string][]string `json:"recipe_ingredient_groups"`
 	Tags               []string            `json:"recipe_tags"`
 	ExtractionMetadata map[string]string   `json:"extraction_metadata"`
+}
+
+type Ingredient struct {
+	Name string `json:"name"`
+	Link bool   `json:"link"`
+	Text string `json:"text"`
+}
+
+type CooksThesaurus struct {
+	Ingredients []Ingredient `json:"ingredients"`
 }
 
 func queryArgs(args []core.Value) (el drivers.HTMLDocument, keySelector drivers.QuerySelector, valueSelector drivers.QuerySelector, err error) {
@@ -48,6 +62,24 @@ func queryArgs(args []core.Value) (el drivers.HTMLDocument, keySelector drivers.
 		return
 	}
 	return
+}
+
+func Print(ctx context.Context, args ...core.Value) (core.Value, error) {
+	err := core.ValidateArgs(args, 1, core.MaxArgs)
+
+	if err != nil {
+		return values.None, err
+	}
+
+	printLog := log.Info()
+
+	for idx, input := range args {
+		printLog.Interface(fmt.Sprintf("%d", idx), input)
+	}
+
+	printLog.Msg("log")
+
+	return values.None, nil
 }
 
 func listToMap(ctx context.Context, args ...core.Value) (core.Value, error) {
@@ -117,36 +149,18 @@ func listToMap(ctx context.Context, args ...core.Value) (core.Value, error) {
 	return mapValues, err
 }
 
-func getRecipeFromPage(file string) (*ProcessedRecipe, error) {
-
-	query := `
-LET doc = PARSE(IO::FS::READ(@file))
-
-LET _ = ELEMENT_EXISTS(doc, '.crlg') ? INNER_TEXT_SET(doc, '.crlg', '') : ''
-
-LET name = ELEMENT_EXISTS(doc, '.chap_hd') ? INNER_TEXT(doc, '.chap_hd') : ''
-
-LET ingredients = LISTTOMAP(doc, '.ing-ts', '.ing-list')
-
-LET directions = (
-	FOR row IN ELEMENTS(doc, '.noindent_para_ts')
-		RETURN INNER_TEXT(row)
-)
-
-RETURN {
-  name,
-  source: 'The Wok: Recipes and Techniques by J. Kenji López-Alt',
-  recipe_ingredient_groups: ingredients,
-  recipe_directions: directions
-}`
-
+func getRecipeFromPage(script, file string) (*CooksThesaurus, error) {
 	comp := compiler.New()
 
 	if err := comp.RegisterFunction("listtomap", listToMap); err != nil {
 		return nil, err
 	}
 
-	program, err := comp.Compile(query)
+	if err := comp.RegisterFunction("debug", Print); err != nil {
+		return nil, err
+	}
+
+	program, err := comp.Compile(script)
 
 	if err != nil {
 		return nil, err
@@ -162,25 +176,65 @@ RETURN {
 		return nil, err
 	}
 
-	var res ProcessedRecipe
+	//var res ProcessedRecipe
+	var res CooksThesaurus
 
 	err = json.Unmarshal(out, &res)
-
 	if err != nil {
 		return nil, err
 	}
 
-	res.Name = strings.Title(res.Name)
+	// res.Name = strings.Title(res.Name)
 
 	return &res, nil
 }
 
+func processFile(script, file string) {
+	println("parsing", file)
+	recipe, err := getRecipeFromPage(script, file)
+	if err != nil {
+		panic(err)
+	}
+
+	// if recipe.Name == "" {
+	// 	continue
+	// }
+
+	out, err := json.MarshalIndent(recipe, "", "  ")
+	if err != nil {
+		panic(err)
+	}
+
+	filename := filepath.Base(file)
+	name := strings.TrimSuffix(filename, filepath.Ext(filename))
+
+	err = os.WriteFile(path.Join("cooksthesaurus", name+".json"), out, 0644)
+	if err != nil {
+		panic(err)
+	}
+}
+
 func main() {
-	if len(os.Args) != 2 {
-		println("usage: <path>")
+	zerolog.SetGlobalLevel(zerolog.DebugLevel)
+	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
+
+	// if len(os.Args) != 3 {
+	// 	println("usage: <script> <path>")
+	// 	return
+	// }
+	scriptFile := os.Args[1]
+	folder := os.Args[2]
+
+	script, err := ioutil.ReadFile(scriptFile)
+	if err != nil {
+		panic(err)
+	}
+
+	if len(os.Args) == 4 {
+		page := os.Args[3]
+		processFile(string(script), page)
 		return
 	}
-	folder := os.Args[1]
 
 	files, err := util.WalkMatch(folder, "*.html")
 	if err != nil {
@@ -188,26 +242,6 @@ func main() {
 	}
 
 	for _, file := range files {
-		recipe, err := getRecipeFromPage(file)
-		if err != nil {
-			panic(err)
-		}
-
-		if recipe.Name == "" {
-			continue
-		}
-
-		out, err := json.MarshalIndent(recipe, "", "  ")
-		if err != nil {
-			panic(err)
-		}
-
-		filename := filepath.Base(file)
-		name := strings.TrimSuffix(filename, filepath.Ext(filename))
-
-		err = os.WriteFile(path.Join("out", name+".json"), out, 0644)
-		if err != nil {
-			panic(err)
-		}
+		processFile(string(script), file)
 	}
 }

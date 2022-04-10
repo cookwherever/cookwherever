@@ -2,7 +2,12 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Col, FormControl, InputGroup, ListGroup, Row } from 'react-bootstrap';
 import { gql } from '@apollo/client';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { Recipe_Directions, Recipes, useUpsertDirectionVideoTimestampMutation } from '../generated/graphql';
+import {
+  Recipe_Directions,
+  Recipe_Ingredients,
+  Recipes,
+  useUpsertDirectionVideoTimestampMutation
+} from '../generated/graphql';
 import { inDeveloperMode } from '../recoil/selectors/view-mode';
 import {
   recipeViewerState,
@@ -31,6 +36,7 @@ interface RecipeDirectionRowProps {
   direction: Recipe_Directions
   goToTimestamp: () => void
   showStepNumbers: boolean
+  ingredientLookup: Record<string, Recipe_Ingredients>
 }
 
 
@@ -38,7 +44,8 @@ const RecipeDirectionRow: React.FunctionComponent<RecipeDirectionRowProps> = ({
   idx,
   direction,
   goToTimestamp,
-  showStepNumbers
+  showStepNumbers,
+  ingredientLookup
 }) => {
   const developerMode = useRecoilValue(inDeveloperMode);
   const [recipeState, setRecipeState] = useRecoilState(recipeViewerState);
@@ -61,6 +68,12 @@ const RecipeDirectionRow: React.FunctionComponent<RecipeDirectionRowProps> = ({
   const stepNumber = showStepNumbers ? `${idx + 1}.` : '';
 
   const [annotatorState, setAnnotatorState] = useState<Span[]>([]);
+  const [directionIngredients, setDirectionIngredients] = useState<Recipe_Ingredients[]>([]);
+
+  const colors = {
+    time: '#84d2ff',
+    ing: '#ff8c69'
+  } as Record<string, string>;
 
   useEffect(() => {
     const regex = /(\d+|\d+ to \d+)\s(seconds?|minutes?|hours?|days?)/g
@@ -71,17 +84,40 @@ const RecipeDirectionRow: React.FunctionComponent<RecipeDirectionRowProps> = ({
       const match = regex.exec(direction.step);
       if (!match) break;
 
-      console.log(match);
-
       const startIdx = regex.lastIndex - match[0].length;
       const endIdx = regex.lastIndex;
 
       annotatorValue.push({
         start: startIdx,
         end: endIdx,
-        tag: 'time'
+        tag: 'time',
+        color: colors.time
       })
     }
+
+    const foundIngredients = [] as Recipe_Ingredients[];
+    Object.keys(ingredientLookup).forEach(ingredientName => {
+      const ingredientRegex = new RegExp(ingredientName, 'g');
+      while (true) {
+        const match = ingredientRegex.exec(direction.step);
+        if (!match) break;
+
+        if (foundIngredients.filter(i => i.name === ingredientName).length === 0) {
+          foundIngredients.push(ingredientLookup[ingredientName]);
+        }
+
+        const startIdx = ingredientRegex.lastIndex - match[0].length;
+        const endIdx = ingredientRegex.lastIndex;
+
+        annotatorValue.push({
+          start: startIdx,
+          end: endIdx,
+          tag: 'ing',
+          color: undefined
+        })
+      }
+    })
+    setDirectionIngredients(foundIngredients);
     setAnnotatorState(annotatorValue);
   }, [direction])
 
@@ -94,7 +130,10 @@ const RecipeDirectionRow: React.FunctionComponent<RecipeDirectionRowProps> = ({
           content={direction.step}
           value={annotatorState}
           onAnnotatorChange={value => setAnnotatorState(value)}
-          highlightClicked={(s) => {
+          highlightClicked={(tag, s) => {
+            if (tag !== 'time') {
+              return;
+            }
             const duration = parseDuration(s);
             setRecipeState({
               ...recipeState,
@@ -108,14 +147,21 @@ const RecipeDirectionRow: React.FunctionComponent<RecipeDirectionRowProps> = ({
               ]
             })
           }}
-          getSpan={span => ({
-            ...span,
-            tag: 'time',
-            color: '#84d2ff',
-          })}
         />
       </Col>
       {direction.video_timestamp && seekToVideoButton}
+    </Row>
+  );
+
+  const ingredientsForDirection = (
+    <Row>
+      <Col md={12} className="mt-3">
+        <ul>
+          {directionIngredients.map(ingredient => (
+            <li key={ingredient.id}>{ingredient.text}</li>
+          ))}
+        </ul>
+      </Col>
     </Row>
   );
 
@@ -224,6 +270,7 @@ const RecipeDirectionRow: React.FunctionComponent<RecipeDirectionRowProps> = ({
   return (
     <>
       {directionStep}
+      {directionIngredients.length > 0 ? ingredientsForDirection : null}
       {additionalDirectionContent()}
     </>
   )
@@ -236,6 +283,23 @@ export const RecipeDirections: React.FunctionComponent<RecipeDirectionsProps> = 
   }) => {
   const [currentDirection, setCurrentDirection] = useState<number | null>(null);
   const [recipeState, setRecipeState] = useRecoilState(recipeViewerState);
+
+  const ingredientLookup = recipe.recipe_ingredient_groups.reduce((ingredients, group) => {
+    const ingredientListLookup = group.group_ingredients.reduce((lookup, ingredient) => {
+      if (!ingredient.name) {
+        return lookup
+      }
+
+      return {
+        ...lookup,
+        [ingredient.name]: ingredient
+      }
+    }, {} as Record<string, Recipe_Ingredients>)
+    return {
+      ...ingredients,
+      ...ingredientListLookup
+    }
+  }, {} as Record<string, Recipe_Ingredients>)
 
   return (
     <ListGroup>
@@ -266,6 +330,7 @@ export const RecipeDirections: React.FunctionComponent<RecipeDirectionsProps> = 
                 direction={direction}
                 goToTimestamp={goToTimestamp}
                 showStepNumbers={showStepNumbers}
+                ingredientLookup={ingredientLookup}
               />
             </Row>
           </ListGroup.Item>

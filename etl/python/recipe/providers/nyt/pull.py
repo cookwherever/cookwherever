@@ -1,5 +1,6 @@
 from recipe_scrapers import scrape_me
 
+from ...constants import nyt_provider
 from ...ingredients import normalize_ingredient_groups
 
 headers = {
@@ -41,6 +42,7 @@ def get_recipe(recipe_id, url, page_data):
     return {
         'name': scraper.title(),
         'source': url,
+        "source_provider_id": nyt_provider['id'],
         'image': scraper.image(),
         'recipe_directions': scraper.instructions().split('\n') if scraper.instructions() else [],
         'recipe_ingredient_groups': [

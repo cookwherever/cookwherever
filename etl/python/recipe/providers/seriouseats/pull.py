@@ -3,6 +3,7 @@ from json import JSONDecodeError
 from recipe_scrapers import scrape_me
 import requests
 
+from ...constants import serious_eats_provider
 from ...ingredients import normalize_ingredient_groups
 
 headers = {
@@ -51,6 +52,7 @@ def get_recipe(recipe_id, url, page_data):
     return {
         'name': scraper.title(),
         'source': url,
+        "source_provider_id": serious_eats_provider['id'],
         'extraction_metadata': {
             'recipe_id': recipe_id,
             'yield': scraper.yields(),

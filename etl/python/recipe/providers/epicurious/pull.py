@@ -3,7 +3,7 @@ import requests
 
 from ...ingredients import normalize_ingredient_groups
 
-from ...constants import LINE_NUMBER_RE
+from ...constants import LINE_NUMBER_RE, epicurious_provider
 
 headers = {
   'Connection': 'keep-alive',
@@ -59,6 +59,7 @@ def get_recipe(recipe_id, url, page_data):
     return {
         'name': scraper.title(),
         'source': url,
+        "source_provider_id": epicurious_provider['id'],
         'extraction_metadata': {
             'recipe_id': recipe_id,
             'yield': scraper.yields(),

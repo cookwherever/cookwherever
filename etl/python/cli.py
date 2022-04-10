@@ -11,7 +11,8 @@ import requests  # requests must be imported after capture_http
 import concurrent.futures
 from warcio.archiveiterator import ArchiveIterator
 
-from graphql import execute_create_recipes
+from recipe.constants import providers
+from graphql import execute_create_recipes, upsert_providers
 from recipe.ingredients import save_parsed_ingredients, load_parsed_ingredients
 from util import debug, slugify
 from urllib.parse import urlparse
@@ -182,8 +183,6 @@ def format_recipe(recipe_file, recipe):
 
     recipe_slug = slugify.slugify(f"{source_name}-{recipe.get('name')}")
 
-    print(recipe_slug)
-
     directions = recipe.get('recipe_directions')
 
     if directions is None:
@@ -204,7 +203,6 @@ def format_recipe(recipe_file, recipe):
         ]
 
     ingredient_groups = recipe.get('recipe_ingredient_groups')
-    print(ingredient_groups)
 
     formatted_recipe_ingredient_groups = [{
         "seq_num": i,
@@ -334,6 +332,15 @@ def main():
         return
 
     step = sys.argv[1]
+
+    if step == 'providers':
+        action = sys.argv[2]
+        if action == 'upsert':
+            upsert_providers(providers)
+            return
+
+        print('no action performed')
+        return
 
     if step == 'ingredients':
         parsed_ingredients = load_parsed_ingredients()
