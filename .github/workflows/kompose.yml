@@ -23,7 +23,9 @@ jobs:
             kompose
           helm: "3.8.0"
           yq: "4.16.2"
-      - run: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
+      - run: curl -L https://github.com/kubernetes/kompose/releases/download/v1.26.1/kompose-linux-amd64 -o kompose && chmod +x kompose
+        name: Install kompose
+      - run: ./kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
       - name: Create commit
         id: create-commit
         uses: stefanzweifel/git-auto-commit-action@v4
