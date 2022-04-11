@@ -25,4 +25,4 @@ jobs:
         with:
           kubeconfig: ${{ secrets.KUBE_CONFIG }}
       - name: Helm Deploy
-        run: helm --debug upgrade food-data -namespace food-data k8s
+        run: helm --debug --namespace food-data upgrade food-data k8s
