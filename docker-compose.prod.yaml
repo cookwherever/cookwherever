@@ -1,7 +1,8 @@
 version: '3.6'
 services:
   frontend:
-    image: ghcr.io/cookwherever/frontend:latest
+    image: cthompson4321/fooddata-frontend:v0.0.14
+    # image: ghcr.io/cookwherever/frontend:latest
     restart: always
     ports:
       - '80:80'
