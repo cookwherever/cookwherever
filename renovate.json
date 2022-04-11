@@ -1,0 +1,9 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "includePaths": [
+    "docker-compose.yaml",
+    "docker-compose.*.yaml"
+  ]
+}
