@@ -15,15 +15,19 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       commit_hash: ${{ steps.save-commit-hash.outputs.commit_hash }}
+      branch_name: ${{ steps.branch-name.outputs.current_branch }}
 
     steps:
       - uses: actions/checkout@v3
+      - name: Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v5.2
       - run: curl -L https://github.com/kubernetes/kompose/releases/download/v1.26.1/kompose-linux-amd64 -o kompose && chmod +x kompose
         name: Install kompose
       - run: ./kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
       - name: Create commit
         id: create-commit
-        if: github.branch == 'master'
+        if: steps.branch-name.outputs.current_branch == 'master'
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           file_pattern: k8s/**/
@@ -41,7 +45,7 @@ jobs:
           fi
   helm:
     runs-on: ubuntu-latest
-    if: github.branch == 'master'
+    if: needs.kompose.outputs.branch_name == 'master'
     needs: kompose
 
     steps:
