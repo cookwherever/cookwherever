@@ -1,14 +1,9 @@
 {
   "extends": [
-    ":dependencyDashboard",
-    ":ignoreModulesAndTests",
-    ":prHourlyLimit2",
-    ":prConcurrentLimit10"
+    "config:base"
   ],
-    "docker": {
-    "enabled": true
-  },
-  "docker-compose": {
-    "enabled": true
-  }
+  "includePaths": [
+    "docker-compose.yaml",
+    "docker-compose.*.yaml"
+  ]
 }
