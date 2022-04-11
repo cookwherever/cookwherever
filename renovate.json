@@ -1,5 +1,14 @@
 {
   "extends": [
-    "config:base"
-  ]
+    ":dependencyDashboard",
+    ":ignoreModulesAndTests",
+    ":prHourlyLimit2",
+    ":prConcurrentLimit10",
+  ],
+    "docker": {
+    "enabled": true
+  },
+  "docker-compose": {
+    "enabled": true
+  },
 }
