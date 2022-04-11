@@ -24,15 +24,17 @@ LET ingredients = (
 )
 
 LET tableIngredients = (
-  FOR ing IN ELEMENTS(doc, 'table')
-    DEBUG(INNER_TEXT(ing))
-    FILTER ELEMENT_EXISTS(ing, 'td > b')
-    LET name = INNER_TEXT(ELEMENT(ing, 'b'))
+  FOR ing IN ELEMENTS(doc, 'table tr')
+    FILTER ELEMENT_EXISTS(ing, 'td b')
+    LET ingName = ELEMENT(ing, 'b')
+    LET asdf = ELEMENT_EXISTS(ingName, 'i') && INNER_TEXT_SET(ingName, 'i', '')
+    LET name = INNER_TEXT(ingName)
     LET formattedName = TRIM(REGEX_SPLIT(name, '(Notes):')[0])
+    LET textElem = ELEMENT_EXISTS(ing, 'td p') ? ELEMENT(ing, 'td p') : ''
     RETURN {
       name: formattedName,
       link: false,
-      text: TRIM(REGEX_REPLACE(INNER_TEXT(ing, 'tr:nth-child(1)'),  '\n\s*', ' '))
+      text: TRIM(REGEX_REPLACE(textElem, '\n\s*', ' '))
     }
 )
 

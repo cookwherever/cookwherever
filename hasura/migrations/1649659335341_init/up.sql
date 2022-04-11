@@ -1,10 +1,3 @@
--- start a transaction
-BEGIN;
-
--- extensions
-CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;
-CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
-
 SET check_function_bodies = false;
 CREATE TYPE public.food_data_type_enum AS ENUM (
     'branded_food',
@@ -27,12 +20,16 @@ CREATE TABLE public.food (
 );
 CREATE TABLE public.recipe_ingredients (
     id integer NOT NULL,
-    name text NOT NULL,
-    amount real NOT NULL,
-    units text NOT NULL,
+    name text,
+    amount real,
+    units text,
     comment text,
-    recipe_id integer NOT NULL,
-    food_id integer
+    food_id integer,
+    text text NOT NULL,
+    seq_num integer,
+    group_id integer,
+    video_timestamp integer,
+    video_timestamp_end integer
 );
 CREATE FUNCTION public.food_candidates_for_ingredient(search public.recipe_ingredients) RETURNS SETOF public.food
     LANGUAGE sql STABLE
@@ -74,16 +71,39 @@ ORDER BY 0
              --+ (description ILIKE concat('Spices,%'))::int
     desc
 $_$;
-CREATE OR REPLACE FUNCTION public.set_current_timestamp_updated_at() RETURNS trigger
+CREATE TABLE public.recipes (
+    id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    name text NOT NULL,
+    source text NOT NULL,
+    image text,
+    extraction_metadata jsonb,
+    visible boolean DEFAULT true NOT NULL,
+    video text,
+    slug text,
+    source_provider_id uuid
+);
+CREATE FUNCTION public.search_recipes(search text) RETURNS SETOF public.recipes
+    LANGUAGE sql STABLE
+    AS $$
+    SELECT *
+    FROM recipes
+    WHERE
+      search <% name
+    OR
+      search = ''
+    ORDER BY
+      similarity(search, name) DESC
+$$;
+CREATE FUNCTION public.set_current_timestamp_updated_at() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
-DECLARE
-  _new record;
-BEGIN
-  _new := NEW;
-  _new."updated_at" = NOW();
-  RETURN _new;
-END;
+declare _new record;
+begin _new := new;
+_new."updated_at" = now();
+return _new;
+end;
 $$;
 CREATE TABLE public.acquisition_sample (
     fdc_id_of_sample_food integer,
@@ -279,18 +299,23 @@ CREATE TABLE public.nutrient_incoming_name (
     name character varying(510),
     nutrient_id integer
 );
-CREATE TABLE public.queues (
+CREATE TABLE public.recipe_direction_actions (
     id integer NOT NULL,
-    name text NOT NULL
+    action text NOT NULL,
+    name jsonb NOT NULL,
+    quantity double precision NOT NULL,
+    unit text NOT NULL,
+    duration integer NOT NULL,
+    direction_id integer NOT NULL
 );
-CREATE SEQUENCE public.queues_id_seq
+CREATE SEQUENCE public.recipe_direction_actions_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-ALTER SEQUENCE public.queues_id_seq OWNED BY public.queues.id;
+ALTER SEQUENCE public.recipe_direction_actions_id_seq OWNED BY public.recipe_direction_actions.id;
 CREATE TABLE public.recipe_direction_durations (
     id integer NOT NULL,
     type text NOT NULL,
@@ -310,8 +335,10 @@ ALTER SEQUENCE public.recipe_direction_durations_id_seq OWNED BY public.recipe_d
 CREATE TABLE public.recipe_directions (
     id integer NOT NULL,
     seq_num integer NOT NULL,
-    direction text NOT NULL,
-    recipe_id integer NOT NULL
+    step text NOT NULL,
+    recipe_id integer NOT NULL,
+    video_timestamp integer,
+    video_timestamp_end integer
 );
 CREATE SEQUENCE public.recipe_directions_id_seq
     AS integer
@@ -321,6 +348,46 @@ CREATE SEQUENCE public.recipe_directions_id_seq
     NO MAXVALUE
     CACHE 1;
 ALTER SEQUENCE public.recipe_directions_id_seq OWNED BY public.recipe_directions.id;
+CREATE TABLE public.recipe_favorite (
+    id bigint NOT NULL,
+    recipe_id integer NOT NULL,
+    user_id integer NOT NULL
+);
+CREATE SEQUENCE public.recipe_favorite_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+ALTER SEQUENCE public.recipe_favorite_id_seq OWNED BY public.recipe_favorite.id;
+CREATE TABLE public.recipe_ingredient_food_candidate (
+    recipe_ingredient_id integer NOT NULL,
+    food_candidate_id integer NOT NULL,
+    id integer NOT NULL,
+    food_candidate_portion_id integer NOT NULL
+);
+CREATE SEQUENCE public.recipe_ingredient_food_candidate_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+ALTER SEQUENCE public.recipe_ingredient_food_candidate_id_seq OWNED BY public.recipe_ingredient_food_candidate.id;
+CREATE TABLE public.recipe_ingredient_groups (
+    id integer NOT NULL,
+    name text,
+    recipe_id integer,
+    seq_num integer
+);
+CREATE SEQUENCE public.recipe_ingredient_groups_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+ALTER SEQUENCE public.recipe_ingredient_groups_id_seq OWNED BY public.recipe_ingredient_groups.id;
 CREATE SEQUENCE public.recipe_ingredients_id_seq
     AS integer
     START WITH 1
@@ -329,24 +396,45 @@ CREATE SEQUENCE public.recipe_ingredients_id_seq
     NO MAXVALUE
     CACHE 1;
 ALTER SEQUENCE public.recipe_ingredients_id_seq OWNED BY public.recipe_ingredients.id;
-CREATE TABLE public.recipe_queues (
+CREATE TABLE public.recipe_list_items (
     id integer NOT NULL,
-    recipe_id integer NOT NULL,
-    queue_id integer NOT NULL,
-    seq_num integer
+    seq_num integer,
+    recipe_list_id integer NOT NULL,
+    recipe_id integer NOT NULL
 );
-CREATE SEQUENCE public.recipe_queues_id_seq
+CREATE SEQUENCE public.recipe_list_items_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-ALTER SEQUENCE public.recipe_queues_id_seq OWNED BY public.recipe_queues.id;
+ALTER SEQUENCE public.recipe_list_items_id_seq OWNED BY public.recipe_list_items.id;
+CREATE TABLE public.recipe_lists (
+    id integer NOT NULL,
+    name text,
+    user_id uuid NOT NULL
+);
+CREATE SEQUENCE public.recipe_lists_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+ALTER SEQUENCE public.recipe_lists_id_seq OWNED BY public.recipe_lists.id;
+CREATE TABLE public.recipe_source_providers (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    name text NOT NULL,
+    url text NOT NULL,
+    description text NOT NULL
+);
+COMMENT ON TABLE public.recipe_source_providers IS 'Sources from where recipes come from.';
 CREATE TABLE public.recipe_tags (
     id integer NOT NULL,
     name text NOT NULL,
-    recipe_id integer NOT NULL
+    recipe_id integer NOT NULL,
+    seq_num integer
 );
 CREATE SEQUENCE public.recipe_tags_id_seq
     AS integer
@@ -356,15 +444,6 @@ CREATE SEQUENCE public.recipe_tags_id_seq
     NO MAXVALUE
     CACHE 1;
 ALTER SEQUENCE public.recipe_tags_id_seq OWNED BY public.recipe_tags.id;
-CREATE TABLE public.recipes (
-    id integer NOT NULL,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    name text NOT NULL,
-    source text NOT NULL,
-    image text,
-    extraction_metadata jsonb
-);
 CREATE SEQUENCE public.recipes_id_seq
     AS integer
     START WITH 1
@@ -403,6 +482,10 @@ CREATE TABLE public.survey_fndds_food (
     start_date timestamp without time zone,
     end_date timestamp without time zone
 );
+CREATE TABLE public.user_config (
+    user_id integer NOT NULL,
+    printer_url text
+);
 CREATE TABLE public.wweia_food_category (
     wweia_food_category integer NOT NULL,
     wweia_food_category_description text
@@ -422,11 +505,15 @@ CREATE SEQUENCE public."~TMPCLP348741_ID_seq"
     NO MAXVALUE
     CACHE 1;
 ALTER SEQUENCE public."~TMPCLP348741_ID_seq" OWNED BY public."~TMPCLP348741"."ID";
-ALTER TABLE ONLY public.queues ALTER COLUMN id SET DEFAULT nextval('public.queues_id_seq'::regclass);
+ALTER TABLE ONLY public.recipe_direction_actions ALTER COLUMN id SET DEFAULT nextval('public.recipe_direction_actions_id_seq'::regclass);
 ALTER TABLE ONLY public.recipe_direction_durations ALTER COLUMN id SET DEFAULT nextval('public.recipe_direction_durations_id_seq'::regclass);
 ALTER TABLE ONLY public.recipe_directions ALTER COLUMN id SET DEFAULT nextval('public.recipe_directions_id_seq'::regclass);
+ALTER TABLE ONLY public.recipe_favorite ALTER COLUMN id SET DEFAULT nextval('public.recipe_favorite_id_seq'::regclass);
+ALTER TABLE ONLY public.recipe_ingredient_food_candidate ALTER COLUMN id SET DEFAULT nextval('public.recipe_ingredient_food_candidate_id_seq'::regclass);
+ALTER TABLE ONLY public.recipe_ingredient_groups ALTER COLUMN id SET DEFAULT nextval('public.recipe_ingredient_groups_id_seq'::regclass);
 ALTER TABLE ONLY public.recipe_ingredients ALTER COLUMN id SET DEFAULT nextval('public.recipe_ingredients_id_seq'::regclass);
-ALTER TABLE ONLY public.recipe_queues ALTER COLUMN id SET DEFAULT nextval('public.recipe_queues_id_seq'::regclass);
+ALTER TABLE ONLY public.recipe_list_items ALTER COLUMN id SET DEFAULT nextval('public.recipe_list_items_id_seq'::regclass);
+ALTER TABLE ONLY public.recipe_lists ALTER COLUMN id SET DEFAULT nextval('public.recipe_lists_id_seq'::regclass);
 ALTER TABLE ONLY public.recipe_tags ALTER COLUMN id SET DEFAULT nextval('public.recipe_tags_id_seq'::regclass);
 ALTER TABLE ONLY public.recipes ALTER COLUMN id SET DEFAULT nextval('public.recipes_id_seq'::regclass);
 ALTER TABLE ONLY public."~TMPCLP348741" ALTER COLUMN "ID" SET DEFAULT nextval('public."~TMPCLP348741_ID_seq"'::regclass);
@@ -480,20 +567,42 @@ ALTER TABLE ONLY public.nutrient_incoming_name
     ADD CONSTRAINT nutrient_incoming_name_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.nutrient
     ADD CONSTRAINT nutrient_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.queues
-    ADD CONSTRAINT queues_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.recipe_direction_actions
+    ADD CONSTRAINT recipe_direction_actions_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.recipe_direction_durations
     ADD CONSTRAINT recipe_direction_durations_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.recipe_directions
     ADD CONSTRAINT recipe_directions_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.recipe_directions
+    ADD CONSTRAINT recipe_directions_recipe_id_seq_num_key UNIQUE (recipe_id, seq_num);
+ALTER TABLE ONLY public.recipe_favorite
+    ADD CONSTRAINT recipe_favorite_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.recipe_ingredient_food_candidate
+    ADD CONSTRAINT recipe_ingredient_food_candidate_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.recipe_ingredient_food_candidate
+    ADD CONSTRAINT recipe_ingredient_food_candidate_recipe_ingredient_id_food_cand UNIQUE (recipe_ingredient_id, food_candidate_id);
+ALTER TABLE ONLY public.recipe_ingredient_groups
+    ADD CONSTRAINT recipe_ingredient_groups_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.recipe_ingredient_groups
+    ADD CONSTRAINT recipe_ingredient_groups_recipe_id_seq_num_key UNIQUE (recipe_id, seq_num);
+ALTER TABLE ONLY public.recipe_ingredients
+    ADD CONSTRAINT recipe_ingredients_group_id_seq_num_key UNIQUE (group_id, seq_num);
 ALTER TABLE ONLY public.recipe_ingredients
     ADD CONSTRAINT recipe_ingredients_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.recipe_queues
-    ADD CONSTRAINT recipe_queues_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.recipe_list_items
+    ADD CONSTRAINT recipe_list_items_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.recipe_lists
+    ADD CONSTRAINT recipe_lists_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.recipe_source_providers
+    ADD CONSTRAINT recipe_sources_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.recipe_tags
     ADD CONSTRAINT recipe_tags_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.recipe_tags
+    ADD CONSTRAINT recipe_tags_recipe_id_name_key UNIQUE (recipe_id, name);
 ALTER TABLE ONLY public.recipes
     ADD CONSTRAINT recipes_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.recipes
+    ADD CONSTRAINT recipes_source_key UNIQUE (source);
 ALTER TABLE ONLY public.retention_factor
     ADD CONSTRAINT retention_factor_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.sr_legacy_food
@@ -504,6 +613,8 @@ ALTER TABLE ONLY public.sub_sample_result
     ADD CONSTRAINT sub_sample_result_pkey PRIMARY KEY (food_nutrient_id);
 ALTER TABLE ONLY public.survey_fndds_food
     ADD CONSTRAINT survey_fndds_food_pkey PRIMARY KEY (fdc_id);
+ALTER TABLE ONLY public.user_config
+    ADD CONSTRAINT user_config_pkey PRIMARY KEY (user_id);
 ALTER TABLE ONLY public.wweia_food_category
     ADD CONSTRAINT wweia_food_category_pkey PRIMARY KEY (wweia_food_category);
 ALTER TABLE ONLY public."~TMPCLP348741"
@@ -518,6 +629,7 @@ CREATE INDEX food_category_code_idx ON public.food_category USING btree (code);
 CREATE INDEX food_component_fdc_id_idx ON public.food_component USING btree (fdc_id);
 CREATE INDEX food_data_type ON public.food USING btree (data_type);
 CREATE INDEX food_description_gin_idx ON public.food USING gin (to_tsvector('english'::regconfig, description));
+CREATE INDEX food_description_nonvector_gin_idx ON public.food USING gin (description public.gin_trgm_ops);
 CREATE INDEX food_description_tsv_gin_idx ON public.food USING gin (description_tsv);
 CREATE INDEX food_food_category_id_idx ON public.food USING btree (food_category_id);
 CREATE INDEX food_nutrient_conversion_factor_fdc_id_idx ON public.food_nutrient_conversion_factor USING btree (fdc_id);
@@ -541,6 +653,7 @@ CREATE INDEX lab_method_nutrient_lab_method_id_idx ON public.lab_method_nutrient
 CREATE INDEX lab_method_nutrient_nutrient_id_idx ON public.lab_method_nutrient USING btree (nutrient_id);
 CREATE INDEX market_acquisition_upc_code_idx ON public.market_acquisition USING btree (upc_code);
 CREATE INDEX nutrient_incoming_name_nutrient_id_idx ON public.nutrient_incoming_name USING btree (nutrient_id);
+CREATE INDEX recipe_name_gin_idx ON public.recipes USING gin (name public.gin_trgm_ops);
 CREATE INDEX retention_factor_code_idx ON public.retention_factor USING btree (code);
 CREATE INDEX retention_factor_food_group_id_idx ON public.retention_factor USING btree (food_group_id);
 CREATE INDEX sub_sample_result_lab_method_id_idx ON public.sub_sample_result USING btree (lab_method_id);
@@ -577,24 +690,35 @@ ALTER TABLE ONLY public.lab_method_nutrient
     ADD CONSTRAINT lab_method_nutrient_lab_method_id_fkey FOREIGN KEY (lab_method_id) REFERENCES public.lab_method(id);
 ALTER TABLE ONLY public.nutrient_incoming_name
     ADD CONSTRAINT nutrient_incoming_name_nutrient_id_fkey FOREIGN KEY (nutrient_id) REFERENCES public.nutrient(id);
+ALTER TABLE ONLY public.recipe_direction_actions
+    ADD CONSTRAINT recipe_direction_actions_direction_id_fkey FOREIGN KEY (direction_id) REFERENCES public.recipe_directions(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
 ALTER TABLE ONLY public.recipe_direction_durations
     ADD CONSTRAINT recipe_direction_durations_recipe_id_fkey FOREIGN KEY (recipe_id) REFERENCES public.recipes(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.recipe_directions
     ADD CONSTRAINT recipe_directions_recipe_id_fkey FOREIGN KEY (recipe_id) REFERENCES public.recipes(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY public.recipe_favorite
+    ADD CONSTRAINT recipe_favorite_recipe_id_fkey FOREIGN KEY (recipe_id) REFERENCES public.recipes(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.recipe_ingredient_food_candidate
+    ADD CONSTRAINT recipe_ingredient_food_candidate_food_candidate_id_fkey FOREIGN KEY (food_candidate_id) REFERENCES public.food(fdc_id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY public.recipe_ingredient_food_candidate
+    ADD CONSTRAINT recipe_ingredient_food_candidate_recipe_ingredient_id_fkey FOREIGN KEY (recipe_ingredient_id) REFERENCES public.recipe_ingredients(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY public.recipe_ingredient_groups
+    ADD CONSTRAINT recipe_ingredient_groups_recipe_id_fkey FOREIGN KEY (recipe_id) REFERENCES public.recipes(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.recipe_ingredients
-    ADD CONSTRAINT recipe_ingredients_recipe_id_fkey FOREIGN KEY (recipe_id) REFERENCES public.recipes(id) ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE ONLY public.recipe_queues
-    ADD CONSTRAINT recipe_queues_queue_id_fkey FOREIGN KEY (queue_id) REFERENCES public.queues(id) ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE ONLY public.recipe_queues
-    ADD CONSTRAINT recipe_queues_recipe_id_fkey FOREIGN KEY (recipe_id) REFERENCES public.recipes(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT recipe_ingredients_group_id_fkey FOREIGN KEY (group_id) REFERENCES public.recipe_ingredient_groups(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY public.recipe_list_items
+    ADD CONSTRAINT recipe_list_items_recipe_id_fkey FOREIGN KEY (recipe_id) REFERENCES public.recipes(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY public.recipe_list_items
+    ADD CONSTRAINT recipe_list_items_recipe_list_id_fkey FOREIGN KEY (recipe_list_id) REFERENCES public.recipe_lists(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY public.recipe_lists
+    ADD CONSTRAINT recipe_lists_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.recipe_tags
     ADD CONSTRAINT recipe_tags_recipe_id_fkey FOREIGN KEY (recipe_id) REFERENCES public.recipes(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY public.recipes
+    ADD CONSTRAINT recipes_source_provider_id_fkey FOREIGN KEY (source_provider_id) REFERENCES public.recipe_source_providers(id);
 ALTER TABLE ONLY public.sr_legacy_food
     ADD CONSTRAINT sr_legacy_food_fdc_id_fkey FOREIGN KEY (fdc_id) REFERENCES public.food(fdc_id);
 ALTER TABLE ONLY public.sub_sample_result
     ADD CONSTRAINT sub_sample_result_lab_method_id_fkey FOREIGN KEY (lab_method_id) REFERENCES public.lab_method(id);
 ALTER TABLE ONLY public.survey_fndds_food
     ADD CONSTRAINT survey_fndds_food_fdc_id_fkey FOREIGN KEY (fdc_id) REFERENCES public.food(fdc_id);
-
--- commit the change (or roll it back later)
-COMMIT;
