@@ -2,10 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
+    kompose.cmd: ./kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
     kompose.service.expose: api.cookwherever.com
     kompose.service.expose.tls-secret: cookwherever-com-tls
-    kompose.version: 1.26.0 (40646f47)
+    kompose.version: 1.26.1 (a9d05d509)
   creationTimestamp: null
   labels:
     io.kompose.service: graphql-engine
@@ -19,10 +19,10 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
+        kompose.cmd: ./kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
         kompose.service.expose: api.cookwherever.com
         kompose.service.expose.tls-secret: cookwherever-com-tls
-        kompose.version: 1.26.0 (40646f47)
+        kompose.version: 1.26.1 (a9d05d509)
       creationTimestamp: null
       labels:
         io.kompose.service: graphql-engine
