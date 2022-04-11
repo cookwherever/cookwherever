@@ -1,4 +1,4 @@
-name: Build
+name: Generate Helm Chart
 
 on:
   push:
