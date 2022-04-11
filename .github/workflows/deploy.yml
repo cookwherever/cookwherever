@@ -7,8 +7,8 @@ on:
   push:
     paths:
       - '.github/**'
-      - 'docker-compose.yml'
-      - 'docker-compose.*.yml'
+      - 'docker-compose.yaml'
+      - 'docker-compose.*.yaml'
 
 jobs:
   kompose:
