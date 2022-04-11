@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Build and Release
 
 on:
   push:
@@ -34,7 +34,7 @@ jobs:
     - run: |
         cd frontend
         yarn install --frozen-lockfile
-        yarn build
+        CI=false yarn build
         docker build . --file Dockerfile --tag build
       name: "Build app and image"
       env:
