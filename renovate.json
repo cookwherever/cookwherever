@@ -5,5 +5,15 @@
   "includePaths": [
     "docker-compose.yaml",
     "docker-compose.*.yaml"
+  ],
+  "hostRules": [
+    {
+      "matchHost": "ghcr.io",
+      "hostType": "docker",
+      "username": "ajvpot",
+      "encrypted": {
+        "password": "wcFMA/xDdHCJBTolAQ/+I9U3PmVs5WjeSitAICeq4MHuJdIVtfEz6leb0TcqNpl+YpVflnmUw/OHliE6vImDAb2K888LZV9pgALHvADaKalj1/cK0DCOH/79huSdDXUm17WddFnPHFlwMEzvL8ZkUBSLw6ndAawxmlG0TKEXRla2MVG1cET3kHCc9T+KBMEwZ5N0oBoxQ59jRcmS7Pn1XCRUDXnWf8u5m860rMKAScyiXggza7wqTgvOzKFatDqb7LEH+DiYYeQ0+6lumUqRRtvv26GQFFTQK+0TF4ZM3is/7JQupEFvV16FzzRAtgTQCRg2SCxEyRhkzXmVPp5OPYd81Uf3LHnY6WX54iRO77VkvhiKwXYwuoozdvNLfxMBWeeaa94eo4D6wN7rNn58oGFRl8MuDLWzlG0brwRe0aRAEn+SNJEMUM19T4L5ZhJFg9QxOlDUmcfiLJFUYu9GjyCUQ6xSQhlics9UXNbQNNhG9bBZ+JsFArLKYpcWx2woCbe0FyqBPaFRxwE+C2SuB7EOxq6w15pVjC4B03IbcJSghy9H1d32ej/M8Zk60O20Zulnt9FII1A3lr6lrsMEqb/T0Y1h+wndTtAjxJa+AFulsceFG9wwuF7gqu3RX1M0pSkTNtYJhSEXX9tTqxVOAPpK8grlv1n1bzEPar4HbyE4igdogLoi4/DPCOerqwTShwHV2LoiZUmaF4qcFJG4BtkYlZKFblXc3a9CqrUBFeIVIyARcAJzBT8NeMyk+v5qhzTnH0HjTCus5EaXt0v4Oh+IL4DQm2F+A/gi1w3ChOgnPKOFDPmvCJJFlUhNiQIvgdRJatAKW3EnzrGQtrawbuUie3u7/Sq1qTBljBRhTnJI5fccbZoExg"
+      }
+    }
   ]
 }
