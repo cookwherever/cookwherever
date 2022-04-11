@@ -1,4 +1,4 @@
-name: Deploy Helm chart
+name: Infra Build and Deploy
 
 concurrency: deploy_prod
 

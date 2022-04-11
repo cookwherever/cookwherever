@@ -1,4 +1,4 @@
-name: Build and Release
+name: Frontend Build
 
 on:
   workflow_dispatch:
@@ -15,7 +15,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-
+    - name: Get branch name
+      id: branch-name
+      uses: tj-actions/branch-names@v5.2
     - name: Setup Node
       uses: actions/setup-node@v2-beta
       with:
@@ -43,9 +45,11 @@ jobs:
         REACT_APP_GIT_SHA: ${{ github.SHA }}
         
     - name: Log into registry
+      if: steps.branch-name.outputs.current_branch == 'master'
       run: echo "${{ secrets.GH_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
     - name: Push image
+      if: steps.branch-name.outputs.current_branch == 'master'
       run: |
         IMAGE_ID=ghcr.io/cookwherever/frontend
         # Change all uppercase to lowercase
