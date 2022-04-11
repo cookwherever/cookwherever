@@ -3,12 +3,12 @@
     ":dependencyDashboard",
     ":ignoreModulesAndTests",
     ":prHourlyLimit2",
-    ":prConcurrentLimit10",
+    ":prConcurrentLimit10"
   ],
     "docker": {
     "enabled": true
   },
   "docker-compose": {
     "enabled": true
-  },
+  }
 }
