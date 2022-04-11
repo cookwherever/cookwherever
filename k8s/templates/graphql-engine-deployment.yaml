@@ -255,7 +255,7 @@ spec:
                 configMapKeyRef:
                   key: POSTGRES_PASSWORD
                   name: env
-          image: hasura/graphql-engine:v2.1.1
+          image: hasura/graphql-engine:v2.4.0
           name: graphql-engine
           ports:
             - containerPort: 8080
