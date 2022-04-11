@@ -1,5 +1,7 @@
 name: Deploy Helm chart
 
+concurrency: deploy_prod
+
 on:
   push:
     branches: [ master ]
