@@ -1,0 +1,35 @@
+name: Build
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'docker-compose.yaml'
+      - 'docker-compose.*.yaml'
+      - '.github/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Kubernetes tools
+        uses: yokawasa/action-setup-kube-tools@v0.8.0
+        with:
+          setup-tools: |
+            helmv3
+            yq
+            kompose
+          helm: "3.8.0"
+          yq: "4.16.2"
+      - run: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
+      - name: Create commit
+        id: create-commit
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          file_pattern: k8s/**/
+          commit_message: "chore: run kompose [skip ci]"
+          commit_user_name: cookwherever[bot]
+          commit_user_email: cookwherever[bot]@users.noreply.github.com
+          commit_author: cookwherever[bot] <cookwherever[bot]@users.noreply.github.com>
