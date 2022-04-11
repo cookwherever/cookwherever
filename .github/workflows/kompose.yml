@@ -1,4 +1,4 @@
-name: Generate Helm Chart
+name: Generate Helm chart
 
 on:
   push:

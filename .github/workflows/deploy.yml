@@ -1,0 +1,28 @@
+name: Deploy Helm chart
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'k8s/**'
+      - '.github/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Kubernetes tools
+        uses: yokawasa/action-setup-kube-tools@v0.8.0
+        with:
+          setup-tools: |
+            helmv3
+            yq
+          helm: "3.8.0"
+          yq: "4.16.2"
+      - uses: Azure/k8s-set-context@v1
+        with:
+          kubeconfig: ${{ secrets.KUBE_CONFIG }}
+      - name: Helm Deploy
+        run: helm --debug upgrade food-data -namespace food-data k8s
