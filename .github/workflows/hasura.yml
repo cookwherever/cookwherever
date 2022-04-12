@@ -30,6 +30,7 @@ jobs:
       - name: Push image
         if: steps.branch-name.outputs.current_branch == 'master'
         run: |
+          set -x
           IMAGE_ID=ghcr.io/cookwherever/hasura
           # Change all uppercase to lowercase
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
@@ -65,6 +66,7 @@ jobs:
             echo "::set-output name=commit_hash::${GITHUB_SHA}"
           fi
       - name: Invoke deploy on new commit
+        if: steps.branch-name.outputs.current_branch == 'master'
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: Deploy
