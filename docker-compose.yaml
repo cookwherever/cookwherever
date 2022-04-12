@@ -2,6 +2,8 @@ version: '3.6'
 services:
   graphql-engine:
     image: hasura/graphql-engine:v2.4.0
+    # image: ghcr.io/cookwherever/hasura:latest
+    # volume mount hasura folder in dev
     depends_on:
       - postgres
     restart: always
@@ -16,6 +18,7 @@ services:
     labels:
       kompose.service.expose: "api.cookwherever.com"
       kompose.service.expose.tls-secret: "cookwherever-com-tls"
+      kompose.image-pull-secret: "ghcr-pull-secret"
   hasura-auth:
     image: nhost/hasura-auth:0.2.1
     depends_on:
