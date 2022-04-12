@@ -69,7 +69,7 @@ jobs:
         docker tag build $IMAGE_ID:$VERSION
         docker push $IMAGE_ID:$VERSION
         
-        yq -yi ".services.frontend.image |= \"$(docker inspect --format='{{index .RepoDigests 0}}' $IMAGE_ID:$VERSION)\"" docker-compose.prod.yml
+        yq -i e ".services.frontend.image |= \"$(docker inspect --format='{{index .RepoDigests 0}}' $IMAGE_ID:$VERSION)\"" docker-compose.prod.yml
 
     - name: Create commit
       id: create-commit
