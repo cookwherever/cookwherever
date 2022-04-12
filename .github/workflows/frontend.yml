@@ -64,9 +64,7 @@ jobs:
         docker tag build $IMAGE_ID:$VERSION
         docker push $IMAGE_ID:$VERSION
         
-        
-        
-        sed -ie "s|ghcr.io/cookwherever/frontend:(.+)|ghcr.io/cookwherever/frontend:$(docker inspect --format='{{index .RepoDigests 0}}' $IMAGE_ID:$VERSION)|" docker-compose.prod.yaml
+        sed -ie "s|$IMAGE_ID:(.+)|$IMAGE_ID:$(docker inspect --format='{{index .RepoDigests 0}}' $IMAGE_ID:$VERSION)|" docker-compose.prod.yaml
 
     - name: Create commit
       id: create-commit
@@ -86,7 +84,7 @@ jobs:
         else
           echo "::set-output name=commit_hash::${GITHUB_SHA}"
         fi
-    - name: Invoke workflow in another repo with inputs
+    - name: Invoke deploy on new commit
       uses: benc-uk/workflow-dispatch@v1
       with:
         workflow: Deploy
