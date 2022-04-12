@@ -16,3 +16,8 @@ services:
       AUTH_CLIENT_URL: https://cookwherever.com
       AUTH_PROVIDER_GOOGLE_CLIENT_ID: 875893625137-o31bbtcuu3qvou8l617hkd35letm8451.apps.googleusercontent.com
       AUTH_PROVIDER_GOOGLE_CLIENT_SECRET: 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
+  graphql-engine:
+    image: hasura/graphql-engine:v2.4.0
+    # image: ghcr.io/cookwherever/hasura:latest
+    labels:
+      kompose.image-pull-secret: "ghcr-pull-secret"
