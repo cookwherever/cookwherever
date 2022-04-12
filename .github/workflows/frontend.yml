@@ -91,4 +91,4 @@ jobs:
       with:
         workflow: Deploy
         token: ${{ secrets.GH_TOKEN }}
-        ref: ${{ steps.create-commit.outputs.commit_hash }}
+        ref: master
