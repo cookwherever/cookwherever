@@ -76,12 +76,8 @@ jobs:
       if: steps.branch-name.outputs.current_branch == 'master'
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
-        branch: origin/master
         file_pattern: docker-compose.prod.yaml
         commit_message: "chore: update container hash [skip ci]"
-        commit_user_name: cookwherever[bot]
-        commit_user_email: cookwherever[bot]@users.noreply.github.com
-        commit_author: cookwherever[bot] <cookwherever[bot]@users.noreply.github.com>
 
     - run: sleep 10
 
