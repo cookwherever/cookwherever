@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   annotations:
     kompose.cmd: ./kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
+    kompose.image-pull-secret: ghcr-pull-secret
     kompose.service.expose: api.cookwherever.com
     kompose.service.expose.tls-secret: cookwherever-com-tls
     kompose.version: 1.26.1 (a9d05d509)
@@ -20,6 +21,7 @@ spec:
     metadata:
       annotations:
         kompose.cmd: ./kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
+        kompose.image-pull-secret: ghcr-pull-secret
         kompose.service.expose: api.cookwherever.com
         kompose.service.expose.tls-secret: cookwherever-com-tls
         kompose.version: 1.26.1 (a9d05d509)
@@ -260,5 +262,7 @@ spec:
           ports:
             - containerPort: 8080
           resources: {}
+      imagePullSecrets:
+        - name: ghcr-pull-secret
       restartPolicy: Always
 status: {}
