@@ -82,6 +82,8 @@ jobs:
         commit_user_email: cookwherever[bot]@users.noreply.github.com
         commit_author: cookwherever[bot] <cookwherever[bot]@users.noreply.github.com>
 
+    - run: sleep 10
+
     - name: Invoke deploy on new commit
       if: steps.branch-name.outputs.current_branch == 'master'
       uses: benc-uk/workflow-dispatch@v1
