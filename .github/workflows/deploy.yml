@@ -1,6 +1,4 @@
-name: Infra Build and Deploy
-
-concurrency: deploy_prod
+name: Infra
 
 on:
   workflow_dispatch:
@@ -47,6 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     if: needs.kompose.outputs.branch_name == 'master'
     needs: kompose
+    concurrency: production
 
     steps:
       - name: Checkout
