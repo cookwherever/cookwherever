@@ -21,7 +21,12 @@ jobs:
       uses: actions/setup-node@v2-beta
       with:
         node-version: '12'
-
+    - name: Install Kubernetes tools
+      uses: yokawasa/action-setup-kube-tools@v0.8.0
+      with:
+        setup-tools: |
+          yq
+        yq: "4.16.2"
     - name: Get yarn cache
       id: yarn-cache
       run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -64,7 +69,7 @@ jobs:
         docker tag build $IMAGE_ID:$VERSION
         docker push $IMAGE_ID:$VERSION
         
-        sed -ie "s|$IMAGE_ID:(.+)|$IMAGE_ID:$(docker inspect --format='{{index .RepoDigests 0}}' $IMAGE_ID:$VERSION)|" docker-compose.prod.yaml
+        yq -yi ".services.frontend.image |= \"$(docker inspect --format='{{index .RepoDigests 0}}' $IMAGE_ID:$VERSION)\"" docker-compose.prod.yml
 
     - name: Create commit
       id: create-commit
