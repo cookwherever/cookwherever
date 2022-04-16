@@ -1,0 +1,7 @@
+---
+title: iceberg lettuce = head lettuce = cabbage lettuce = crisphead lettuce
+tags:
+- ingredient
+
+---
+iceberg lettuce = head lettuce = cabbage lettuce = crisphead lettuce This is prized for its crispness and longevity in the refrigerator, but it's a bit short on flavor and nutrients. Substitutes: romaine lettuce (also crunchy, and more flavorful) OR leaf lettuce

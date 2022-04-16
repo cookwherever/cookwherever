@@ -1,0 +1,7 @@
+---
+title: 'keylime = Florida key lime = Mexican lime   kumquat   .    Substitutes:'
+tags:
+- ingredient
+
+---
+key lime = Florida key lime = Mexican lime   These are smaller and more acidic than the more common Persian limes.  limes (Many cooks prefer freshly squeezed Persian lime juice over bottled key lime juice for key lime pies.)   kumquat     KUHM-kwaht     These look like grape-sized oranges, and they can be eaten whole. The flavor is a bit sour and very intense.  They peak in the winter months.    Substitutes:  limequats OR calamondin oranges OR Seville oranges (for marmalade)

@@ -1,0 +1,7 @@
+---
+title: 'naan    Substitutes:'
+tags:
+- ingredient
+
+---
+naan      NAWN    This Indian flatbread is made with wheat flour.  It's usually served hot.   Substitutes:  chapati OR flour tortilla OR pita OR paratha OR rice (This is another traditional accompaniment to Indian dishes.)

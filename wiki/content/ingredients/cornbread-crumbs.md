@@ -1,0 +1,7 @@
+---
+title: cornbread crumbs = corn bread crumbs = crumbled cornbread = crumbled corn bread
+tags:
+- ingredient
+
+---
+cornbread crumbs = corn bread crumbs = crumbled cornbread = crumbled corn bread Notes: This is used to bread or stuff poultry and fish. Packaged cornbread crumbs are available in the baking supplies section of many supermarkets, or you can make your own by crumbling cooled cornbread. Substitutes: breadcrumbs, cornflake crumbs = crushed cornflakes Equivalents: 3 cups whole cornflakes = 1 cup crushed Notes: This is used as a colorful breading for meat and fish, and as a topping for casseroles. You can buy cornflakes already crushed, or buy whole cornflakes and crush them yourself. To make your own: Put cornflakes in a plastic bag and crush using a rolling pin. Three cups of whole cornflakes yield one cup of cornflake crumbs. Substitutes: breadcrumbs (dry and fine) OR panko OR cornmeal OR cracker meal OR melba toast (crushed and tossed with oil) OR other breakfast cereal flakes (crushed) OR corn chips (crushed) OR coating mix OR pretzels (crushed) , cracker meal = cracker crumbs = crushed crackers Notes: These crushed crackers are used as a breading for meat and fish. When the food is fried, the crumbs provide a crunchy coating. Look for it in the baking goods section of your supermarket, or make your own by putting crackers in a plastic bag and crushing them with a rolling pin. Substitutes: breadcrumbs OR panko OR matzo meal OR cornflake crumbs

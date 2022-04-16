@@ -1,0 +1,72 @@
+LET doc = PARSE(IO::FS::READ(@file))
+
+LET mainSection = ELEMENT(doc, 'blockquote')
+
+LET tableIngredients = (
+  FOR table IN ELEMENTS(mainSection, 'blockquote > table')
+    FILTER ELEMENT_EXISTS(table, 'tr > td:nth-child(2)')
+    LET infoRow = ELEMENT(table, 'tr > td:nth-child(2)')
+
+    LET ingName = FIRST(ELEMENT_EXISTS(infoRow, 'b') ? ELEMENTS(infoRow, 'b') : ELEMENTS(doc, 'b > font'))
+    LET removeItalics = ELEMENT_EXISTS(ingName, 'i') && INNER_TEXT_SET(ingName, 'i', '')
+
+    LET formattedName = CLEAN_TEXT(INNER_TEXT(ingName))
+    
+    LET ingText = (
+      ELEMENT_EXISTS(infoRow, 'p') ?
+      INNER_TEXT_ALL(infoRow, 'p') :
+      INNER_TEXT(infoRow)
+    )
+    
+    LET formattedText = CLEAN_TEXT(CONCAT_SEPARATOR(", ", ingText))
+
+    RETURN {
+      name: formattedName,
+      names: SPLIT(formattedName, " = "),
+      link: false,
+      text: formattedText
+    }
+)
+
+LET wrappedTableIngredients = (
+  FOR table IN ELEMENTS(mainSection, 'blockquote > p > table')
+    FILTER ELEMENT_EXISTS(table, 'tr > td:nth-child(2)')
+    FOR infoRow IN ELEMENTS(table, 'tr > td:nth-child(2)')
+      LET ingName = FIRST(ELEMENT_EXISTS(infoRow, 'b') ? ELEMENTS(infoRow, 'b') : ELEMENTS(doc, 'b > font'))
+      LET removeItalics = ELEMENT_EXISTS(ingName, 'i') && INNER_HTML_SET(ingName, 'i', '')
+
+      LET formattedName = CLEAN_TEXT(INNER_TEXT(ingName))
+      LET formattedText = CLEAN_TEXT(INNER_TEXT(infoRow))
+
+      RETURN {
+        name: formattedName,
+        names: SPLIT(formattedName, " = "),
+        link: false,
+        text: formattedText
+      }
+)
+
+LET links = (
+  FOR link IN ELEMENTS(mainSection, 'blockquote > p > b')
+    FILTER ELEMENT_EXISTS(link, 'a')
+    LET linkUrl = ATTR_GET(ELEMENT(link, 'a'), 'href').href
+    RETURN {
+      name: CLEAN_TEXT(INNER_TEXT(link)),
+      link: true,
+      text: linkUrl
+    }
+)
+
+LET pageLinks = (
+  FOR link IN ELEMENTS(mainSection, 'blockquote p a')
+    LET linkUrl = ATTR_GET(link, 'href').href
+    RETURN {
+      name: CLEAN_TEXT(INNER_TEXT(link)),
+      link: true,
+      text: linkUrl
+    }
+)
+
+RETURN {
+  ingredients: UNION(pageLinks, links, wrappedTableIngredients, tableIngredients)
+}

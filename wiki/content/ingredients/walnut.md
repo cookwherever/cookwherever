@@ -1,0 +1,7 @@
+---
+title: walnut
+tags:
+- ingredient
+
+---
+

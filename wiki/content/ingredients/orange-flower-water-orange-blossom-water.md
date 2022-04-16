@@ -1,0 +1,7 @@
+---
+title: orange flower water = orange blossom water = zhaar
+tags:
+- ingredient
+
+---
+orange flower water = orange blossom water = zhaar    This is distilled from bitter orange blossoms, and it's used to flavor drinks, salads, and desserts.  Look for it in Middle Eastern markets and specialty shops.   rose water OR vanilla extract OR orange extract OR orange-flavored liqueur OR orange zest

@@ -1,0 +1,7 @@
+---
+title: frais des bois = wild strawberry = wood strawberry
+tags:
+- ingredient
+
+---
+frais des bois = wild strawberry = wood strawberry fraises des bois Pronunciation: (singular) FRAY-day-BWAH (plural) FREHZ-day-BWAH Notes: These small, wild strawberries are either white or red, and have a very intense flavor. Substitutes: strawberries
