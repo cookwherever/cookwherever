@@ -5,7 +5,8 @@
   "includePaths": [
     "docker-compose.yaml",
     "docker-compose.*.yaml",
-    "hasura/Dockerfile"
+    "hasura/Dockerfile",
+    ".github/**"
   ],
   "hostRules": [
     {
