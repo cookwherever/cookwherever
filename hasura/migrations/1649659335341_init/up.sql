@@ -1,4 +1,12 @@
+-- start a transaction
+BEGIN;
+
 SET check_function_bodies = false;
+
+-- extensions
+CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;
+CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
+
 CREATE TYPE public.food_data_type_enum AS ENUM (
     'branded_food',
     'sub_sample_food',
@@ -722,3 +730,6 @@ ALTER TABLE ONLY public.sub_sample_result
     ADD CONSTRAINT sub_sample_result_lab_method_id_fkey FOREIGN KEY (lab_method_id) REFERENCES public.lab_method(id);
 ALTER TABLE ONLY public.survey_fndds_food
     ADD CONSTRAINT survey_fndds_food_fdc_id_fkey FOREIGN KEY (fdc_id) REFERENCES public.food(fdc_id);
+
+-- commit the change (or roll it back later)
+COMMIT;

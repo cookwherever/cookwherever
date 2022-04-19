@@ -1,9 +1,8 @@
-name: Frontend Build
+name: Frontend
 
 on:
   workflow_dispatch:
   push:
-    branches: [ master ]
     paths:
       - 'frontend/**'
       - '.github/**'
@@ -22,13 +21,18 @@ jobs:
       uses: actions/setup-node@v2-beta
       with:
         node-version: '12'
-
+    - name: Install Kubernetes tools
+      uses: yokawasa/action-setup-kube-tools@v0.8.0
+      with:
+        setup-tools: |
+          yq
+        yq: "4.16.2"
     - name: Get yarn cache
       id: yarn-cache
       run: echo "::set-output name=dir::$(yarn cache dir)"
 
     - name: Cache dependencies
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: ${{ steps.yarn-cache.outputs.dir }}
         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -64,4 +68,23 @@ jobs:
         echo VERSION=$VERSION
         docker tag build $IMAGE_ID:$VERSION
         docker push $IMAGE_ID:$VERSION
+        
+        yq -i e ".services.frontend.image |= \"$(docker inspect --format='{{index .RepoDigests 0}}' $IMAGE_ID:$VERSION)\"" docker-compose.prod.yaml
 
+    - name: Create commit
+      id: create-commit
+      if: steps.branch-name.outputs.current_branch == 'master'
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        file_pattern: docker-compose.prod.yaml
+        commit_message: "chore: update container hash [skip ci]"
+
+    - run: sleep 10
+
+    - name: Invoke deploy on new commit
+      if: steps.branch-name.outputs.current_branch == 'master'
+      uses: benc-uk/workflow-dispatch@v1
+      with:
+        workflow: Deploy
+        token: ${{ secrets.GH_TOKEN }}
+        ref: master

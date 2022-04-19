@@ -1,6 +1,5 @@
-name: Infra Build and Deploy
-
-concurrency: deploy_prod
+name: Deploy
+concurrency: production
 
 on:
   workflow_dispatch:
@@ -32,9 +31,6 @@ jobs:
         with:
           file_pattern: k8s/**/
           commit_message: "chore: run kompose [skip ci]"
-          commit_user_name: cookwherever[bot]
-          commit_user_email: cookwherever[bot]@users.noreply.github.com
-          commit_author: cookwherever[bot] <cookwherever[bot]@users.noreply.github.com>
       - name: Save commit hash
         id: save-commit-hash
         run: |
