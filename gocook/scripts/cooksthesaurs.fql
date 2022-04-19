@@ -1,5 +1,7 @@
 LET doc = PARSE(IO::FS::READ(@file))
 
+LET pageTitle = CLEAN_TEXT(INNER_TEXT(FIRST(ELEMENTS(doc, 'b > font'))))
+
 LET mainSection = ELEMENT(doc, 'blockquote')
 
 LET tableIngredients = (
@@ -11,6 +13,9 @@ LET tableIngredients = (
     LET removeItalics = ELEMENT_EXISTS(ingName, 'i') && INNER_TEXT_SET(ingName, 'i', '')
 
     LET formattedName = CLEAN_TEXT(INNER_TEXT(ingName))
+
+    LET mainPage = formattedName == ''
+    LET names = SPLIT(mainPage ? pageTitle : formattedName, " = ")
     
     LET ingText = (
       ELEMENT_EXISTS(infoRow, 'p') ?
@@ -20,9 +25,12 @@ LET tableIngredients = (
     
     LET formattedText = CLEAN_TEXT(CONCAT_SEPARATOR(", ", ingText))
 
+    DEBUG(names)
+
     RETURN {
-      name: formattedName,
-      names: SPLIT(formattedName, " = "),
+      name: names[0],
+      names: names,
+      mainPage: mainPage,
       link: false,
       text: formattedText
     }
@@ -32,24 +40,31 @@ LET wrappedTableIngredients = (
   FOR table IN ELEMENTS(mainSection, 'blockquote > p > table')
     FILTER ELEMENT_EXISTS(table, 'tr > td:nth-child(2)')
     FOR infoRow IN ELEMENTS(table, 'tr > td:nth-child(2)')
-      LET ingName = FIRST(ELEMENT_EXISTS(infoRow, 'b') ? ELEMENTS(infoRow, 'b') : ELEMENTS(doc, 'b > font'))
+      LET ingName = FIRST(ELEMENT_EXISTS(infoRow, 'b') ? (
+        FOR e IN ELEMENTS(infoRow, 'b')
+          FILTER CLEAN_TEXT(INNER_TEXT(e)) != ""
+          RETURN e
+       ) : ELEMENTS(doc, 'b > font'))
       LET removeItalics = ELEMENT_EXISTS(ingName, 'i') && INNER_HTML_SET(ingName, 'i', '')
 
       LET formattedName = CLEAN_TEXT(INNER_TEXT(ingName))
       LET formattedText = CLEAN_TEXT(INNER_TEXT(infoRow))
 
+      LET names = SPLIT(formattedName, ' = ')
+
       RETURN {
-        name: formattedName,
-        names: SPLIT(formattedName, " = "),
+        name: names[0],
+        names: names,
         link: false,
         text: formattedText
       }
 )
 
 LET links = (
-  FOR link IN ELEMENTS(mainSection, 'blockquote > p > b')
-    FILTER ELEMENT_EXISTS(link, 'a')
-    LET linkUrl = ATTR_GET(ELEMENT(link, 'a'), 'href').href
+  FOR p IN ELEMENTS(mainSection, 'blockquote > p')
+    FILTER ELEMENT_EXISTS(link, 'b > a')
+    LET link = ELEMENT('b > a')
+    LET linkUrl = ATTR_GET(link, 'href').href
     RETURN {
       name: CLEAN_TEXT(INNER_TEXT(link)),
       link: true,
@@ -60,6 +75,7 @@ LET links = (
 LET pageLinks = (
   FOR link IN ELEMENTS(mainSection, 'blockquote p a')
     LET linkUrl = ATTR_GET(link, 'href').href
+    DEBUG(link)
     RETURN {
       name: CLEAN_TEXT(INNER_TEXT(link)),
       link: true,

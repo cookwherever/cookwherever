@@ -1,7 +1,0 @@
----
-title: ostrich   <i></i>
-tags:
-- ingredient
-
----
-rabbit  Rabbit is low in fat and similar in taste and texture to chicken.    Substitutes:  chicken (takes less time to cook)

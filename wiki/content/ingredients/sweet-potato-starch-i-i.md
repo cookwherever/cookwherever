@@ -1,7 +1,0 @@
----
-title: sweet potato starch  <i></i>
-tags:
-- ingredient
-
----
-sweet potato starch  Asian cooks like to dredge pork in this before frying it.

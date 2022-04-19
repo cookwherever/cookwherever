@@ -1,7 +1,0 @@
----
-title: blutwurst  <i></i>
-tags:
-- ingredient
-
----
-blutwurst  This is a spicy and salty German blood sausage made from pork, beef, and beef blood.  Germans like to snack on it, or mix it with sauerkraut.  It comes already cooked, but it's usually heated before being served.  blood sausage,

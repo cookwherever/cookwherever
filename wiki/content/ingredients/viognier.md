@@ -1,7 +1,0 @@
----
-title: Viognier
-tags:
-- ingredient
-
----
-

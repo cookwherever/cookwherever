@@ -1,7 +1,0 @@
----
-title: heart
-tags:
-- ingredient
-
----
-,

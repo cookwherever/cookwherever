@@ -1,7 +1,0 @@
----
-title: carrot
-tags:
-- ingredient
-
----
-
