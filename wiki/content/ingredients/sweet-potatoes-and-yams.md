@@ -1,0 +1,57 @@
+---
+title: sweet potatoes & yams
+tags:
+- ingredient
+
+---
+
+
+### Links
+
+* [[boniato]]
+* [[boniato]]
+* [[boniato]]
+* [[boniato]]
+* [[boniato]]
+* [[tropical-yam]]
+* [[tropical-yam]]
+* [[tropical-yam]]
+* [[tropical-yam]]
+* [[tropical-yam]]
+* [[boniato]]
+* [[tropical-yam]]
+* [[tropical-yam]]
+* batata - [[boniato]]
+* batata dulce - [[boniato]]
+* batiste - [[boniato]]
+* camote - [[boniato]]
+* cuban sweet potato - [[boniato]]
+* tropical yam - [[tropical-yam]]
+* tropical yam - [[tropical-yam]]
+* igname - [[tropical-yam]]
+* tropical yam - [[tropical-yam]]
+* nam� - [[tropical-yam]]
+* tropical sweet potato - [[boniato]]
+* tropical yam - [[tropical-yam]]
+* tropical yam - [[tropical-yam]]
+* [[batata]]
+* [[batata-dulce]]
+* [[batiste]]
+* [[camote]]
+* [[cuban-sweet-potato]]
+* [[cush-cush-tropical-yam]]
+* [[greater-yam-tropical-yam]]
+* [[igname]]
+* [[mapuey-tropical-yam]]
+* [[nam]]
+* [[tropical-sweet-potato]]
+* [[true-yam-tropical-yam]]
+* [[yacon]]
+* [[yampi-tropical-yam]]
+* [[boniato]]
+* [[japanese-yam]]
+* [[okinawan-purple-potato]]
+* [[sweet-potato]]
+* [[tropical-yam]]
+* [[yam]]
+* [[yamaimo]]

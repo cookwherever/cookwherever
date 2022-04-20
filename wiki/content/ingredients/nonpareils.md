@@ -1,0 +1,11 @@
+---
+title: nonpareils
+tags:
+- ingredient
+
+---
+nonpareils non-pah-REHLS Notes: These small colored balls are used to decorate cakes and cookies. Substitutes: jimmies OR drag�es
+
+### Links
+
+* [[candy]]

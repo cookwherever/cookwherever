@@ -1,0 +1,11 @@
+---
+title: parsley root
+tags:
+- ingredient
+
+---
+parsley root = parsnip-rooted parsley = turnip-rooted parsley = Hamburg parsley = Dutch parsley = heimischer = padrushka This is hard to find in the United States, but it's a popular root vegetable in Central Europe. Substitutes: celeriac OR carrots OR parsnips OR turnips Notes: For more information, see the Wegman's Food Market's page on Parsley Root.,
+
+### Links
+
+* [[roots]]

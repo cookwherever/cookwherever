@@ -30,7 +30,7 @@ spec:
         io.kompose.service: frontend
     spec:
       containers:
-        - image: ghcr.io/cookwherever/frontend:v0.0.1
+        - image: ghcr.io/cookwherever/frontend:v0.0.2
           name: frontend
           ports:
             - containerPort: 80

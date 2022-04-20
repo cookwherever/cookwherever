@@ -1,0 +1,11 @@
+---
+title: Thai purple sticky rice
+tags:
+- ingredient
+
+---
+Thai purple sticky rice = Thai black sticky rice = Thai black glutinous rice Equivalents: One cup dried rice yields two cups cooked rice. Notes: This turns a rich dark purple when cooked. The color bleeds, so it's best to pair it with other dark ingredients. Thai cooks often use it in desserts. Substitutes: glutinous rice
+
+### Links
+
+* [[rice]]

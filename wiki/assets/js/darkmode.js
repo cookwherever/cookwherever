@@ -1,38 +1,29 @@
-const mode = document.getElementById('mode');
+const userPref = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+const currentTheme = localStorage.getItem('theme') ?? userPref
 
-if (mode !== null) {
-
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-
-    if (event.matches) {
-
-      localStorage.setItem('theme', 'dark');
-      document.documentElement.setAttribute('data-dark-mode', '');
-
-    } else {
-
-      localStorage.setItem('theme', 'light');
-      document.documentElement.removeAttribute('data-dark-mode');
-
-    }
-
-  })
-
-  mode.addEventListener('click', () => {
-
-    document.documentElement.toggleAttribute('data-dark-mode');
-    localStorage.setItem('theme', document.documentElement.hasAttribute('data-dark-mode') ? 'dark' : 'light');
-
-  });
-
-  if (localStorage.getItem('theme') === 'dark') {
-
-    document.documentElement.setAttribute('data-dark-mode', '');
-
-  } else {
-
-    document.documentElement.removeAttribute('data-dark-mode');
-
-  }
-
+if (currentTheme) {
+  document.documentElement.setAttribute('saved-theme', currentTheme);
 }
+
+const switchTheme = (e) => {
+  if (e.target.checked) {
+    document.documentElement.setAttribute('saved-theme', 'dark')
+    localStorage.setItem('theme', 'dark')
+  }
+  else {
+    document.documentElement.setAttribute('saved-theme', 'light')
+    localStorage.setItem('theme', 'light')
+  }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  // Darkmode toggle
+  const toggleSwitch = document.querySelector('#darkmode-toggle')
+
+  // listen for toggle
+  toggleSwitch.addEventListener('change', switchTheme, false)
+
+  if (currentTheme === 'dark') {
+    toggleSwitch.checked = true
+  }
+})

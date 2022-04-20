@@ -1,0 +1,11 @@
+---
+title: Humboldt fog cheese
+tags:
+- ingredient
+
+---
+Humboldt fog cheese Notes: This excellent soft-ripened goat cheese has a layer of vegetable ash running down the middle. It's an excellent table cheese. The rind is edible, and fairly good. Substitutes: Morbier OR Brie
+
+### Links
+
+* [[soft-cheeses]]

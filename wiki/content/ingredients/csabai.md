@@ -1,0 +1,11 @@
+---
+title: csabai
+tags:
+- ingredient
+
+---
+csabai Pronunciation: chah-BUY Notes: This is a Hungarian smoked sausage that's heavily seasoned with paprika. Rings of it are sold in German delis.
+
+### Links
+
+* [[cold-cuts]]

@@ -1,39 +1,58 @@
 LET doc = PARSE(IO::FS::READ(@file))
 
-LET pageTitle = CLEAN_TEXT(INNER_TEXT(FIRST(ELEMENTS(doc, 'b > font'))))
+LET pageTitle = LOWER(CLEAN_TEXT(INNER_TEXT(FIRST(ELEMENTS(doc, 'b > font')))))
 
 LET mainSection = ELEMENT(doc, 'blockquote')
+LET mainTips = ELEMENT_EXISTS(doc, 'blockquote > ul') && CONCAT_SEPARATOR("\n", (
+    FOR e IN ELEMENTS(doc, 'blockquote > ul > li')
+      RETURN CONCAT('* ', CLEAN_TEXT(INNER_TEXT(e)))
+  )
+)
+
+LET mainSubstitutes = ELEMENT_EXISTS(doc, 'blockquote > p') && CONCAT_SEPARATOR("\n", (
+  FOR e in ELEMENTS(doc, 'blockquote > p')
+    FILTER ELEMENT_EXISTS(e, 'b > i')
+    LET a = ELEMENT(e, 'b > i')
+    FILTER INNER_TEXT(a) == 'Substitutes:'
+    LET removeBold = ELEMENT_EXISTS(e, 'b') && INNER_TEXT_SET(e, 'b', '')
+    RETURN CONCAT_SEPARATOR("\n", (
+      FOR e IN SPLIT(CLEAN_TEXT(INNER_TEXT(e)), " OR ")
+        RETURN CONCAT("* ", e)
+    ))
+))
 
 LET tableIngredients = (
   FOR table IN ELEMENTS(mainSection, 'blockquote > table')
     FILTER ELEMENT_EXISTS(table, 'tr > td:nth-child(2)')
-    LET infoRow = ELEMENT(table, 'tr > td:nth-child(2)')
+    FOR infoRow IN ELEMENTS(table, 'tr > td:nth-child(2)')
+      LET ingName = FIRST(ELEMENT_EXISTS(infoRow, 'b') ? ELEMENTS(infoRow, 'b') : ELEMENTS(doc, 'b > font'))
+      LET removeItalics = ELEMENT_EXISTS(ingName, 'i') && INNER_TEXT_SET(ingName, 'i', '')
 
-    LET ingName = FIRST(ELEMENT_EXISTS(infoRow, 'b') ? ELEMENTS(infoRow, 'b') : ELEMENTS(doc, 'b > font'))
-    LET removeItalics = ELEMENT_EXISTS(ingName, 'i') && INNER_TEXT_SET(ingName, 'i', '')
+      LET formattedName = CLEAN_TEXT(INNER_TEXT(ingName))
 
-    LET formattedName = CLEAN_TEXT(INNER_TEXT(ingName))
+      LET mainPage = formattedName == ''
+      LET names = SPLIT(mainPage ? pageTitle : formattedName, " = ")
+      
+      LET ingText = (
+        ELEMENT_EXISTS(infoRow, 'p') ?
+        INNER_TEXT_ALL(infoRow, 'p') :
+        INNER_TEXT(infoRow)
+      )
+      
+      LET formattedText = CLEAN_TEXT(CONCAT_SEPARATOR(", ", ingText))
+      LET fullText = mainPage || POSITION(names, pageTitle) ? CONCAT(
+        formattedText,
+        "\n\n### Tips\n", mainTips,
+        "\n\n### Substitutes\n", mainSubstitutes
+      ) : formattedText
 
-    LET mainPage = formattedName == ''
-    LET names = SPLIT(mainPage ? pageTitle : formattedName, " = ")
-    
-    LET ingText = (
-      ELEMENT_EXISTS(infoRow, 'p') ?
-      INNER_TEXT_ALL(infoRow, 'p') :
-      INNER_TEXT(infoRow)
-    )
-    
-    LET formattedText = CLEAN_TEXT(CONCAT_SEPARATOR(", ", ingText))
-
-    DEBUG(names)
-
-    RETURN {
-      name: names[0],
-      names: names,
-      mainPage: mainPage,
-      link: false,
-      text: formattedText
-    }
+      RETURN {
+        name: names[0],
+        names: names,
+        mainPage: mainPage,
+        link: false,
+        text: fullText 
+      }
 )
 
 LET wrappedTableIngredients = (
@@ -60,29 +79,75 @@ LET wrappedTableIngredients = (
       }
 )
 
+LET varieties = (
+  FOR infoRow IN ELEMENTS(mainSection, 'blockquote > p')
+    FILTER ELEMENT_EXISTS(infoRow, 'b')
+    LET ingName = FIRST((
+      FOR e IN ELEMENTS(infoRow, 'b')
+        FILTER CLEAN_TEXT(INNER_TEXT(e)) != ""
+        RETURN e
+    ))
+    FILTER ingName != null
+
+    LET italics = ELEMENT_EXISTS(ingName, 'i') && (
+      FOR e IN ELEMENTS(ingName, 'i')
+        RETURN INNER_HTML_SET(e, '')
+    )
+
+    LET formattedName = CLEAN_TEXT(INNER_TEXT(ingName))
+    LET formattedText = CLEAN_TEXT(INNER_TEXT(infoRow))
+
+    FILTER !REGEX_TEST(formattedName, '(Link|Varieties|Equivalencies|Suggested Varieties|Other Classifications)')
+
+    LET names = SPLIT(formattedName, ' = ')
+
+    // DEBUG(names)
+
+    RETURN {
+      name: names[0],
+      names: names,
+      link: false,
+      text: formattedText
+    }
+)
+
 LET links = (
   FOR p IN ELEMENTS(mainSection, 'blockquote > p')
-    FILTER ELEMENT_EXISTS(link, 'b > a')
-    LET link = ELEMENT('b > a')
+    FILTER ELEMENT_EXISTS(p, 'b > a')
+    LET link = ELEMENT(p, 'b > a')
+    FILTER INNER_TEXT(link) != ''
+    
+    LET e = FIRST(ELEMENTS(p, 'b'))
     LET linkUrl = ATTR_GET(link, 'href').href
+    LET linkName = CLEAN_TEXT(INNER_TEXT(link))
+
+    LET removeItalics = ELEMENT_EXISTS(e, 'i') ? INNER_HTML_SET(e, 'i', '') : null
+    LET removeAnchor = ELEMENT_EXISTS(e, 'a') ? INNER_HTML_SET(e, 'a', '') : null
+    
+    LET bText = CLEAN_TEXT(INNER_TEXT(e))
+    // LET name = bText == '' ? linkName : bText
+    LET name = linkName
+
     RETURN {
-      name: CLEAN_TEXT(INNER_TEXT(link)),
+      name: name,
       link: true,
       text: linkUrl
     }
 )
 
 LET pageLinks = (
-  FOR link IN ELEMENTS(mainSection, 'blockquote p a')
+  FOR link IN UNION(ELEMENTS(mainSection, 'blockquote > p > a'), ELEMENTS(mainSection, 'blockquote > p > b > a'))
     LET linkUrl = ATTR_GET(link, 'href').href
-    DEBUG(link)
+    FILTER linkUrl != null
+    LET name = CLEAN_TEXT(INNER_TEXT(link))
     RETURN {
-      name: CLEAN_TEXT(INNER_TEXT(link)),
+      name: name,
       link: true,
       text: linkUrl
     }
 )
 
 RETURN {
-  ingredients: UNION(pageLinks, links, wrappedTableIngredients, tableIngredients)
+  name: pageTitle,
+  ingredients: UNION(pageLinks, links, wrappedTableIngredients, varieties, tableIngredients)
 }

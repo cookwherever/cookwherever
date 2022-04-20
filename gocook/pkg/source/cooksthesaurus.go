@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"path"
+	"strings"
 	"text/template"
 
 	"github.com/cookwherever/cookwherever/gocook/pkg/constants"
@@ -52,27 +53,24 @@ func (s *CooksThesaurusProcessor) Parse(script, file string) (res interface{}, e
 	return
 }
 
-type IngredientLeaf struct {
-	Name             string
-	Description      string
-	Ingredients      []IngredientLeaf
-	ChildIngredients IngredientTree
-}
-
-type IngredientTree map[string]IngredientTree
-
 type IngredientPageHeader struct {
 	Title string   `yaml:"title"`
 	Tags  []string `yaml:"tags"`
+}
+
+type Link struct {
+	Name string
+	To   string
 }
 
 type IngredientPage struct {
 	Header  string
 	Content string
 	Names   string
+	Links   []Link
 }
 
-func createIngredientMarkdown(ingredient types.Ingredient) (page []byte, err error) {
+func createIngredientMarkdown(ingredient types.Ingredient, links []Link) (page []byte, err error) {
 	out, err := yaml.Marshal(IngredientPageHeader{
 		Title: util.CleanText(ingredient.Name),
 		Tags: []string{
@@ -89,6 +87,10 @@ func createIngredientMarkdown(ingredient types.Ingredient) (page []byte, err err
 {{.Header}}
 ---
 {{.Content}}
+
+### Links
+{{ range .Links }}
+{{ if .Name }}* {{ .Name }} - [[{{ .To }}]]{{ else }}* [[{{ .To }}]]{{ end }}{{ end }}
 `)
 	if err != nil {
 		log.Error().Err(err).Msg("unable to parse template")
@@ -99,6 +101,7 @@ func createIngredientMarkdown(ingredient types.Ingredient) (page []byte, err err
 	err = tmpl.Execute(&buf, IngredientPage{
 		Header:  string(out),
 		Content: ingredient.Text,
+		Links:   links,
 	})
 	if err != nil {
 		log.Error().Err(err).Msg("unable to execute template")
@@ -114,8 +117,6 @@ func (s *CooksThesaurusProcessor) Process() (err error) {
 		return err
 	}
 
-	ingredientLookup := map[string][]types.Ingredient{}
-	ingredientTreeLookup := map[string]IngredientTree{}
 	for _, file := range files {
 		var (
 			contents   []byte
@@ -132,44 +133,78 @@ func (s *CooksThesaurusProcessor) Process() (err error) {
 			return
 		}
 
-		ingredientFileName := path.Base(file)
-		ingredientLookup[ingredientFileName] = ingredient.Ingredients
-		ingredientTreeLookup[ingredientFileName] = IngredientTree{}
-	}
+		var ingredientLinks []Link
+		var mainIngredient types.Ingredient
+		var ingredientsToProcess []types.Ingredient
 
-	for fileName, ingredients := range ingredientLookup {
-		_ = ingredientTreeLookup[fileName]
-		for _, ingredient := range ingredients {
-			if ingredient.Link {
+		for _, i := range ingredient.Ingredients {
+			if i.MainPage || strings.EqualFold(i.Name, ingredient.Name) {
+				mainIngredient = i
+				mainIngredient.Name = strings.ToLower(mainIngredient.Name)
 				continue
 			}
 
-			out, err := createIngredientMarkdown(ingredient)
-			if err != nil {
+			if i.Link {
+				ingredientLinks = append(ingredientLinks, Link{
+					Name: strings.ToLower(i.Name),
+					To:   slug.Make(strings.ReplaceAll(strings.ToLower(i.Text), "#", "")),
+				})
 				continue
-			}
-
-			var name string
-			if len(ingredient.Names) == 0 {
-				name = ingredient.Name
 			} else {
-				name = ingredient.Names[0]
+				ingredientLinks = append(ingredientLinks, Link{
+					Name: "",
+					To:   slug.Make(strings.ToLower(i.Name)),
+				})
 			}
-			cleanName := util.CleanText(name)
 
-			ingredientSlug := slug.Make(cleanName)
-
-			filePath := path.Join(constants.CooksThesaurusProcessedDir, ingredientSlug+".md")
-
-			err = ioutil.WriteFile(filePath, out, 0755)
-			if err != nil {
-				log.Error().
-					Err(err).
-					Msg("unable to write file")
+			if i.Text == i.Name {
 				continue
+			}
+
+			ingredientsToProcess = append(ingredientsToProcess, i)
+		}
+
+		if mainIngredient.Name == "" {
+			mainIngredient = types.Ingredient{
+				Name: strings.ToLower(ingredient.Name),
 			}
 		}
+
+		for _, i := range ingredientsToProcess {
+			processIngredient(i, []Link{
+				{
+					To: slug.Make(mainIngredient.Name),
+				},
+			})
+		}
+		processIngredient(mainIngredient, ingredientLinks)
 	}
 
 	return
+}
+
+func processIngredient(ingredient types.Ingredient, links []Link) {
+	out, err := createIngredientMarkdown(ingredient, links)
+	if err != nil {
+		return
+	}
+
+	var name string
+	if len(ingredient.Names) == 0 {
+		name = ingredient.Name
+	} else {
+		name = ingredient.Names[0]
+	}
+	cleanName := util.CleanText(strings.ToLower(name))
+
+	ingredientSlug := slug.Make(cleanName)
+
+	filePath := path.Join(constants.CooksThesaurusProcessedDir, ingredientSlug+".md")
+
+	err = ioutil.WriteFile(filePath, out, 0755)
+	if err != nil {
+		log.Error().
+			Err(err).
+			Msg("unable to write file")
+	}
 }

@@ -12,6 +12,7 @@
       update: updateAuthProviderRequests
       delete_by_pk: deleteAuthProviderRequest
       update_by_pk: updateAuthProviderRequest
+    comment: null
     custom_name: authProviderRequests
     custom_column_names:
       redirect_url: redirectUrl
@@ -29,6 +30,7 @@
       update: updateAuthProviders
       delete_by_pk: deleteAuthProvider
       update_by_pk: updateAuthProvider
+    comment: null
     custom_name: authProviders
     custom_column_names: {}
   array_relationships:
@@ -53,6 +55,7 @@
       update: updateAuthRefreshTokens
       delete_by_pk: deleteAuthRefreshToken
       update_by_pk: updateAuthRefreshToken
+    comment: null
     custom_name: authRefreshTokens
     custom_column_names:
       refresh_token: refreshToken
@@ -77,6 +80,7 @@
       update: updateAuthRoles
       delete_by_pk: deleteAuthRole
       update_by_pk: updateAuthRole
+    comment: null
     custom_name: authRoles
     custom_column_names: {}
   array_relationships:
@@ -108,6 +112,7 @@
       update: updateAuthUserProviders
       delete_by_pk: deleteAuthUserProvider
       update_by_pk: updateAuthUserProvider
+    comment: null
     custom_name: authUserProviders
     custom_column_names:
       provider_user_id: providerUserId
@@ -138,6 +143,7 @@
       update: updateAuthUserRoles
       delete_by_pk: deleteAuthUserRole
       update_by_pk: updateAuthUserRole
+    comment: null
     custom_name: authUserRoles
     custom_column_names:
       created_at: createdAt
@@ -163,6 +169,7 @@
       update: updateUsers
       delete_by_pk: deleteUser
       update_by_pk: updateUser
+    comment: null
     custom_name: users
     custom_column_names:
       display_name: displayName
@@ -872,6 +879,7 @@
       - id
       - image
       - name
+      - slug
       - source
       - source_provider_id
       - updated_at

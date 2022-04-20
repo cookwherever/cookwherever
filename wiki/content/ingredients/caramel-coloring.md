@@ -1,0 +1,11 @@
+---
+title: caramel coloring
+tags:
+- ingredient
+
+---
+caramel coloring = burnt sugar caramel Stirring constantly, cook 1 C firmly packed brown sugar + 2 tablespoons water until sugar is dissolved (about 2 minutes), then gradually add 1 C boiling water; continue cooking until it becomes syrupy (about 15 minutes). Substitutes: Kitchen Bouquet (includes seasonings, saltier than caramel coloring) OR browning
+
+### Links
+
+* [[stocks-broths-and-gravies]]

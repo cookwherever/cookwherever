@@ -1,5 +1,7 @@
-node_modules
+.DS_Store
 public
 resources
-.netlify
-.hugo_build.lock
+.idea
+content/.obsidian
+assets/indices/linkIndex.json
+assets/indices/contentIndex.json

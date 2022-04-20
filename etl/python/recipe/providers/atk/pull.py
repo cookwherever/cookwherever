@@ -38,6 +38,8 @@ def process_recipe(recipe_id, content):
         print(f"unable to load {recipe_id}")
         return
 
+    print(json.dumps(api_recipe, indent=2))
+
     name = api_recipe.get('title')
     photo = api_recipe.get('photo')
     image = photo.get('image_url') if photo is not None else ""
