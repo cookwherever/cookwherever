@@ -97,11 +97,9 @@ LET varieties = (
     LET formattedName = CLEAN_TEXT(INNER_TEXT(ingName))
     LET formattedText = CLEAN_TEXT(INNER_TEXT(infoRow))
 
-    FILTER !REGEX_TEST(formattedName, '(Link|Varieties|Equivalencies|Suggested Varieties|Other Classifications)')
+    FILTER !REGEX_TEST(formattedName, '(Link|Varieties|Equivalencies|Suggested Varieties|Other Classifications|Tips)')
 
     LET names = SPLIT(formattedName, ' = ')
-
-    // DEBUG(names)
 
     RETURN {
       name: names[0],
@@ -125,7 +123,6 @@ LET links = (
     LET removeAnchor = ELEMENT_EXISTS(e, 'a') ? INNER_HTML_SET(e, 'a', '') : null
     
     LET bText = CLEAN_TEXT(INNER_TEXT(e))
-    // LET name = bText == '' ? linkName : bText
     LET name = linkName
 
     RETURN {
