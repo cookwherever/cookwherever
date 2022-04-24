@@ -4,34 +4,34 @@ metadata:
   annotations:
     kompose.cmd: ./kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
     kompose.image-pull-secret: ghcr-pull-secret
-    kompose.service.expose: recipes.cookwherever.com
+    kompose.service.expose: cookwherever.com
     kompose.service.expose.tls-secret: cookwherever-com-tls
     kompose.version: 1.26.1 (a9d05d509)
   creationTimestamp: null
   labels:
-    io.kompose.service: frontend
-  name: frontend
+    io.kompose.service: wiki
+  name: wiki
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: frontend
+      io.kompose.service: wiki
   strategy: {}
   template:
     metadata:
       annotations:
         kompose.cmd: ./kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
         kompose.image-pull-secret: ghcr-pull-secret
-        kompose.service.expose: recipes.cookwherever.com
+        kompose.service.expose: cookwherever.com
         kompose.service.expose.tls-secret: cookwherever-com-tls
         kompose.version: 1.26.1 (a9d05d509)
       creationTimestamp: null
       labels:
-        io.kompose.service: frontend
+        io.kompose.service: wiki
     spec:
       containers:
-        - image: ghcr.io/cookwherever/frontend@sha256:5113955fc162d0cdda62a1eab2e0dee78c514f4c0f68ea4404f47b6b905ef297
-          name: frontend
+        - image: ghcr.io/cookwherever/wiki:v0.0.2
+          name: wiki
           ports:
             - containerPort: 80
           resources: {}

@@ -4,19 +4,19 @@ metadata:
   annotations:
     kompose.cmd: ./kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
     kompose.image-pull-secret: ghcr-pull-secret
-    kompose.service.expose: recipes.cookwherever.com
+    kompose.service.expose: cookwherever.com
     kompose.service.expose.tls-secret: cookwherever-com-tls
     kompose.version: 1.26.1 (a9d05d509)
   creationTimestamp: null
   labels:
-    io.kompose.service: frontend
-  name: frontend
+    io.kompose.service: wiki
+  name: wiki
 spec:
   ports:
     - name: "80"
       port: 80
       targetPort: 80
   selector:
-    io.kompose.service: frontend
+    io.kompose.service: wiki
 status:
   loadBalancer: {}
