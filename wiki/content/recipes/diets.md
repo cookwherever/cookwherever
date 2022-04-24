@@ -1,0 +1,5 @@
+---
+title: Diets
+---
+
+[[format]]

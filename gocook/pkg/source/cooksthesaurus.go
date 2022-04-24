@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"io/ioutil"
+	"os"
 	"path"
 	"strings"
 	"text/template"
@@ -63,14 +64,15 @@ type Link struct {
 	To   string
 }
 
-type IngredientPage struct {
-	Header  string
-	Content string
-	Names   string
-	Links   []Link
+type IngredientMarkdownPage struct {
+	Header   string
+	Content  string
+	Names    []string
+	Links    []Link
+	FileName string
 }
 
-func createIngredientMarkdown(ingredient types.Ingredient, links []Link) (page []byte, err error) {
+func createIngredientMarkdown(ingredient types.Ingredient, links []Link, filename string) (page []byte, err error) {
 	out, err := yaml.Marshal(IngredientPageHeader{
 		Title: util.CleanText(ingredient.Name),
 		Tags: []string{
@@ -84,13 +86,19 @@ func createIngredientMarkdown(ingredient types.Ingredient, links []Link) (page [
 
 	tmpl, err := template.New("ingredient-page").Parse(
 		`---
-{{.Header}}
----
+{{.Header}}---
 {{.Content}}
 
-### Links
+### Other Names
+{{ range .Names }}
+* {{ . }}{{ end }}
+
+### Varieties
 {{ range .Links }}
 {{ if .Name }}* {{ .Name }} - [[{{ .To }}]]{{ else }}* [[{{ .To }}]]{{ end }}{{ end }}
+
+### Sources
+* http://foodsubs.com/{{ .FileName }}
 `)
 	if err != nil {
 		log.Error().Err(err).Msg("unable to parse template")
@@ -98,10 +106,12 @@ func createIngredientMarkdown(ingredient types.Ingredient, links []Link) (page [
 	}
 
 	var buf bytes.Buffer
-	err = tmpl.Execute(&buf, IngredientPage{
-		Header:  string(out),
-		Content: ingredient.Text,
-		Links:   links,
+	err = tmpl.Execute(&buf, IngredientMarkdownPage{
+		Header:   string(out),
+		Content:  ingredient.Text,
+		Links:    links,
+		FileName: filename,
+		Names:    ingredient.Names,
 	})
 	if err != nil {
 		log.Error().Err(err).Msg("unable to execute template")
@@ -111,11 +121,21 @@ func createIngredientMarkdown(ingredient types.Ingredient, links []Link) (page [
 	return
 }
 
+type IngredientPage struct {
+	ingredient types.Ingredient
+	links      []Link
+	varieties  []types.Ingredient
+	filename   string
+}
+
 func (s *CooksThesaurusProcessor) Process() (err error) {
 	files, err := util.WalkMatch(s.ParsedDir(), "*.json")
 	if err != nil {
 		return err
 	}
+
+	var ingredientPages []IngredientPage
+	filenameToName := map[string]string{}
 
 	for _, file := range files {
 		var (
@@ -135,7 +155,7 @@ func (s *CooksThesaurusProcessor) Process() (err error) {
 
 		var ingredientLinks []Link
 		var mainIngredient types.Ingredient
-		var ingredientsToProcess []types.Ingredient
+		var pageIngredients []types.Ingredient
 
 		for _, i := range ingredient.Ingredients {
 			if i.MainPage || strings.EqualFold(i.Name, ingredient.Name) {
@@ -145,6 +165,13 @@ func (s *CooksThesaurusProcessor) Process() (err error) {
 			}
 
 			if i.Link {
+				if strings.Contains(i.Text, ".html") {
+					ingredientLinks = append(ingredientLinks, Link{
+						Name: strings.ToLower(i.Name),
+						To:   i.Text,
+					})
+					continue
+				}
 				ingredientLinks = append(ingredientLinks, Link{
 					Name: strings.ToLower(i.Name),
 					To:   slug.Make(strings.ReplaceAll(strings.ToLower(i.Text), "#", "")),
@@ -161,7 +188,7 @@ func (s *CooksThesaurusProcessor) Process() (err error) {
 				continue
 			}
 
-			ingredientsToProcess = append(ingredientsToProcess, i)
+			pageIngredients = append(pageIngredients, i)
 		}
 
 		if mainIngredient.Name == "" {
@@ -170,21 +197,69 @@ func (s *CooksThesaurusProcessor) Process() (err error) {
 			}
 		}
 
-		for _, i := range ingredientsToProcess {
-			processIngredient(i, []Link{
-				{
-					To: slug.Make(mainIngredient.Name),
-				},
-			})
-		}
-		processIngredient(mainIngredient, ingredientLinks)
+		_, n := path.Split(file)
+		filename := strings.ReplaceAll(n, ".json", ".html")
+		filenameToName[filename] = slug.Make(mainIngredient.Name)
+
+		ingredientPages = append(ingredientPages, IngredientPage{
+			ingredient: mainIngredient,
+			links:      ingredientLinks,
+			varieties:  pageIngredients,
+			filename:   filename,
+		})
 	}
 
+	for _, i := range ingredientPages {
+		ingredientSlug := slug.Make(i.ingredient.Name)
+		folder := path.Join(s.ProcessedDir(), ingredientSlug)
+
+		if err = os.MkdirAll(folder, 0755); err != nil {
+			println(err)
+			continue
+		}
+
+		for n, l := range i.links {
+			if name, ok := filenameToName[l.To]; ok {
+				i.links[n].To = name
+			}
+		}
+
+		makeIngredientPages(ingredientSlug, i)
+	}
 	return
 }
 
-func processIngredient(ingredient types.Ingredient, links []Link) {
-	out, err := createIngredientMarkdown(ingredient, links)
+func makeIngredientPages(basePath string, ingPage IngredientPage) {
+	actualLinks := map[string]bool{}
+	for _, i := range ingPage.links {
+		if i.Name != "" {
+			actualLinks[slug.Make(i.Name)] = true
+		}
+	}
+
+	var filteredLinks []Link
+	for _, i := range ingPage.links {
+		_, ok := actualLinks[i.To]
+		if i.Name == "" && ok {
+			continue
+		}
+		filteredLinks = append(filteredLinks, i)
+	}
+	ingPage.links = filteredLinks
+
+	for _, i := range ingPage.varieties {
+		ingSlug := slug.Make(ingPage.ingredient.Name)
+		processIngredient(basePath, i, []Link{
+			{
+				To: ingSlug,
+			},
+		}, ingPage.filename)
+	}
+	processIngredient(basePath, ingPage.ingredient, ingPage.links, ingPage.filename)
+}
+
+func processIngredient(basePath string, ingredient types.Ingredient, links []Link, filename string) {
+	out, err := createIngredientMarkdown(ingredient, links, filename)
 	if err != nil {
 		return
 	}
@@ -199,9 +274,14 @@ func processIngredient(ingredient types.Ingredient, links []Link) {
 
 	ingredientSlug := slug.Make(cleanName)
 
-	filePath := path.Join(constants.CooksThesaurusProcessedDir, ingredientSlug+".md")
+	outPath := constants.CooksThesaurusProcessedDir
 
-	err = ioutil.WriteFile(filePath, out, 0755)
+	if basePath != "" {
+		outPath = path.Join(outPath, basePath)
+	}
+	outPath = path.Join(outPath, ingredientSlug+".md")
+
+	err = ioutil.WriteFile(outPath, out, 0755)
 	if err != nil {
 		log.Error().
 			Err(err).

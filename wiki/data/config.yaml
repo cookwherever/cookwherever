@@ -1,15 +1,12 @@
-name: Jacky Zhao
+name: Cook Wherever
 enableToc: true
 openToc: false
 enableLinkPreview: true
 enableLatex: true
-description:
-  Host your second brain and digital garden for free. Quartz features extremely fast full-text search,
-  Wikilink support, backlinks, local graph, tags, and link previews.
-page_title:
-  "🪴 Quartz 3.2"
+description: Documenting everything about cooking.
+page_title: 🐖 Cook Wherever
 links:
   - link_name: Twitter
-    link: https://twitter.com/_jzhao
+    link: https://twitter.com/cookwherever
   - link_name: Github
-    link: https://github.com/jackyzha0
+    link: https://github.com/cookwherever

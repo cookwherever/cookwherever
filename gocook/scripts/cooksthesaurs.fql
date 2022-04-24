@@ -34,11 +34,11 @@ LET tableIngredients = (
       LET names = SPLIT(mainPage ? pageTitle : formattedName, " = ")
       
       LET ingText = (
-        ELEMENT_EXISTS(infoRow, 'p') ?
+        ELEMENT_EXISTS(infoRow, 'p') && CLEAN_TEXT(ELEMENT(infoRow, 'p')) != '' ?
         INNER_TEXT_ALL(infoRow, 'p') :
         INNER_TEXT(infoRow)
       )
-      
+
       LET formattedText = CLEAN_TEXT(CONCAT_SEPARATOR(", ", ingText))
       LET fullText = mainPage || POSITION(names, pageTitle) ? CONCAT(
         formattedText,
@@ -123,20 +123,21 @@ LET links = (
     LET removeAnchor = ELEMENT_EXISTS(e, 'a') ? INNER_HTML_SET(e, 'a', '') : null
     
     LET bText = CLEAN_TEXT(INNER_TEXT(e))
-    LET name = linkName
+    LET name = REGEX_REPLACE(bText, '\s+\.', '')
+    LET fixedName = name == '' ? INNER_TEXT(link) : name
 
     RETURN {
-      name: name,
+      name: fixedName,
       link: true,
       text: linkUrl
     }
 )
 
-LET pageLinks = (
-  FOR link IN UNION(ELEMENTS(mainSection, 'blockquote > p > a'), ELEMENTS(mainSection, 'blockquote > p > b > a'))
+LET categoryLinks = (
+  FOR link IN ELEMENTS(mainSection, 'p font a')
     LET linkUrl = ATTR_GET(link, 'href').href
-    FILTER linkUrl != null
     LET name = CLEAN_TEXT(INNER_TEXT(link))
+    FILTER REGEX_TEST(name, '^[A-Z]')
     RETURN {
       name: name,
       link: true,
@@ -144,7 +145,12 @@ LET pageLinks = (
     }
 )
 
-RETURN {
+LET ret = LENGTH(categoryLinks) > 0 ? {
   name: pageTitle,
-  ingredients: UNION(pageLinks, links, wrappedTableIngredients, varieties, tableIngredients)
+  ingredients: categoryLinks
+} : {
+  name: pageTitle,
+  ingredients: UNION(links, wrappedTableIngredients, varieties, tableIngredients)
 }
+
+RETURN ret
