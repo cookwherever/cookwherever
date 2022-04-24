@@ -11,7 +11,7 @@ powdered egg white Look for this in stores that sell cake decorating supplies. J
 
 ### Varieties
 
-* [[eggs]]
+* [[ingredients/food/eggs/eggs]]
 
 ### Sources
 * http://foodsubs.com/Eggs.html

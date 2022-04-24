@@ -11,7 +11,7 @@ duck egg Compared to chicken eggs, these are larger, higher in fat, more colorfu
 
 ### Varieties
 
-* [[eggs]]
+* [[ingredients/food/eggs/eggs]]
 
 ### Sources
 * http://foodsubs.com/Eggs.html

@@ -8,7 +8,16 @@
   <component name="Go" enabled="true" />
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/backend" />
+      <excludeFolder url="file://$MODULE_DIR$/docker" />
+      <excludeFolder url="file://$MODULE_DIR$/etl/python/archive" />
+      <excludeFolder url="file://$MODULE_DIR$/etl/python/env" />
+      <excludeFolder url="file://$MODULE_DIR$/etl/python/normalized" />
+      <excludeFolder url="file://$MODULE_DIR$/etl/python/recipes" />
+      <excludeFolder url="file://$MODULE_DIR$/frontend/build" />
+      <excludeFolder url="file://$MODULE_DIR$/gocook/data" />
+    </content>
     <orderEntry type="jdk" jdkName="Python 3.8 (env)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Python 3.9 (food-data) interpreter library" level="application" />

@@ -11,7 +11,7 @@ salted duck egg See the Recipesource.com recipe for Salted Eggs.
 
 ### Varieties
 
-* [[eggs]]
+* [[ingredients/food/eggs/eggs]]
 
 ### Sources
 * http://foodsubs.com/Eggs.html

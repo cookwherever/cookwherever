@@ -11,7 +11,7 @@ egg substitute 1 egg = 1/4 C egg substitute OR 1 egg = 3 tablespoons egg substit
 
 ### Varieties
 
-* [[eggs]]
+* [[ingredients/food/eggs/eggs]]
 
 ### Sources
 * http://foodsubs.com/Eggs.html

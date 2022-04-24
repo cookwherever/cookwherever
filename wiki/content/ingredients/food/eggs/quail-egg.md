@@ -11,7 +11,7 @@ quail egg chicken egg (larger, but taste is similar) salted duck egg See the Rec
 
 ### Varieties
 
-* [[eggs]]
+* [[ingredients/food/eggs/eggs]]
 
 ### Sources
 * http://foodsubs.com/Eggs.html

@@ -20,7 +20,7 @@ tags:
 * preserves & fruit butters - [[preserves-and-fruit-butters]]
 * extracts & essences - [[extracts-and-flavoring-oils]]
 * candied foods - [[candied-foods]]
-* eggs - [[eggs]]
+* eggs - [[ingredients/food/eggs/eggs]]
 * non-wheat flours - [[nonwheat-flours]]
 * thickeners - [[thickeners]]
 * gelatins - [[gelatins]]

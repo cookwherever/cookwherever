@@ -12,7 +12,7 @@ egg = chicken egg Equivalents: One egg contains about one tablespoon of egg yolk
 
 ### Varieties
 
-* [[eggs]]
+* [[ingredients/food/eggs/eggs]]
 
 ### Sources
 * http://foodsubs.com/Eggs.html

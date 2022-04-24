@@ -29,7 +29,7 @@ tags:
 * [[qurut]]
 * [[smetana]]
 * [[sour-cream]]
-* [[yogurt]]
+* [[ingredients/food/cultured-milk-products/yogurt]]
 * [[clabber-cream]]
 * [[crema]]
 * [[jocoque]]
@@ -46,7 +46,7 @@ tags:
 * [[quroot-qurut]]
 * [[qurut]]
 * [[sour-milk]]
-* [[yogurt]]
+* [[ingredients/food/cultured-milk-products/yogurt]]
 * [[buttermilk]]
 * [[creme-fraiche-creme-fraiche]]
 

@@ -19,6 +19,10 @@
 
     {{ $darkMode := resources.Get "js/darkmode.js" |  resources.Fingerprint "md5" | resources.Minify }}
     <script src="{{$darkMode.Permalink}}"></script>
+
+    {{ $js := resources.Get "js/main.ts" | js.Build (dict "sourcemap" "inline") }}
+    <script src="{{ $js.Permalink }}" defer></script>
+
     {{partial "katex.html" .}}
 
     <!--  Preload page vars  -->

@@ -23,7 +23,7 @@ tags:
 * firm cheeses - [[firm-cheeses]]
 * blue cheeses - [[blue-cheeses]]
 * processed cheeses - [[processed-cheeses]]
-* eggs - [[eggs]]
+* eggs - [[ingredients/food/eggs/eggs]]
 
 ### Sources
 * http://foodsubs.com/FGVegetarian.html

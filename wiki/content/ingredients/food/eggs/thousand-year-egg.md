@@ -11,7 +11,7 @@ thousand-year egg See the RecipeSource.com recipe for Thousand-year Eggs.
 
 ### Varieties
 
-* [[eggs]]
+* [[ingredients/food/eggs/eggs]]
 
 ### Sources
 * http://foodsubs.com/Eggs.html

@@ -11,7 +11,7 @@ meringue powder Look for this in stores that sell cake decorating supplies. Subs
 
 ### Varieties
 
-* [[eggs]]
+* [[ingredients/food/eggs/eggs]]
 
 ### Sources
 * http://foodsubs.com/Eggs.html
