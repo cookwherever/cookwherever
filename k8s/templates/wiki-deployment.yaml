@@ -30,7 +30,7 @@ spec:
         io.kompose.service: wiki
     spec:
       containers:
-        - image: ghcr.io/cookwherever/wiki:v0.0.3
+        - image: ghcr.io/cookwherever/wiki@sha256:cf021e51c27326e0b7c002173bc19f93addbed124a1505dc378784a8167fc02a
           name: wiki
           ports:
             - containerPort: 80
