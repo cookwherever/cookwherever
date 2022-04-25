@@ -340,6 +340,50 @@
       filter: {}
 - table:
     schema: public
+    name: ingredients
+  object_relationships:
+  - name: food
+    using:
+      foreign_key_constraint_on: fdc_id
+  insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+      - names
+      - fdc_id
+      - wiki_url
+      - id
+      backend_only: false
+  select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+      - names
+      - fdc_id
+      - wiki_url
+      - id
+      filter: {}
+  - role: user
+    permission:
+      columns:
+      - names
+      - fdc_id
+      - wiki_url
+      - id
+      filter: {}
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - names
+      - fdc_id
+      - wiki_url
+      - id
+      filter: {}
+      check: {}
+- table:
+    schema: public
     name: measure_unit
   select_permissions:
   - role: anonymous
@@ -879,7 +923,6 @@
       - id
       - image
       - name
-      - slug
       - source
       - source_provider_id
       - updated_at

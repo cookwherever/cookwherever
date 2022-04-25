@@ -8,7 +8,9 @@ RUN wget --quiet "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VER
     rm -r hugo_${HUGO_VERSION}_Linux-64bit.tar.gz && \
     mv hugo /usr/bin
 
-RUN go install github.com/jackyzha0/hugo-obsidian@latest
+# TODO (cthompson) remove once changes are accepted upstream
+RUN go env -w GOPROXY="direct"
+RUN go install github.com/breadchris/hugo-obsidian@latest
 
 COPY ./ /site
 WORKDIR /site
@@ -17,5 +19,6 @@ RUN GIT_CONFIG_NOSYSTEM=true hugo
 
 FROM nginx:alpine
 COPY --from=build /site/public /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 WORKDIR /usr/share/nginx/html
