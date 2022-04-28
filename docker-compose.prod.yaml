@@ -1,7 +1,7 @@
 version: '3.6'
 services:
   frontend:
-    image: ghcr.io/cookwherever/frontend@sha256:3c9430f064a9c3fe4f491dc4b5bd1d57923bfeb861f7cd2264929fd0cbda3004
+    image: ghcr.io/cookwherever/frontend@sha256:069641f3225682d650d724116c7c8a7afe41a2843c6d0e0566a372b9f4f7afd0
     restart: always
     ports:
       - '80:80'
