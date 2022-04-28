@@ -30,7 +30,7 @@ This is a spongy, mild-tasting vegetable that's meaty yet low in calories. It's 
 * [[white-eggplant]]
 * [[]]
 * [[aubergine]]
-* [[substitutes]]
+* [[ingredients/food/ham/substitutes]]
 * [[american-eggplant]]
 * [[apple-green-eggplant]]
 * [[asian-eggplants]]

@@ -50,7 +50,7 @@ Root vegetables are rich in nutrients, low in fat and calories, inexpensive and 
 * white salsify - [[salsify]]
 * yellow turnip - [[rutabaga]]
 * [[root-vegetables]]
-* [[substitutes]]
+* [[ingredients/food/roots/substitutes]]
 * [[coriander-root]]
 * [[lo-bak]]
 * [[beet]]

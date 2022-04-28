@@ -11,7 +11,7 @@ bitter almond Unprocessed bitter almonds have a more intense flavor than ordinar
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

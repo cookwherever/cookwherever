@@ -20,7 +20,7 @@ tags:
 * white-skinned garlic - [[garlic]]
 * [[stinky-rose]]
 * [[]]
-* [[substitutes]]
+* [[ingredients/food/ham/substitutes]]
 * [[dehydrated-minced-garlic-garlic-flakes]]
 * [[dried-garlic-flakes-garlic-flakes]]
 * [[infused-garlic-oil]]

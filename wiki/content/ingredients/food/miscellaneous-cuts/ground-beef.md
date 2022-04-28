@@ -13,7 +13,7 @@ ground beef = hamburger = mince beef This varies in quality depending upon what 
 
 ### Varieties
 
-* [[miscellaneous-cuts]]
+* [[ingredients/food/miscellaneous-cuts/miscellaneous-cuts]]
 
 ### Sources
 * http://foodsubs.com/MeatBeefMisc.html

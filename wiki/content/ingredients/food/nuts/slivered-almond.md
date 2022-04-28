@@ -11,7 +11,7 @@ slivered almond Equivalents: 3 ounces = 2/3 cup Notes: You can buy slivered almo
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

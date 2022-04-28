@@ -14,7 +14,7 @@ Rich and creamy avocados are quite versatile. You can dice them into salads, stu
 * avocadito - [[cocktail-avocado]]
 * = avocadito - [[]]
 * [[]]
-* [[substitutes]]
+* [[ingredients/food/ham/substitutes]]
 * [[cocktail-avocado]]
 * [[bacon-avocado]]
 * [[fuerte-avocado]]

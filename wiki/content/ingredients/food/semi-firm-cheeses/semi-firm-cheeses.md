@@ -74,7 +74,7 @@ tags:
 * [[vasterboten-cheese]]
 * [[wensleydale]]
 * [[yak-cheese]]
-* [[semi-firm-cheese]]
+* [[ingredients/food/semi-firm-cheeses/semi-firm-cheese]]
 
 ### Sources
 * http://foodsubs.com/Chesfirm.html

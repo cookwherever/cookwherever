@@ -13,7 +13,7 @@ The category "seeds" includes not just the familiar sunflower and pumpkin seeds,
 
 * grains - [[grains-category]]
 * legumes - [[legumes-and-nuts-category]]
-* nuts - [[nuts]]
+* nuts - [[ingredients/food/nuts/nuts]]
 * pepitas - [[pumpkin-seeds]]
 * [[lotus-seeds]]
 * [[pepitas-pumpkin-seeds]]

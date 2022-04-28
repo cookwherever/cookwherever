@@ -29,7 +29,7 @@ tags:
 * virginia ham - [[country-ham]]
 * wet-cured ham - [[city-ham]]
 * [[synonym]]
-* [[substitutes]]
+* [[ingredients/food/ham/substitutes]]
 * [[ardennes-ham]]
 * [[bayonne-ham]]
 * [[boned-ham-city-ham]]

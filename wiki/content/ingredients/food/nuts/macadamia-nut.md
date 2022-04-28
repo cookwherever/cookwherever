@@ -13,7 +13,7 @@ macadamia nut = Queensland nut = Australian nut mack-uh-DAY-me-uh Notes: These r
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

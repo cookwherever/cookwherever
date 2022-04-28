@@ -12,7 +12,7 @@ gingko nut = white nut GHING-koe OR JING-koe Notes: These nuts date back some 15
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

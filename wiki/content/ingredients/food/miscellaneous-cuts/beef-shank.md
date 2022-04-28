@@ -11,7 +11,7 @@ beef shank This isn't a tender cut, but it's rich in flavor and great for making
 
 ### Varieties
 
-* [[miscellaneous-cuts]]
+* [[ingredients/food/miscellaneous-cuts/miscellaneous-cuts]]
 
 ### Sources
 * http://foodsubs.com/MeatBeefMisc.html

@@ -11,7 +11,7 @@ breadnut seeds These seeds come from breadnuts, which are seeded versions of bre
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

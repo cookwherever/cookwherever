@@ -23,7 +23,7 @@ tags:
 * [[la-vache-qui-rit-vache-qui-rit]]
 * [[pasteurized-process-cheese]]
 * [[pasteurized-process-cheese-food]]
-* [[processed-cheese]]
+* [[ingredients/food/processed-cheeses/processed-cheese]]
 * [[vache-qui-rit]]
 * [[velveeta-pasteurized-process-cheese-food]]
 * [[american-cheese]]

@@ -13,7 +13,7 @@ beechnut = beechmast = beech nut Beechnuts are small, triangular nuts. They're u
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

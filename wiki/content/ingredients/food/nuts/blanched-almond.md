@@ -11,7 +11,7 @@ blanched almond Notes: Shelled almonds have a slightly bitter brown skin which c
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

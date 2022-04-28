@@ -14,7 +14,7 @@ tags:
 * peas - [[dried-peas]]
 * lentils - [[lentils]]
 * dry beans - [[dry-beans]]
-* nuts - [[nuts]]
+* nuts - [[ingredients/food/nuts/nuts]]
 * nut & seed pastes - [[nut-pastes]]
 * non-dairy milks & creams - [[non-dairy-milks-and-creams]]
 * soft cheeses - [[soft-cheeses]]

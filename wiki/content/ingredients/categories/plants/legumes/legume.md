@@ -1,5 +1,5 @@
 ---
-title: legumes & nuts category
+title: legumes
 tags:
 - ingredient
 ---
@@ -17,11 +17,12 @@ tags:
 * edible pods - [[edible-pods]]
 * fresh peas - [[fresh-peas]]
 * fresh beans - [[fresh-beans]]
-* nuts - [[nuts]]
-* nut & seed pastes - [[nut-pastes]]
-* nut flours & meals - [[nut-flours-and-meals]]
 * soy products - [[soy-products]]
 * bean products - [[bean-products]]
 
+* A legume is any plant that is in the Fabaceae family
+* Being an entire plant, a legume technically refers to the stems, leaves, stocks, roots, etc.
+*  
+
 ### Sources
-* http://foodsubs.com/FGLegumes.html
+* [Why Lentils And Rice Are Scientifically Delicious Together | What’s Eating Dan](https://www.youtube.com/watch?v=fxh_9Qq9zvY)

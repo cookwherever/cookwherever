@@ -17,7 +17,7 @@ chufa = chufa nut = tiger nut = earth almond = earth nut = Florida almond = rush
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

@@ -12,7 +12,7 @@ kluwak nuts = kluwak kupas
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

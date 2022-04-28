@@ -14,7 +14,7 @@ cube steak = cubed steak = braising beef = minute steak This is a relatively tou
 
 ### Varieties
 
-* [[miscellaneous-cuts]]
+* [[ingredients/food/miscellaneous-cuts/miscellaneous-cuts]]
 
 ### Sources
 * http://foodsubs.com/MeatBeefMisc.html

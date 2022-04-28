@@ -75,7 +75,7 @@ tags:
 * [[whey-cheeses]]
 * [[white-cheese-cream-cheese]]
 * [[yogurt-cheese]]
-* [[fresh-cheese]]
+* [[ingredients/food/fresh-cheeses/fresh-cheese]]
 * [[fresh-hispanic-cheese]]
 * [[fromage-blanc]]
 * [[kefir-cheese]]

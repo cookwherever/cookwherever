@@ -12,7 +12,7 @@ mape = Polynesian chestnut chestnuts
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

@@ -11,7 +11,7 @@ dried chestnut You reconstitute these by boiling them for about an hour. They're
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

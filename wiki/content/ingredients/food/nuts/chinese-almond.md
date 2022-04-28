@@ -14,7 +14,7 @@ Chinese almond = apricot seed = hang yen = dried almond These aren't really almo
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

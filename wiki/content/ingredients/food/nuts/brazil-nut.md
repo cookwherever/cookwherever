@@ -13,7 +13,7 @@ Brazil nut = para nut = cream nut 2 pounds unshelled = 1 pound shelled Notes: Th
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

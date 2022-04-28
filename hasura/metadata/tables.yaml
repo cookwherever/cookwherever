@@ -340,50 +340,6 @@
       filter: {}
 - table:
     schema: public
-    name: ingredients
-  object_relationships:
-  - name: food
-    using:
-      foreign_key_constraint_on: fdc_id
-  insert_permissions:
-  - role: user
-    permission:
-      check: {}
-      columns:
-      - names
-      - fdc_id
-      - wiki_url
-      - id
-      backend_only: false
-  select_permissions:
-  - role: anonymous
-    permission:
-      columns:
-      - names
-      - fdc_id
-      - wiki_url
-      - id
-      filter: {}
-  - role: user
-    permission:
-      columns:
-      - names
-      - fdc_id
-      - wiki_url
-      - id
-      filter: {}
-  update_permissions:
-  - role: user
-    permission:
-      columns:
-      - names
-      - fdc_id
-      - wiki_url
-      - id
-      filter: {}
-      check: {}
-- table:
-    schema: public
     name: measure_unit
   select_permissions:
   - role: anonymous
@@ -918,22 +874,18 @@
   - role: anonymous
     permission:
       columns:
-      - created_at
-      - extraction_metadata
+      - visible
       - id
+      - extraction_metadata
       - image
       - name
+      - slug
       - source
-      - source_provider_id
-      - updated_at
       - video
-      - visible
-      filter:
-        _or:
-        - source:
-            _like: '%seriouseats%'
-        - source:
-            _like: '%epicurious%'
+      - created_at
+      - updated_at
+      - source_provider_id
+      filter: {}
       allow_aggregations: true
   - role: user
     permission:

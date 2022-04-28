@@ -21,7 +21,7 @@ pine nut = pinoli = pinyon = pinolea = pignolia = Indian nut = pi�on = pignolo
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

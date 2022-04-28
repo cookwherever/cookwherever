@@ -13,7 +13,7 @@ stew beef = beef for stew = diced beef These cubes of meat are tough enough to r
 
 ### Varieties
 
-* [[miscellaneous-cuts]]
+* [[ingredients/food/miscellaneous-cuts/miscellaneous-cuts]]
 
 ### Sources
 * http://foodsubs.com/MeatBeefMisc.html

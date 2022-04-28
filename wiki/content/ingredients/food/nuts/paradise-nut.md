@@ -13,7 +13,7 @@ paradise nut = sapucaya nut = sapucia nut Brazil nut (larger, but very similar)
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

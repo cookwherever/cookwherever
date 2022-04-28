@@ -12,7 +12,7 @@ tags:
 
 * [[cuts]]
 * [[veal-cube-steak]]
-* [[miscellaneous-cuts]]
+* [[ingredients/food/miscellaneous-veal-cuts/miscellaneous-cuts]]
 * [[ground-veal]]
 * [[veal-shank]]
 * [[veal-stew-meat]]

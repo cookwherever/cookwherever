@@ -17,7 +17,7 @@ water caltrop = horned water chestnut = Jesuit nut = ling kio = ling chio = ling
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

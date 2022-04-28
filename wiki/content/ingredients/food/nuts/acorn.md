@@ -11,7 +11,7 @@ acorn These nuts come from oak trees, and they were once an important food for N
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

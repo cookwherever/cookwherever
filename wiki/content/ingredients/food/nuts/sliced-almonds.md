@@ -11,7 +11,7 @@ sliced almonds 3 ounces = 1 cup Notes: You can buy almonds already sliced, or do
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

@@ -11,7 +11,7 @@ walnut Equivalents: 1 cup chopped = 4 1/2 ounces; 1 cup halves = 3 1/2 ounces; 1
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

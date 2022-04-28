@@ -11,7 +11,7 @@ cashew KA-shoe Notes: These rich, sweet nuts have a toxic shell, so they're almo
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

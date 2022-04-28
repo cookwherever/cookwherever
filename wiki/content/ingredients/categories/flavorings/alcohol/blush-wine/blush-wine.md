@@ -10,9 +10,9 @@ tags:
 
 ### Varieties
 
-* [[synonyms]]
+* [[ingredients/categories/flavorings/alcohol/blush-wine/synonyms]]
 * [[white-grenache]]
-* [[substitutes]]
+* [[ingredients/categories/flavorings/alcohol/blush-wine/substitutes]]
 * [[white-merlot]]
 * [[white-zinfandel]]
 

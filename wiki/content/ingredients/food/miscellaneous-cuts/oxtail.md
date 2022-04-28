@@ -11,7 +11,7 @@ oxtail one oxtail = 2 pounds Notes: Cooks use these to make oxtail soup. Each ox
 
 ### Varieties
 
-* [[miscellaneous-cuts]]
+* [[ingredients/food/miscellaneous-cuts/miscellaneous-cuts]]
 
 ### Sources
 * http://foodsubs.com/MeatBeefMisc.html

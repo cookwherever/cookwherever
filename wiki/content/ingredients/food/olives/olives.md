@@ -20,7 +20,7 @@ A staple of Mediterranean cuisines, olives are most often eaten out of hand, tho
 * ripe olives - [[black-olives]]
 * spanish pitted olive - [[manzanilla-olive]]
 * victoria olive - [[royal]]
-* [[substitutes]]
+* [[ingredients/food/olives/substitutes]]
 * [[agrinion-olive]]
 * [[aleppo-olive]]
 * [[arauco-olive]]

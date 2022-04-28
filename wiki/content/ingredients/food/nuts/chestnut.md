@@ -12,7 +12,7 @@ chestnut = marron One pound in the shell = 2 1/2 cups shelled whole nuts Notes: 
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

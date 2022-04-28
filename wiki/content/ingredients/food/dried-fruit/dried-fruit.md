@@ -54,7 +54,7 @@ Dried fruit is a terrific snack, but cooks also use it in everything from muffin
 * [[pineapple-dried]]
 * [[prune]]
 * [[raisins]]
-* [[substitutes]]
+* [[ingredients/food/dried-fruit/substitutes]]
 * [[apple-dried]]
 * [[cherry-dried]]
 * [[chinese-date]]

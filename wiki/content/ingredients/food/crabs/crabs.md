@@ -10,7 +10,7 @@ tags:
 
 ### Varieties
 
-* [[substitutes]]
+* [[ingredients/food/crabs/substitutes]]
 * [[]]
 * [[blue-crab]]
 * [[crab-cake]]

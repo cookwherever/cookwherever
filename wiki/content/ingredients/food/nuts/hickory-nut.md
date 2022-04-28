@@ -11,7 +11,7 @@ hickory nut These are delicious, but they aren't grown commercially because the 
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

@@ -11,7 +11,7 @@ pistachio nut pih-STASH-ee-yoh Equivalents: 2 cups pistachios in the shell = 1 c
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

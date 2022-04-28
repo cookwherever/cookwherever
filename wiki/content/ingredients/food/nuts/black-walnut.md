@@ -11,7 +11,7 @@ black walnut These are hard to shell, but tastier than ordinary walnuts. Bakers 
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

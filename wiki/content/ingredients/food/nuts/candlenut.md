@@ -15,7 +15,7 @@ candlenut = candle nut = kemiri = country walnut = buah keras Notes: Candlenuts 
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

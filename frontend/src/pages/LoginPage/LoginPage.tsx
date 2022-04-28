@@ -49,7 +49,7 @@ export const LoginPage: React.FunctionComponent<LoginPageProps> = (props) => {
   }
 
   const loginWithGoogle = () => {
-    window.location.href = `${authUrl}/signin/provider/google`;
+    window.location.href = `${authUrl}/signin/provider/google?redirectTo=${process.env.AUTH_REDIRECT}`;
   }
 
   return (

@@ -11,7 +11,7 @@ kola nut These bitter nuts are loaded with caffeine, and Africans like to chew o
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

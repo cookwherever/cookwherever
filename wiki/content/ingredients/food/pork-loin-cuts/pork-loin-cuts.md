@@ -19,7 +19,7 @@ tags:
 * [[pork-sirloin-roast]]
 * [[pork-top-loin-chop]]
 * [[pork-top-loin-roast]]
-* [[loin]]
+* [[ingredients/food/pork-loin-cuts/loin]]
 * [[pork-back-ribs]]
 * [[pork-butterfly-chop]]
 * [[pork-center-loin-roast]]

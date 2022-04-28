@@ -15,7 +15,7 @@ peanut = groundnut = monkey nut = goober = goober pea Notes: These aren't really
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

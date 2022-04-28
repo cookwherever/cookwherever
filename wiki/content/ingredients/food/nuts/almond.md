@@ -12,7 +12,7 @@ almond = sweet almond Equivalents: 3 ounces whole almonds = 1/2 cup = 65 almonds
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

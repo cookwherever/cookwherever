@@ -12,7 +12,7 @@ butternut = white walnut Notes: This walnut relative is hard to find outside of 
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

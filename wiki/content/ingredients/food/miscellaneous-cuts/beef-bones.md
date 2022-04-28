@@ -12,7 +12,7 @@ beef bones = beef soup bones These are usually boiled with other ingredients to 
 
 ### Varieties
 
-* [[miscellaneous-cuts]]
+* [[ingredients/food/miscellaneous-cuts/miscellaneous-cuts]]
 
 ### Sources
 * http://foodsubs.com/MeatBeefMisc.html

@@ -13,7 +13,7 @@ hazelnut = filbert = cobnut Notes: Hazelnuts have a crunchy texture and an appea
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html

@@ -27,7 +27,7 @@ With their rich flavor and mild acidity, tomatoes have worked their way into tho
 * poire-joli - [[teardrop-tomato]]
 * tomate verde - [[tomatillo]]
 * [[]]
-* [[substitutes]]
+* [[ingredients/food/tomatoes/substitutes]]
 * [[currant-tomato]]
 * [[cherry-tomato]]
 * [[grape-tomatoes]]

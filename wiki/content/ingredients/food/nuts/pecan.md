@@ -11,7 +11,7 @@ pecan pih-CAHN OR pih-CAN Equivalents: 1 pound in the shell = 1/2 pound shelled 
 
 ### Varieties
 
-* [[nuts]]
+* [[ingredients/food/nuts/nuts]]
 
 ### Sources
 * http://foodsubs.com/Nuts.html
