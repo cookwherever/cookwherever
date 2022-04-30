@@ -89,7 +89,7 @@ tags:
 * [[turnip-greens]]
 * [[water-spinach]]
 * [[alogbati-malabar-spinach]]
-* [[amaranth]]
+* [[ingredients/categories/plants/produce/vegetables/vegetable-row-crops/cooking-greens/amaranth]]
 * [[beet-greens]]
 * [[broccoli-raab]]
 * [[callaloo]]

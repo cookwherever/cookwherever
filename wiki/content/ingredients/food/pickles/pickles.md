@@ -30,7 +30,7 @@ tags:
 * [[bread-and-butter-pickles]]
 * [[capers]]
 * [[caper-berry]]
-* [[cornichon]]
+* [[ingredients/food/pickles/cornichon]]
 * [[giardiniera]]
 * [[kim-chee]]
 * [[pepperoncini]]

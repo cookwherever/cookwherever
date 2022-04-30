@@ -13,7 +13,7 @@ tags:
 * cuke - [[cucumber]]
 * [[]]
 * [[american-dill]]
-* [[cornichon]]
+* [[ingredients/categories/plants/produce/vegetables/seeded-vegetables/vine-grown/cucumbers/cornichon]]
 * [[gherkin]]
 * [[cucumber]]
 * [[armenian-cucumber]]

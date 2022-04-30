@@ -20,7 +20,7 @@ tags:
 * [[teff]]
 * [[millet]]
 * [[quinoa]]
-* [[amaranth]]
+* [[ingredients/food/other-grains/amaranth]]
 * [[black-quinoa]]
 * [[psyllium-seed-husks]]
 

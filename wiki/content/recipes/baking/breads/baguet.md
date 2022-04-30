@@ -15,3 +15,4 @@ baguet See French bread.
 
 ### Sources
 * http://foodsubs.com/Bread.html
+* [What can you make with 1 Dozen French Baguettes?](https://www.youtube.com/watch?v=oIM8jlZ2SEc)

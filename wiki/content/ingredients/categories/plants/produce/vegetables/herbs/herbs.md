@@ -3,17 +3,9 @@ title: herbs
 tags:
 - ingredient
 ---
-Middle Eastern herbs
-
-### Tips
-false
 
 ### Substitutes
-
-
-### Other Names
-
-* herbs
+1 tablespoon fresh = 1 teaspoon dried
 
 ### Varieties
 

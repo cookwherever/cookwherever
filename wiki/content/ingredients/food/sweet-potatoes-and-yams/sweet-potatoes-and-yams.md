@@ -8,6 +8,16 @@ tags:
 ### Other Names
 
 
+### Preparation
+#### Sous Vide
+* 135-170F for a couple hours
+
+##### Concepts
+* Starch in a potato is a [[polysaccharide]] made up of glucose
+* Cooking transforms the [[polysaccharide]]s into maltose, which are sugars we can taste.
+* An enzyme becomes active to break down the starch at 135F and stops when it becomes denatured at 170F
+
+
 ### Varieties
 
 * batata - [[boniato]]
@@ -41,3 +51,4 @@ tags:
 
 ### Sources
 * http://foodsubs.com/Sweetpotatoes.html
+* https://www.seriouseats.com/the-best-mashed-sweet-potatoes-recipe
