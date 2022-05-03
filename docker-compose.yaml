@@ -1,7 +1,7 @@
 version: '3.6'
 services:
   graphql-engine:
-    image: hasura/graphql-engine:v2.4.0
+    image: hasura/graphql-engine:v2.6.1
     depends_on:
       - postgres
     restart: always

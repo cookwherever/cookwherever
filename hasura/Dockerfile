@@ -1,4 +1,4 @@
-FROM hasura/graphql-engine:v2.4.0
+FROM hasura/graphql-engine:v2.6.1
 
 ADD * /hasura/
 
