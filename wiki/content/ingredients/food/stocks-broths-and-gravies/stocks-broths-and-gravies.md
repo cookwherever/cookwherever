@@ -29,7 +29,7 @@ tags:
 * [[veal-stock]]
 * [[beef-broth]]
 * [[beef-stock]]
-* [[browning]]
+* [[ingredients/food/stocks-broths-and-gravies/browning]]
 * [[chicken-broth]]
 * [[chicken-stock]]
 * [[dashi]]

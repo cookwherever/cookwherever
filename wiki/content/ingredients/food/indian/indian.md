@@ -18,7 +18,7 @@ tags:
 * [[curry-leaf]]
 * [[indian-bay-leaf]]
 * [[turmeric-leaves]]
-* [[equivalents]]
+* [[ingredients/food/dry-beans/equivalents]]
 
 ### Sources
 * http://foodsubs.com/HerbsIndian.html

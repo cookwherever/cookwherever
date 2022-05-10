@@ -21,7 +21,7 @@ tags:
 * [[epazote]]
 * [[guajes]]
 * [[hoja-santa-leaves]]
-* [[h]]
+* [[ingredients/food/hispanic-herbs/h]]
 * [[safflower]]
 * [[papalo]]
 * [[pipicha]]
@@ -32,12 +32,12 @@ tags:
 * [[epazote]]
 * [[guajes]]
 * [[hoja-santa-leaves]]
-* [[h]]
+* [[ingredients/food/hispanic-herbs/h]]
 * [[safflower]]
 * [[papalo]]
 * [[romeritos]]
 * [[yerba-buena]]
-* [[equivalents]]
+* [[ingredients/food/dry-beans/equivalents]]
 
 ### Sources
 * http://foodsubs.com/HerbsHisp.html

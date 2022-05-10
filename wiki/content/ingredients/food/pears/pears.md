@@ -19,7 +19,7 @@ It's hard to improve on the flavor of a soft, juicy raw pear, but combine it wit
 * [[bosc-pear]]
 * [[california-sugar-pear]]
 * [[comice-pear]]
-* [[ingredients/food/ham/substitutes]]
+* [[ingredients/categories/land-animals/meat/pork/ham/substitutes]]
 * [[]]
 * [[anjou-pear]]
 * [[danjou-pearanjou-pear]]

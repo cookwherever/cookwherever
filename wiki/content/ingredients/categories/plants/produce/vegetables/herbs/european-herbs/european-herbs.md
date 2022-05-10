@@ -76,7 +76,7 @@ tags:
 * [[savory]]
 * [[tarragon]]
 * [[winter-savory]]
-* [[equivalents]]
+* [[ingredients/food/dry-beans/equivalents]]
 
 ### Sources
 * http://foodsubs.com/HerbsEur.html

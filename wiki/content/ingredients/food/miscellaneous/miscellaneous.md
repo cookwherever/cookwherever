@@ -29,7 +29,7 @@ tags:
 * [[vegetable-rennet]]
 * [[vegetable-yeast-extract]]
 * [[vesiga]]
-* [[wine-ball]]
+* [[ingredients/food/miscellaneous/wine-ball]]
 * [[alum]]
 * [[cream-of-tartar]]
 * [[xanthan]]

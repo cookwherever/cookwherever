@@ -86,7 +86,7 @@ Beans are low in fat and loaded with nutrients, and we'd probably eat more of th
 * [[vallarta-bean]]
 * [[yellow-indian-woman-bean]]
 * [[]]
-* [[equivalents]]
+* [[ingredients/food/dry-beans/equivalents]]
 * [[aduki-bean-azuki-bean]]
 * [[adzuki-bean-azuki-bean]]
 * [[anasazi]]

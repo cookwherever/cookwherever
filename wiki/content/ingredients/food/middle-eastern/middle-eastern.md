@@ -10,7 +10,7 @@ tags:
 
 ### Varieties
 
-* [[equivalents]]
+* [[ingredients/food/dry-beans/equivalents]]
 * [[meloukhia]]
 
 ### Sources

@@ -65,7 +65,7 @@ tags:
 * [[wheat-germ]]
 * [[wholemeal-flour-whole-wheat-flour]]
 * [[whole-wheat-flour]]
-* [[equivalents]]
+* [[ingredients/food/dry-beans/equivalents]]
 * [[wheat-flour]]
 * [[all-purpose-flour]]
 * [[graham-flour]]

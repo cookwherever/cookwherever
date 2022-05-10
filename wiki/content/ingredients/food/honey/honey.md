@@ -16,8 +16,6 @@ false
 * honey
 
 ### Varieties
-
-* [[f]]
 * [[comb-honey-comb-honey]]
 * [[liquid-honey-liquid-honey]]
 * [[spun-honey]]

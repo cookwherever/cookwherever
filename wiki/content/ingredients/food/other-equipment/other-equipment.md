@@ -10,9 +10,9 @@ tags:
 
 ### Varieties
 
-* [[funnel]]
+* [[ingredients/food/other-equipment/funnel]]
 * [[mold]]
-* [[funnel]]
+* [[ingredients/food/other-equipment/funnel]]
 * [[rice-cooker]]
 * [[sudare]]
 

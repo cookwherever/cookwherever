@@ -71,7 +71,7 @@ tags:
 * [[serai-powder]]
 * [[tia-to]]
 * [[yellow-chinese-chives]]
-* [[equivalents]]
+* [[ingredients/food/dry-beans/equivalents]]
 
 ### Sources
 * http://foodsubs.com/HerbsAsian.html

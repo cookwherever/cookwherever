@@ -9,7 +9,7 @@ tags:
 
 ### Varieties
 
-* [[equivalents]]
+* [[ingredients/food/dry-beans/equivalents]]
 
 ### Sources
 * http://foodsubs.com/Herbs.html
