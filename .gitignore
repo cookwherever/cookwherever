@@ -1,1 +1,3 @@
 docker/data
+.env.prod
+.env.dev.secrets

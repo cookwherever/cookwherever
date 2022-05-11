@@ -5,10 +5,6 @@ services:
     depends_on:
       - postgres
     restart: always
-    environment:
-      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: anonymous
-      HASURA_GRAPHQL_LOG_LEVEL: debug
-      HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
     env_file:
       - .env
     ports:
@@ -23,13 +19,6 @@ services:
       - graphql-engine
     env_file:
       - .env
-    environment:
-      AUTH_CLIENT_URL: http://localhost:3000
-      AUTH_SERVER_URL: http://localhost:4000
-      AUTH_SMTP_HOST: mailhog
-      AUTH_SMTP_PORT: 1025
-      AUTH_PROVIDER_GOOGLE_CLIENT_ID: 875893625137-deq8eei4brrdlre3er989koj0437nd5t.apps.googleusercontent.com
-      AUTH_PROVIDER_GOOGLE_CLIENT_SECRET: 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
     volumes:
       - ./hasura-auth/migrations:/app/migrations
     ports:
@@ -39,13 +28,8 @@ services:
       kompose.service.expose.tls-secret: "cookwherever-com-tls"
   mailhog:
     image: mailhog/mailhog
-    environment:
-      SMTP_HOST: mailhog
-      SMTP_PORT: 1025
-      SMTP_PASS: ${AUTH_SMTP_PASS}
-      SMTP_USER: ${AUTH_SMTP_USER}
-      SMTP_SECURE: '${AUTH_SMTP_SECURE}'
-      SMTP_SENDER: ${AUTH_SMTP_SENDER}
+    env_file:
+      - .env
     ports:
       - 1025:1025 # smtp server
       - 8025:8025 # web ui
