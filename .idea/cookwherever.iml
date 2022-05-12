@@ -16,6 +16,7 @@
     </content>
     <orderEntry type="jdk" jdkName="Python 3.9 (food-data)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Python 3.9 (food-data) interpreter library" level="application" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_FOLDERS">
