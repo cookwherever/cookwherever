@@ -1,0 +1,34 @@
+version: '3.6'
+services:
+  frontend:
+    image: ghcr.io/cookwherever/frontend@sha256:4c0e0de14597e1b1e4248d16520e40a747ef74c6651ce6c660cb8fe7d5997cce
+    restart: always
+    ports:
+      - '80:80'
+    labels:
+      kompose.service.expose: "recipes.cookwherever.com"
+      kompose.service.expose.tls-secret: "cookwherever-com-tls"
+      kompose.image-pull-secret: "ghcr-pull-secret"
+  wiki:
+    image: ghcr.io/cookwherever/wiki@sha256:baf8476d72e3480c8ba729c52a45a08f08abf9b74c6a712c8504d42f8f54b0fa
+    restart: always
+    ports:
+      - '80:80'
+    labels:
+      kompose.service.expose: "cookwherever.com"
+      kompose.service.expose.tls-secret: "cookwherever-com-tls"
+      kompose.image-pull-secret: "ghcr-pull-secret"
+  hasura-auth:
+    environment:
+      AUTH_SERVER_URL: https://login.cookwherever.com
+      AUTH_CLIENT_URL: https://cookwherever.com
+    env_file:
+      - .env.prod.secrets
+  graphql-engine:
+    image: hasura/graphql-engine:v2.4.0
+    # image: ghcr.io/cookwherever/hasura:latest
+    env_file:
+      - .env
+      - .env.prod.secrets
+    labels:
+      kompose.image-pull-secret: "ghcr-pull-secret"

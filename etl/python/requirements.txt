@@ -1,0 +1,6 @@
+warcio
+requests
+bs4
+extruct
+youtube_transcript_api
+unidecode

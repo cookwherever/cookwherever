@@ -1,0 +1,7 @@
+async function main(blockInput, backpack) {
+    const idArray = blockInput.map(id => `id[]=${id}`).join('&')
+
+    const resp = await fetch(`https://www.bbcgoodfood.com/api/recipes-frontend/lists/simple/recipe?${idArray}`)
+    const data = await resp.json();
+    return data.items.map(i => `https://www.bbcgoodfood.com${i.url}`);
+}

@@ -1,0 +1,87 @@
+name: Frontend
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'frontend/**'
+      - '.github/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Get branch name
+      id: branch-name
+      uses: tj-actions/branch-names@v5.2
+    - name: Install Kubernetes tools
+      uses: yokawasa/action-setup-kube-tools@v0.8.0
+      with:
+        setup-tools: |
+          yq
+        yq: "4.16.2"
+
+    - name: Setup Node
+      uses: actions/setup-node@v2-beta
+      with:
+        node-version: '12'
+    - uses: actions/cache@v2
+      id: yarn-cache
+      with:
+        path: '**/node_modules'
+        key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+    - name: Install dependencies
+      if: steps.yarn-cache.outputs.cache-hit != 'true'
+      run: cd frontend && yarn install --frozen-lockfile
+
+    - run: |
+        cd frontend
+        CI=false yarn build
+        docker build . --file Dockerfile --tag build
+      name: "Build app and image"
+      env:
+        REACT_APP_GIT_SHA: ${{ github.SHA }}
+        
+    - name: Log into registry
+      if: steps.branch-name.outputs.current_branch == 'master'
+      run: echo "${{ secrets.GH_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+    - name: Push image
+      if: steps.branch-name.outputs.current_branch == 'master'
+      run: |
+        IMAGE_ID=ghcr.io/cookwherever/frontend
+        # Change all uppercase to lowercase
+        IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+        # Strip git ref prefix from version
+        VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+        # Strip "v" prefix from tag name
+        [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+        # Use Docker `latest` tag convention
+        [ "$VERSION" == "master" ] && VERSION=latest
+        echo IMAGE_ID=$IMAGE_ID
+        echo VERSION=$VERSION
+        docker tag build $IMAGE_ID:$VERSION
+        docker push $IMAGE_ID:$VERSION
+        
+        yq -i e ".services.frontend.image |= \"$(docker inspect --format='{{index .RepoDigests 0}}' $IMAGE_ID:$VERSION)\"" docker-compose.prod.yaml
+
+    - name: Create commit
+      id: create-commit
+      if: steps.branch-name.outputs.current_branch == 'master'
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        file_pattern: docker-compose.prod.yaml
+        commit_message: "chore: update container hash [skip ci]"
+
+    - run: sleep 10
+
+    - name: Invoke deploy on new commit
+      if: steps.branch-name.outputs.current_branch == 'master'
+      uses: benc-uk/workflow-dispatch@v1
+      with:
+        workflow: Deploy
+        token: ${{ secrets.GH_TOKEN }}
+        ref: master

@@ -1,0 +1,202 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
+    kompose.image-pull-secret: ghcr-pull-secret
+    kompose.service.expose: api.cookwherever.com
+    kompose.service.expose.tls-secret: cookwherever-com-tls
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: graphql-engine
+  name: graphql-engine
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: graphql-engine
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
+        kompose.image-pull-secret: ghcr-pull-secret
+        kompose.service.expose: api.cookwherever.com
+        kompose.service.expose.tls-secret: cookwherever-com-tls
+        kompose.version: 1.26.0 (40646f47)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: graphql-engine
+    spec:
+      containers:
+        - env:
+            - name: AUTH_ACCESS_CONTROL_ALLOWED_REDIRECT_URLS
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTH_ACCESS_CONTROL_ALLOWED_REDIRECT_URLS
+                  name: env
+            - name: AUTH_ACCESS_TOKEN_EXPIRES_IN
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTH_ACCESS_TOKEN_EXPIRES_IN
+                  name: env
+            - name: AUTH_ANONYMOUS_USERS_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTH_ANONYMOUS_USERS_ENABLED
+                  name: env
+            - name: AUTH_CLIENT_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTH_CLIENT_URL
+                  name: env
+            - name: AUTH_EMAIL_PASSWORDLESS_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTH_EMAIL_PASSWORDLESS_ENABLED
+                  name: env
+            - name: AUTH_LOG_LEVEL
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTH_LOG_LEVEL
+                  name: env
+            - name: AUTH_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTH_PORT
+                  name: env
+            - name: AUTH_PROVIDER_GOOGLE_CLIENT_ID
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTH_PROVIDER_GOOGLE_CLIENT_ID
+                  name: env-prod-secrets
+            - name: AUTH_PROVIDER_GOOGLE_CLIENT_SECRET
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTH_PROVIDER_GOOGLE_CLIENT_SECRET
+                  name: env-prod-secrets
+            - name: AUTH_PROVIDER_GOOGLE_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTH_PROVIDER_GOOGLE_ENABLED
+                  name: env
+            - name: AUTH_SERVER_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTH_SERVER_URL
+                  name: env
+            - name: AUTH_SMTP_AUTH_METHOD
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTH_SMTP_AUTH_METHOD
+                  name: env
+            - name: AUTH_SMTP_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTH_SMTP_HOST
+                  name: env
+            - name: AUTH_SMTP_PASS
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTH_SMTP_PASS
+                  name: env
+            - name: AUTH_SMTP_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTH_SMTP_PORT
+                  name: env
+            - name: AUTH_SMTP_SECURE
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTH_SMTP_SECURE
+                  name: env
+            - name: AUTH_SMTP_SENDER
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTH_SMTP_SENDER
+                  name: env
+            - name: AUTH_SMTP_USER
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTH_SMTP_USER
+                  name: env
+            - name: HASURA_GRAPHQL_ADMIN_SECRET
+              valueFrom:
+                configMapKeyRef:
+                  key: HASURA_GRAPHQL_ADMIN_SECRET
+                  name: env-prod-secrets
+            - name: HASURA_GRAPHQL_DATABASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: HASURA_GRAPHQL_DATABASE_URL
+                  name: env-prod-secrets
+            - name: HASURA_GRAPHQL_ENABLE_CONSOLE
+              valueFrom:
+                configMapKeyRef:
+                  key: HASURA_GRAPHQL_ENABLE_CONSOLE
+                  name: env
+            - name: HASURA_GRAPHQL_GRAPHQL_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: HASURA_GRAPHQL_GRAPHQL_URL
+                  name: env
+            - name: HASURA_GRAPHQL_JWT_SECRET
+              valueFrom:
+                configMapKeyRef:
+                  key: HASURA_GRAPHQL_JWT_SECRET
+                  name: env-prod-secrets
+            - name: HASURA_GRAPHQL_LOG_LEVEL
+              valueFrom:
+                configMapKeyRef:
+                  key: HASURA_GRAPHQL_LOG_LEVEL
+                  name: env
+            - name: HASURA_GRAPHQL_UNAUTHORIZED_ROLE
+              valueFrom:
+                configMapKeyRef:
+                  key: HASURA_GRAPHQL_UNAUTHORIZED_ROLE
+                  name: env
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: POSTGRES_PASSWORD
+                  name: env-prod-secrets
+            - name: SMTP_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: SMTP_HOST
+                  name: env
+            - name: SMTP_PASS
+              valueFrom:
+                configMapKeyRef:
+                  key: SMTP_PASS
+                  name: env
+            - name: SMTP_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: SMTP_PORT
+                  name: env
+            - name: SMTP_SECURE
+              valueFrom:
+                configMapKeyRef:
+                  key: SMTP_SECURE
+                  name: env
+            - name: SMTP_SENDER
+              valueFrom:
+                configMapKeyRef:
+                  key: SMTP_SENDER
+                  name: env
+            - name: SMTP_USER
+              valueFrom:
+                configMapKeyRef:
+                  key: SMTP_USER
+                  name: env
+          image: hasura/graphql-engine:v2.4.0
+          name: graphql-engine
+          ports:
+            - containerPort: 8080
+          resources: {}
+      imagePullSecrets:
+        - name: ghcr-pull-secret
+      restartPolicy: Always
+status: {}

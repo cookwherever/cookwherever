@@ -1,0 +1,50 @@
+
+.hover-card {
+  transition: box-shadow .3s, background-color .3s;
+}
+
+.hover-card:hover {
+    cursor: pointer;
+    background-color: rgba(33,33,33, .1);
+    box-shadow: 0 0 11px rgba(33,33,33,.2);
+}
+
+.ingredient-not-completed {
+    background-color: white;
+}
+
+.ingredient-completed {
+    background-color: rgba(33,33,33, .1);
+}
+
+.recipe-direction {
+    cursor: pointer;
+}
+
+.recipe-direction-current {
+    background-color: rgba(33,33,33, .1);
+}
+
+.timestamp-ingredient {
+    cursor: pointer;
+    background-color: rgba(33,33,33, .1);
+}
+
+.youtube-player iframe {
+    width: 100%;
+}
+
+@media screen and (min-width: 600px) {
+    .youtube-player iframe {
+        min-width: 600px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .youtube-player iframe {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        height: 200px;
+    }
+}

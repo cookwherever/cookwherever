@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Python" name="Python">
+      <configuration sdkName="Python 3.9 (food-data)" />
+    </facet>
+  </component>
+  <component name="Go" enabled="true" />
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/backend" />
+      <excludeFolder url="file://$MODULE_DIR$/docker" />
+      <excludeFolder url="file://$MODULE_DIR$/gocook/data" />
+      <excludeFolder url="file://$MODULE_DIR$/wiki/public" />
+      <excludeFolder url="file://$MODULE_DIR$/wiki/content" />
+      <excludeFolder url="file://$MODULE_DIR$/etl/python/recipes" />
+      <excludeFolder url="file://$MODULE_DIR$/etl/python/normalized" />
+      <excludeFolder url="file://$MODULE_DIR$/etl/python/env" />
+      <excludeFolder url="file://$MODULE_DIR$/etl/python/archive" />
+      <excludeFolder url="file://$MODULE_DIR$/etl/gocook/data" />
+    </content>
+    <orderEntry type="jdk" jdkName="Python 3.9 (food-data)" jdkType="Python SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Python 3.9 (food-data) interpreter library" level="application" />
+  </component>
+  <component name="TemplatesService">
+    <option name="TEMPLATE_FOLDERS">
+      <list>
+        <option value="$MODULE_DIR$/k8s/templates" />
+      </list>
+    </option>
+  </component>
+</module>

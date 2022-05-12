@@ -1,0 +1,37 @@
+version: '3.6'
+services:
+  graphql-engine:
+    image: hasura/graphql-engine:v2.4.0
+    depends_on:
+      - postgres
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - '8080:8080'
+    labels:
+      kompose.service.expose: "api.cookwherever.com"
+      kompose.service.expose.tls-secret: "cookwherever-com-tls"
+  hasura-auth:
+    image: nhost/hasura-auth:0.2.1
+    depends_on:
+      - postgres
+      - graphql-engine
+    env_file:
+      - .env
+    volumes:
+      - ./hasura-auth/migrations:/app/migrations
+    ports:
+      - '4000:4000'
+    labels:
+      kompose.service.expose: "login.cookwherever.com"
+      kompose.service.expose.tls-secret: "cookwherever-com-tls"
+  mailhog:
+    image: mailhog/mailhog
+    env_file:
+      - .env
+    ports:
+      - 1025:1025 # smtp server
+      - 8025:8025 # web ui
+    volumes:
+      - ./docker/data/mailhog:/maildir

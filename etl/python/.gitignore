@@ -1,0 +1,7 @@
+env/
+recipes/
+archive/
+normalized/
+**/__pycache__/
+**/*.pyc
+atk_courses/courses/

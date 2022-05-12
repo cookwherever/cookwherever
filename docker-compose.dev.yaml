@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: postgres
+    restart: always
+    volumes:
+      - ./docker/data/db:/var/lib/postgresql/data
+      - ./docker/initdb.d:/docker-entrypoint-initdb.d:ro
+    ports:
+      - '5432:5432'
+  graphql-engine:
+    env_file:
+      - .env.dev
+      - .env.dev.secrets
+  hasura-auth:
+    env_file:
+      - .env.dev
+      - .env.dev.secrets

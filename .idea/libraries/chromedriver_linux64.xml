@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="chromedriver_linux64">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/recipe-saver/node_modules/chromedriver/lib/chromedriver/chromedriver_linux64.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

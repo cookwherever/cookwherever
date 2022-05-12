@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
+    kompose.image-pull-secret: ghcr-pull-secret
+    kompose.service.expose: api.cookwherever.com
+    kompose.service.expose.tls-secret: cookwherever-com-tls
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: graphql-engine
+  name: graphql-engine
+spec:
+  ports:
+    - name: "8080"
+      port: 8080
+      targetPort: 8080
+  selector:
+    io.kompose.service: graphql-engine
+status:
+  loadBalancer: {}

@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kompose.cmd: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
+    kompose.service.expose: login.cookwherever.com
+    kompose.service.expose.tls-secret: cookwherever-com-tls
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: hasura-auth
+  name: hasura-auth
+spec:
+  rules:
+    - host: login.cookwherever.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: hasura-auth
+                port:
+                  number: 4000
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - login.cookwherever.com
+      secretName: cookwherever-com-tls
+status:
+  loadBalancer: {}
