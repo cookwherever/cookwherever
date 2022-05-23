@@ -11,7 +11,7 @@ turkey bacon Different brands of turkey bacon have wildly different amounts of f
 
 ### Varieties
 
-* [[bacon]]
+* [[ingredients/categories/land-animals/meat/pork/bacon/bacon]]
 
 ### Sources
 * http://foodsubs.com/MeatcureBacon.html

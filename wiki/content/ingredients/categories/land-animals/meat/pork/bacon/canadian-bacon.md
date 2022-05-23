@@ -13,7 +13,7 @@ Canadian bacon = back bacon = bacon (British) Notes: Canadian bacon tastes like 
 
 ### Varieties
 
-* [[bacon]]
+* [[ingredients/categories/land-animals/meat/pork/bacon/bacon]]
 
 ### Sources
 * http://foodsubs.com/MeatcureBacon.html

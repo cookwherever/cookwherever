@@ -11,7 +11,7 @@ gypsy bacon This Hungarian specialty consists of a slab of bacon that's been roa
 
 ### Varieties
 
-* [[bacon]]
+* [[ingredients/categories/land-animals/meat/pork/bacon/bacon]]
 
 ### Sources
 * http://foodsubs.com/MeatcureBacon.html

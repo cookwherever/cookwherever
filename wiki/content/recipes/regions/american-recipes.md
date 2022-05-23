@@ -16,7 +16,7 @@ These recipes also encourage you, when you have the time/equipment for it, to tr
 * Sunny Side Up
 * Scrambled
 * Poached
-* Bacon
+* [[cooking/bacon]]
 ### I have time / I have people over
 * Hard / Soft Boiled
 * Omelet

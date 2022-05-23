@@ -12,7 +12,7 @@ Irish bacon = back bacon This is a lot leaner than American bacon. Note that Can
 
 ### Varieties
 
-* [[bacon]]
+* [[ingredients/categories/land-animals/meat/pork/bacon/bacon]]
 
 ### Sources
 * http://foodsubs.com/MeatcureBacon.html

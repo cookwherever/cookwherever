@@ -11,7 +11,7 @@ fatback This is a slab of fat that runs along the back of a pig. You can render 
 
 ### Varieties
 
-* [[bacon]]
+* [[ingredients/categories/land-animals/meat/pork/bacon/bacon]]
 
 ### Sources
 * http://foodsubs.com/MeatcureBacon.html

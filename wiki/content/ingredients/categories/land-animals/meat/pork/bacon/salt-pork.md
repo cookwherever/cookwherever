@@ -11,7 +11,7 @@ salt pork This is a salt-cured chunk of fat that comes from pork bellies. It's u
 
 ### Varieties
 
-* [[bacon]]
+* [[ingredients/categories/land-animals/meat/pork/bacon/bacon]]
 
 ### Sources
 * http://foodsubs.com/MeatcureBacon.html

@@ -11,7 +11,7 @@ imitation bacon bits This is soy protein that's flavored to taste like bacon. It
 
 ### Varieties
 
-* [[bacon]]
+* [[ingredients/categories/land-animals/meat/pork/bacon/bacon]]
 
 ### Sources
 * http://foodsubs.com/MeatcureBacon.html

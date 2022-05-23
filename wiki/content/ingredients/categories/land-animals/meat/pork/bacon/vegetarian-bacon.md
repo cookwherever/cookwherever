@@ -13,7 +13,7 @@ vegetarian bacon = tofu bacon = soy bacon Many meat analogs are disappointing, b
 
 ### Varieties
 
-* [[bacon]]
+* [[ingredients/categories/land-animals/meat/pork/bacon/bacon]]
 
 ### Sources
 * http://foodsubs.com/MeatcureBacon.html
