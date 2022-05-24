@@ -13,7 +13,7 @@ services:
       kompose.service.expose: "api.cookwherever.com"
       kompose.service.expose.tls-secret: "cookwherever-com-tls"
   hasura-auth:
-    image: nhost/hasura-auth:0.2.1
+    image: nhost/hasura-auth:0.8.0
     depends_on:
       - postgres
       - graphql-engine
