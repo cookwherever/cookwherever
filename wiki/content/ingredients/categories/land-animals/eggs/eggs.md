@@ -4,9 +4,7 @@ tags:
 - ingredient
 ---
 
-
-### Other Names
-
+### Notes
 
 ### Varieties
 
@@ -29,3 +27,4 @@ tags:
 
 ### Sources
 * http://foodsubs.com/Eggs.html
+* [The Science of Egg Yolks and How to Make Them Taste Like Parmesan Cheese | What's Eating Dan?](youtube.com/watch?v=KL4PDa6PpLQ)

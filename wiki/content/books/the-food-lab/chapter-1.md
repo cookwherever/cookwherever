@@ -2,6 +2,8 @@
 
 ## Eggs
 
+Learn more about eggs as an [[ingredients/categories/land-animals/eggs/eggs|ingredient]]
+
 ### yolk
 * 75% of calories in an egg
 * Biologically they are sacks of water with dissolved proteins and larger masses of protein and fat linked together with lecithin
