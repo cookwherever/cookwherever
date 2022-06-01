@@ -148,7 +148,7 @@ What happens to the egg yolk as heat increases.
 4. Cook for 30 seconds.
 5. Add ice cubes.
 6. Wait for water to return to a boil.
-7. Reduce to a subsimmer, 190F.
+7. Reduce to a subsimmer, 190° F.
 8. Cook for 11 minutes.
 9. Drain the eggs.
 10. Peel under cool running water.
@@ -479,28 +479,224 @@ Duration: 2 weeks
 | Young cheeses of all kinds (I like cheddar, Jack, blue, feta, Gruyère, Brie, and goat cheeses) | Grate or crumble. If using in conjunction with other cooked ingredients, toss with them in a small bowl after parcooking them; the residual heat will help start the melting process. |
 | Hard grating cheeses like Parmigiano-Reggiano, Cotija, and Pecorino Romano | Grate on a Microplane and add to the raw eggs. |
 | Cured meats like sausage, ham, and bacon | Cut into ½-inch pieces or nuggets and parcook in butter (let bacon cook in its own fat) until crisp on the edges and well browned. |
-| Firm vegetables like onions, shallots, bell peppers, and hot peppers | Dice and soften in butter.
-Tomatoes	Dice, salt, and drain. |
+| Firm vegetables like onions, shallots, bell peppers, and hot peppers | Dice and soften in butter. |
+|Tomatoes | Dice, salt, and drain. |
 | Tender leafy vegetables like spinach and arugula | Sauté in butter, with a bit of minced garlic if desired. |
 | Tender squashes like zucchini and summer squash | Sauté in butter. |
 | Asparagus |	Cut into 1/4-inch slices on the bias and sauté in butter. |
 | Scallions | Thinly slice whites and sauté in butter; thinly slice greens and incorporate into the filling or reserve for garnish. |
 | Mushrooms | Slice thin and sauté in butter until the moisture has evaporated and the mushrooms are well browned. |
-| Herbs | Add directly to the raw eggs. |
+| [[herbs]] | Add directly to the raw eggs. |
 
-### Bacon
+## Bacon
 #### Concepts
+More about [[ingredients/categories/land-animals/meat/pork/bacon/bacon|bacon as an ingredient]].
+
+##### What is in bacon?
+* Two main elements fat (mixture of fat and connective tissue) and lean, each cooks at different rates
+* Fat shrinks when heated
+* Remaining connective tissue is slowly broken down
+	* Not fully breaking down connective tissue is what causes bacon to be "rubbery"
+* Lean shrinks less than fat
+* The difference in cooking rates is why bacon will curl and buckle
+* Not keeping the bacon flat against the pan (as a result of curling or poor placement of the strip) makes the differences in cooking more pronounced 
 
 ##### Wet vs Dry Cure
+* All bacon is [[curing|cured]]
+	* Dry cure
+		* Salt and other spices are rubbed on pork belly 
+		* Over a few weeks, salt gets diffused throughout pork belly, meat loses moisture
+		* Result is a deeply flavored belly as flavor has been concentrated by lost water
+	* Wet cure
+		* Saltwater solution is injected into meat
+		* Salt can travel through meat more easily, only requires days to cure
+		* Resulting belly does not have enough time to drive off water, but instead takes on more water
+		* You receive less belly than what you are seeing compared to dry cure bacon due to the water weight
+		* 1lb package has at least 1 or 2oz of water weight
+	* Wet cure bacon will curl more as there is more water that evaporates and sputters more grease because of the water rapidly evaporating 
+
+##### Even cooking
+* Low heat, even heat distribution prevents curling and keeps bacon in contact with pan
+	* Large heavy skillet made from metal that allows even heat distribution is good for this
+	* Baking sheet in oven also works well, also lets you cook more bacon simultaneously
+* Cutting bacon in half helps prevent the bacon from curling as much
+
+### Pan Fried Bacon
+#### Equipment
+* Heavy-bottom pan
+	* Subs:
+		* 12-inch cast-iron skillet
+		* Nonstick skillet
+* Tongs
+* Plate
+* Paper towels
+
+#### Ingredients
+* 8 slices of bacon
+	* Prep:
+		* Cut crosswise in half with knife
+
+#### Directions
+1. Place bacon in even layer in pan
+2. Heat pan to medium heat
+	* Until: Sizzling
+	* Time: 4 minutes
+	* Also: Line plate with paper towels
+3. Reduce pan to medium-low heat
+4. Cook
+	* Until: Fat is rendered and bacon is crisp on both sides
+	* Also: Flip bacon and rearrange slices occasionally
+	* Time: 12 minutes
+5. Using tongs, transfer bacon to paper towel lined plate
+
+### Oven Fried Bacon
+#### Equipment
+* Rimmed baking sheet
+	* Amount: 2
+* Tongs
+* Plate
+* Paper towels
+
+#### Ingredients
+* 23 slices of bacon
+	* About: 1lb
+
+#### Directions
+1. Set oven racks to lower- and upper- middle positions
+2. Preheat oven
+	* Temperature: 425° F
+	* Also: Arrange bacon slices into single layer between rimmed baking sheets
+3. Roast bacon
+	* Until: Crisp and brown
+	* Time: 18 to 20 minutes
+	* Also: Line plate with paper towels
+	* Also: Halfway through cooking, rotate baking sheets back to front and top to bottom [1]
+4. Using tongs, transfer bacon to paper towel lined plate
+
+##### Notes
+[1] How to rotate baking sheets
+
+Caution: Moving hot baking sheets with grease can be dangerous. Use oven mitts to protect your hands.
+
+1. Make sure the top of the oven is cleared (or find some clear area in your kitchen where you can place very hot things, you may place down cotton towels, oven mitts, or some other object to insulate from the heat of the baking sheet)
+2. Take the baking sheet on the top rack out of the oven and place on the top of the oven
+3. Take the baking sheet on the bottom rack out and rotate it so that you are holding the edge of the sheet that was further away from you
+4. Place this sheet back into the oven
+5. Take the sheet that you took out and rotate it in the same way as the other sheet so the further edge is closer to you
+6. Place sheet back into oven
+
+## Crispy Potato Cake
+### Concepts
+* Also known as a rösti
+* Outside is crispy and golden brown, inside is creamy and tender
+* It is important to balance starch in the potato cake
+	* Too much starch and it is sticky
+	* Too little and it falls apart
+* Starch is held in cell walls of the potato, cutting releases the starch
+* Avoid rinsing potato shreds as they do not soften properly when cooked
+
+#### Method of cutting potato is important
+* Using a box grater or food processor will rupture too many cell walls, releasing too much liquid and starch
+* You can squeeze the shreds dry, but potato cake will be starchy and sticky
+* Using a mandolin is more difficult than the other methods, but will result in a better potato cake
+* A 1/16-inch blade will cut the correctly sized shreds or a larger sized blade and then using a sharp knife to cut them into planks
+* Sharper blades and less cutting = less cell walls breaking = less sticky starch being released = better texture and more potato flavor
+
+#### Parcook Potatos before Frying
+* Prevents oxidation 
+	* After potatoes are cut, in 15 minutes the color will change from pale white, to reddish brown, and then to black
+	* Storing sliced potatoes in water will slow down this process, but washes away starch
+* A microwave is effective at parcooking the sliced potatos because it does it quickly without adding or losing too much moisture
+  
+### Basic Crispy Potato Cake
+#### Equipment
+* Knife or Mandolin or box grater
+* Plate
+	* Properties:
+		* Microwave-safe
+	* Amount: 2
+* Microwave
+* Skillet
+* Rubber spatula
+
+#### Ingredients
+* 3 medium [[russet-potato|russet potatoes]]
+	* About: 1lb
+	* Prep:
+		* Rinsed
+		* Cut into 1/16-inch matchsticks or grated on large holes of a box grater
+* 1/4 cup olive oil
+	* Separated: In half (2 tablespoons each) 
+* Salt
+	* Preferably Kosher salt
+* Freshly ground black pepper
+
+#### Directions
+1. Spread potatoes on plate
+2. Microwave on high
+	* Until: Hot all the way through and softened but still slightly crunchy
+	* Time: 5 minutes
+3. Heat skillet to medium
+	* Also: Place 2 tablespoons of olive oil in skillet
+	* Until: Oil is shimmering
+4. Add potatoes to skillet
+5. Press potatoes with rubber spatula
+6. [[season|Season]] potatoes with salt and pepper
+7. Cook
+	* Until: Potatoes are deep golden brown and crispy on the first side [1]
+	* Time: 7 minutes
+	* Also: Swirl and shake the pan occasionally
+	* Also: Bring plate to arms reach
+8. Slide the potatoes onto plate
+	* Note: Use rubber spatula in other hand to help guide the potatoes
+9. Place another plate upside down on top of plate with potatoes
+10. Grip edges of two plates so they are firmly in contact with each other
+11. Invert both plates so that the cooked side is facing up
+12. Remove top plate
+13. Add remaining oil to skillet
+14. Wait
+	* Until: Oil is shimmering
+15. Slide potato cake into skillet
+	* Note: uncooked side should be down in the skillet
+16. Cook
+	* Until: Potatoes are deep golden brown and crispy on the first side [1]
+	* Time: 7 minutes
+	* Also: Swirl and shake the pan occasionally
+	* Also: Bring plate to arms reach
+17. Slide potato cake onto plate
+
+##### Notes
+[1] Use the rubber spatula to gently lift the potatoes to peer under them
+
+#### Variations 
+##### Onion and mushrooms
 TODO
 
+## Potato Hash
+### Food
+#### Concepts
+#### Equipment
 #### Ingredients
 #### Directions
 #### Variations 
 
+## Pancakes
+TODO
+
+## Waffles
+
+## Ricotta
+TODO
+
+## Biscuits
+TODO
+
+## Sticky Buns
+TODO
+
 ### Food
 #### Concepts
-
+#### Equipment
 #### Ingredients
 #### Directions
 #### Variations 

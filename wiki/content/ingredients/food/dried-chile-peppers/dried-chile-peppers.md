@@ -47,7 +47,7 @@ tags:
 * [[tepin-tepin]]
 * [[arbol-chile-chile-de-arbol]]
 * [[bola-chile-cascabel-pepper]]
-* [[cayenne-pepper]]
+* [[ingredients/food/dried-chile-peppers/cayenne-pepper]]
 * [[chilhuacle-negro-chile]]
 * [[chile-bola-cascabel-pepper]]
 * [[chile-de-arbol]]

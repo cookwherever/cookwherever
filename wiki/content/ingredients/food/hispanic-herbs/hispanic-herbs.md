@@ -37,7 +37,7 @@ tags:
 * [[papalo]]
 * [[romeritos]]
 * [[yerba-buena]]
-* [[ingredients/food/dry-beans/equivalents]]
+* [[ingredients/categories/plants/produce/vegetables/seeded-vegetables/legumes/pulses/beans/dry-beans/equivalents]]
 
 ### Sources
 * http://foodsubs.com/HerbsHisp.html
