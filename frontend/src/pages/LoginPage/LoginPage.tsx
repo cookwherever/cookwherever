@@ -1,19 +1,10 @@
 import React, { useState } from 'react'
 
-import { Button, Grid, Paper, styled, TextField } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-import { Face, Fingerprint } from '@material-ui/icons';
 import path from 'path';
 import { inputChangeHandler } from '../../utils/hook-helpers';
 import { authUrl } from 'src/utils/auth';
-
-const LoginPaper = styled(Paper)(({ theme }) => ({
-  margin: theme.spacing() * 2
-}));
-
-const LoginContent = styled('div')(({ theme }) => ({
-  padding: theme.spacing()
-}));
+import {Button, Col, Container, FormControl, FormGroup, Row} from "react-bootstrap";
 
 interface LoginPageProps {
 
@@ -49,35 +40,29 @@ export const LoginPage: React.FunctionComponent<LoginPageProps> = (props) => {
   }
 
   const loginWithGoogle = () => {
-    window.location.href = `${authUrl}/signin/provider/google?redirectTo=${process.env.AUTH_REDIRECT}`;
+    window.location.href = `${authUrl}/signin/provider/google?redirectTo=${process.env.REACT_APP_AUTH_REDIRECT}`;
   }
 
   return (
-    <LoginPaper>
-      <LoginContent>
-        <Grid container spacing={8} alignItems="flex-end">
-          <Grid item>
-            <Face />
-          </Grid>
-          <Grid item md={true} sm={true} xs={true}>
-            <TextField onChange={inputChangeHandler(setEmail)} id="email" label="Email" type="email" fullWidth autoFocus required />
-          </Grid>
-        </Grid>
-        <Grid container spacing={8} alignItems="flex-end">
-          <Grid item>
-            <Fingerprint />
-          </Grid>
-          <Grid item md={true} sm={true} xs={true}>
-            <TextField onChange={inputChangeHandler(setPassword)} id="password" label="Password" type="password" fullWidth required />
-          </Grid>
-        </Grid>
-        <Grid container justify="center" style={{ marginTop: '10px' }}>
-          <Button onClick={login} variant="outlined" color="primary" style={{ textTransform: 'none' }}>Login</Button>
-        </Grid>
-        <Grid container justify="center" style={{ marginTop: '10px' }}>
-          <Button onClick={loginWithGoogle} variant="outlined" color="primary" style={{ textTransform: 'none' }}>Login with Google</Button>
-        </Grid>
-      </LoginContent>
-    </LoginPaper>
+    <Container>
+      <Row>
+        <FormGroup>
+          <FormControl onChange={inputChangeHandler(setEmail)} id="email" type="email" />
+        </FormGroup>
+      </Row>
+      <Row>
+        <FormGroup>
+          <FormControl onChange={inputChangeHandler(setPassword)} id="password" type="password" />
+        </FormGroup>
+      </Row>
+      <Row>
+        <Col>
+          <Button onClick={login}>Login</Button>
+        </Col>
+        <Col>
+          <Button onClick={loginWithGoogle}>Login with Google</Button>
+        </Col>
+      </Row>
+    </Container>
   );
 }

@@ -1,6 +1,6 @@
 // src/AppRouter.tsx
 
-import React, { FunctionComponent, Suspense, useEffect, useRef, useState } from 'react'
+import React, {FunctionComponent, Suspense, useContext, useEffect, useRef, useState} from 'react'
 import { BrowserRouter as Router, Link, Route, Switch, useHistory, useLocation } from 'react-router-dom'
 import { RecoilRoot } from 'recoil'
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
@@ -24,6 +24,7 @@ import 'src/styles/main.css';
 
 import RecipeVisualizerPage from './pages/RecipeVisualizerPage/RecipeVisualizerPage';
 import { anonymousSignin, getRefreshedToken } from './utils/auth';
+import {AuthContext, AuthProvider} from "./providers/AuthProvider";
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL_URL
@@ -46,64 +47,71 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 })
 
-const AppRouter: FunctionComponent = () => {
-  // const { hash } = useLocation();
-  //
-  // const params = new URLSearchParams(hash.replace('#', ''));
-  // const refreshToken = params.get('refreshToken')
-  //
-  // useEffect(() => {
-  //   if (refreshToken) {
-  //     getRefreshedToken(refreshToken);
-  //     setLoginType('logged in with Google');
-  //   }
-  // }, [refreshToken]);
-  //
-  // const [loginType, setLoginType] = useState<string>('not logged in');
-  //
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token');
-  //   if (!token) {
-  //     anonymousSignin();
-  //     setLoginType('anonymous');
-  //   }
-  // }, []);
+const NavBar = () => {
+  const { user } = useContext(AuthContext);
+  const unauthedRoutes = (
+    <>
+      <Nav.Item>
+        <Nav.Link href="/login">Login</Nav.Link>
+      </Nav.Item>
+    </>
+  );
+  const authedRoutes = (
+    <>
+      <Nav.Item>
+        <Nav.Link href="/recipe/save">Save Recipe</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="/lists">Lists</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <div className="pt-2">{user && (user.displayName || user.email)}</div>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link onClick={() => {
+          localStorage.removeItem('token');
+          window.location.href = '/';
+        }}>
+          Logout
+        </Nav.Link>
+      </Nav.Item>
+    </>
+  );
+  return (
+    <Container>
+      <Nav className="justify-content-center" activeKey="/">
+        <Nav.Item>
+          <Nav.Link href="/">Home</Nav.Link>
+        </Nav.Item>
+        {user ? authedRoutes : unauthedRoutes}
+      </Nav>
+    </Container>
+  );
+}
 
+const AppRouter: FunctionComponent = () => {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <Container>
-          <Nav className="justify-content-center" activeKey="/">
-            <Nav.Item>
-              <Nav.Link href="/">Home</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link href="/recipe/save">Save Recipe</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link href="/lists">Lists</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link href="/login">Login</Nav.Link>
-            </Nav.Item>
-          </Nav>
-        </Container>
-        <RecoilRoot>
-          <RecoilizeDebugger />
-          <Suspense fallback={<span>Loading...</span>}>
-            <Switch>
-              <Route exact path="/" component={HomePage} />
-              <Route path="/login" component={LoginPage} />
-              <Route path="/register" component={RegisterPage} />
-              <Route path="/ingredient/:id" component={ViewIngredientPage} />
-              <Route path="/ingredient/search" component={SearchIngredientPage} />
-              <Route path="/recipe/save" component={SaveRecipePage} />
-              <Route path="/recipe/visualize" component={RecipeVisualizerPage} />
-              <Route path="/recipe/:slug" component={ViewRecipePage} />
-              <Route path="/lists" component={RecipeListsPage} />
-            </Switch>
-          </Suspense>
-        </RecoilRoot>
+        <AuthProvider>
+          <NavBar/>
+          <RecoilRoot>
+            <RecoilizeDebugger />
+            <Suspense fallback={<span>Loading...</span>}>
+              <Switch>
+                <Route exact path="/" component={HomePage} />
+                <Route path="/login" component={LoginPage} />
+                <Route path="/register" component={RegisterPage} />
+                <Route path="/ingredient/:id" component={ViewIngredientPage} />
+                <Route path="/ingredient/search" component={SearchIngredientPage} />
+                <Route path="/recipe/save" component={SaveRecipePage} />
+                <Route path="/recipe/visualize" component={RecipeVisualizerPage} />
+                <Route path="/recipe/:slug" component={ViewRecipePage} />
+                <Route path="/lists" component={RecipeListsPage} />
+              </Switch>
+            </Suspense>
+          </RecoilRoot>
+        </AuthProvider>
       </Router>
     </ApolloProvider>
   )

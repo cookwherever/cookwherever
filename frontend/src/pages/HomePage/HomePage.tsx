@@ -7,7 +7,6 @@ import useDebouncedCallback from '@restart/hooks/useDebouncedCallback';
 import { gql } from '@apollo/client';
 import { RecipesList } from '../../components/RecipesList/RecipesList';
 import { RecipeSearch } from '../../types/component-types';
-import { getRefreshedToken } from '../../utils/auth';
 import { useGetRecipeSourceProvidersQuery, useViewRecipeQueryQuery } from '../../generated/graphql';
 
 interface HomePageProps {
@@ -110,17 +109,8 @@ const RecipeSearchForm: React.FunctionComponent<RecipeSearchFormProps> = ({ reci
 }
 
 export const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
-  const { search, pathname, hash } = useLocation();
+  const { search, pathname } = useLocation();
   const history = useHistory();
-
-  const params = new URLSearchParams(hash.replace('#', ''));
-  const refreshToken = params.get('refreshToken')
-
-  useEffect(() => {
-    if (refreshToken) {
-      getRefreshedToken(refreshToken);
-    }
-  }, [refreshToken])
 
   const urlSearchParams = new URLSearchParams(search);
 
