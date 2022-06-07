@@ -19,8 +19,8 @@ interface IngredientListProps {
 export const IngredientList: React.FunctionComponent<IngredientListProps> = ({ ingredientGroups }) => {
   return (
     <>
-      {ingredientGroups.map((ingredient_group) => (
-        <Col sm key='recipe-ingredient-group'>
+      {ingredientGroups.map((ingredient_group, idx) => (
+        <Col sm key={`recipe-ingredient-group-${idx}`}>
           <IngredientGroup ingredientGroup={ingredient_group} />
         </Col>
       ))}

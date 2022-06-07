@@ -13,6 +13,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  _text: any;
   bigint: any;
   citext: any;
   float8: any;
@@ -96,11 +97,30 @@ export type String_Comparison_Exp = {
   _similar?: InputMaybe<Scalars['String']>;
 };
 
+/** Boolean expression to compare columns of type "_text". All fields are combined with logical 'AND'. */
+export type _Text_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['_text']>;
+  _gt?: InputMaybe<Scalars['_text']>;
+  _gte?: InputMaybe<Scalars['_text']>;
+  _in?: InputMaybe<Array<Scalars['_text']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['_text']>;
+  _lte?: InputMaybe<Scalars['_text']>;
+  _neq?: InputMaybe<Scalars['_text']>;
+  _nin?: InputMaybe<Array<Scalars['_text']>>;
+};
+
 /** columns and relationships of "auth.provider_requests" */
 export type AuthProviderRequests = {
   __typename?: 'authProviderRequests';
   id: Scalars['uuid'];
-  redirectUrl: Scalars['String'];
+  options?: Maybe<Scalars['jsonb']>;
+};
+
+
+/** columns and relationships of "auth.provider_requests" */
+export type AuthProviderRequestsOptionsArgs = {
+  path?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregated selection of "auth.provider_requests" */
@@ -125,13 +145,18 @@ export type AuthProviderRequests_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
+/** append existing jsonb value of filtered columns with new jsonb value */
+export type AuthProviderRequests_Append_Input = {
+  options?: InputMaybe<Scalars['jsonb']>;
+};
+
 /** Boolean expression to filter rows from the table "auth.provider_requests". All fields are combined with a logical 'AND'. */
 export type AuthProviderRequests_Bool_Exp = {
   _and?: InputMaybe<Array<AuthProviderRequests_Bool_Exp>>;
   _not?: InputMaybe<AuthProviderRequests_Bool_Exp>;
   _or?: InputMaybe<Array<AuthProviderRequests_Bool_Exp>>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
-  redirectUrl?: InputMaybe<String_Comparison_Exp>;
+  options?: InputMaybe<Jsonb_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "auth.provider_requests" */
@@ -140,24 +165,37 @@ export enum AuthProviderRequests_Constraint {
   ProviderRequestsPkey = 'provider_requests_pkey'
 }
 
+/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+export type AuthProviderRequests_Delete_At_Path_Input = {
+  options?: InputMaybe<Array<Scalars['String']>>;
+};
+
+/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+export type AuthProviderRequests_Delete_Elem_Input = {
+  options?: InputMaybe<Scalars['Int']>;
+};
+
+/** delete key/value pair or string element. key/value pairs are matched based on their key value */
+export type AuthProviderRequests_Delete_Key_Input = {
+  options?: InputMaybe<Scalars['String']>;
+};
+
 /** input type for inserting data into table "auth.provider_requests" */
 export type AuthProviderRequests_Insert_Input = {
   id?: InputMaybe<Scalars['uuid']>;
-  redirectUrl?: InputMaybe<Scalars['String']>;
+  options?: InputMaybe<Scalars['jsonb']>;
 };
 
 /** aggregate max on columns */
 export type AuthProviderRequests_Max_Fields = {
   __typename?: 'authProviderRequests_max_fields';
   id?: Maybe<Scalars['uuid']>;
-  redirectUrl?: Maybe<Scalars['String']>;
 };
 
 /** aggregate min on columns */
 export type AuthProviderRequests_Min_Fields = {
   __typename?: 'authProviderRequests_min_fields';
   id?: Maybe<Scalars['uuid']>;
-  redirectUrl?: Maybe<Scalars['String']>;
 };
 
 /** response of any mutation on the table "auth.provider_requests" */
@@ -169,7 +207,7 @@ export type AuthProviderRequests_Mutation_Response = {
   returning: Array<AuthProviderRequests>;
 };
 
-/** on conflict condition type for table "auth.provider_requests" */
+/** on_conflict condition type for table "auth.provider_requests" */
 export type AuthProviderRequests_On_Conflict = {
   constraint: AuthProviderRequests_Constraint;
   update_columns?: Array<AuthProviderRequests_Update_Column>;
@@ -179,7 +217,7 @@ export type AuthProviderRequests_On_Conflict = {
 /** Ordering options when selecting data from "auth.provider_requests". */
 export type AuthProviderRequests_Order_By = {
   id?: InputMaybe<Order_By>;
-  redirectUrl?: InputMaybe<Order_By>;
+  options?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: authProviderRequests */
@@ -187,18 +225,23 @@ export type AuthProviderRequests_Pk_Columns_Input = {
   id: Scalars['uuid'];
 };
 
+/** prepend existing jsonb value of filtered columns with new jsonb value */
+export type AuthProviderRequests_Prepend_Input = {
+  options?: InputMaybe<Scalars['jsonb']>;
+};
+
 /** select columns of table "auth.provider_requests" */
 export enum AuthProviderRequests_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  RedirectUrl = 'redirectUrl'
+  Options = 'options'
 }
 
 /** input type for updating data in table "auth.provider_requests" */
 export type AuthProviderRequests_Set_Input = {
   id?: InputMaybe<Scalars['uuid']>;
-  redirectUrl?: InputMaybe<Scalars['String']>;
+  options?: InputMaybe<Scalars['jsonb']>;
 };
 
 /** update columns of table "auth.provider_requests" */
@@ -206,7 +249,7 @@ export enum AuthProviderRequests_Update_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  RedirectUrl = 'redirectUrl'
+  Options = 'options'
 }
 
 /** columns and relationships of "auth.providers" */
@@ -306,11 +349,11 @@ export type AuthProviders_Mutation_Response = {
 /** input type for inserting object relation for remote table "auth.providers" */
 export type AuthProviders_Obj_Rel_Insert_Input = {
   data: AuthProviders_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<AuthProviders_On_Conflict>;
 };
 
-/** on conflict condition type for table "auth.providers" */
+/** on_conflict condition type for table "auth.providers" */
 export type AuthProviders_On_Conflict = {
   constraint: AuthProviders_Constraint;
   update_columns?: Array<AuthProviders_Update_Column>;
@@ -388,7 +431,7 @@ export type AuthRefreshTokens_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "auth.refresh_tokens" */
 export type AuthRefreshTokens_Arr_Rel_Insert_Input = {
   data: Array<AuthRefreshTokens_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<AuthRefreshTokens_On_Conflict>;
 };
 
@@ -462,7 +505,7 @@ export type AuthRefreshTokens_Mutation_Response = {
   returning: Array<AuthRefreshTokens>;
 };
 
-/** on conflict condition type for table "auth.refresh_tokens" */
+/** on_conflict condition type for table "auth.refresh_tokens" */
 export type AuthRefreshTokens_On_Conflict = {
   constraint: AuthRefreshTokens_Constraint;
   update_columns?: Array<AuthRefreshTokens_Update_Column>;
@@ -638,11 +681,11 @@ export type AuthRoles_Mutation_Response = {
 /** input type for inserting object relation for remote table "auth.roles" */
 export type AuthRoles_Obj_Rel_Insert_Input = {
   data: AuthRoles_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<AuthRoles_On_Conflict>;
 };
 
-/** on conflict condition type for table "auth.roles" */
+/** on_conflict condition type for table "auth.roles" */
 export type AuthRoles_On_Conflict = {
   constraint: AuthRoles_Constraint;
   update_columns?: Array<AuthRoles_Update_Column>;
@@ -727,7 +770,7 @@ export type AuthUserProviders_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "auth.user_providers" */
 export type AuthUserProviders_Arr_Rel_Insert_Input = {
   data: Array<AuthUserProviders_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<AuthUserProviders_On_Conflict>;
 };
 
@@ -831,7 +874,7 @@ export type AuthUserProviders_Mutation_Response = {
   returning: Array<AuthUserProviders>;
 };
 
-/** on conflict condition type for table "auth.user_providers" */
+/** on_conflict condition type for table "auth.user_providers" */
 export type AuthUserProviders_On_Conflict = {
   constraint: AuthUserProviders_Constraint;
   update_columns?: Array<AuthUserProviders_Update_Column>;
@@ -954,7 +997,7 @@ export type AuthUserRoles_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "auth.user_roles" */
 export type AuthUserRoles_Arr_Rel_Insert_Input = {
   data: Array<AuthUserRoles_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<AuthUserRoles_On_Conflict>;
 };
 
@@ -1032,7 +1075,7 @@ export type AuthUserRoles_Mutation_Response = {
   returning: Array<AuthUserRoles>;
 };
 
-/** on conflict condition type for table "auth.user_roles" */
+/** on_conflict condition type for table "auth.user_roles" */
 export type AuthUserRoles_On_Conflict = {
   constraint: AuthUserRoles_Constraint;
   update_columns?: Array<AuthUserRoles_Update_Column>;
@@ -1336,7 +1379,7 @@ export type Food_Attribute_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "food_attribute" */
 export type Food_Attribute_Arr_Rel_Insert_Input = {
   data: Array<Food_Attribute_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Food_Attribute_On_Conflict>;
 };
 
@@ -1447,7 +1490,7 @@ export type Food_Attribute_Mutation_Response = {
   returning: Array<Food_Attribute>;
 };
 
-/** on conflict condition type for table "food_attribute" */
+/** on_conflict condition type for table "food_attribute" */
 export type Food_Attribute_On_Conflict = {
   constraint: Food_Attribute_Constraint;
   update_columns?: Array<Food_Attribute_Update_Column>;
@@ -1664,11 +1707,11 @@ export type Food_Attribute_Type_Mutation_Response = {
 /** input type for inserting object relation for remote table "food_attribute_type" */
 export type Food_Attribute_Type_Obj_Rel_Insert_Input = {
   data: Food_Attribute_Type_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Food_Attribute_Type_On_Conflict>;
 };
 
-/** on conflict condition type for table "food_attribute_type" */
+/** on_conflict condition type for table "food_attribute_type" */
 export type Food_Attribute_Type_On_Conflict = {
   constraint: Food_Attribute_Type_Constraint;
   update_columns?: Array<Food_Attribute_Type_Update_Column>;
@@ -1955,11 +1998,11 @@ export type Food_Category_Mutation_Response = {
 /** input type for inserting object relation for remote table "food_category" */
 export type Food_Category_Obj_Rel_Insert_Input = {
   data: Food_Category_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Food_Category_On_Conflict>;
 };
 
-/** on conflict condition type for table "food_category" */
+/** on_conflict condition type for table "food_category" */
 export type Food_Category_On_Conflict = {
   constraint: Food_Category_Constraint;
   update_columns?: Array<Food_Category_Update_Column>;
@@ -2202,7 +2245,7 @@ export type Food_Nutrient_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "food_nutrient" */
 export type Food_Nutrient_Arr_Rel_Insert_Input = {
   data: Array<Food_Nutrient_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Food_Nutrient_On_Conflict>;
 };
 
@@ -2361,7 +2404,7 @@ export type Food_Nutrient_Mutation_Response = {
   returning: Array<Food_Nutrient>;
 };
 
-/** on conflict condition type for table "food_nutrient" */
+/** on_conflict condition type for table "food_nutrient" */
 export type Food_Nutrient_On_Conflict = {
   constraint: Food_Nutrient_Constraint;
   update_columns?: Array<Food_Nutrient_Update_Column>;
@@ -2662,11 +2705,11 @@ export type Food_Nutrient_Variance_Order_By = {
 /** input type for inserting object relation for remote table "food" */
 export type Food_Obj_Rel_Insert_Input = {
   data: Food_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Food_On_Conflict>;
 };
 
-/** on conflict condition type for table "food" */
+/** on_conflict condition type for table "food" */
 export type Food_On_Conflict = {
   constraint: Food_Constraint;
   update_columns?: Array<Food_Update_Column>;
@@ -2758,7 +2801,7 @@ export type Food_Portion_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "food_portion" */
 export type Food_Portion_Arr_Rel_Insert_Input = {
   data: Array<Food_Portion_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Food_Portion_On_Conflict>;
 };
 
@@ -2914,11 +2957,11 @@ export type Food_Portion_Mutation_Response = {
 /** input type for inserting object relation for remote table "food_portion" */
 export type Food_Portion_Obj_Rel_Insert_Input = {
   data: Food_Portion_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Food_Portion_On_Conflict>;
 };
 
-/** on conflict condition type for table "food_portion" */
+/** on_conflict condition type for table "food_portion" */
 export type Food_Portion_On_Conflict = {
   constraint: Food_Portion_Constraint;
   update_columns?: Array<Food_Portion_Update_Column>;
@@ -3321,6 +3364,205 @@ export type Food_Variance_Order_By = {
   food_category_id?: InputMaybe<Order_By>;
 };
 
+/** Ingredients used in recipes. */
+export type Ingredients = {
+  __typename?: 'ingredients';
+  fdc_id: Scalars['Int'];
+  /** An object relationship */
+  food: Food;
+  id: Scalars['uuid'];
+  names?: Maybe<Scalars['_text']>;
+  wiki_url: Scalars['String'];
+};
+
+/** aggregated selection of "ingredients" */
+export type Ingredients_Aggregate = {
+  __typename?: 'ingredients_aggregate';
+  aggregate?: Maybe<Ingredients_Aggregate_Fields>;
+  nodes: Array<Ingredients>;
+};
+
+/** aggregate fields of "ingredients" */
+export type Ingredients_Aggregate_Fields = {
+  __typename?: 'ingredients_aggregate_fields';
+  avg?: Maybe<Ingredients_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Ingredients_Max_Fields>;
+  min?: Maybe<Ingredients_Min_Fields>;
+  stddev?: Maybe<Ingredients_Stddev_Fields>;
+  stddev_pop?: Maybe<Ingredients_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Ingredients_Stddev_Samp_Fields>;
+  sum?: Maybe<Ingredients_Sum_Fields>;
+  var_pop?: Maybe<Ingredients_Var_Pop_Fields>;
+  var_samp?: Maybe<Ingredients_Var_Samp_Fields>;
+  variance?: Maybe<Ingredients_Variance_Fields>;
+};
+
+
+/** aggregate fields of "ingredients" */
+export type Ingredients_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Ingredients_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Ingredients_Avg_Fields = {
+  __typename?: 'ingredients_avg_fields';
+  fdc_id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "ingredients". All fields are combined with a logical 'AND'. */
+export type Ingredients_Bool_Exp = {
+  _and?: InputMaybe<Array<Ingredients_Bool_Exp>>;
+  _not?: InputMaybe<Ingredients_Bool_Exp>;
+  _or?: InputMaybe<Array<Ingredients_Bool_Exp>>;
+  fdc_id?: InputMaybe<Int_Comparison_Exp>;
+  food?: InputMaybe<Food_Bool_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  names?: InputMaybe<_Text_Comparison_Exp>;
+  wiki_url?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "ingredients" */
+export enum Ingredients_Constraint {
+  /** unique or primary key constraint */
+  IngredientsPkey = 'ingredients_pkey'
+}
+
+/** input type for incrementing numeric columns in table "ingredients" */
+export type Ingredients_Inc_Input = {
+  fdc_id?: InputMaybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "ingredients" */
+export type Ingredients_Insert_Input = {
+  fdc_id?: InputMaybe<Scalars['Int']>;
+  food?: InputMaybe<Food_Obj_Rel_Insert_Input>;
+  id?: InputMaybe<Scalars['uuid']>;
+  names?: InputMaybe<Scalars['_text']>;
+  wiki_url?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Ingredients_Max_Fields = {
+  __typename?: 'ingredients_max_fields';
+  fdc_id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['uuid']>;
+  wiki_url?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Ingredients_Min_Fields = {
+  __typename?: 'ingredients_min_fields';
+  fdc_id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['uuid']>;
+  wiki_url?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "ingredients" */
+export type Ingredients_Mutation_Response = {
+  __typename?: 'ingredients_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Ingredients>;
+};
+
+/** on_conflict condition type for table "ingredients" */
+export type Ingredients_On_Conflict = {
+  constraint: Ingredients_Constraint;
+  update_columns?: Array<Ingredients_Update_Column>;
+  where?: InputMaybe<Ingredients_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "ingredients". */
+export type Ingredients_Order_By = {
+  fdc_id?: InputMaybe<Order_By>;
+  food?: InputMaybe<Food_Order_By>;
+  id?: InputMaybe<Order_By>;
+  names?: InputMaybe<Order_By>;
+  wiki_url?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: ingredients */
+export type Ingredients_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "ingredients" */
+export enum Ingredients_Select_Column {
+  /** column name */
+  FdcId = 'fdc_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Names = 'names',
+  /** column name */
+  WikiUrl = 'wiki_url'
+}
+
+/** input type for updating data in table "ingredients" */
+export type Ingredients_Set_Input = {
+  fdc_id?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  names?: InputMaybe<Scalars['_text']>;
+  wiki_url?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate stddev on columns */
+export type Ingredients_Stddev_Fields = {
+  __typename?: 'ingredients_stddev_fields';
+  fdc_id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Ingredients_Stddev_Pop_Fields = {
+  __typename?: 'ingredients_stddev_pop_fields';
+  fdc_id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Ingredients_Stddev_Samp_Fields = {
+  __typename?: 'ingredients_stddev_samp_fields';
+  fdc_id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Ingredients_Sum_Fields = {
+  __typename?: 'ingredients_sum_fields';
+  fdc_id?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "ingredients" */
+export enum Ingredients_Update_Column {
+  /** column name */
+  FdcId = 'fdc_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Names = 'names',
+  /** column name */
+  WikiUrl = 'wiki_url'
+}
+
+/** aggregate var_pop on columns */
+export type Ingredients_Var_Pop_Fields = {
+  __typename?: 'ingredients_var_pop_fields';
+  fdc_id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Ingredients_Var_Samp_Fields = {
+  __typename?: 'ingredients_var_samp_fields';
+  fdc_id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Ingredients_Variance_Fields = {
+  __typename?: 'ingredients_variance_fields';
+  fdc_id?: Maybe<Scalars['Float']>;
+};
+
 /** Boolean expression to compare columns of type "jsonb". All fields are combined with logical 'AND'. */
 export type Jsonb_Comparison_Exp = {
   /** is the column contained in the given json value */
@@ -3446,11 +3688,11 @@ export type Measure_Unit_Mutation_Response = {
 /** input type for inserting object relation for remote table "measure_unit" */
 export type Measure_Unit_Obj_Rel_Insert_Input = {
   data: Measure_Unit_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Measure_Unit_On_Conflict>;
 };
 
-/** on conflict condition type for table "measure_unit" */
+/** on_conflict condition type for table "measure_unit" */
 export type Measure_Unit_On_Conflict = {
   constraint: Measure_Unit_Constraint;
   update_columns?: Array<Measure_Unit_Update_Column>;
@@ -3600,6 +3842,10 @@ export type Mutation_Root = {
   delete_food_portion?: Maybe<Food_Portion_Mutation_Response>;
   /** delete single row from the table: "food_portion" */
   delete_food_portion_by_pk?: Maybe<Food_Portion>;
+  /** delete data from the table: "ingredients" */
+  delete_ingredients?: Maybe<Ingredients_Mutation_Response>;
+  /** delete single row from the table: "ingredients" */
+  delete_ingredients_by_pk?: Maybe<Ingredients>;
   /** delete data from the table: "measure_unit" */
   delete_measure_unit?: Maybe<Measure_Unit_Mutation_Response>;
   /** delete single row from the table: "measure_unit" */
@@ -3712,6 +3958,10 @@ export type Mutation_Root = {
   insert_food_portion?: Maybe<Food_Portion_Mutation_Response>;
   /** insert a single row into the table: "food_portion" */
   insert_food_portion_one?: Maybe<Food_Portion>;
+  /** insert data into the table: "ingredients" */
+  insert_ingredients?: Maybe<Ingredients_Mutation_Response>;
+  /** insert a single row into the table: "ingredients" */
+  insert_ingredients_one?: Maybe<Ingredients>;
   /** insert data into the table: "measure_unit" */
   insert_measure_unit?: Maybe<Measure_Unit_Mutation_Response>;
   /** insert a single row into the table: "measure_unit" */
@@ -3824,6 +4074,10 @@ export type Mutation_Root = {
   update_food_portion?: Maybe<Food_Portion_Mutation_Response>;
   /** update single row of the table: "food_portion" */
   update_food_portion_by_pk?: Maybe<Food_Portion>;
+  /** update data of the table: "ingredients" */
+  update_ingredients?: Maybe<Ingredients_Mutation_Response>;
+  /** update single row of the table: "ingredients" */
+  update_ingredients_by_pk?: Maybe<Ingredients>;
   /** update data of the table: "measure_unit" */
   update_measure_unit?: Maybe<Measure_Unit_Mutation_Response>;
   /** update single row of the table: "measure_unit" */
@@ -4040,6 +4294,18 @@ export type Mutation_RootDelete_Food_PortionArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Food_Portion_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_IngredientsArgs = {
+  where: Ingredients_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Ingredients_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -4406,6 +4672,20 @@ export type Mutation_RootInsert_Food_Portion_OneArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsert_IngredientsArgs = {
+  objects: Array<Ingredients_Insert_Input>;
+  on_conflict?: InputMaybe<Ingredients_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Ingredients_OneArgs = {
+  object: Ingredients_Insert_Input;
+  on_conflict?: InputMaybe<Ingredients_On_Conflict>;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsert_Measure_UnitArgs = {
   objects: Array<Measure_Unit_Insert_Input>;
   on_conflict?: InputMaybe<Measure_Unit_On_Conflict>;
@@ -4624,6 +4904,11 @@ export type Mutation_RootUpdateAuthProviderArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdateAuthProviderRequestArgs = {
+  _append?: InputMaybe<AuthProviderRequests_Append_Input>;
+  _delete_at_path?: InputMaybe<AuthProviderRequests_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<AuthProviderRequests_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<AuthProviderRequests_Delete_Key_Input>;
+  _prepend?: InputMaybe<AuthProviderRequests_Prepend_Input>;
   _set?: InputMaybe<AuthProviderRequests_Set_Input>;
   pk_columns: AuthProviderRequests_Pk_Columns_Input;
 };
@@ -4631,6 +4916,11 @@ export type Mutation_RootUpdateAuthProviderRequestArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdateAuthProviderRequestsArgs = {
+  _append?: InputMaybe<AuthProviderRequests_Append_Input>;
+  _delete_at_path?: InputMaybe<AuthProviderRequests_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<AuthProviderRequests_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<AuthProviderRequests_Delete_Key_Input>;
+  _prepend?: InputMaybe<AuthProviderRequests_Prepend_Input>;
   _set?: InputMaybe<AuthProviderRequests_Set_Input>;
   where: AuthProviderRequests_Bool_Exp;
 };
@@ -4816,6 +5106,22 @@ export type Mutation_RootUpdate_Food_Portion_By_PkArgs = {
   _inc?: InputMaybe<Food_Portion_Inc_Input>;
   _set?: InputMaybe<Food_Portion_Set_Input>;
   pk_columns: Food_Portion_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_IngredientsArgs = {
+  _inc?: InputMaybe<Ingredients_Inc_Input>;
+  _set?: InputMaybe<Ingredients_Set_Input>;
+  where: Ingredients_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Ingredients_By_PkArgs = {
+  _inc?: InputMaybe<Ingredients_Inc_Input>;
+  _set?: InputMaybe<Ingredients_Set_Input>;
+  pk_columns: Ingredients_Pk_Columns_Input;
 };
 
 
@@ -5190,11 +5496,11 @@ export type Nutrient_Mutation_Response = {
 /** input type for inserting object relation for remote table "nutrient" */
 export type Nutrient_Obj_Rel_Insert_Input = {
   data: Nutrient_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Nutrient_On_Conflict>;
 };
 
-/** on conflict condition type for table "nutrient" */
+/** on_conflict condition type for table "nutrient" */
 export type Nutrient_On_Conflict = {
   constraint: Nutrient_Constraint;
   update_columns?: Array<Nutrient_Update_Column>;
@@ -5398,6 +5704,12 @@ export type Query_Root = {
   food_portion_aggregate: Food_Portion_Aggregate;
   /** fetch data from the table: "food_portion" using primary key columns */
   food_portion_by_pk?: Maybe<Food_Portion>;
+  /** fetch data from the table: "ingredients" */
+  ingredients: Array<Ingredients>;
+  /** fetch aggregated fields from the table: "ingredients" */
+  ingredients_aggregate: Ingredients_Aggregate;
+  /** fetch data from the table: "ingredients" using primary key columns */
+  ingredients_by_pk?: Maybe<Ingredients>;
   /** fetch data from the table: "measure_unit" */
   measure_unit: Array<Measure_Unit>;
   /** fetch aggregated fields from the table: "measure_unit" */
@@ -5410,9 +5722,9 @@ export type Query_Root = {
   nutrient_aggregate: Nutrient_Aggregate;
   /** fetch data from the table: "nutrient" using primary key columns */
   nutrient_by_pk?: Maybe<Nutrient>;
-  /** An array relationship */
+  /** fetch data from the table: "recipe_direction_actions" */
   recipe_direction_actions: Array<Recipe_Direction_Actions>;
-  /** An aggregate relationship */
+  /** fetch aggregated fields from the table: "recipe_direction_actions" */
   recipe_direction_actions_aggregate: Recipe_Direction_Actions_Aggregate;
   /** fetch data from the table: "recipe_direction_actions" using primary key columns */
   recipe_direction_actions_by_pk?: Maybe<Recipe_Direction_Actions>;
@@ -5492,8 +5804,6 @@ export type Query_Root = {
   search_recipes_aggregate: Recipes_Aggregate;
   /** fetch data from the table: "auth.users" using primary key columns */
   user?: Maybe<Users>;
-  /** fetch aggregated fields from the table: "auth.users" */
-  userAggregate: Users_Aggregate;
   /** fetch data from the table: "user_config" */
   user_config: Array<User_Config>;
   /** fetch aggregated fields from the table: "user_config" */
@@ -5502,6 +5812,8 @@ export type Query_Root = {
   user_config_by_pk?: Maybe<User_Config>;
   /** fetch data from the table: "auth.users" */
   users: Array<Users>;
+  /** fetch aggregated fields from the table: "auth.users" */
+  usersAggregate: Users_Aggregate;
 };
 
 
@@ -5778,6 +6090,29 @@ export type Query_RootFood_Portion_AggregateArgs = {
 
 export type Query_RootFood_Portion_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+
+export type Query_RootIngredientsArgs = {
+  distinct_on?: InputMaybe<Array<Ingredients_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Ingredients_Order_By>>;
+  where?: InputMaybe<Ingredients_Bool_Exp>;
+};
+
+
+export type Query_RootIngredients_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Ingredients_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Ingredients_Order_By>>;
+  where?: InputMaybe<Ingredients_Bool_Exp>;
+};
+
+
+export type Query_RootIngredients_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -6148,15 +6483,6 @@ export type Query_RootUserArgs = {
 };
 
 
-export type Query_RootUserAggregateArgs = {
-  distinct_on?: InputMaybe<Array<Users_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Users_Order_By>>;
-  where?: InputMaybe<Users_Bool_Exp>;
-};
-
-
 export type Query_RootUser_ConfigArgs = {
   distinct_on?: InputMaybe<Array<User_Config_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -6181,6 +6507,15 @@ export type Query_RootUser_Config_By_PkArgs = {
 
 
 export type Query_RootUsersArgs = {
+  distinct_on?: InputMaybe<Array<Users_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Users_Order_By>>;
+  where?: InputMaybe<Users_Bool_Exp>;
+};
+
+
+export type Query_RootUsersAggregateArgs = {
   distinct_on?: InputMaybe<Array<Users_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -6236,31 +6571,9 @@ export type Recipe_Direction_Actions_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
-/** order by aggregate values of table "recipe_direction_actions" */
-export type Recipe_Direction_Actions_Aggregate_Order_By = {
-  avg?: InputMaybe<Recipe_Direction_Actions_Avg_Order_By>;
-  count?: InputMaybe<Order_By>;
-  max?: InputMaybe<Recipe_Direction_Actions_Max_Order_By>;
-  min?: InputMaybe<Recipe_Direction_Actions_Min_Order_By>;
-  stddev?: InputMaybe<Recipe_Direction_Actions_Stddev_Order_By>;
-  stddev_pop?: InputMaybe<Recipe_Direction_Actions_Stddev_Pop_Order_By>;
-  stddev_samp?: InputMaybe<Recipe_Direction_Actions_Stddev_Samp_Order_By>;
-  sum?: InputMaybe<Recipe_Direction_Actions_Sum_Order_By>;
-  var_pop?: InputMaybe<Recipe_Direction_Actions_Var_Pop_Order_By>;
-  var_samp?: InputMaybe<Recipe_Direction_Actions_Var_Samp_Order_By>;
-  variance?: InputMaybe<Recipe_Direction_Actions_Variance_Order_By>;
-};
-
 /** append existing jsonb value of filtered columns with new jsonb value */
 export type Recipe_Direction_Actions_Append_Input = {
   name?: InputMaybe<Scalars['jsonb']>;
-};
-
-/** input type for inserting array relation for remote table "recipe_direction_actions" */
-export type Recipe_Direction_Actions_Arr_Rel_Insert_Input = {
-  data: Array<Recipe_Direction_Actions_Insert_Input>;
-  /** on conflict condition */
-  on_conflict?: InputMaybe<Recipe_Direction_Actions_On_Conflict>;
 };
 
 /** aggregate avg on columns */
@@ -6270,14 +6583,6 @@ export type Recipe_Direction_Actions_Avg_Fields = {
   duration?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   quantity?: Maybe<Scalars['Float']>;
-};
-
-/** order by avg() on columns of table "recipe_direction_actions" */
-export type Recipe_Direction_Actions_Avg_Order_By = {
-  direction_id?: InputMaybe<Order_By>;
-  duration?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  quantity?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "recipe_direction_actions". All fields are combined with a logical 'AND'. */
@@ -6345,16 +6650,6 @@ export type Recipe_Direction_Actions_Max_Fields = {
   unit?: Maybe<Scalars['String']>;
 };
 
-/** order by max() on columns of table "recipe_direction_actions" */
-export type Recipe_Direction_Actions_Max_Order_By = {
-  action?: InputMaybe<Order_By>;
-  direction_id?: InputMaybe<Order_By>;
-  duration?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  quantity?: InputMaybe<Order_By>;
-  unit?: InputMaybe<Order_By>;
-};
-
 /** aggregate min on columns */
 export type Recipe_Direction_Actions_Min_Fields = {
   __typename?: 'recipe_direction_actions_min_fields';
@@ -6366,16 +6661,6 @@ export type Recipe_Direction_Actions_Min_Fields = {
   unit?: Maybe<Scalars['String']>;
 };
 
-/** order by min() on columns of table "recipe_direction_actions" */
-export type Recipe_Direction_Actions_Min_Order_By = {
-  action?: InputMaybe<Order_By>;
-  direction_id?: InputMaybe<Order_By>;
-  duration?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  quantity?: InputMaybe<Order_By>;
-  unit?: InputMaybe<Order_By>;
-};
-
 /** response of any mutation on the table "recipe_direction_actions" */
 export type Recipe_Direction_Actions_Mutation_Response = {
   __typename?: 'recipe_direction_actions_mutation_response';
@@ -6385,7 +6670,7 @@ export type Recipe_Direction_Actions_Mutation_Response = {
   returning: Array<Recipe_Direction_Actions>;
 };
 
-/** on conflict condition type for table "recipe_direction_actions" */
+/** on_conflict condition type for table "recipe_direction_actions" */
 export type Recipe_Direction_Actions_On_Conflict = {
   constraint: Recipe_Direction_Actions_Constraint;
   update_columns?: Array<Recipe_Direction_Actions_Update_Column>;
@@ -6451,14 +6736,6 @@ export type Recipe_Direction_Actions_Stddev_Fields = {
   quantity?: Maybe<Scalars['Float']>;
 };
 
-/** order by stddev() on columns of table "recipe_direction_actions" */
-export type Recipe_Direction_Actions_Stddev_Order_By = {
-  direction_id?: InputMaybe<Order_By>;
-  duration?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  quantity?: InputMaybe<Order_By>;
-};
-
 /** aggregate stddev_pop on columns */
 export type Recipe_Direction_Actions_Stddev_Pop_Fields = {
   __typename?: 'recipe_direction_actions_stddev_pop_fields';
@@ -6466,14 +6743,6 @@ export type Recipe_Direction_Actions_Stddev_Pop_Fields = {
   duration?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   quantity?: Maybe<Scalars['Float']>;
-};
-
-/** order by stddev_pop() on columns of table "recipe_direction_actions" */
-export type Recipe_Direction_Actions_Stddev_Pop_Order_By = {
-  direction_id?: InputMaybe<Order_By>;
-  duration?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  quantity?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -6485,14 +6754,6 @@ export type Recipe_Direction_Actions_Stddev_Samp_Fields = {
   quantity?: Maybe<Scalars['Float']>;
 };
 
-/** order by stddev_samp() on columns of table "recipe_direction_actions" */
-export type Recipe_Direction_Actions_Stddev_Samp_Order_By = {
-  direction_id?: InputMaybe<Order_By>;
-  duration?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  quantity?: InputMaybe<Order_By>;
-};
-
 /** aggregate sum on columns */
 export type Recipe_Direction_Actions_Sum_Fields = {
   __typename?: 'recipe_direction_actions_sum_fields';
@@ -6500,14 +6761,6 @@ export type Recipe_Direction_Actions_Sum_Fields = {
   duration?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
   quantity?: Maybe<Scalars['float8']>;
-};
-
-/** order by sum() on columns of table "recipe_direction_actions" */
-export type Recipe_Direction_Actions_Sum_Order_By = {
-  direction_id?: InputMaybe<Order_By>;
-  duration?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  quantity?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "recipe_direction_actions" */
@@ -6537,14 +6790,6 @@ export type Recipe_Direction_Actions_Var_Pop_Fields = {
   quantity?: Maybe<Scalars['Float']>;
 };
 
-/** order by var_pop() on columns of table "recipe_direction_actions" */
-export type Recipe_Direction_Actions_Var_Pop_Order_By = {
-  direction_id?: InputMaybe<Order_By>;
-  duration?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  quantity?: InputMaybe<Order_By>;
-};
-
 /** aggregate var_samp on columns */
 export type Recipe_Direction_Actions_Var_Samp_Fields = {
   __typename?: 'recipe_direction_actions_var_samp_fields';
@@ -6554,14 +6799,6 @@ export type Recipe_Direction_Actions_Var_Samp_Fields = {
   quantity?: Maybe<Scalars['Float']>;
 };
 
-/** order by var_samp() on columns of table "recipe_direction_actions" */
-export type Recipe_Direction_Actions_Var_Samp_Order_By = {
-  direction_id?: InputMaybe<Order_By>;
-  duration?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  quantity?: InputMaybe<Order_By>;
-};
-
 /** aggregate variance on columns */
 export type Recipe_Direction_Actions_Variance_Fields = {
   __typename?: 'recipe_direction_actions_variance_fields';
@@ -6569,14 +6806,6 @@ export type Recipe_Direction_Actions_Variance_Fields = {
   duration?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   quantity?: Maybe<Scalars['Float']>;
-};
-
-/** order by variance() on columns of table "recipe_direction_actions" */
-export type Recipe_Direction_Actions_Variance_Order_By = {
-  direction_id?: InputMaybe<Order_By>;
-  duration?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  quantity?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "recipe_direction_durations" */
@@ -6638,7 +6867,7 @@ export type Recipe_Direction_Durations_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "recipe_direction_durations" */
 export type Recipe_Direction_Durations_Arr_Rel_Insert_Input = {
   data: Array<Recipe_Direction_Durations_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Recipe_Direction_Durations_On_Conflict>;
 };
 
@@ -6747,7 +6976,7 @@ export type Recipe_Direction_Durations_Mutation_Response = {
   returning: Array<Recipe_Direction_Durations>;
 };
 
-/** on conflict condition type for table "recipe_direction_durations" */
+/** on_conflict condition type for table "recipe_direction_durations" */
 export type Recipe_Direction_Durations_On_Conflict = {
   constraint: Recipe_Direction_Durations_Constraint;
   update_columns?: Array<Recipe_Direction_Durations_Update_Column>;
@@ -6934,35 +7163,11 @@ export type Recipe_Direction_Durations_Variance_Order_By = {
 export type Recipe_Directions = {
   __typename?: 'recipe_directions';
   id: Scalars['Int'];
-  /** An array relationship */
-  recipe_direction_actions: Array<Recipe_Direction_Actions>;
-  /** An aggregate relationship */
-  recipe_direction_actions_aggregate: Recipe_Direction_Actions_Aggregate;
   recipe_id: Scalars['Int'];
   seq_num: Scalars['Int'];
   step: Scalars['String'];
   video_timestamp?: Maybe<Scalars['Int']>;
   video_timestamp_end?: Maybe<Scalars['Int']>;
-};
-
-
-/** columns and relationships of "recipe_directions" */
-export type Recipe_DirectionsRecipe_Direction_ActionsArgs = {
-  distinct_on?: InputMaybe<Array<Recipe_Direction_Actions_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Recipe_Direction_Actions_Order_By>>;
-  where?: InputMaybe<Recipe_Direction_Actions_Bool_Exp>;
-};
-
-
-/** columns and relationships of "recipe_directions" */
-export type Recipe_DirectionsRecipe_Direction_Actions_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Recipe_Direction_Actions_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Recipe_Direction_Actions_Order_By>>;
-  where?: InputMaybe<Recipe_Direction_Actions_Bool_Exp>;
 };
 
 /** aggregated selection of "recipe_directions" */
@@ -7013,7 +7218,7 @@ export type Recipe_Directions_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "recipe_directions" */
 export type Recipe_Directions_Arr_Rel_Insert_Input = {
   data: Array<Recipe_Directions_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Recipe_Directions_On_Conflict>;
 };
 
@@ -7042,7 +7247,6 @@ export type Recipe_Directions_Bool_Exp = {
   _not?: InputMaybe<Recipe_Directions_Bool_Exp>;
   _or?: InputMaybe<Array<Recipe_Directions_Bool_Exp>>;
   id?: InputMaybe<Int_Comparison_Exp>;
-  recipe_direction_actions?: InputMaybe<Recipe_Direction_Actions_Bool_Exp>;
   recipe_id?: InputMaybe<Int_Comparison_Exp>;
   seq_num?: InputMaybe<Int_Comparison_Exp>;
   step?: InputMaybe<String_Comparison_Exp>;
@@ -7070,7 +7274,6 @@ export type Recipe_Directions_Inc_Input = {
 /** input type for inserting data into table "recipe_directions" */
 export type Recipe_Directions_Insert_Input = {
   id?: InputMaybe<Scalars['Int']>;
-  recipe_direction_actions?: InputMaybe<Recipe_Direction_Actions_Arr_Rel_Insert_Input>;
   recipe_id?: InputMaybe<Scalars['Int']>;
   seq_num?: InputMaybe<Scalars['Int']>;
   step?: InputMaybe<Scalars['String']>;
@@ -7129,7 +7332,7 @@ export type Recipe_Directions_Mutation_Response = {
   returning: Array<Recipe_Directions>;
 };
 
-/** on conflict condition type for table "recipe_directions" */
+/** on_conflict condition type for table "recipe_directions" */
 export type Recipe_Directions_On_Conflict = {
   constraint: Recipe_Directions_Constraint;
   update_columns?: Array<Recipe_Directions_Update_Column>;
@@ -7139,7 +7342,6 @@ export type Recipe_Directions_On_Conflict = {
 /** Ordering options when selecting data from "recipe_directions". */
 export type Recipe_Directions_Order_By = {
   id?: InputMaybe<Order_By>;
-  recipe_direction_actions_aggregate?: InputMaybe<Recipe_Direction_Actions_Aggregate_Order_By>;
   recipe_id?: InputMaybe<Order_By>;
   seq_num?: InputMaybe<Order_By>;
   step?: InputMaybe<Order_By>;
@@ -7432,7 +7634,7 @@ export type Recipe_Favorite_Mutation_Response = {
   returning: Array<Recipe_Favorite>;
 };
 
-/** on conflict condition type for table "recipe_favorite" */
+/** on_conflict condition type for table "recipe_favorite" */
 export type Recipe_Favorite_On_Conflict = {
   constraint: Recipe_Favorite_Constraint;
   update_columns?: Array<Recipe_Favorite_Update_Column>;
@@ -7596,7 +7798,7 @@ export type Recipe_Ingredient_Food_Candidate_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "recipe_ingredient_food_candidate" */
 export type Recipe_Ingredient_Food_Candidate_Arr_Rel_Insert_Input = {
   data: Array<Recipe_Ingredient_Food_Candidate_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Recipe_Ingredient_Food_Candidate_On_Conflict>;
 };
 
@@ -7699,7 +7901,7 @@ export type Recipe_Ingredient_Food_Candidate_Mutation_Response = {
   returning: Array<Recipe_Ingredient_Food_Candidate>;
 };
 
-/** on conflict condition type for table "recipe_ingredient_food_candidate" */
+/** on_conflict condition type for table "recipe_ingredient_food_candidate" */
 export type Recipe_Ingredient_Food_Candidate_On_Conflict = {
   constraint: Recipe_Ingredient_Food_Candidate_Constraint;
   update_columns?: Array<Recipe_Ingredient_Food_Candidate_Update_Column>;
@@ -7955,7 +8157,7 @@ export type Recipe_Ingredient_Groups_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "recipe_ingredient_groups" */
 export type Recipe_Ingredient_Groups_Arr_Rel_Insert_Input = {
   data: Array<Recipe_Ingredient_Groups_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Recipe_Ingredient_Groups_On_Conflict>;
 };
 
@@ -8058,11 +8260,11 @@ export type Recipe_Ingredient_Groups_Mutation_Response = {
 /** input type for inserting object relation for remote table "recipe_ingredient_groups" */
 export type Recipe_Ingredient_Groups_Obj_Rel_Insert_Input = {
   data: Recipe_Ingredient_Groups_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Recipe_Ingredient_Groups_On_Conflict>;
 };
 
-/** on conflict condition type for table "recipe_ingredient_groups" */
+/** on_conflict condition type for table "recipe_ingredient_groups" */
 export type Recipe_Ingredient_Groups_On_Conflict = {
   constraint: Recipe_Ingredient_Groups_Constraint;
   update_columns?: Array<Recipe_Ingredient_Groups_Update_Column>;
@@ -8228,7 +8430,6 @@ export type Recipe_Ingredients = {
   comment?: Maybe<Scalars['String']>;
   /** An object relationship */
   food?: Maybe<Food>;
-  /** A computed field, executes function "food_candidates_for_ingredient" */
   food_candidates?: Maybe<Array<Food>>;
   food_id?: Maybe<Scalars['Int']>;
   group_id?: Maybe<Scalars['Int']>;
@@ -8325,7 +8526,7 @@ export type Recipe_Ingredients_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "recipe_ingredients" */
 export type Recipe_Ingredients_Arr_Rel_Insert_Input = {
   data: Array<Recipe_Ingredients_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Recipe_Ingredients_On_Conflict>;
 };
 
@@ -8482,7 +8683,7 @@ export type Recipe_Ingredients_Mutation_Response = {
   returning: Array<Recipe_Ingredients>;
 };
 
-/** on conflict condition type for table "recipe_ingredients" */
+/** on_conflict condition type for table "recipe_ingredients" */
 export type Recipe_Ingredients_On_Conflict = {
   constraint: Recipe_Ingredients_Constraint;
   update_columns?: Array<Recipe_Ingredients_Update_Column>;
@@ -8802,7 +9003,7 @@ export type Recipe_List_Items_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "recipe_list_items" */
 export type Recipe_List_Items_Arr_Rel_Insert_Input = {
   data: Array<Recipe_List_Items_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Recipe_List_Items_On_Conflict>;
 };
 
@@ -8903,7 +9104,7 @@ export type Recipe_List_Items_Mutation_Response = {
   returning: Array<Recipe_List_Items>;
 };
 
-/** on conflict condition type for table "recipe_list_items" */
+/** on_conflict condition type for table "recipe_list_items" */
 export type Recipe_List_Items_On_Conflict = {
   constraint: Recipe_List_Items_Constraint;
   update_columns?: Array<Recipe_List_Items_Update_Column>;
@@ -9202,11 +9403,11 @@ export type Recipe_Lists_Mutation_Response = {
 /** input type for inserting object relation for remote table "recipe_lists" */
 export type Recipe_Lists_Obj_Rel_Insert_Input = {
   data: Recipe_Lists_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Recipe_Lists_On_Conflict>;
 };
 
-/** on conflict condition type for table "recipe_lists" */
+/** on_conflict condition type for table "recipe_lists" */
 export type Recipe_Lists_On_Conflict = {
   constraint: Recipe_Lists_Constraint;
   update_columns?: Array<Recipe_Lists_Update_Column>;
@@ -9295,12 +9496,7 @@ export type Recipe_Lists_Variance_Fields = {
   id?: Maybe<Scalars['Float']>;
 };
 
-/**
- * Sources from where recipes come from.
- *
- *
- * columns and relationships of "recipe_source_providers"
- */
+/** Sources from where recipes come from. */
 export type Recipe_Source_Providers = {
   __typename?: 'recipe_source_providers';
   description: Scalars['String'];
@@ -9386,11 +9582,11 @@ export type Recipe_Source_Providers_Mutation_Response = {
 /** input type for inserting object relation for remote table "recipe_source_providers" */
 export type Recipe_Source_Providers_Obj_Rel_Insert_Input = {
   data: Recipe_Source_Providers_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Recipe_Source_Providers_On_Conflict>;
 };
 
-/** on conflict condition type for table "recipe_source_providers" */
+/** on_conflict condition type for table "recipe_source_providers" */
 export type Recipe_Source_Providers_On_Conflict = {
   constraint: Recipe_Source_Providers_Constraint;
   update_columns?: Array<Recipe_Source_Providers_Update_Column>;
@@ -9499,7 +9695,7 @@ export type Recipe_Tags_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "recipe_tags" */
 export type Recipe_Tags_Arr_Rel_Insert_Input = {
   data: Array<Recipe_Tags_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Recipe_Tags_On_Conflict>;
 };
 
@@ -9595,7 +9791,7 @@ export type Recipe_Tags_Mutation_Response = {
   returning: Array<Recipe_Tags>;
 };
 
-/** on conflict condition type for table "recipe_tags" */
+/** on_conflict condition type for table "recipe_tags" */
 export type Recipe_Tags_On_Conflict = {
   constraint: Recipe_Tags_Constraint;
   update_columns?: Array<Recipe_Tags_Update_Column>;
@@ -10024,11 +10220,11 @@ export type Recipes_Mutation_Response = {
 /** input type for inserting object relation for remote table "recipes" */
 export type Recipes_Obj_Rel_Insert_Input = {
   data: Recipes_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Recipes_On_Conflict>;
 };
 
-/** on conflict condition type for table "recipes" */
+/** on_conflict condition type for table "recipes" */
 export type Recipes_On_Conflict = {
   constraint: Recipes_Constraint;
   update_columns?: Array<Recipes_Update_Column>;
@@ -10256,6 +10452,12 @@ export type Subscription_Root = {
   food_portion_aggregate: Food_Portion_Aggregate;
   /** fetch data from the table: "food_portion" using primary key columns */
   food_portion_by_pk?: Maybe<Food_Portion>;
+  /** fetch data from the table: "ingredients" */
+  ingredients: Array<Ingredients>;
+  /** fetch aggregated fields from the table: "ingredients" */
+  ingredients_aggregate: Ingredients_Aggregate;
+  /** fetch data from the table: "ingredients" using primary key columns */
+  ingredients_by_pk?: Maybe<Ingredients>;
   /** fetch data from the table: "measure_unit" */
   measure_unit: Array<Measure_Unit>;
   /** fetch aggregated fields from the table: "measure_unit" */
@@ -10268,9 +10470,9 @@ export type Subscription_Root = {
   nutrient_aggregate: Nutrient_Aggregate;
   /** fetch data from the table: "nutrient" using primary key columns */
   nutrient_by_pk?: Maybe<Nutrient>;
-  /** An array relationship */
+  /** fetch data from the table: "recipe_direction_actions" */
   recipe_direction_actions: Array<Recipe_Direction_Actions>;
-  /** An aggregate relationship */
+  /** fetch aggregated fields from the table: "recipe_direction_actions" */
   recipe_direction_actions_aggregate: Recipe_Direction_Actions_Aggregate;
   /** fetch data from the table: "recipe_direction_actions" using primary key columns */
   recipe_direction_actions_by_pk?: Maybe<Recipe_Direction_Actions>;
@@ -10350,8 +10552,6 @@ export type Subscription_Root = {
   search_recipes_aggregate: Recipes_Aggregate;
   /** fetch data from the table: "auth.users" using primary key columns */
   user?: Maybe<Users>;
-  /** fetch aggregated fields from the table: "auth.users" */
-  userAggregate: Users_Aggregate;
   /** fetch data from the table: "user_config" */
   user_config: Array<User_Config>;
   /** fetch aggregated fields from the table: "user_config" */
@@ -10360,6 +10560,8 @@ export type Subscription_Root = {
   user_config_by_pk?: Maybe<User_Config>;
   /** fetch data from the table: "auth.users" */
   users: Array<Users>;
+  /** fetch aggregated fields from the table: "auth.users" */
+  usersAggregate: Users_Aggregate;
 };
 
 
@@ -10636,6 +10838,29 @@ export type Subscription_RootFood_Portion_AggregateArgs = {
 
 export type Subscription_RootFood_Portion_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+
+export type Subscription_RootIngredientsArgs = {
+  distinct_on?: InputMaybe<Array<Ingredients_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Ingredients_Order_By>>;
+  where?: InputMaybe<Ingredients_Bool_Exp>;
+};
+
+
+export type Subscription_RootIngredients_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Ingredients_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Ingredients_Order_By>>;
+  where?: InputMaybe<Ingredients_Bool_Exp>;
+};
+
+
+export type Subscription_RootIngredients_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -11006,15 +11231,6 @@ export type Subscription_RootUserArgs = {
 };
 
 
-export type Subscription_RootUserAggregateArgs = {
-  distinct_on?: InputMaybe<Array<Users_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Users_Order_By>>;
-  where?: InputMaybe<Users_Bool_Exp>;
-};
-
-
 export type Subscription_RootUser_ConfigArgs = {
   distinct_on?: InputMaybe<Array<User_Config_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -11039,6 +11255,15 @@ export type Subscription_RootUser_Config_By_PkArgs = {
 
 
 export type Subscription_RootUsersArgs = {
+  distinct_on?: InputMaybe<Array<Users_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Users_Order_By>>;
+  where?: InputMaybe<Users_Bool_Exp>;
+};
+
+
+export type Subscription_RootUsersAggregateArgs = {
   distinct_on?: InputMaybe<Array<Users_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -11177,7 +11402,7 @@ export type User_Config_Mutation_Response = {
   returning: Array<User_Config>;
 };
 
-/** on conflict condition type for table "user_config" */
+/** on_conflict condition type for table "user_config" */
 export type User_Config_On_Conflict = {
   constraint: User_Config_Constraint;
   update_columns?: Array<User_Config_Update_Column>;
@@ -11405,7 +11630,7 @@ export type Users_Append_Input = {
 /** input type for inserting array relation for remote table "auth.users" */
 export type Users_Arr_Rel_Insert_Input = {
   data: Array<Users_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Users_On_Conflict>;
 };
 
@@ -11607,11 +11832,11 @@ export type Users_Mutation_Response = {
 /** input type for inserting object relation for remote table "auth.users" */
 export type Users_Obj_Rel_Insert_Input = {
   data: Users_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Users_On_Conflict>;
 };
 
-/** on conflict condition type for table "auth.users" */
+/** on_conflict condition type for table "auth.users" */
 export type Users_On_Conflict = {
   constraint: Users_Constraint;
   update_columns?: Array<Users_Update_Column>;
@@ -11903,7 +12128,7 @@ export type ViewRecipeQueryQueryVariables = Exact<{
 }>;
 
 
-export type ViewRecipeQueryQuery = { __typename?: 'query_root', recipes: Array<{ __typename?: 'recipes', id: number, slug?: string | null, name: string, created_at: any, source: string, updated_at: any, video?: string | null, recipe_ingredient_groups: Array<{ __typename?: 'recipe_ingredient_groups', name?: string | null, group_ingredients: Array<{ __typename?: 'recipe_ingredients', id: number, seq_num?: number | null, text: string, name?: string | null, amount?: number | null, comment?: string | null, units?: string | null, video_timestamp?: number | null, video_timestamp_end?: number | null, recipe_ingredient_food_candidates: Array<{ __typename?: 'recipe_ingredient_food_candidate', food_portion?: { __typename?: 'food_portion', gram_weight?: any | null, amount?: any | null, modifier?: string | null, portion_description?: string | null, measure_unit?: { __typename?: 'measure_unit', name?: string | null } | null } | null, food: { __typename?: 'food', description?: string | null } }> }> }>, recipe_directions: Array<{ __typename?: 'recipe_directions', id: number, seq_num: number, step: string, video_timestamp?: number | null, video_timestamp_end?: number | null }>, recipe_tags: Array<{ __typename?: 'recipe_tags', name: string, id: number }> }> };
+export type ViewRecipeQueryQuery = { __typename?: 'query_root', recipes: Array<{ __typename?: 'recipes', id: number, slug?: string | null, name: string, created_at: any, source: string, updated_at: any, video?: string | null, recipe_ingredient_groups: Array<{ __typename?: 'recipe_ingredient_groups', id: number, name?: string | null, group_ingredients: Array<{ __typename?: 'recipe_ingredients', id: number, seq_num?: number | null, text: string, name?: string | null, amount?: number | null, comment?: string | null, units?: string | null, video_timestamp?: number | null, video_timestamp_end?: number | null, recipe_ingredient_food_candidates: Array<{ __typename?: 'recipe_ingredient_food_candidate', food_portion?: { __typename?: 'food_portion', gram_weight?: any | null, amount?: any | null, modifier?: string | null, portion_description?: string | null, measure_unit?: { __typename?: 'measure_unit', name?: string | null } | null } | null, food: { __typename?: 'food', description?: string | null } }> }> }>, recipe_directions: Array<{ __typename?: 'recipe_directions', id: number, seq_num: number, step: string, video_timestamp?: number | null, video_timestamp_end?: number | null }>, recipe_tags: Array<{ __typename?: 'recipe_tags', name: string, id: number }> }> };
 
 export type UpdateRecipeVideoMutationVariables = Exact<{
   id?: InputMaybe<Scalars['Int']>;
@@ -12425,6 +12650,7 @@ export const ViewRecipeQueryDocument = gql`
     updated_at
     video
     recipe_ingredient_groups(order_by: {seq_num: asc}) {
+      id
       name
       group_ingredients(order_by: {seq_num: asc}) {
         id

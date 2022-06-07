@@ -12,6 +12,7 @@ $ npx generate-react-cli component SaveRecipePage --type=page
 import React from 'react'
 
 import { SaveRecipeForm } from '../../components/SaveRecipeForm/SaveRecipeForm';
+import {Container} from "react-bootstrap";
 
 interface SaveRecipePageProps {
 
@@ -19,9 +20,9 @@ interface SaveRecipePageProps {
 
 export const SaveRecipePage: React.FunctionComponent<SaveRecipePageProps> = (props) => {
   return (
-    <div className="SaveRecipePage" data-testid="SaveRecipePage">
+    <Container className="SaveRecipePage" data-testid="SaveRecipePage">
       <h1>Save Recipe</h1>
       <SaveRecipeForm />
-    </div>
+    </Container>
   );
 }

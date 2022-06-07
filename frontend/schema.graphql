@@ -111,12 +111,32 @@ input String_comparison_exp {
   _similar: String
 }
 
+scalar _text
+
+"""
+Boolean expression to compare columns of type "_text". All fields are combined with logical 'AND'.
+"""
+input _text_comparison_exp {
+  _eq: _text
+  _gt: _text
+  _gte: _text
+  _in: [_text!]
+  _is_null: Boolean
+  _lt: _text
+  _lte: _text
+  _neq: _text
+  _nin: [_text!]
+}
+
 """
 columns and relationships of "auth.provider_requests"
 """
 type authProviderRequests {
   id: uuid!
-  redirectUrl: String!
+  options(
+    """JSON select path"""
+    path: String
+  ): jsonb
 }
 
 """
@@ -136,6 +156,11 @@ type authProviderRequests_aggregate_fields {
   min: authProviderRequests_min_fields
 }
 
+"""append existing jsonb value of filtered columns with new jsonb value"""
+input authProviderRequests_append_input {
+  options: jsonb
+}
+
 """
 Boolean expression to filter rows from the table "auth.provider_requests". All fields are combined with a logical 'AND'.
 """
@@ -144,7 +169,7 @@ input authProviderRequests_bool_exp {
   _not: authProviderRequests_bool_exp
   _or: [authProviderRequests_bool_exp!]
   id: uuid_comparison_exp
-  redirectUrl: String_comparison_exp
+  options: jsonb_comparison_exp
 }
 
 """
@@ -156,23 +181,42 @@ enum authProviderRequests_constraint {
 }
 
 """
+delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+"""
+input authProviderRequests_delete_at_path_input {
+  options: [String!]
+}
+
+"""
+delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+"""
+input authProviderRequests_delete_elem_input {
+  options: Int
+}
+
+"""
+delete key/value pair or string element. key/value pairs are matched based on their key value
+"""
+input authProviderRequests_delete_key_input {
+  options: String
+}
+
+"""
 input type for inserting data into table "auth.provider_requests"
 """
 input authProviderRequests_insert_input {
   id: uuid
-  redirectUrl: String
+  options: jsonb
 }
 
 """aggregate max on columns"""
 type authProviderRequests_max_fields {
   id: uuid
-  redirectUrl: String
 }
 
 """aggregate min on columns"""
 type authProviderRequests_min_fields {
   id: uuid
-  redirectUrl: String
 }
 
 """
@@ -187,7 +231,7 @@ type authProviderRequests_mutation_response {
 }
 
 """
-on conflict condition type for table "auth.provider_requests"
+on_conflict condition type for table "auth.provider_requests"
 """
 input authProviderRequests_on_conflict {
   constraint: authProviderRequests_constraint!
@@ -198,12 +242,17 @@ input authProviderRequests_on_conflict {
 """Ordering options when selecting data from "auth.provider_requests"."""
 input authProviderRequests_order_by {
   id: order_by
-  redirectUrl: order_by
+  options: order_by
 }
 
 """primary key columns input for table: authProviderRequests"""
 input authProviderRequests_pk_columns_input {
   id: uuid!
+}
+
+"""prepend existing jsonb value of filtered columns with new jsonb value"""
+input authProviderRequests_prepend_input {
+  options: jsonb
 }
 
 """
@@ -214,7 +263,7 @@ enum authProviderRequests_select_column {
   id
 
   """column name"""
-  redirectUrl
+  options
 }
 
 """
@@ -222,7 +271,7 @@ input type for updating data in table "auth.provider_requests"
 """
 input authProviderRequests_set_input {
   id: uuid
-  redirectUrl: String
+  options: jsonb
 }
 
 """
@@ -233,7 +282,7 @@ enum authProviderRequests_update_column {
   id
 
   """column name"""
-  redirectUrl
+  options
 }
 
 """
@@ -350,12 +399,12 @@ input type for inserting object relation for remote table "auth.providers"
 input authProviders_obj_rel_insert_input {
   data: authProviders_insert_input!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: authProviders_on_conflict
 }
 
 """
-on conflict condition type for table "auth.providers"
+on_conflict condition type for table "auth.providers"
 """
 input authProviders_on_conflict {
   constraint: authProviders_constraint!
@@ -442,7 +491,7 @@ input type for inserting array relation for remote table "auth.refresh_tokens"
 input authRefreshTokens_arr_rel_insert_input {
   data: [authRefreshTokens_insert_input!]!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: authRefreshTokens_on_conflict
 }
 
@@ -527,7 +576,7 @@ type authRefreshTokens_mutation_response {
 }
 
 """
-on conflict condition type for table "auth.refresh_tokens"
+on_conflict condition type for table "auth.refresh_tokens"
 """
 input authRefreshTokens_on_conflict {
   constraint: authRefreshTokens_constraint!
@@ -745,12 +794,12 @@ input type for inserting object relation for remote table "auth.roles"
 input authRoles_obj_rel_insert_input {
   data: authRoles_insert_input!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: authRoles_on_conflict
 }
 
 """
-on conflict condition type for table "auth.roles"
+on_conflict condition type for table "auth.roles"
 """
 input authRoles_on_conflict {
   constraint: authRoles_constraint!
@@ -845,7 +894,7 @@ input type for inserting array relation for remote table "auth.user_providers"
 input authUserProviders_arr_rel_insert_input {
   data: [authUserProviders_insert_input!]!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: authUserProviders_on_conflict
 }
 
@@ -962,7 +1011,7 @@ type authUserProviders_mutation_response {
 }
 
 """
-on conflict condition type for table "auth.user_providers"
+on_conflict condition type for table "auth.user_providers"
 """
 input authUserProviders_on_conflict {
   constraint: authUserProviders_constraint!
@@ -1109,7 +1158,7 @@ input type for inserting array relation for remote table "auth.user_roles"
 input authUserRoles_arr_rel_insert_input {
   data: [authUserRoles_insert_input!]!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: authUserRoles_on_conflict
 }
 
@@ -1199,7 +1248,7 @@ type authUserRoles_mutation_response {
 }
 
 """
-on conflict condition type for table "auth.user_roles"
+on_conflict condition type for table "auth.user_roles"
 """
 input authUserRoles_on_conflict {
   constraint: authUserRoles_constraint!
@@ -1583,7 +1632,7 @@ input type for inserting array relation for remote table "food_attribute"
 input food_attribute_arr_rel_insert_input {
   data: [food_attribute_insert_input!]!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: food_attribute_on_conflict
 }
 
@@ -1708,7 +1757,7 @@ type food_attribute_mutation_response {
 }
 
 """
-on conflict condition type for table "food_attribute"
+on_conflict condition type for table "food_attribute"
 """
 input food_attribute_on_conflict {
   constraint: food_attribute_constraint!
@@ -1945,12 +1994,12 @@ input type for inserting object relation for remote table "food_attribute_type"
 input food_attribute_type_obj_rel_insert_input {
   data: food_attribute_type_insert_input!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: food_attribute_type_on_conflict
 }
 
 """
-on conflict condition type for table "food_attribute_type"
+on_conflict condition type for table "food_attribute_type"
 """
 input food_attribute_type_on_conflict {
   constraint: food_attribute_type_constraint!
@@ -2260,12 +2309,12 @@ input type for inserting object relation for remote table "food_category"
 input food_category_obj_rel_insert_input {
   data: food_category_insert_input!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: food_category_on_conflict
 }
 
 """
-on conflict condition type for table "food_category"
+on_conflict condition type for table "food_category"
 """
 input food_category_on_conflict {
   constraint: food_category_constraint!
@@ -2528,7 +2577,7 @@ input type for inserting array relation for remote table "food_nutrient"
 input food_nutrient_arr_rel_insert_input {
   data: [food_nutrient_insert_input!]!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: food_nutrient_on_conflict
 }
 
@@ -2701,7 +2750,7 @@ type food_nutrient_mutation_response {
 }
 
 """
-on conflict condition type for table "food_nutrient"
+on_conflict condition type for table "food_nutrient"
 """
 input food_nutrient_on_conflict {
   constraint: food_nutrient_constraint!
@@ -3039,12 +3088,12 @@ input type for inserting object relation for remote table "food"
 input food_obj_rel_insert_input {
   data: food_insert_input!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: food_on_conflict
 }
 
 """
-on conflict condition type for table "food"
+on_conflict condition type for table "food"
 """
 input food_on_conflict {
   constraint: food_constraint!
@@ -3139,7 +3188,7 @@ input type for inserting array relation for remote table "food_portion"
 input food_portion_arr_rel_insert_input {
   data: [food_portion_insert_input!]!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: food_portion_on_conflict
 }
 
@@ -3311,12 +3360,12 @@ input type for inserting object relation for remote table "food_portion"
 input food_portion_obj_rel_insert_input {
   data: food_portion_insert_input!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: food_portion_on_conflict
 }
 
 """
-on conflict condition type for table "food_portion"
+on_conflict condition type for table "food_portion"
 """
 input food_portion_on_conflict {
   constraint: food_portion_constraint!
@@ -3776,6 +3825,214 @@ input food_variance_order_by {
   food_category_id: order_by
 }
 
+"""Ingredients used in recipes."""
+type ingredients {
+  fdc_id: Int!
+
+  """An object relationship"""
+  food: food!
+  id: uuid!
+  names: _text
+  wiki_url: String!
+}
+
+"""
+aggregated selection of "ingredients"
+"""
+type ingredients_aggregate {
+  aggregate: ingredients_aggregate_fields
+  nodes: [ingredients!]!
+}
+
+"""
+aggregate fields of "ingredients"
+"""
+type ingredients_aggregate_fields {
+  avg: ingredients_avg_fields
+  count(columns: [ingredients_select_column!], distinct: Boolean): Int!
+  max: ingredients_max_fields
+  min: ingredients_min_fields
+  stddev: ingredients_stddev_fields
+  stddev_pop: ingredients_stddev_pop_fields
+  stddev_samp: ingredients_stddev_samp_fields
+  sum: ingredients_sum_fields
+  var_pop: ingredients_var_pop_fields
+  var_samp: ingredients_var_samp_fields
+  variance: ingredients_variance_fields
+}
+
+"""aggregate avg on columns"""
+type ingredients_avg_fields {
+  fdc_id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "ingredients". All fields are combined with a logical 'AND'.
+"""
+input ingredients_bool_exp {
+  _and: [ingredients_bool_exp!]
+  _not: ingredients_bool_exp
+  _or: [ingredients_bool_exp!]
+  fdc_id: Int_comparison_exp
+  food: food_bool_exp
+  id: uuid_comparison_exp
+  names: _text_comparison_exp
+  wiki_url: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "ingredients"
+"""
+enum ingredients_constraint {
+  """unique or primary key constraint"""
+  ingredients_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "ingredients"
+"""
+input ingredients_inc_input {
+  fdc_id: Int
+}
+
+"""
+input type for inserting data into table "ingredients"
+"""
+input ingredients_insert_input {
+  fdc_id: Int
+  food: food_obj_rel_insert_input
+  id: uuid
+  names: _text
+  wiki_url: String
+}
+
+"""aggregate max on columns"""
+type ingredients_max_fields {
+  fdc_id: Int
+  id: uuid
+  wiki_url: String
+}
+
+"""aggregate min on columns"""
+type ingredients_min_fields {
+  fdc_id: Int
+  id: uuid
+  wiki_url: String
+}
+
+"""
+response of any mutation on the table "ingredients"
+"""
+type ingredients_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [ingredients!]!
+}
+
+"""
+on_conflict condition type for table "ingredients"
+"""
+input ingredients_on_conflict {
+  constraint: ingredients_constraint!
+  update_columns: [ingredients_update_column!]! = []
+  where: ingredients_bool_exp
+}
+
+"""Ordering options when selecting data from "ingredients"."""
+input ingredients_order_by {
+  fdc_id: order_by
+  food: food_order_by
+  id: order_by
+  names: order_by
+  wiki_url: order_by
+}
+
+"""primary key columns input for table: ingredients"""
+input ingredients_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "ingredients"
+"""
+enum ingredients_select_column {
+  """column name"""
+  fdc_id
+
+  """column name"""
+  id
+
+  """column name"""
+  names
+
+  """column name"""
+  wiki_url
+}
+
+"""
+input type for updating data in table "ingredients"
+"""
+input ingredients_set_input {
+  fdc_id: Int
+  id: uuid
+  names: _text
+  wiki_url: String
+}
+
+"""aggregate stddev on columns"""
+type ingredients_stddev_fields {
+  fdc_id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type ingredients_stddev_pop_fields {
+  fdc_id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type ingredients_stddev_samp_fields {
+  fdc_id: Float
+}
+
+"""aggregate sum on columns"""
+type ingredients_sum_fields {
+  fdc_id: Int
+}
+
+"""
+update columns of table "ingredients"
+"""
+enum ingredients_update_column {
+  """column name"""
+  fdc_id
+
+  """column name"""
+  id
+
+  """column name"""
+  names
+
+  """column name"""
+  wiki_url
+}
+
+"""aggregate var_pop on columns"""
+type ingredients_var_pop_fields {
+  fdc_id: Float
+}
+
+"""aggregate var_samp on columns"""
+type ingredients_var_samp_fields {
+  fdc_id: Float
+}
+
+"""aggregate variance on columns"""
+type ingredients_variance_fields {
+  fdc_id: Float
+}
+
 scalar jsonb
 
 """
@@ -3915,12 +4172,12 @@ input type for inserting object relation for remote table "measure_unit"
 input measure_unit_obj_rel_insert_input {
   data: measure_unit_insert_input!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: measure_unit_on_conflict
 }
 
 """
-on conflict condition type for table "measure_unit"
+on_conflict condition type for table "measure_unit"
 """
 input measure_unit_on_conflict {
   constraint: measure_unit_constraint!
@@ -4191,6 +4448,19 @@ type mutation_root {
   delete_food_portion_by_pk(id: Int!): food_portion
 
   """
+  delete data from the table: "ingredients"
+  """
+  delete_ingredients(
+    """filter the rows which have to be deleted"""
+    where: ingredients_bool_exp!
+  ): ingredients_mutation_response
+
+  """
+  delete single row from the table: "ingredients"
+  """
+  delete_ingredients_by_pk(id: uuid!): ingredients
+
+  """
   delete data from the table: "measure_unit"
   """
   delete_measure_unit(
@@ -4392,7 +4662,7 @@ type mutation_root {
     """the row to be inserted"""
     object: authProviders_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: authProviders_on_conflict
   ): authProviders
 
@@ -4403,7 +4673,7 @@ type mutation_root {
     """the row to be inserted"""
     object: authProviderRequests_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: authProviderRequests_on_conflict
   ): authProviderRequests
 
@@ -4414,7 +4684,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [authProviderRequests_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: authProviderRequests_on_conflict
   ): authProviderRequests_mutation_response
 
@@ -4425,7 +4695,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [authProviders_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: authProviders_on_conflict
   ): authProviders_mutation_response
 
@@ -4436,7 +4706,7 @@ type mutation_root {
     """the row to be inserted"""
     object: authRefreshTokens_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: authRefreshTokens_on_conflict
   ): authRefreshTokens
 
@@ -4447,7 +4717,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [authRefreshTokens_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: authRefreshTokens_on_conflict
   ): authRefreshTokens_mutation_response
 
@@ -4458,7 +4728,7 @@ type mutation_root {
     """the row to be inserted"""
     object: authRoles_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: authRoles_on_conflict
   ): authRoles
 
@@ -4469,7 +4739,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [authRoles_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: authRoles_on_conflict
   ): authRoles_mutation_response
 
@@ -4480,7 +4750,7 @@ type mutation_root {
     """the row to be inserted"""
     object: authUserProviders_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: authUserProviders_on_conflict
   ): authUserProviders
 
@@ -4491,7 +4761,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [authUserProviders_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: authUserProviders_on_conflict
   ): authUserProviders_mutation_response
 
@@ -4502,7 +4772,7 @@ type mutation_root {
     """the row to be inserted"""
     object: authUserRoles_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: authUserRoles_on_conflict
   ): authUserRoles
 
@@ -4513,7 +4783,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [authUserRoles_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: authUserRoles_on_conflict
   ): authUserRoles_mutation_response
 
@@ -4524,7 +4794,7 @@ type mutation_root {
     """the row to be inserted"""
     object: users_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: users_on_conflict
   ): users
 
@@ -4535,7 +4805,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [users_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: users_on_conflict
   ): users_mutation_response
 
@@ -4546,7 +4816,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [food_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: food_on_conflict
   ): food_mutation_response
 
@@ -4557,7 +4827,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [food_attribute_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: food_attribute_on_conflict
   ): food_attribute_mutation_response
 
@@ -4568,7 +4838,7 @@ type mutation_root {
     """the row to be inserted"""
     object: food_attribute_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: food_attribute_on_conflict
   ): food_attribute
 
@@ -4579,7 +4849,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [food_attribute_type_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: food_attribute_type_on_conflict
   ): food_attribute_type_mutation_response
 
@@ -4590,7 +4860,7 @@ type mutation_root {
     """the row to be inserted"""
     object: food_attribute_type_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: food_attribute_type_on_conflict
   ): food_attribute_type
 
@@ -4601,7 +4871,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [food_category_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: food_category_on_conflict
   ): food_category_mutation_response
 
@@ -4612,7 +4882,7 @@ type mutation_root {
     """the row to be inserted"""
     object: food_category_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: food_category_on_conflict
   ): food_category
 
@@ -4623,7 +4893,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [food_nutrient_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: food_nutrient_on_conflict
   ): food_nutrient_mutation_response
 
@@ -4634,7 +4904,7 @@ type mutation_root {
     """the row to be inserted"""
     object: food_nutrient_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: food_nutrient_on_conflict
   ): food_nutrient
 
@@ -4645,7 +4915,7 @@ type mutation_root {
     """the row to be inserted"""
     object: food_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: food_on_conflict
   ): food
 
@@ -4656,7 +4926,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [food_portion_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: food_portion_on_conflict
   ): food_portion_mutation_response
 
@@ -4667,9 +4937,31 @@ type mutation_root {
     """the row to be inserted"""
     object: food_portion_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: food_portion_on_conflict
   ): food_portion
+
+  """
+  insert data into the table: "ingredients"
+  """
+  insert_ingredients(
+    """the rows to be inserted"""
+    objects: [ingredients_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: ingredients_on_conflict
+  ): ingredients_mutation_response
+
+  """
+  insert a single row into the table: "ingredients"
+  """
+  insert_ingredients_one(
+    """the row to be inserted"""
+    object: ingredients_insert_input!
+
+    """upsert condition"""
+    on_conflict: ingredients_on_conflict
+  ): ingredients
 
   """
   insert data into the table: "measure_unit"
@@ -4678,7 +4970,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [measure_unit_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: measure_unit_on_conflict
   ): measure_unit_mutation_response
 
@@ -4689,7 +4981,7 @@ type mutation_root {
     """the row to be inserted"""
     object: measure_unit_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: measure_unit_on_conflict
   ): measure_unit
 
@@ -4700,7 +4992,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [nutrient_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: nutrient_on_conflict
   ): nutrient_mutation_response
 
@@ -4711,7 +5003,7 @@ type mutation_root {
     """the row to be inserted"""
     object: nutrient_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: nutrient_on_conflict
   ): nutrient
 
@@ -4722,7 +5014,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [recipe_direction_actions_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: recipe_direction_actions_on_conflict
   ): recipe_direction_actions_mutation_response
 
@@ -4733,7 +5025,7 @@ type mutation_root {
     """the row to be inserted"""
     object: recipe_direction_actions_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: recipe_direction_actions_on_conflict
   ): recipe_direction_actions
 
@@ -4744,7 +5036,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [recipe_direction_durations_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: recipe_direction_durations_on_conflict
   ): recipe_direction_durations_mutation_response
 
@@ -4755,7 +5047,7 @@ type mutation_root {
     """the row to be inserted"""
     object: recipe_direction_durations_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: recipe_direction_durations_on_conflict
   ): recipe_direction_durations
 
@@ -4766,7 +5058,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [recipe_directions_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: recipe_directions_on_conflict
   ): recipe_directions_mutation_response
 
@@ -4777,7 +5069,7 @@ type mutation_root {
     """the row to be inserted"""
     object: recipe_directions_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: recipe_directions_on_conflict
   ): recipe_directions
 
@@ -4788,7 +5080,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [recipe_favorite_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: recipe_favorite_on_conflict
   ): recipe_favorite_mutation_response
 
@@ -4799,7 +5091,7 @@ type mutation_root {
     """the row to be inserted"""
     object: recipe_favorite_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: recipe_favorite_on_conflict
   ): recipe_favorite
 
@@ -4810,7 +5102,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [recipe_ingredient_food_candidate_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: recipe_ingredient_food_candidate_on_conflict
   ): recipe_ingredient_food_candidate_mutation_response
 
@@ -4821,7 +5113,7 @@ type mutation_root {
     """the row to be inserted"""
     object: recipe_ingredient_food_candidate_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: recipe_ingredient_food_candidate_on_conflict
   ): recipe_ingredient_food_candidate
 
@@ -4832,7 +5124,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [recipe_ingredient_groups_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: recipe_ingredient_groups_on_conflict
   ): recipe_ingredient_groups_mutation_response
 
@@ -4843,7 +5135,7 @@ type mutation_root {
     """the row to be inserted"""
     object: recipe_ingredient_groups_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: recipe_ingredient_groups_on_conflict
   ): recipe_ingredient_groups
 
@@ -4854,7 +5146,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [recipe_ingredients_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: recipe_ingredients_on_conflict
   ): recipe_ingredients_mutation_response
 
@@ -4865,7 +5157,7 @@ type mutation_root {
     """the row to be inserted"""
     object: recipe_ingredients_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: recipe_ingredients_on_conflict
   ): recipe_ingredients
 
@@ -4876,7 +5168,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [recipe_list_items_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: recipe_list_items_on_conflict
   ): recipe_list_items_mutation_response
 
@@ -4887,7 +5179,7 @@ type mutation_root {
     """the row to be inserted"""
     object: recipe_list_items_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: recipe_list_items_on_conflict
   ): recipe_list_items
 
@@ -4898,7 +5190,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [recipe_lists_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: recipe_lists_on_conflict
   ): recipe_lists_mutation_response
 
@@ -4909,7 +5201,7 @@ type mutation_root {
     """the row to be inserted"""
     object: recipe_lists_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: recipe_lists_on_conflict
   ): recipe_lists
 
@@ -4920,7 +5212,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [recipe_source_providers_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: recipe_source_providers_on_conflict
   ): recipe_source_providers_mutation_response
 
@@ -4931,7 +5223,7 @@ type mutation_root {
     """the row to be inserted"""
     object: recipe_source_providers_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: recipe_source_providers_on_conflict
   ): recipe_source_providers
 
@@ -4942,7 +5234,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [recipe_tags_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: recipe_tags_on_conflict
   ): recipe_tags_mutation_response
 
@@ -4953,7 +5245,7 @@ type mutation_root {
     """the row to be inserted"""
     object: recipe_tags_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: recipe_tags_on_conflict
   ): recipe_tags
 
@@ -4964,7 +5256,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [recipes_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: recipes_on_conflict
   ): recipes_mutation_response
 
@@ -4975,7 +5267,7 @@ type mutation_root {
     """the row to be inserted"""
     object: recipes_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: recipes_on_conflict
   ): recipes
 
@@ -4986,7 +5278,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [user_config_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: user_config_on_conflict
   ): user_config_mutation_response
 
@@ -4997,7 +5289,7 @@ type mutation_root {
     """the row to be inserted"""
     object: user_config_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: user_config_on_conflict
   ): user_config
 
@@ -5014,6 +5306,27 @@ type mutation_root {
   update single row of the table: "auth.provider_requests"
   """
   updateAuthProviderRequest(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: authProviderRequests_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: authProviderRequests_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: authProviderRequests_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: authProviderRequests_delete_key_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: authProviderRequests_prepend_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: authProviderRequests_set_input
     pk_columns: authProviderRequests_pk_columns_input!
@@ -5023,6 +5336,27 @@ type mutation_root {
   update data of the table: "auth.provider_requests"
   """
   updateAuthProviderRequests(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: authProviderRequests_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: authProviderRequests_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: authProviderRequests_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: authProviderRequests_delete_key_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: authProviderRequests_prepend_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: authProviderRequests_set_input
 
@@ -5338,6 +5672,32 @@ type mutation_root {
     _set: food_portion_set_input
     pk_columns: food_portion_pk_columns_input!
   ): food_portion
+
+  """
+  update data of the table: "ingredients"
+  """
+  update_ingredients(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: ingredients_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: ingredients_set_input
+
+    """filter the rows which have to be updated"""
+    where: ingredients_bool_exp!
+  ): ingredients_mutation_response
+
+  """
+  update single row of the table: "ingredients"
+  """
+  update_ingredients_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: ingredients_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: ingredients_set_input
+    pk_columns: ingredients_pk_columns_input!
+  ): ingredients
 
   """
   update data of the table: "measure_unit"
@@ -5928,12 +6288,12 @@ input type for inserting object relation for remote table "nutrient"
 input nutrient_obj_rel_insert_input {
   data: nutrient_insert_input!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: nutrient_on_conflict
 }
 
 """
-on conflict condition type for table "nutrient"
+on_conflict condition type for table "nutrient"
 """
 input nutrient_on_conflict {
   constraint: nutrient_constraint!
@@ -6602,6 +6962,49 @@ type query_root {
   food_portion_by_pk(id: Int!): food_portion
 
   """
+  fetch data from the table: "ingredients"
+  """
+  ingredients(
+    """distinct select on columns"""
+    distinct_on: [ingredients_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [ingredients_order_by!]
+
+    """filter the rows returned"""
+    where: ingredients_bool_exp
+  ): [ingredients!]!
+
+  """
+  fetch aggregated fields from the table: "ingredients"
+  """
+  ingredients_aggregate(
+    """distinct select on columns"""
+    distinct_on: [ingredients_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [ingredients_order_by!]
+
+    """filter the rows returned"""
+    where: ingredients_bool_exp
+  ): ingredients_aggregate!
+
+  """fetch data from the table: "ingredients" using primary key columns"""
+  ingredients_by_pk(id: uuid!): ingredients
+
+  """
   fetch data from the table: "measure_unit"
   """
   measure_unit(
@@ -6687,7 +7090,9 @@ type query_root {
   """fetch data from the table: "nutrient" using primary key columns"""
   nutrient_by_pk(id: Int!): nutrient
 
-  """An array relationship"""
+  """
+  fetch data from the table: "recipe_direction_actions"
+  """
   recipe_direction_actions(
     """distinct select on columns"""
     distinct_on: [recipe_direction_actions_select_column!]
@@ -6705,7 +7110,9 @@ type query_root {
     where: recipe_direction_actions_bool_exp
   ): [recipe_direction_actions!]!
 
-  """An aggregate relationship"""
+  """
+  fetch aggregated fields from the table: "recipe_direction_actions"
+  """
   recipe_direction_actions_aggregate(
     """distinct select on columns"""
     distinct_on: [recipe_direction_actions_select_column!]
@@ -7303,26 +7710,6 @@ type query_root {
   user(id: uuid!): users
 
   """
-  fetch aggregated fields from the table: "auth.users"
-  """
-  userAggregate(
-    """distinct select on columns"""
-    distinct_on: [users_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [users_order_by!]
-
-    """filter the rows returned"""
-    where: users_bool_exp
-  ): users_aggregate!
-
-  """
   fetch data from the table: "user_config"
   """
   user_config(
@@ -7384,6 +7771,26 @@ type query_root {
     """filter the rows returned"""
     where: users_bool_exp
   ): [users!]!
+
+  """
+  fetch aggregated fields from the table: "auth.users"
+  """
+  usersAggregate(
+    """distinct select on columns"""
+    distinct_on: [users_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [users_order_by!]
+
+    """filter the rows returned"""
+    where: users_bool_exp
+  ): users_aggregate!
 }
 
 """
@@ -7427,36 +7834,9 @@ type recipe_direction_actions_aggregate_fields {
   variance: recipe_direction_actions_variance_fields
 }
 
-"""
-order by aggregate values of table "recipe_direction_actions"
-"""
-input recipe_direction_actions_aggregate_order_by {
-  avg: recipe_direction_actions_avg_order_by
-  count: order_by
-  max: recipe_direction_actions_max_order_by
-  min: recipe_direction_actions_min_order_by
-  stddev: recipe_direction_actions_stddev_order_by
-  stddev_pop: recipe_direction_actions_stddev_pop_order_by
-  stddev_samp: recipe_direction_actions_stddev_samp_order_by
-  sum: recipe_direction_actions_sum_order_by
-  var_pop: recipe_direction_actions_var_pop_order_by
-  var_samp: recipe_direction_actions_var_samp_order_by
-  variance: recipe_direction_actions_variance_order_by
-}
-
 """append existing jsonb value of filtered columns with new jsonb value"""
 input recipe_direction_actions_append_input {
   name: jsonb
-}
-
-"""
-input type for inserting array relation for remote table "recipe_direction_actions"
-"""
-input recipe_direction_actions_arr_rel_insert_input {
-  data: [recipe_direction_actions_insert_input!]!
-
-  """on conflict condition"""
-  on_conflict: recipe_direction_actions_on_conflict
 }
 
 """aggregate avg on columns"""
@@ -7465,16 +7845,6 @@ type recipe_direction_actions_avg_fields {
   duration: Float
   id: Float
   quantity: Float
-}
-
-"""
-order by avg() on columns of table "recipe_direction_actions"
-"""
-input recipe_direction_actions_avg_order_by {
-  direction_id: order_by
-  duration: order_by
-  id: order_by
-  quantity: order_by
 }
 
 """
@@ -7555,18 +7925,6 @@ type recipe_direction_actions_max_fields {
   unit: String
 }
 
-"""
-order by max() on columns of table "recipe_direction_actions"
-"""
-input recipe_direction_actions_max_order_by {
-  action: order_by
-  direction_id: order_by
-  duration: order_by
-  id: order_by
-  quantity: order_by
-  unit: order_by
-}
-
 """aggregate min on columns"""
 type recipe_direction_actions_min_fields {
   action: String
@@ -7575,18 +7933,6 @@ type recipe_direction_actions_min_fields {
   id: Int
   quantity: float8
   unit: String
-}
-
-"""
-order by min() on columns of table "recipe_direction_actions"
-"""
-input recipe_direction_actions_min_order_by {
-  action: order_by
-  direction_id: order_by
-  duration: order_by
-  id: order_by
-  quantity: order_by
-  unit: order_by
 }
 
 """
@@ -7601,7 +7947,7 @@ type recipe_direction_actions_mutation_response {
 }
 
 """
-on conflict condition type for table "recipe_direction_actions"
+on_conflict condition type for table "recipe_direction_actions"
 """
 input recipe_direction_actions_on_conflict {
   constraint: recipe_direction_actions_constraint!
@@ -7677,32 +8023,12 @@ type recipe_direction_actions_stddev_fields {
   quantity: Float
 }
 
-"""
-order by stddev() on columns of table "recipe_direction_actions"
-"""
-input recipe_direction_actions_stddev_order_by {
-  direction_id: order_by
-  duration: order_by
-  id: order_by
-  quantity: order_by
-}
-
 """aggregate stddev_pop on columns"""
 type recipe_direction_actions_stddev_pop_fields {
   direction_id: Float
   duration: Float
   id: Float
   quantity: Float
-}
-
-"""
-order by stddev_pop() on columns of table "recipe_direction_actions"
-"""
-input recipe_direction_actions_stddev_pop_order_by {
-  direction_id: order_by
-  duration: order_by
-  id: order_by
-  quantity: order_by
 }
 
 """aggregate stddev_samp on columns"""
@@ -7713,32 +8039,12 @@ type recipe_direction_actions_stddev_samp_fields {
   quantity: Float
 }
 
-"""
-order by stddev_samp() on columns of table "recipe_direction_actions"
-"""
-input recipe_direction_actions_stddev_samp_order_by {
-  direction_id: order_by
-  duration: order_by
-  id: order_by
-  quantity: order_by
-}
-
 """aggregate sum on columns"""
 type recipe_direction_actions_sum_fields {
   direction_id: Int
   duration: Int
   id: Int
   quantity: float8
-}
-
-"""
-order by sum() on columns of table "recipe_direction_actions"
-"""
-input recipe_direction_actions_sum_order_by {
-  direction_id: order_by
-  duration: order_by
-  id: order_by
-  quantity: order_by
 }
 
 """
@@ -7775,16 +8081,6 @@ type recipe_direction_actions_var_pop_fields {
   quantity: Float
 }
 
-"""
-order by var_pop() on columns of table "recipe_direction_actions"
-"""
-input recipe_direction_actions_var_pop_order_by {
-  direction_id: order_by
-  duration: order_by
-  id: order_by
-  quantity: order_by
-}
-
 """aggregate var_samp on columns"""
 type recipe_direction_actions_var_samp_fields {
   direction_id: Float
@@ -7793,32 +8089,12 @@ type recipe_direction_actions_var_samp_fields {
   quantity: Float
 }
 
-"""
-order by var_samp() on columns of table "recipe_direction_actions"
-"""
-input recipe_direction_actions_var_samp_order_by {
-  direction_id: order_by
-  duration: order_by
-  id: order_by
-  quantity: order_by
-}
-
 """aggregate variance on columns"""
 type recipe_direction_actions_variance_fields {
   direction_id: Float
   duration: Float
   id: Float
   quantity: Float
-}
-
-"""
-order by variance() on columns of table "recipe_direction_actions"
-"""
-input recipe_direction_actions_variance_order_by {
-  direction_id: order_by
-  duration: order_by
-  id: order_by
-  quantity: order_by
 }
 
 """
@@ -7881,7 +8157,7 @@ input type for inserting array relation for remote table "recipe_direction_durat
 input recipe_direction_durations_arr_rel_insert_input {
   data: [recipe_direction_durations_insert_input!]!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: recipe_direction_durations_on_conflict
 }
 
@@ -8004,7 +8280,7 @@ type recipe_direction_durations_mutation_response {
 }
 
 """
-on conflict condition type for table "recipe_direction_durations"
+on_conflict condition type for table "recipe_direction_durations"
 """
 input recipe_direction_durations_on_conflict {
   constraint: recipe_direction_durations_constraint!
@@ -8218,42 +8494,6 @@ columns and relationships of "recipe_directions"
 """
 type recipe_directions {
   id: Int!
-
-  """An array relationship"""
-  recipe_direction_actions(
-    """distinct select on columns"""
-    distinct_on: [recipe_direction_actions_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [recipe_direction_actions_order_by!]
-
-    """filter the rows returned"""
-    where: recipe_direction_actions_bool_exp
-  ): [recipe_direction_actions!]!
-
-  """An aggregate relationship"""
-  recipe_direction_actions_aggregate(
-    """distinct select on columns"""
-    distinct_on: [recipe_direction_actions_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [recipe_direction_actions_order_by!]
-
-    """filter the rows returned"""
-    where: recipe_direction_actions_bool_exp
-  ): recipe_direction_actions_aggregate!
   recipe_id: Int!
   seq_num: Int!
   step: String!
@@ -8309,7 +8549,7 @@ input type for inserting array relation for remote table "recipe_directions"
 input recipe_directions_arr_rel_insert_input {
   data: [recipe_directions_insert_input!]!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: recipe_directions_on_conflict
 }
 
@@ -8341,7 +8581,6 @@ input recipe_directions_bool_exp {
   _not: recipe_directions_bool_exp
   _or: [recipe_directions_bool_exp!]
   id: Int_comparison_exp
-  recipe_direction_actions: recipe_direction_actions_bool_exp
   recipe_id: Int_comparison_exp
   seq_num: Int_comparison_exp
   step: String_comparison_exp
@@ -8376,7 +8615,6 @@ input type for inserting data into table "recipe_directions"
 """
 input recipe_directions_insert_input {
   id: Int
-  recipe_direction_actions: recipe_direction_actions_arr_rel_insert_input
   recipe_id: Int
   seq_num: Int
   step: String
@@ -8440,7 +8678,7 @@ type recipe_directions_mutation_response {
 }
 
 """
-on conflict condition type for table "recipe_directions"
+on_conflict condition type for table "recipe_directions"
 """
 input recipe_directions_on_conflict {
   constraint: recipe_directions_constraint!
@@ -8451,7 +8689,6 @@ input recipe_directions_on_conflict {
 """Ordering options when selecting data from "recipe_directions"."""
 input recipe_directions_order_by {
   id: order_by
-  recipe_direction_actions_aggregate: recipe_direction_actions_aggregate_order_by
   recipe_id: order_by
   seq_num: order_by
   step: order_by
@@ -8772,7 +9009,7 @@ type recipe_favorite_mutation_response {
 }
 
 """
-on conflict condition type for table "recipe_favorite"
+on_conflict condition type for table "recipe_favorite"
 """
 input recipe_favorite_on_conflict {
   constraint: recipe_favorite_constraint!
@@ -8942,7 +9179,7 @@ input type for inserting array relation for remote table "recipe_ingredient_food
 input recipe_ingredient_food_candidate_arr_rel_insert_input {
   data: [recipe_ingredient_food_candidate_insert_input!]!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: recipe_ingredient_food_candidate_on_conflict
 }
 
@@ -9060,7 +9297,7 @@ type recipe_ingredient_food_candidate_mutation_response {
 }
 
 """
-on conflict condition type for table "recipe_ingredient_food_candidate"
+on_conflict condition type for table "recipe_ingredient_food_candidate"
 """
 input recipe_ingredient_food_candidate_on_conflict {
   constraint: recipe_ingredient_food_candidate_constraint!
@@ -9351,7 +9588,7 @@ input type for inserting array relation for remote table "recipe_ingredient_grou
 input recipe_ingredient_groups_arr_rel_insert_input {
   data: [recipe_ingredient_groups_insert_input!]!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: recipe_ingredient_groups_on_conflict
 }
 
@@ -9471,12 +9708,12 @@ input type for inserting object relation for remote table "recipe_ingredient_gro
 input recipe_ingredient_groups_obj_rel_insert_input {
   data: recipe_ingredient_groups_insert_input!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: recipe_ingredient_groups_on_conflict
 }
 
 """
-on conflict condition type for table "recipe_ingredient_groups"
+on_conflict condition type for table "recipe_ingredient_groups"
 """
 input recipe_ingredient_groups_on_conflict {
   constraint: recipe_ingredient_groups_constraint!
@@ -9664,10 +9901,6 @@ type recipe_ingredients {
 
   """An object relationship"""
   food: food
-
-  """
-  A computed field, executes function "food_candidates_for_ingredient"
-  """
   food_candidates(
     """distinct select on columns"""
     distinct_on: [food_select_column!]
@@ -9782,7 +10015,7 @@ input type for inserting array relation for remote table "recipe_ingredients"
 input recipe_ingredients_arr_rel_insert_input {
   data: [recipe_ingredients_insert_input!]!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: recipe_ingredients_on_conflict
 }
 
@@ -9954,7 +10187,7 @@ type recipe_ingredients_mutation_response {
 }
 
 """
-on conflict condition type for table "recipe_ingredients"
+on_conflict condition type for table "recipe_ingredients"
 """
 input recipe_ingredients_on_conflict {
   constraint: recipe_ingredients_constraint!
@@ -10311,7 +10544,7 @@ input type for inserting array relation for remote table "recipe_list_items"
 input recipe_list_items_arr_rel_insert_input {
   data: [recipe_list_items_insert_input!]!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: recipe_list_items_on_conflict
 }
 
@@ -10426,7 +10659,7 @@ type recipe_list_items_mutation_response {
 }
 
 """
-on conflict condition type for table "recipe_list_items"
+on_conflict condition type for table "recipe_list_items"
 """
 input recipe_list_items_on_conflict {
   constraint: recipe_list_items_constraint!
@@ -10763,12 +10996,12 @@ input type for inserting object relation for remote table "recipe_lists"
 input recipe_lists_obj_rel_insert_input {
   data: recipe_lists_insert_input!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: recipe_lists_on_conflict
 }
 
 """
-on conflict condition type for table "recipe_lists"
+on_conflict condition type for table "recipe_lists"
 """
 input recipe_lists_on_conflict {
   constraint: recipe_lists_constraint!
@@ -10861,13 +11094,7 @@ type recipe_lists_variance_fields {
   id: Float
 }
 
-"""
-Sources from where recipes come from.
-
-
-columns and relationships of "recipe_source_providers"
-
-"""
+"""Sources from where recipes come from."""
 type recipe_source_providers {
   description: String!
   id: uuid!
@@ -10956,12 +11183,12 @@ input type for inserting object relation for remote table "recipe_source_provide
 input recipe_source_providers_obj_rel_insert_input {
   data: recipe_source_providers_insert_input!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: recipe_source_providers_on_conflict
 }
 
 """
-on conflict condition type for table "recipe_source_providers"
+on_conflict condition type for table "recipe_source_providers"
 """
 input recipe_source_providers_on_conflict {
   constraint: recipe_source_providers_constraint!
@@ -11084,7 +11311,7 @@ input type for inserting array relation for remote table "recipe_tags"
 input recipe_tags_arr_rel_insert_input {
   data: [recipe_tags_insert_input!]!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: recipe_tags_on_conflict
 }
 
@@ -11195,7 +11422,7 @@ type recipe_tags_mutation_response {
 }
 
 """
-on conflict condition type for table "recipe_tags"
+on_conflict condition type for table "recipe_tags"
 """
 input recipe_tags_on_conflict {
   constraint: recipe_tags_constraint!
@@ -11707,12 +11934,12 @@ input type for inserting object relation for remote table "recipes"
 input recipes_obj_rel_insert_input {
   data: recipes_insert_input!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: recipes_on_conflict
 }
 
 """
-on conflict condition type for table "recipes"
+on_conflict condition type for table "recipes"
 """
 input recipes_on_conflict {
   constraint: recipes_constraint!
@@ -12412,6 +12639,49 @@ type subscription_root {
   food_portion_by_pk(id: Int!): food_portion
 
   """
+  fetch data from the table: "ingredients"
+  """
+  ingredients(
+    """distinct select on columns"""
+    distinct_on: [ingredients_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [ingredients_order_by!]
+
+    """filter the rows returned"""
+    where: ingredients_bool_exp
+  ): [ingredients!]!
+
+  """
+  fetch aggregated fields from the table: "ingredients"
+  """
+  ingredients_aggregate(
+    """distinct select on columns"""
+    distinct_on: [ingredients_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [ingredients_order_by!]
+
+    """filter the rows returned"""
+    where: ingredients_bool_exp
+  ): ingredients_aggregate!
+
+  """fetch data from the table: "ingredients" using primary key columns"""
+  ingredients_by_pk(id: uuid!): ingredients
+
+  """
   fetch data from the table: "measure_unit"
   """
   measure_unit(
@@ -12497,7 +12767,9 @@ type subscription_root {
   """fetch data from the table: "nutrient" using primary key columns"""
   nutrient_by_pk(id: Int!): nutrient
 
-  """An array relationship"""
+  """
+  fetch data from the table: "recipe_direction_actions"
+  """
   recipe_direction_actions(
     """distinct select on columns"""
     distinct_on: [recipe_direction_actions_select_column!]
@@ -12515,7 +12787,9 @@ type subscription_root {
     where: recipe_direction_actions_bool_exp
   ): [recipe_direction_actions!]!
 
-  """An aggregate relationship"""
+  """
+  fetch aggregated fields from the table: "recipe_direction_actions"
+  """
   recipe_direction_actions_aggregate(
     """distinct select on columns"""
     distinct_on: [recipe_direction_actions_select_column!]
@@ -13113,26 +13387,6 @@ type subscription_root {
   user(id: uuid!): users
 
   """
-  fetch aggregated fields from the table: "auth.users"
-  """
-  userAggregate(
-    """distinct select on columns"""
-    distinct_on: [users_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [users_order_by!]
-
-    """filter the rows returned"""
-    where: users_bool_exp
-  ): users_aggregate!
-
-  """
   fetch data from the table: "user_config"
   """
   user_config(
@@ -13194,6 +13448,26 @@ type subscription_root {
     """filter the rows returned"""
     where: users_bool_exp
   ): [users!]!
+
+  """
+  fetch aggregated fields from the table: "auth.users"
+  """
+  usersAggregate(
+    """distinct select on columns"""
+    distinct_on: [users_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [users_order_by!]
+
+    """filter the rows returned"""
+    where: users_bool_exp
+  ): users_aggregate!
 }
 
 scalar timestamp
@@ -13343,7 +13617,7 @@ type user_config_mutation_response {
 }
 
 """
-on conflict condition type for table "user_config"
+on_conflict condition type for table "user_config"
 """
 input user_config_on_conflict {
   constraint: user_config_constraint!
@@ -13608,7 +13882,7 @@ input type for inserting array relation for remote table "auth.users"
 input users_arr_rel_insert_input {
   data: [users_insert_input!]!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: users_on_conflict
 }
 
@@ -13831,12 +14105,12 @@ input type for inserting object relation for remote table "auth.users"
 input users_obj_rel_insert_input {
   data: users_insert_input!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: users_on_conflict
 }
 
 """
-on conflict condition type for table "auth.users"
+on_conflict condition type for table "auth.users"
 """
 input users_on_conflict {
   constraint: users_constraint!

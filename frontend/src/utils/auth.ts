@@ -1,4 +1,4 @@
-import {User} from "../types/user";
+import { User } from '../types/user';
 
 export const authUrl = process.env.REACT_APP_AUTH_URL || 'http://localhost:4000';
 

@@ -3,12 +3,10 @@ import React, { useRef, useState } from 'react'
 
 import { gql, useMutation } from '@apollo/client';
 
-import { GraphQLBridge } from 'uniforms-bridge-graphql'
-import { AutoForm } from 'uniforms-material'
-import { buildASTSchema } from 'graphql'
-
-import { Container, Paper } from '@mui/material';
-import { styled } from '@material-ui/core';
+import { Col, Container, Row } from 'react-bootstrap';
+import Form from '@rjsf/bootstrap-4';
+import { JSONSchema7 } from 'json-schema';
+import { IChangeEvent, ISubmitEvent } from '@rjsf/core';
 import {
   Recipe_Directions_Constraint,
   Recipe_Directions_Update_Column, Recipe_Ingredient_Groups,
@@ -20,71 +18,72 @@ import {
   Recipe_Tags_Constraint,
   Recipe_Tags_Update_Column,
   Recipes,
-  Recipes_Insert_Input
+  Recipes_Insert_Input, useInsertRecipeMutation
 } from '../../generated/graphql'
 import ImageCropper from '../../widgets/ImageCropper/ImageCropper';
+import slugify from "slugify";
 
-const CozyPaper = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  color: theme.palette.text.secondary,
-  padding: '3em',
-  margin: '1em'
-}));
-
-const recipeSchema = gql`
-  type RecipeDirection {
-    step: String
-  }
-
-  type RecipeIngredient {
-    text: String
-  }
-
-  type RecipeIngredientsGroup {
-    name: String
-    group_ingredients: [RecipeIngredient]!
-  }
-
-  type RecipeTag {
-    name: String
-  }
-
-  type Recipe {
-    name: String!
-    source: String
-    recipe_directions: [RecipeDirection]!
-    recipe_ingredient_groups: [RecipeIngredientsGroup]!
-    recipe_tags: [RecipeTag]!
-  }
-
-  type Query {
-    anything: ID
-  }
-`
-
-const schemaType = buildASTSchema(recipeSchema).getType('Recipe')
-const schemaExtras = {
-  recipe_directions: {
-    label: 'Directions',
+const recipeSchema: JSONSchema7 = {
+  'title': 'Recipe',
+  'type': 'object',
+  'required': [],
+  'properties': {
+    'name': { 'type': 'string' },
+    'source': { 'type': 'string' },
+    'recipe_directions': {
+      'type': 'array',
+      'items': { '$ref': '#/definitions/RecipeDirection' }
+    },
+    'recipe_ingredient_groups': {
+      'type': 'array',
+      'items': { '$ref': '#/definitions/RecipeIngredientsGroup' }
+    },
+    'recipe_tags': {
+      'type': 'array',
+      'items': { '$ref': '#/definitions/RecipeTag' }
+    }
   },
-  recipe_ingredient_groups: {
-    label: 'Ingredient Groups',
-  },
-  recipe_tags: {
-    label: 'Tags',
-  },
-}
+  'definitions': {
+    'RecipeDirection': {
+      'type': 'object',
+      'properties': {
+        'step': { 'type': 'string' }
+      }
+    },
+    'RecipeIngredient': {
+      'type': 'object',
+      'properties': {
+        'text': { 'type': 'string' }
+      }
+    },
+    'RecipeIngredientsGroup': {
+      'type': 'object',
+      'properties': {
+        'name': { 'type': 'string' },
+        'group_ingredients': {
+          'type': 'array',
+          'items': { '$ref': '#/definitions/RecipeIngredient' }
+        }
+      }
+    },
+    'RecipeTag': {
+      'type': 'object',
+      'properties': {
+        'name': { 'type': 'string' }
+      }
+    }
+  }
+};
 
-const schemaValidator = (recipe: Recipes) => {
-  return null
-}
-
-const bridge = new GraphQLBridge(
-  // @ts-ignore
-  schemaType,
-  schemaValidator,
-  schemaExtras
-)
+const uiSchema = {
+  'recipe_directions': {
+    'items': {
+      'step': {
+        'ui:widget': 'textarea'
+      }
+    }
+  }
+};
 
 const INSERT_RECIPE = gql`
   mutation InsertRecipe(
@@ -105,37 +104,25 @@ const INSERT_RECIPE = gql`
 export const SaveRecipeForm = () => {
   const [text, setText] = useState('');
   const [progress, setProgress] = useState('');
+  const [formData, setFormData] = useState<Recipes | null>(null);
 
-  const [formRecipe, setFormRecipe] = useState<Recipes>({
-    recipe_direction_durations_aggregate: { nodes: [] },
-    recipe_directions_aggregate: { nodes: [] },
-    recipe_ingredient_groups_aggregate: { nodes: [] },
-    recipe_tags_aggregate: { nodes: [] },
-    __typename: 'recipes',
-    created_at: undefined,
-    extraction_metadata: undefined,
-    id: 0,
-    image: undefined,
-    name: '',
-    recipe_direction_durations: [],
-    recipe_directions: [],
-    recipe_ingredient_groups: [],
-    recipe_tags: [],
-    source: '',
-    updated_at: undefined,
-    visible: true,
-  });
-  const [create, { loading, error }] = useMutation(INSERT_RECIPE)
+  const [create, { data, loading, error }] = useInsertRecipeMutation();
 
-  const onSubmit = async (recipe: Recipes) => {
-    setFormRecipe(recipe)
+  const onSubmit = async (e: ISubmitEvent<Recipes>, event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const recipe = formData;
+    if (recipe === null) {
+      return;
+    }
 
     const formatRecipeIngredientGroup = (group: Recipe_Ingredient_Groups, idx: number): Recipe_Ingredient_Groups_Insert_Input => {
       return {
         seq_num: idx,
         name: group.name,
         group_ingredients: {
-          data: group.group_ingredients.map((ingredient, ingredientIdx): Recipe_Ingredients_Insert_Input => {
+          // HACK (breadchris) until types are picked up correctly, recipe_directions is not seen as nullable
+          data: (group.group_ingredients || []).map((ingredient, ingredientIdx): Recipe_Ingredients_Insert_Input => {
             return {
               seq_num: ingredientIdx,
               text: ingredient.text,
@@ -149,18 +136,19 @@ export const SaveRecipeForm = () => {
       }
     }
 
+    const slug = slugify(recipe.name);
+
     const newRecipe: Recipes_Insert_Input = {
       name: recipe.name,
       source: recipe.source,
       image: recipe.image,
+      slug: recipe.slug,
       recipe_directions: {
-        data: recipe.recipe_directions.map((direction, idx) => {
+        // HACK (breadchris) until types are picked up correctly, recipe_directions is not seen as nullable
+        data: (recipe.recipe_directions || []).map((direction, idx) => {
           return {
             ...direction,
             seq_num: idx,
-            recipe_direction_actions: {
-              data: direction.recipe_direction_actions
-            }
           }
         }),
         on_conflict:
@@ -170,7 +158,8 @@ export const SaveRecipeForm = () => {
           }
       },
       recipe_tags: {
-        data: recipe.recipe_tags.map((tag, idx) => {
+        // HACK (breadchris) until types are picked up correctly, recipe_directions is not seen as nullable
+        data: (recipe.recipe_tags || []).map((tag, idx) => {
           return {
             ...tag,
             seq_num: idx
@@ -182,7 +171,8 @@ export const SaveRecipeForm = () => {
         }
       },
       recipe_ingredient_groups: {
-        data: recipe.recipe_ingredient_groups.map(formatRecipeIngredientGroup),
+        // HACK (breadchris) until types are picked up correctly, recipe_directions is not seen as nullable
+        data: (recipe.recipe_ingredient_groups || []).map(formatRecipeIngredientGroup),
         on_conflict: {
           constraint: Recipe_Ingredient_Groups_Constraint.RecipeIngredientGroupsRecipeIdSeqNumKey,
           update_columns: [Recipe_Ingredient_Groups_Update_Column.Name]
@@ -190,28 +180,49 @@ export const SaveRecipeForm = () => {
       }
     }
 
-    const resp = await create({
-      variables: {
-        recipe: newRecipe
-      }
-    })
-    console.log(resp)
+    try {
+      const resp = await create({
+        variables: {
+          recipe: newRecipe
+        }
+      })
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   return (
     <Container>
-      <CozyPaper>
-        <AutoForm
-          placeholder={true}
-          schema={bridge}
-          model={formRecipe}
-          // @ts-ignore
-          onSubmit={onSubmit}
-        />
+      <>
+        <Row>
+          <Col md={9}>
+            <Form
+              schema={recipeSchema}
+              uiSchema={uiSchema}
+              formData={formData}
+              onChange={(e) => {
+                setFormData(e.formData);
+              }}
+              onSubmit={onSubmit}
+              onError={() => {}}
+            />
+          </Col>
+          <Col md={3} />
+        </Row>
+        { error && (
+          <Row>
+            <p>Unable to save recipe: {error}</p>
+          </Row>
+        )}
+        { data && (
+          <Row>
+            <p>Saved recipe. View it <a href={`/recipe/${data.insert_recipes_one?.id}`}>here</a>.</p>
+          </Row>
+        )}
         <p>{progress}</p>
         <p>{text}</p>
         <ImageCropper setProgress={setProgress} setText={setText} />
-      </CozyPaper>
+      </>
     </Container>
   )
 }

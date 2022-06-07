@@ -22,6 +22,7 @@ import { RecipeOffCanvas } from '../../components/RecipeOffCanvas';
 import { userState, viewModeState } from '../../recoil/atoms/auth';
 import { inDeveloperMode } from '../../recoil/selectors/view-mode';
 import { recipeViewerState } from '../../recoil/atoms/recipe';
+import {SaveRecipeToList} from "../../components/SaveRecipeToList";
 
 interface ViewRecipePageProps {
   match: {
@@ -42,6 +43,7 @@ export const QUERY = gql`
       updated_at
       video
       recipe_ingredient_groups(order_by: { seq_num: asc }) {
+        id
         name
         group_ingredients(order_by: { seq_num: asc }) {
           id
@@ -119,29 +121,6 @@ export function isIngredientVideoStep(step: VideoStep, type: string, group_idx: 
   return false;
 }
 
-interface ViewModeSelectorProps {
-  
-}
-
-const ViewModeSelector: React.FunctionComponent<ViewModeSelectorProps> = ({}) => {
-  const [viewMode, setViewMode] = useRecoilState(viewModeState);
-  
-  const toggleDeveloperMode = () => {
-    setViewMode(viewMode === 'developer' ? 'view' : 'developer')
-  }
-  
-  return (
-    <>
-      <Form.Check
-        type="switch"
-        label="developer"
-        checked={viewMode === 'developer'}
-        onClick={toggleDeveloperMode}
-      />
-    </>
-  )
-}
-
 interface VideoMetadataFormProps {
   recipe: Recipes
 }
@@ -183,6 +162,7 @@ export const ViewRecipePage: React.FunctionComponent<ViewRecipePageProps> = ({ m
   const { invalidated: recipeInvalidated } = recipeState;
 
   const [showRecipeOffCanvas, setShowRecipeOffCanvas] = useState(false);
+  const [showRecipeSave, setShowRecipeSave] = useState(false);
 
   const id = slug.split('-').pop();
 
@@ -229,18 +209,31 @@ export const ViewRecipePage: React.FunctionComponent<ViewRecipePageProps> = ({ m
     <Container className="ViewRecipePage" data-testid="ViewRecipePage">
       <Row className='my-3'>
         <Col md={12}>
-          <h1 className="text-4xl pb-8">
+          <div className="fs-1 pb-8" style={{'display': 'inline'}}>
             {recipe.name}
-          </h1>
-          <ViewModeSelector />
+          </div>
+          <span className='fs-5 mx-2'>from <a href={recipe.source}>{sourceHostname}</a></span>
         </Col>
       </Row>
       <Row>
-        <Col md={12}>
-          <Button variant="outline-dark" size='sm' onClick={() => setShowRecipeOffCanvas(true)} className="fs-8" style={{ cursor: 'pointer', userSelect: 'none' }}>
-            <i className='bi bi-star' />
-          </Button>
-          <h5 className='text-right mx-3' style={{ transform: 'translateY(50%)', top: '50%', display: 'inline' }}>from <a href={recipe.source}>{sourceHostname}</a></h5>
+        <Col md={3}>
+          <Row className="mb-2">
+            <Col md={2}>
+              <Button variant="outline-dark" size='sm' onClick={() => setShowRecipeSave(!showRecipeSave)} className="fs-8" style={{ cursor: 'pointer', userSelect: 'none' }}>
+                <i className='bi bi-star' />
+              </Button>
+            </Col>
+            <Col md={2}>
+              <Button variant="outline-dark" size='sm' onClick={() => setShowRecipeOffCanvas(true)} className="fs-8" style={{ cursor: 'pointer', userSelect: 'none' }}>
+                <i className='bi bi-caret-down' />
+              </Button>
+            </Col>
+          </Row>
+          <Row>
+            {showRecipeSave && <SaveRecipeToList recipe={recipe} />}
+          </Row>
+        </Col>
+        <Col md={9}>
           {recipe.recipe_tags.map((tag) => {
             return (
               <Badge key={tag.id} className="mx-1 fs-6" style={{ cursor: 'pointer', userSelect: 'none' }} bg="light" text="muted">{tag.name}</Badge>

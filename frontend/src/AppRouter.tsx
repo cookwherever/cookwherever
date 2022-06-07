@@ -1,16 +1,13 @@
 // src/AppRouter.tsx
 
-import React, {FunctionComponent, Suspense, useContext, useEffect, useRef, useState} from 'react'
+import React, { FunctionComponent, Suspense, useContext, useEffect, useRef, useState } from 'react'
 import { BrowserRouter as Router, Link, Route, Switch, useHistory, useLocation } from 'react-router-dom'
 import { RecoilRoot } from 'recoil'
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
-import { Home, Bookmark, List, Lock } from '@mui/icons-material';
 import { Container, Nav } from 'react-bootstrap';
 import RecoilizeDebugger from 'recoilize';
 import { ViewIngredientPage } from './pages/ViewIngredientPage/ViewIngredientPage';
-import { SearchIngredientPage } from './pages/SearchIngredientPage/SearchIngredientPage';
 import { SaveRecipePage } from './pages/SaveRecipePage/SaveRecipePage';
 import { HomePage } from './pages/HomePage/HomePage';
 import { ViewRecipePage } from './pages/ViewRecipePage/ViewRecipePage';
@@ -24,7 +21,8 @@ import 'src/styles/main.css';
 
 import RecipeVisualizerPage from './pages/RecipeVisualizerPage/RecipeVisualizerPage';
 import { anonymousSignin, getRefreshedToken } from './utils/auth';
-import {AuthContext, AuthProvider} from "./providers/AuthProvider";
+import { AuthContext, AuthProvider } from './providers/AuthProvider';
+import {IngredientsPage} from "./pages/IngredientsPage";
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL_URL
@@ -65,13 +63,17 @@ const NavBar = () => {
         <Nav.Link href="/lists">Lists</Nav.Link>
       </Nav.Item>
       <Nav.Item>
+        <Nav.Link href="/ingredients">Ingredients</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
         <div className="pt-2">{user && (user.displayName || user.email)}</div>
       </Nav.Item>
       <Nav.Item>
         <Nav.Link onClick={() => {
           localStorage.removeItem('token');
           window.location.href = '/';
-        }}>
+        }}
+        >
           Logout
         </Nav.Link>
       </Nav.Item>
@@ -94,7 +96,7 @@ const AppRouter: FunctionComponent = () => {
     <ApolloProvider client={client}>
       <Router>
         <AuthProvider>
-          <NavBar/>
+          <NavBar />
           <RecoilRoot>
             <RecoilizeDebugger />
             <Suspense fallback={<span>Loading...</span>}>
@@ -102,8 +104,8 @@ const AppRouter: FunctionComponent = () => {
                 <Route exact path="/" component={HomePage} />
                 <Route path="/login" component={LoginPage} />
                 <Route path="/register" component={RegisterPage} />
+                <Route path="/ingredient" component={IngredientsPage} />
                 <Route path="/ingredient/:id" component={ViewIngredientPage} />
-                <Route path="/ingredient/search" component={SearchIngredientPage} />
                 <Route path="/recipe/save" component={SaveRecipePage} />
                 <Route path="/recipe/visualize" component={RecipeVisualizerPage} />
                 <Route path="/recipe/:slug" component={ViewRecipePage} />

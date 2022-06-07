@@ -1618,6 +1618,151 @@
         "possibleTypes": null
       },
       {
+        "kind": "SCALAR",
+        "name": "_text",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "_text_comparison_exp",
+        "description": "Boolean expression to compare columns of type \"_text\". All fields are combined with logical 'AND'.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "_eq",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "_text",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "_gt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "_text",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "_gte",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "_text",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "_in",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "_text",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "_is_null",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "_lt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "_text",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "_lte",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "_text",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "_neq",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "_text",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "_nin",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "_text",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
         "name": "authProviderRequests",
         "description": "columns and relationships of \"auth.provider_requests\"",
@@ -1639,17 +1784,26 @@
             "deprecationReason": null
           },
           {
-            "name": "redirectUrl",
+            "name": "options",
             "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+            "args": [
+              {
+                "name": "path",
+                "description": "JSON select path",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
               }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "jsonb",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -1793,6 +1947,29 @@
       },
       {
         "kind": "INPUT_OBJECT",
+        "name": "authProviderRequests_append_input",
+        "description": "append existing jsonb value of filtered columns with new jsonb value",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "options",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "jsonb",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
         "name": "authProviderRequests_bool_exp",
         "description": "Boolean expression to filter rows from the table \"auth.provider_requests\". All fields are combined with a logical 'AND'.",
         "fields": null,
@@ -1862,11 +2039,11 @@
             "deprecationReason": null
           },
           {
-            "name": "redirectUrl",
+            "name": "options",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "String_comparison_exp",
+              "name": "jsonb_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -1897,6 +2074,83 @@
       },
       {
         "kind": "INPUT_OBJECT",
+        "name": "authProviderRequests_delete_at_path_input",
+        "description": "delete the field or element with specified path (for JSON arrays, negative integers count from the end)",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "options",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "authProviderRequests_delete_elem_input",
+        "description": "delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "options",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "authProviderRequests_delete_key_input",
+        "description": "delete key/value pair or string element. key/value pairs are matched based on their key value",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "options",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
         "name": "authProviderRequests_insert_input",
         "description": "input type for inserting data into table \"auth.provider_requests\"",
         "fields": null,
@@ -1914,11 +2168,11 @@
             "deprecationReason": null
           },
           {
-            "name": "redirectUrl",
+            "name": "options",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "String",
+              "name": "jsonb",
               "ofType": null
             },
             "defaultValue": null,
@@ -1946,18 +2200,6 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
-          },
-          {
-            "name": "redirectUrl",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -1977,18 +2219,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "uuid",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "redirectUrl",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -2054,7 +2284,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "authProviderRequests_on_conflict",
-        "description": "on conflict condition type for table \"auth.provider_requests\"",
+        "description": "on_conflict condition type for table \"auth.provider_requests\"",
         "fields": null,
         "inputFields": [
           {
@@ -2133,7 +2363,7 @@
             "deprecationReason": null
           },
           {
-            "name": "redirectUrl",
+            "name": "options",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -2177,6 +2407,29 @@
         "possibleTypes": null
       },
       {
+        "kind": "INPUT_OBJECT",
+        "name": "authProviderRequests_prepend_input",
+        "description": "prepend existing jsonb value of filtered columns with new jsonb value",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "options",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "jsonb",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "ENUM",
         "name": "authProviderRequests_select_column",
         "description": "select columns of table \"auth.provider_requests\"",
@@ -2191,7 +2444,7 @@
             "deprecationReason": null
           },
           {
-            "name": "redirectUrl",
+            "name": "options",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -2218,11 +2471,11 @@
             "deprecationReason": null
           },
           {
-            "name": "redirectUrl",
+            "name": "options",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "String",
+              "name": "jsonb",
               "ofType": null
             },
             "defaultValue": null,
@@ -2249,7 +2502,7 @@
             "deprecationReason": null
           },
           {
-            "name": "redirectUrl",
+            "name": "options",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -2869,7 +3122,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "on conflict condition",
+            "description": "upsert condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "authProviders_on_conflict",
@@ -2887,7 +3140,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "authProviders_on_conflict",
-        "description": "on conflict condition type for table \"auth.providers\"",
+        "description": "on_conflict condition type for table \"auth.providers\"",
         "fields": null,
         "inputFields": [
           {
@@ -3367,7 +3620,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "on conflict condition",
+            "description": "upsert condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "authRefreshTokens_on_conflict",
@@ -3883,7 +4136,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "authRefreshTokens_on_conflict",
-        "description": "on conflict condition type for table \"auth.refresh_tokens\"",
+        "description": "on_conflict condition type for table \"auth.refresh_tokens\"",
         "fields": null,
         "inputFields": [
           {
@@ -5000,7 +5253,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "on conflict condition",
+            "description": "upsert condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "authRoles_on_conflict",
@@ -5018,7 +5271,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "authRoles_on_conflict",
-        "description": "on conflict condition type for table \"auth.roles\"",
+        "description": "on_conflict condition type for table \"auth.roles\"",
         "fields": null,
         "inputFields": [
           {
@@ -5586,7 +5839,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "on conflict condition",
+            "description": "upsert condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "authUserProviders_on_conflict",
@@ -6426,7 +6679,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "authUserProviders_on_conflict",
-        "description": "on conflict condition type for table \"auth.user_providers\"",
+        "description": "on_conflict condition type for table \"auth.user_providers\"",
         "fields": null,
         "inputFields": [
           {
@@ -7186,7 +7439,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "on conflict condition",
+            "description": "upsert condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "authUserRoles_on_conflict",
@@ -7732,7 +7985,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "authUserRoles_on_conflict",
-        "description": "on conflict condition type for table \"auth.user_roles\"",
+        "description": "on_conflict condition type for table \"auth.user_roles\"",
         "fields": null,
         "inputFields": [
           {
@@ -10138,7 +10391,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "on conflict condition",
+            "description": "upsert condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "food_attribute_on_conflict",
@@ -10975,7 +11228,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "food_attribute_on_conflict",
-        "description": "on conflict condition type for table \"food_attribute\"",
+        "description": "on_conflict condition type for table \"food_attribute\"",
         "fields": null,
         "inputFields": [
           {
@@ -12415,7 +12668,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "on conflict condition",
+            "description": "upsert condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "food_attribute_type_on_conflict",
@@ -12433,7 +12686,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "food_attribute_type_on_conflict",
-        "description": "on conflict condition type for table \"food_attribute_type\"",
+        "description": "on_conflict condition type for table \"food_attribute_type\"",
         "fields": null,
         "inputFields": [
           {
@@ -14167,7 +14420,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "on conflict condition",
+            "description": "upsert condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "food_category_on_conflict",
@@ -14185,7 +14438,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "food_category_on_conflict",
-        "description": "on conflict condition type for table \"food_category\"",
+        "description": "on_conflict condition type for table \"food_category\"",
         "fields": null,
         "inputFields": [
           {
@@ -15845,7 +16098,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "on conflict condition",
+            "description": "upsert condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "food_nutrient_on_conflict",
@@ -17258,7 +17511,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "food_nutrient_on_conflict",
-        "description": "on conflict condition type for table \"food_nutrient\"",
+        "description": "on_conflict condition type for table \"food_nutrient\"",
         "fields": null,
         "inputFields": [
           {
@@ -19655,7 +19908,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "on conflict condition",
+            "description": "upsert condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "food_on_conflict",
@@ -19673,7 +19926,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "food_on_conflict",
-        "description": "on conflict condition type for table \"food\"",
+        "description": "on_conflict condition type for table \"food\"",
         "fields": null,
         "inputFields": [
           {
@@ -20452,7 +20705,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "on conflict condition",
+            "description": "upsert condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "food_portion_on_conflict",
@@ -21814,7 +22067,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "on conflict condition",
+            "description": "upsert condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "food_portion_on_conflict",
@@ -21832,7 +22085,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "food_portion_on_conflict",
-        "description": "on conflict condition type for table \"food_portion\"",
+        "description": "on_conflict condition type for table \"food_portion\"",
         "fields": null,
         "inputFields": [
           {
@@ -24537,6 +24790,1173 @@
         "possibleTypes": null
       },
       {
+        "kind": "OBJECT",
+        "name": "ingredients",
+        "description": "Ingredients used in recipes.",
+        "fields": [
+          {
+            "name": "fdc_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "food",
+            "description": "An object relationship",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "food",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "uuid",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "names",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "_text",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "wiki_url",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ingredients_aggregate",
+        "description": "aggregated selection of \"ingredients\"",
+        "fields": [
+          {
+            "name": "aggregate",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ingredients_aggregate_fields",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "nodes",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "ingredients",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ingredients_aggregate_fields",
+        "description": "aggregate fields of \"ingredients\"",
+        "fields": [
+          {
+            "name": "avg",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ingredients_avg_fields",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "count",
+            "description": null,
+            "args": [
+              {
+                "name": "columns",
+                "description": null,
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "ingredients_select_column",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "distinct",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "max",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ingredients_max_fields",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "min",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ingredients_min_fields",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "stddev",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ingredients_stddev_fields",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "stddev_pop",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ingredients_stddev_pop_fields",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "stddev_samp",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ingredients_stddev_samp_fields",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "sum",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ingredients_sum_fields",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "var_pop",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ingredients_var_pop_fields",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "var_samp",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ingredients_var_samp_fields",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "variance",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ingredients_variance_fields",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ingredients_avg_fields",
+        "description": "aggregate avg on columns",
+        "fields": [
+          {
+            "name": "fdc_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ingredients_bool_exp",
+        "description": "Boolean expression to filter rows from the table \"ingredients\". All fields are combined with a logical 'AND'.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "_and",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "ingredients_bool_exp",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "_not",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ingredients_bool_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "_or",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "ingredients_bool_exp",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "fdc_id",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "Int_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "food",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "food_bool_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "uuid_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "names",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "_text_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "wiki_url",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "String_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "ingredients_constraint",
+        "description": "unique or primary key constraints on table \"ingredients\"",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "ingredients_pkey",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ingredients_inc_input",
+        "description": "input type for incrementing numeric columns in table \"ingredients\"",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "fdc_id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ingredients_insert_input",
+        "description": "input type for inserting data into table \"ingredients\"",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "fdc_id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "food",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "food_obj_rel_insert_input",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "uuid",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "names",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "_text",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "wiki_url",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ingredients_max_fields",
+        "description": "aggregate max on columns",
+        "fields": [
+          {
+            "name": "fdc_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "uuid",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "wiki_url",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ingredients_min_fields",
+        "description": "aggregate min on columns",
+        "fields": [
+          {
+            "name": "fdc_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "uuid",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "wiki_url",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ingredients_mutation_response",
+        "description": "response of any mutation on the table \"ingredients\"",
+        "fields": [
+          {
+            "name": "affected_rows",
+            "description": "number of rows affected by the mutation",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "returning",
+            "description": "data from the rows affected by the mutation",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "ingredients",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ingredients_on_conflict",
+        "description": "on_conflict condition type for table \"ingredients\"",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "constraint",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "ingredients_constraint",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "update_columns",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "ingredients_update_column",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "defaultValue": "[]",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "where",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ingredients_bool_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ingredients_order_by",
+        "description": "Ordering options when selecting data from \"ingredients\".",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "fdc_id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "food",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "food_order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "names",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "wiki_url",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ingredients_pk_columns_input",
+        "description": "primary key columns input for table: ingredients",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "uuid",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "ingredients_select_column",
+        "description": "select columns of table \"ingredients\"",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "fdc_id",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "names",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "wiki_url",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ingredients_set_input",
+        "description": "input type for updating data in table \"ingredients\"",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "fdc_id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "uuid",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "names",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "_text",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "wiki_url",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ingredients_stddev_fields",
+        "description": "aggregate stddev on columns",
+        "fields": [
+          {
+            "name": "fdc_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ingredients_stddev_pop_fields",
+        "description": "aggregate stddev_pop on columns",
+        "fields": [
+          {
+            "name": "fdc_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ingredients_stddev_samp_fields",
+        "description": "aggregate stddev_samp on columns",
+        "fields": [
+          {
+            "name": "fdc_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ingredients_sum_fields",
+        "description": "aggregate sum on columns",
+        "fields": [
+          {
+            "name": "fdc_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "ingredients_update_column",
+        "description": "update columns of table \"ingredients\"",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "fdc_id",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "names",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "wiki_url",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ingredients_var_pop_fields",
+        "description": "aggregate var_pop on columns",
+        "fields": [
+          {
+            "name": "fdc_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ingredients_var_samp_fields",
+        "description": "aggregate var_samp on columns",
+        "fields": [
+          {
+            "name": "fdc_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ingredients_variance_fields",
+        "description": "aggregate variance on columns",
+        "fields": [
+          {
+            "name": "fdc_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "SCALAR",
         "name": "jsonb",
         "description": null,
@@ -25437,7 +26857,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "on conflict condition",
+            "description": "upsert condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "measure_unit_on_conflict",
@@ -25455,7 +26875,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "measure_unit_on_conflict",
-        "description": "on conflict condition type for table \"measure_unit\"",
+        "description": "on_conflict condition type for table \"measure_unit\"",
         "fields": null,
         "inputFields": [
           {
@@ -26699,6 +28119,64 @@
             "deprecationReason": null
           },
           {
+            "name": "delete_ingredients",
+            "description": "delete data from the table: \"ingredients\"",
+            "args": [
+              {
+                "name": "where",
+                "description": "filter the rows which have to be deleted",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "ingredients_bool_exp",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ingredients_mutation_response",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "delete_ingredients_by_pk",
+            "description": "delete single row from the table: \"ingredients\"",
+            "args": [
+              {
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "uuid",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ingredients",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "delete_measure_unit",
             "description": "delete data from the table: \"measure_unit\"",
             "args": [
@@ -27590,7 +29068,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "authProviders_on_conflict",
@@ -27631,7 +29109,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "authProviderRequests_on_conflict",
@@ -27680,7 +29158,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "authProviderRequests_on_conflict",
@@ -27729,7 +29207,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "authProviders_on_conflict",
@@ -27770,7 +29248,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "authRefreshTokens_on_conflict",
@@ -27819,7 +29297,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "authRefreshTokens_on_conflict",
@@ -27860,7 +29338,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "authRoles_on_conflict",
@@ -27909,7 +29387,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "authRoles_on_conflict",
@@ -27950,7 +29428,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "authUserProviders_on_conflict",
@@ -27999,7 +29477,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "authUserProviders_on_conflict",
@@ -28040,7 +29518,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "authUserRoles_on_conflict",
@@ -28089,7 +29567,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "authUserRoles_on_conflict",
@@ -28130,7 +29608,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "users_on_conflict",
@@ -28179,7 +29657,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "users_on_conflict",
@@ -28228,7 +29706,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "food_on_conflict",
@@ -28277,7 +29755,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "food_attribute_on_conflict",
@@ -28318,7 +29796,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "food_attribute_on_conflict",
@@ -28367,7 +29845,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "food_attribute_type_on_conflict",
@@ -28408,7 +29886,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "food_attribute_type_on_conflict",
@@ -28457,7 +29935,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "food_category_on_conflict",
@@ -28498,7 +29976,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "food_category_on_conflict",
@@ -28547,7 +30025,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "food_nutrient_on_conflict",
@@ -28588,7 +30066,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "food_nutrient_on_conflict",
@@ -28629,7 +30107,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "food_on_conflict",
@@ -28678,7 +30156,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "food_portion_on_conflict",
@@ -28719,7 +30197,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "food_portion_on_conflict",
@@ -28733,6 +30211,96 @@
             "type": {
               "kind": "OBJECT",
               "name": "food_portion",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "insert_ingredients",
+            "description": "insert data into the table: \"ingredients\"",
+            "args": [
+              {
+                "name": "objects",
+                "description": "the rows to be inserted",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "LIST",
+                    "name": null,
+                    "ofType": {
+                      "kind": "NON_NULL",
+                      "name": null,
+                      "ofType": {
+                        "kind": "INPUT_OBJECT",
+                        "name": "ingredients_insert_input",
+                        "ofType": null
+                      }
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "on_conflict",
+                "description": "upsert condition",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "ingredients_on_conflict",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ingredients_mutation_response",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "insert_ingredients_one",
+            "description": "insert a single row into the table: \"ingredients\"",
+            "args": [
+              {
+                "name": "object",
+                "description": "the row to be inserted",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "ingredients_insert_input",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "on_conflict",
+                "description": "upsert condition",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "ingredients_on_conflict",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ingredients",
               "ofType": null
             },
             "isDeprecated": false,
@@ -28768,7 +30336,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "measure_unit_on_conflict",
@@ -28809,7 +30377,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "measure_unit_on_conflict",
@@ -28858,7 +30426,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "nutrient_on_conflict",
@@ -28899,7 +30467,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "nutrient_on_conflict",
@@ -28948,7 +30516,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "recipe_direction_actions_on_conflict",
@@ -28989,7 +30557,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "recipe_direction_actions_on_conflict",
@@ -29038,7 +30606,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "recipe_direction_durations_on_conflict",
@@ -29079,7 +30647,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "recipe_direction_durations_on_conflict",
@@ -29128,7 +30696,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "recipe_directions_on_conflict",
@@ -29169,7 +30737,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "recipe_directions_on_conflict",
@@ -29218,7 +30786,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "recipe_favorite_on_conflict",
@@ -29259,7 +30827,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "recipe_favorite_on_conflict",
@@ -29308,7 +30876,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "recipe_ingredient_food_candidate_on_conflict",
@@ -29349,7 +30917,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "recipe_ingredient_food_candidate_on_conflict",
@@ -29398,7 +30966,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "recipe_ingredient_groups_on_conflict",
@@ -29439,7 +31007,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "recipe_ingredient_groups_on_conflict",
@@ -29488,7 +31056,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "recipe_ingredients_on_conflict",
@@ -29529,7 +31097,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "recipe_ingredients_on_conflict",
@@ -29578,7 +31146,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "recipe_list_items_on_conflict",
@@ -29619,7 +31187,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "recipe_list_items_on_conflict",
@@ -29668,7 +31236,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "recipe_lists_on_conflict",
@@ -29709,7 +31277,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "recipe_lists_on_conflict",
@@ -29758,7 +31326,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "recipe_source_providers_on_conflict",
@@ -29799,7 +31367,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "recipe_source_providers_on_conflict",
@@ -29848,7 +31416,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "recipe_tags_on_conflict",
@@ -29889,7 +31457,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "recipe_tags_on_conflict",
@@ -29938,7 +31506,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "recipes_on_conflict",
@@ -29979,7 +31547,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "recipes_on_conflict",
@@ -30028,7 +31596,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "user_config_on_conflict",
@@ -30069,7 +31637,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "on conflict condition",
+                "description": "upsert condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "user_config_on_conflict",
@@ -30134,6 +31702,66 @@
             "description": "update single row of the table: \"auth.provider_requests\"",
             "args": [
               {
+                "name": "_append",
+                "description": "append existing jsonb value of filtered columns with new jsonb value",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "authProviderRequests_append_input",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "_delete_at_path",
+                "description": "delete the field or element with specified path (for JSON arrays, negative integers count from the end)",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "authProviderRequests_delete_at_path_input",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "_delete_elem",
+                "description": "delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "authProviderRequests_delete_elem_input",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "_delete_key",
+                "description": "delete key/value pair or string element. key/value pairs are matched based on their key value",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "authProviderRequests_delete_key_input",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "_prepend",
+                "description": "prepend existing jsonb value of filtered columns with new jsonb value",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "authProviderRequests_prepend_input",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
                 "name": "_set",
                 "description": "sets the columns of the filtered rows to the given values",
                 "type": {
@@ -30174,6 +31802,66 @@
             "name": "updateAuthProviderRequests",
             "description": "update data of the table: \"auth.provider_requests\"",
             "args": [
+              {
+                "name": "_append",
+                "description": "append existing jsonb value of filtered columns with new jsonb value",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "authProviderRequests_append_input",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "_delete_at_path",
+                "description": "delete the field or element with specified path (for JSON arrays, negative integers count from the end)",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "authProviderRequests_delete_at_path_input",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "_delete_elem",
+                "description": "delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "authProviderRequests_delete_elem_input",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "_delete_key",
+                "description": "delete key/value pair or string element. key/value pairs are matched based on their key value",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "authProviderRequests_delete_key_input",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "_prepend",
+                "description": "prepend existing jsonb value of filtered columns with new jsonb value",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "authProviderRequests_prepend_input",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
               {
                 "name": "_set",
                 "description": "sets the columns of the filtered rows to the given values",
@@ -31413,6 +33101,112 @@
             "type": {
               "kind": "OBJECT",
               "name": "food_portion",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "update_ingredients",
+            "description": "update data of the table: \"ingredients\"",
+            "args": [
+              {
+                "name": "_inc",
+                "description": "increments the numeric columns with given value of the filtered values",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "ingredients_inc_input",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "_set",
+                "description": "sets the columns of the filtered rows to the given values",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "ingredients_set_input",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "where",
+                "description": "filter the rows which have to be updated",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "ingredients_bool_exp",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ingredients_mutation_response",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "update_ingredients_by_pk",
+            "description": "update single row of the table: \"ingredients\"",
+            "args": [
+              {
+                "name": "_inc",
+                "description": "increments the numeric columns with given value of the filtered values",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "ingredients_inc_input",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "_set",
+                "description": "sets the columns of the filtered rows to the given values",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "ingredients_set_input",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "pk_columns",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "ingredients_pk_columns_input",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ingredients",
               "ofType": null
             },
             "isDeprecated": false,
@@ -34054,7 +35848,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "on conflict condition",
+            "description": "upsert condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "nutrient_on_conflict",
@@ -34072,7 +35866,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "nutrient_on_conflict",
-        "description": "on conflict condition type for table \"nutrient\"",
+        "description": "on_conflict condition type for table \"nutrient\"",
         "fields": null,
         "inputFields": [
           {
@@ -37441,6 +39235,229 @@
             "deprecationReason": null
           },
           {
+            "name": "ingredients",
+            "description": "fetch data from the table: \"ingredients\"",
+            "args": [
+              {
+                "name": "distinct_on",
+                "description": "distinct select on columns",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "ingredients_select_column",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "limit",
+                "description": "limit the number of rows returned",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "offset",
+                "description": "skip the first n rows. Use only with order_by",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "order_by",
+                "description": "sort the rows by one or more columns",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "ingredients_order_by",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "where",
+                "description": "filter the rows returned",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "ingredients_bool_exp",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "ingredients",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ingredients_aggregate",
+            "description": "fetch aggregated fields from the table: \"ingredients\"",
+            "args": [
+              {
+                "name": "distinct_on",
+                "description": "distinct select on columns",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "ingredients_select_column",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "limit",
+                "description": "limit the number of rows returned",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "offset",
+                "description": "skip the first n rows. Use only with order_by",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "order_by",
+                "description": "sort the rows by one or more columns",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "ingredients_order_by",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "where",
+                "description": "filter the rows returned",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "ingredients_bool_exp",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ingredients_aggregate",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ingredients_by_pk",
+            "description": "fetch data from the table: \"ingredients\" using primary key columns",
+            "args": [
+              {
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "uuid",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ingredients",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "measure_unit",
             "description": "fetch data from the table: \"measure_unit\"",
             "args": [
@@ -37888,7 +39905,7 @@
           },
           {
             "name": "recipe_direction_actions",
-            "description": "An array relationship",
+            "description": "fetch data from the table: \"recipe_direction_actions\"",
             "args": [
               {
                 "name": "distinct_on",
@@ -37989,7 +40006,7 @@
           },
           {
             "name": "recipe_direction_actions_aggregate",
-            "description": "An aggregate relationship",
+            "description": "fetch aggregated fields from the table: \"recipe_direction_actions\"",
             "args": [
               {
                 "name": "distinct_on",
@@ -41044,99 +43061,6 @@
             "deprecationReason": null
           },
           {
-            "name": "userAggregate",
-            "description": "fetch aggregated fields from the table: \"auth.users\"",
-            "args": [
-              {
-                "name": "distinct_on",
-                "description": "distinct select on columns",
-                "type": {
-                  "kind": "LIST",
-                  "name": null,
-                  "ofType": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "ENUM",
-                      "name": "users_select_column",
-                      "ofType": null
-                    }
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "limit",
-                "description": "limit the number of rows returned",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "offset",
-                "description": "skip the first n rows. Use only with order_by",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "order_by",
-                "description": "sort the rows by one or more columns",
-                "type": {
-                  "kind": "LIST",
-                  "name": null,
-                  "ofType": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "INPUT_OBJECT",
-                      "name": "users_order_by",
-                      "ofType": null
-                    }
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "where",
-                "description": "filter the rows returned",
-                "type": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "users_bool_exp",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "users_aggregate",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "user_config",
             "description": "fetch data from the table: \"user_config\"",
             "args": [
@@ -41455,6 +43379,99 @@
                     "ofType": null
                   }
                 }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "usersAggregate",
+            "description": "fetch aggregated fields from the table: \"auth.users\"",
+            "args": [
+              {
+                "name": "distinct_on",
+                "description": "distinct select on columns",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "users_select_column",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "limit",
+                "description": "limit the number of rows returned",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "offset",
+                "description": "skip the first n rows. Use only with order_by",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "order_by",
+                "description": "sort the rows by one or more columns",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "users_order_by",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "where",
+                "description": "filter the rows returned",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "users_bool_exp",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "users_aggregate",
+                "ofType": null
               }
             },
             "isDeprecated": false,
@@ -41831,149 +43848,6 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "recipe_direction_actions_aggregate_order_by",
-        "description": "order by aggregate values of table \"recipe_direction_actions\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "avg",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "recipe_direction_actions_avg_order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "count",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "max",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "recipe_direction_actions_max_order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "min",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "recipe_direction_actions_min_order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "stddev",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "recipe_direction_actions_stddev_order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "stddev_pop",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "recipe_direction_actions_stddev_pop_order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "stddev_samp",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "recipe_direction_actions_stddev_samp_order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "sum",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "recipe_direction_actions_sum_order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "var_pop",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "recipe_direction_actions_var_pop_order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "var_samp",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "recipe_direction_actions_var_samp_order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "variance",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "recipe_direction_actions_variance_order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
         "name": "recipe_direction_actions_append_input",
         "description": "append existing jsonb value of filtered columns with new jsonb value",
         "fields": null,
@@ -41984,53 +43858,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "jsonb",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "recipe_direction_actions_arr_rel_insert_input",
-        "description": "input type for inserting array relation for remote table \"recipe_direction_actions\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "data",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "recipe_direction_actions_insert_input",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "on_conflict",
-            "description": "on conflict condition",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "recipe_direction_actions_on_conflict",
               "ofType": null
             },
             "defaultValue": null,
@@ -42098,65 +43925,6 @@
         ],
         "inputFields": null,
         "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "recipe_direction_actions_avg_order_by",
-        "description": "order by avg() on columns of table \"recipe_direction_actions\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "direction_id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "duration",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "quantity",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -42639,89 +44407,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "INPUT_OBJECT",
-        "name": "recipe_direction_actions_max_order_by",
-        "description": "order by max() on columns of table \"recipe_direction_actions\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "action",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "direction_id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "duration",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "quantity",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "unit",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "OBJECT",
         "name": "recipe_direction_actions_min_fields",
         "description": "aggregate min on columns",
@@ -42805,89 +44490,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "INPUT_OBJECT",
-        "name": "recipe_direction_actions_min_order_by",
-        "description": "order by min() on columns of table \"recipe_direction_actions\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "action",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "direction_id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "duration",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "quantity",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "unit",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "OBJECT",
         "name": "recipe_direction_actions_mutation_response",
         "description": "response of any mutation on the table \"recipe_direction_actions\"",
@@ -42941,7 +44543,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "recipe_direction_actions_on_conflict",
-        "description": "on conflict condition type for table \"recipe_direction_actions\"",
+        "description": "on_conflict condition type for table \"recipe_direction_actions\"",
         "fields": null,
         "inputFields": [
           {
@@ -43354,65 +44956,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "INPUT_OBJECT",
-        "name": "recipe_direction_actions_stddev_order_by",
-        "description": "order by stddev() on columns of table \"recipe_direction_actions\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "direction_id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "duration",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "quantity",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "OBJECT",
         "name": "recipe_direction_actions_stddev_pop_fields",
         "description": "aggregate stddev_pop on columns",
@@ -43468,65 +45011,6 @@
         ],
         "inputFields": null,
         "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "recipe_direction_actions_stddev_pop_order_by",
-        "description": "order by stddev_pop() on columns of table \"recipe_direction_actions\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "direction_id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "duration",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "quantity",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -43590,65 +45074,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "INPUT_OBJECT",
-        "name": "recipe_direction_actions_stddev_samp_order_by",
-        "description": "order by stddev_samp() on columns of table \"recipe_direction_actions\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "direction_id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "duration",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "quantity",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "OBJECT",
         "name": "recipe_direction_actions_sum_fields",
         "description": "aggregate sum on columns",
@@ -43704,65 +45129,6 @@
         ],
         "inputFields": null,
         "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "recipe_direction_actions_sum_order_by",
-        "description": "order by sum() on columns of table \"recipe_direction_actions\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "direction_id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "duration",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "quantity",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -43879,65 +45245,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "INPUT_OBJECT",
-        "name": "recipe_direction_actions_var_pop_order_by",
-        "description": "order by var_pop() on columns of table \"recipe_direction_actions\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "direction_id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "duration",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "quantity",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "OBJECT",
         "name": "recipe_direction_actions_var_samp_fields",
         "description": "aggregate var_samp on columns",
@@ -43997,65 +45304,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "INPUT_OBJECT",
-        "name": "recipe_direction_actions_var_samp_order_by",
-        "description": "order by var_samp() on columns of table \"recipe_direction_actions\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "direction_id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "duration",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "quantity",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "OBJECT",
         "name": "recipe_direction_actions_variance_fields",
         "description": "aggregate variance on columns",
@@ -44111,65 +45359,6 @@
         ],
         "inputFields": null,
         "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "recipe_direction_actions_variance_order_by",
-        "description": "order by variance() on columns of table \"recipe_direction_actions\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "direction_id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "duration",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "quantity",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -44682,7 +45871,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "on conflict condition",
+            "description": "upsert condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "recipe_direction_durations_on_conflict",
@@ -45495,7 +46684,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "recipe_direction_durations_on_conflict",
-        "description": "on conflict condition type for table \"recipe_direction_durations\"",
+        "description": "on_conflict condition type for table \"recipe_direction_durations\"",
         "fields": null,
         "inputFields": [
           {
@@ -46690,200 +47879,6 @@
             "deprecationReason": null
           },
           {
-            "name": "recipe_direction_actions",
-            "description": "An array relationship",
-            "args": [
-              {
-                "name": "distinct_on",
-                "description": "distinct select on columns",
-                "type": {
-                  "kind": "LIST",
-                  "name": null,
-                  "ofType": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "ENUM",
-                      "name": "recipe_direction_actions_select_column",
-                      "ofType": null
-                    }
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "limit",
-                "description": "limit the number of rows returned",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "offset",
-                "description": "skip the first n rows. Use only with order_by",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "order_by",
-                "description": "sort the rows by one or more columns",
-                "type": {
-                  "kind": "LIST",
-                  "name": null,
-                  "ofType": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "INPUT_OBJECT",
-                      "name": "recipe_direction_actions_order_by",
-                      "ofType": null
-                    }
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "where",
-                "description": "filter the rows returned",
-                "type": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "recipe_direction_actions_bool_exp",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "recipe_direction_actions",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "recipe_direction_actions_aggregate",
-            "description": "An aggregate relationship",
-            "args": [
-              {
-                "name": "distinct_on",
-                "description": "distinct select on columns",
-                "type": {
-                  "kind": "LIST",
-                  "name": null,
-                  "ofType": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "ENUM",
-                      "name": "recipe_direction_actions_select_column",
-                      "ofType": null
-                    }
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "limit",
-                "description": "limit the number of rows returned",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "offset",
-                "description": "skip the first n rows. Use only with order_by",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "order_by",
-                "description": "sort the rows by one or more columns",
-                "type": {
-                  "kind": "LIST",
-                  "name": null,
-                  "ofType": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "INPUT_OBJECT",
-                      "name": "recipe_direction_actions_order_by",
-                      "ofType": null
-                    }
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "where",
-                "description": "filter the rows returned",
-                "type": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "recipe_direction_actions_bool_exp",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "recipe_direction_actions_aggregate",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "recipe_id",
             "description": null,
             "args": [],
@@ -47363,7 +48358,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "on conflict condition",
+            "description": "upsert condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "recipe_directions_on_conflict",
@@ -47591,18 +48586,6 @@
             "deprecationReason": null
           },
           {
-            "name": "recipe_direction_actions",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "recipe_direction_actions_bool_exp",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "recipe_id",
             "description": null,
             "type": {
@@ -47773,18 +48756,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "recipe_direction_actions",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "recipe_direction_actions_arr_rel_insert_input",
               "ofType": null
             },
             "defaultValue": null,
@@ -48242,7 +49213,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "recipe_directions_on_conflict",
-        "description": "on conflict condition type for table \"recipe_directions\"",
+        "description": "on_conflict condition type for table \"recipe_directions\"",
         "fields": null,
         "inputFields": [
           {
@@ -48314,18 +49285,6 @@
             "type": {
               "kind": "ENUM",
               "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "recipe_direction_actions_aggregate",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "recipe_direction_actions_aggregate_order_by",
               "ofType": null
             },
             "defaultValue": null,
@@ -50326,7 +51285,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "recipe_favorite_on_conflict",
-        "description": "on conflict condition type for table \"recipe_favorite\"",
+        "description": "on_conflict condition type for table \"recipe_favorite\"",
         "fields": null,
         "inputFields": [
           {
@@ -51411,7 +52370,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "on conflict condition",
+            "description": "upsert condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "recipe_ingredient_food_candidate_on_conflict",
@@ -52134,7 +53093,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "recipe_ingredient_food_candidate_on_conflict",
-        "description": "on conflict condition type for table \"recipe_ingredient_food_candidate\"",
+        "description": "on_conflict condition type for table \"recipe_ingredient_food_candidate\"",
         "fields": null,
         "inputFields": [
           {
@@ -53930,7 +54889,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "on conflict condition",
+            "description": "upsert condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "recipe_ingredient_groups_on_conflict",
@@ -54638,7 +55597,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "on conflict condition",
+            "description": "upsert condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "recipe_ingredient_groups_on_conflict",
@@ -54656,7 +55615,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "recipe_ingredient_groups_on_conflict",
-        "description": "on conflict condition type for table \"recipe_ingredient_groups\"",
+        "description": "on_conflict condition type for table \"recipe_ingredient_groups\"",
         "fields": null,
         "inputFields": [
           {
@@ -55656,7 +56615,7 @@
           },
           {
             "name": "food_candidates",
-            "description": "A computed field, executes function \"food_candidates_for_ingredient\"",
+            "description": null,
             "args": [
               {
                 "name": "distinct_on",
@@ -56481,7 +57440,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "on conflict condition",
+            "description": "upsert condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "recipe_ingredients_on_conflict",
@@ -57852,7 +58811,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "recipe_ingredients_on_conflict",
-        "description": "on conflict condition type for table \"recipe_ingredients\"",
+        "description": "on_conflict condition type for table \"recipe_ingredients\"",
         "fields": null,
         "inputFields": [
           {
@@ -60262,7 +61221,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "on conflict condition",
+            "description": "upsert condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "recipe_list_items_on_conflict",
@@ -60979,7 +61938,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "recipe_list_items_on_conflict",
-        "description": "on conflict condition type for table \"recipe_list_items\"",
+        "description": "on_conflict condition type for table \"recipe_list_items\"",
         "fields": null,
         "inputFields": [
           {
@@ -62982,7 +63941,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "on conflict condition",
+            "description": "upsert condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "recipe_lists_on_conflict",
@@ -63000,7 +63959,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "recipe_lists_on_conflict",
-        "description": "on conflict condition type for table \"recipe_lists\"",
+        "description": "on_conflict condition type for table \"recipe_lists\"",
         "fields": null,
         "inputFields": [
           {
@@ -63415,7 +64374,7 @@
       {
         "kind": "OBJECT",
         "name": "recipe_source_providers",
-        "description": "Sources from where recipes come from.\n\n\ncolumns and relationships of \"recipe_source_providers\"",
+        "description": "Sources from where recipes come from.",
         "fields": [
           {
             "name": "description",
@@ -63998,7 +64957,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "on conflict condition",
+            "description": "upsert condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "recipe_source_providers_on_conflict",
@@ -64016,7 +64975,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "recipe_source_providers_on_conflict",
-        "description": "on conflict condition type for table \"recipe_source_providers\"",
+        "description": "on_conflict condition type for table \"recipe_source_providers\"",
         "fields": null,
         "inputFields": [
           {
@@ -64764,7 +65723,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "on conflict condition",
+            "description": "upsert condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "recipe_tags_on_conflict",
@@ -65403,7 +66362,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "recipe_tags_on_conflict",
-        "description": "on conflict condition type for table \"recipe_tags\"",
+        "description": "on_conflict condition type for table \"recipe_tags\"",
         "fields": null,
         "inputFields": [
           {
@@ -68471,7 +69430,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "on conflict condition",
+            "description": "upsert condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "recipes_on_conflict",
@@ -68489,7 +69448,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "recipes_on_conflict",
-        "description": "on conflict condition type for table \"recipes\"",
+        "description": "on_conflict condition type for table \"recipes\"",
         "fields": null,
         "inputFields": [
           {
@@ -71988,6 +72947,229 @@
             "deprecationReason": null
           },
           {
+            "name": "ingredients",
+            "description": "fetch data from the table: \"ingredients\"",
+            "args": [
+              {
+                "name": "distinct_on",
+                "description": "distinct select on columns",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "ingredients_select_column",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "limit",
+                "description": "limit the number of rows returned",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "offset",
+                "description": "skip the first n rows. Use only with order_by",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "order_by",
+                "description": "sort the rows by one or more columns",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "ingredients_order_by",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "where",
+                "description": "filter the rows returned",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "ingredients_bool_exp",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "ingredients",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ingredients_aggregate",
+            "description": "fetch aggregated fields from the table: \"ingredients\"",
+            "args": [
+              {
+                "name": "distinct_on",
+                "description": "distinct select on columns",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "ingredients_select_column",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "limit",
+                "description": "limit the number of rows returned",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "offset",
+                "description": "skip the first n rows. Use only with order_by",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "order_by",
+                "description": "sort the rows by one or more columns",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "ingredients_order_by",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "where",
+                "description": "filter the rows returned",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "ingredients_bool_exp",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ingredients_aggregate",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ingredients_by_pk",
+            "description": "fetch data from the table: \"ingredients\" using primary key columns",
+            "args": [
+              {
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "uuid",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ingredients",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "measure_unit",
             "description": "fetch data from the table: \"measure_unit\"",
             "args": [
@@ -72435,7 +73617,7 @@
           },
           {
             "name": "recipe_direction_actions",
-            "description": "An array relationship",
+            "description": "fetch data from the table: \"recipe_direction_actions\"",
             "args": [
               {
                 "name": "distinct_on",
@@ -72536,7 +73718,7 @@
           },
           {
             "name": "recipe_direction_actions_aggregate",
-            "description": "An aggregate relationship",
+            "description": "fetch aggregated fields from the table: \"recipe_direction_actions\"",
             "args": [
               {
                 "name": "distinct_on",
@@ -75591,99 +76773,6 @@
             "deprecationReason": null
           },
           {
-            "name": "userAggregate",
-            "description": "fetch aggregated fields from the table: \"auth.users\"",
-            "args": [
-              {
-                "name": "distinct_on",
-                "description": "distinct select on columns",
-                "type": {
-                  "kind": "LIST",
-                  "name": null,
-                  "ofType": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "ENUM",
-                      "name": "users_select_column",
-                      "ofType": null
-                    }
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "limit",
-                "description": "limit the number of rows returned",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "offset",
-                "description": "skip the first n rows. Use only with order_by",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "order_by",
-                "description": "sort the rows by one or more columns",
-                "type": {
-                  "kind": "LIST",
-                  "name": null,
-                  "ofType": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "INPUT_OBJECT",
-                      "name": "users_order_by",
-                      "ofType": null
-                    }
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "where",
-                "description": "filter the rows returned",
-                "type": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "users_bool_exp",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "users_aggregate",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "user_config",
             "description": "fetch data from the table: \"user_config\"",
             "args": [
@@ -76002,6 +77091,99 @@
                     "ofType": null
                   }
                 }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "usersAggregate",
+            "description": "fetch aggregated fields from the table: \"auth.users\"",
+            "args": [
+              {
+                "name": "distinct_on",
+                "description": "distinct select on columns",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "users_select_column",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "limit",
+                "description": "limit the number of rows returned",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "offset",
+                "description": "skip the first n rows. Use only with order_by",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "order_by",
+                "description": "sort the rows by one or more columns",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "users_order_by",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "where",
+                "description": "filter the rows returned",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "users_bool_exp",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "users_aggregate",
+                "ofType": null
               }
             },
             "isDeprecated": false,
@@ -77023,7 +78205,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "user_config_on_conflict",
-        "description": "on conflict condition type for table \"user_config\"",
+        "description": "on_conflict condition type for table \"user_config\"",
         "fields": null,
         "inputFields": [
           {
@@ -78582,7 +79764,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "on conflict condition",
+            "description": "upsert condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "users_on_conflict",
@@ -80480,7 +81662,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "on conflict condition",
+            "description": "upsert condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "users_on_conflict",
@@ -80498,7 +81680,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "users_on_conflict",
-        "description": "on conflict condition type for table \"auth.users\"",
+        "description": "on_conflict condition type for table \"auth.users\"",
         "fields": null,
         "inputFields": [
           {

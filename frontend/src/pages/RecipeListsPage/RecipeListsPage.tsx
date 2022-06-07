@@ -1,28 +1,12 @@
 import React, { useState } from 'react'
 
 import { ApolloCache, DefaultContext, gql, OperationVariables, useMutation, useQuery } from '@apollo/client';
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Grid,
-  Link,
-  List,
-  ListItem, makeStyles,
-  Modal,
-  Paper, styled,
-  Theme,
-  Typography
-} from '@mui/material';
-import { buildASTSchema } from 'graphql';
-import { GraphQLBridge } from 'uniforms-bridge-graphql';
-import { AutoForm } from 'uniforms-material';
 import { ApolloQueryResult } from '@apollo/client/core/types';
 import { FetchResult } from '@apollo/client/link/core';
 import { MutationFunctionOptions } from '@apollo/client/react/types/types';
+import {Button, Card, Col, Container, Form, FormControl, Modal, Row} from 'react-bootstrap';
 import { Recipe_List_Items, Recipe_Lists, Recipes } from '../../generated/graphql';
-import {ModalUnstyled} from "@mui/base";
+import {inputChangeHandler} from "../../utils/hook-helpers";
 
 const GET_RECIPE_LISTS = gql`
 query GetUserRecipeLists {
@@ -57,20 +41,6 @@ const DELETE_RECIPE_LIST = gql`
     }
 `;
 
-const recipeListSchema = gql`
-    type RecipeList {
-        name: String
-    }
-
-    type Query {
-        anything: ID
-    }
-`
-
-const schemaType = buildASTSchema(recipeListSchema).getType('RecipeList');
-// @ts-ignore
-const bridge = new GraphQLBridge(schemaType, () => {}, {});
-
 interface RecipeListsPageProps {
 
 }
@@ -78,11 +48,11 @@ interface RecipeListsPageProps {
 const RecipeListItem = (recipe_list_item: Recipe_List_Items) => {
   const recipeLink = `/recipe/${recipe_list_item.recipe.id}`;
   return (
-    <ListItem key={recipe_list_item.id}>
-      <Typography variant='body2'>
-        <Link href={recipeLink}>{recipe_list_item.recipe.name}</Link>
-      </Typography>
-    </ListItem>
+    <Row key={recipe_list_item.id}>
+      <div className="fs-5">
+        <a href={recipeLink}>{recipe_list_item.recipe.name}</a>
+      </div>
+    </Row>
   )
 }
 
@@ -93,29 +63,6 @@ interface RecipeListCardProps {
   modalOpen: boolean;
   setModalOpen: React.Dispatch<boolean>;
 }
-
-const StyledModal = styled(ModalUnstyled)`
-  position: fixed;
-  z-index: 1300;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const Backdrop = styled('div')`
-  z-index: -1;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  -webkit-tap-highlight-color: transparent;
-`;
 
 const style = {
   width: 400,
@@ -143,35 +90,30 @@ const RecipeListCard = (props: RecipeListCardProps) => {
   const nullOrUndefined = (obj?: number | null) => (obj === undefined || obj === null) ? 0 : obj;
 
   return (
-    <Grid item xs={6} key={recipe_list.id}>
+    <Col md={6} key={recipe_list.id}>
       <Card>
-        <CardContent>
-          <Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom>
+        <Card.Body>
+          <div className="fs-3">
             {recipe_list.name}
-          </Typography>
-          <List>
+          </div>
+          <Row>
             {[...recipe_list.recipe_list_items]
               .sort((a, b) => nullOrUndefined(a.seq_num) - nullOrUndefined(b.seq_num))
               .map(RecipeListItem)}
-          </List>
+          </Row>
           <Button onClick={() => setModalOpen(true)}>Delete</Button>
-          <StyledModal
-            open={modalOpen}
-            onClose={() => setModalOpen(false)}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-            BackdropComponent={Backdrop}
+          <Modal
+            show={modalOpen}
+            onHide={() => setModalOpen(false)}
           >
-            <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Are you sure you want to delete this list?
-              </Typography>
-              <Button variant="text" onClick={removeList}>Delete</Button>
-            </Box>
-          </StyledModal>
-        </CardContent>
+            <div id="modal-modal-title" className="fs-3">
+              Are you sure you want to delete this list?
+            </div>
+            <Button variant="text" onClick={removeList}>Delete</Button>
+          </Modal>
+        </Card.Body>
       </Card>
-    </Grid>
+    </Col>
   )
 }
 
@@ -179,6 +121,7 @@ export const RecipeListsPage: React.FunctionComponent<RecipeListsPageProps> = (p
   const [create, { loading: createLoading, error: createError }] = useMutation(INSERT_RECIPE_LIST);
   const [deleteList, { loading: deleteLoading, error: deleteError }] = useMutation(DELETE_RECIPE_LIST);
   const [modalOpen, setModalOpen] = useState(false);
+  const [listName, setListName] = useState<string | null>(null);
 
   const { loading, error, data, refetch } = useQuery(GET_RECIPE_LISTS, {
     variables: {}
@@ -190,10 +133,10 @@ export const RecipeListsPage: React.FunctionComponent<RecipeListsPageProps> = (p
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const { recipe_lists } = data as {recipe_lists: Recipe_Lists[]};
 
-  const onSubmit = async (recipeList: Recipe_Lists) => {
+  const onSubmit = async () => {
     const resp = await create({
       variables: {
-        name: recipeList.name
+        name: listName
       }
     })
     console.log(resp);
@@ -202,16 +145,17 @@ export const RecipeListsPage: React.FunctionComponent<RecipeListsPageProps> = (p
   }
 
   return (
-    <div className="RecipeListsPage" data-testid="RecipeListsPage">
-      <AutoForm
-        placeholder={true}
-        schema={bridge}
-        // @ts-ignore
-        onSubmit={onSubmit}
-      />
-      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+    <Container className="RecipeListsPage" data-testid="RecipeListsPage">
+      <Row>
+        <Form>
+          <h4>New List</h4>
+          <input name="name" onChange={inputChangeHandler(setListName)} />
+          <Button onClick={onSubmit}>Submit</Button>
+        </Form>
+      </Row>
+      <Row>
         {recipe_lists.map((recipe_list) => RecipeListCard({ refetch, deleteList, recipe_list, modalOpen, setModalOpen }))}
-      </Grid>
-    </div>
+      </Row>
+    </Container>
   );
 }

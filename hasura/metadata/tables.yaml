@@ -14,8 +14,7 @@
       update_by_pk: updateAuthProviderRequest
     comment: null
     custom_name: authProviderRequests
-    custom_column_names:
-      redirect_url: redirectUrl
+    custom_column_names: {}
 - table:
     schema: auth
     name: providers
@@ -161,7 +160,7 @@
   configuration:
     custom_root_fields:
       insert: insertUsers
-      select_aggregate: userAggregate
+      select_aggregate: usersAggregate
       insert_one: insertUser
       select_by_pk: user
       select: users
@@ -435,14 +434,6 @@
 - table:
     schema: public
     name: recipe_directions
-  array_relationships:
-    - name: recipe_direction_actions
-      using:
-        foreign_key_constraint_on:
-          column: direction_id
-          table:
-            schema: public
-            name: recipe_direction_actions
   insert_permissions:
     - role: user
       permission:

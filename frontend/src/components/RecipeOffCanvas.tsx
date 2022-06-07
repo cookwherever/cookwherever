@@ -3,6 +3,8 @@ import {Button, Col, Container, Form, Offcanvas, Row} from 'react-bootstrap';
 import { Recipes } from '../generated/graphql';
 import {SaveRecipeToList} from "./SaveRecipeToList";
 import {ToggleRecipeVisible} from "./ToggleRecipeVisible";
+import {useRecoilState} from "recoil";
+import {viewModeState} from "../recoil/atoms/auth";
 
 interface RecipeOffCanvasProps {
   recipe: Recipes
@@ -10,6 +12,29 @@ interface RecipeOffCanvasProps {
   callbacks: {
     show: React.Dispatch<boolean>
   }
+}
+
+interface ViewModeSelectorProps {
+
+}
+
+const ViewModeSelector: React.FunctionComponent<ViewModeSelectorProps> = ({}) => {
+  const [viewMode, setViewMode] = useRecoilState(viewModeState);
+
+  const toggleDeveloperMode = () => {
+    setViewMode(viewMode === 'developer' ? 'view' : 'developer')
+  }
+
+  return (
+    <>
+      <Form.Check
+        type="switch"
+        label="developer"
+        checked={viewMode === 'developer'}
+        onChange={toggleDeveloperMode}
+      />
+    </>
+  )
 }
 
 export const RecipeOffCanvas: React.FunctionComponent<RecipeOffCanvasProps> = ({ recipe, visible, callbacks: { show } }) => {
@@ -34,15 +59,12 @@ export const RecipeOffCanvas: React.FunctionComponent<RecipeOffCanvasProps> = ({
           <Offcanvas.Body>
             <Form>
               <Row>
-                <Col md={8}>
-                  <Form.Group controlId="formSaveToList">
-                    <Form.Label>Save Recipe to List</Form.Label>
-                    <SaveRecipeToList recipe={recipe} />
-                  </Form.Group>
+                <Col md={4}>
+                  <ViewModeSelector />
                 </Col>
               </Row>
               <Row>
-                <Col md={2}>
+                <Col md={4}>
                   <Form.Group controlId="formPrint">
                     <Form.Label>Print Recipe</Form.Label>
                     <Button size="sm" onClick={printRecipe}>Print</Button>
@@ -50,7 +72,7 @@ export const RecipeOffCanvas: React.FunctionComponent<RecipeOffCanvasProps> = ({
                 </Col>
               </Row>
               <Row>
-                <Col md={2}>
+                <Col md={4}>
                   <Form.Group controlId="formHide">
                     <Form.Label>Toggle Recipe as Visible</Form.Label>
                     <ToggleRecipeVisible recipe={recipe} />

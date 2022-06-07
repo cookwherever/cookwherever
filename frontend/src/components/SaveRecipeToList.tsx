@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import {Recipe_Lists, Recipes} from '../generated/graphql';
@@ -25,21 +25,9 @@ interface SaveRecipeProps {
 }
 
 export const SaveRecipeToList: React.FunctionComponent<SaveRecipeProps> = ({ recipe }) => {
-  const [selectedList, setSelectedList] = useState(-1);
+  const [selectedList, setSelectedList] = useState(0);
+  const [savedToList, setSavedToList] = useState('');
   const [saveRecipeInsert, { loading: saveRecipeLoading, error: saveRecipeError }] = useMutation(INSERT_RECIPE_TO_LIST);
-  const saveRecipe = async () => {
-    if (selectedList === -1) {
-      console.error('no list selected');
-      return;
-    }
-
-    await saveRecipeInsert({
-      variables: {
-        recipe_id: recipe.id,
-        recipe_list_id: selectedList,
-      }
-    });
-  }
 
   const { loading, error, data } = useQuery(GET_RECIPE_LISTS, {
     variables: {}
@@ -51,25 +39,58 @@ export const SaveRecipeToList: React.FunctionComponent<SaveRecipeProps> = ({ rec
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const { recipe_lists } = data as {recipe_lists: Recipe_Lists[]};
 
+  const saveRecipe = async () => {
+    if (selectedList === 0) {
+      console.error('no list selected');
+      return;
+    }
+
+    const list = recipe_lists[selectedList - 1];
+
+    try {
+      await saveRecipeInsert({
+        variables: {
+          recipe_id: recipe.id,
+          recipe_list_id: list.id,
+        }
+      });
+      setSavedToList(`Saved recipe to ${list.name}.`);
+    } catch (e) {
+      console.error(e);
+      setSavedToList(`Unable to save recipe to ${list.name}`);
+    }
+  }
+
+  if (recipe_lists.length > 0 && selectedList === 0) {
+    setSelectedList(1);
+  }
+
   return (
-    <Row className="justify-content-md-center">
-      <Col xs={12} md={8} className="px-1">
-        <Form.Select
-          id="recipe-list-select"
-          value={selectedList}
-          onChange={(event) => { setSelectedList(parseInt(event.target.value, 10)); }}
-        >
-          {recipe_lists.map(list => {
-            return (
-              <option value={list.id} key={list.id}>{list.name}</option>
-            )
-          })}
-        </Form.Select>
-      </Col>
-      <Col md={4} className="px-1">
-        <Button size="sm" onClick={saveRecipe}>Save</Button>
-      </Col>
-    </Row>
+    <>
+      <Row className="justify-content-md-center">
+        <Col xs={12} md={8} className="px-1">
+          <Form.Select
+            id="recipe-list-select"
+            value={selectedList}
+            onChange={(event) => { setSelectedList(parseInt(event.target.value, 10)); }}
+          >
+            {recipe_lists.map(list => {
+              return (
+                <option value={list.id} key={list.id}>{list.name}</option>
+              )
+            })}
+          </Form.Select>
+        </Col>
+        <Col md={4} className="px-1">
+          <Button size="sm" onClick={saveRecipe}>Save</Button>
+        </Col>
+      </Row>
+      {savedToList && (
+        <Row>
+          {savedToList}
+        </Row>
+      )}
+    </>
   )
 };
 
