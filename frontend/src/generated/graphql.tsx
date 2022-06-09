@@ -3787,6 +3787,128 @@ export type Measure_Unit_Variance_Fields = {
   ml?: Maybe<Scalars['Float']>;
 };
 
+/** columns and relationships of "most_common_ingredients" */
+export type Most_Common_Ingredients = {
+  __typename?: 'most_common_ingredients';
+  ingredient_count?: Maybe<Scalars['bigint']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+/** aggregated selection of "most_common_ingredients" */
+export type Most_Common_Ingredients_Aggregate = {
+  __typename?: 'most_common_ingredients_aggregate';
+  aggregate?: Maybe<Most_Common_Ingredients_Aggregate_Fields>;
+  nodes: Array<Most_Common_Ingredients>;
+};
+
+/** aggregate fields of "most_common_ingredients" */
+export type Most_Common_Ingredients_Aggregate_Fields = {
+  __typename?: 'most_common_ingredients_aggregate_fields';
+  avg?: Maybe<Most_Common_Ingredients_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Most_Common_Ingredients_Max_Fields>;
+  min?: Maybe<Most_Common_Ingredients_Min_Fields>;
+  stddev?: Maybe<Most_Common_Ingredients_Stddev_Fields>;
+  stddev_pop?: Maybe<Most_Common_Ingredients_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Most_Common_Ingredients_Stddev_Samp_Fields>;
+  sum?: Maybe<Most_Common_Ingredients_Sum_Fields>;
+  var_pop?: Maybe<Most_Common_Ingredients_Var_Pop_Fields>;
+  var_samp?: Maybe<Most_Common_Ingredients_Var_Samp_Fields>;
+  variance?: Maybe<Most_Common_Ingredients_Variance_Fields>;
+};
+
+
+/** aggregate fields of "most_common_ingredients" */
+export type Most_Common_Ingredients_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Most_Common_Ingredients_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Most_Common_Ingredients_Avg_Fields = {
+  __typename?: 'most_common_ingredients_avg_fields';
+  ingredient_count?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "most_common_ingredients". All fields are combined with a logical 'AND'. */
+export type Most_Common_Ingredients_Bool_Exp = {
+  _and?: InputMaybe<Array<Most_Common_Ingredients_Bool_Exp>>;
+  _not?: InputMaybe<Most_Common_Ingredients_Bool_Exp>;
+  _or?: InputMaybe<Array<Most_Common_Ingredients_Bool_Exp>>;
+  ingredient_count?: InputMaybe<Bigint_Comparison_Exp>;
+  name?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** aggregate max on columns */
+export type Most_Common_Ingredients_Max_Fields = {
+  __typename?: 'most_common_ingredients_max_fields';
+  ingredient_count?: Maybe<Scalars['bigint']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Most_Common_Ingredients_Min_Fields = {
+  __typename?: 'most_common_ingredients_min_fields';
+  ingredient_count?: Maybe<Scalars['bigint']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+/** Ordering options when selecting data from "most_common_ingredients". */
+export type Most_Common_Ingredients_Order_By = {
+  ingredient_count?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+};
+
+/** select columns of table "most_common_ingredients" */
+export enum Most_Common_Ingredients_Select_Column {
+  /** column name */
+  IngredientCount = 'ingredient_count',
+  /** column name */
+  Name = 'name'
+}
+
+/** aggregate stddev on columns */
+export type Most_Common_Ingredients_Stddev_Fields = {
+  __typename?: 'most_common_ingredients_stddev_fields';
+  ingredient_count?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Most_Common_Ingredients_Stddev_Pop_Fields = {
+  __typename?: 'most_common_ingredients_stddev_pop_fields';
+  ingredient_count?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Most_Common_Ingredients_Stddev_Samp_Fields = {
+  __typename?: 'most_common_ingredients_stddev_samp_fields';
+  ingredient_count?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Most_Common_Ingredients_Sum_Fields = {
+  __typename?: 'most_common_ingredients_sum_fields';
+  ingredient_count?: Maybe<Scalars['bigint']>;
+};
+
+/** aggregate var_pop on columns */
+export type Most_Common_Ingredients_Var_Pop_Fields = {
+  __typename?: 'most_common_ingredients_var_pop_fields';
+  ingredient_count?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Most_Common_Ingredients_Var_Samp_Fields = {
+  __typename?: 'most_common_ingredients_var_samp_fields';
+  ingredient_count?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Most_Common_Ingredients_Variance_Fields = {
+  __typename?: 'most_common_ingredients_variance_fields';
+  ingredient_count?: Maybe<Scalars['Float']>;
+};
+
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
@@ -5716,6 +5838,10 @@ export type Query_Root = {
   measure_unit_aggregate: Measure_Unit_Aggregate;
   /** fetch data from the table: "measure_unit" using primary key columns */
   measure_unit_by_pk?: Maybe<Measure_Unit>;
+  /** fetch data from the table: "most_common_ingredients" */
+  most_common_ingredients: Array<Most_Common_Ingredients>;
+  /** fetch aggregated fields from the table: "most_common_ingredients" */
+  most_common_ingredients_aggregate: Most_Common_Ingredients_Aggregate;
   /** fetch data from the table: "nutrient" */
   nutrient: Array<Nutrient>;
   /** fetch aggregated fields from the table: "nutrient" */
@@ -6136,6 +6262,24 @@ export type Query_RootMeasure_Unit_AggregateArgs = {
 
 export type Query_RootMeasure_Unit_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+
+export type Query_RootMost_Common_IngredientsArgs = {
+  distinct_on?: InputMaybe<Array<Most_Common_Ingredients_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Most_Common_Ingredients_Order_By>>;
+  where?: InputMaybe<Most_Common_Ingredients_Bool_Exp>;
+};
+
+
+export type Query_RootMost_Common_Ingredients_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Most_Common_Ingredients_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Most_Common_Ingredients_Order_By>>;
+  where?: InputMaybe<Most_Common_Ingredients_Bool_Exp>;
 };
 
 
@@ -10464,6 +10608,10 @@ export type Subscription_Root = {
   measure_unit_aggregate: Measure_Unit_Aggregate;
   /** fetch data from the table: "measure_unit" using primary key columns */
   measure_unit_by_pk?: Maybe<Measure_Unit>;
+  /** fetch data from the table: "most_common_ingredients" */
+  most_common_ingredients: Array<Most_Common_Ingredients>;
+  /** fetch aggregated fields from the table: "most_common_ingredients" */
+  most_common_ingredients_aggregate: Most_Common_Ingredients_Aggregate;
   /** fetch data from the table: "nutrient" */
   nutrient: Array<Nutrient>;
   /** fetch aggregated fields from the table: "nutrient" */
@@ -10884,6 +11032,24 @@ export type Subscription_RootMeasure_Unit_AggregateArgs = {
 
 export type Subscription_RootMeasure_Unit_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+
+export type Subscription_RootMost_Common_IngredientsArgs = {
+  distinct_on?: InputMaybe<Array<Most_Common_Ingredients_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Most_Common_Ingredients_Order_By>>;
+  where?: InputMaybe<Most_Common_Ingredients_Bool_Exp>;
+};
+
+
+export type Subscription_RootMost_Common_Ingredients_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Most_Common_Ingredients_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Most_Common_Ingredients_Order_By>>;
+  where?: InputMaybe<Most_Common_Ingredients_Bool_Exp>;
 };
 
 
@@ -12104,6 +12270,18 @@ export type GetRecipeSourceProvidersQueryVariables = Exact<{ [key: string]: neve
 
 export type GetRecipeSourceProvidersQuery = { __typename?: 'query_root', recipe_source_providers: Array<{ __typename?: 'recipe_source_providers', id: any, name: string }> };
 
+export type GetMostCommonIngredientsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetMostCommonIngredientsQuery = { __typename?: 'query_root', most_common_ingredients: Array<{ __typename?: 'most_common_ingredients', ingredient_count?: any | null, name?: string | null }> };
+
+export type RecipesWithIngredientQueryVariables = Exact<{
+  ingredient_name: Scalars['String'];
+}>;
+
+
+export type RecipesWithIngredientQuery = { __typename?: 'query_root', recipes: Array<{ __typename?: 'recipes', id: number, name: string }> };
+
 export type GetUserRecipeListsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -12530,6 +12708,80 @@ export function useGetRecipeSourceProvidersLazyQuery(baseOptions?: Apollo.LazyQu
 export type GetRecipeSourceProvidersQueryHookResult = ReturnType<typeof useGetRecipeSourceProvidersQuery>;
 export type GetRecipeSourceProvidersLazyQueryHookResult = ReturnType<typeof useGetRecipeSourceProvidersLazyQuery>;
 export type GetRecipeSourceProvidersQueryResult = Apollo.QueryResult<GetRecipeSourceProvidersQuery, GetRecipeSourceProvidersQueryVariables>;
+export const GetMostCommonIngredientsDocument = gql`
+    query GetMostCommonIngredients {
+  most_common_ingredients(limit: 100) {
+    ingredient_count
+    name
+  }
+}
+    `;
+
+/**
+ * __useGetMostCommonIngredientsQuery__
+ *
+ * To run a query within a React component, call `useGetMostCommonIngredientsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMostCommonIngredientsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMostCommonIngredientsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetMostCommonIngredientsQuery(baseOptions?: Apollo.QueryHookOptions<GetMostCommonIngredientsQuery, GetMostCommonIngredientsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetMostCommonIngredientsQuery, GetMostCommonIngredientsQueryVariables>(GetMostCommonIngredientsDocument, options);
+      }
+export function useGetMostCommonIngredientsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMostCommonIngredientsQuery, GetMostCommonIngredientsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetMostCommonIngredientsQuery, GetMostCommonIngredientsQueryVariables>(GetMostCommonIngredientsDocument, options);
+        }
+export type GetMostCommonIngredientsQueryHookResult = ReturnType<typeof useGetMostCommonIngredientsQuery>;
+export type GetMostCommonIngredientsLazyQueryHookResult = ReturnType<typeof useGetMostCommonIngredientsLazyQuery>;
+export type GetMostCommonIngredientsQueryResult = Apollo.QueryResult<GetMostCommonIngredientsQuery, GetMostCommonIngredientsQueryVariables>;
+export const RecipesWithIngredientDocument = gql`
+    query RecipesWithIngredient($ingredient_name: String!) {
+  recipes(
+    where: {recipe_ingredient_groups: {group_ingredients: {name: {_eq: $ingredient_name}}}}
+    limit: 100
+  ) {
+    id
+    name
+  }
+}
+    `;
+
+/**
+ * __useRecipesWithIngredientQuery__
+ *
+ * To run a query within a React component, call `useRecipesWithIngredientQuery` and pass it any options that fit your needs.
+ * When your component renders, `useRecipesWithIngredientQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useRecipesWithIngredientQuery({
+ *   variables: {
+ *      ingredient_name: // value for 'ingredient_name'
+ *   },
+ * });
+ */
+export function useRecipesWithIngredientQuery(baseOptions: Apollo.QueryHookOptions<RecipesWithIngredientQuery, RecipesWithIngredientQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<RecipesWithIngredientQuery, RecipesWithIngredientQueryVariables>(RecipesWithIngredientDocument, options);
+      }
+export function useRecipesWithIngredientLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<RecipesWithIngredientQuery, RecipesWithIngredientQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<RecipesWithIngredientQuery, RecipesWithIngredientQueryVariables>(RecipesWithIngredientDocument, options);
+        }
+export type RecipesWithIngredientQueryHookResult = ReturnType<typeof useRecipesWithIngredientQuery>;
+export type RecipesWithIngredientLazyQueryHookResult = ReturnType<typeof useRecipesWithIngredientLazyQuery>;
+export type RecipesWithIngredientQueryResult = Apollo.QueryResult<RecipesWithIngredientQuery, RecipesWithIngredientQueryVariables>;
 export const GetUserRecipeListsDocument = gql`
     query GetUserRecipeLists {
   recipe_lists {

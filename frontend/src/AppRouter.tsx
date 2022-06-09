@@ -63,7 +63,7 @@ const NavBar = () => {
         <Nav.Link href="/lists">Lists</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link href="/ingredients">Ingredients</Nav.Link>
+        <Nav.Link href="/ingredient">Ingredients</Nav.Link>
       </Nav.Item>
       <Nav.Item>
         <div className="pt-2">{user && (user.displayName || user.email)}</div>

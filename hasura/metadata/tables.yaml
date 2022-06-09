@@ -401,6 +401,16 @@
         filter: {}
 - table:
     schema: public
+    name: most_common_ingredients
+  select_permissions:
+    - role: user
+      permission:
+        columns:
+          - ingredient_count
+          - name
+        filter: {}
+- table:
+    schema: public
     name: nutrient
 - table:
     schema: public

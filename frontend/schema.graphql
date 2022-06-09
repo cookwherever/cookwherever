@@ -4276,6 +4276,119 @@ type measure_unit_variance_fields {
   ml: Float
 }
 
+"""
+columns and relationships of "most_common_ingredients"
+"""
+type most_common_ingredients {
+  ingredient_count: bigint
+  name: String
+}
+
+"""
+aggregated selection of "most_common_ingredients"
+"""
+type most_common_ingredients_aggregate {
+  aggregate: most_common_ingredients_aggregate_fields
+  nodes: [most_common_ingredients!]!
+}
+
+"""
+aggregate fields of "most_common_ingredients"
+"""
+type most_common_ingredients_aggregate_fields {
+  avg: most_common_ingredients_avg_fields
+  count(columns: [most_common_ingredients_select_column!], distinct: Boolean): Int!
+  max: most_common_ingredients_max_fields
+  min: most_common_ingredients_min_fields
+  stddev: most_common_ingredients_stddev_fields
+  stddev_pop: most_common_ingredients_stddev_pop_fields
+  stddev_samp: most_common_ingredients_stddev_samp_fields
+  sum: most_common_ingredients_sum_fields
+  var_pop: most_common_ingredients_var_pop_fields
+  var_samp: most_common_ingredients_var_samp_fields
+  variance: most_common_ingredients_variance_fields
+}
+
+"""aggregate avg on columns"""
+type most_common_ingredients_avg_fields {
+  ingredient_count: Float
+}
+
+"""
+Boolean expression to filter rows from the table "most_common_ingredients". All fields are combined with a logical 'AND'.
+"""
+input most_common_ingredients_bool_exp {
+  _and: [most_common_ingredients_bool_exp!]
+  _not: most_common_ingredients_bool_exp
+  _or: [most_common_ingredients_bool_exp!]
+  ingredient_count: bigint_comparison_exp
+  name: String_comparison_exp
+}
+
+"""aggregate max on columns"""
+type most_common_ingredients_max_fields {
+  ingredient_count: bigint
+  name: String
+}
+
+"""aggregate min on columns"""
+type most_common_ingredients_min_fields {
+  ingredient_count: bigint
+  name: String
+}
+
+"""Ordering options when selecting data from "most_common_ingredients"."""
+input most_common_ingredients_order_by {
+  ingredient_count: order_by
+  name: order_by
+}
+
+"""
+select columns of table "most_common_ingredients"
+"""
+enum most_common_ingredients_select_column {
+  """column name"""
+  ingredient_count
+
+  """column name"""
+  name
+}
+
+"""aggregate stddev on columns"""
+type most_common_ingredients_stddev_fields {
+  ingredient_count: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type most_common_ingredients_stddev_pop_fields {
+  ingredient_count: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type most_common_ingredients_stddev_samp_fields {
+  ingredient_count: Float
+}
+
+"""aggregate sum on columns"""
+type most_common_ingredients_sum_fields {
+  ingredient_count: bigint
+}
+
+"""aggregate var_pop on columns"""
+type most_common_ingredients_var_pop_fields {
+  ingredient_count: Float
+}
+
+"""aggregate var_samp on columns"""
+type most_common_ingredients_var_samp_fields {
+  ingredient_count: Float
+}
+
+"""aggregate variance on columns"""
+type most_common_ingredients_variance_fields {
+  ingredient_count: Float
+}
+
 """mutation root"""
 type mutation_root {
   """
@@ -7046,6 +7159,46 @@ type query_root {
 
   """fetch data from the table: "measure_unit" using primary key columns"""
   measure_unit_by_pk(id: Int!): measure_unit
+
+  """
+  fetch data from the table: "most_common_ingredients"
+  """
+  most_common_ingredients(
+    """distinct select on columns"""
+    distinct_on: [most_common_ingredients_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [most_common_ingredients_order_by!]
+
+    """filter the rows returned"""
+    where: most_common_ingredients_bool_exp
+  ): [most_common_ingredients!]!
+
+  """
+  fetch aggregated fields from the table: "most_common_ingredients"
+  """
+  most_common_ingredients_aggregate(
+    """distinct select on columns"""
+    distinct_on: [most_common_ingredients_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [most_common_ingredients_order_by!]
+
+    """filter the rows returned"""
+    where: most_common_ingredients_bool_exp
+  ): most_common_ingredients_aggregate!
 
   """
   fetch data from the table: "nutrient"
@@ -12723,6 +12876,46 @@ type subscription_root {
 
   """fetch data from the table: "measure_unit" using primary key columns"""
   measure_unit_by_pk(id: Int!): measure_unit
+
+  """
+  fetch data from the table: "most_common_ingredients"
+  """
+  most_common_ingredients(
+    """distinct select on columns"""
+    distinct_on: [most_common_ingredients_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [most_common_ingredients_order_by!]
+
+    """filter the rows returned"""
+    where: most_common_ingredients_bool_exp
+  ): [most_common_ingredients!]!
+
+  """
+  fetch aggregated fields from the table: "most_common_ingredients"
+  """
+  most_common_ingredients_aggregate(
+    """distinct select on columns"""
+    distinct_on: [most_common_ingredients_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [most_common_ingredients_order_by!]
+
+    """filter the rows returned"""
+    where: most_common_ingredients_bool_exp
+  ): most_common_ingredients_aggregate!
 
   """
   fetch data from the table: "nutrient"
