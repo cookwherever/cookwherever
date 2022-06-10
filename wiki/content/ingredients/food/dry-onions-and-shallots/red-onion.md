@@ -11,7 +11,7 @@ red onion These are sweet enough to eat raw, and they're often used to add color
 
 ### Varieties
 
-* [[dry-onions-and-shallots]]
+* [[ingredients/food/dry-onions-and-shallots/dry-onions-and-shallots]]
 
 ### Sources
 * http://foodsubs.com/Onionsdry.html

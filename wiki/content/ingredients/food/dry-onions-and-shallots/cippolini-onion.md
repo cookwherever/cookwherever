@@ -12,7 +12,7 @@ cippolini onion = Borettana onion Pronunciation: chip-ah-LEE-nee Notes: These ro
 
 ### Varieties
 
-* [[dry-onions-and-shallots]]
+* [[ingredients/food/dry-onions-and-shallots/dry-onions-and-shallots]]
 
 ### Sources
 * http://foodsubs.com/Onionsdry.html

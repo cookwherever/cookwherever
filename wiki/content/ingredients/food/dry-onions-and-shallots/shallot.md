@@ -11,7 +11,7 @@ shallot Australians use the term shallots to describe green onions, but to Ameri
 
 ### Varieties
 
-* [[dry-onions-and-shallots]]
+* [[ingredients/food/dry-onions-and-shallots/dry-onions-and-shallots]]
 
 ### Sources
 * http://foodsubs.com/Onionsdry.html

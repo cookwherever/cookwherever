@@ -17,7 +17,7 @@ false
 
 ### Varieties
 
-* [[dry-onions-and-shallots]]
+* [[ingredients/categories/plants/produce/vegetables/root-underground/bulbs/onions/dry-onions-and-shallots]]
 
 ### Sources
 * http://foodsubs.com/Onions.html

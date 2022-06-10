@@ -13,7 +13,7 @@ boiling onion = boiler = boiler onion These are small versions of yellow, white,
 
 ### Varieties
 
-* [[dry-onions-and-shallots]]
+* [[ingredients/food/dry-onions-and-shallots/dry-onions-and-shallots]]
 
 ### Sources
 * http://foodsubs.com/Onionsdry.html

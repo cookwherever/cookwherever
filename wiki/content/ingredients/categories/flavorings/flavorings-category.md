@@ -26,7 +26,7 @@ tags:
 * india - [[indian-spices]]
 * middle east - [[middle-eastern-spices]]
 * herb & spice mixes - [[herb-and-spice-mixes]]
-* africa - [[ingredients/food/herb-and-spice-mixes/african-herb-and-spice-mixes]]
+* africa - [[ingredients/categories/flavorings/spices/herb-and-spice-mixes/african-herb-and-spice-mixes]]
 * america - [[american-herb-and-spice-mixes]]
 * asia - [[asian-herb-and-spice-mixes]]
 * europe - [[european-herb-and-spice-mixes]]

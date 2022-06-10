@@ -12,7 +12,7 @@ storage onion = fall onion These onions are available year-round, since their lo
 
 ### Varieties
 
-* [[dry-onions-and-shallots]]
+* [[ingredients/food/dry-onions-and-shallots/dry-onions-and-shallots]]
 
 ### Sources
 * http://foodsubs.com/Onionsdry.html

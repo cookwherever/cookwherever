@@ -11,7 +11,7 @@ pearl onion Notes: These tiny onions are sweet and mild. About one inch in diame
 
 ### Varieties
 
-* [[dry-onions-and-shallots]]
+* [[ingredients/food/dry-onions-and-shallots/dry-onions-and-shallots]]
 
 ### Sources
 * http://foodsubs.com/Onionsdry.html
