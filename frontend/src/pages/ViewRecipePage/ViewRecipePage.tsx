@@ -10,7 +10,6 @@ import useDebouncedCallback from '@restart/hooks/useDebouncedCallback';
 import Timer from 'react-compound-timer';
 import {
   Recipes,
-  useRecipesQueryQuery,
   useUpdateRecipeVideoMutation,
   useViewRecipeQueryQuery
 } from '../../generated/graphql';
@@ -19,10 +18,9 @@ import { VideoPlayer } from '../../components/VideoPlayer';
 import { RecipeDirections } from '../../components/RecipeDirections';
 import { IngredientList } from '../../components/IngredientList';
 import { RecipeOffCanvas } from '../../components/RecipeOffCanvas';
-import { userState, viewModeState } from '../../recoil/atoms/auth';
 import { inDeveloperMode } from '../../recoil/selectors/view-mode';
 import { recipeViewerState } from '../../recoil/atoms/recipe';
-import {SaveRecipeToList} from "../../components/SaveRecipeToList";
+import { SaveRecipeToList } from '../../components/SaveRecipeToList';
 
 interface ViewRecipePageProps {
   match: {
@@ -55,20 +53,24 @@ export const QUERY = gql`
           units
           video_timestamp
           video_timestamp_end
-          recipe_ingredient_food_candidates {
-            food_portion {
-              gram_weight
-              amount
-              modifier
-              measure_unit {
-                name
+          ingredient {
+              id
+              name
+              ingredient_food_candidate {
+                  food {
+                      description
+                  }
+                  food_portion {
+                      gram_weight
+                      amount
+                      measure_unit {
+                          name
+                      }
+                      portion_description
+                      modifier
+                  }
               }
-              portion_description
-            }
-            food {
-              description
-            }
-          }
+          }  
         }
       }
       recipe_directions(order_by: { seq_num: asc }) {
@@ -208,32 +210,32 @@ export const ViewRecipePage: React.FunctionComponent<ViewRecipePageProps> = ({ m
   return (
     <Container className="ViewRecipePage" data-testid="ViewRecipePage">
       <Row className='my-3'>
-        <Col md={12}>
-          <div className="fs-1 pb-8" style={{'display': 'inline'}}>
+        <Col md={9}>
+          <div className="fs-1 pb-8" style={{ 'display': 'inline' }}>
             {recipe.name}
           </div>
           <span className='fs-5 mx-2'>from <a href={recipe.source}>{sourceHostname}</a></span>
         </Col>
-      </Row>
-      <Row>
-        <Col md={3}>
-          <Row className="mb-2">
-            <Col md={2}>
-              <Button variant="outline-dark" size='sm' onClick={() => setShowRecipeSave(!showRecipeSave)} className="fs-8" style={{ cursor: 'pointer', userSelect: 'none' }}>
-                <i className='bi bi-star' />
-              </Button>
-            </Col>
-            <Col md={2}>
-              <Button variant="outline-dark" size='sm' onClick={() => setShowRecipeOffCanvas(true)} className="fs-8" style={{ cursor: 'pointer', userSelect: 'none' }}>
-                <i className='bi bi-caret-down' />
-              </Button>
+        <Col md={3} className="d-flex align-items-center justify-content-end">
+          <Row>
+            <Col>
+              <div>
+                <Button variant="outline-dark" size='sm' onClick={() => setShowRecipeSave(!showRecipeSave)} className="fs-8 mx-1" style={{ cursor: 'pointer', userSelect: 'none' }}>
+                  <i className='bi bi-star' />
+                </Button>
+                <Button variant="outline-dark" size='sm' onClick={() => setShowRecipeOffCanvas(true)} className="fs-8 mx-1" style={{ cursor: 'pointer', userSelect: 'none' }}>
+                  <i className='bi bi-caret-down' />
+                </Button>
+              </div>
             </Col>
           </Row>
           <Row>
             {showRecipeSave && <SaveRecipeToList recipe={recipe} />}
           </Row>
         </Col>
-        <Col md={9}>
+      </Row>
+      <Row>
+        <Col md={12}>
           {recipe.recipe_tags.map((tag) => {
             return (
               <Badge key={tag.id} className="mx-1 fs-6" style={{ cursor: 'pointer', userSelect: 'none' }} bg="light" text="muted">{tag.name}</Badge>

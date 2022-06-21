@@ -111,23 +111,6 @@ input String_comparison_exp {
   _similar: String
 }
 
-scalar _text
-
-"""
-Boolean expression to compare columns of type "_text". All fields are combined with logical 'AND'.
-"""
-input _text_comparison_exp {
-  _eq: _text
-  _gt: _text
-  _gte: _text
-  _in: [_text!]
-  _is_null: Boolean
-  _lt: _text
-  _lte: _text
-  _neq: _text
-  _nin: [_text!]
-}
-
 """
 columns and relationships of "auth.provider_requests"
 """
@@ -3825,15 +3808,485 @@ input food_variance_order_by {
   food_category_id: order_by
 }
 
-"""Ingredients used in recipes."""
-type ingredients {
-  fdc_id: Int!
-
+"""
+columns and relationships of "ingredient_food_candidate"
+"""
+type ingredient_food_candidate {
   """An object relationship"""
   food: food!
+  food_candidate_id: Int!
+  food_candidate_portion_id: Int!
+
+  """An object relationship"""
+  food_portion: food_portion
+  id: Int!
+}
+
+"""
+aggregated selection of "ingredient_food_candidate"
+"""
+type ingredient_food_candidate_aggregate {
+  aggregate: ingredient_food_candidate_aggregate_fields
+  nodes: [ingredient_food_candidate!]!
+}
+
+"""
+aggregate fields of "ingredient_food_candidate"
+"""
+type ingredient_food_candidate_aggregate_fields {
+  avg: ingredient_food_candidate_avg_fields
+  count(columns: [ingredient_food_candidate_select_column!], distinct: Boolean): Int!
+  max: ingredient_food_candidate_max_fields
+  min: ingredient_food_candidate_min_fields
+  stddev: ingredient_food_candidate_stddev_fields
+  stddev_pop: ingredient_food_candidate_stddev_pop_fields
+  stddev_samp: ingredient_food_candidate_stddev_samp_fields
+  sum: ingredient_food_candidate_sum_fields
+  var_pop: ingredient_food_candidate_var_pop_fields
+  var_samp: ingredient_food_candidate_var_samp_fields
+  variance: ingredient_food_candidate_variance_fields
+}
+
+"""aggregate avg on columns"""
+type ingredient_food_candidate_avg_fields {
+  food_candidate_id: Float
+  food_candidate_portion_id: Float
+  id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "ingredient_food_candidate". All fields are combined with a logical 'AND'.
+"""
+input ingredient_food_candidate_bool_exp {
+  _and: [ingredient_food_candidate_bool_exp!]
+  _not: ingredient_food_candidate_bool_exp
+  _or: [ingredient_food_candidate_bool_exp!]
+  food: food_bool_exp
+  food_candidate_id: Int_comparison_exp
+  food_candidate_portion_id: Int_comparison_exp
+  food_portion: food_portion_bool_exp
+  id: Int_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "ingredient_food_candidate"
+"""
+enum ingredient_food_candidate_constraint {
+  """unique or primary key constraint"""
+  ingredient_food_candidate_food_candidate_id_food_candidate_port
+
+  """unique or primary key constraint"""
+  recipe_ingredient_food_candidate_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "ingredient_food_candidate"
+"""
+input ingredient_food_candidate_inc_input {
+  food_candidate_id: Int
+  food_candidate_portion_id: Int
+  id: Int
+}
+
+"""
+input type for inserting data into table "ingredient_food_candidate"
+"""
+input ingredient_food_candidate_insert_input {
+  food: food_obj_rel_insert_input
+  food_candidate_id: Int
+  food_candidate_portion_id: Int
+  food_portion: food_portion_obj_rel_insert_input
+  id: Int
+}
+
+"""aggregate max on columns"""
+type ingredient_food_candidate_max_fields {
+  food_candidate_id: Int
+  food_candidate_portion_id: Int
+  id: Int
+}
+
+"""aggregate min on columns"""
+type ingredient_food_candidate_min_fields {
+  food_candidate_id: Int
+  food_candidate_portion_id: Int
+  id: Int
+}
+
+"""
+response of any mutation on the table "ingredient_food_candidate"
+"""
+type ingredient_food_candidate_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [ingredient_food_candidate!]!
+}
+
+"""
+input type for inserting object relation for remote table "ingredient_food_candidate"
+"""
+input ingredient_food_candidate_obj_rel_insert_input {
+  data: ingredient_food_candidate_insert_input!
+
+  """upsert condition"""
+  on_conflict: ingredient_food_candidate_on_conflict
+}
+
+"""
+on_conflict condition type for table "ingredient_food_candidate"
+"""
+input ingredient_food_candidate_on_conflict {
+  constraint: ingredient_food_candidate_constraint!
+  update_columns: [ingredient_food_candidate_update_column!]! = []
+  where: ingredient_food_candidate_bool_exp
+}
+
+"""Ordering options when selecting data from "ingredient_food_candidate"."""
+input ingredient_food_candidate_order_by {
+  food: food_order_by
+  food_candidate_id: order_by
+  food_candidate_portion_id: order_by
+  food_portion: food_portion_order_by
+  id: order_by
+}
+
+"""primary key columns input for table: ingredient_food_candidate"""
+input ingredient_food_candidate_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "ingredient_food_candidate"
+"""
+enum ingredient_food_candidate_select_column {
+  """column name"""
+  food_candidate_id
+
+  """column name"""
+  food_candidate_portion_id
+
+  """column name"""
+  id
+}
+
+"""
+input type for updating data in table "ingredient_food_candidate"
+"""
+input ingredient_food_candidate_set_input {
+  food_candidate_id: Int
+  food_candidate_portion_id: Int
+  id: Int
+}
+
+"""aggregate stddev on columns"""
+type ingredient_food_candidate_stddev_fields {
+  food_candidate_id: Float
+  food_candidate_portion_id: Float
+  id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type ingredient_food_candidate_stddev_pop_fields {
+  food_candidate_id: Float
+  food_candidate_portion_id: Float
+  id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type ingredient_food_candidate_stddev_samp_fields {
+  food_candidate_id: Float
+  food_candidate_portion_id: Float
+  id: Float
+}
+
+"""aggregate sum on columns"""
+type ingredient_food_candidate_sum_fields {
+  food_candidate_id: Int
+  food_candidate_portion_id: Int
+  id: Int
+}
+
+"""
+update columns of table "ingredient_food_candidate"
+"""
+enum ingredient_food_candidate_update_column {
+  """column name"""
+  food_candidate_id
+
+  """column name"""
+  food_candidate_portion_id
+
+  """column name"""
+  id
+}
+
+"""aggregate var_pop on columns"""
+type ingredient_food_candidate_var_pop_fields {
+  food_candidate_id: Float
+  food_candidate_portion_id: Float
+  id: Float
+}
+
+"""aggregate var_samp on columns"""
+type ingredient_food_candidate_var_samp_fields {
+  food_candidate_id: Float
+  food_candidate_portion_id: Float
+  id: Float
+}
+
+"""aggregate variance on columns"""
+type ingredient_food_candidate_variance_fields {
+  food_candidate_id: Float
+  food_candidate_portion_id: Float
+  id: Float
+}
+
+"""Names of ingredients"""
+type ingredient_names {
   id: uuid!
-  names: _text
-  wiki_url: String!
+
+  """An object relationship"""
+  ingredient: ingredients!
+  ingredient_id: uuid!
+  name: String!
+}
+
+"""
+aggregated selection of "ingredient_names"
+"""
+type ingredient_names_aggregate {
+  aggregate: ingredient_names_aggregate_fields
+  nodes: [ingredient_names!]!
+}
+
+"""
+aggregate fields of "ingredient_names"
+"""
+type ingredient_names_aggregate_fields {
+  count(columns: [ingredient_names_select_column!], distinct: Boolean): Int!
+  max: ingredient_names_max_fields
+  min: ingredient_names_min_fields
+}
+
+"""
+order by aggregate values of table "ingredient_names"
+"""
+input ingredient_names_aggregate_order_by {
+  count: order_by
+  max: ingredient_names_max_order_by
+  min: ingredient_names_min_order_by
+}
+
+"""
+input type for inserting array relation for remote table "ingredient_names"
+"""
+input ingredient_names_arr_rel_insert_input {
+  data: [ingredient_names_insert_input!]!
+
+  """upsert condition"""
+  on_conflict: ingredient_names_on_conflict
+}
+
+"""
+Boolean expression to filter rows from the table "ingredient_names". All fields are combined with a logical 'AND'.
+"""
+input ingredient_names_bool_exp {
+  _and: [ingredient_names_bool_exp!]
+  _not: ingredient_names_bool_exp
+  _or: [ingredient_names_bool_exp!]
+  id: uuid_comparison_exp
+  ingredient: ingredients_bool_exp
+  ingredient_id: uuid_comparison_exp
+  name: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "ingredient_names"
+"""
+enum ingredient_names_constraint {
+  """unique or primary key constraint"""
+  ingredient_names_pkey
+}
+
+"""
+input type for inserting data into table "ingredient_names"
+"""
+input ingredient_names_insert_input {
+  id: uuid
+  ingredient: ingredients_obj_rel_insert_input
+  ingredient_id: uuid
+  name: String
+}
+
+"""aggregate max on columns"""
+type ingredient_names_max_fields {
+  id: uuid
+  ingredient_id: uuid
+  name: String
+}
+
+"""
+order by max() on columns of table "ingredient_names"
+"""
+input ingredient_names_max_order_by {
+  id: order_by
+  ingredient_id: order_by
+  name: order_by
+}
+
+"""aggregate min on columns"""
+type ingredient_names_min_fields {
+  id: uuid
+  ingredient_id: uuid
+  name: String
+}
+
+"""
+order by min() on columns of table "ingredient_names"
+"""
+input ingredient_names_min_order_by {
+  id: order_by
+  ingredient_id: order_by
+  name: order_by
+}
+
+"""
+response of any mutation on the table "ingredient_names"
+"""
+type ingredient_names_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [ingredient_names!]!
+}
+
+"""
+on_conflict condition type for table "ingredient_names"
+"""
+input ingredient_names_on_conflict {
+  constraint: ingredient_names_constraint!
+  update_columns: [ingredient_names_update_column!]! = []
+  where: ingredient_names_bool_exp
+}
+
+"""Ordering options when selecting data from "ingredient_names"."""
+input ingredient_names_order_by {
+  id: order_by
+  ingredient: ingredients_order_by
+  ingredient_id: order_by
+  name: order_by
+}
+
+"""primary key columns input for table: ingredient_names"""
+input ingredient_names_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "ingredient_names"
+"""
+enum ingredient_names_select_column {
+  """column name"""
+  id
+
+  """column name"""
+  ingredient_id
+
+  """column name"""
+  name
+}
+
+"""
+input type for updating data in table "ingredient_names"
+"""
+input ingredient_names_set_input {
+  id: uuid
+  ingredient_id: uuid
+  name: String
+}
+
+"""
+update columns of table "ingredient_names"
+"""
+enum ingredient_names_update_column {
+  """column name"""
+  id
+
+  """column name"""
+  ingredient_id
+
+  """column name"""
+  name
+}
+
+"""Ingredients used in recipes."""
+type ingredients {
+  food_candidate_id: Int
+
+  """
+  A computed field, executes function "food_candidates_for_ingredient"
+  """
+  food_candidates(
+    """distinct select on columns"""
+    distinct_on: [food_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [food_order_by!]
+
+    """filter the rows returned"""
+    where: food_bool_exp
+  ): [food!]
+  id: uuid!
+
+  """An object relationship"""
+  ingredient_food_candidate: ingredient_food_candidate
+
+  """An array relationship"""
+  ingredient_names(
+    """distinct select on columns"""
+    distinct_on: [ingredient_names_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [ingredient_names_order_by!]
+
+    """filter the rows returned"""
+    where: ingredient_names_bool_exp
+  ): [ingredient_names!]!
+
+  """An aggregate relationship"""
+  ingredient_names_aggregate(
+    """distinct select on columns"""
+    distinct_on: [ingredient_names_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [ingredient_names_order_by!]
+
+    """filter the rows returned"""
+    where: ingredient_names_bool_exp
+  ): ingredient_names_aggregate!
+  name: String
+  wiki_url: String
 }
 
 """
@@ -3861,9 +4314,33 @@ type ingredients_aggregate_fields {
   variance: ingredients_variance_fields
 }
 
+"""
+order by aggregate values of table "ingredients"
+"""
+input ingredients_aggregate_order_by {
+  avg: ingredients_avg_order_by
+  count: order_by
+  max: ingredients_max_order_by
+  min: ingredients_min_order_by
+  stddev: ingredients_stddev_order_by
+  stddev_pop: ingredients_stddev_pop_order_by
+  stddev_samp: ingredients_stddev_samp_order_by
+  sum: ingredients_sum_order_by
+  var_pop: ingredients_var_pop_order_by
+  var_samp: ingredients_var_samp_order_by
+  variance: ingredients_variance_order_by
+}
+
 """aggregate avg on columns"""
 type ingredients_avg_fields {
-  fdc_id: Float
+  food_candidate_id: Float
+}
+
+"""
+order by avg() on columns of table "ingredients"
+"""
+input ingredients_avg_order_by {
+  food_candidate_id: order_by
 }
 
 """
@@ -3873,10 +4350,12 @@ input ingredients_bool_exp {
   _and: [ingredients_bool_exp!]
   _not: ingredients_bool_exp
   _or: [ingredients_bool_exp!]
-  fdc_id: Int_comparison_exp
-  food: food_bool_exp
+  food_candidate_id: Int_comparison_exp
+  food_candidates: food_bool_exp
   id: uuid_comparison_exp
-  names: _text_comparison_exp
+  ingredient_food_candidate: ingredient_food_candidate_bool_exp
+  ingredient_names: ingredient_names_bool_exp
+  name: String_comparison_exp
   wiki_url: String_comparison_exp
 }
 
@@ -3885,6 +4364,9 @@ unique or primary key constraints on table "ingredients"
 """
 enum ingredients_constraint {
   """unique or primary key constraint"""
+  ingredients_name_key
+
+  """unique or primary key constraint"""
   ingredients_pkey
 }
 
@@ -3892,32 +4374,55 @@ enum ingredients_constraint {
 input type for incrementing numeric columns in table "ingredients"
 """
 input ingredients_inc_input {
-  fdc_id: Int
+  food_candidate_id: Int
 }
 
 """
 input type for inserting data into table "ingredients"
 """
 input ingredients_insert_input {
-  fdc_id: Int
-  food: food_obj_rel_insert_input
+  food_candidate_id: Int
   id: uuid
-  names: _text
+  ingredient_food_candidate: ingredient_food_candidate_obj_rel_insert_input
+  ingredient_names: ingredient_names_arr_rel_insert_input
+  name: String
   wiki_url: String
 }
 
 """aggregate max on columns"""
 type ingredients_max_fields {
-  fdc_id: Int
+  food_candidate_id: Int
   id: uuid
+  name: String
   wiki_url: String
+}
+
+"""
+order by max() on columns of table "ingredients"
+"""
+input ingredients_max_order_by {
+  food_candidate_id: order_by
+  id: order_by
+  name: order_by
+  wiki_url: order_by
 }
 
 """aggregate min on columns"""
 type ingredients_min_fields {
-  fdc_id: Int
+  food_candidate_id: Int
   id: uuid
+  name: String
   wiki_url: String
+}
+
+"""
+order by min() on columns of table "ingredients"
+"""
+input ingredients_min_order_by {
+  food_candidate_id: order_by
+  id: order_by
+  name: order_by
+  wiki_url: order_by
 }
 
 """
@@ -3932,6 +4437,16 @@ type ingredients_mutation_response {
 }
 
 """
+input type for inserting object relation for remote table "ingredients"
+"""
+input ingredients_obj_rel_insert_input {
+  data: ingredients_insert_input!
+
+  """upsert condition"""
+  on_conflict: ingredients_on_conflict
+}
+
+"""
 on_conflict condition type for table "ingredients"
 """
 input ingredients_on_conflict {
@@ -3942,10 +4457,12 @@ input ingredients_on_conflict {
 
 """Ordering options when selecting data from "ingredients"."""
 input ingredients_order_by {
-  fdc_id: order_by
-  food: food_order_by
+  food_candidate_id: order_by
+  food_candidates_aggregate: food_aggregate_order_by
   id: order_by
-  names: order_by
+  ingredient_food_candidate: ingredient_food_candidate_order_by
+  ingredient_names_aggregate: ingredient_names_aggregate_order_by
+  name: order_by
   wiki_url: order_by
 }
 
@@ -3959,13 +4476,13 @@ select columns of table "ingredients"
 """
 enum ingredients_select_column {
   """column name"""
-  fdc_id
+  food_candidate_id
 
   """column name"""
   id
 
   """column name"""
-  names
+  name
 
   """column name"""
   wiki_url
@@ -3975,30 +4492,58 @@ enum ingredients_select_column {
 input type for updating data in table "ingredients"
 """
 input ingredients_set_input {
-  fdc_id: Int
+  food_candidate_id: Int
   id: uuid
-  names: _text
+  name: String
   wiki_url: String
 }
 
 """aggregate stddev on columns"""
 type ingredients_stddev_fields {
-  fdc_id: Float
+  food_candidate_id: Float
+}
+
+"""
+order by stddev() on columns of table "ingredients"
+"""
+input ingredients_stddev_order_by {
+  food_candidate_id: order_by
 }
 
 """aggregate stddev_pop on columns"""
 type ingredients_stddev_pop_fields {
-  fdc_id: Float
+  food_candidate_id: Float
+}
+
+"""
+order by stddev_pop() on columns of table "ingredients"
+"""
+input ingredients_stddev_pop_order_by {
+  food_candidate_id: order_by
 }
 
 """aggregate stddev_samp on columns"""
 type ingredients_stddev_samp_fields {
-  fdc_id: Float
+  food_candidate_id: Float
+}
+
+"""
+order by stddev_samp() on columns of table "ingredients"
+"""
+input ingredients_stddev_samp_order_by {
+  food_candidate_id: order_by
 }
 
 """aggregate sum on columns"""
 type ingredients_sum_fields {
-  fdc_id: Int
+  food_candidate_id: Int
+}
+
+"""
+order by sum() on columns of table "ingredients"
+"""
+input ingredients_sum_order_by {
+  food_candidate_id: order_by
 }
 
 """
@@ -4006,13 +4551,13 @@ update columns of table "ingredients"
 """
 enum ingredients_update_column {
   """column name"""
-  fdc_id
+  food_candidate_id
 
   """column name"""
   id
 
   """column name"""
-  names
+  name
 
   """column name"""
   wiki_url
@@ -4020,17 +4565,38 @@ enum ingredients_update_column {
 
 """aggregate var_pop on columns"""
 type ingredients_var_pop_fields {
-  fdc_id: Float
+  food_candidate_id: Float
+}
+
+"""
+order by var_pop() on columns of table "ingredients"
+"""
+input ingredients_var_pop_order_by {
+  food_candidate_id: order_by
 }
 
 """aggregate var_samp on columns"""
 type ingredients_var_samp_fields {
-  fdc_id: Float
+  food_candidate_id: Float
+}
+
+"""
+order by var_samp() on columns of table "ingredients"
+"""
+input ingredients_var_samp_order_by {
+  food_candidate_id: order_by
 }
 
 """aggregate variance on columns"""
 type ingredients_variance_fields {
-  fdc_id: Float
+  food_candidate_id: Float
+}
+
+"""
+order by variance() on columns of table "ingredients"
+"""
+input ingredients_variance_order_by {
+  food_candidate_id: order_by
 }
 
 scalar jsonb
@@ -4280,6 +4846,10 @@ type measure_unit_variance_fields {
 columns and relationships of "most_common_ingredients"
 """
 type most_common_ingredients {
+  id: uuid
+
+  """An object relationship"""
+  ingredient: ingredients
   ingredient_count: bigint
   name: String
 }
@@ -4321,24 +4891,30 @@ input most_common_ingredients_bool_exp {
   _and: [most_common_ingredients_bool_exp!]
   _not: most_common_ingredients_bool_exp
   _or: [most_common_ingredients_bool_exp!]
+  id: uuid_comparison_exp
+  ingredient: ingredients_bool_exp
   ingredient_count: bigint_comparison_exp
   name: String_comparison_exp
 }
 
 """aggregate max on columns"""
 type most_common_ingredients_max_fields {
+  id: uuid
   ingredient_count: bigint
   name: String
 }
 
 """aggregate min on columns"""
 type most_common_ingredients_min_fields {
+  id: uuid
   ingredient_count: bigint
   name: String
 }
 
 """Ordering options when selecting data from "most_common_ingredients"."""
 input most_common_ingredients_order_by {
+  id: order_by
+  ingredient: ingredients_order_by
   ingredient_count: order_by
   name: order_by
 }
@@ -4347,6 +4923,9 @@ input most_common_ingredients_order_by {
 select columns of table "most_common_ingredients"
 """
 enum most_common_ingredients_select_column {
+  """column name"""
+  id
+
   """column name"""
   ingredient_count
 
@@ -4561,6 +5140,32 @@ type mutation_root {
   delete_food_portion_by_pk(id: Int!): food_portion
 
   """
+  delete data from the table: "ingredient_food_candidate"
+  """
+  delete_ingredient_food_candidate(
+    """filter the rows which have to be deleted"""
+    where: ingredient_food_candidate_bool_exp!
+  ): ingredient_food_candidate_mutation_response
+
+  """
+  delete single row from the table: "ingredient_food_candidate"
+  """
+  delete_ingredient_food_candidate_by_pk(id: Int!): ingredient_food_candidate
+
+  """
+  delete data from the table: "ingredient_names"
+  """
+  delete_ingredient_names(
+    """filter the rows which have to be deleted"""
+    where: ingredient_names_bool_exp!
+  ): ingredient_names_mutation_response
+
+  """
+  delete single row from the table: "ingredient_names"
+  """
+  delete_ingredient_names_by_pk(id: uuid!): ingredient_names
+
+  """
   delete data from the table: "ingredients"
   """
   delete_ingredients(
@@ -4650,19 +5255,6 @@ type mutation_root {
   delete single row from the table: "recipe_favorite"
   """
   delete_recipe_favorite_by_pk(id: bigint!): recipe_favorite
-
-  """
-  delete data from the table: "recipe_ingredient_food_candidate"
-  """
-  delete_recipe_ingredient_food_candidate(
-    """filter the rows which have to be deleted"""
-    where: recipe_ingredient_food_candidate_bool_exp!
-  ): recipe_ingredient_food_candidate_mutation_response
-
-  """
-  delete single row from the table: "recipe_ingredient_food_candidate"
-  """
-  delete_recipe_ingredient_food_candidate_by_pk(id: Int!): recipe_ingredient_food_candidate
 
   """
   delete data from the table: "recipe_ingredient_groups"
@@ -5055,6 +5647,50 @@ type mutation_root {
   ): food_portion
 
   """
+  insert data into the table: "ingredient_food_candidate"
+  """
+  insert_ingredient_food_candidate(
+    """the rows to be inserted"""
+    objects: [ingredient_food_candidate_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: ingredient_food_candidate_on_conflict
+  ): ingredient_food_candidate_mutation_response
+
+  """
+  insert a single row into the table: "ingredient_food_candidate"
+  """
+  insert_ingredient_food_candidate_one(
+    """the row to be inserted"""
+    object: ingredient_food_candidate_insert_input!
+
+    """upsert condition"""
+    on_conflict: ingredient_food_candidate_on_conflict
+  ): ingredient_food_candidate
+
+  """
+  insert data into the table: "ingredient_names"
+  """
+  insert_ingredient_names(
+    """the rows to be inserted"""
+    objects: [ingredient_names_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: ingredient_names_on_conflict
+  ): ingredient_names_mutation_response
+
+  """
+  insert a single row into the table: "ingredient_names"
+  """
+  insert_ingredient_names_one(
+    """the row to be inserted"""
+    object: ingredient_names_insert_input!
+
+    """upsert condition"""
+    on_conflict: ingredient_names_on_conflict
+  ): ingredient_names
+
+  """
   insert data into the table: "ingredients"
   """
   insert_ingredients(
@@ -5207,28 +5843,6 @@ type mutation_root {
     """upsert condition"""
     on_conflict: recipe_favorite_on_conflict
   ): recipe_favorite
-
-  """
-  insert data into the table: "recipe_ingredient_food_candidate"
-  """
-  insert_recipe_ingredient_food_candidate(
-    """the rows to be inserted"""
-    objects: [recipe_ingredient_food_candidate_insert_input!]!
-
-    """upsert condition"""
-    on_conflict: recipe_ingredient_food_candidate_on_conflict
-  ): recipe_ingredient_food_candidate_mutation_response
-
-  """
-  insert a single row into the table: "recipe_ingredient_food_candidate"
-  """
-  insert_recipe_ingredient_food_candidate_one(
-    """the row to be inserted"""
-    object: recipe_ingredient_food_candidate_insert_input!
-
-    """upsert condition"""
-    on_conflict: recipe_ingredient_food_candidate_on_conflict
-  ): recipe_ingredient_food_candidate
 
   """
   insert data into the table: "recipe_ingredient_groups"
@@ -5787,6 +6401,52 @@ type mutation_root {
   ): food_portion
 
   """
+  update data of the table: "ingredient_food_candidate"
+  """
+  update_ingredient_food_candidate(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: ingredient_food_candidate_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: ingredient_food_candidate_set_input
+
+    """filter the rows which have to be updated"""
+    where: ingredient_food_candidate_bool_exp!
+  ): ingredient_food_candidate_mutation_response
+
+  """
+  update single row of the table: "ingredient_food_candidate"
+  """
+  update_ingredient_food_candidate_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: ingredient_food_candidate_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: ingredient_food_candidate_set_input
+    pk_columns: ingredient_food_candidate_pk_columns_input!
+  ): ingredient_food_candidate
+
+  """
+  update data of the table: "ingredient_names"
+  """
+  update_ingredient_names(
+    """sets the columns of the filtered rows to the given values"""
+    _set: ingredient_names_set_input
+
+    """filter the rows which have to be updated"""
+    where: ingredient_names_bool_exp!
+  ): ingredient_names_mutation_response
+
+  """
+  update single row of the table: "ingredient_names"
+  """
+  update_ingredient_names_by_pk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: ingredient_names_set_input
+    pk_columns: ingredient_names_pk_columns_input!
+  ): ingredient_names
+
+  """
   update data of the table: "ingredients"
   """
   update_ingredients(
@@ -6009,32 +6669,6 @@ type mutation_root {
     _set: recipe_favorite_set_input
     pk_columns: recipe_favorite_pk_columns_input!
   ): recipe_favorite
-
-  """
-  update data of the table: "recipe_ingredient_food_candidate"
-  """
-  update_recipe_ingredient_food_candidate(
-    """increments the numeric columns with given value of the filtered values"""
-    _inc: recipe_ingredient_food_candidate_inc_input
-
-    """sets the columns of the filtered rows to the given values"""
-    _set: recipe_ingredient_food_candidate_set_input
-
-    """filter the rows which have to be updated"""
-    where: recipe_ingredient_food_candidate_bool_exp!
-  ): recipe_ingredient_food_candidate_mutation_response
-
-  """
-  update single row of the table: "recipe_ingredient_food_candidate"
-  """
-  update_recipe_ingredient_food_candidate_by_pk(
-    """increments the numeric columns with given value of the filtered values"""
-    _inc: recipe_ingredient_food_candidate_inc_input
-
-    """sets the columns of the filtered rows to the given values"""
-    _set: recipe_ingredient_food_candidate_set_input
-    pk_columns: recipe_ingredient_food_candidate_pk_columns_input!
-  ): recipe_ingredient_food_candidate
 
   """
   update data of the table: "recipe_ingredient_groups"
@@ -7075,6 +7709,92 @@ type query_root {
   food_portion_by_pk(id: Int!): food_portion
 
   """
+  fetch data from the table: "ingredient_food_candidate"
+  """
+  ingredient_food_candidate(
+    """distinct select on columns"""
+    distinct_on: [ingredient_food_candidate_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [ingredient_food_candidate_order_by!]
+
+    """filter the rows returned"""
+    where: ingredient_food_candidate_bool_exp
+  ): [ingredient_food_candidate!]!
+
+  """
+  fetch aggregated fields from the table: "ingredient_food_candidate"
+  """
+  ingredient_food_candidate_aggregate(
+    """distinct select on columns"""
+    distinct_on: [ingredient_food_candidate_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [ingredient_food_candidate_order_by!]
+
+    """filter the rows returned"""
+    where: ingredient_food_candidate_bool_exp
+  ): ingredient_food_candidate_aggregate!
+
+  """
+  fetch data from the table: "ingredient_food_candidate" using primary key columns
+  """
+  ingredient_food_candidate_by_pk(id: Int!): ingredient_food_candidate
+
+  """An array relationship"""
+  ingredient_names(
+    """distinct select on columns"""
+    distinct_on: [ingredient_names_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [ingredient_names_order_by!]
+
+    """filter the rows returned"""
+    where: ingredient_names_bool_exp
+  ): [ingredient_names!]!
+
+  """An aggregate relationship"""
+  ingredient_names_aggregate(
+    """distinct select on columns"""
+    distinct_on: [ingredient_names_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [ingredient_names_order_by!]
+
+    """filter the rows returned"""
+    where: ingredient_names_bool_exp
+  ): ingredient_names_aggregate!
+
+  """
+  fetch data from the table: "ingredient_names" using primary key columns
+  """
+  ingredient_names_by_pk(id: uuid!): ingredient_names
+
+  """
   fetch data from the table: "ingredients"
   """
   ingredients(
@@ -7412,51 +8132,6 @@ type query_root {
 
   """fetch data from the table: "recipe_favorite" using primary key columns"""
   recipe_favorite_by_pk(id: bigint!): recipe_favorite
-
-  """
-  fetch data from the table: "recipe_ingredient_food_candidate"
-  """
-  recipe_ingredient_food_candidate(
-    """distinct select on columns"""
-    distinct_on: [recipe_ingredient_food_candidate_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [recipe_ingredient_food_candidate_order_by!]
-
-    """filter the rows returned"""
-    where: recipe_ingredient_food_candidate_bool_exp
-  ): [recipe_ingredient_food_candidate!]!
-
-  """
-  fetch aggregated fields from the table: "recipe_ingredient_food_candidate"
-  """
-  recipe_ingredient_food_candidate_aggregate(
-    """distinct select on columns"""
-    distinct_on: [recipe_ingredient_food_candidate_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [recipe_ingredient_food_candidate_order_by!]
-
-    """filter the rows returned"""
-    where: recipe_ingredient_food_candidate_bool_exp
-  ): recipe_ingredient_food_candidate_aggregate!
-
-  """
-  fetch data from the table: "recipe_ingredient_food_candidate" using primary key columns
-  """
-  recipe_ingredient_food_candidate_by_pk(id: Int!): recipe_ingredient_food_candidate
 
   """An array relationship"""
   recipe_ingredient_groups(
@@ -9270,382 +9945,6 @@ type recipe_favorite_variance_fields {
 }
 
 """
-columns and relationships of "recipe_ingredient_food_candidate"
-"""
-type recipe_ingredient_food_candidate {
-  """An object relationship"""
-  food: food!
-  food_candidate_id: Int!
-  food_candidate_portion_id: Int!
-
-  """An object relationship"""
-  food_portion: food_portion
-  id: Int!
-  recipe_ingredient_id: Int!
-}
-
-"""
-aggregated selection of "recipe_ingredient_food_candidate"
-"""
-type recipe_ingredient_food_candidate_aggregate {
-  aggregate: recipe_ingredient_food_candidate_aggregate_fields
-  nodes: [recipe_ingredient_food_candidate!]!
-}
-
-"""
-aggregate fields of "recipe_ingredient_food_candidate"
-"""
-type recipe_ingredient_food_candidate_aggregate_fields {
-  avg: recipe_ingredient_food_candidate_avg_fields
-  count(columns: [recipe_ingredient_food_candidate_select_column!], distinct: Boolean): Int!
-  max: recipe_ingredient_food_candidate_max_fields
-  min: recipe_ingredient_food_candidate_min_fields
-  stddev: recipe_ingredient_food_candidate_stddev_fields
-  stddev_pop: recipe_ingredient_food_candidate_stddev_pop_fields
-  stddev_samp: recipe_ingredient_food_candidate_stddev_samp_fields
-  sum: recipe_ingredient_food_candidate_sum_fields
-  var_pop: recipe_ingredient_food_candidate_var_pop_fields
-  var_samp: recipe_ingredient_food_candidate_var_samp_fields
-  variance: recipe_ingredient_food_candidate_variance_fields
-}
-
-"""
-order by aggregate values of table "recipe_ingredient_food_candidate"
-"""
-input recipe_ingredient_food_candidate_aggregate_order_by {
-  avg: recipe_ingredient_food_candidate_avg_order_by
-  count: order_by
-  max: recipe_ingredient_food_candidate_max_order_by
-  min: recipe_ingredient_food_candidate_min_order_by
-  stddev: recipe_ingredient_food_candidate_stddev_order_by
-  stddev_pop: recipe_ingredient_food_candidate_stddev_pop_order_by
-  stddev_samp: recipe_ingredient_food_candidate_stddev_samp_order_by
-  sum: recipe_ingredient_food_candidate_sum_order_by
-  var_pop: recipe_ingredient_food_candidate_var_pop_order_by
-  var_samp: recipe_ingredient_food_candidate_var_samp_order_by
-  variance: recipe_ingredient_food_candidate_variance_order_by
-}
-
-"""
-input type for inserting array relation for remote table "recipe_ingredient_food_candidate"
-"""
-input recipe_ingredient_food_candidate_arr_rel_insert_input {
-  data: [recipe_ingredient_food_candidate_insert_input!]!
-
-  """upsert condition"""
-  on_conflict: recipe_ingredient_food_candidate_on_conflict
-}
-
-"""aggregate avg on columns"""
-type recipe_ingredient_food_candidate_avg_fields {
-  food_candidate_id: Float
-  food_candidate_portion_id: Float
-  id: Float
-  recipe_ingredient_id: Float
-}
-
-"""
-order by avg() on columns of table "recipe_ingredient_food_candidate"
-"""
-input recipe_ingredient_food_candidate_avg_order_by {
-  food_candidate_id: order_by
-  food_candidate_portion_id: order_by
-  id: order_by
-  recipe_ingredient_id: order_by
-}
-
-"""
-Boolean expression to filter rows from the table "recipe_ingredient_food_candidate". All fields are combined with a logical 'AND'.
-"""
-input recipe_ingredient_food_candidate_bool_exp {
-  _and: [recipe_ingredient_food_candidate_bool_exp!]
-  _not: recipe_ingredient_food_candidate_bool_exp
-  _or: [recipe_ingredient_food_candidate_bool_exp!]
-  food: food_bool_exp
-  food_candidate_id: Int_comparison_exp
-  food_candidate_portion_id: Int_comparison_exp
-  food_portion: food_portion_bool_exp
-  id: Int_comparison_exp
-  recipe_ingredient_id: Int_comparison_exp
-}
-
-"""
-unique or primary key constraints on table "recipe_ingredient_food_candidate"
-"""
-enum recipe_ingredient_food_candidate_constraint {
-  """unique or primary key constraint"""
-  recipe_ingredient_food_candidate_pkey
-
-  """unique or primary key constraint"""
-  recipe_ingredient_food_candidate_recipe_ingredient_id_food_cand
-}
-
-"""
-input type for incrementing numeric columns in table "recipe_ingredient_food_candidate"
-"""
-input recipe_ingredient_food_candidate_inc_input {
-  food_candidate_id: Int
-  food_candidate_portion_id: Int
-  id: Int
-  recipe_ingredient_id: Int
-}
-
-"""
-input type for inserting data into table "recipe_ingredient_food_candidate"
-"""
-input recipe_ingredient_food_candidate_insert_input {
-  food: food_obj_rel_insert_input
-  food_candidate_id: Int
-  food_candidate_portion_id: Int
-  food_portion: food_portion_obj_rel_insert_input
-  id: Int
-  recipe_ingredient_id: Int
-}
-
-"""aggregate max on columns"""
-type recipe_ingredient_food_candidate_max_fields {
-  food_candidate_id: Int
-  food_candidate_portion_id: Int
-  id: Int
-  recipe_ingredient_id: Int
-}
-
-"""
-order by max() on columns of table "recipe_ingredient_food_candidate"
-"""
-input recipe_ingredient_food_candidate_max_order_by {
-  food_candidate_id: order_by
-  food_candidate_portion_id: order_by
-  id: order_by
-  recipe_ingredient_id: order_by
-}
-
-"""aggregate min on columns"""
-type recipe_ingredient_food_candidate_min_fields {
-  food_candidate_id: Int
-  food_candidate_portion_id: Int
-  id: Int
-  recipe_ingredient_id: Int
-}
-
-"""
-order by min() on columns of table "recipe_ingredient_food_candidate"
-"""
-input recipe_ingredient_food_candidate_min_order_by {
-  food_candidate_id: order_by
-  food_candidate_portion_id: order_by
-  id: order_by
-  recipe_ingredient_id: order_by
-}
-
-"""
-response of any mutation on the table "recipe_ingredient_food_candidate"
-"""
-type recipe_ingredient_food_candidate_mutation_response {
-  """number of rows affected by the mutation"""
-  affected_rows: Int!
-
-  """data from the rows affected by the mutation"""
-  returning: [recipe_ingredient_food_candidate!]!
-}
-
-"""
-on_conflict condition type for table "recipe_ingredient_food_candidate"
-"""
-input recipe_ingredient_food_candidate_on_conflict {
-  constraint: recipe_ingredient_food_candidate_constraint!
-  update_columns: [recipe_ingredient_food_candidate_update_column!]! = []
-  where: recipe_ingredient_food_candidate_bool_exp
-}
-
-"""
-Ordering options when selecting data from "recipe_ingredient_food_candidate".
-"""
-input recipe_ingredient_food_candidate_order_by {
-  food: food_order_by
-  food_candidate_id: order_by
-  food_candidate_portion_id: order_by
-  food_portion: food_portion_order_by
-  id: order_by
-  recipe_ingredient_id: order_by
-}
-
-"""primary key columns input for table: recipe_ingredient_food_candidate"""
-input recipe_ingredient_food_candidate_pk_columns_input {
-  id: Int!
-}
-
-"""
-select columns of table "recipe_ingredient_food_candidate"
-"""
-enum recipe_ingredient_food_candidate_select_column {
-  """column name"""
-  food_candidate_id
-
-  """column name"""
-  food_candidate_portion_id
-
-  """column name"""
-  id
-
-  """column name"""
-  recipe_ingredient_id
-}
-
-"""
-input type for updating data in table "recipe_ingredient_food_candidate"
-"""
-input recipe_ingredient_food_candidate_set_input {
-  food_candidate_id: Int
-  food_candidate_portion_id: Int
-  id: Int
-  recipe_ingredient_id: Int
-}
-
-"""aggregate stddev on columns"""
-type recipe_ingredient_food_candidate_stddev_fields {
-  food_candidate_id: Float
-  food_candidate_portion_id: Float
-  id: Float
-  recipe_ingredient_id: Float
-}
-
-"""
-order by stddev() on columns of table "recipe_ingredient_food_candidate"
-"""
-input recipe_ingredient_food_candidate_stddev_order_by {
-  food_candidate_id: order_by
-  food_candidate_portion_id: order_by
-  id: order_by
-  recipe_ingredient_id: order_by
-}
-
-"""aggregate stddev_pop on columns"""
-type recipe_ingredient_food_candidate_stddev_pop_fields {
-  food_candidate_id: Float
-  food_candidate_portion_id: Float
-  id: Float
-  recipe_ingredient_id: Float
-}
-
-"""
-order by stddev_pop() on columns of table "recipe_ingredient_food_candidate"
-"""
-input recipe_ingredient_food_candidate_stddev_pop_order_by {
-  food_candidate_id: order_by
-  food_candidate_portion_id: order_by
-  id: order_by
-  recipe_ingredient_id: order_by
-}
-
-"""aggregate stddev_samp on columns"""
-type recipe_ingredient_food_candidate_stddev_samp_fields {
-  food_candidate_id: Float
-  food_candidate_portion_id: Float
-  id: Float
-  recipe_ingredient_id: Float
-}
-
-"""
-order by stddev_samp() on columns of table "recipe_ingredient_food_candidate"
-"""
-input recipe_ingredient_food_candidate_stddev_samp_order_by {
-  food_candidate_id: order_by
-  food_candidate_portion_id: order_by
-  id: order_by
-  recipe_ingredient_id: order_by
-}
-
-"""aggregate sum on columns"""
-type recipe_ingredient_food_candidate_sum_fields {
-  food_candidate_id: Int
-  food_candidate_portion_id: Int
-  id: Int
-  recipe_ingredient_id: Int
-}
-
-"""
-order by sum() on columns of table "recipe_ingredient_food_candidate"
-"""
-input recipe_ingredient_food_candidate_sum_order_by {
-  food_candidate_id: order_by
-  food_candidate_portion_id: order_by
-  id: order_by
-  recipe_ingredient_id: order_by
-}
-
-"""
-update columns of table "recipe_ingredient_food_candidate"
-"""
-enum recipe_ingredient_food_candidate_update_column {
-  """column name"""
-  food_candidate_id
-
-  """column name"""
-  food_candidate_portion_id
-
-  """column name"""
-  id
-
-  """column name"""
-  recipe_ingredient_id
-}
-
-"""aggregate var_pop on columns"""
-type recipe_ingredient_food_candidate_var_pop_fields {
-  food_candidate_id: Float
-  food_candidate_portion_id: Float
-  id: Float
-  recipe_ingredient_id: Float
-}
-
-"""
-order by var_pop() on columns of table "recipe_ingredient_food_candidate"
-"""
-input recipe_ingredient_food_candidate_var_pop_order_by {
-  food_candidate_id: order_by
-  food_candidate_portion_id: order_by
-  id: order_by
-  recipe_ingredient_id: order_by
-}
-
-"""aggregate var_samp on columns"""
-type recipe_ingredient_food_candidate_var_samp_fields {
-  food_candidate_id: Float
-  food_candidate_portion_id: Float
-  id: Float
-  recipe_ingredient_id: Float
-}
-
-"""
-order by var_samp() on columns of table "recipe_ingredient_food_candidate"
-"""
-input recipe_ingredient_food_candidate_var_samp_order_by {
-  food_candidate_id: order_by
-  food_candidate_portion_id: order_by
-  id: order_by
-  recipe_ingredient_id: order_by
-}
-
-"""aggregate variance on columns"""
-type recipe_ingredient_food_candidate_variance_fields {
-  food_candidate_id: Float
-  food_candidate_portion_id: Float
-  id: Float
-  recipe_ingredient_id: Float
-}
-
-"""
-order by variance() on columns of table "recipe_ingredient_food_candidate"
-"""
-input recipe_ingredient_food_candidate_variance_order_by {
-  food_candidate_id: order_by
-  food_candidate_portion_id: order_by
-  id: order_by
-  recipe_ingredient_id: order_by
-}
-
-"""
 columns and relationships of "recipe_ingredient_groups"
 """
 type recipe_ingredient_groups {
@@ -10051,65 +10350,27 @@ columns and relationships of "recipe_ingredients"
 type recipe_ingredients {
   amount: Float
   comment: String
-
-  """An object relationship"""
-  food: food
-  food_candidates(
-    """distinct select on columns"""
-    distinct_on: [food_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [food_order_by!]
-
-    """filter the rows returned"""
-    where: food_bool_exp
-  ): [food!]
-  food_id: Int
   group_id: Int
   id: Int!
+
+  """Get the ingredient for a recipe ingredient."""
+  ingredient(
+    """distinct select on columns"""
+    distinct_on: [ingredients_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [ingredients_order_by!]
+
+    """filter the rows returned"""
+    where: ingredients_bool_exp
+  ): [ingredients!]
   name: String
-
-  """An array relationship"""
-  recipe_ingredient_food_candidates(
-    """distinct select on columns"""
-    distinct_on: [recipe_ingredient_food_candidate_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [recipe_ingredient_food_candidate_order_by!]
-
-    """filter the rows returned"""
-    where: recipe_ingredient_food_candidate_bool_exp
-  ): [recipe_ingredient_food_candidate!]!
-
-  """An aggregate relationship"""
-  recipe_ingredient_food_candidates_aggregate(
-    """distinct select on columns"""
-    distinct_on: [recipe_ingredient_food_candidate_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [recipe_ingredient_food_candidate_order_by!]
-
-    """filter the rows returned"""
-    where: recipe_ingredient_food_candidate_bool_exp
-  ): recipe_ingredient_food_candidate_aggregate!
 
   """An object relationship"""
   recipe_ingredient_group: recipe_ingredient_groups
@@ -10175,7 +10436,6 @@ input recipe_ingredients_arr_rel_insert_input {
 """aggregate avg on columns"""
 type recipe_ingredients_avg_fields {
   amount: Float
-  food_id: Float
   group_id: Float
   id: Float
   seq_num: Float
@@ -10188,7 +10448,6 @@ order by avg() on columns of table "recipe_ingredients"
 """
 input recipe_ingredients_avg_order_by {
   amount: order_by
-  food_id: order_by
   group_id: order_by
   id: order_by
   seq_num: order_by
@@ -10205,13 +10464,10 @@ input recipe_ingredients_bool_exp {
   _or: [recipe_ingredients_bool_exp!]
   amount: Float_comparison_exp
   comment: String_comparison_exp
-  food: food_bool_exp
-  food_candidates: food_bool_exp
-  food_id: Int_comparison_exp
   group_id: Int_comparison_exp
   id: Int_comparison_exp
+  ingredient: ingredients_bool_exp
   name: String_comparison_exp
-  recipe_ingredient_food_candidates: recipe_ingredient_food_candidate_bool_exp
   recipe_ingredient_group: recipe_ingredient_groups_bool_exp
   seq_num: Int_comparison_exp
   text: String_comparison_exp
@@ -10236,7 +10492,6 @@ input type for incrementing numeric columns in table "recipe_ingredients"
 """
 input recipe_ingredients_inc_input {
   amount: Float
-  food_id: Int
   group_id: Int
   id: Int
   seq_num: Int
@@ -10250,12 +10505,9 @@ input type for inserting data into table "recipe_ingredients"
 input recipe_ingredients_insert_input {
   amount: Float
   comment: String
-  food: food_obj_rel_insert_input
-  food_id: Int
   group_id: Int
   id: Int
   name: String
-  recipe_ingredient_food_candidates: recipe_ingredient_food_candidate_arr_rel_insert_input
   recipe_ingredient_group: recipe_ingredient_groups_obj_rel_insert_input
   seq_num: Int
   text: String
@@ -10268,7 +10520,6 @@ input recipe_ingredients_insert_input {
 type recipe_ingredients_max_fields {
   amount: Float
   comment: String
-  food_id: Int
   group_id: Int
   id: Int
   name: String
@@ -10285,7 +10536,6 @@ order by max() on columns of table "recipe_ingredients"
 input recipe_ingredients_max_order_by {
   amount: order_by
   comment: order_by
-  food_id: order_by
   group_id: order_by
   id: order_by
   name: order_by
@@ -10300,7 +10550,6 @@ input recipe_ingredients_max_order_by {
 type recipe_ingredients_min_fields {
   amount: Float
   comment: String
-  food_id: Int
   group_id: Int
   id: Int
   name: String
@@ -10317,7 +10566,6 @@ order by min() on columns of table "recipe_ingredients"
 input recipe_ingredients_min_order_by {
   amount: order_by
   comment: order_by
-  food_id: order_by
   group_id: order_by
   id: order_by
   name: order_by
@@ -10352,13 +10600,10 @@ input recipe_ingredients_on_conflict {
 input recipe_ingredients_order_by {
   amount: order_by
   comment: order_by
-  food: food_order_by
-  food_candidates_aggregate: food_aggregate_order_by
-  food_id: order_by
   group_id: order_by
   id: order_by
+  ingredient_aggregate: ingredients_aggregate_order_by
   name: order_by
-  recipe_ingredient_food_candidates_aggregate: recipe_ingredient_food_candidate_aggregate_order_by
   recipe_ingredient_group: recipe_ingredient_groups_order_by
   seq_num: order_by
   text: order_by
@@ -10381,9 +10626,6 @@ enum recipe_ingredients_select_column {
 
   """column name"""
   comment
-
-  """column name"""
-  food_id
 
   """column name"""
   group_id
@@ -10416,7 +10658,6 @@ input type for updating data in table "recipe_ingredients"
 input recipe_ingredients_set_input {
   amount: Float
   comment: String
-  food_id: Int
   group_id: Int
   id: Int
   name: String
@@ -10430,7 +10671,6 @@ input recipe_ingredients_set_input {
 """aggregate stddev on columns"""
 type recipe_ingredients_stddev_fields {
   amount: Float
-  food_id: Float
   group_id: Float
   id: Float
   seq_num: Float
@@ -10443,7 +10683,6 @@ order by stddev() on columns of table "recipe_ingredients"
 """
 input recipe_ingredients_stddev_order_by {
   amount: order_by
-  food_id: order_by
   group_id: order_by
   id: order_by
   seq_num: order_by
@@ -10454,7 +10693,6 @@ input recipe_ingredients_stddev_order_by {
 """aggregate stddev_pop on columns"""
 type recipe_ingredients_stddev_pop_fields {
   amount: Float
-  food_id: Float
   group_id: Float
   id: Float
   seq_num: Float
@@ -10467,7 +10705,6 @@ order by stddev_pop() on columns of table "recipe_ingredients"
 """
 input recipe_ingredients_stddev_pop_order_by {
   amount: order_by
-  food_id: order_by
   group_id: order_by
   id: order_by
   seq_num: order_by
@@ -10478,7 +10715,6 @@ input recipe_ingredients_stddev_pop_order_by {
 """aggregate stddev_samp on columns"""
 type recipe_ingredients_stddev_samp_fields {
   amount: Float
-  food_id: Float
   group_id: Float
   id: Float
   seq_num: Float
@@ -10491,7 +10727,6 @@ order by stddev_samp() on columns of table "recipe_ingredients"
 """
 input recipe_ingredients_stddev_samp_order_by {
   amount: order_by
-  food_id: order_by
   group_id: order_by
   id: order_by
   seq_num: order_by
@@ -10502,7 +10737,6 @@ input recipe_ingredients_stddev_samp_order_by {
 """aggregate sum on columns"""
 type recipe_ingredients_sum_fields {
   amount: Float
-  food_id: Int
   group_id: Int
   id: Int
   seq_num: Int
@@ -10515,7 +10749,6 @@ order by sum() on columns of table "recipe_ingredients"
 """
 input recipe_ingredients_sum_order_by {
   amount: order_by
-  food_id: order_by
   group_id: order_by
   id: order_by
   seq_num: order_by
@@ -10532,9 +10765,6 @@ enum recipe_ingredients_update_column {
 
   """column name"""
   comment
-
-  """column name"""
-  food_id
 
   """column name"""
   group_id
@@ -10564,7 +10794,6 @@ enum recipe_ingredients_update_column {
 """aggregate var_pop on columns"""
 type recipe_ingredients_var_pop_fields {
   amount: Float
-  food_id: Float
   group_id: Float
   id: Float
   seq_num: Float
@@ -10577,7 +10806,6 @@ order by var_pop() on columns of table "recipe_ingredients"
 """
 input recipe_ingredients_var_pop_order_by {
   amount: order_by
-  food_id: order_by
   group_id: order_by
   id: order_by
   seq_num: order_by
@@ -10588,7 +10816,6 @@ input recipe_ingredients_var_pop_order_by {
 """aggregate var_samp on columns"""
 type recipe_ingredients_var_samp_fields {
   amount: Float
-  food_id: Float
   group_id: Float
   id: Float
   seq_num: Float
@@ -10601,7 +10828,6 @@ order by var_samp() on columns of table "recipe_ingredients"
 """
 input recipe_ingredients_var_samp_order_by {
   amount: order_by
-  food_id: order_by
   group_id: order_by
   id: order_by
   seq_num: order_by
@@ -10612,7 +10838,6 @@ input recipe_ingredients_var_samp_order_by {
 """aggregate variance on columns"""
 type recipe_ingredients_variance_fields {
   amount: Float
-  food_id: Float
   group_id: Float
   id: Float
   seq_num: Float
@@ -10625,7 +10850,6 @@ order by variance() on columns of table "recipe_ingredients"
 """
 input recipe_ingredients_variance_order_by {
   amount: order_by
-  food_id: order_by
   group_id: order_by
   id: order_by
   seq_num: order_by
@@ -12792,6 +13016,92 @@ type subscription_root {
   food_portion_by_pk(id: Int!): food_portion
 
   """
+  fetch data from the table: "ingredient_food_candidate"
+  """
+  ingredient_food_candidate(
+    """distinct select on columns"""
+    distinct_on: [ingredient_food_candidate_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [ingredient_food_candidate_order_by!]
+
+    """filter the rows returned"""
+    where: ingredient_food_candidate_bool_exp
+  ): [ingredient_food_candidate!]!
+
+  """
+  fetch aggregated fields from the table: "ingredient_food_candidate"
+  """
+  ingredient_food_candidate_aggregate(
+    """distinct select on columns"""
+    distinct_on: [ingredient_food_candidate_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [ingredient_food_candidate_order_by!]
+
+    """filter the rows returned"""
+    where: ingredient_food_candidate_bool_exp
+  ): ingredient_food_candidate_aggregate!
+
+  """
+  fetch data from the table: "ingredient_food_candidate" using primary key columns
+  """
+  ingredient_food_candidate_by_pk(id: Int!): ingredient_food_candidate
+
+  """An array relationship"""
+  ingredient_names(
+    """distinct select on columns"""
+    distinct_on: [ingredient_names_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [ingredient_names_order_by!]
+
+    """filter the rows returned"""
+    where: ingredient_names_bool_exp
+  ): [ingredient_names!]!
+
+  """An aggregate relationship"""
+  ingredient_names_aggregate(
+    """distinct select on columns"""
+    distinct_on: [ingredient_names_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [ingredient_names_order_by!]
+
+    """filter the rows returned"""
+    where: ingredient_names_bool_exp
+  ): ingredient_names_aggregate!
+
+  """
+  fetch data from the table: "ingredient_names" using primary key columns
+  """
+  ingredient_names_by_pk(id: uuid!): ingredient_names
+
+  """
   fetch data from the table: "ingredients"
   """
   ingredients(
@@ -13129,51 +13439,6 @@ type subscription_root {
 
   """fetch data from the table: "recipe_favorite" using primary key columns"""
   recipe_favorite_by_pk(id: bigint!): recipe_favorite
-
-  """
-  fetch data from the table: "recipe_ingredient_food_candidate"
-  """
-  recipe_ingredient_food_candidate(
-    """distinct select on columns"""
-    distinct_on: [recipe_ingredient_food_candidate_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [recipe_ingredient_food_candidate_order_by!]
-
-    """filter the rows returned"""
-    where: recipe_ingredient_food_candidate_bool_exp
-  ): [recipe_ingredient_food_candidate!]!
-
-  """
-  fetch aggregated fields from the table: "recipe_ingredient_food_candidate"
-  """
-  recipe_ingredient_food_candidate_aggregate(
-    """distinct select on columns"""
-    distinct_on: [recipe_ingredient_food_candidate_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [recipe_ingredient_food_candidate_order_by!]
-
-    """filter the rows returned"""
-    where: recipe_ingredient_food_candidate_bool_exp
-  ): recipe_ingredient_food_candidate_aggregate!
-
-  """
-  fetch data from the table: "recipe_ingredient_food_candidate" using primary key columns
-  """
-  recipe_ingredient_food_candidate_by_pk(id: Int!): recipe_ingredient_food_candidate
 
   """An array relationship"""
   recipe_ingredient_groups(

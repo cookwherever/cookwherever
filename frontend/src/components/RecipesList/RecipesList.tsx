@@ -1,14 +1,14 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Pagination } from '@mui/material';
-import { gql, useQuery } from '@apollo/client';
-import { Button, Card, Col, Container, Row } from 'react-bootstrap';
-import {Recipes, Recipes_Aggregate, Recipes_Bool_Exp, useRecipesQueryQuery} from '../../generated/graphql';
+import { gql } from '@apollo/client';
+import { Card, Col, Container, Row } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
+import { Recipes_Bool_Exp, useRecipesQueryQuery } from '../../generated/graphql';
 import { RecipeSearch } from '../../types/component-types';
 import { getSourceHostname } from '../../utils/format-recipe';
-import {useHistory} from "react-router-dom";
 
 export const QUERY = gql`
-  query RecipesQuery($search: String, $where: recipes_bool_exp!, $limit: Int = 10, $offset: Int = 0) {
+  query RecipesQuery($search: String, $where: recipes_bool_exp!, $limit: Int!, $offset: Int!) {
     search_recipes(args: {search: $search}, where: $where, limit: $limit, offset: $offset, order_by: {updated_at: asc}) {
       id
       slug
@@ -113,7 +113,7 @@ export const RecipesList: React.FunctionComponent<RecipesListProps> = (props) =>
 
   if (loading) return (<h4>'Loading...'</h4>);
   if (error) return (<h4>{`Error! ${error.message}`}</h4>);
-  if (!data) return (<h4>No data!</h4>);
+  if (!data || !data.search_recipes_aggregate.aggregate) return (<h4>No data!</h4>);
 
   if (!data.search_recipes || data.search_recipes.length === 0) {
     return (
@@ -122,11 +122,6 @@ export const RecipesList: React.FunctionComponent<RecipesListProps> = (props) =>
   }
 
   const recipeCount = data.search_recipes_aggregate.aggregate;
-  if (!recipeCount) {
-    return (
-      <p>Search for a recipe!</p>
-    )
-  }
 
   const pageCount = Math.floor(recipeCount.count / resultsPerPage);
 
@@ -150,7 +145,7 @@ export const RecipesList: React.FunctionComponent<RecipesListProps> = (props) =>
                   history.push(`/recipe/${recipe.slug}-${recipe.id}`)
                 }}
               >
-                {/*<Card.Img variant="top" src={recipeImage} />*/}
+                {/* <Card.Img variant="top" src={recipeImage} /> */}
                 <Card.Body>
                   <Card.Title>{recipe.name}</Card.Title>
                   <Card.Text>
@@ -164,5 +159,5 @@ export const RecipesList: React.FunctionComponent<RecipesListProps> = (props) =>
         <Pagination page={page + 1} count={pageCount} onChange={changePage} />
       </Row>
     </Container>
-  )
+  );
 }

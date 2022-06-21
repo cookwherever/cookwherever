@@ -10,6 +10,8 @@
         --g-link-active: #5a7282;
     }
 </style>
+{{ $elGraphoJs := resources.Get "js/ElGrapho.min.js" | resources.Fingerprint "md5" }}
+<script src="{{ $elGraphoJs.Permalink }}"></script>
 {{ $js := resources.Get "js/graph.js" | resources.Fingerprint "md5" }}
 <script src="{{ $js.Permalink }}"></script>
 <script>

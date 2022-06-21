@@ -45,7 +45,14 @@ export const SaveRecipeToList: React.FunctionComponent<SaveRecipeProps> = ({ rec
       return;
     }
 
-    const list = recipe_lists[selectedList - 1];
+    const lists = recipe_lists.filter(l => l.id === selectedList);
+
+    if (lists.length !== 1) {
+      console.error(`there are multiple lists that matched the selected list id`, selectedList, recipe_lists);
+      return;
+    }
+
+    const list = lists[0];
 
     try {
       await saveRecipeInsert({

@@ -1,10 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Col, ListGroup, Row, Form } from 'react-bootstrap';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { Recipe_Ingredients } from '../generated/graphql';
-import FoodCandidateList from "./FoodCandidateList/FoodCandidateList";
-import {useRecoilState, useRecoilValue} from "recoil";
-import {viewModeState} from "../recoil/atoms/auth";
-import {recipeViewerState} from "../recoil/atoms/recipe";
+import { viewModeState } from '../recoil/atoms/auth';
+import { recipeViewerState } from '../recoil/atoms/recipe';
 
 interface IngredientGroupItemProps {
   ingredient: Recipe_Ingredients
@@ -19,42 +18,53 @@ export const IngredientGroupItem: React.FunctionComponent<IngredientGroupItemPro
   const [recipeState, setRecipeState] = useRecoilState(recipeViewerState);
 
   const getIngredientConversion = () => {
-    return ingredient.recipe_ingredient_food_candidates.length
-      ? ingredient.recipe_ingredient_food_candidates.map((food_candidate) => {
-        const portion = food_candidate.food_portion;
-        if (!portion) {
-          console.error(`portion is null for ${food_candidate}`);
-          return null;
-        }
-        return (
-          <>
-            &nbsp;- ({food_candidate.food.description}
-            , {portion.gram_weight}g = {portion.amount}
-            {
-              portion.measure_unit && portion.measure_unit.name !== 'undetermined'
-                ? portion.measure_unit.name
-                : (<>{portion.portion_description} {portion.modifier}</>)
-            })
-          </>
-        )
-      })
-      : <FoodCandidateList id={ingredient.id} selectedCallback={() => { console.log('TODO reload recipe') }} />
-  };
-
-
-  const lookup: Record<string, number> = {
-    teaspoon: 1,
-    tablespoon: 3,
-    cup: 4 * 4 * 3,
-  };
-
-  const getNormalized = () => {
-    if (ingredient.amount && ingredient.units) {
-      const modifier = lookup[ingredient.units];
-      return ingredient.amount / modifier;
+    if (!ingredient.ingredient || ingredient.ingredient.length === 0) {
+      return null;
     }
-    return -1;
-  }
+
+    const recipeIngredient = ingredient.ingredient[0];
+    const candidate = recipeIngredient.ingredient_food_candidate;
+    if (!candidate) {
+      console.error(`candidate is null for ${recipeIngredient}`);
+      return null;
+    }
+
+    const portion = candidate.food_portion;
+    if (!portion) {
+      console.error(`portion is null for ${candidate}`);
+      return null;
+    }
+
+    const measureUnit = portion.measure_unit && portion.measure_unit.name !== 'undetermined'
+      ? portion.measure_unit.name
+      : (portion.portion_description ? `${portion.portion_description} ${portion.modifier}` : `${portion.modifier}`);
+
+    const lookup: Record<string, number> = {
+      teaspoon: 1,
+      tsp: 1,
+      tablespoon: 3,
+      tbsp: 3,
+      cup: 4 * 4 * 3,
+      clove: 1,
+    };
+
+    if (!ingredient.amount || !ingredient.units || !measureUnit) {
+      return null;
+    }
+
+    const modifier = lookup[ingredient.units];
+    const normalizedIngredient = ingredient.amount * modifier;
+
+    const foodModifier = lookup[measureUnit];
+    const normalizedFood = portion.gram_weight / foodModifier;
+
+    const ingredientMass = normalizedIngredient * normalizedFood;
+
+    return {
+      debug: `${candidate.food.description}, ${portion.gram_weight}g = ${portion.amount} ${measureUnit}`,
+      mass: ingredientMass,
+    }
+  };
 
   const doSetTimestamp = () => {
     if (!ingredient.video_timestamp) return;
@@ -66,7 +76,11 @@ export const IngredientGroupItem: React.FunctionComponent<IngredientGroupItemPro
     });
   }
 
-  const ingredientText = (<div style={markAsPrepped ? {textDecoration: 'line-through', cursor: 'pointer'} : {cursor: 'pointer'}}>{ingredient.text}</div>);
+  const conversion = getIngredientConversion();
+
+  const ingText = ingredient.text + (conversion ? ` or ${conversion.mass}g` : '');
+
+  const ingredientText = (<div style={markAsPrepped ? { textDecoration: 'line-through', cursor: 'pointer' } : { cursor: 'pointer' }}>{ingText}</div>);
 
   const getDeveloperInfo = () => {
     return (
@@ -77,9 +91,11 @@ export const IngredientGroupItem: React.FunctionComponent<IngredientGroupItemPro
           </Col>
         </Row>
         <Row>
-          <Col md={12}>
-            Normalized: {getNormalized()}
-          </Col>
+          {conversion && (
+            <Col md={12}>
+              {conversion.debug}
+            </Col>
+          )}
         </Row>
       </>
     );

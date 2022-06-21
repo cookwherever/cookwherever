@@ -339,46 +339,117 @@
         filter: {}
 - table:
     schema: public
-    name: ingredients
+    name: ingredient_food_candidate
   object_relationships:
     - name: food
       using:
-        foreign_key_constraint_on: fdc_id
+        foreign_key_constraint_on: food_candidate_id
+    - name: food_portion
+      using:
+        manual_configuration:
+          remote_table:
+            schema: public
+            name: food_portion
+          insertion_order: null
+          column_mapping:
+            food_candidate_portion_id: id
+            food_candidate_id: fdc_id
   insert_permissions:
     - role: user
       permission:
         check: {}
         columns:
-          - names
-          - fdc_id
-          - wiki_url
+          - food_candidate_id
+          - food_candidate_portion_id
           - id
         backend_only: false
   select_permissions:
     - role: anonymous
       permission:
         columns:
-          - names
-          - fdc_id
-          - wiki_url
+          - food_candidate_id
+          - food_candidate_portion_id
           - id
         filter: {}
     - role: user
       permission:
         columns:
-          - names
-          - fdc_id
-          - wiki_url
+          - food_candidate_id
+          - food_candidate_portion_id
           - id
         filter: {}
   update_permissions:
     - role: user
       permission:
         columns:
-          - names
-          - fdc_id
-          - wiki_url
+          - food_candidate_id
           - id
+          - food_candidate_portion_id
+        filter: {}
+        check: {}
+- table:
+    schema: public
+    name: ingredient_names
+  object_relationships:
+    - name: ingredient
+      using:
+        foreign_key_constraint_on: ingredient_id
+- table:
+    schema: public
+    name: ingredients
+  object_relationships:
+    - name: ingredient_food_candidate
+      using:
+        foreign_key_constraint_on: food_candidate_id
+  array_relationships:
+    - name: ingredient_names
+      using:
+        foreign_key_constraint_on:
+          column: ingredient_id
+          table:
+            schema: public
+            name: ingredient_names
+  computed_fields:
+    - name: food_candidates
+      definition:
+        function:
+          schema: public
+          name: food_candidates_for_ingredient
+  insert_permissions:
+    - role: user
+      permission:
+        check: {}
+        columns:
+          - food_candidate_id
+          - id
+          - name
+          - wiki_url
+        backend_only: false
+  select_permissions:
+    - role: anonymous
+      permission:
+        columns:
+          - food_candidate_id
+          - id
+          - name
+          - wiki_url
+        filter: {}
+    - role: user
+      permission:
+        columns:
+          - food_candidate_id
+          - id
+          - name
+          - wiki_url
+        filter: {}
+  update_permissions:
+    - role: user
+      permission:
+        columns:
+          - food_candidate_id
+          - id
+          - name
+          - wiki_url
         filter: {}
         check: {}
 - table:
@@ -402,13 +473,25 @@
 - table:
     schema: public
     name: most_common_ingredients
+  object_relationships:
+    - name: ingredient
+      using:
+        manual_configuration:
+          remote_table:
+            schema: public
+            name: ingredients
+          insertion_order: null
+          column_mapping:
+            id: id
   select_permissions:
     - role: user
       permission:
         columns:
-          - ingredient_count
           - name
+          - ingredient_count
+          - id
         filter: {}
+        allow_aggregations: true
 - table:
     schema: public
     name: nutrient
@@ -520,60 +603,6 @@
             _eq: X-Hasura-User-Id
 - table:
     schema: public
-    name: recipe_ingredient_food_candidate
-  object_relationships:
-    - name: food
-      using:
-        foreign_key_constraint_on: food_candidate_id
-    - name: food_portion
-      using:
-        manual_configuration:
-          remote_table:
-            schema: public
-            name: food_portion
-          insertion_order: null
-          column_mapping:
-            food_candidate_portion_id: id
-            food_candidate_id: fdc_id
-  insert_permissions:
-    - role: user
-      permission:
-        check: {}
-        columns:
-          - food_candidate_id
-          - food_candidate_portion_id
-          - id
-          - recipe_ingredient_id
-        backend_only: false
-  select_permissions:
-    - role: anonymous
-      permission:
-        columns:
-          - food_candidate_id
-          - food_candidate_portion_id
-          - id
-          - recipe_ingredient_id
-        filter: {}
-    - role: user
-      permission:
-        columns:
-          - food_candidate_id
-          - food_candidate_portion_id
-          - id
-          - recipe_ingredient_id
-        filter: {}
-  update_permissions:
-    - role: user
-      permission:
-        columns:
-          - food_candidate_id
-          - food_candidate_portion_id
-          - id
-          - recipe_ingredient_id
-        filter: {}
-        check: null
-- table:
-    schema: public
     name: recipe_ingredient_groups
   object_relationships:
     - name: recipe
@@ -628,48 +657,30 @@
     schema: public
     name: recipe_ingredients
   object_relationships:
-    - name: food
-      using:
-        manual_configuration:
-          remote_table:
-            schema: public
-            name: food
-          insertion_order: null
-          column_mapping:
-            food_id: fdc_id
     - name: recipe_ingredient_group
       using:
         foreign_key_constraint_on: group_id
-  array_relationships:
-    - name: recipe_ingredient_food_candidates
-      using:
-        foreign_key_constraint_on:
-          column: recipe_ingredient_id
-          table:
-            schema: public
-            name: recipe_ingredient_food_candidate
   computed_fields:
-    - name: food_candidates
+    - name: ingredient
       definition:
         function:
           schema: public
-          name: food_candidates_for_ingredient
+          name: ingredient_for_recipe_ingredient
         table_argument: search
-      comment: ""
+      comment: Get the ingredient for a recipe ingredient.
   insert_permissions:
     - role: user
       permission:
         check: {}
         columns:
+          - amount
+          - comment
+          - group_id
           - id
           - name
-          - amount
-          - units
-          - comment
-          - food_id
-          - text
           - seq_num
-          - group_id
+          - text
+          - units
           - video_timestamp
           - video_timestamp_end
         backend_only: false
@@ -677,15 +688,14 @@
     - role: anonymous
       permission:
         columns:
+          - amount
+          - comment
+          - group_id
           - id
           - name
-          - amount
-          - units
-          - comment
-          - food_id
-          - text
           - seq_num
-          - group_id
+          - text
+          - units
           - video_timestamp
           - video_timestamp_end
         filter: {}
@@ -694,7 +704,6 @@
         columns:
           - amount
           - comment
-          - food_id
           - group_id
           - id
           - name
@@ -713,14 +722,13 @@
           - amount
           - units
           - comment
-          - food_id
           - text
           - seq_num
           - group_id
           - video_timestamp
           - video_timestamp_end
         filter: {}
-        check: null
+        check: {}
 - table:
     schema: public
     name: recipe_list_items

@@ -27,7 +27,7 @@ tags:
 * [[tart-pan]]
 * [[air-bake-cookie-sheet-insulated-cookie-sheet]]
 * [[baking-sheet-cookie-sheet]]
-* [[clay-pot]]
+* [[equipment/baking-equipment/clay-pot]]
 * [[cookie-sheet]]
 * [[flour-sifter-sifter]]
 * [[insulated-cookie-sheet]]
