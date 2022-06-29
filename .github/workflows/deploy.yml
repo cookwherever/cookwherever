@@ -70,7 +70,7 @@ jobs:
             yq
           helm: "3.8.0"
           yq: "4.16.2"
-      - uses: Azure/k8s-set-context@v1
+      - uses: Azure/k8s-set-context@v3
         with:
           kubeconfig: ${{ secrets.KUBE_CONFIG }}
       - name: Helm Deploy
