@@ -409,12 +409,6 @@
           table:
             schema: public
             name: ingredient_names
-  computed_fields:
-    - name: food_candidates
-      definition:
-        function:
-          schema: public
-          name: food_candidates_for_ingredient
   insert_permissions:
     - role: user
       permission:
@@ -666,8 +660,7 @@
         function:
           schema: public
           name: ingredient_for_recipe_ingredient
-        table_argument: search
-      comment: Get the ingredient for a recipe ingredient.
+        table_argument: recipe_ing
   insert_permissions:
     - role: user
       permission:
