@@ -23,6 +23,7 @@ import RecipeVisualizerPage from './pages/RecipeVisualizerPage/RecipeVisualizerP
 import { anonymousSignin, getRefreshedToken } from './utils/auth';
 import { AuthContext, AuthProvider } from './providers/AuthProvider';
 import {IngredientsPage} from "./pages/IngredientsPage";
+import { DevicesPage } from './pages/DevicesPage';
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL_URL
@@ -110,6 +111,7 @@ const AppRouter: FunctionComponent = () => {
                 <Route path="/recipe/visualize" component={RecipeVisualizerPage} />
                 <Route path="/recipe/:slug" component={ViewRecipePage} />
                 <Route path="/lists" component={RecipeListsPage} />
+                <Route path="/devices" component={DevicesPage} />
               </Switch>
             </Suspense>
           </RecoilRoot>
