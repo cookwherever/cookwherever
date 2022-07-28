@@ -74,4 +74,4 @@ jobs:
         with:
           kubeconfig: ${{ secrets.KUBE_CONFIG }}
       - name: Helm Deploy
-        run: helm --namespace food-data upgrade food-data k8s
+        run: helm --namespace cookwherever upgrade cookwherever k8s

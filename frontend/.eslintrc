@@ -13,6 +13,8 @@
     }
   },
   "rules": {
+    "no-console": "off",
+    "no-bitwise": "off",
     "object-curly-spacing": ["warn", "always"],
     "no-unused-vars": [
       "warn",

@@ -112,6 +112,20 @@ What happens to the egg yolk as heat increases.
 | 158F - 170F | Yolk becomes firmer until it turns pale and crumbly. |
 | > 170F | More and more crumbly. The sulfer in the egg white and iron in the yolk react and create _ferrous sulfide_. This molecule makes the outside of the yolk turn slightly green.
 
+### Whipping Egg Whites
+[[meringue]] - egg whites that have been whipped to the point that they exist in a semisolid foam
+
+When whipping egg whites, there are a number of states that whipped egg whites will go through. Understanding what happens at these states can help you figure out where you are in the process/figure out what went wrong.
+
+A _peak_ in a meringue refers to taking a utensil (a whisk, spatula, etc.), place it into the whipped egg whites, pulling it out, and observing the tiny mountain, or _peak_, of egg whites that were formed. If the peak starts to fall over a bit, then the peaks are _soft_. If the peak keeps it shape rigidly, then the peaks are _stiff_.
+
+| State of Whipping     | Description                                                                                                                                           |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Foam                  | The [[globulin]] and [[ovotransferrin]] proteins begin to unfold and form into small groups. Air is trapped in the groups of proteins as air bubbles. |
+| Soft peaks            | The groups of proteins connect with each other creating a network with reinforced walls. More air bubbles are trapped in the network, and still are mostly visible. |
+| Stiff peaks           | The air bubbles are too small to see with human eyes, and the egg whites look white and opaque like shaving cream. |
+| Breakdown and weeping | Continuing to beat the egg whites will make the network of proteins come too close together and squeeze out the moisture. Acidic ingredients (cream of tartar, lemon juice, etc) prevent the protein network from ever being able to bond too tightly.                                                                                                                                                     |
+
 ### Foolproof Soft-Boiled Eggs
 #### Concepts
 #### Ingredients
@@ -675,26 +689,116 @@ Caution: Moving hot baking sheets with grease can be dangerous. Use oven mitts t
 TODO
 
 ## Potato Hash
-### Food
-#### Concepts
-#### Equipment
-#### Ingredients
-#### Directions
-#### Variations 
+### Concepts
+#### Blueprint
+- starchy root vegetable 
+	- [[potatoes]]
+	- [[sweet-potato]]
+	- [[beet]]
+- left overs
+	- vegetables
+		- [[cabbages]] will have a sweet, nutty flavor when charred 
+		- [[onions]] and [[ingredients/categories/plants/produce/vegetables/root-underground/bulbs/onions/dry-onions-and-shallots/shallot|shallots]] become sweet
+	- cooked meat
+		- [[cured-meats]] become crispy
+- eggs
+- acid
+	- [[todo/hot-sauce]]
+### Equipment
+- peeler
+- knife
+- microwave
+- microwave safe plate
+- paper towel
+	- Subs:
+		- cloth towel
+- fork
+### Ingredients
+- 1 1/2 lbs [[russet-potato]]
+	- Prep: Peeled
+	- Prep: Cut into 1/2 inch cubes
+- 3 tbsp vegetable oil
+- 1 red bell pepper
+	- Prep: Thinly sliced
+- 1 green bell pepper
+	- Prep: Thinly sliced
+- 1 onion
+	- Prep: Thinly sliced
+- 1 tsp hot sauce
+- salt
+- black pepper
+	- Prep: Freshly ground
+- Optional: 4 large eggs
+
+### Directions
+1. If using eggs:
+	1. Move oven rack to upper middle position
+	2. Preheat oven to 400°F
+2. Spread potatoes out evenly on plate
+3. Cover potatoes with towel
+4. Microwave on high
+	- Until: Piercing a piece of potato can be done relatively easily. (the potato will still slightly under cooked)
+	- Time: 4 to 6 minutes
+5. 
+### Variations 
 
 ## Pancakes
-TODO
+### Concepts
+#### Bread
+See notes on [[breads]]
+### Leavening a Quick Bread
+See notes on [[baking-soda]]
+- [[baking-powder]] does not create enough gas to leaven a thicker dough, dough of a quick bread must be very moist and loose
+- A quick bread has more of a [[batter]] than a [[doughs|dough]] which means there is little gluten formation
+- Making batter will immediately cause baking soda to start reacting and creating bubbles
+- _Batter should be cooked immediately after making_ 
+	- Immediately cooking: light, tall, fluffy
+	- Waiting: dense, gummy, with few bubbles
+### Browning
+- [[maillard reaction]] is the reason why pancakes are brown
+- Baking soda will create a more [[alkaline]] environment which helps browning
+	- After the baking soda has been neutralized by the acidic buttermilk, the rest will go towards browning the pancake 
+- Too little baking soda will make pancake pale, too much will brown too fast and leave a soapy, chemical aftertaste from the baking soda that has not been neutralized
+- Cookies will sometimes use baking soda by itself to improve browning
+
+### Egg whites
+- whipped egg whites add extra air bubbles to pancakes that make then even lighter when cooked
+
+### Flavor
+
+
+### Equipment
+### Ingredients
+### Directions
+### Variations 
 
 ## Waffles
+### Concepts
+### Equipment
+### Ingredients
+### Directions
+### Variations 
 
 ## Ricotta
-TODO
+### Concepts
+### Equipment
+### Ingredients
+### Directions
+### Variations 
 
 ## Biscuits
-TODO
+### Concepts
+### Equipment
+### Ingredients
+### Directions
+### Variations 
 
 ## Sticky Buns
-TODO
+### Concepts
+### Equipment
+### Ingredients
+### Directions
+### Variations 
 
 ### Food
 #### Concepts
