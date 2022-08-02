@@ -10,7 +10,7 @@ services:
       kompose.service.expose.tls-secret: "cookwherever-com-tls"
       kompose.image-pull-secret: "ghcr-pull-secret"
   wiki:
-    image: ghcr.io/cookwherever/wiki@sha256:25fc4124fd5264193fccb42560068d7d9aba91e840d8bb10967982a5f5369df0
+    image: ghcr.io/cookwherever/wiki@sha256:22e5873c367a63cadb27c35b9e1a3748bd86282a79685c6d70d931d5a795a3d4
     restart: always
     ports:
       - '80:80'
