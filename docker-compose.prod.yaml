@@ -5,14 +5,14 @@ services:
     restart: always
     ports:
       - '80:80'
-    labels: 
+    labels:
       kompose.image-pull-secret: "ghcr-pull-secret"
   wiki:
-    image: ghcr.io/cookwherever/wiki@sha256:25fc4124fd5264193fccb42560068d7d9aba91e840d8bb10967982a5f5369df0
+    image: ghcr.io/cookwherever/wiki@sha256:8d1a480afb15e419ecc71ed5eee624e07b47c5b452d7e906b971126a6863d4c6
     restart: always
     ports:
       - '80:80'
-    labels: 
+    labels:
       kompose.image-pull-secret: "ghcr-pull-secret"
   hasura-auth:
     environment:
