@@ -70,8 +70,14 @@ jobs:
             yq
           helm: "3.8.0"
           yq: "4.16.2"
-      - uses: Azure/k8s-set-context@v1
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v0'
         with:
-          kubeconfig: ${{ secrets.KUBE_CONFIG }}
+          credentials_json: '${{ secrets.GCP_SERVICE_ACCOUNT }}'
+      - id: 'get-credentials'
+        uses: 'google-github-actions/get-gke-credentials@v0'
+        with:
+          cluster_name: 'breadchris-cluster'
+          location: 'us-west4-a'
       - name: Helm Deploy
         run: helm --namespace cookwherever upgrade cookwherever k8s
