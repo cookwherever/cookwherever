@@ -2,11 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: ./kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
-    kompose.image-pull-secret: ghcr-pull-secret
-    kompose.service.expose: api.cookwherever.com
-    kompose.service.expose.tls-secret: cookwherever-com-tls
-    kompose.version: 1.26.1 (a9d05d509)
+    kompose.cmd: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
+    kompose.version: 1.26.0 (HEAD)
   creationTimestamp: null
   labels:
     io.kompose.service: graphql-engine
@@ -20,11 +17,8 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: ./kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
-        kompose.image-pull-secret: ghcr-pull-secret
-        kompose.service.expose: api.cookwherever.com
-        kompose.service.expose.tls-secret: cookwherever-com-tls
-        kompose.version: 1.26.1 (a9d05d509)
+        kompose.cmd: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
+        kompose.version: 1.26.0 (HEAD)
       creationTimestamp: null
       labels:
         io.kompose.service: graphql-engine
@@ -191,12 +185,10 @@ spec:
                 configMapKeyRef:
                   key: SMTP_USER
                   name: env
-          image: hasura/graphql-engine:v2.4.0
+          image: hasura/graphql-engine:v2.9.0
           name: graphql-engine
           ports:
             - containerPort: 8080
           resources: {}
-      imagePullSecrets:
-        - name: ghcr-pull-secret
       restartPolicy: Always
 status: {}

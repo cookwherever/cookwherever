@@ -2,11 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: ./kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
+    kompose.cmd: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
     kompose.image-pull-secret: ghcr-pull-secret
-    kompose.service.expose: recipes.cookwherever.com
-    kompose.service.expose.tls-secret: cookwherever-com-tls
-    kompose.version: 1.26.1 (a9d05d509)
+    kompose.version: 1.26.0 (HEAD)
   creationTimestamp: null
   labels:
     io.kompose.service: frontend
@@ -20,17 +18,15 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: ./kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
+        kompose.cmd: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
         kompose.image-pull-secret: ghcr-pull-secret
-        kompose.service.expose: recipes.cookwherever.com
-        kompose.service.expose.tls-secret: cookwherever-com-tls
-        kompose.version: 1.26.1 (a9d05d509)
+        kompose.version: 1.26.0 (HEAD)
       creationTimestamp: null
       labels:
         io.kompose.service: frontend
     spec:
       containers:
-        - image: ghcr.io/cookwherever/frontend@sha256:03e3c831bf7e7a55cec8fcdf6efcc1d373fa44032040d2f982e4499d08a8c804
+        - image: ghcr.io/cookwherever/frontend:latest
           name: frontend
           ports:
             - containerPort: 80

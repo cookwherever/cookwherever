@@ -6,6 +6,7 @@ SET check_function_bodies = false;
 -- extensions
 CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;
 CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
+CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA public;
 
 CREATE TYPE public.food_data_type_enum AS ENUM (
     'branded_food',
@@ -39,6 +40,14 @@ CREATE TABLE public.recipe_ingredients (
     video_timestamp integer,
     video_timestamp_end integer
 );
+
+CREATE OR REPLACE FUNCTION "public"."set_current_timestamp_updated_at"() RETURNS TRIGGER AS $$
+  DECLARE _new record;
+  BEGIN _new := NEW;
+  _new."updated_at" = NOW();
+  RETURN _new; END;
+$$ LANGUAGE plpgsql;
+
 CREATE FUNCTION public.food_candidates_for_ingredient(search public.recipe_ingredients) RETURNS SETOF public.food
     LANGUAGE sql STABLE
     AS $$
@@ -104,15 +113,9 @@ CREATE FUNCTION public.search_recipes(search text) RETURNS SETOF public.recipes
     ORDER BY
       similarity(search, name) DESC
 $$;
-CREATE FUNCTION public.set_current_timestamp_updated_at() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-declare _new record;
-begin _new := new;
-_new."updated_at" = now();
-return _new;
-end;
-$$;
+CREATE TABLE auth.users (
+    id uuid PRIMARY KEY
+);
 CREATE TABLE public.acquisition_sample (
     fdc_id_of_sample_food integer,
     fdc_id_of_acquisition_food integer

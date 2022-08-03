@@ -36,6 +36,7 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: postgres-claim0
+              subPath: postgres
             - name: postgres-initdb-configmap
               mountPath: /docker-entrypoint-initdb.d/
       restartPolicy: Always

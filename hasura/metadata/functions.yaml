@@ -1,6 +1,6 @@
 - function:
-    schema: public
     name: search_foods
-- function:
     schema: public
+- function:
     name: search_recipes
+    schema: public

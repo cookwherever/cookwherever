@@ -19,6 +19,7 @@
       <excludeFolder url="file://$MODULE_DIR$/etl/python/env" />
       <excludeFolder url="file://$MODULE_DIR$/etl/python/archive" />
       <excludeFolder url="file://$MODULE_DIR$/etl/gocook/data" />
+      <excludeFolder url="file://$MODULE_DIR$/etl/python/data" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.9 (food-data)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

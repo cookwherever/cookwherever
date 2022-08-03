@@ -68,7 +68,7 @@ def filter_providers(provider):
 
 def cache_recipe_content(provider, recipe_id):
     for name, provider in filter_providers(provider):
-        provider_dir = os.path.join('archive', name)
+        provider_dir = os.path.join('data', 'archive', name)
         ensure_dir(provider_dir)
 
         with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
@@ -140,7 +140,7 @@ def normalize_recipe(provider, provider_name, recipe_filename):
     recipe = provider.normalize_recipe(recipe_id, recipe_model)
     debug(json.dumps(recipe, indent=2))
 
-    provider_dir = os.path.join('normalized', provider_name)
+    provider_dir = os.path.join('data', 'normalized', provider_name)
     ensure_dir(provider_dir)
 
     recipe_save_file = os.path.join(provider_dir, f"{recipe_id}.json")
@@ -260,7 +260,7 @@ def process_recipe_file(recipe_file):
 
 
 def upsert_processed_recipes(provider, recipe_id):
-    recipe_folder = os.path.join('normalized', provider)
+    recipe_folder = os.path.join('data', 'normalized', provider)
 
     recipe_files = os.listdir(recipe_folder)
     if recipe_id is not None:
@@ -307,7 +307,7 @@ def verify_recipe_file(recipe_file):
 
 
 def verify_normalized_recipes(provider, recipe_id):
-    recipe_folder = os.path.join('normalized', provider)
+    recipe_folder = os.path.join('data', 'normalized', provider)
 
     recipe_files = os.listdir(recipe_folder)
     if recipe_id is not None:
