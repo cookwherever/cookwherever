@@ -259,6 +259,14 @@
             name: ingredients
             schema: public
   select_permissions:
+    - role: anonymous
+      permission:
+        columns:
+          - ingredient_count
+          - name
+          - id
+        filter: {}
+        allow_aggregations: true
     - role: user
       permission:
         columns:
