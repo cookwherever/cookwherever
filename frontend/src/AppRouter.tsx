@@ -5,8 +5,9 @@ import { BrowserRouter as Router, Link, Route, Switch, useHistory, useLocation }
 import { RecoilRoot } from 'recoil'
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { Container, Nav } from 'react-bootstrap';
+import { Button, Container, Nav } from 'react-bootstrap';
 import RecoilizeDebugger from 'recoilize';
+import { LogtoConfig, LogtoProvider } from '@logto/react';
 import { ViewIngredientPage } from './pages/ViewIngredientPage/ViewIngredientPage';
 import { SaveRecipePage } from './pages/SaveRecipePage/SaveRecipePage';
 import { HomePage } from './pages/HomePage/HomePage';
@@ -20,10 +21,12 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'src/styles/main.css';
 
 import RecipeVisualizerPage from './pages/RecipeVisualizerPage/RecipeVisualizerPage';
-import { anonymousSignin, getRefreshedToken } from './utils/auth';
-import { AuthContext, AuthProvider } from './providers/AuthProvider';
-import {IngredientsPage} from "./pages/IngredientsPage";
+import { IngredientsPage } from './pages/IngredientsPage';
 import { DevicesPage } from './pages/DevicesPage';
+import { Login } from './components/auth/Login';
+import { logout, selectSession } from './recoil/authentication';
+import useAppSelector from './hooks/useAppSelector';
+import useAppDispatch from './hooks/useAppDispatch';
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL_URL
@@ -47,14 +50,11 @@ const client = new ApolloClient({
 })
 
 const NavBar = () => {
-  const { user } = useContext(AuthContext);
-  const unauthedRoutes = (
-    <>
-      <Nav.Item>
-        <Nav.Link href="/login">Login</Nav.Link>
-      </Nav.Item>
-    </>
-  );
+  const session = useAppSelector(selectSession);
+  const history = useHistory();
+  const dispatch = useAppDispatch();
+  const doLogout = () => dispatch(logout(history));
+
   const authedRoutes = (
     <>
       <Nav.Item>
@@ -66,18 +66,6 @@ const NavBar = () => {
       <Nav.Item>
         <Nav.Link href="/ingredient">Ingredients</Nav.Link>
       </Nav.Item>
-      <Nav.Item>
-        <div className="pt-2">{user && (user.displayName || user.email)}</div>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link onClick={() => {
-          localStorage.removeItem('token');
-          window.location.href = '/';
-        }}
-        >
-          Logout
-        </Nav.Link>
-      </Nav.Item>
     </>
   );
   return (
@@ -86,7 +74,17 @@ const NavBar = () => {
         <Nav.Item>
           <Nav.Link href="/">Home</Nav.Link>
         </Nav.Item>
-        {user ? authedRoutes : unauthedRoutes}
+        {session && authedRoutes}
+        <>
+          <Nav.Item>
+            {session ? (
+              <>
+                {`Logged in as: ${session.identity.traits.email}`} <Button onClick={doLogout}>Log Out</Button>
+              </>) : (
+                <Login />
+            )}
+          </Nav.Item>
+        </>
       </Nav>
     </Container>
   );
@@ -96,26 +94,24 @@ const AppRouter: FunctionComponent = () => {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <AuthProvider>
-          <NavBar />
-          <RecoilRoot>
-            <RecoilizeDebugger />
-            <Suspense fallback={<span>Loading...</span>}>
-              <Switch>
-                <Route exact path="/" component={HomePage} />
-                <Route path="/login" component={LoginPage} />
-                <Route path="/register" component={RegisterPage} />
-                <Route path="/ingredient" component={IngredientsPage} />
-                <Route path="/ingredient/:id" component={ViewIngredientPage} />
-                <Route path="/recipe/save" component={SaveRecipePage} />
-                <Route path="/recipe/visualize" component={RecipeVisualizerPage} />
-                <Route path="/recipe/:slug" component={ViewRecipePage} />
-                <Route path="/lists" component={RecipeListsPage} />
-                <Route path="/devices" component={DevicesPage} />
-              </Switch>
-            </Suspense>
-          </RecoilRoot>
-        </AuthProvider>
+        <NavBar />
+        <RecoilRoot>
+          <RecoilizeDebugger />
+          <Suspense fallback={<span>Loading...</span>}>
+            <Switch>
+              <Route exact path="/" component={HomePage} />
+              <Route path="/login" component={LoginPage} />
+              <Route path="/register" component={RegisterPage} />
+              <Route path="/ingredient" component={IngredientsPage} />
+              <Route path="/ingredient/:id" component={ViewIngredientPage} />
+              <Route path="/recipe/save" component={SaveRecipePage} />
+              <Route path="/recipe/visualize" component={RecipeVisualizerPage} />
+              <Route path="/recipe/:slug" component={ViewRecipePage} />
+              <Route path="/lists" component={RecipeListsPage} />
+              <Route path="/devices" component={DevicesPage} />
+            </Switch>
+          </Suspense>
+        </RecoilRoot>
       </Router>
     </ApolloProvider>
   )

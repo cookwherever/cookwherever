@@ -11,9 +11,3 @@ services:
     env_file:
       - .env
       - .env.dev
-      - .env.dev.secrets
-  hasura-auth:
-    env_file:
-      - .env
-      - .env.dev
-      - .env.dev.secrets
