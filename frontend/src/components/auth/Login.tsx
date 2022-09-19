@@ -13,12 +13,12 @@
  */
 import { SubmitSelfServiceLoginFlowBody } from '@ory/kratos-client';
 import React, { useEffect } from 'react';
-import { useLocation, useHistory } from 'react-router';
+import { useLocation, useHistory } from 'react-router-dom';
 
-import { Flow } from '../../components/auth';
+import { Flow } from './Flow';
 import useAppDispatch from '../../hooks/useAppDispatch';
-import useAppSelector from '../../hooks/useAppSelector';
-import { login, resetLoginFlow, selectLoginFlow, setLoginFlow } from '../../store/slices/authentication';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { login, resetLoginFlow, selectLoginFlow, setLoginFlow } from '../../recoil/authentication';
 import { handleFlowError, handleGetFlowError } from '../../utils/handleGetFlowError';
 import oryClient from '../../utils/ory-client';
 
@@ -26,7 +26,7 @@ export const Login = () => {
   const dispatch = useAppDispatch();
   const flow = useAppSelector(selectLoginFlow);
 
-  const search = useLocation().search;
+  const { search } = useLocation();
   const searchParams = new URLSearchParams(search);
 
   const navigate = useHistory();
@@ -74,8 +74,8 @@ export const Login = () => {
   const title = flow?.refresh
     ? 'Confirm Action'
     : flow?.requested_aal === 'aal2'
-    ? 'Two-Factor Authentication'
-    : 'Login';
+      ? 'Two-Factor Authentication'
+      : 'Login';
 
   return (
     <>

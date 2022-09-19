@@ -11,8 +11,12 @@
  * limitations under the License.
  *
  */
-import { TypedUseSelectorHook, useSelector } from 'react-redux';
+import { Configuration, V0alpha2Api } from '@ory/kratos-client';
 
-import { RootState } from '../recoil/store';
+const oryClient = new V0alpha2Api(
+  new Configuration({
+    basePath: process.env.REACT_APP_KRATOS_URL || 'http://localhost:4455/api/kratos',
+  })
+);
 
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+export default oryClient;

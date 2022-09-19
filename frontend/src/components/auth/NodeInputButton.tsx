@@ -14,8 +14,8 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
+import { getNodeLabel } from '../../utils/nodes';
 import { NodeInputProps } from './helpers';
-import {getNodeLabel} from "../../utils/nodes";
 
 export function NodeInputButton<T>({ node, attributes, setValue, disabled, dispatchSubmit }: NodeInputProps) {
   // Some attributes have dynamic JavaScript - this is for example required for WebAuthn.

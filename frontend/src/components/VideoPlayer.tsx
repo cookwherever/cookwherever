@@ -60,7 +60,8 @@ export const VideoPlayer: React.FunctionComponent<VideoPlayerProps> = ({ recipe 
   const changeTimestamp = async () => {
     if (player === null) return;
 
-    const updatedTimestamp = Math.floor(player.getCurrentTime());
+    const currentTime = await player.getCurrentTime();
+    const updatedTimestamp = Math.floor(currentTime);
 
     const getNextFocusedDirectionTimestamp = (): FocusedDirectionTimestamp => {
       if (focusedDirectionTimestamp.position === 'start') {
@@ -107,7 +108,7 @@ export const VideoPlayer: React.FunctionComponent<VideoPlayerProps> = ({ recipe 
   }
 
   return (
-    <div className='youtube-player' style={{position: 'fixed'}}>
+    <div className='youtube-player' style={{ position: 'fixed' }}>
       <YouTube videoId={videoId} opts={opts} onReady={onReady} onStateChange={(event) => {console.log(event)}} />
       { developerMode && <Button onClick={changeTimestamp}>Set Timestamp</Button> }
     </div>

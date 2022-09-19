@@ -1,28 +1,10 @@
 - id: "ory:cookwherever:hasura:graphql"
   upstream:
     preserve_host: true
-    url: "http://hasura:8080"
+    url: "http://graphql-engine:8080"
     strip_path: "/api"
   match:
     url: "<https|http|ws>://<localhost:4455|cookwherever.com>/api/v1/graphql"
-    methods:
-      - POST
-  authenticators:
-    - handler: cookie_session
-    - handler: anonymous # If the above cookie ins't found or fails, "Subject" becomes "Anonymous" in the below claims
-  authorizer:
-    handler: allow
-  mutators:
-    - handler: hydrator
-    - handler: id_token
-
-- id: "ory:cookwherever:backend:graphql"
-  upstream:
-    preserve_host: true
-    url: "http://host.docker.internal:8088"
-    strip_path: "/api/backend"
-  match:
-    url: "<https|http|ws>://<oathkeeper:4455|cookwherever.com>/api/backend/v1/graphql"
     methods:
       - POST
   authenticators:
@@ -37,7 +19,7 @@
   upstream:
     preserve_host: true
     strip_path: "/api/hasura"
-    url: "http://localhost:8080"
+    url: "http://graphql-engine:8080"
   match:
     url: "<https|http|ws>://<localhost:4455|cookwherever.com>/api/hasura/<.*>"
     methods:

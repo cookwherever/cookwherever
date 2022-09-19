@@ -15,7 +15,7 @@ import { AxiosError } from 'axios';
 import React, { useEffect } from 'react';
 
 import useAppDispatch from '../../hooks/useAppDispatch';
-import { setConfirmedUnauthenticated, setSession } from '../../store/slices/authentication';
+import { setConfirmedUnauthenticated, setSession } from '../../recoil/authentication';
 import oryClient from '../../utils/ory-client';
 
 export const LoadSession: React.FC = (props) => {
@@ -43,6 +43,7 @@ export const LoadSession: React.FC = (props) => {
             // Something else happened!
             return Promise.reject(err);
         }
+        return Promise.resolve();
       });
   }, []);
   // It doesn't block currently, but this component is designed to wrap the entire app, just in case we ever do want to block on session confirmation.

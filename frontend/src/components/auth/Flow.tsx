@@ -26,16 +26,16 @@ import {
 } from '@ory/kratos-client';
 import React, { Component, FormEvent, ReactNode } from 'react';
 
+import { getNodeId, isUiNodeInputAttributes } from '../../utils/nodes';
 import { Messages } from './Messages';
 import { Node } from './Node';
-import {getNodeId, isUiNodeInputAttributes} from "../../utils/nodes";
 
 export type Values = Partial<
-  | SubmitSelfServiceLoginFlowBody
-  | SubmitSelfServiceRegistrationFlowBody
-  | SubmitSelfServiceRecoveryFlowBody
-  | SubmitSelfServiceSettingsFlowBody
-  | SubmitSelfServiceVerificationFlowBody
+| SubmitSelfServiceLoginFlowBody
+| SubmitSelfServiceRegistrationFlowBody
+| SubmitSelfServiceRecoveryFlowBody
+| SubmitSelfServiceSettingsFlowBody
+| SubmitSelfServiceVerificationFlowBody
 >;
 
 export type Methods = 'oidc' | 'password' | 'profile' | 'totp' | 'webauthn' | 'link' | 'lookup_secret';
@@ -43,11 +43,11 @@ export type Methods = 'oidc' | 'password' | 'profile' | 'totp' | 'webauthn' | 'l
 export type Props<T> = {
   // The flow
   flow?:
-    | SelfServiceLoginFlow
-    | SelfServiceRegistrationFlow
-    | SelfServiceSettingsFlow
-    | SelfServiceVerificationFlow
-    | SelfServiceRecoveryFlow;
+  | SelfServiceLoginFlow
+  | SelfServiceRegistrationFlow
+  | SelfServiceSettingsFlow
+  | SelfServiceVerificationFlow
+  | SelfServiceRecoveryFlow;
   // Only show certain nodes. We will always render the default nodes for CSRF tokens.
   only?: Methods;
   // Is triggered on submission
@@ -91,7 +91,7 @@ export class Flow<T extends Values> extends Component<Props<T>, State<T>> {
     nodes.forEach((node) => {
       // This only makes sense for text nodes
       if (isUiNodeInputAttributes(node.attributes)) {
-        if (node.attributes.type === 'button' || node.attributes.type === 'submit') {
+        if (node.attributes.node_type === 'button' || node.attributes.node_type === 'submit') {
           // In order to mimic real HTML forms, we need to skip setting the value
           // for buttons as the button value will (in normal HTML forms) only trigger
           // if the user clicks it.
@@ -145,7 +145,7 @@ export class Flow<T extends Values> extends Component<Props<T>, State<T>> {
         isLoading: false,
       }));
     }
-    return;
+    
   };
 
   render(): ReactNode {
@@ -189,8 +189,7 @@ export class Flow<T extends Values> extends Component<Props<T>, State<T>> {
                       resolve();
                     }
                   );
-                })
-              }
+                })}
             />
           );
         })}
