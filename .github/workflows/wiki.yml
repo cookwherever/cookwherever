@@ -16,7 +16,7 @@ jobs:
 
       - name: Get branch name
         id: branch-name
-        uses: tj-actions/branch-names@v5.2
+        uses: tj-actions/branch-names@v6.1
       - name: Install Kubernetes tools
         uses: yokawasa/action-setup-kube-tools@v0.8.0
         with:
