@@ -10,7 +10,7 @@ services:
     ports:
       - '8080:8080'
   hasura-auth:
-    image: nhost/hasura-auth:0.9.3
+    image: nhost/hasura-auth:0.13.0
     depends_on:
       - postgres
       - graphql-engine
