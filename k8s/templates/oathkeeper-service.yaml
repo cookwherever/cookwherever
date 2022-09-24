@@ -3,18 +3,20 @@ kind: Service
 metadata:
   annotations:
     kompose.cmd: ./kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
-    kompose.image-pull-secret: ghcr-pull-secret
     kompose.version: 1.26.1 (a9d05d509)
   creationTimestamp: null
   labels:
-    io.kompose.service: wiki
-  name: wiki
+    io.kompose.service: oathkeeper
+  name: oathkeeper
 spec:
   ports:
-    - name: "80"
-      port: 80
-      targetPort: 80
+    - name: "4455"
+      port: 4455
+      targetPort: 4455
+    - name: "4456"
+      port: 4456
+      targetPort: 4456
   selector:
-    io.kompose.service: wiki
+    io.kompose.service: oathkeeper
 status:
   loadBalancer: {}

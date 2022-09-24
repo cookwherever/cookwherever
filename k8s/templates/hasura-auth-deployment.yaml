@@ -2,8 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
-    kompose.version: 1.26.0 (HEAD)
+    kompose.cmd: ./kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
+    kompose.version: 1.26.1 (a9d05d509)
   creationTimestamp: null
   labels:
     io.kompose.service: hasura-auth
@@ -13,33 +13,20 @@ spec:
   selector:
     matchLabels:
       io.kompose.service: hasura-auth
-  strategy:
-    type: Recreate
+  strategy: {}
   template:
     metadata:
       annotations:
-        kompose.cmd: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
-        kompose.version: 1.26.0 (HEAD)
+        kompose.cmd: ./kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
+        kompose.version: 1.26.1 (a9d05d509)
       creationTimestamp: null
       labels:
         io.kompose.service: hasura-auth
     spec:
       containers:
         - env:
-            - name: AUTH_ACCESS_CONTROL_ALLOWED_REDIRECT_URLS
-              value: http://localhost:3000,https://recipes.cookwherever.com
-            - name: AUTH_ACCESS_TOKEN_EXPIRES_IN
-              value: "604800000"
-            - name: AUTH_ANONYMOUS_USERS_ENABLED
-              value: "false"
             - name: AUTH_CLIENT_URL
               value: https://cookwherever.com
-            - name: AUTH_EMAIL_PASSWORDLESS_ENABLED
-              value: "true"
-            - name: AUTH_LOG_LEVEL
-              value: debug
-            - name: AUTH_PORT
-              value: "4000"
             - name: AUTH_PROVIDER_GOOGLE_CLIENT_ID
               valueFrom:
                 configMapKeyRef:
@@ -50,23 +37,8 @@ spec:
                 configMapKeyRef:
                   key: AUTH_PROVIDER_GOOGLE_CLIENT_SECRET
                   name: env-prod-secrets
-            - name: AUTH_PROVIDER_GOOGLE_ENABLED
-              value: "true"
             - name: AUTH_SERVER_URL
               value: https://login.cookwherever.com
-            - name: AUTH_SMTP_AUTH_METHOD
-            - name: AUTH_SMTP_HOST
-              value: mailhog
-            - name: AUTH_SMTP_PASS
-              value: password
-            - name: AUTH_SMTP_PORT
-              value: "1025"
-            - name: AUTH_SMTP_SECURE
-              value: "false"
-            - name: AUTH_SMTP_SENDER
-              value: hasura-auth@example.com
-            - name: AUTH_SMTP_USER
-              value: user
             - name: HASURA_GRAPHQL_ADMIN_SECRET
               valueFrom:
                 configMapKeyRef:
@@ -77,47 +49,18 @@ spec:
                 configMapKeyRef:
                   key: HASURA_GRAPHQL_DATABASE_URL
                   name: env-prod-secrets
-            - name: HASURA_GRAPHQL_ENABLE_CONSOLE
-              value: '''true'''
-            - name: HASURA_GRAPHQL_GRAPHQL_URL
-              value: http://graphql-engine:8080/v1/graphql
             - name: HASURA_GRAPHQL_JWT_SECRET
               valueFrom:
                 configMapKeyRef:
                   key: HASURA_GRAPHQL_JWT_SECRET
                   name: env-prod-secrets
-            - name: HASURA_GRAPHQL_LOG_LEVEL
-              value: debug
-            - name: HASURA_GRAPHQL_UNAUTHORIZED_ROLE
-              value: anonymous
             - name: POSTGRES_PASSWORD
               valueFrom:
                 configMapKeyRef:
                   key: POSTGRES_PASSWORD
                   name: env-prod-secrets
-            - name: SMTP_HOST
-              value: mailhog
-            - name: SMTP_PASS
-              value: password
-            - name: SMTP_PORT
-              value: "1025"
-            - name: SMTP_SECURE
-              value: "false"
-            - name: SMTP_SENDER
-              value: hasura-auth@example.com
-            - name: SMTP_USER
-              value: user
-          image: nhost/hasura-auth:0.9.3
+          image: hasura-auth
           name: hasura-auth
-          ports:
-            - containerPort: 4000
           resources: {}
-          volumeMounts:
-            - mountPath: /app/migrations
-              name: hasura-auth-claim0
       restartPolicy: Always
-      volumes:
-        - name: hasura-auth-claim0
-          persistentVolumeClaim:
-            claimName: hasura-auth-claim0
 status: {}

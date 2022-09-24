@@ -3,35 +3,32 @@ kind: Deployment
 metadata:
   annotations:
     kompose.cmd: ./kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
-    kompose.image-pull-secret: ghcr-pull-secret
     kompose.version: 1.26.1 (a9d05d509)
   creationTimestamp: null
   labels:
-    io.kompose.service: wiki
-  name: wiki
+    io.kompose.service: mailslurper
+  name: mailslurper
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: wiki
+      io.kompose.service: mailslurper
   strategy: {}
   template:
     metadata:
       annotations:
         kompose.cmd: ./kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
-        kompose.image-pull-secret: ghcr-pull-secret
         kompose.version: 1.26.1 (a9d05d509)
       creationTimestamp: null
       labels:
-        io.kompose.service: wiki
+        io.kompose.service: mailslurper
     spec:
       containers:
-        - image: ghcr.io/cookwherever/wiki@sha256:8d1a480afb15e419ecc71ed5eee624e07b47c5b452d7e906b971126a6863d4c6
-          name: wiki
+        - image: oryd/mailslurper:latest-smtps
+          name: mailslurper
           ports:
-            - containerPort: 80
+            - containerPort: 4436
+            - containerPort: 4437
           resources: {}
-      imagePullSecrets:
-        - name: ghcr-pull-secret
       restartPolicy: Always
 status: {}
