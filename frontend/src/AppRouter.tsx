@@ -8,19 +8,19 @@ import { setContext } from '@apollo/client/link/context';
 import { Button, Container, Nav } from 'react-bootstrap';
 import RecoilizeDebugger from 'recoilize';
 import { Provider } from 'react-redux';
-import { ViewIngredientPage } from './pages/ViewIngredientPage/ViewIngredientPage';
-import { SaveRecipePage } from './pages/SaveRecipePage/SaveRecipePage';
-import { HomePage } from './pages/HomePage/HomePage';
-import { ViewRecipePage } from './pages/ViewRecipePage/ViewRecipePage';
-import { LoginPage } from './pages/LoginPage/LoginPage';
-import { RecipeListsPage } from './pages/RecipeListsPage/RecipeListsPage';
-import { RegisterPage } from './pages/RegisterPage/RegisterPage';
+import { ViewIngredientPage } from './pages/ViewIngredientPage';
+import { SaveRecipePage } from './pages/SaveRecipePage';
+import { HomePage } from './pages/HomePage';
+import { ViewRecipePage } from './pages/ViewRecipePage';
+import { LoginPage } from './pages/LoginPage';
+import { RecipeListsPage } from './pages/RecipeListsPage';
+import { RegisterPage } from './pages/RegisterPage';
 
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import 'bootstrap/dist/css/bootstrap.css';
 import 'src/styles/main.css';
 
-import RecipeVisualizerPage from './pages/RecipeVisualizerPage/RecipeVisualizerPage';
+import RecipeVisualizerPage from './pages/RecipeVisualizerPage';
 import { IngredientsPage } from './pages/IngredientsPage';
 import { DevicesPage } from './pages/DevicesPage';
 import { logout, selectSession } from './recoil/authentication';
@@ -30,7 +30,7 @@ import { store } from './recoil/store';
 import { LoadSession } from './components/auth/LoadSession';
 
 const httpLink = createHttpLink({
-  uri: process.env.REACT_APP_GRAPHQL_URL
+  uri: process.env.REACT_APP_GRAPHQL_URL,
 });
 
 const client = new ApolloClient({

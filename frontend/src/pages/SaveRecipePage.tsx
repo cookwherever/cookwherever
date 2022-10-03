@@ -11,7 +11,7 @@ $ npx generate-react-cli component SaveRecipePage --type=page
 
 import React from 'react'
 
-import { SaveRecipeForm } from '../../components/SaveRecipeForm/SaveRecipeForm';
+import { SaveRecipeForm } from '../components/SaveRecipeForm';
 import {Container} from "react-bootstrap";
 
 interface SaveRecipePageProps {

@@ -5,9 +5,9 @@ import { Col, Container, Form, InputGroup, Row } from 'react-bootstrap';
 import ListInput from 'src/components/ListInput';
 import useDebouncedCallback from '@restart/hooks/useDebouncedCallback';
 import { gql } from '@apollo/client';
-import { RecipesList } from '../../components/RecipesList/RecipesList';
-import { RecipeSearch } from '../../types/component-types';
-import { useGetRecipeSourceProvidersQuery, useViewRecipeQueryQuery } from '../../generated/graphql';
+import { RecipesList } from '../components/RecipesList';
+import { RecipeSearch } from '../types/component-types';
+import { useGetRecipeSourceProvidersQuery, useViewRecipeQueryQuery } from '../generated/graphql';
 
 interface HomePageProps {
 

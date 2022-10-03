@@ -5,8 +5,8 @@ import { ApolloQueryResult } from '@apollo/client/core/types';
 import { FetchResult } from '@apollo/client/link/core';
 import { MutationFunctionOptions } from '@apollo/client/react/types/types';
 import {Button, Card, Col, Container, Form, FormControl, Modal, Row} from 'react-bootstrap';
-import { Recipe_List_Items, Recipe_Lists, Recipes } from '../../generated/graphql';
-import {inputChangeHandler} from "../../utils/hook-helpers";
+import { Recipe_List_Items, Recipe_Lists, Recipes } from '../generated/graphql';
+import {inputChangeHandler} from "../utils/hook-helpers";
 
 const GET_RECIPE_LISTS = gql`
 query GetUserRecipeLists {

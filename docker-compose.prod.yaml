@@ -14,12 +14,13 @@ services:
       - '80:80'
     labels:
       kompose.image-pull-secret: "ghcr-pull-secret"
-  hasura-auth:
-    environment:
-      AUTH_SERVER_URL: https://login.cookwherever.com
-      AUTH_CLIENT_URL: https://cookwherever.com
+  kratos:
     env_file:
       - .env.prod.secrets
+  oathkeeper:
+    env_file:
+      - .env
+      - .env.prod
   graphql-engine:
     image: hasura/graphql-engine:v2.9.0
     # image: ghcr.io/cookwherever/hasura:latest

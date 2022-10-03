@@ -16,8 +16,16 @@ selfservice:
     password:
       enabled: false
     oidc:
-      enabled: false
-
+      enabled: true
+      config:
+        providers:
+          - id: google
+            provider: google
+            client_id: fake-value
+            client_secret: another-fake-value
+            mapper_url: file:///config/kratos/oidc.google.jsonnet
+            scope:
+              - email
   flows:
     login:
       ui_url: http://localhost:4455/auth/login

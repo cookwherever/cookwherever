@@ -12,15 +12,15 @@ import {
   Recipes,
   useUpdateRecipeVideoMutation,
   useViewRecipeQueryQuery
-} from '../../generated/graphql';
-import { getSourceHostname } from '../../utils/format-recipe';
-import { VideoPlayer } from '../../components/VideoPlayer';
-import { RecipeDirections } from '../../components/RecipeDirections';
-import { IngredientList } from '../../components/IngredientList';
-import { RecipeOffCanvas } from '../../components/RecipeOffCanvas';
-import { inDeveloperMode } from '../../recoil/selectors/view-mode';
-import { recipeViewerState } from '../../recoil/atoms/recipe';
-import { SaveRecipeToList } from '../../components/SaveRecipeToList';
+} from '../generated/graphql';
+import { getSourceHostname } from '../utils/format-recipe';
+import { VideoPlayer } from '../components/VideoPlayer';
+import { RecipeDirections } from '../components/RecipeDirections';
+import { IngredientList } from '../components/IngredientList';
+import { RecipeOffCanvas } from '../components/RecipeOffCanvas';
+import { inDeveloperMode } from '../recoil/selectors/view-mode';
+import { recipeViewerState } from '../recoil/atoms/recipe';
+import { SaveRecipeToList } from '../components/SaveRecipeToList';
 
 interface ViewRecipePageProps {
   match: {

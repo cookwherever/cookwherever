@@ -30,9 +30,7 @@ services:
     restart: unless-stopped
     environment:
       DSN: postgres://postgres:secretpgpassword@postgres:5432/postgres
-      LOG_LEVEL: trace
-      SELFSERVICE_METHODS_OIDC_CONFIG_PROVIDERS_0_MAPPER_URL: file:///config/kratos/oidc.google.jsonnet
-    command: serve -c /config/kratos/config.yaml -c /config/kratos/config.dev.yaml --dev --watch-courier
+    command: serve -c /config/kratos/config.yaml --dev --watch-courier
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
@@ -48,9 +46,6 @@ services:
       - "4455:4455"
       - "4456:4456"
     command: '--config /config/oathkeeper/config.yaml serve'
-    environment:
-      ACCESS_RULES_REPOSITORIES: file:///config/oathkeeper/rules.yaml
-      MUTATORS_ID_TOKEN_CONFIG_JWKS_URL: file:///config/oathkeeper/jwks.json
     volumes:
       - "./ory/oathkeeper:/config/oathkeeper"
     extra_hosts:

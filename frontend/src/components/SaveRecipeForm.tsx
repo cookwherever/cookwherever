@@ -19,8 +19,8 @@ import {
   Recipe_Tags_Update_Column,
   Recipes,
   Recipes_Insert_Input, useInsertRecipeMutation
-} from '../../generated/graphql'
-import ImageCropper from '../../widgets/ImageCropper/ImageCropper';
+} from '../generated/graphql'
+import ImageCropper from './ImageCropper';
 import slugify from "slugify";
 
 const recipeSchema: JSONSchema7 = {

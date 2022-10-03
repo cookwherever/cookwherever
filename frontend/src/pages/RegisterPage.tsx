@@ -4,7 +4,7 @@ import {Button, Grid, Paper, styled, TextField} from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { Face, Fingerprint } from '@material-ui/icons';
 import path from 'path';
-import { inputChangeHandler } from '../../utils/hook-helpers';
+import { inputChangeHandler } from '../utils/hook-helpers';
 
 const RegisterPaper = styled(Paper)(({ theme }) => ({
   margin: theme.spacing() * 2

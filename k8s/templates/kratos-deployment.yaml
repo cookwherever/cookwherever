@@ -6,14 +6,15 @@ metadata:
     kompose.version: 1.26.0 (HEAD)
   creationTimestamp: null
   labels:
-    io.kompose.service: graphql-engine
-  name: graphql-engine
+    io.kompose.service: kratos
+  name: kratos
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: graphql-engine
-  strategy: {}
+      io.kompose.service: kratos
+  strategy:
+    type: Recreate
   template:
     metadata:
       annotations:
@@ -21,10 +22,16 @@ spec:
         kompose.version: 1.26.0 (HEAD)
       creationTimestamp: null
       labels:
-        io.kompose.service: graphql-engine
+        io.kompose.service: kratos
     spec:
       containers:
-        - env:
+        - args:
+            - serve
+            - -c
+            - /config/kratos/config.yaml
+            - --dev
+            - --watch-courier
+          env:
             - name: AUTH_PROVIDER_GOOGLE_CLIENT_ID
               valueFrom:
                 configMapKeyRef:
@@ -35,6 +42,8 @@ spec:
                 configMapKeyRef:
                   key: AUTH_PROVIDER_GOOGLE_CLIENT_SECRET
                   name: env-prod-secrets
+            - name: DSN
+              value: postgres://postgres:secretpgpassword@postgres:5432/postgres
             - name: HASURA_GRAPHQL_ADMIN_SECRET
               valueFrom:
                 configMapKeyRef:
@@ -45,50 +54,28 @@ spec:
                 configMapKeyRef:
                   key: HASURA_GRAPHQL_DATABASE_URL
                   name: env-prod-secrets
-            - name: HASURA_GRAPHQL_ENABLE_CONSOLE
-              valueFrom:
-                configMapKeyRef:
-                  key: HASURA_GRAPHQL_ENABLE_CONSOLE
-                  name: env
-            - name: HASURA_GRAPHQL_GRAPHQL_URL
-              valueFrom:
-                configMapKeyRef:
-                  key: HASURA_GRAPHQL_GRAPHQL_URL
-                  name: env
-            - name: HASURA_GRAPHQL_JWT_SECRET
-              valueFrom:
-                configMapKeyRef:
-                  key: HASURA_GRAPHQL_JWT_SECRET
-                  name: env
             - name: HASURA_GRAPHQL_JWT_SECRET
               valueFrom:
                 configMapKeyRef:
                   key: HASURA_GRAPHQL_JWT_SECRET
                   name: env-prod-secrets
-            - name: HASURA_GRAPHQL_LOG_LEVEL
-              valueFrom:
-                configMapKeyRef:
-                  key: HASURA_GRAPHQL_LOG_LEVEL
-                  name: env
-            - name: HASURA_GRAPHQL_UNAUTHORIZED_ROLE
-              valueFrom:
-                configMapKeyRef:
-                  key: HASURA_GRAPHQL_UNAUTHORIZED_ROLE
-                  name: env
-            - name: MUTATORS_ID_TOKEN_CONFIG_JWKS_URL
-              valueFrom:
-                configMapKeyRef:
-                  key: MUTATORS_ID_TOKEN_CONFIG_JWKS_URL
-                  name: env
             - name: POSTGRES_PASSWORD
               valueFrom:
                 configMapKeyRef:
                   key: POSTGRES_PASSWORD
                   name: env-prod-secrets
-          image: hasura/graphql-engine:v2.9.0
-          name: graphql-engine
+          image: oryd/kratos:v0.9.0-alpha.3
+          name: kratos
           ports:
-            - containerPort: 8080
+            - containerPort: 4433
+            - containerPort: 4434
           resources: {}
+          volumeMounts:
+            - mountPath: /config/kratos
+              name: kratos-cm0
       restartPolicy: Always
+      volumes:
+        - configMap:
+            name: kratos-cm0
+          name: kratos-cm0
 status: {}

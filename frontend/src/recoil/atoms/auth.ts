@@ -1,14 +1,14 @@
 import {atom, AtomEffect} from 'recoil'
-import {initUser, initViewMode, ViewMode} from 'src/model/user'
 
 import { recoilPersist } from 'recoil-persist'
 
-const { persistAtom } = recoilPersist()
+export type ViewMode = 'view' | 'edit' | 'developer';
 
-export const userState = atom({
-  key: 'UserState',
-  default: initUser(),
-})
+export const initViewMode = (): ViewMode => (
+  localStorage.getItem('developer') as ViewMode || 'view'
+)
+
+const { persistAtom } = recoilPersist()
 
 export const viewModeState = atom<ViewMode>({
   key: 'ViewMode',

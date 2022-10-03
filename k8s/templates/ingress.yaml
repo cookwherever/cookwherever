@@ -16,9 +16,6 @@ spec:
   tls: # < placing a host in the TLS config will indicate a certificate should be created
     - hosts:
       - cookwherever.com
-      - login.cookwherever.com
-      - recipes.cookwherever.com
-      - api.cookwherever.com
       secretName: cookwherever-tls-secret
   rules:
     - host: cookwherever.com
@@ -31,32 +28,12 @@ spec:
                   number: 80
             path: /
             pathType: Prefix
-    - host: login.cookwherever.com
-      http:
-        paths:
-          - backend:
-              service:
-                name: hasura-auth
-                port:
-                  number: 4000
-            path: /
-            pathType: Prefix
-    - host: api.cookwherever.com
-      http:
-        paths:
-          - backend:
-              service:
-                name: graphql-engine
-                port:
-                  number: 8080
-            path: /
-            pathType: Prefix
     - host: recipes.cookwherever.com
       http:
         paths:
           - backend:
               service:
-                name: frontend
+                name: oathkeeper
                 port:
                   number: 80
             path: /
