@@ -20,12 +20,13 @@ import {
 } from '@ory/kratos-client';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
-import { History } from 'history';
 
-import { createLogoutHandler } from '../../hooks/createLogoutHandler';
-import { handleFlowError } from '../../utils/handleGetFlowError';
-import oryClient from '../../utils/ory-client';
-import { AppThunk, RootState } from '../store';
+import { History } from 'history';
+import { RouteComponentProps } from 'react-router';
+import { createLogoutHandler } from '../hooks/createLogoutHandler';
+import { handleFlowError } from '../utils/handleGetFlowError';
+import oryClient from '../utils/ory-client';
+import { AppThunk, RootState } from './store';
 
 export interface AuthState {
   confirmedUnauthenticated: boolean;
@@ -86,86 +87,86 @@ export const selectUserId = (state: RootState) => state.auth.session?.identity.i
 export const selectConfirmedUnauthenticated = (state: RootState) => state.auth.confirmedUnauthenticated;
 
 export const login =
-  (navigate: History, values: SubmitSelfServiceLoginFlowBody): AppThunk =>
-  (dispatch, getState) => {
-    const flow = selectLoginFlow(getState());
+  (navigate: RouteComponentProps['history'], values: SubmitSelfServiceLoginFlowBody): AppThunk =>
+    (dispatch, getState) => {
+      const flow = selectLoginFlow(getState());
 
-    if (!flow) {
-      throw new Error('flow is undefined in login');
-    }
+      if (!flow) {
+        throw new Error('flow is undefined in login');
+      }
 
-    // On submission, add the flow ID to the URL but do not navigate. This prevents the user loosing
-    // his data when she/he reloads the page.
-    navigate.push(`/login?flow=${flow.id}`, { replace: true });
-    oryClient
-      .submitSelfServiceLoginFlow(String(flow.id), undefined, values)
+      // On submission, add the flow ID to the URL but do not navigate. This prevents the user loosing
+      // his data when she/he reloads the page.
+      navigate.push(`/login?flow=${flow.id}`, { replace: true });
+      oryClient
+        .submitSelfServiceLoginFlow(String(flow.id), values)
       // We logged in successfully! Let's bring the user home.
-      .then((res) => {
-        if (flow.return_to) {
-          window.location.href = flow.return_to;
-          return;
-        }
-        const session: Session = res.data.session;
-        console.log(session);
-        dispatch(setSession(session));
+        .then((res) => {
+          if (flow.return_to) {
+            window.location.href = flow.return_to;
+            return;
+          }
+          const { session } = res.data;
+          console.log(session);
+          dispatch(setSession(session));
 
-        navigate.push('/');
-      })
-      .catch(handleFlowError(navigate, 'login', () => dispatch(resetLoginFlow())))
-      .catch((err: AxiosError) => {
+          navigate.push('/');
+        })
+        .catch(handleFlowError(navigate, 'login', () => dispatch(resetLoginFlow())))
+        .catch((err: AxiosError) => {
         // If the previous handler did not catch the error it's most likely a form validation error
-        if (err.response?.status === 400) {
+          if (err.response?.status === 400) {
           // Yup, it is!
-          dispatch(setLoginFlow(err.response?.data));
-          return;
-        }
+            dispatch(setLoginFlow(err.response?.data as SelfServiceLoginFlow));
+            return;
+          }
 
-        return Promise.reject(err);
-      });
-  };
+          Promise.reject(err);
+        });
+    };
 
 export const register =
-  (navigate: History, values: SubmitSelfServiceRegistrationFlowBody): AppThunk =>
-  (dispatch, getState) => {
-    const flow = selectRegisterFlow(getState());
+  (navigate: RouteComponentProps['history'], values: SubmitSelfServiceRegistrationFlowBody): AppThunk =>
+    (dispatch, getState) => {
+      const flow = selectRegisterFlow(getState());
 
-    if (!flow) {
-      throw new Error('flow is undefined in register');
-    }
+      if (!flow) {
+        throw new Error('flow is undefined in register');
+      }
 
-    // On submission, add the flow ID to the URL but do not navigate. This prevents the user loosing
-    // his data when she/he reloads the page.
-    navigate.push(`/account/register?flow=${flow.id}`, { replace: true });
-    oryClient
-      .submitSelfServiceRegistrationFlow(String(flow.id), values)
-      .then(({ data }) => {
+      // On submission, add the flow ID to the URL but do not navigate. This prevents the user loosing
+      // his data when she/he reloads the page.
+      navigate.push(`/account/register?flow=${flow.id}`, { replace: true });
+      oryClient
+        .submitSelfServiceRegistrationFlow(String(flow.id), values)
+        .then(({ data }) => {
         // If we ended up here, it means we are successfully signed up!
         //
         // You can do cool stuff here, like having access to the identity which just signed up:
-        console.log('This is the user session: ', data, data.identity);
+          console.log('This is the user session: ', data, data.identity);
 
-        dispatch(setSession(data.session || null));
+          dispatch(setSession(data.session || null));
 
-        // For now however we just want to redirect home!
-        return navigate.push(flow.return_to || '/');
-      })
-      .catch(handleFlowError(navigate, 'register', () => dispatch(resetRegisterFlow())))
-      .catch((err: AxiosError) => {
+          // For now however we just want to redirect home!
+          return navigate.push(flow.return_to || '/');
+        })
+        .catch(handleFlowError(navigate, 'register', () => dispatch(resetRegisterFlow())))
+        .catch((err: AxiosError) => {
         // If the previous handler did not catch the error it's most likely a form validation error
-        if (err.response?.status === 400) {
+          if (err.response?.status === 400) {
           // Yup, it is!
-          dispatch(setRegisterFlow(err.response?.data));
-          return;
-        }
+            dispatch(setRegisterFlow(err.response?.data as SelfServiceRegistrationFlow));
+            return;
+          }
 
-        return Promise.reject(err);
-      });
-  };
+          Promise.reject(err);
+        });
+    };
 
 export const logout =
   (navigate: History): AppThunk =>
-  (dispatch) => {
-    const logoutHandler = createLogoutHandler(navigate);
-    void logoutHandler();
-    dispatch(setSession(null));
-  };
+    (dispatch) => {
+      const logoutHandler = createLogoutHandler(navigate);
+      logoutHandler();
+      dispatch(setSession(null));
+    };

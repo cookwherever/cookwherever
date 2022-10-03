@@ -4,6 +4,7 @@ services:
     image: hasura/graphql-engine:v2.9.0
     depends_on:
       - postgres
+      - oathkeeper
     restart: always
     env_file:
       - .env
@@ -12,7 +13,7 @@ services:
   kratos-migrate:
     image: oryd/kratos:v0.9.0-alpha.3
     environment:
-      - DSN=postgres://postgres:secretpgpassword@postgres:5432/cookwherever
+      - DSN=postgres://postgres:secretpgpassword@postgres:5432/postgres
     command: -c /config/kratos/config.yaml migrate sql -e --yes
     restart: on-failure
     volumes:
@@ -28,10 +29,8 @@ services:
       - '4434:4434' # admin
     restart: unless-stopped
     environment:
-      DSN: postgres://postgres:secretpgpassword@postgres:5432/cookwherever
-      LOG_LEVEL: trace
-      SELFSERVICE_METHODS_OIDC_CONFIG_PROVIDERS_0_MAPPER_URL: file:///config/kratos/oidc.google.jsonnet
-    command: serve -c /config/kratos/config.yaml -c /config/kratos/config.dev.yaml --dev --watch-courier
+      DSN: postgres://postgres:secretpgpassword@postgres:5432/postgres
+    command: serve -c /config/kratos/config.yaml --dev --watch-courier
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
@@ -47,9 +46,6 @@ services:
       - "4455:4455"
       - "4456:4456"
     command: '--config /config/oathkeeper/config.yaml serve'
-    environment:
-      ACCESS_RULES_REPOSITORIES: file:///config/oathkeeper/rules.yaml,file:///config/oathkeeper/rules.frontend.yaml
-      MUTATORS_ID_TOKEN_CONFIG_JWKS_URL: file:///config/oathkeeper/jwks.json
     volumes:
       - "./ory/oathkeeper:/config/oathkeeper"
     extra_hosts:

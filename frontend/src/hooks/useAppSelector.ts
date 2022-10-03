@@ -13,8 +13,6 @@
  */
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 
-import { RootState } from '../store/store';
+import { RootState } from '../recoil/store';
 
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-
-export default useAppSelector;

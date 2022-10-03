@@ -7,45 +7,34 @@ import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@ap
 import { setContext } from '@apollo/client/link/context';
 import { Button, Container, Nav } from 'react-bootstrap';
 import RecoilizeDebugger from 'recoilize';
-import { LogtoConfig, LogtoProvider } from '@logto/react';
-import { ViewIngredientPage } from './pages/ViewIngredientPage/ViewIngredientPage';
-import { SaveRecipePage } from './pages/SaveRecipePage/SaveRecipePage';
-import { HomePage } from './pages/HomePage/HomePage';
-import { ViewRecipePage } from './pages/ViewRecipePage/ViewRecipePage';
-import { LoginPage } from './pages/LoginPage/LoginPage';
-import { RecipeListsPage } from './pages/RecipeListsPage/RecipeListsPage';
-import { RegisterPage } from './pages/RegisterPage/RegisterPage';
+import { Provider } from 'react-redux';
+import { ViewIngredientPage } from './pages/ViewIngredientPage';
+import { SaveRecipePage } from './pages/SaveRecipePage';
+import { HomePage } from './pages/HomePage';
+import { ViewRecipePage } from './pages/ViewRecipePage';
+import { LoginPage } from './pages/LoginPage';
+import { RecipeListsPage } from './pages/RecipeListsPage';
+import { RegisterPage } from './pages/RegisterPage';
 
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import 'bootstrap/dist/css/bootstrap.css';
 import 'src/styles/main.css';
 
-import RecipeVisualizerPage from './pages/RecipeVisualizerPage/RecipeVisualizerPage';
+import RecipeVisualizerPage from './pages/RecipeVisualizerPage';
 import { IngredientsPage } from './pages/IngredientsPage';
 import { DevicesPage } from './pages/DevicesPage';
-import { Login } from './components/auth/Login';
 import { logout, selectSession } from './recoil/authentication';
-import useAppSelector from './hooks/useAppSelector';
+import { useAppSelector } from './hooks/useAppSelector';
 import useAppDispatch from './hooks/useAppDispatch';
+import { store } from './recoil/store';
+import { LoadSession } from './components/auth/LoadSession';
 
 const httpLink = createHttpLink({
-  uri: process.env.REACT_APP_GRAPHQL_URL
-});
-
-const authLink = setContext((_, { headers }) => {
-  // get the authentication token from local storage if it exists
-  const token = localStorage.getItem('token');
-  // return the headers to the context so httpLink can read them
-  return {
-    headers: {
-      ...headers,
-      ...(token ? { authorization: `Bearer ${token}` } : {}),
-    }
-  }
+  uri: process.env.REACT_APP_GRAPHQL_URL,
 });
 
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  link: httpLink,
   cache: new InMemoryCache(),
 })
 
@@ -53,6 +42,7 @@ const NavBar = () => {
   const session = useAppSelector(selectSession);
   const history = useHistory();
   const dispatch = useAppDispatch();
+  // @ts-ignore
   const doLogout = () => dispatch(logout(history));
 
   const authedRoutes = (
@@ -78,11 +68,8 @@ const NavBar = () => {
         <>
           <Nav.Item>
             {session ? (
-              <>
-                {`Logged in as: ${session.identity.traits.email}`} <Button onClick={doLogout}>Log Out</Button>
-              </>) : (
-                <Login />
-            )}
+              <Nav.Link onClick={doLogout}>Log Out</Nav.Link>
+            ) : (<Nav.Link href="/login">Login</Nav.Link>)}
           </Nav.Item>
         </>
       </Nav>
@@ -94,65 +81,30 @@ const AppRouter: FunctionComponent = () => {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <NavBar />
-        <RecoilRoot>
-          <RecoilizeDebugger />
-          <Suspense fallback={<span>Loading...</span>}>
-            <Switch>
-              <Route exact path="/" component={HomePage} />
-              <Route path="/login" component={LoginPage} />
-              <Route path="/register" component={RegisterPage} />
-              <Route path="/ingredient" component={IngredientsPage} />
-              <Route path="/ingredient/:id" component={ViewIngredientPage} />
-              <Route path="/recipe/save" component={SaveRecipePage} />
-              <Route path="/recipe/visualize" component={RecipeVisualizerPage} />
-              <Route path="/recipe/:slug" component={ViewRecipePage} />
-              <Route path="/lists" component={RecipeListsPage} />
-              <Route path="/devices" component={DevicesPage} />
-            </Switch>
-          </Suspense>
-        </RecoilRoot>
+        <Provider store={store}>
+          <LoadSession>
+            <RecoilRoot>
+              <RecoilizeDebugger />
+              <Suspense fallback={<span>Loading...</span>}>
+                <NavBar />
+                <Switch>
+                  <Route exact path="/" component={HomePage} />
+                  <Route path="/login" component={LoginPage} />
+                  <Route path="/register" component={RegisterPage} />
+                  <Route path="/ingredient" component={IngredientsPage} />
+                  <Route path="/ingredient/:id" component={ViewIngredientPage} />
+                  <Route path="/recipe/save" component={SaveRecipePage} />
+                  <Route path="/recipe/visualize" component={RecipeVisualizerPage} />
+                  <Route path="/recipe/:slug" component={ViewRecipePage} />
+                  <Route path="/lists" component={RecipeListsPage} />
+                  <Route path="/devices" component={DevicesPage} />
+                </Switch>
+              </Suspense>
+            </RecoilRoot>
+          </LoadSession>
+        </Provider>
       </Router>
     </ApolloProvider>
   )
 }
-
-/*
-// TODO EE: To replace Recoil with Redux Toolkit;
-
-import { Provider } from 'react-redux'
-import store from './redux/store'
-
-<Router>
-  <Provider store={store}>
-    <Switch>
-      <Route exact path="/" component={App} />
-    </Switch>
-  </Provider>
-</Router>
-
- */
-
-/*
-
-// TODO: EE: Without Recoil or Redux Toolkit;
-
-// src/AppRouter.tsx
-
-import React, { FunctionComponent } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import App from './App'
-
-const AppRouter: FunctionComponent = () => {
-  return (
-    <Router>
-      <Switch>
-        <Route exact path="/" component={App} />
-      </Switch>
-    </Router>
-  )
-}
-
- */
-
 export default AppRouter

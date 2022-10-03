@@ -1,12 +1,11 @@
 apiVersion: v1
 data:
-  ALL_YES: "1"
   HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
   HASURA_GRAPHQL_GRAPHQL_URL: http://graphql-engine:8080/v1/graphql
+  HASURA_GRAPHQL_JWT_SECRET: '{"type":"RS256","jwk_url":"http://oathkeeper:4456/.well-known/jwks.json","issuer":"http://oathkeeper:4455/"}'
   HASURA_GRAPHQL_LOG_LEVEL: debug
   HASURA_GRAPHQL_UNAUTHORIZED_ROLE: anonymous
-  NO_INQUIRY: "0"
-  TRUST_PROXY_HEADER: "1"
+  MUTATORS_ID_TOKEN_CONFIG_JWKS_URL: file:///config/oathkeeper/jwks.json
 kind: ConfigMap
 metadata:
   creationTimestamp: null

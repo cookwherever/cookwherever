@@ -2,8 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: ./kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
-    kompose.version: 1.26.1 (a9d05d509)
+    kompose.cmd: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert --volumes=configMap -c -o k8s
+    kompose.version: 1.26.0 (HEAD)
   creationTimestamp: null
   labels:
     io.kompose.service: oathkeeper
@@ -18,8 +18,8 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: ./kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
-        kompose.version: 1.26.1 (a9d05d509)
+        kompose.cmd: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert --volumes=configMap -c -o k8s
+        kompose.version: 1.26.0 (HEAD)
       creationTimestamp: null
       labels:
         io.kompose.service: oathkeeper
@@ -31,9 +31,40 @@ spec:
             - serve
           env:
             - name: ACCESS_RULES_REPOSITORIES
-              value: file:///config/oathkeeper/rules.yaml,file:///config/oathkeeper/rules.frontend.yaml
+              valueFrom:
+                configMapKeyRef:
+                  key: ACCESS_RULES_REPOSITORIES
+                  name: env-prod
+            - name: HASURA_GRAPHQL_ENABLE_CONSOLE
+              valueFrom:
+                configMapKeyRef:
+                  key: HASURA_GRAPHQL_ENABLE_CONSOLE
+                  name: env
+            - name: HASURA_GRAPHQL_GRAPHQL_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: HASURA_GRAPHQL_GRAPHQL_URL
+                  name: env
+            - name: HASURA_GRAPHQL_JWT_SECRET
+              valueFrom:
+                configMapKeyRef:
+                  key: HASURA_GRAPHQL_JWT_SECRET
+                  name: env
+            - name: HASURA_GRAPHQL_LOG_LEVEL
+              valueFrom:
+                configMapKeyRef:
+                  key: HASURA_GRAPHQL_LOG_LEVEL
+                  name: env
+            - name: HASURA_GRAPHQL_UNAUTHORIZED_ROLE
+              valueFrom:
+                configMapKeyRef:
+                  key: HASURA_GRAPHQL_UNAUTHORIZED_ROLE
+                  name: env
             - name: MUTATORS_ID_TOKEN_CONFIG_JWKS_URL
-              value: file:///config/oathkeeper/jwks.json
+              valueFrom:
+                configMapKeyRef:
+                  key: MUTATORS_ID_TOKEN_CONFIG_JWKS_URL
+                  name: env
           image: oryd/oathkeeper:v0.38
           name: oathkeeper
           ports:
@@ -42,10 +73,10 @@ spec:
           resources: {}
           volumeMounts:
             - mountPath: /config/oathkeeper
-              name: oathkeeper-claim0
+              name: oathkeeper-cm0
       restartPolicy: Always
       volumes:
-        - name: oathkeeper-claim0
-          persistentVolumeClaim:
-            claimName: oathkeeper-claim0
+        - configMap:
+            name: oathkeeper-cm0
+          name: oathkeeper-cm0
 status: {}

@@ -2,8 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: ./kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
-    kompose.version: 1.26.1 (a9d05d509)
+    kompose.cmd: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert --volumes=configMap -c -o k8s
+    kompose.version: 1.26.0 (HEAD)
   creationTimestamp: null
   labels:
     io.kompose.service: graphql-engine
@@ -17,19 +17,14 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: ./kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert -c -o k8s
-        kompose.version: 1.26.1 (a9d05d509)
+        kompose.cmd: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert --volumes=configMap -c -o k8s
+        kompose.version: 1.26.0 (HEAD)
       creationTimestamp: null
       labels:
         io.kompose.service: graphql-engine
     spec:
       containers:
         - env:
-            - name: ALL_YES
-              valueFrom:
-                configMapKeyRef:
-                  key: ALL_YES
-                  name: env
             - name: AUTH_PROVIDER_GOOGLE_CLIENT_ID
               valueFrom:
                 configMapKeyRef:
@@ -64,6 +59,11 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: HASURA_GRAPHQL_JWT_SECRET
+                  name: env
+            - name: HASURA_GRAPHQL_JWT_SECRET
+              valueFrom:
+                configMapKeyRef:
+                  key: HASURA_GRAPHQL_JWT_SECRET
                   name: env-prod-secrets
             - name: HASURA_GRAPHQL_LOG_LEVEL
               valueFrom:
@@ -75,21 +75,16 @@ spec:
                 configMapKeyRef:
                   key: HASURA_GRAPHQL_UNAUTHORIZED_ROLE
                   name: env
-            - name: NO_INQUIRY
+            - name: MUTATORS_ID_TOKEN_CONFIG_JWKS_URL
               valueFrom:
                 configMapKeyRef:
-                  key: NO_INQUIRY
+                  key: MUTATORS_ID_TOKEN_CONFIG_JWKS_URL
                   name: env
             - name: POSTGRES_PASSWORD
               valueFrom:
                 configMapKeyRef:
                   key: POSTGRES_PASSWORD
                   name: env-prod-secrets
-            - name: TRUST_PROXY_HEADER
-              valueFrom:
-                configMapKeyRef:
-                  key: TRUST_PROXY_HEADER
-                  name: env
           image: hasura/graphql-engine:v2.9.0
           name: graphql-engine
           ports:

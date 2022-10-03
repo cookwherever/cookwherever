@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  ACCESS_RULES_REPOSITORIES: file:///config/oathkeeper/rules.yaml,file:///config/oathkeeper/rules.prod.yaml
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: oathkeeper-env-prod
+  name: env-prod

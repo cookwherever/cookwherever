@@ -1,0 +1,182 @@
+apiVersion: v1
+data:
+  config.yaml: |
+    serve:
+      proxy:
+        port: 4455 # run the proxy at port 4455
+      api:
+        port: 4456 # run the api at port 4456
+
+    access_rules:
+      repositories:
+        - file://rules.yaml
+
+    errors:
+      fallback:
+        - json
+      handlers:
+        json:
+          enabled: true
+          config:
+            verbose: true
+        redirect:
+          enabled: true
+          config:
+            to: https://www.ory.sh/docs
+
+    mutators:
+      noop:
+        enabled: true
+
+      id_token:
+        enabled: true
+        config:
+          issuer_url: http://oathkeeper:4455/
+          jwks_url: file://jwks.json
+          claims: |
+            {
+              "https://hasura.io/jwt/claims": {
+                {{ if .Subject }}
+                  "x-hasura-user-id": "{{ .Subject }}",
+                  "x-hasura-allowed-roles": ["user"],
+                  "x-hasura-default-role": "user"
+                {{ else }}
+                  "x-hasura-allowed-roles": ["anonymous"],
+                  "x-hasura-default-role": "anonymous"
+                {{ end }}
+              }
+            }
+
+    authorizers:
+      allow:
+        enabled: true
+      deny:
+        enabled: true
+
+    authenticators:
+      anonymous:
+        enabled: true
+        config:
+          subject: 73324cc4-951c-4756-aa95-872b9cd6c0e5
+
+      cookie_session:
+        enabled: true
+        config:
+          check_session_url: http://kratos:4433/sessions/whoami
+          preserve_path: true
+          extra_from: "@this"
+          subject_from: "identity.id"
+          only:
+            - ory_kratos_session
+  jwks.json: |
+    {
+      "keys": [
+        {
+          "use": "sig",
+          "kty": "RSA",
+          "kid": "779cf6d8-4b87-411a-a31f-ca3f63246d34",
+          "alg": "RS256",
+          "n": "6bYpveTUrHS5qTLpYrQoWLc9iIaRJO65GNctDioioi_PHUZ8VaQmvzi0kYQ4Sm9iVKIdmStat6vMm2lJloeqKc0GK8DWa8ucBJ4mw7imrt-RyZ9Z40ZB6O9Vkzuuq7T7TEoVOPEOzBDJJrD4U65QKncog_LYA7Gw5gpZdWIXG58pHZVC1i8UJWfbYTK_GiuJjlvQ10-GlfcYmHPURrCy3T8c2qsKlbwG9A72FIaqkRrB05OEYgs8fO2QGsLmkFslyi8n2owdcd3cfB9tnAd7M_v7bpRqifJBxCR6Q1dUnIucSix7WAI38I1FgBS4XhEmGTJ80b_jXnXoFuDi7qUVsQ",
+          "e": "AQAB",
+          "d": "qwxMnpOE57cCTwhY8YmDYfKykWJThmFFjR2m9w_1ixhMkFOPGirqxNceqMXJYQkGQYTo_rpRSc3uEOxNFGO0MaXBV3JqPDintmV9X4-cRq6QB62d3w4DnRTVX821eCwcI-iwgZ1DxCyg27V3-d7BA2N0fqXUXVfGbYazlIq2-Nns9ODVNRfCGBThAjhNigfZJ3XNumsMH-rCBzp8oTJwJtUZ_Aj7agIJxQ7YMXPOr2DDEQYlsHnzt9qdkiIQqDovhNI5EQ49lhnQ2HbJZXnbsBHRTfhp1lkfvkpISzZQa9qq44oQFz6pCQ1mYpgikqIXuUVc5mR3XxAVMr-gD1KmsQ",
+          "p": "84v9Gt3zw5BMZEB9lAkKCnCqWmlXM6CEFBkt6XL68OIgciPbuTWIzS7MBMi371YrSuUrIL4uhv1u6aopbmu1L_lbN5vFesusvk481fUW7kGsjiZsfF4NoadWZtImvv7hDPU0oCOKKyGjaJRWWDMcQFIPLhu4zeC4W-5zcXsR_TU",
+          "q": "9alueNF-ip1tnC7_xfOPgEh_e9yXLabam6nYbMTNgavYOiVdg-HKdQYfG2p5qR1cBXfmHUrJKF3n4cfLsZdruiPjHN-kwa2Q1gH-ZmuOa2LtqFg_zKkJAkGspVJmw7qGLsfIZ6x6T7_P6_YRg0GGMj9pbVDlXrWxhtOx1dxnkg0",
+          "dp": "xxJZG9nqg6LyXku8mgFdfLUk-ev7BE8jRs5iEd0TM0ySmtmmo1gX7ydeSlbKyk5T6s8xlnz9yQdk3ohhf0l4-7LGFck0_S94jsGixnykdrGl2zebG3lBiS4f2MHUO_BYgl_32SHTsXe4eyYtAcEdSZIJqHWudFJIP5TENjETvjU",
+          "dq": "P8qBb0onK-N5ZQcnT8XRS6SHxigf8bDUL3vJQWVRYAy5l0_AmtB0_DJcvYfGk82V6a2ayZxz49GOtyhkkncZeDp9bS_93nUtmQTnhL0FPIlx4TcZShHSzw0ywbNGEClNUrR6K8Gz-SV73nAFWCoZqM6il8pb5V4U_UfXdAtJsbk",
+          "qi": "UuvC0IRz2x1Zu4nj2QkO0oAPscpOfvnXsWErQQsZKIZoQfXQC8o6-ySRLVIrmjQrlO-_LaPFYKeNnExhwnv8se-XKBXXZxAA5OS_bzclA6VP96lbAH6BR1uE02nslwWqtu99675olOtU6EmOtU7Uk27-23bdgH9rtnF3f_zri1M"
+        }
+      ]
+    }
+  rules.dev.yaml: |
+    - id: "ory:cookwherever:frontend:routes"
+      upstream:
+        preserve_host: true
+        url: "http://host.docker.internal:3000"
+      match:
+        url: "<https|http|ws>://localhost:4455/<(?!api).*>"
+        methods:
+          - GET
+      authenticators:
+        - handler: anonymous
+      authorizer:
+        handler: allow
+      mutators:
+        - handler: noop
+  rules.prod.yaml: |
+    - id: "ory:cookwherever:frontend:routes"
+      upstream:
+        preserve_host: true
+        url: "http://frontend"
+      match:
+        url: "<https|http|ws>://recipes.cookwherever.com/<(?!api).*>"
+        methods:
+          - GET
+      authenticators:
+        - handler: anonymous
+      authorizer:
+        handler: allow
+      mutators:
+        - handler: noop
+  rules.yaml: |
+    - id: "ory:cookwherever:hasura:graphql"
+      upstream:
+        preserve_host: true
+        url: "http://graphql-engine:8080"
+        strip_path: "/api"
+      match:
+        url: "<https|http|ws>://<localhost:4455|recipes.cookwherever.com>/api/v1/graphql"
+        methods:
+          - POST
+      authenticators:
+        - handler: cookie_session
+        - handler: anonymous # If the above cookie ins't found or fails, "Subject" becomes "Anonymous" in the below claims
+      authorizer:
+        handler: allow
+      mutators:
+        - handler: id_token
+
+    - id: "ory:cookwherever:hasura:admin"
+      upstream:
+        preserve_host: true
+        strip_path: "/api/hasura"
+        url: "http://graphql-engine:8080"
+      match:
+        url: "<https|http|ws>://<localhost:4455|recipes.cookwherever.com>/api/hasura/<.*>"
+        methods:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - OPTIONS
+      authenticators:
+        - handler: anonymous
+      authorizer:
+        handler: allow
+      mutators:
+        - handler: noop
+
+    - id: "ory:cookwherever:kratos"
+      upstream:
+        preserve_host: true
+        url: "http://kratos:4433"
+        strip_path: "/api/kratos"
+      match:
+        url: "<https|http|ws>://<localhost:4455|recipes.cookwherever.com>/api/kratos/<.*>"
+        methods:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - OPTIONS
+      authenticators:
+        - handler: anonymous
+      authorizer:
+        handler: allow
+      mutators:
+        - handler: noop
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: oathkeeper
+  name: oathkeeper-cm0

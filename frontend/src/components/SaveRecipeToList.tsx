@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { Button, Col, Form, Row } from 'react-bootstrap';
-import {Recipe_Lists, Recipes} from '../generated/graphql';
+import { Recipe_Lists, Recipes } from '../generated/graphql';
 
 const GET_RECIPE_LISTS = gql`
 query GetRecipeLists {
@@ -25,7 +25,7 @@ interface SaveRecipeProps {
 }
 
 export const SaveRecipeToList: React.FunctionComponent<SaveRecipeProps> = ({ recipe }) => {
-  const [selectedList, setSelectedList] = useState(0);
+  const [selectedList, setSelectedList] = useState(-1);
   const [savedToList, setSavedToList] = useState('');
   const [saveRecipeInsert, { loading: saveRecipeLoading, error: saveRecipeError }] = useMutation(INSERT_RECIPE_TO_LIST);
 
@@ -48,7 +48,7 @@ export const SaveRecipeToList: React.FunctionComponent<SaveRecipeProps> = ({ rec
     const lists = recipe_lists.filter(l => l.id === selectedList);
 
     if (lists.length !== 1) {
-      console.error(`there are multiple lists that matched the selected list id`, selectedList, recipe_lists);
+      console.error('could not find list', selectedList, recipe_lists, lists);
       return;
     }
 
@@ -68,8 +68,8 @@ export const SaveRecipeToList: React.FunctionComponent<SaveRecipeProps> = ({ rec
     }
   }
 
-  if (recipe_lists.length > 0 && selectedList === 0) {
-    setSelectedList(1);
+  if (recipe_lists.length > 0 && selectedList === -1) {
+    setSelectedList(recipe_lists[0].id);
   }
 
   return (

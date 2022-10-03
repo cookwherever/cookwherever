@@ -25,12 +25,6 @@ mutators:
   noop:
     enabled: true
 
-  hydrator:
-    enabled: true
-    config:
-      api:
-        url: http://host.docker.internal:8088/oathkeeper/hydrate
-
   id_token:
     enabled: true
     config:
@@ -39,8 +33,8 @@ mutators:
       claims: |
         {
           "https://hasura.io/jwt/claims": {
-            {{ if .Extra.user_id }}
-              "x-hasura-user-id": "{{ .Extra.user_id }}",
+            {{ if .Subject }}
+              "x-hasura-user-id": "{{ .Subject }}",
               "x-hasura-allowed-roles": ["user"],
               "x-hasura-default-role": "user"
             {{ else }}

@@ -14,18 +14,18 @@
 import { UiNode } from '@ory/kratos-client';
 import React from 'react';
 
+import {
+  isUiNodeAnchorAttributes,
+  isUiNodeImageAttributes,
+  isUiNodeInputAttributes, isUiNodeScriptAttributes,
+  isUiNodeTextAttributes
+} from '../../utils/nodes';
 import { NodeAnchor } from './NodeAnchor';
 import { NodeImage } from './NodeImage';
 import { NodeInput } from './NodeInput';
 import { NodeScript } from './NodeScript';
 import { NodeText } from './NodeText';
 import { FormDispatcher, ValueSetter } from './helpers';
-import {
-  isUiNodeAnchorAttributes,
-  isUiNodeImageAttributes,
-  isUiNodeInputAttributes, isUiNodeScriptAttributes,
-  isUiNodeTextAttributes
-} from "../../utils/nodes";
 
 interface Props {
   node: UiNode;
