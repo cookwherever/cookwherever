@@ -1,5 +1,9 @@
 ---
 title: General Instant Pot Pressure-Cooking Times
+tags:
+- unreviewed
+- books
+- how-to-instant-pot
 ---
 
 ## Ingredient Category Notes

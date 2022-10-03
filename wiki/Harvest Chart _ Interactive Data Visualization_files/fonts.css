@@ -1,0 +1,27 @@
+@font-face {
+  font-family: AlrightSans;
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/Alright-v2-Normal-LP-Regular-latin1.woff2') format("woff2");
+}
+
+@font-face {
+  font-family: AlrightSans;
+  font-style: normal;
+  font-weight: bold;
+  src: url('../fonts/Alright-v2-Normal-LP-Bold-latin1.woff2') format("woff2");
+}
+
+@font-face {
+  font-family: AlrightSans;
+  font-style: italic;
+  font-weight: normal;
+  src: url('../fonts/Alright-v2-Normal-LP-Bold-Italic-latin1.woff2') format("woff2");
+}
+
+@font-face {
+  font-family: AlrightSans;
+  font-weight: bold;
+  font-style: italic;
+  src: url('../fonts/Alright-v2-Normal-LP-Regular-latin1.woff2') format("woff2");
+}

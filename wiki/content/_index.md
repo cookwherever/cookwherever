@@ -1,5 +1,7 @@
 ---
 title: Cook Wherever
+tags:
+- unreviewed
 ---
 
 A cooking knowledge base for everything and anything related to cooking.
