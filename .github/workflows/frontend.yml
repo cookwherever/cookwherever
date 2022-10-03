@@ -44,6 +44,9 @@ jobs:
       name: "Build app and image"
       env:
         REACT_APP_GIT_SHA: ${{ github.SHA }}
+
+    - if: ${{ !(github.event_name == 'push' && github.ref == 'refs/heads/master') }}
+      run: exit 0
         
     - name: Log into registry
       if: steps.branch-name.outputs.current_branch == 'master'

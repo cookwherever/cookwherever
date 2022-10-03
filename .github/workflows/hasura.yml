@@ -3,6 +3,8 @@ name: Hasura
 on:
   workflow_dispatch:
   push:
+    branches:
+      - master
     paths:
       - 'hasura/**'
       - '.github/**'

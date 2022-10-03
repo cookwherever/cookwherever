@@ -4,6 +4,8 @@ concurrency: production
 on:
   workflow_dispatch:
   push:
+    branches:
+      - master
     paths:
       - '.github/**'
       - 'docker-compose.yaml'
