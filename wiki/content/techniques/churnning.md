@@ -1,5 +1,8 @@
 ---
 title: Churning
+tags:
+- unreviewed
+- techniques
 ---
 
 * Beating air into [[cream]] and slamming fat globules against each other

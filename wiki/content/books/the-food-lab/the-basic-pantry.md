@@ -1,3 +1,10 @@
+---
+title: The Basic Pantry
+tags:
+- reviewed
+- books
+- the-food-lab
+---
 # Refrigerated Goods
 
 ## Fridge Organization Tips
@@ -52,7 +59,6 @@ Important for vegetables to not dry out and stay fresh
 ### The Vegetable Crisper
 * Vegetables 
 * Herbs
-
 
 ## The Fridge Door
 

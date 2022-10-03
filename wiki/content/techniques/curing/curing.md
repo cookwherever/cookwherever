@@ -1,5 +1,9 @@
 ---
 title: Curing
+tags:
+- unreviewed
+- techniques
+- curing
 ---
 
 * Salt deprives bacteria of water and restructures muscle fibers for different texture

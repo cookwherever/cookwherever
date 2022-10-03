@@ -1,3 +1,10 @@
+---
+title: chapter-1
+tags:
+- unreviewed
+- books
+- the-food-lab
+---
 # 1 Eggs, Dairy, and the Science of Breakfast
 
 ## Eggs
@@ -739,7 +746,6 @@ TODO
 4. Microwave on high
 	- Until: Piercing a piece of potato can be done relatively easily. (the potato will still slightly under cooked)
 	- Time: 4 to 6 minutes
-5. 
 ### Variations 
 
 ## Pancakes
@@ -761,15 +767,48 @@ See notes on [[baking-soda]]
 - Too little baking soda will make pancake pale, too much will brown too fast and leave a soapy, chemical aftertaste from the baking soda that has not been neutralized
 - Cookies will sometimes use baking soda by itself to improve browning
 
-### Egg whites
-- whipped egg whites add extra air bubbles to pancakes that make then even lighter when cooked
+## Basic Dry Pancake Mix
+### Equipment
+- Large bowl
+- Whisk
+### Ingredients
+- 10 oz all-purpose flour
+- 1 tsp baking powder
+- 1/2 tsp baking soda
+- 1 tsp kosher salt
+- 1 tbsp sugar
+### Directions
+1. Combine all-purpose flour, baking powder, baking soda, kosher salt, sugar in large bowl
+2. Whisk bowl
+### Storage
+#### Container
+Air-tight
+#### Duration
+3 months
+### Variations
 
-### Flavor
-
-
+## Light and Fluffy Buttermilk Pancakes
 ### Equipment
 ### Ingredients
+- 1 Basic Dry Pancake Mix
+- 2 large eggs
+	- Prep: Separated
+- 1 1/2 cups buttermilk
+- 1 cup sour cream
+	- Substitute: 1 cup buttermilk
+- 4 tbsp unsalted butter
+	- Prep: Melted
+- Extra butter
+	- Substitute: oil
+- Optional: Maple Syrup
 ### Directions
+1. Pour Basic Dry Pancake Mix into large bowl
+2. Whisk egg whites in a medium bowl
+	- Until: Stiff peaks form
+3. Whisk egg yolks, buttermilk, and sour cream
+	- Until: Homogeneous
+	- Also: Drizzle butter
+4. 
 ### Variations 
 
 ## Waffles

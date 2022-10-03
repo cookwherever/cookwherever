@@ -14,6 +14,7 @@ RUN go install github.com/breadchris/hugo-obsidian@latest
 
 COPY ./ /site
 WORKDIR /site
+RUN find content -type f -exec grep -q '^- unreviewed' {} \; -exec rm {} +
 RUN make build
 RUN GIT_CONFIG_NOSYSTEM=true hugo
 

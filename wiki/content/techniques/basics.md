@@ -1,5 +1,8 @@
 ---
 title: Basic Techniques
+tags:
+- unreviewed
+- techniques
 ---
 
 Learn to cook and feed yourself at the same time
