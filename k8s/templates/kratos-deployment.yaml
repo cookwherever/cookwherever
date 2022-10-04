@@ -29,8 +29,8 @@ spec:
             - serve
             - -c
             - /config/kratos/config.yaml
-            - --dev
-            - --watch-courier
+            - -c
+            - /config/kratos/config.production.yaml
           env:
             - name: DSN
               value: postgres://postgres:secretpgpassword@postgres:5432/postgres
