@@ -23,7 +23,7 @@ jobs:
       - name: Get branch name
         id: branch-name
         uses: tj-actions/branch-names@v5.2
-      - uses: DamianReeves/write-file-action@v1.0
+      - uses: DamianReeves/write-file-action@v1.1
         with:
           path: .env.prod.secrets
           contents: |
