@@ -1,4 +1,4 @@
-import {atom, AtomEffect} from 'recoil'
+import { atom, AtomEffect } from 'recoil'
 
 import { recoilPersist } from 'recoil-persist'
 

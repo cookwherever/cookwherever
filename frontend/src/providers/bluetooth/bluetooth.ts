@@ -42,7 +42,7 @@ function loadBmp(pBMP: Uint8Array, bInvert: number, iXOffset: number, iYOffset: 
 
   if (iXOffset < 0 || iYOffset < 0) {
     console.error('offset is incorrect', {
-      iXOffset, iYOffset
+      iXOffset, iYOffset,
     });
     return -1;
   }
@@ -56,7 +56,7 @@ function loadBmp(pBMP: Uint8Array, bInvert: number, iXOffset: number, iYOffset: 
   // too big
   if (cx + iXOffset > bbWidth || cy + iYOffset > bbHeight) {
     console.error('too big', {
-      cx, cy, bbWidth, bbHeight
+      cx, cy, bbWidth, bbHeight,
     });
     return -1;
   }
@@ -131,7 +131,7 @@ export class Printer {
     this.device = await navigator.bluetooth.requestDevice({
       filters: [{ name: 'GB03' }],
       optionalServices: [printerService],
-      acceptAllDevices: false
+      acceptAllDevices: false,
     });
 
     if (!this.device.gatt) {

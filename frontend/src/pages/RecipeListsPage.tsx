@@ -4,9 +4,9 @@ import { ApolloCache, DefaultContext, gql, OperationVariables, useMutation, useQ
 import { ApolloQueryResult } from '@apollo/client/core/types';
 import { FetchResult } from '@apollo/client/link/core';
 import { MutationFunctionOptions } from '@apollo/client/react/types/types';
-import {Button, Card, Col, Container, Form, FormControl, Modal, Row} from 'react-bootstrap';
+import { Button, Card, Col, Container, Form, FormControl, Modal, Row } from 'react-bootstrap';
 import { Recipe_List_Items, Recipe_Lists, Recipes } from '../generated/graphql';
-import {inputChangeHandler} from "../utils/hook-helpers";
+import { inputChangeHandler } from '../utils/hook-helpers';
 
 const GET_RECIPE_LISTS = gql`
 query GetUserRecipeLists {
@@ -82,7 +82,7 @@ const RecipeListCard = (props: RecipeListCardProps) => {
     await deleteList({
       variables: {
         id: recipe_list.id,
-      }
+      },
     });
     await refetch();
   };
@@ -124,20 +124,20 @@ export const RecipeListsPage: React.FunctionComponent<RecipeListsPageProps> = (p
   const [listName, setListName] = useState<string | null>(null);
 
   const { loading, error, data, refetch } = useQuery(GET_RECIPE_LISTS, {
-    variables: {}
+    variables: {},
   });
 
   if (loading) return (<h4>'Loading...'</h4>);
   if (error) return (<h4>{`Error! ${error.message}`}</h4>);
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  const { recipe_lists } = data as {recipe_lists: Recipe_Lists[]};
+  const { recipe_lists } = data as { recipe_lists: Recipe_Lists[] };
 
   const onSubmit = async () => {
     const resp = await create({
       variables: {
-        name: listName
-      }
+        name: listName,
+      },
     })
     console.log(resp);
 

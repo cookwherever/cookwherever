@@ -110,7 +110,7 @@ export function getNodeId({ attributes }: UiNode) {
  * @param attr
  * @returns type of node
  */
-export const getNodeInputType = (attr: any): string => attr?.['type'] ?? ''
+export const getNodeInputType = (attr: any): string => attr?.type ?? ''
 
 export type FilterNodesByGroups = {
   nodes: Array<UiNode>

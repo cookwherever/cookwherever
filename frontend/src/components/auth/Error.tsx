@@ -16,7 +16,7 @@ import { CodeBox } from '@ory/themes';
 import { AxiosError } from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Card } from 'react-bootstrap';
-import {NavLink, useLocation, useHistory} from 'react-router-dom';
+import { NavLink, useLocation, useHistory } from 'react-router-dom';
 
 import oryClient from '../../utils/ory-client';
 
@@ -28,12 +28,6 @@ const AuthErrorComponent: React.FC = () => {
 
   const queryParams = React.useMemo(() => new URLSearchParams(search), [search]);
   const id = queryParams.get('id');
-
-  if (!id) {
-    return (
-      <span>Reached the error page without an error id, not sure what happened. Let us know if you see this.</span>
-    );
-  }
 
   useEffect(() => {
     // If the router is not ready yet, or we already have an error, do nothing.

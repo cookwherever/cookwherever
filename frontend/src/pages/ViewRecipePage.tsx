@@ -11,7 +11,7 @@ import Timer from 'react-compound-timer';
 import {
   Recipes,
   useUpdateRecipeVideoMutation,
-  useViewRecipeQueryQuery
+  useViewRecipeQueryQuery,
 } from '../generated/graphql';
 import { getSourceHostname } from '../utils/format-recipe';
 import { VideoPlayer } from '../components/VideoPlayer';
@@ -133,15 +133,15 @@ const VideoMetadataForm: React.FunctionComponent<VideoMetadataFormProps> = ({ re
 
   const [updateRecipeVideoMutation] = useUpdateRecipeVideoMutation({
     variables: {
-      id: recipe.id
-    }
+      id: recipe.id,
+    },
   });
 
   useEffect(() => {
     updateRecipeVideoMutation({
       variables: {
-        video: videoUrl
-      }
+        video: videoUrl,
+      },
     })
   }, [videoUrl])
 
@@ -171,7 +171,7 @@ export const ViewRecipePage: React.FunctionComponent<ViewRecipePageProps> = ({ m
   const { loading, error, data, refetch } = useViewRecipeQueryQuery({
     variables: {
       id: parseInt(id || '0', 10),
-    }
+    },
   });
 
   useEffect(() => {
@@ -179,7 +179,7 @@ export const ViewRecipePage: React.FunctionComponent<ViewRecipePageProps> = ({ m
 
     setRecipeState({
       ...recipeState,
-      invalidated: false
+      invalidated: false,
     })
     refetch();
   }, [recipeInvalidated])
@@ -203,7 +203,7 @@ export const ViewRecipePage: React.FunctionComponent<ViewRecipePageProps> = ({ m
           return '';
         }
         return i.replace(/\W/g, '');
-      })
+      }),
     ]
   }, [] as string[]);
 

@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
-import {gql} from '@apollo/client';
-import {Button, Card, Col, Container, Form, FormLabel, Row} from 'react-bootstrap';
+import { gql } from '@apollo/client';
+import { Button, Card, Col, Container, Form, FormLabel, Row } from 'react-bootstrap';
 import {
   Food,
   Food_Portion,
@@ -10,7 +10,7 @@ import {
   Ingredients_Constraint,
   Ingredients_Update_Column,
   useSearchFoodsQuery,
-  useUpsertIngredientMutation
+  useUpsertIngredientMutation,
 } from '../generated/graphql';
 
 interface FoodCandidateListProps {
@@ -46,12 +46,12 @@ mutation UpsertIngredient($ingredient: ingredients_insert_input!, $on_conflict: 
 }
 `;
 
-const FoodCandidate = (props: {name: string, foodCandidate: Food, setSelectedCandidate: React.Dispatch<boolean>}) => {
+const FoodCandidate = (props: { name: string, foodCandidate: Food, setSelectedCandidate: React.Dispatch<boolean> }) => {
   const { name, foodCandidate, setSelectedCandidate } = props;
 
   const [portion, setPortion] = useState<Food_Portion | null>(null);
 
-  const [create, {data, error, loading}] = useUpsertIngredientMutation();
+  const [create, { data, error, loading }] = useUpsertIngredientMutation();
 
   useEffect(() => {
     if (foodCandidate.food_portions.length === 0) {
@@ -93,17 +93,17 @@ const FoodCandidate = (props: {name: string, foodCandidate: Food, setSelectedCan
                 update_columns: [
                   Ingredient_Food_Candidate_Update_Column.FoodCandidateId,
                   Ingredient_Food_Candidate_Update_Column.FoodCandidatePortionId,
-                ]
-              }
-            }
+                ],
+              },
+            },
           },
           on_conflict: {
             constraint: Ingredients_Constraint.IngredientsNameKey,
             update_columns: [
-              Ingredients_Update_Column.Name
+              Ingredients_Update_Column.Name,
             ],
-          }
-        }
+          },
+        },
       })
     } catch (e) {
       console.error(e);
@@ -152,7 +152,7 @@ const IngredientFoodCandidateList: React.FunctionComponent<FoodCandidateListProp
   const { loading, error, data } = useSearchFoodsQuery({
     variables: {
       search: name,
-    }
+    },
   });
 
   if (loading) return (<h4>'Loading...'</h4>);

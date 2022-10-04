@@ -1,8 +1,8 @@
 import React from 'react'
 
-import {Mark, MarkProps} from './Mark'
-import {selectionIsEmpty, selectionIsBackwards, splitTokensWithOffsets} from './utils'
-import {Span} from './span'
+import { Mark, MarkProps } from './Mark'
+import { selectionIsEmpty, selectionIsBackwards, splitTokensWithOffsets } from './utils'
+import { Span } from './span'
 
 interface TokenProps {
   i: number
@@ -36,7 +36,7 @@ export const TokenAnnotator = <T extends Span>(props: TokenAnnotatorProps<T>) =>
 
   const getSpan = (span: TokenSpan): T => {
     if (props.getSpan) return props.getSpan(span)
-    return {start: span.start, end: span.end} as T
+    return { start: span.start, end: span.end } as T
   }
 
   const handleMouseUp = () => {
@@ -85,7 +85,7 @@ export const TokenAnnotator = <T extends Span>(props: TokenAnnotatorProps<T>) =>
     selection.empty()
   }
 
-  const handleSplitClick = ({start, end}: {start: number, end: number}) => {
+  const handleSplitClick = ({ start, end }: { start: number, end: number }) => {
     // Find and remove the matching split.
     const splitIndex = props.value.findIndex(s => s.start === start && s.end === end)
     if (splitIndex >= 0) {
@@ -93,7 +93,7 @@ export const TokenAnnotator = <T extends Span>(props: TokenAnnotatorProps<T>) =>
     }
   }
 
-  const {tokens, value, onChange, ...divProps} = props
+  const { tokens, value, onChange, ...divProps } = props
   const splits = splitTokensWithOffsets(tokens, value)
   return (
     <div {...divProps} onMouseUp={handleMouseUp}>
@@ -105,11 +105,11 @@ export const TokenAnnotator = <T extends Span>(props: TokenAnnotatorProps<T>) =>
             onClick: handleSplitClick,
             start: 0,
             end: 0,
-            tag: ''
+            tag: '',
           })
         ) : (
           <Token key={split.i} {...split} />
-        )
+        ),
       )}
     </div>
   )

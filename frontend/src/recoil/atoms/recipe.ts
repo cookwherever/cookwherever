@@ -1,4 +1,4 @@
-import {atom, selector} from 'recoil';
+import { atom, selector } from 'recoil';
 import {
   Recipes,
 } from '../../generated/graphql';
@@ -12,7 +12,7 @@ export interface FocusedDirectionTimestamp {
 
 export const initialFocusedDirectionTimestamp: FocusedDirectionTimestamp = {
   idx: 0,
-  position: 'start'
+  position: 'start',
 }
 
 export interface CurrentRecipeStep {
@@ -65,8 +65,8 @@ export const recipeViewerState = atom<RecipeState>({
       },
       source: '',
       updated_at: 0,
-      visible: false
-    }
+      visible: false,
+    },
   },
 })
 
@@ -74,19 +74,19 @@ export const recipeInvalidatedState = selector({
   key: 'recipeInvalidatedState',
   get: ({ get }) => {
     return get(recipeViewerState).invalidated;
-  }
+  },
 });
 
 export const focusedDirectionTimestampState = selector({
   key: 'focusedDirectionTimestampState',
   get: ({ get }) => {
     return get(recipeViewerState).focusedDirectionTimestamp;
-  }
+  },
 });
 
 export const reportedTimestampState = selector({
   key: 'reportedTimestampState',
   get: ({ get }) => {
     return get(recipeViewerState).reportedTimestamp;
-  }
+  },
 });

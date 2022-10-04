@@ -32,7 +32,7 @@ function getRecipeSearchWhere(whereConditions: Recipes_Bool_Exp[]): Recipes_Bool
 
   if (whereConditions.length > 1) {
     return {
-      _and: whereConditions
+      _and: whereConditions,
     }
   }
   return whereConditions[0];
@@ -61,16 +61,16 @@ export const RecipesList: React.FunctionComponent<RecipesListProps> = (props) =>
   const whereConditions: Recipes_Bool_Exp[] = [
     {
       visible: {
-        _eq: true
-      }
-    }
+        _eq: true,
+      },
+    },
   ];
 
   if (recipeSearch.source !== '') {
     whereConditions.push({
       source_provider_id: {
-        _eq: recipeSearch.source
-      }
+        _eq: recipeSearch.source,
+      },
     });
   }
 
@@ -80,10 +80,10 @@ export const RecipesList: React.FunctionComponent<RecipesListProps> = (props) =>
         recipe_ingredient_groups: {
           group_ingredients: {
             text: {
-              _ilike: `%${ingredient}%`
-            }
-          }
-        }
+              _ilike: `%${ingredient}%`,
+            },
+          },
+        },
       })
     }
   }
@@ -93,9 +93,9 @@ export const RecipesList: React.FunctionComponent<RecipesListProps> = (props) =>
       whereConditions.push({
         recipe_tags: {
           name: {
-            _eq: tag
-          }
-        }
+            _eq: tag,
+          },
+        },
       })
     }
   }
@@ -107,8 +107,8 @@ export const RecipesList: React.FunctionComponent<RecipesListProps> = (props) =>
       search: recipeSearch.name,
       where,
       limit: resultsPerPage,
-      offset: resultsPerPage * page
-    }
+      offset: resultsPerPage * page,
+    },
   });
 
   if (loading) return (<h4>'Loading...'</h4>);

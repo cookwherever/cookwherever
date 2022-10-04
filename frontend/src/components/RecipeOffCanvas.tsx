@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import {Button, Col, Container, Form, Offcanvas, Row} from 'react-bootstrap';
+import { Button, Col, Container, Form, Offcanvas, Row } from 'react-bootstrap';
 import { Recipes } from '../generated/graphql';
-import {SaveRecipeToList} from "./SaveRecipeToList";
-import {ToggleRecipeVisible} from "./ToggleRecipeVisible";
-import {useRecoilState} from "recoil";
-import {viewModeState} from "../recoil/atoms/auth";
+import { SaveRecipeToList } from './SaveRecipeToList';
+import { ToggleRecipeVisible } from './ToggleRecipeVisible';
+import { useRecoilState } from 'recoil';
+import { viewModeState } from '../recoil/atoms/auth';
 
 interface RecipeOffCanvasProps {
   recipe: Recipes
@@ -44,8 +44,8 @@ export const RecipeOffCanvas: React.FunctionComponent<RecipeOffCanvasProps> = ({
       method: 'POST',
       body: JSON.stringify(recipe),
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     })
   }
 

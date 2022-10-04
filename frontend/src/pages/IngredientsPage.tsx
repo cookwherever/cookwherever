@@ -5,7 +5,7 @@ import { Pagination } from '@mui/material';
 import useDebouncedCallback from '@restart/hooks/useDebouncedCallback';
 import {
   Most_Common_Ingredients_Bool_Exp,
-  useGetMostCommonIngredientsQuery, useRecipesWithIngredientQuery
+  useGetMostCommonIngredientsQuery, useRecipesWithIngredientQuery,
 } from '../generated/graphql';
 import { inputChangeHandler } from '../utils/hook-helpers';
 import IngredientFoodCandidateList from '../components/IngredientFoodCandidateList';
@@ -68,7 +68,7 @@ const IngredientInspect: React.FC<IngredientInspectProps> = ({
   const { data, error, loading } = useRecipesWithIngredientQuery({
     variables: {
       ingredient_name: ingredientName,
-    }
+    },
   });
 
   if (loading) return null;
@@ -114,7 +114,7 @@ export const IngredientsPage: React.FunctionComponent<IngredientsPageProps> = (p
   const where: Most_Common_Ingredients_Bool_Exp = search ? {
     name: {
       _ilike: `%${search}%`,
-    }
+    },
   } : {};
 
   const { data, error, loading } = useGetMostCommonIngredientsQuery({
@@ -122,7 +122,7 @@ export const IngredientsPage: React.FunctionComponent<IngredientsPageProps> = (p
       limit: resultsPerPage,
       offset: resultsPerPage * page,
       where,
-    }
+    },
   });
 
   const ingredientsList = () => {

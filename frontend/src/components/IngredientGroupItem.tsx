@@ -71,8 +71,8 @@ export const IngredientGroupItem: React.FunctionComponent<IngredientGroupItemPro
     setRecipeState({
       ...recipeState,
       currentRecipeStep: {
-        timestamp: ingredient.video_timestamp
-      }
+        timestamp: ingredient.video_timestamp,
+      },
     });
   }
 

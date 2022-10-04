@@ -6,13 +6,13 @@ import ReactCrop from 'react-image-crop';
 // eslint-disable-next-line import/no-duplicates
 import { Crop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
-import {createWorker} from "tesseract.js";
+import { createWorker } from 'tesseract.js';
 
 async function generateDownload(
   setProgress: React.Dispatch<React.SetStateAction<string>>,
   setText: React.Dispatch<React.SetStateAction<string>>,
   worker: Tesseract.Worker, canvas: HTMLCanvasElement | null,
-  crop: Crop | null
+  crop: Crop | null,
 ) {
   if (!crop || !canvas) {
     return;
@@ -33,14 +33,14 @@ async function generateDownload(
         // @ts-ignore
         blob.name = 'test.jpg';
         setProgress('recognizing text...');
-        const {data: {text}} = await worker.recognize(blob);
+        const { data: { text } } = await worker.recognize(blob);
         setProgress('completed analysis');
         setText(text);
         console.log(text);
         await worker.terminate();
       },
       'image/png',
-      1
+      1,
     );
   } catch (e) {
     console.error(e);
@@ -62,7 +62,7 @@ const ImageCropper = (props: IImageCropperProps) => {
   const [completedCrop, setCompletedCrop] = useState<Crop | null>(null);
 
   const worker = createWorker({
-    logger: m => setProgress(JSON.stringify(m))
+    logger: m => setProgress(JSON.stringify(m)),
   });
 
   const onSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -112,7 +112,7 @@ const ImageCropper = (props: IImageCropperProps) => {
       0,
       0,
       imgCrop.width * scaleX,
-      imgCrop.height * scaleY
+      imgCrop.height * scaleY,
     );
   }, [completedCrop]);
 
@@ -143,7 +143,7 @@ const ImageCropper = (props: IImageCropperProps) => {
           style={{
             width: Math.round(completedCrop?.width ?? 0),
             height: Math.round(completedCrop?.height ?? 0),
-            visibility: 'hidden'
+            visibility: 'hidden',
           }}
         />
       </div>

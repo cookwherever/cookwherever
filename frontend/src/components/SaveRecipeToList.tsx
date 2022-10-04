@@ -30,14 +30,14 @@ export const SaveRecipeToList: React.FunctionComponent<SaveRecipeProps> = ({ rec
   const [saveRecipeInsert, { loading: saveRecipeLoading, error: saveRecipeError }] = useMutation(INSERT_RECIPE_TO_LIST);
 
   const { loading, error, data } = useQuery(GET_RECIPE_LISTS, {
-    variables: {}
+    variables: {},
   });
 
   if (loading) return (<h4>'Loading...'</h4>);
   if (error) return (<h4>{`Error! ${error.message}`}</h4>);
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  const { recipe_lists } = data as {recipe_lists: Recipe_Lists[]};
+  const { recipe_lists } = data as { recipe_lists: Recipe_Lists[] };
 
   const saveRecipe = async () => {
     if (selectedList === 0) {
@@ -59,7 +59,7 @@ export const SaveRecipeToList: React.FunctionComponent<SaveRecipeProps> = ({ rec
         variables: {
           recipe_id: recipe.id,
           recipe_list_id: list.id,
-        }
+        },
       });
       setSavedToList(`Saved recipe to ${list.name}.`);
     } catch (e) {

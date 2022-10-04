@@ -15,7 +15,7 @@ import { Checkbox } from '@ory/themes';
 import React from 'react';
 
 import { NodeInputProps } from './helpers';
-import {getNodeLabel} from "../../utils/nodes";
+import { getNodeLabel } from '../../utils/nodes';
 
 export function NodeInputCheckbox<T>({ node, attributes, setValue, disabled }: NodeInputProps) {
   // Render a checkbox.s
