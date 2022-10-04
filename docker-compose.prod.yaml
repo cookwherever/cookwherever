@@ -15,6 +15,7 @@ services:
     labels:
       kompose.image-pull-secret: "ghcr-pull-secret"
   kratos:
+    command: serve -c /config/kratos/config.yaml -c /config/kratos/config.production.yaml
     env_file:
       - .env.prod.secrets
   oathkeeper:
