@@ -35,7 +35,7 @@ spec:
               service:
                 name: oathkeeper
                 port:
-                  number: 80
+                  number: 4455
             path: /
             pathType: Prefix
 status:
