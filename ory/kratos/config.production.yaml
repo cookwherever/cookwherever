@@ -1,41 +1,41 @@
 serve:
   public:
-    base_url: https://cookwherever.com/api/kratos/
+    base_url: https://recipes.cookwherever.com/api/kratos/
     cors:
       enabled: true
   admin:
     base_url: http://localhost:4434/
 
 selfservice:
-  default_browser_return_url: https://cookwherever.com/
+  default_browser_return_url: https://recipes.cookwherever.com/
   allowed_return_urls:
-    - https://cookwherever.com
+    - https://recipes.cookwherever.com
 
   flows:
     error:
-      ui_url: https://cookwherever.com/auth/error
+      ui_url: https://recipes.cookwherever.com/auth/error
 
     settings:
-      ui_url: https://cookwherever.com/api/kratos/settings
+      ui_url: https://recipes.cookwherever.com/api/kratos/settings
 
     recovery:
-      ui_url: https://cookwherever.com/api/kratos/recovery
+      ui_url: https://recipes.cookwherever.com/api/kratos/recovery
 
     verification:
-      ui_url: https://cookwherever.com/api/kratos/verification
+      ui_url: https://recipes.cookwherever.com/api/kratos/verification
       after:
-        default_browser_return_url: https://cookwherever.com/
+        default_browser_return_url: https://recipes.cookwherever.com/
 
     logout:
       after:
-        default_browser_return_url: https://cookwherever.com
+        default_browser_return_url: https://recipes.cookwherever.com
 
     login:
-      ui_url: https://cookwherever.com
+      ui_url: https://recipes.cookwherever.com
       lifespan: 10m
 
     registration:
-      ui_url: https://cookwherever.com/
+      ui_url: https://recipes.cookwherever.com/
       lifespan: 10m
       after:
         password:
