@@ -2,8 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert --volumes=configMap -c -o k8s
-    kompose.version: 1.26.0 (HEAD)
+    kompose.cmd: ./kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert --volumes=configMap -c -o k8s
+    kompose.version: 1.26.1 (a9d05d509)
   creationTimestamp: null
   labels:
     io.kompose.service: kratos
@@ -18,8 +18,8 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert --volumes=configMap -c -o k8s
-        kompose.version: 1.26.0 (HEAD)
+        kompose.cmd: ./kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert --volumes=configMap -c -o k8s
+        kompose.version: 1.26.1 (a9d05d509)
       creationTimestamp: null
       labels:
         io.kompose.service: kratos
@@ -32,16 +32,6 @@ spec:
             - --dev
             - --watch-courier
           env:
-            - name: AUTH_PROVIDER_GOOGLE_CLIENT_ID
-              valueFrom:
-                configMapKeyRef:
-                  key: AUTH_PROVIDER_GOOGLE_CLIENT_ID
-                  name: env-prod-secrets
-            - name: AUTH_PROVIDER_GOOGLE_CLIENT_SECRET
-              valueFrom:
-                configMapKeyRef:
-                  key: AUTH_PROVIDER_GOOGLE_CLIENT_SECRET
-                  name: env-prod-secrets
             - name: DSN
               value: postgres://postgres:secretpgpassword@postgres:5432/postgres
             - name: HASURA_GRAPHQL_ADMIN_SECRET
@@ -63,6 +53,16 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: POSTGRES_PASSWORD
+                  name: env-prod-secrets
+            - name: SELFSERVICE_METHODS_OIDC_CONFIG_PROVIDERS_0_CLIENT_ID
+              valueFrom:
+                configMapKeyRef:
+                  key: SELFSERVICE_METHODS_OIDC_CONFIG_PROVIDERS_0_CLIENT_ID
+                  name: env-prod-secrets
+            - name: SELFSERVICE_METHODS_OIDC_CONFIG_PROVIDERS_0_CLIENT_SECRET
+              valueFrom:
+                configMapKeyRef:
+                  key: SELFSERVICE_METHODS_OIDC_CONFIG_PROVIDERS_0_CLIENT_SECRET
                   name: env-prod-secrets
           image: oryd/kratos:v0.9.0-alpha.3
           name: kratos
