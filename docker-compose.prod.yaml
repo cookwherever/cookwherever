@@ -8,7 +8,7 @@ services:
     labels:
       kompose.image-pull-secret: "ghcr-pull-secret"
   wiki:
-    image: ghcr.io/cookwherever/wiki@sha256:4528a594010c859a0cf2630af356af205b4d868a0a4e4d55851b89001dc0e221
+    image: ghcr.io/cookwherever/wiki@sha256:e649de0fde355db3fd92c01706211a486f74f076c5327387b6896ba7611e9f75
     restart: always
     ports:
       - '80:80'
