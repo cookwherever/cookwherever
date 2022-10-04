@@ -42,7 +42,7 @@ jobs:
         if: steps.branch-name.outputs.current_branch == 'master'
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          file_pattern: k8s/**/
+          file_pattern: k8s/**/*
           commit_message: "chore: run kompose [skip ci]"
       - name: Save commit hash
         id: save-commit-hash
