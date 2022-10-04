@@ -39,7 +39,7 @@ jobs:
 
     - run: |
         cd frontend
-        CI=false yarn build
+        CI=false yarn build:production
         docker build . --file Dockerfile --tag build
       name: "Build app and image"
       env:
