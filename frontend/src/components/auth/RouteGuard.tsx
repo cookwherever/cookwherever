@@ -15,7 +15,7 @@ import React, { useEffect } from 'react';
 
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { selectConfirmedUnauthenticated } from '../../recoil/authentication';
-import {useHistory} from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
 export const RouteGuard: React.FC = (props) => {
   const confirmedNotAuthenticed = useAppSelector(selectConfirmedUnauthenticated);

@@ -148,7 +148,7 @@ export type AuthProviderRequests_Bool_Exp = {
 /** unique or primary key constraints on table "auth.provider_requests" */
 export enum AuthProviderRequests_Constraint {
   /** unique or primary key constraint */
-  ProviderRequestsPkey = 'provider_requests_pkey'
+  ProviderRequestsPkey = 'provider_requests_pkey',
 }
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
@@ -221,7 +221,7 @@ export enum AuthProviderRequests_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  Options = 'options'
+  Options = 'options',
 }
 
 /** input type for updating data in table "auth.provider_requests" */
@@ -235,7 +235,7 @@ export enum AuthProviderRequests_Update_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  Options = 'options'
+  Options = 'options',
 }
 
 /** columns and relationships of "auth.providers" */
@@ -302,7 +302,7 @@ export type AuthProviders_Bool_Exp = {
 /** unique or primary key constraints on table "auth.providers" */
 export enum AuthProviders_Constraint {
   /** unique or primary key constraint */
-  ProvidersPkey = 'providers_pkey'
+  ProvidersPkey = 'providers_pkey',
 }
 
 /** input type for inserting data into table "auth.providers" */
@@ -360,7 +360,7 @@ export type AuthProviders_Pk_Columns_Input = {
 /** select columns of table "auth.providers" */
 export enum AuthProviders_Select_Column {
   /** column name */
-  Id = 'id'
+  Id = 'id',
 }
 
 /** input type for updating data in table "auth.providers" */
@@ -371,7 +371,7 @@ export type AuthProviders_Set_Input = {
 /** update columns of table "auth.providers" */
 export enum AuthProviders_Update_Column {
   /** column name */
-  Id = 'id'
+  Id = 'id',
 }
 
 /** columns and relationships of "auth.refresh_tokens" */
@@ -436,7 +436,7 @@ export type AuthRefreshTokens_Bool_Exp = {
 /** unique or primary key constraints on table "auth.refresh_tokens" */
 export enum AuthRefreshTokens_Constraint {
   /** unique or primary key constraint */
-  RefreshTokensPkey = 'refresh_tokens_pkey'
+  RefreshTokensPkey = 'refresh_tokens_pkey',
 }
 
 /** input type for inserting data into table "auth.refresh_tokens" */
@@ -521,7 +521,7 @@ export enum AuthRefreshTokens_Select_Column {
   /** column name */
   RefreshToken = 'refreshToken',
   /** column name */
-  UserId = 'userId'
+  UserId = 'userId',
 }
 
 /** input type for updating data in table "auth.refresh_tokens" */
@@ -541,7 +541,7 @@ export enum AuthRefreshTokens_Update_Column {
   /** column name */
   RefreshToken = 'refreshToken',
   /** column name */
-  UserId = 'userId'
+  UserId = 'userId',
 }
 
 /** columns and relationships of "auth.roles" */
@@ -633,7 +633,7 @@ export type AuthRoles_Bool_Exp = {
 /** unique or primary key constraints on table "auth.roles" */
 export enum AuthRoles_Constraint {
   /** unique or primary key constraint */
-  RolesPkey = 'roles_pkey'
+  RolesPkey = 'roles_pkey',
 }
 
 /** input type for inserting data into table "auth.roles" */
@@ -693,7 +693,7 @@ export type AuthRoles_Pk_Columns_Input = {
 /** select columns of table "auth.roles" */
 export enum AuthRoles_Select_Column {
   /** column name */
-  Role = 'role'
+  Role = 'role',
 }
 
 /** input type for updating data in table "auth.roles" */
@@ -704,7 +704,7 @@ export type AuthRoles_Set_Input = {
 /** update columns of table "auth.roles" */
 export enum AuthRoles_Update_Column {
   /** column name */
-  Role = 'role'
+  Role = 'role',
 }
 
 /** columns and relationships of "auth.user_providers" */
@@ -784,7 +784,7 @@ export enum AuthUserProviders_Constraint {
   /** unique or primary key constraint */
   UserProvidersProviderIdProviderUserIdKey = 'user_providers_provider_id_provider_user_id_key',
   /** unique or primary key constraint */
-  UserProvidersUserIdProviderIdKey = 'user_providers_user_id_provider_id_key'
+  UserProvidersUserIdProviderIdKey = 'user_providers_user_id_provider_id_key',
 }
 
 /** input type for inserting data into table "auth.user_providers" */
@@ -903,7 +903,7 @@ export enum AuthUserProviders_Select_Column {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  UserId = 'userId'
+  UserId = 'userId',
 }
 
 /** input type for updating data in table "auth.user_providers" */
@@ -935,7 +935,7 @@ export enum AuthUserProviders_Update_Column {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  UserId = 'userId'
+  UserId = 'userId',
 }
 
 /** columns and relationships of "auth.user_roles" */
@@ -1005,7 +1005,7 @@ export enum AuthUserRoles_Constraint {
   /** unique or primary key constraint */
   UserRolesPkey = 'user_roles_pkey',
   /** unique or primary key constraint */
-  UserRolesUserIdRoleKey = 'user_roles_user_id_role_key'
+  UserRolesUserIdRoleKey = 'user_roles_user_id_role_key',
 }
 
 /** input type for inserting data into table "auth.user_roles" */
@@ -1092,7 +1092,7 @@ export enum AuthUserRoles_Select_Column {
   /** column name */
   Role = 'role',
   /** column name */
-  UserId = 'userId'
+  UserId = 'userId',
 }
 
 /** input type for updating data in table "auth.user_roles" */
@@ -1112,7 +1112,7 @@ export enum AuthUserRoles_Update_Column {
   /** column name */
   Role = 'role',
   /** column name */
-  UserId = 'userId'
+  UserId = 'userId',
 }
 
 /** Boolean expression to compare columns of type "bigint". All fields are combined with logical 'AND'. */
@@ -1403,7 +1403,7 @@ export type Food_Attribute_Bool_Exp = {
 /** unique or primary key constraints on table "food_attribute" */
 export enum Food_Attribute_Constraint {
   /** unique or primary key constraint */
-  FoodAttributePkey = 'food_attribute_pkey'
+  FoodAttributePkey = 'food_attribute_pkey',
 }
 
 /** input type for incrementing numeric columns in table "food_attribute" */
@@ -1512,7 +1512,7 @@ export enum Food_Attribute_Select_Column {
   /** column name */
   SeqNum = 'seq_num',
   /** column name */
-  Value = 'value'
+  Value = 'value',
 }
 
 /** input type for updating data in table "food_attribute" */
@@ -1650,7 +1650,7 @@ export type Food_Attribute_Type_Bool_Exp = {
 /** unique or primary key constraints on table "food_attribute_type" */
 export enum Food_Attribute_Type_Constraint {
   /** unique or primary key constraint */
-  FoodAttributeTypePkey = 'food_attribute_type_pkey'
+  FoodAttributeTypePkey = 'food_attribute_type_pkey',
 }
 
 /** input type for incrementing numeric columns in table "food_attribute_type" */
@@ -1723,7 +1723,7 @@ export enum Food_Attribute_Type_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  Name = 'name'
+  Name = 'name',
 }
 
 /** input type for updating data in table "food_attribute_type" */
@@ -1764,7 +1764,7 @@ export enum Food_Attribute_Type_Update_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  Name = 'name'
+  Name = 'name',
 }
 
 /** aggregate var_pop on columns */
@@ -1798,7 +1798,7 @@ export enum Food_Attribute_Update_Column {
   /** column name */
   SeqNum = 'seq_num',
   /** column name */
-  Value = 'value'
+  Value = 'value',
 }
 
 /** aggregate var_pop on columns */
@@ -1940,7 +1940,7 @@ export type Food_Category_Bool_Exp = {
 /** unique or primary key constraints on table "food_category" */
 export enum Food_Category_Constraint {
   /** unique or primary key constraint */
-  FoodCategoryPkey = 'food_category_pkey'
+  FoodCategoryPkey = 'food_category_pkey',
 }
 
 /** input type for incrementing numeric columns in table "food_category" */
@@ -2014,7 +2014,7 @@ export enum Food_Category_Select_Column {
   /** column name */
   Description = 'description',
   /** column name */
-  Id = 'id'
+  Id = 'id',
 }
 
 /** input type for updating data in table "food_category" */
@@ -2059,7 +2059,7 @@ export enum Food_Category_Update_Column {
   /** column name */
   Description = 'description',
   /** column name */
-  Id = 'id'
+  Id = 'id',
 }
 
 /** aggregate var_pop on columns */
@@ -2086,7 +2086,7 @@ export type Food_Category_Variance_Fields = {
 /** unique or primary key constraints on table "food" */
 export enum Food_Constraint {
   /** unique or primary key constraint */
-  FoodPkey = 'food_pkey'
+  FoodPkey = 'food_pkey',
 }
 
 /** Boolean expression to compare columns of type "food_data_type_enum". All fields are combined with logical 'AND'. */
@@ -2286,7 +2286,7 @@ export type Food_Nutrient_Bool_Exp = {
 /** unique or primary key constraints on table "food_nutrient" */
 export enum Food_Nutrient_Constraint {
   /** unique or primary key constraint */
-  FoodNutrientPkey = 'food_nutrient_pkey'
+  FoodNutrientPkey = 'food_nutrient_pkey',
 }
 
 /** input type for incrementing numeric columns in table "food_nutrient" */
@@ -2441,7 +2441,7 @@ export enum Food_Nutrient_Select_Column {
   /** column name */
   MinYearAcquired = 'min_year_acquired',
   /** column name */
-  NutrientId = 'nutrient_id'
+  NutrientId = 'nutrient_id',
 }
 
 /** input type for updating data in table "food_nutrient" */
@@ -2598,7 +2598,7 @@ export enum Food_Nutrient_Update_Column {
   /** column name */
   MinYearAcquired = 'min_year_acquired',
   /** column name */
-  NutrientId = 'nutrient_id'
+  NutrientId = 'nutrient_id',
 }
 
 /** aggregate var_pop on columns */
@@ -2838,7 +2838,7 @@ export type Food_Portion_Bool_Exp = {
 /** unique or primary key constraints on table "food_portion" */
 export enum Food_Portion_Constraint {
   /** unique or primary key constraint */
-  FoodPortionPkey = 'food_portion_pkey'
+  FoodPortionPkey = 'food_portion_pkey',
 }
 
 /** input type for incrementing numeric columns in table "food_portion" */
@@ -2998,7 +2998,7 @@ export enum Food_Portion_Select_Column {
   /** column name */
   PortionDescription = 'portion_description',
   /** column name */
-  SeqNum = 'seq_num'
+  SeqNum = 'seq_num',
 }
 
 /** input type for updating data in table "food_portion" */
@@ -3139,7 +3139,7 @@ export enum Food_Portion_Update_Column {
   /** column name */
   PortionDescription = 'portion_description',
   /** column name */
-  SeqNum = 'seq_num'
+  SeqNum = 'seq_num',
 }
 
 /** aggregate var_pop on columns */
@@ -3230,7 +3230,7 @@ export enum Food_Select_Column {
   /** column name */
   FoodCategoryId = 'food_category_id',
   /** column name */
-  PublicationDate = 'publication_date'
+  PublicationDate = 'publication_date',
 }
 
 /** input type for updating data in table "food" */
@@ -3308,7 +3308,7 @@ export enum Food_Update_Column {
   /** column name */
   FoodCategoryId = 'food_category_id',
   /** column name */
-  PublicationDate = 'publication_date'
+  PublicationDate = 'publication_date',
 }
 
 /** aggregate var_pop on columns */
@@ -3417,7 +3417,7 @@ export enum Ingredient_Food_Candidate_Constraint {
   /** unique or primary key constraint */
   IngredientFoodCandidateFoodCandidateIdFoodCandidatePort = 'ingredient_food_candidate_food_candidate_id_food_candidate_port',
   /** unique or primary key constraint */
-  RecipeIngredientFoodCandidatePkey = 'recipe_ingredient_food_candidate_pkey'
+  RecipeIngredientFoodCandidatePkey = 'recipe_ingredient_food_candidate_pkey',
 }
 
 /** input type for incrementing numeric columns in table "ingredient_food_candidate" */
@@ -3496,7 +3496,7 @@ export enum Ingredient_Food_Candidate_Select_Column {
   /** column name */
   FoodCandidatePortionId = 'food_candidate_portion_id',
   /** column name */
-  Id = 'id'
+  Id = 'id',
 }
 
 /** input type for updating data in table "ingredient_food_candidate" */
@@ -3545,7 +3545,7 @@ export enum Ingredient_Food_Candidate_Update_Column {
   /** column name */
   FoodCandidatePortionId = 'food_candidate_portion_id',
   /** column name */
-  Id = 'id'
+  Id = 'id',
 }
 
 /** aggregate var_pop on columns */
@@ -3632,7 +3632,7 @@ export type Ingredient_Names_Bool_Exp = {
 /** unique or primary key constraints on table "ingredient_names" */
 export enum Ingredient_Names_Constraint {
   /** unique or primary key constraint */
-  IngredientNamesPkey = 'ingredient_names_pkey'
+  IngredientNamesPkey = 'ingredient_names_pkey',
 }
 
 /** input type for inserting data into table "ingredient_names" */
@@ -3709,7 +3709,7 @@ export enum Ingredient_Names_Select_Column {
   /** column name */
   IngredientId = 'ingredient_id',
   /** column name */
-  Name = 'name'
+  Name = 'name',
 }
 
 /** input type for updating data in table "ingredient_names" */
@@ -3726,7 +3726,7 @@ export enum Ingredient_Names_Update_Column {
   /** column name */
   IngredientId = 'ingredient_id',
   /** column name */
-  Name = 'name'
+  Name = 'name',
 }
 
 /** Ingredients used in recipes. */
@@ -3851,7 +3851,7 @@ export enum Ingredients_Constraint {
   /** unique or primary key constraint */
   IngredientsNameKey = 'ingredients_name_key',
   /** unique or primary key constraint */
-  IngredientsPkey = 'ingredients_pkey'
+  IngredientsPkey = 'ingredients_pkey',
 }
 
 /** input type for incrementing numeric columns in table "ingredients" */
@@ -3951,7 +3951,7 @@ export enum Ingredients_Select_Column {
   /** column name */
   Name = 'name',
   /** column name */
-  WikiUrl = 'wiki_url'
+  WikiUrl = 'wiki_url',
 }
 
 /** input type for updating data in table "ingredients" */
@@ -4015,7 +4015,7 @@ export enum Ingredients_Update_Column {
   /** column name */
   Name = 'name',
   /** column name */
-  WikiUrl = 'wiki_url'
+  WikiUrl = 'wiki_url',
 }
 
 /** aggregate var_pop on columns */
@@ -4132,7 +4132,7 @@ export type Measure_Unit_Bool_Exp = {
 /** unique or primary key constraints on table "measure_unit" */
 export enum Measure_Unit_Constraint {
   /** unique or primary key constraint */
-  MeasureUnitPkey = 'measure_unit_pkey'
+  MeasureUnitPkey = 'measure_unit_pkey',
 }
 
 /** input type for incrementing numeric columns in table "measure_unit" */
@@ -4206,7 +4206,7 @@ export enum Measure_Unit_Select_Column {
   /** column name */
   Ml = 'ml',
   /** column name */
-  Name = 'name'
+  Name = 'name',
 }
 
 /** input type for updating data in table "measure_unit" */
@@ -4251,7 +4251,7 @@ export enum Measure_Unit_Update_Column {
   /** column name */
   Ml = 'ml',
   /** column name */
-  Name = 'name'
+  Name = 'name',
 }
 
 /** aggregate var_pop on columns */
@@ -4363,7 +4363,7 @@ export enum Most_Common_Ingredients_Select_Column {
   /** column name */
   IngredientCount = 'ingredient_count',
   /** column name */
-  Name = 'name'
+  Name = 'name',
 }
 
 /** aggregate stddev on columns */
@@ -6118,7 +6118,7 @@ export type Nutrient_Bool_Exp = {
 /** unique or primary key constraints on table "nutrient" */
 export enum Nutrient_Constraint {
   /** unique or primary key constraint */
-  NutrientPkey = 'nutrient_pkey'
+  NutrientPkey = 'nutrient_pkey',
 }
 
 /** input type for incrementing numeric columns in table "nutrient" */
@@ -6205,7 +6205,7 @@ export enum Nutrient_Select_Column {
   /** column name */
   Rank = 'rank',
   /** column name */
-  UnitName = 'unit_name'
+  UnitName = 'unit_name',
 }
 
 /** input type for updating data in table "nutrient" */
@@ -6260,7 +6260,7 @@ export enum Nutrient_Update_Column {
   /** column name */
   Rank = 'rank',
   /** column name */
-  UnitName = 'unit_name'
+  UnitName = 'unit_name',
 }
 
 /** aggregate var_pop on columns */
@@ -6300,7 +6300,7 @@ export enum Order_By {
   /** in descending order, nulls first */
   DescNullsFirst = 'desc_nulls_first',
   /** in descending order, nulls last */
-  DescNullsLast = 'desc_nulls_last'
+  DescNullsLast = 'desc_nulls_last',
 }
 
 export type Query_Root = {
@@ -7326,7 +7326,7 @@ export type Recipe_Direction_Actions_Bool_Exp = {
 /** unique or primary key constraints on table "recipe_direction_actions" */
 export enum Recipe_Direction_Actions_Constraint {
   /** unique or primary key constraint */
-  RecipeDirectionActionsPkey = 'recipe_direction_actions_pkey'
+  RecipeDirectionActionsPkey = 'recipe_direction_actions_pkey',
 }
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
@@ -7437,7 +7437,7 @@ export enum Recipe_Direction_Actions_Select_Column {
   /** column name */
   Quantity = 'quantity',
   /** column name */
-  Unit = 'unit'
+  Unit = 'unit',
 }
 
 /** input type for updating data in table "recipe_direction_actions" */
@@ -7502,7 +7502,7 @@ export enum Recipe_Direction_Actions_Update_Column {
   /** column name */
   Quantity = 'quantity',
   /** column name */
-  Unit = 'unit'
+  Unit = 'unit',
 }
 
 /** aggregate var_pop on columns */
@@ -7628,7 +7628,7 @@ export type Recipe_Direction_Durations_Bool_Exp = {
 /** unique or primary key constraints on table "recipe_direction_durations" */
 export enum Recipe_Direction_Durations_Constraint {
   /** unique or primary key constraint */
-  RecipeDirectionDurationsPkey = 'recipe_direction_durations_pkey'
+  RecipeDirectionDurationsPkey = 'recipe_direction_durations_pkey',
 }
 
 /** input type for incrementing numeric columns in table "recipe_direction_durations" */
@@ -7735,7 +7735,7 @@ export enum Recipe_Direction_Durations_Select_Column {
   /** column name */
   Type = 'type',
   /** column name */
-  UnitOfTime = 'unit_of_time'
+  UnitOfTime = 'unit_of_time',
 }
 
 /** input type for updating data in table "recipe_direction_durations" */
@@ -7829,7 +7829,7 @@ export enum Recipe_Direction_Durations_Update_Column {
   /** column name */
   Type = 'type',
   /** column name */
-  UnitOfTime = 'unit_of_time'
+  UnitOfTime = 'unit_of_time',
 }
 
 /** aggregate var_pop on columns */
@@ -7983,7 +7983,7 @@ export enum Recipe_Directions_Constraint {
   /** unique or primary key constraint */
   RecipeDirectionsPkey = 'recipe_directions_pkey',
   /** unique or primary key constraint */
-  RecipeDirectionsRecipeIdSeqNumKey = 'recipe_directions_recipe_id_seq_num_key'
+  RecipeDirectionsRecipeIdSeqNumKey = 'recipe_directions_recipe_id_seq_num_key',
 }
 
 /** input type for incrementing numeric columns in table "recipe_directions" */
@@ -8091,7 +8091,7 @@ export enum Recipe_Directions_Select_Column {
   /** column name */
   VideoTimestamp = 'video_timestamp',
   /** column name */
-  VideoTimestampEnd = 'video_timestamp_end'
+  VideoTimestampEnd = 'video_timestamp_end',
 }
 
 /** input type for updating data in table "recipe_directions" */
@@ -8193,7 +8193,7 @@ export enum Recipe_Directions_Update_Column {
   /** column name */
   VideoTimestamp = 'video_timestamp',
   /** column name */
-  VideoTimestampEnd = 'video_timestamp_end'
+  VideoTimestampEnd = 'video_timestamp_end',
 }
 
 /** aggregate var_pop on columns */
@@ -8315,7 +8315,7 @@ export type Recipe_Favorite_Bool_Exp = {
 /** unique or primary key constraints on table "recipe_favorite" */
 export enum Recipe_Favorite_Constraint {
   /** unique or primary key constraint */
-  RecipeFavoritePkey = 'recipe_favorite_pkey'
+  RecipeFavoritePkey = 'recipe_favorite_pkey',
 }
 
 /** input type for incrementing numeric columns in table "recipe_favorite" */
@@ -8385,7 +8385,7 @@ export enum Recipe_Favorite_Select_Column {
   /** column name */
   RecipeId = 'recipe_id',
   /** column name */
-  UserId = 'user_id'
+  UserId = 'user_id',
 }
 
 /** input type for updating data in table "recipe_favorite" */
@@ -8434,7 +8434,7 @@ export enum Recipe_Favorite_Update_Column {
   /** column name */
   RecipeId = 'recipe_id',
   /** column name */
-  UserId = 'user_id'
+  UserId = 'user_id',
 }
 
 /** aggregate var_pop on columns */
@@ -8581,7 +8581,7 @@ export enum Recipe_Ingredient_Groups_Constraint {
   /** unique or primary key constraint */
   RecipeIngredientGroupsPkey = 'recipe_ingredient_groups_pkey',
   /** unique or primary key constraint */
-  RecipeIngredientGroupsRecipeIdSeqNumKey = 'recipe_ingredient_groups_recipe_id_seq_num_key'
+  RecipeIngredientGroupsRecipeIdSeqNumKey = 'recipe_ingredient_groups_recipe_id_seq_num_key',
 }
 
 /** input type for incrementing numeric columns in table "recipe_ingredient_groups" */
@@ -8682,7 +8682,7 @@ export enum Recipe_Ingredient_Groups_Select_Column {
   /** column name */
   RecipeId = 'recipe_id',
   /** column name */
-  SeqNum = 'seq_num'
+  SeqNum = 'seq_num',
 }
 
 /** input type for updating data in table "recipe_ingredient_groups" */
@@ -8762,7 +8762,7 @@ export enum Recipe_Ingredient_Groups_Update_Column {
   /** column name */
   RecipeId = 'recipe_id',
   /** column name */
-  SeqNum = 'seq_num'
+  SeqNum = 'seq_num',
 }
 
 /** aggregate var_pop on columns */
@@ -8936,7 +8936,7 @@ export enum Recipe_Ingredients_Constraint {
   /** unique or primary key constraint */
   RecipeIngredientsGroupIdSeqNumKey = 'recipe_ingredients_group_id_seq_num_key',
   /** unique or primary key constraint */
-  RecipeIngredientsPkey = 'recipe_ingredients_pkey'
+  RecipeIngredientsPkey = 'recipe_ingredients_pkey',
 }
 
 /** input type for incrementing numeric columns in table "recipe_ingredients" */
@@ -9080,7 +9080,7 @@ export enum Recipe_Ingredients_Select_Column {
   /** column name */
   VideoTimestamp = 'video_timestamp',
   /** column name */
-  VideoTimestampEnd = 'video_timestamp_end'
+  VideoTimestampEnd = 'video_timestamp_end',
 }
 
 /** input type for updating data in table "recipe_ingredients" */
@@ -9202,7 +9202,7 @@ export enum Recipe_Ingredients_Update_Column {
   /** column name */
   VideoTimestamp = 'video_timestamp',
   /** column name */
-  VideoTimestampEnd = 'video_timestamp_end'
+  VideoTimestampEnd = 'video_timestamp_end',
 }
 
 /** aggregate var_pop on columns */
@@ -9366,7 +9366,7 @@ export type Recipe_List_Items_Bool_Exp = {
 /** unique or primary key constraints on table "recipe_list_items" */
 export enum Recipe_List_Items_Constraint {
   /** unique or primary key constraint */
-  RecipeListItemsPkey = 'recipe_list_items_pkey'
+  RecipeListItemsPkey = 'recipe_list_items_pkey',
 }
 
 /** input type for incrementing numeric columns in table "recipe_list_items" */
@@ -9461,7 +9461,7 @@ export enum Recipe_List_Items_Select_Column {
   /** column name */
   RecipeListId = 'recipe_list_id',
   /** column name */
-  SeqNum = 'seq_num'
+  SeqNum = 'seq_num',
 }
 
 /** input type for updating data in table "recipe_list_items" */
@@ -9549,7 +9549,7 @@ export enum Recipe_List_Items_Update_Column {
   /** column name */
   RecipeListId = 'recipe_list_id',
   /** column name */
-  SeqNum = 'seq_num'
+  SeqNum = 'seq_num',
 }
 
 /** aggregate var_pop on columns */
@@ -9685,7 +9685,7 @@ export type Recipe_Lists_Bool_Exp = {
 /** unique or primary key constraints on table "recipe_lists" */
 export enum Recipe_Lists_Constraint {
   /** unique or primary key constraint */
-  RecipeListsPkey = 'recipe_lists_pkey'
+  RecipeListsPkey = 'recipe_lists_pkey',
 }
 
 /** input type for incrementing numeric columns in table "recipe_lists" */
@@ -9760,7 +9760,7 @@ export enum Recipe_Lists_Select_Column {
   /** column name */
   Name = 'name',
   /** column name */
-  UserId = 'user_id'
+  UserId = 'user_id',
 }
 
 /** input type for updating data in table "recipe_lists" */
@@ -9801,7 +9801,7 @@ export enum Recipe_Lists_Update_Column {
   /** column name */
   Name = 'name',
   /** column name */
-  UserId = 'user_id'
+  UserId = 'user_id',
 }
 
 /** aggregate var_pop on columns */
@@ -9867,7 +9867,7 @@ export type Recipe_Source_Providers_Bool_Exp = {
 /** unique or primary key constraints on table "recipe_source_providers" */
 export enum Recipe_Source_Providers_Constraint {
   /** unique or primary key constraint */
-  RecipeSourcesPkey = 'recipe_sources_pkey'
+  RecipeSourcesPkey = 'recipe_sources_pkey',
 }
 
 /** input type for inserting data into table "recipe_source_providers" */
@@ -9941,7 +9941,7 @@ export enum Recipe_Source_Providers_Select_Column {
   /** column name */
   Name = 'name',
   /** column name */
-  Url = 'url'
+  Url = 'url',
 }
 
 /** input type for updating data in table "recipe_source_providers" */
@@ -9961,7 +9961,7 @@ export enum Recipe_Source_Providers_Update_Column {
   /** column name */
   Name = 'name',
   /** column name */
-  Url = 'url'
+  Url = 'url',
 }
 
 /** columns and relationships of "recipe_tags" */
@@ -10056,7 +10056,7 @@ export enum Recipe_Tags_Constraint {
   /** unique or primary key constraint */
   RecipeTagsPkey = 'recipe_tags_pkey',
   /** unique or primary key constraint */
-  RecipeTagsRecipeIdNameKey = 'recipe_tags_recipe_id_name_key'
+  RecipeTagsRecipeIdNameKey = 'recipe_tags_recipe_id_name_key',
 }
 
 /** input type for incrementing numeric columns in table "recipe_tags" */
@@ -10146,7 +10146,7 @@ export enum Recipe_Tags_Select_Column {
   /** column name */
   RecipeId = 'recipe_id',
   /** column name */
-  SeqNum = 'seq_num'
+  SeqNum = 'seq_num',
 }
 
 /** input type for updating data in table "recipe_tags" */
@@ -10226,7 +10226,7 @@ export enum Recipe_Tags_Update_Column {
   /** column name */
   RecipeId = 'recipe_id',
   /** column name */
-  SeqNum = 'seq_num'
+  SeqNum = 'seq_num',
 }
 
 /** aggregate var_pop on columns */
@@ -10463,7 +10463,7 @@ export enum Recipes_Constraint {
   /** unique or primary key constraint */
   RecipesPkey = 'recipes_pkey',
   /** unique or primary key constraint */
-  RecipesSourceKey = 'recipes_source_key'
+  RecipesSourceKey = 'recipes_source_key',
 }
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
@@ -10610,7 +10610,7 @@ export enum Recipes_Select_Column {
   /** column name */
   Video = 'video',
   /** column name */
-  Visible = 'visible'
+  Visible = 'visible',
 }
 
 /** input type for updating data in table "recipes" */
@@ -10675,7 +10675,7 @@ export enum Recipes_Update_Column {
   /** column name */
   Video = 'video',
   /** column name */
-  Visible = 'visible'
+  Visible = 'visible',
 }
 
 /** aggregate var_pop on columns */
@@ -11742,7 +11742,7 @@ export type User_Config_Bool_Exp = {
 /** unique or primary key constraints on table "user_config" */
 export enum User_Config_Constraint {
   /** unique or primary key constraint */
-  UserConfigPkey = 'user_config_pkey'
+  UserConfigPkey = 'user_config_pkey',
 }
 
 /** input type for incrementing numeric columns in table "user_config" */
@@ -11802,7 +11802,7 @@ export enum User_Config_Select_Column {
   /** column name */
   PrinterUrl = 'printer_url',
   /** column name */
-  UserId = 'user_id'
+  UserId = 'user_id',
 }
 
 /** input type for updating data in table "user_config" */
@@ -11840,7 +11840,7 @@ export enum User_Config_Update_Column {
   /** column name */
   PrinterUrl = 'printer_url',
   /** column name */
-  UserId = 'user_id'
+  UserId = 'user_id',
 }
 
 /** aggregate var_pop on columns */
@@ -12053,7 +12053,7 @@ export enum Users_Constraint {
   /** unique or primary key constraint */
   UsersPhoneNumberKey = 'users_phone_number_key',
   /** unique or primary key constraint */
-  UsersPkey = 'users_pkey'
+  UsersPkey = 'users_pkey',
 }
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
@@ -12311,7 +12311,7 @@ export enum Users_Select_Column {
   /** column name */
   TotpSecret = 'totpSecret',
   /** column name */
-  UpdatedAt = 'updatedAt'
+  UpdatedAt = 'updatedAt',
 }
 
 /** input type for updating data in table "auth.users" */
@@ -12391,7 +12391,7 @@ export enum Users_Update_Column {
   /** column name */
   TotpSecret = 'totpSecret',
   /** column name */
-  UpdatedAt = 'updatedAt'
+  UpdatedAt = 'updatedAt',
 }
 
 /** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
@@ -12570,13 +12570,13 @@ export const SearchFoodsDocument = gql`
  * });
  */
 export function useSearchFoodsQuery(baseOptions: Apollo.QueryHookOptions<SearchFoodsQuery, SearchFoodsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<SearchFoodsQuery, SearchFoodsQueryVariables>(SearchFoodsDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<SearchFoodsQuery, SearchFoodsQueryVariables>(SearchFoodsDocument, options);
+}
 export function useSearchFoodsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchFoodsQuery, SearchFoodsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<SearchFoodsQuery, SearchFoodsQueryVariables>(SearchFoodsDocument, options);
-        }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<SearchFoodsQuery, SearchFoodsQueryVariables>(SearchFoodsDocument, options);
+}
 export type SearchFoodsQueryHookResult = ReturnType<typeof useSearchFoodsQuery>;
 export type SearchFoodsLazyQueryHookResult = ReturnType<typeof useSearchFoodsLazyQuery>;
 export type SearchFoodsQueryResult = Apollo.QueryResult<SearchFoodsQuery, SearchFoodsQueryVariables>;
@@ -12608,9 +12608,9 @@ export type UpsertIngredientMutationFn = Apollo.MutationFunction<UpsertIngredien
  * });
  */
 export function useUpsertIngredientMutation(baseOptions?: Apollo.MutationHookOptions<UpsertIngredientMutation, UpsertIngredientMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpsertIngredientMutation, UpsertIngredientMutationVariables>(UpsertIngredientDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<UpsertIngredientMutation, UpsertIngredientMutationVariables>(UpsertIngredientDocument, options);
+}
 export type UpsertIngredientMutationHookResult = ReturnType<typeof useUpsertIngredientMutation>;
 export type UpsertIngredientMutationResult = Apollo.MutationResult<UpsertIngredientMutation>;
 export type UpsertIngredientMutationOptions = Apollo.BaseMutationOptions<UpsertIngredientMutation, UpsertIngredientMutationVariables>;
@@ -12646,9 +12646,9 @@ export type UpsertIngredientVideoTimestampMutationFn = Apollo.MutationFunction<U
  * });
  */
 export function useUpsertIngredientVideoTimestampMutation(baseOptions?: Apollo.MutationHookOptions<UpsertIngredientVideoTimestampMutation, UpsertIngredientVideoTimestampMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpsertIngredientVideoTimestampMutation, UpsertIngredientVideoTimestampMutationVariables>(UpsertIngredientVideoTimestampDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<UpsertIngredientVideoTimestampMutation, UpsertIngredientVideoTimestampMutationVariables>(UpsertIngredientVideoTimestampDocument, options);
+}
 export type UpsertIngredientVideoTimestampMutationHookResult = ReturnType<typeof useUpsertIngredientVideoTimestampMutation>;
 export type UpsertIngredientVideoTimestampMutationResult = Apollo.MutationResult<UpsertIngredientVideoTimestampMutation>;
 export type UpsertIngredientVideoTimestampMutationOptions = Apollo.BaseMutationOptions<UpsertIngredientVideoTimestampMutation, UpsertIngredientVideoTimestampMutationVariables>;
@@ -12684,9 +12684,9 @@ export type UpsertDirectionVideoTimestampMutationFn = Apollo.MutationFunction<Up
  * });
  */
 export function useUpsertDirectionVideoTimestampMutation(baseOptions?: Apollo.MutationHookOptions<UpsertDirectionVideoTimestampMutation, UpsertDirectionVideoTimestampMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpsertDirectionVideoTimestampMutation, UpsertDirectionVideoTimestampMutationVariables>(UpsertDirectionVideoTimestampDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<UpsertDirectionVideoTimestampMutation, UpsertDirectionVideoTimestampMutationVariables>(UpsertDirectionVideoTimestampDocument, options);
+}
 export type UpsertDirectionVideoTimestampMutationHookResult = ReturnType<typeof useUpsertDirectionVideoTimestampMutation>;
 export type UpsertDirectionVideoTimestampMutationResult = Apollo.MutationResult<UpsertDirectionVideoTimestampMutation>;
 export type UpsertDirectionVideoTimestampMutationOptions = Apollo.BaseMutationOptions<UpsertDirectionVideoTimestampMutation, UpsertDirectionVideoTimestampMutationVariables>;
@@ -12734,13 +12734,13 @@ export const RecipesQueryDocument = gql`
  * });
  */
 export function useRecipesQueryQuery(baseOptions: Apollo.QueryHookOptions<RecipesQueryQuery, RecipesQueryQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<RecipesQueryQuery, RecipesQueryQueryVariables>(RecipesQueryDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<RecipesQueryQuery, RecipesQueryQueryVariables>(RecipesQueryDocument, options);
+}
 export function useRecipesQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<RecipesQueryQuery, RecipesQueryQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<RecipesQueryQuery, RecipesQueryQueryVariables>(RecipesQueryDocument, options);
-        }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<RecipesQueryQuery, RecipesQueryQueryVariables>(RecipesQueryDocument, options);
+}
 export type RecipesQueryQueryHookResult = ReturnType<typeof useRecipesQueryQuery>;
 export type RecipesQueryLazyQueryHookResult = ReturnType<typeof useRecipesQueryLazyQuery>;
 export type RecipesQueryQueryResult = Apollo.QueryResult<RecipesQueryQuery, RecipesQueryQueryVariables>;
@@ -12774,9 +12774,9 @@ export type InsertRecipeMutationFn = Apollo.MutationFunction<InsertRecipeMutatio
  * });
  */
 export function useInsertRecipeMutation(baseOptions?: Apollo.MutationHookOptions<InsertRecipeMutation, InsertRecipeMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<InsertRecipeMutation, InsertRecipeMutationVariables>(InsertRecipeDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<InsertRecipeMutation, InsertRecipeMutationVariables>(InsertRecipeDocument, options);
+}
 export type InsertRecipeMutationHookResult = ReturnType<typeof useInsertRecipeMutation>;
 export type InsertRecipeMutationResult = Apollo.MutationResult<InsertRecipeMutation>;
 export type InsertRecipeMutationOptions = Apollo.BaseMutationOptions<InsertRecipeMutation, InsertRecipeMutationVariables>;
@@ -12805,13 +12805,13 @@ export const GetRecipeListsDocument = gql`
  * });
  */
 export function useGetRecipeListsQuery(baseOptions?: Apollo.QueryHookOptions<GetRecipeListsQuery, GetRecipeListsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetRecipeListsQuery, GetRecipeListsQueryVariables>(GetRecipeListsDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<GetRecipeListsQuery, GetRecipeListsQueryVariables>(GetRecipeListsDocument, options);
+}
 export function useGetRecipeListsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetRecipeListsQuery, GetRecipeListsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetRecipeListsQuery, GetRecipeListsQueryVariables>(GetRecipeListsDocument, options);
-        }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<GetRecipeListsQuery, GetRecipeListsQueryVariables>(GetRecipeListsDocument, options);
+}
 export type GetRecipeListsQueryHookResult = ReturnType<typeof useGetRecipeListsQuery>;
 export type GetRecipeListsLazyQueryHookResult = ReturnType<typeof useGetRecipeListsLazyQuery>;
 export type GetRecipeListsQueryResult = Apollo.QueryResult<GetRecipeListsQuery, GetRecipeListsQueryVariables>;
@@ -12845,9 +12845,9 @@ export type InsertRecipeIntoListMutationFn = Apollo.MutationFunction<InsertRecip
  * });
  */
 export function useInsertRecipeIntoListMutation(baseOptions?: Apollo.MutationHookOptions<InsertRecipeIntoListMutation, InsertRecipeIntoListMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<InsertRecipeIntoListMutation, InsertRecipeIntoListMutationVariables>(InsertRecipeIntoListDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<InsertRecipeIntoListMutation, InsertRecipeIntoListMutationVariables>(InsertRecipeIntoListDocument, options);
+}
 export type InsertRecipeIntoListMutationHookResult = ReturnType<typeof useInsertRecipeIntoListMutation>;
 export type InsertRecipeIntoListMutationResult = Apollo.MutationResult<InsertRecipeIntoListMutation>;
 export type InsertRecipeIntoListMutationOptions = Apollo.BaseMutationOptions<InsertRecipeIntoListMutation, InsertRecipeIntoListMutationVariables>;
@@ -12878,9 +12878,9 @@ export type HideRecipeMutationFn = Apollo.MutationFunction<HideRecipeMutation, H
  * });
  */
 export function useHideRecipeMutation(baseOptions?: Apollo.MutationHookOptions<HideRecipeMutation, HideRecipeMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<HideRecipeMutation, HideRecipeMutationVariables>(HideRecipeDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<HideRecipeMutation, HideRecipeMutationVariables>(HideRecipeDocument, options);
+}
 export type HideRecipeMutationHookResult = ReturnType<typeof useHideRecipeMutation>;
 export type HideRecipeMutationResult = Apollo.MutationResult<HideRecipeMutation>;
 export type HideRecipeMutationOptions = Apollo.BaseMutationOptions<HideRecipeMutation, HideRecipeMutationVariables>;
@@ -12909,13 +12909,13 @@ export const GetRecipeSourceProvidersDocument = gql`
  * });
  */
 export function useGetRecipeSourceProvidersQuery(baseOptions?: Apollo.QueryHookOptions<GetRecipeSourceProvidersQuery, GetRecipeSourceProvidersQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetRecipeSourceProvidersQuery, GetRecipeSourceProvidersQueryVariables>(GetRecipeSourceProvidersDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<GetRecipeSourceProvidersQuery, GetRecipeSourceProvidersQueryVariables>(GetRecipeSourceProvidersDocument, options);
+}
 export function useGetRecipeSourceProvidersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetRecipeSourceProvidersQuery, GetRecipeSourceProvidersQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetRecipeSourceProvidersQuery, GetRecipeSourceProvidersQueryVariables>(GetRecipeSourceProvidersDocument, options);
-        }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<GetRecipeSourceProvidersQuery, GetRecipeSourceProvidersQueryVariables>(GetRecipeSourceProvidersDocument, options);
+}
 export type GetRecipeSourceProvidersQueryHookResult = ReturnType<typeof useGetRecipeSourceProvidersQuery>;
 export type GetRecipeSourceProvidersLazyQueryHookResult = ReturnType<typeof useGetRecipeSourceProvidersLazyQuery>;
 export type GetRecipeSourceProvidersQueryResult = Apollo.QueryResult<GetRecipeSourceProvidersQuery, GetRecipeSourceProvidersQueryVariables>;
@@ -12968,13 +12968,13 @@ export const GetMostCommonIngredientsDocument = gql`
  * });
  */
 export function useGetMostCommonIngredientsQuery(baseOptions: Apollo.QueryHookOptions<GetMostCommonIngredientsQuery, GetMostCommonIngredientsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetMostCommonIngredientsQuery, GetMostCommonIngredientsQueryVariables>(GetMostCommonIngredientsDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<GetMostCommonIngredientsQuery, GetMostCommonIngredientsQueryVariables>(GetMostCommonIngredientsDocument, options);
+}
 export function useGetMostCommonIngredientsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMostCommonIngredientsQuery, GetMostCommonIngredientsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetMostCommonIngredientsQuery, GetMostCommonIngredientsQueryVariables>(GetMostCommonIngredientsDocument, options);
-        }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<GetMostCommonIngredientsQuery, GetMostCommonIngredientsQueryVariables>(GetMostCommonIngredientsDocument, options);
+}
 export type GetMostCommonIngredientsQueryHookResult = ReturnType<typeof useGetMostCommonIngredientsQuery>;
 export type GetMostCommonIngredientsLazyQueryHookResult = ReturnType<typeof useGetMostCommonIngredientsLazyQuery>;
 export type GetMostCommonIngredientsQueryResult = Apollo.QueryResult<GetMostCommonIngredientsQuery, GetMostCommonIngredientsQueryVariables>;
@@ -13007,13 +13007,13 @@ export const RecipesWithIngredientDocument = gql`
  * });
  */
 export function useRecipesWithIngredientQuery(baseOptions: Apollo.QueryHookOptions<RecipesWithIngredientQuery, RecipesWithIngredientQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<RecipesWithIngredientQuery, RecipesWithIngredientQueryVariables>(RecipesWithIngredientDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<RecipesWithIngredientQuery, RecipesWithIngredientQueryVariables>(RecipesWithIngredientDocument, options);
+}
 export function useRecipesWithIngredientLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<RecipesWithIngredientQuery, RecipesWithIngredientQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<RecipesWithIngredientQuery, RecipesWithIngredientQueryVariables>(RecipesWithIngredientDocument, options);
-        }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<RecipesWithIngredientQuery, RecipesWithIngredientQueryVariables>(RecipesWithIngredientDocument, options);
+}
 export type RecipesWithIngredientQueryHookResult = ReturnType<typeof useRecipesWithIngredientQuery>;
 export type RecipesWithIngredientLazyQueryHookResult = ReturnType<typeof useRecipesWithIngredientLazyQuery>;
 export type RecipesWithIngredientQueryResult = Apollo.QueryResult<RecipesWithIngredientQuery, RecipesWithIngredientQueryVariables>;
@@ -13050,13 +13050,13 @@ export const GetUserRecipeListsDocument = gql`
  * });
  */
 export function useGetUserRecipeListsQuery(baseOptions?: Apollo.QueryHookOptions<GetUserRecipeListsQuery, GetUserRecipeListsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetUserRecipeListsQuery, GetUserRecipeListsQueryVariables>(GetUserRecipeListsDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<GetUserRecipeListsQuery, GetUserRecipeListsQueryVariables>(GetUserRecipeListsDocument, options);
+}
 export function useGetUserRecipeListsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserRecipeListsQuery, GetUserRecipeListsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetUserRecipeListsQuery, GetUserRecipeListsQueryVariables>(GetUserRecipeListsDocument, options);
-        }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<GetUserRecipeListsQuery, GetUserRecipeListsQueryVariables>(GetUserRecipeListsDocument, options);
+}
 export type GetUserRecipeListsQueryHookResult = ReturnType<typeof useGetUserRecipeListsQuery>;
 export type GetUserRecipeListsLazyQueryHookResult = ReturnType<typeof useGetUserRecipeListsLazyQuery>;
 export type GetUserRecipeListsQueryResult = Apollo.QueryResult<GetUserRecipeListsQuery, GetUserRecipeListsQueryVariables>;
@@ -13087,9 +13087,9 @@ export type InsertRecipeListMutationFn = Apollo.MutationFunction<InsertRecipeLis
  * });
  */
 export function useInsertRecipeListMutation(baseOptions?: Apollo.MutationHookOptions<InsertRecipeListMutation, InsertRecipeListMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<InsertRecipeListMutation, InsertRecipeListMutationVariables>(InsertRecipeListDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<InsertRecipeListMutation, InsertRecipeListMutationVariables>(InsertRecipeListDocument, options);
+}
 export type InsertRecipeListMutationHookResult = ReturnType<typeof useInsertRecipeListMutation>;
 export type InsertRecipeListMutationResult = Apollo.MutationResult<InsertRecipeListMutation>;
 export type InsertRecipeListMutationOptions = Apollo.BaseMutationOptions<InsertRecipeListMutation, InsertRecipeListMutationVariables>;
@@ -13120,9 +13120,9 @@ export type DeleteRecipeListMutationFn = Apollo.MutationFunction<DeleteRecipeLis
  * });
  */
 export function useDeleteRecipeListMutation(baseOptions?: Apollo.MutationHookOptions<DeleteRecipeListMutation, DeleteRecipeListMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<DeleteRecipeListMutation, DeleteRecipeListMutationVariables>(DeleteRecipeListDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<DeleteRecipeListMutation, DeleteRecipeListMutationVariables>(DeleteRecipeListDocument, options);
+}
 export type DeleteRecipeListMutationHookResult = ReturnType<typeof useDeleteRecipeListMutation>;
 export type DeleteRecipeListMutationResult = Apollo.MutationResult<DeleteRecipeListMutation>;
 export type DeleteRecipeListMutationOptions = Apollo.BaseMutationOptions<DeleteRecipeListMutation, DeleteRecipeListMutationVariables>;
@@ -13201,13 +13201,13 @@ export const ViewRecipeQueryDocument = gql`
  * });
  */
 export function useViewRecipeQueryQuery(baseOptions?: Apollo.QueryHookOptions<ViewRecipeQueryQuery, ViewRecipeQueryQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<ViewRecipeQueryQuery, ViewRecipeQueryQueryVariables>(ViewRecipeQueryDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<ViewRecipeQueryQuery, ViewRecipeQueryQueryVariables>(ViewRecipeQueryDocument, options);
+}
 export function useViewRecipeQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ViewRecipeQueryQuery, ViewRecipeQueryQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<ViewRecipeQueryQuery, ViewRecipeQueryQueryVariables>(ViewRecipeQueryDocument, options);
-        }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<ViewRecipeQueryQuery, ViewRecipeQueryQueryVariables>(ViewRecipeQueryDocument, options);
+}
 export type ViewRecipeQueryQueryHookResult = ReturnType<typeof useViewRecipeQueryQuery>;
 export type ViewRecipeQueryLazyQueryHookResult = ReturnType<typeof useViewRecipeQueryLazyQuery>;
 export type ViewRecipeQueryQueryResult = Apollo.QueryResult<ViewRecipeQueryQuery, ViewRecipeQueryQueryVariables>;
@@ -13239,9 +13239,9 @@ export type UpdateRecipeVideoMutationFn = Apollo.MutationFunction<UpdateRecipeVi
  * });
  */
 export function useUpdateRecipeVideoMutation(baseOptions?: Apollo.MutationHookOptions<UpdateRecipeVideoMutation, UpdateRecipeVideoMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateRecipeVideoMutation, UpdateRecipeVideoMutationVariables>(UpdateRecipeVideoDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<UpdateRecipeVideoMutation, UpdateRecipeVideoMutationVariables>(UpdateRecipeVideoDocument, options);
+}
 export type UpdateRecipeVideoMutationHookResult = ReturnType<typeof useUpdateRecipeVideoMutation>;
 export type UpdateRecipeVideoMutationResult = Apollo.MutationResult<UpdateRecipeVideoMutation>;
 export type UpdateRecipeVideoMutationOptions = Apollo.BaseMutationOptions<UpdateRecipeVideoMutation, UpdateRecipeVideoMutationVariables>;

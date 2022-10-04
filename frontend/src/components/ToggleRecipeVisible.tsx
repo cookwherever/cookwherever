@@ -17,13 +17,13 @@ interface ToggleRecipeVisibleProps {
   recipe: Recipes;
 }
 
-export const ToggleRecipeVisible: React.FunctionComponent<ToggleRecipeVisibleProps> = ({recipe}) => {
+export const ToggleRecipeVisible: React.FunctionComponent<ToggleRecipeVisibleProps> = ({ recipe }) => {
   const [hideRecipe, { loading: hideRecipeLoading, error: hideRecipeError }] = useMutation(HIDE_RECIPE);
   const doHideRecipe = async () => {
     await hideRecipe({
       variables: {
         id: recipe.id,
-      }
+      },
     });
   }
 

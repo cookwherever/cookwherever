@@ -18,7 +18,7 @@ import {
   isUiNodeAnchorAttributes,
   isUiNodeImageAttributes,
   isUiNodeInputAttributes, isUiNodeScriptAttributes,
-  isUiNodeTextAttributes
+  isUiNodeTextAttributes,
 } from '../../utils/nodes';
 import { NodeAnchor } from './NodeAnchor';
 import { NodeImage } from './NodeImage';

@@ -8,7 +8,7 @@ import { FocusedDirectionTimestamp, initialFocusedDirectionTimestamp, recipeView
 import {
   Recipes, RecipesQueryDocument,
   UpsertDirectionVideoTimestampDocument,
-  useUpsertDirectionVideoTimestampMutation
+  useUpsertDirectionVideoTimestampMutation,
 } from '../generated/graphql';
 
 interface VideoPlayerProps {
@@ -53,7 +53,7 @@ export const VideoPlayer: React.FunctionComponent<VideoPlayerProps> = ({ recipe 
     playerVars: {},
   };
 
-  const onReady = (event: {target: YouTubePlayer}) => {
+  const onReady = (event: { target: YouTubePlayer }) => {
     setPlayer(event.target);
   }
 
@@ -67,14 +67,14 @@ export const VideoPlayer: React.FunctionComponent<VideoPlayerProps> = ({ recipe 
       if (focusedDirectionTimestamp.position === 'start') {
         return {
           idx: focusedDirectionTimestamp.idx,
-          position: 'end'
+          position: 'end',
         }
       }
 
       if (focusedDirectionTimestamp.idx + 1 < recipe.recipe_directions.length) {
         return {
           idx: focusedDirectionTimestamp.idx + 1,
-          position: 'start'
+          position: 'start',
         }
       }
       return initialFocusedDirectionTimestamp;

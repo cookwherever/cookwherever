@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Printer } from '../providers/bluetooth/bluetooth';
 import { CanvasToBMP } from '../utils/image';

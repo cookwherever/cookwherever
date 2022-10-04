@@ -51,7 +51,7 @@ const RecipeSearchForm: React.FunctionComponent<RecipeSearchFormProps> = ({ reci
             onChange={(e) => {
               setRecipeSearch({
                 ...recipeSearch,
-                name: e.target.value
+                name: e.target.value,
               })
             }}
           />
@@ -62,7 +62,7 @@ const RecipeSearchForm: React.FunctionComponent<RecipeSearchFormProps> = ({ reci
             onChange={(e) => {
               setRecipeSearch({
                 ...recipeSearch,
-                source: e.target.value
+                source: e.target.value,
               })
             }}
           >
@@ -84,7 +84,7 @@ const RecipeSearchForm: React.FunctionComponent<RecipeSearchFormProps> = ({ reci
             onChange={(ingredients) => {
               setRecipeSearch({
                 ...recipeSearch,
-                ingredients
+                ingredients,
               })
             }}
           />
@@ -98,7 +98,7 @@ const RecipeSearchForm: React.FunctionComponent<RecipeSearchFormProps> = ({ reci
             onChange={(tags) => {
               setRecipeSearch({
                 ...recipeSearch,
-                tags
+                tags,
               })
             }}
           />
@@ -118,7 +118,7 @@ export const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
     name: urlSearchParams.get('name') || '',
     source: urlSearchParams.get('source') || '',
     ingredients: urlSearchParams.getAll('ingredients'),
-    tags: urlSearchParams.getAll('tags')
+    tags: urlSearchParams.getAll('tags'),
   });
 
   const debouncedRecipeSearch = useDebouncedCallback(setRecipeSearch, 500);

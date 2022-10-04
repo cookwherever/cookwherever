@@ -82,7 +82,7 @@ export const TextAnnotator = <T extends Span>(props: TextAnnotatorProps<T>) => {
     selection.empty()
   }
 
-  const handleSplitClick = (highlightClicked: (tag: string, value: string) => void) => ({ start, end }: {start: number, end: number}) => {
+  const handleSplitClick = (highlightClicked: (tag: string, value: string) => void) => ({ start, end }: { start: number, end: number }) => {
     // Find and remove the matching split.
     const splitIndex = props.value.findIndex(s => s.start === start && s.end === end)
 

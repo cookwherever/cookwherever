@@ -18,10 +18,10 @@ import {
   Recipe_Tags_Constraint,
   Recipe_Tags_Update_Column,
   Recipes,
-  Recipes_Insert_Input, useInsertRecipeMutation
+  Recipes_Insert_Input, useInsertRecipeMutation,
 } from '../generated/graphql'
 import ImageCropper from './ImageCropper';
-import slugify from "slugify";
+import slugify from 'slugify';
 
 const recipeSchema: JSONSchema7 = {
   'title': 'Recipe',
@@ -32,29 +32,29 @@ const recipeSchema: JSONSchema7 = {
     'source': { 'type': 'string' },
     'recipe_directions': {
       'type': 'array',
-      'items': { '$ref': '#/definitions/RecipeDirection' }
+      'items': { '$ref': '#/definitions/RecipeDirection' },
     },
     'recipe_ingredient_groups': {
       'type': 'array',
-      'items': { '$ref': '#/definitions/RecipeIngredientsGroup' }
+      'items': { '$ref': '#/definitions/RecipeIngredientsGroup' },
     },
     'recipe_tags': {
       'type': 'array',
-      'items': { '$ref': '#/definitions/RecipeTag' }
-    }
+      'items': { '$ref': '#/definitions/RecipeTag' },
+    },
   },
   'definitions': {
     'RecipeDirection': {
       'type': 'object',
       'properties': {
-        'step': { 'type': 'string' }
-      }
+        'step': { 'type': 'string' },
+      },
     },
     'RecipeIngredient': {
       'type': 'object',
       'properties': {
-        'text': { 'type': 'string' }
-      }
+        'text': { 'type': 'string' },
+      },
     },
     'RecipeIngredientsGroup': {
       'type': 'object',
@@ -62,27 +62,27 @@ const recipeSchema: JSONSchema7 = {
         'name': { 'type': 'string' },
         'group_ingredients': {
           'type': 'array',
-          'items': { '$ref': '#/definitions/RecipeIngredient' }
-        }
-      }
+          'items': { '$ref': '#/definitions/RecipeIngredient' },
+        },
+      },
     },
     'RecipeTag': {
       'type': 'object',
       'properties': {
-        'name': { 'type': 'string' }
-      }
-    }
-  }
+        'name': { 'type': 'string' },
+      },
+    },
+  },
 };
 
 const uiSchema = {
   'recipe_directions': {
     'items': {
       'step': {
-        'ui:widget': 'textarea'
-      }
-    }
-  }
+        'ui:widget': 'textarea',
+      },
+    },
+  },
 };
 
 const INSERT_RECIPE = gql`
@@ -130,9 +130,9 @@ export const SaveRecipeForm = () => {
           }),
           on_conflict: {
             constraint: Recipe_Ingredients_Constraint.RecipeIngredientsGroupIdSeqNumKey,
-            update_columns: [Recipe_Ingredients_Update_Column.Text]
-          }
-        }
+            update_columns: [Recipe_Ingredients_Update_Column.Text],
+          },
+        },
       }
     }
 
@@ -154,40 +154,40 @@ export const SaveRecipeForm = () => {
         on_conflict:
           {
             constraint: Recipe_Directions_Constraint.RecipeDirectionsRecipeIdSeqNumKey,
-            update_columns: [Recipe_Directions_Update_Column.Step]
-          }
+            update_columns: [Recipe_Directions_Update_Column.Step],
+          },
       },
       recipe_tags: {
         // HACK (breadchris) until types are picked up correctly, recipe_directions is not seen as nullable
         data: (recipe.recipe_tags || []).map((tag, idx) => {
           return {
             ...tag,
-            seq_num: idx
+            seq_num: idx,
           }
         }),
         on_conflict: {
           constraint: Recipe_Tags_Constraint.RecipeTagsRecipeIdNameKey,
-          update_columns: [Recipe_Tags_Update_Column.Name]
-        }
+          update_columns: [Recipe_Tags_Update_Column.Name],
+        },
       },
       recipe_ingredient_groups: {
         // HACK (breadchris) until types are picked up correctly, recipe_directions is not seen as nullable
         data: (recipe.recipe_ingredient_groups || []).map(formatRecipeIngredientGroup),
         on_conflict: {
           constraint: Recipe_Ingredient_Groups_Constraint.RecipeIngredientGroupsRecipeIdSeqNumKey,
-          update_columns: [Recipe_Ingredient_Groups_Update_Column.Name]
-        }
-      }
+          update_columns: [Recipe_Ingredient_Groups_Update_Column.Name],
+        },
+      },
     }
 
     try {
       const resp = await create({
         variables: {
-          recipe: newRecipe
-        }
+          recipe: newRecipe,
+        },
       })
-    } catch (e) {
-      console.error(e);
+    } catch (err) {
+      console.error(err);
     }
   }
 

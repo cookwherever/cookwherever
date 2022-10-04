@@ -63,7 +63,7 @@ export const Login = () => {
       .initializeSelfServiceLoginFlowForBrowsers(
         Boolean(refresh),
         aal ? String(aal) : undefined,
-        returnTo ? String(returnTo) : undefined
+        returnTo ? String(returnTo) : undefined,
       )
       .then(({ data }) => {
         dispatch(setLoginFlow(data));

@@ -34,7 +34,7 @@
       }
     ],
     "@typescript-eslint/no-explicit-any": [
-      "error",
+      "warn",
       {
         "ignoreRestArgs": true
       }
@@ -54,7 +54,7 @@
         "allowForLoopAfterthoughts": true
       }
     ],
-    "react/jsx-key": "error",
+    "react/jsx-key": "warn",
     "import/no-extraneous-dependencies": [
       "error",
       {

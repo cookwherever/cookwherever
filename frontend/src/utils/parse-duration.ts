@@ -53,11 +53,11 @@ ratioLookup.y = ratioLookup.d * 365.25
  * @return {Number}
  */
 
-export function parseDuration(str: string, format='ms'): number {
+export function parseDuration(str: string, format = 'ms'): number {
   let result = 0;
   // ignore commas/placeholders
   const parsedStr = str.replace(/(\d)[,_](\d)/g, '$1$2')
-  parsedStr.replace(durationRE, function (_, n: string, units: string){
+  parsedStr.replace(durationRE, function (_, n: string, units: string) {
     const ratio = unitRatio(units)
     if (ratio) result = (result || 0) + parseFloat(n) * ratio
     return '';

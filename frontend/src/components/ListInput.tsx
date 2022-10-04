@@ -14,7 +14,7 @@ const ListInput: React.FunctionComponent<ListProps> = ({
   value,
   maxListCount,
   header = 'Values',
-  placeholder = 'Enter text followed by ENTER...'
+  placeholder = 'Enter text followed by ENTER...',
 }) => {
   const [item, setItem] = React.useState('');
   const [list, setList] = useState<string[]>(value || []);
@@ -77,7 +77,7 @@ const ListInput: React.FunctionComponent<ListProps> = ({
         </thead>
         <tbody>
         {/* eslint-disable-next-line no-shadow */}
-          {list.map((item, i) => {
+          {list.map((listItem, i) => {
             // the keys are there to take care of react warning otherwise
             return (
               <tr key={i}>
@@ -89,7 +89,7 @@ const ListInput: React.FunctionComponent<ListProps> = ({
                   >
                     {String.fromCharCode(10006)}
                   </Button>
-                  {item}
+                  {listItem}
                 </td>
               </tr>
             );

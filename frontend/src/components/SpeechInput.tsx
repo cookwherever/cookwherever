@@ -1,6 +1,6 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-import {Button} from "@mui/material";
+import { Button } from '@mui/material';
 
 
 let recognition: { continuous: boolean; interimResults: boolean; onstart: () => void; onerror: (e: Event) => void; onend: (() => void) | null; onresult: (e: any) => void; stop: () => void; lang: any; start: () => void; } | undefined = undefined;

@@ -6,17 +6,17 @@ import {
   Recipe_Directions,
   Recipe_Ingredients,
   Recipes,
-  useUpsertDirectionVideoTimestampMutation
+  useUpsertDirectionVideoTimestampMutation,
 } from '../generated/graphql';
 import { inDeveloperMode } from '../recoil/selectors/view-mode';
 import {
   recipeViewerState,
-  TimestampPosition
+  TimestampPosition,
 } from '../recoil/atoms/recipe';
 import { Span } from './Annotator/span';
 import { TextAnnotator } from './Annotator/TextAnnotator';
 import { parseDuration } from '../utils/parse-duration';
-import {uuid} from "../utils/uuid";
+import { uuid } from '../utils/uuid';
 
 const INSERT_DIRECTION_VIDEO_TIMESTAMP = gql`
 mutation UpsertDirectionVideoTimestamp($video_timestamp: Int, $video_timestamp_end: Int, $id: Int) {
@@ -45,7 +45,7 @@ const RecipeDirectionRow: React.FunctionComponent<RecipeDirectionRowProps> = ({
   direction,
   goToTimestamp,
   showStepNumbers,
-  ingredientLookup
+  ingredientLookup,
 }) => {
   const developerMode = useRecoilValue(inDeveloperMode);
   const [recipeState, setRecipeState] = useRecoilState(recipeViewerState);
@@ -72,7 +72,7 @@ const RecipeDirectionRow: React.FunctionComponent<RecipeDirectionRowProps> = ({
 
   const colors = {
     time: '#84d2ff',
-    ing: '#ff8c69'
+    ing: '#ff8c69',
   } as Record<string, string>;
 
   useEffect(() => {
@@ -91,7 +91,7 @@ const RecipeDirectionRow: React.FunctionComponent<RecipeDirectionRowProps> = ({
         start: startIdx,
         end: endIdx,
         tag: 'time',
-        color: colors.time
+        color: colors.time,
       })
     }
 
@@ -113,7 +113,7 @@ const RecipeDirectionRow: React.FunctionComponent<RecipeDirectionRowProps> = ({
           start: startIdx,
           end: endIdx,
           tag: 'ing',
-          color: undefined
+          color: undefined,
         })
       }
     })
@@ -142,9 +142,9 @@ const RecipeDirectionRow: React.FunctionComponent<RecipeDirectionRowProps> = ({
                 {
                   id: uuid(),
                   stepNumber: idx + 1,
-                  time: duration
-                }
-              ]
+                  time: duration,
+                },
+              ],
             })
           }}
         />
@@ -172,7 +172,7 @@ const RecipeDirectionRow: React.FunctionComponent<RecipeDirectionRowProps> = ({
     const clipStart = timestamp ? `${Math.floor(timestamp / 60)}:${`00${timestamp % 60}`.slice(-2)}` : '';
     const clipEnd = timestampEnd ? `${Math.floor(timestampEnd / 60)}:${`00${timestampEnd % 60}`.slice(-2)}` : '';
 
-    const changeTimestamp = (position: TimestampPosition) => async (event: ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
+    const changeTimestamp = (position: TimestampPosition) => async (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       const parseTimestamp = () => {
         let errs = '';
         try {
@@ -211,13 +211,13 @@ const RecipeDirectionRow: React.FunctionComponent<RecipeDirectionRowProps> = ({
       })
     }
 
-    const setFocusedInput = (position: TimestampPosition) => (e: React.FocusEvent<HTMLInputElement|HTMLTextAreaElement>) => {
+    const setFocusedInput = (position: TimestampPosition) => (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setRecipeState({
         ...recipeState,
         focusedDirectionTimestamp: {
           idx,
           position,
-        }
+        },
       })
     }
 
@@ -279,7 +279,7 @@ const RecipeDirectionRow: React.FunctionComponent<RecipeDirectionRowProps> = ({
 export const RecipeDirections: React.FunctionComponent<RecipeDirectionsProps> = (
   {
     recipe,
-    showStepNumbers
+    showStepNumbers,
   }) => {
   const [currentDirection, setCurrentDirection] = useState<number | null>(null);
   const [recipeState, setRecipeState] = useRecoilState(recipeViewerState);
@@ -292,12 +292,12 @@ export const RecipeDirections: React.FunctionComponent<RecipeDirectionsProps> = 
 
       return {
         ...lookup,
-        [ingredient.name]: ingredient
+        [ingredient.name]: ingredient,
       }
     }, {} as Record<string, Recipe_Ingredients>)
     return {
       ...ingredients,
-      ...ingredientListLookup
+      ...ingredientListLookup,
     }
   }, {} as Record<string, Recipe_Ingredients>)
 
@@ -311,8 +311,8 @@ export const RecipeDirections: React.FunctionComponent<RecipeDirectionsProps> = 
             ...recipeState,
             currentRecipeStep: {
               timestamp: direction.video_timestamp,
-              timestampEnd: direction.video_timestamp_end || undefined
-            }
+              timestampEnd: direction.video_timestamp_end || undefined,
+            },
           });
         }
 

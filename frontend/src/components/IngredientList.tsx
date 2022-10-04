@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {Col, Form, Row} from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Col, Form, Row } from 'react-bootstrap';
 import { gql } from '@apollo/client';
 import { Recipe_Ingredient_Groups } from '../generated/graphql';
 import { IngredientGroup } from './IngredientGroup';
-import {inputChangeHandler} from "../utils/hook-helpers";
+import { inputChangeHandler } from '../utils/hook-helpers';
 
 const INSERT_INGREDIENT_VIDEO_TIMESTAMP = gql`
 mutation UpsertIngredientVideoTimestamp($id: Int_comparison_exp, $video_timestamp: Int, $video_timestamp_end: Int) {

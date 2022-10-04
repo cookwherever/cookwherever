@@ -82,7 +82,7 @@ export const CanvasToBMP = {
    */
   toBlob(canvas: HTMLCanvasElement) {
     return new Blob([this.toArrayBuffer(canvas)], {
-      type: 'image/bmp'
+      type: 'image/bmp',
     });
   },
 
@@ -100,5 +100,5 @@ export const CanvasToBMP = {
       bs += String.fromCharCode(buffer[i]);
     }
     return `data:image/bmp;base64,${  btoa(bs)}`;
-  }
+  },
 };

@@ -63,6 +63,8 @@
     "react-uuid": "^1.0.2",
     "react-youtube": "^7.14.0",
     "recoil": "0.1.2",
+    "@types/react-router": "^5.1.19",
+    "@types/youtube-player": "^5.5.5",
     "recoil-persist": "^4.0.0",
     "recoilize": "^2.0.1",
     "redux": "^4.0.5",
@@ -78,7 +80,9 @@
     "uniforms-bootstrap5": "^3.10.0-rc.0",
     "uniforms-bridge-graphql": "^3.5.5",
     "uniforms-material": "^3.5.5",
-    "yarn": "^1.22.10"
+    "yarn": "^1.22.10",
+    "@types/json-schema": "^7.0.11",
+    "@types/lodash.sortby": "^4.7.7"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.6.2",
@@ -95,7 +99,6 @@
     "@types/jest": "^26.0.9",
     "@types/jest-environment-puppeteer": "^4.4.0",
     "@types/lodash": "^4.14.177",
-    "@types/lodash.sortby": "^4.7.6",
     "@types/node": "^14.0.27",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.2",
@@ -108,7 +111,6 @@
     "@types/sinon": "^9.0.8",
     "@types/styled-components": "^5.1.2",
     "@types/web-bluetooth": "^0.0.14",
-    "@types/youtube-player": "^5.5.5",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-config-react-app": "^7.0.1",

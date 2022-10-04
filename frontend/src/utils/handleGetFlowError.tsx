@@ -18,7 +18,7 @@ import { RouteComponentProps } from 'react-router';
 export function handleGetFlowError<S>(
   navigate: RouteComponentProps['history'],
   flowType: 'login' | 'register' | 'settings' | 'recovery' | 'verification',
-  resetFlow: () => void
+  resetFlow: () => void,
 ) {
   return async (err: AxiosError) => {
     const data = err.response?.data as { error: { id: string }, redirect_browser_to: string };

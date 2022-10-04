@@ -15,7 +15,7 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 
 import { NodeInputProps } from './helpers';
-import {getNodeLabel} from "../../utils/nodes";
+import { getNodeLabel } from '../../utils/nodes';
 
 export function NodeInputSubmit<T>({ node, attributes, setValue, disabled, dispatchSubmit }: NodeInputProps) {
   console.log('auth button value is ', attributes.value);

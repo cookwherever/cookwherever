@@ -14,7 +14,7 @@
 import { AxiosError } from 'axios';
 
 import oryClient from '../utils/ory-client';
-import {History} from "history";
+import { History } from 'history';
 
 // Returns a function which will log the user out
 export function createLogoutHandler(navigate: History) {

@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 
-import {Button, Grid, Paper, styled, TextField} from '@material-ui/core';
+import { Button, Grid, Paper, styled, TextField } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { Face, Fingerprint } from '@material-ui/icons';
 import path from 'path';
 import { inputChangeHandler } from '../utils/hook-helpers';
 
 const RegisterPaper = styled(Paper)(({ theme }) => ({
-  margin: theme.spacing() * 2
+  margin: theme.spacing() * 2,
 }));
 
 const RegisterContent = styled('div')(({ theme }) => ({
-  padding: theme.spacing()
+  padding: theme.spacing(),
 }));
 
 interface LoginPageProps {
@@ -34,15 +34,15 @@ export const RegisterPage: React.FunctionComponent<LoginPageProps> = (props) => 
       method: 'POST',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         'email': email,
-        'password': password
-      })
+        'password': password,
+      }),
     })
 
-    const data = await resp.json() as {id: string, username: string, token: string}
+    const data = await resp.json() as { id: string, username: string, token: string }
     localStorage.setItem('token', data.token)
     history.push('/')
   }
