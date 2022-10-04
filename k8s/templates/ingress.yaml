@@ -16,6 +16,7 @@ spec:
   tls: # < placing a host in the TLS config will indicate a certificate should be created
     - hosts:
       - cookwherever.com
+      - recipes.cookwherever.com
       secretName: cookwherever-tls-secret
   rules:
     - host: cookwherever.com
