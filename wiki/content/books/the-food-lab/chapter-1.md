@@ -666,7 +666,8 @@ Caution: Moving hot baking sheets with grease can be dangerous. Use oven mitts t
 5. Press potatoes with rubber spatula
 6. [[season|Season]] potatoes with salt and pepper
 7. Cook
-	* Until: Potatoes are deep golden brown and crispy on the first side [1]
+	* Until: Potatoes are deep golden brown and crispy on the first side
+	* Note: Use the rubber spatula to gently lift the potatoes to peer under them
 	* Time: 7 minutes
 	* Also: Swirl and shake the pan occasionally
 	* Also: Bring plate to arms reach
@@ -687,9 +688,6 @@ Caution: Moving hot baking sheets with grease can be dangerous. Use oven mitts t
 	* Also: Swirl and shake the pan occasionally
 	* Also: Bring plate to arms reach
 17. Slide potato cake onto plate
-
-##### Notes
-[1] Use the rubber spatula to gently lift the potatoes to peer under them
 
 #### Variations 
 ##### Onion and mushrooms
@@ -743,9 +741,10 @@ TODO
 	2. Preheat oven to 400°F
 2. Spread potatoes out evenly on plate
 3. Cover potatoes with towel
-4. Microwave on high
+4. Microwave
 	- Until: Piercing a piece of potato can be done relatively easily. (the potato will still slightly under cooked)
 	- Time: 4 to 6 minutes
+	- Temperature: High
 ### Variations 
 
 ## Pancakes
@@ -780,11 +779,13 @@ See notes on [[baking-soda]]
 ### Directions
 1. Combine all-purpose flour, baking powder, baking soda, kosher salt, sugar in large bowl
 2. Whisk bowl
+
 ### Storage
 #### Container
 Air-tight
 #### Duration
 3 months
+
 ### Variations
 
 ## Light and Fluffy Buttermilk Pancakes
@@ -803,40 +804,361 @@ Air-tight
 - Optional: Maple Syrup
 ### Directions
 1. Pour Basic Dry Pancake Mix into large bowl
-2. Whisk egg whites in a medium bowl
+2. Whisk egg whites in medium bowl 
 	- Until: Stiff peaks form
-3. Whisk egg yolks, buttermilk, and sour cream
+3. Whisk egg yolks, buttermilk, and sour cream in large bowl
 	- Until: Homogeneous
-	- Also: Drizzle butter
-4. 
+4. Drizzle butter slowly into $2
+    - Also: Whisk
+5. Fold egg whites into $4
+    - Until: Just combined
+6. Pour $5 into $1
+7. Fold $6
+    - Until: Just combined
+8. Heat nonstick skillet
+	- Temperature: Medium
+	- Time: 5 minutes
+9. Add 1 tbsp butter to nonstick skillet
+10. Spread butter in $9
+    - With: Paper towel
+    - Until: No visible streaks of butter
+11. Add 1/4 cup of batter to $10
+    - Until: Skillet is full with batter
+    - Details: Batter should not touch
+12. Cook
+	- Until: Bubbles appear on top of pancake
+	- Until: Bottoms are golden brown
+	- Time: 2 minutes
+13. Flip pancakes
+14. Cook
+	- Until: Bottoms are golden brown
+	- Time: 2 minutes
+
+### Storage
+#### Keep Warm
+Wire rack on baking sheet in oven.
+
+### Serve
+- Maple syrup
+- Butter
+
 ### Variations 
 
 ## Waffles
 ### Concepts
+- Belgian waffle - Yeasted, chewy
+- American-style - [[quick-breads]]
+- Carbonated water adds bubbles to the batter to make it lighter
+	- Any carbonated drink will do; beer, sparkling water (even flavored)
+	- Club soda is best due to sodium helping retain bubbles
 ### Equipment
+- Electric waffle iron
+	- Sub: Stovetop waffle iron
+- Large bowl
+- Medium bowl
+- Large bowl
+- Rubber spatula
 ### Ingredients
+- 1 recipe Basic Dry Pancake Mix
+- 2 large eggs
+	- Prep: Seperate whites from yolks.
+- 1 1/2 cups buttermilk
+- 4 tbsp unsalted butter
+	- Prep: Melted
+- 1 cup club soda
+	- Prep: Chilled
+	- Note: Colder is better, but not frozen.
+- 1 tsp vanilla extract
+- Butter
+	- Sub: Oil
 ### Directions
+1. Preheat electric waffle iron
+	- Temperature: Low
+2. Add dry mix to large bowl
+3. Add egg whites to medium bowl
+4. Whisk medium bowl
+	- Until: Stiff peaks
+5. Add egg yolks and buttermilk to large bowl
+6. Whisk large bowl
+	- Until: Homogeneous
+	- Also: Drizzle butter slowly into bowl.
+7. Add egg whites into yolk mixture
+8. Fold mixture with rubber spatula
+	- Untli: Just combined
+9. Add soda water into mixture
+10. Fold mixture with rubber spatula
+	- Untli: Just combined
+11. Add mixture to dry mix
+12. Fold mixture with rubber spatula
+	- Untli: Just combined
+	- Observe: There should be visible lumps
+13. Scoop 1/4 cup of batter into each well of waffle iron
+14. Close waffle iron
+15. Flip waffle iron
+16. Cook
+	- Until: Waffles are golden brown
+	- Also: Occasionally flip waffle iron
+	- Time: 10 minutes
+17. Remove waffles from iron
+	- Note: A fork may help flip up a waffle if they are hard to get out.
+18. Repeat 13 - 17
+	- Until: No more batter remains
+
+#### Storage
+#### Keep Warm
+Wire rack, on baking sheet in oven set to 200° F.
+
 ### Variations 
+- Orange-scented
+- Maple Bacon
 
 ## Ricotta
 ### Concepts
+- _Ricotta_ means "recooked"
+- Made by adding acid to heated whey
+	- Whey is typically from Pecorino Romano production
+- Heat and acid binds proteins in milk together
+	- Mostly the casein protein
+- Bound proteins trap moisture and fat resulting in soft, white curds
+- Curds are removed from the milk
+	- When drained, flavor is concentrated and texture is emphasized
+- Store bough ricotta is not drained
+	- The process of draining has to be done carefully to avoid damaging the curds, this can be expensive.
+	- Result is a rubbery paste
+- Ricotta should be creamy, tender and a tang from the acid added during cooking
+
+#### Acid added during cooking
+- Buttermilk
+	- 1:4 ratio is needed to curdle milk, which imparts strong sour flavor
+- Distilled vinegar
+	- 5% acetic acid
+	- Clean flavor
+	- Consistent with fresh milk
+		- Mlik gets more acidic over time
+- Lemon juice
+	- Acidity is not consistent, amount may vary based on lemon
+	- Imparts slight citrius flavor
+
+#### Affect of Draining Time on Texture
+| Time | Texture | Best Uses |
+| ---- | ------- | --------- |
+| < 5 min | Moist and creamy with small, tender curds. Similar to cottage cheese | Use immediately. Serve with olive oil, salt, pepper. Dessert with honey and fruit. |
+| 15 to 20 min | Moist and spreadable. Not runny. | Moist and savory (lasagna, pizza). Pancake batter. |
+| 2 to 8 hours (refrigerated) | Large, dry, crumbly curds. Moldable. | Cakes and pasta. |
+
+#### Pasturizing Milk Techniques
+| Technique | Temperature | Time | Notes |
+| --------- | ----------- | ---- | ----- |
+| Regular | 161°F | 20 seconds | Few weeks of shelf life. Most supermarket milk. |
+| Ultra High Temperature (UHT) | 275°F | 1 second | Several month shelf life (in a proper container, can be unrefrigerated for years). |
+| Low-Temperature | 145°F | 30 minutes | Small farms use this method. Does not impart "cooked" flavor. Packaging will not indicate this method is used. |
+
+- Higher temperature used when pasteurizing milk, the more breakdown in proteins and sugars
+	- Complex carbohydrates are broken down into simple sugars, which taste sweet
+- UHT does not coagulate as well
+
 ### Equipment
+- Cheesecloth
+	- Sub: Paper towels
+- Large bowl
+- 2-quart measuring cup
+- Slotted spoon
+	- Sub: Wire skimmer
+- Plastic wrap
 ### Ingredients
+- 4 cups whole milk
+- 1/2 teaspoon salt
+- 1/4 cup distilled white vinegar
+	- Sub: Lemon juice 
+
 ### Directions
-### Variations 
+1. Line colander with four layers of cheesecloth
+2. Place colander over large bowl
+3. Combine milk, salt, vinegar in 2-quart measuring cup
+4. Microwave
+	- Temperature: High
+	- Time: 4 minutes
+	- Until: Bubbling around edges or milk is 165°F
+5. Remove measuring cup from microwave
+6. Stir gently
+	- Time: 5 seconds
+	- Observe: Milk separates into curds, solid white, and liquid whey, translucent
+7. If not seperated after stiring, microwave
+	- Temperature: High
+	- Time: 30 seconds
+	- Repeat: Until milk separates into curds
+8. Transfer curds with slotted spoon to colander
+9. Cover colander with plastic wrap
+10. Drain
+	- Until: Desired texture (see table)
+
+### Storage
+Covered in refrigerator up to 5 days
 
 ## Biscuits
 ### Concepts
+- batter and dough
+	- flour
+	- butter
+	- baking powder
+	- baking soda
+	- liquid dairy 
+- batter
+	- fluffy, tender, flat
+	- butter is melted and added
+	- flour + water = gluten
+- dough
+	- tall, flaky, crisp
+	- butter is added while it is cold
+	- flour + just butter = less gluten
+- fat from butter gets in the way of the gluten network from growing
+- you want to form some gluten so things hold, but too much and biscuits will be tough
+- rolling out biscuit squishes the chunks of butter into flat, thin layers (this is what gives biscuts their layers)
+#### Baking
+- butter melts, leaving fat while the water is vaporized
+- Vaporized water from the butter and dough create a bubble that expands, creating an expanded space in the gluten network
+- Baking powder and soda also leaven the dough, adding more spaces in the network
+- As the water is removed from the dough, the starches from the flour become hard and the biscuit starts to come set and hold its shape
+- The expanded spaces now hold their shape on their own
+
+#### Folding
+- Handling the dough more will transfer heat into the dough, warming up the butter, and increase the amount of gluten being formed
+	- Butter that is warmed up will start to seep out water, which is absorbed by the flour and converted to gluten
+	- Pressing the dough over and over will cause more gluten to form
+- Food processing butter into the flour will chop up the butter quickly, without transfering heat into the dough
+- Folding the dough onto itself will increase the number of layers of butter and flour
+	- Think about croissants and puff pasteries, biscuit layers are not as volumous, but are essentially the same
+- Scone is essentially a sweetend biscuit 
+
 ### Equipment
+- Oven
+- Food processor
+- Clean surface
+	- Size: 2 feet by 2 feet
+- Rolling pin
+- Bench scraper
+- Parchment paper
+- Baking sheet
 ### Ingredients
+- 1/2 cup buttermilk
+- 1/2 cup sour cream
+- 10 ounces (2 cups) all-purpose flour
+- 1 tbsp baking powder
+- 1/4 tsp baking soda
+- 1 1/2 tsp salt
+- 8 tbsp (1 stick) unsalted butter
+	- Prep:
+		- Chilled
+		- Cut into 1/4 inch bits
+- 2 tbsp unsalted butter
+	- Prep: Melted
 ### Directions
+1. Place oven rack in the middle position
+2. Preheat oven to 425°F
+3. Add buttermilk and sour cream into small bowl
+4. Whisk mixture
+	- Until: Combined
+5. Add flour, baking powder, baking soda, and salt to food processor bowl
+6. Blend mixture with food processor
+	- Until: Blended
+	- Time: 2 seconds
+7. Add butter to food processor bowl
+8. Pulse mixture with food processor
+	- Until: Mixture has small clumps and butter is at most 1/4 inch
+9. Pour food processor bowl into large bowl
+10. Add buttermilk mixture to flour mixture
+11. Fold mixture with rubber spatula
+	- Until: Combined
+12. Dust work surface with flour
+13. Place dough on floured work surface
+14. Press dough together
+	- Note: If dough is too sticky, dust dough with flour
+15. Roll dough into 12 inch square
+16. Laminate dough
+    - Note: Use a bench scraper to lift dough from work surface.
+	- Note: Visualizing the dough split into thirds, fold the left section over the middle section, fold the right section over the folded left section, so that all the sections overlap each other. You will end up with a 12 inch by 4 inch rectangle.
+17. Laminate dough
+    - Note: Use a bench scraper to lift dough from work surface.
+	- Note: Visualizing the dough split into thirds, fold the top section over the middle section, fold the bottom section over the folded top section, all sections will overlap each other. You will end up with a 4 inch square.
+18. Repeat 15 - 17
+19. Roll dough into 12 inch square
+20. Cut dough into 6 parts
+	- Note: You can use a biscuit cutter
+22. Place parchment paper on baking sheet
+21. Place biscuits on baking sheet
+	- Note: Spaced 1 inch apart
+22. Brush tops of biscuits with melted butter
+23. Bake
+	- Until: Golden brown
+	- Time: 15 minutes
+	- Also: Rotate pan halfway through baking
+
 ### Variations 
+- Cheddar cheese and scallion 
+- Bacon parmesan
+- Flaky scone
 
 ## Sticky Buns
 ### Concepts
+- enriched dough
+	- standard dough (flour, water, salt, leavener) + fat
+	- eggs and butter
+	- milk and yogurt also introduce fat
+- less fat
+	- more gluten
+	- stronger network
+	- larger holes in crumb
+	- chewier
+- more fat
+	- fat gets in the way of gluten forming (water + flour), breaks up continuous network
+	- softer
+	- richer
+- gluten is kind of like noodles (noodles are made up of gluten, so they are like larger gluten network lol)
+	- noodles that have just been cooked in water are somewhat sticky. They clump and cling to each other to create a cohesive mass that wants to stay with each other.
+	- Once you put butter, oil, or some other fat on the noodles, they start to slide around each other more easily. They no longer clump as much.
+- yeast consumes sugars and turns them into carbon dioxide (trapped in the gluten network to form bubbles), alcohol, and aromatic flavors
+	- chemically leavening bread with baking soda compromises flavor
+- add too much yeast and the flavor is bitter and distincly "yeasty"
+
 ### Equipment
 ### Ingredients
+#### Dough
+- 3 large eggs
+- 1/3 cup packed light brown sugar
+- 3/4 cup buttermilk
+- 2 tsp kosher
+- 2 tsp instant yeast
+- 6 tbsp unsalted butter
+	- Prep: Melted
+- 20 oz (4 cups) all-purpose flour
+
+#### Pecan-Caramel Sauce
+- 4 tbsp unsalted butter
+- 2/3 cup packed light brown sugar
+- 3 tbsp buttermilk
+- 4 oz (1 cup) pecans
+	- Prep:
+		- Toasted at 400°F
+		- Coarsely chopped
+- Pinch of kosher salt
+
+#### Filling
+- 2/3 cup package light brown sugar
+- 1 tbsp ground cinnamon
+- 2 tbsp unsalted butter
+	- Prep: Melted
+
+#### Orange Cream Cheese Glaze
+- 4 oz cream cheese
+- 1/4 cup buttermilk
+- 1 1/2 cup powdered sugar
+- 1 tbsp grated orange zest
+- 2 tbsp orange juice
+- Pinch of kosher salt
+
 ### Directions
+TODO
+
 ### Variations 
 
 ### Food

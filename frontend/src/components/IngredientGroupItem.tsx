@@ -18,11 +18,11 @@ export const IngredientGroupItem: React.FunctionComponent<IngredientGroupItemPro
   const [recipeState, setRecipeState] = useRecoilState(recipeViewerState);
 
   const getIngredientConversion = () => {
-    if (!ingredient.ingredient || ingredient.ingredient.length === 0) {
+    if (!ingredient.ingredient) {
       return null;
     }
 
-    const recipeIngredient = ingredient.ingredient[0];
+    const recipeIngredient = ingredient.ingredient;
     const candidate = recipeIngredient.ingredient_food_candidate;
     if (!candidate) {
       console.error(`candidate is null for ${recipeIngredient}`);
