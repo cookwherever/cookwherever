@@ -14,7 +14,6 @@ export type Scalars = {
   Int: number;
   Float: number;
   bigint: any;
-  citext: any;
   float8: any;
   food_data_type_enum: any;
   jsonb: any;
@@ -96,1025 +95,6 @@ export type String_Comparison_Exp = {
   _similar?: InputMaybe<Scalars['String']>;
 };
 
-/** columns and relationships of "auth.provider_requests" */
-export type AuthProviderRequests = {
-  __typename?: 'authProviderRequests';
-  id: Scalars['uuid'];
-  options?: Maybe<Scalars['jsonb']>;
-};
-
-
-/** columns and relationships of "auth.provider_requests" */
-export type AuthProviderRequestsOptionsArgs = {
-  path?: InputMaybe<Scalars['String']>;
-};
-
-/** aggregated selection of "auth.provider_requests" */
-export type AuthProviderRequests_Aggregate = {
-  __typename?: 'authProviderRequests_aggregate';
-  aggregate?: Maybe<AuthProviderRequests_Aggregate_Fields>;
-  nodes: Array<AuthProviderRequests>;
-};
-
-/** aggregate fields of "auth.provider_requests" */
-export type AuthProviderRequests_Aggregate_Fields = {
-  __typename?: 'authProviderRequests_aggregate_fields';
-  count: Scalars['Int'];
-  max?: Maybe<AuthProviderRequests_Max_Fields>;
-  min?: Maybe<AuthProviderRequests_Min_Fields>;
-};
-
-
-/** aggregate fields of "auth.provider_requests" */
-export type AuthProviderRequests_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<AuthProviderRequests_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** append existing jsonb value of filtered columns with new jsonb value */
-export type AuthProviderRequests_Append_Input = {
-  options?: InputMaybe<Scalars['jsonb']>;
-};
-
-/** Boolean expression to filter rows from the table "auth.provider_requests". All fields are combined with a logical 'AND'. */
-export type AuthProviderRequests_Bool_Exp = {
-  _and?: InputMaybe<Array<AuthProviderRequests_Bool_Exp>>;
-  _not?: InputMaybe<AuthProviderRequests_Bool_Exp>;
-  _or?: InputMaybe<Array<AuthProviderRequests_Bool_Exp>>;
-  id?: InputMaybe<Uuid_Comparison_Exp>;
-  options?: InputMaybe<Jsonb_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "auth.provider_requests" */
-export enum AuthProviderRequests_Constraint {
-  /** unique or primary key constraint */
-  ProviderRequestsPkey = 'provider_requests_pkey',
-}
-
-/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
-export type AuthProviderRequests_Delete_At_Path_Input = {
-  options?: InputMaybe<Array<Scalars['String']>>;
-};
-
-/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
-export type AuthProviderRequests_Delete_Elem_Input = {
-  options?: InputMaybe<Scalars['Int']>;
-};
-
-/** delete key/value pair or string element. key/value pairs are matched based on their key value */
-export type AuthProviderRequests_Delete_Key_Input = {
-  options?: InputMaybe<Scalars['String']>;
-};
-
-/** input type for inserting data into table "auth.provider_requests" */
-export type AuthProviderRequests_Insert_Input = {
-  id?: InputMaybe<Scalars['uuid']>;
-  options?: InputMaybe<Scalars['jsonb']>;
-};
-
-/** aggregate max on columns */
-export type AuthProviderRequests_Max_Fields = {
-  __typename?: 'authProviderRequests_max_fields';
-  id?: Maybe<Scalars['uuid']>;
-};
-
-/** aggregate min on columns */
-export type AuthProviderRequests_Min_Fields = {
-  __typename?: 'authProviderRequests_min_fields';
-  id?: Maybe<Scalars['uuid']>;
-};
-
-/** response of any mutation on the table "auth.provider_requests" */
-export type AuthProviderRequests_Mutation_Response = {
-  __typename?: 'authProviderRequests_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<AuthProviderRequests>;
-};
-
-/** on_conflict condition type for table "auth.provider_requests" */
-export type AuthProviderRequests_On_Conflict = {
-  constraint: AuthProviderRequests_Constraint;
-  update_columns?: Array<AuthProviderRequests_Update_Column>;
-  where?: InputMaybe<AuthProviderRequests_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "auth.provider_requests". */
-export type AuthProviderRequests_Order_By = {
-  id?: InputMaybe<Order_By>;
-  options?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: authProviderRequests */
-export type AuthProviderRequests_Pk_Columns_Input = {
-  id: Scalars['uuid'];
-};
-
-/** prepend existing jsonb value of filtered columns with new jsonb value */
-export type AuthProviderRequests_Prepend_Input = {
-  options?: InputMaybe<Scalars['jsonb']>;
-};
-
-/** select columns of table "auth.provider_requests" */
-export enum AuthProviderRequests_Select_Column {
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Options = 'options',
-}
-
-/** input type for updating data in table "auth.provider_requests" */
-export type AuthProviderRequests_Set_Input = {
-  id?: InputMaybe<Scalars['uuid']>;
-  options?: InputMaybe<Scalars['jsonb']>;
-};
-
-/** update columns of table "auth.provider_requests" */
-export enum AuthProviderRequests_Update_Column {
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Options = 'options',
-}
-
-/** columns and relationships of "auth.providers" */
-export type AuthProviders = {
-  __typename?: 'authProviders';
-  id: Scalars['String'];
-  /** An array relationship */
-  userProviders: Array<AuthUserProviders>;
-  /** An aggregate relationship */
-  userProviders_aggregate: AuthUserProviders_Aggregate;
-};
-
-
-/** columns and relationships of "auth.providers" */
-export type AuthProvidersUserProvidersArgs = {
-  distinct_on?: InputMaybe<Array<AuthUserProviders_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthUserProviders_Order_By>>;
-  where?: InputMaybe<AuthUserProviders_Bool_Exp>;
-};
-
-
-/** columns and relationships of "auth.providers" */
-export type AuthProvidersUserProviders_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<AuthUserProviders_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthUserProviders_Order_By>>;
-  where?: InputMaybe<AuthUserProviders_Bool_Exp>;
-};
-
-/** aggregated selection of "auth.providers" */
-export type AuthProviders_Aggregate = {
-  __typename?: 'authProviders_aggregate';
-  aggregate?: Maybe<AuthProviders_Aggregate_Fields>;
-  nodes: Array<AuthProviders>;
-};
-
-/** aggregate fields of "auth.providers" */
-export type AuthProviders_Aggregate_Fields = {
-  __typename?: 'authProviders_aggregate_fields';
-  count: Scalars['Int'];
-  max?: Maybe<AuthProviders_Max_Fields>;
-  min?: Maybe<AuthProviders_Min_Fields>;
-};
-
-
-/** aggregate fields of "auth.providers" */
-export type AuthProviders_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<AuthProviders_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** Boolean expression to filter rows from the table "auth.providers". All fields are combined with a logical 'AND'. */
-export type AuthProviders_Bool_Exp = {
-  _and?: InputMaybe<Array<AuthProviders_Bool_Exp>>;
-  _not?: InputMaybe<AuthProviders_Bool_Exp>;
-  _or?: InputMaybe<Array<AuthProviders_Bool_Exp>>;
-  id?: InputMaybe<String_Comparison_Exp>;
-  userProviders?: InputMaybe<AuthUserProviders_Bool_Exp>;
-};
-
-/** unique or primary key constraints on table "auth.providers" */
-export enum AuthProviders_Constraint {
-  /** unique or primary key constraint */
-  ProvidersPkey = 'providers_pkey',
-}
-
-/** input type for inserting data into table "auth.providers" */
-export type AuthProviders_Insert_Input = {
-  id?: InputMaybe<Scalars['String']>;
-  userProviders?: InputMaybe<AuthUserProviders_Arr_Rel_Insert_Input>;
-};
-
-/** aggregate max on columns */
-export type AuthProviders_Max_Fields = {
-  __typename?: 'authProviders_max_fields';
-  id?: Maybe<Scalars['String']>;
-};
-
-/** aggregate min on columns */
-export type AuthProviders_Min_Fields = {
-  __typename?: 'authProviders_min_fields';
-  id?: Maybe<Scalars['String']>;
-};
-
-/** response of any mutation on the table "auth.providers" */
-export type AuthProviders_Mutation_Response = {
-  __typename?: 'authProviders_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<AuthProviders>;
-};
-
-/** input type for inserting object relation for remote table "auth.providers" */
-export type AuthProviders_Obj_Rel_Insert_Input = {
-  data: AuthProviders_Insert_Input;
-  /** upsert condition */
-  on_conflict?: InputMaybe<AuthProviders_On_Conflict>;
-};
-
-/** on_conflict condition type for table "auth.providers" */
-export type AuthProviders_On_Conflict = {
-  constraint: AuthProviders_Constraint;
-  update_columns?: Array<AuthProviders_Update_Column>;
-  where?: InputMaybe<AuthProviders_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "auth.providers". */
-export type AuthProviders_Order_By = {
-  id?: InputMaybe<Order_By>;
-  userProviders_aggregate?: InputMaybe<AuthUserProviders_Aggregate_Order_By>;
-};
-
-/** primary key columns input for table: authProviders */
-export type AuthProviders_Pk_Columns_Input = {
-  id: Scalars['String'];
-};
-
-/** select columns of table "auth.providers" */
-export enum AuthProviders_Select_Column {
-  /** column name */
-  Id = 'id',
-}
-
-/** input type for updating data in table "auth.providers" */
-export type AuthProviders_Set_Input = {
-  id?: InputMaybe<Scalars['String']>;
-};
-
-/** update columns of table "auth.providers" */
-export enum AuthProviders_Update_Column {
-  /** column name */
-  Id = 'id',
-}
-
-/** columns and relationships of "auth.refresh_tokens" */
-export type AuthRefreshTokens = {
-  __typename?: 'authRefreshTokens';
-  createdAt: Scalars['timestamptz'];
-  expiresAt: Scalars['timestamptz'];
-  refreshToken: Scalars['uuid'];
-  /** An object relationship */
-  user: Users;
-  userId: Scalars['uuid'];
-};
-
-/** aggregated selection of "auth.refresh_tokens" */
-export type AuthRefreshTokens_Aggregate = {
-  __typename?: 'authRefreshTokens_aggregate';
-  aggregate?: Maybe<AuthRefreshTokens_Aggregate_Fields>;
-  nodes: Array<AuthRefreshTokens>;
-};
-
-/** aggregate fields of "auth.refresh_tokens" */
-export type AuthRefreshTokens_Aggregate_Fields = {
-  __typename?: 'authRefreshTokens_aggregate_fields';
-  count: Scalars['Int'];
-  max?: Maybe<AuthRefreshTokens_Max_Fields>;
-  min?: Maybe<AuthRefreshTokens_Min_Fields>;
-};
-
-
-/** aggregate fields of "auth.refresh_tokens" */
-export type AuthRefreshTokens_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<AuthRefreshTokens_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** order by aggregate values of table "auth.refresh_tokens" */
-export type AuthRefreshTokens_Aggregate_Order_By = {
-  count?: InputMaybe<Order_By>;
-  max?: InputMaybe<AuthRefreshTokens_Max_Order_By>;
-  min?: InputMaybe<AuthRefreshTokens_Min_Order_By>;
-};
-
-/** input type for inserting array relation for remote table "auth.refresh_tokens" */
-export type AuthRefreshTokens_Arr_Rel_Insert_Input = {
-  data: Array<AuthRefreshTokens_Insert_Input>;
-  /** upsert condition */
-  on_conflict?: InputMaybe<AuthRefreshTokens_On_Conflict>;
-};
-
-/** Boolean expression to filter rows from the table "auth.refresh_tokens". All fields are combined with a logical 'AND'. */
-export type AuthRefreshTokens_Bool_Exp = {
-  _and?: InputMaybe<Array<AuthRefreshTokens_Bool_Exp>>;
-  _not?: InputMaybe<AuthRefreshTokens_Bool_Exp>;
-  _or?: InputMaybe<Array<AuthRefreshTokens_Bool_Exp>>;
-  createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
-  expiresAt?: InputMaybe<Timestamptz_Comparison_Exp>;
-  refreshToken?: InputMaybe<Uuid_Comparison_Exp>;
-  user?: InputMaybe<Users_Bool_Exp>;
-  userId?: InputMaybe<Uuid_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "auth.refresh_tokens" */
-export enum AuthRefreshTokens_Constraint {
-  /** unique or primary key constraint */
-  RefreshTokensPkey = 'refresh_tokens_pkey',
-}
-
-/** input type for inserting data into table "auth.refresh_tokens" */
-export type AuthRefreshTokens_Insert_Input = {
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
-  expiresAt?: InputMaybe<Scalars['timestamptz']>;
-  refreshToken?: InputMaybe<Scalars['uuid']>;
-  user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
-  userId?: InputMaybe<Scalars['uuid']>;
-};
-
-/** aggregate max on columns */
-export type AuthRefreshTokens_Max_Fields = {
-  __typename?: 'authRefreshTokens_max_fields';
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  expiresAt?: Maybe<Scalars['timestamptz']>;
-  refreshToken?: Maybe<Scalars['uuid']>;
-  userId?: Maybe<Scalars['uuid']>;
-};
-
-/** order by max() on columns of table "auth.refresh_tokens" */
-export type AuthRefreshTokens_Max_Order_By = {
-  createdAt?: InputMaybe<Order_By>;
-  expiresAt?: InputMaybe<Order_By>;
-  refreshToken?: InputMaybe<Order_By>;
-  userId?: InputMaybe<Order_By>;
-};
-
-/** aggregate min on columns */
-export type AuthRefreshTokens_Min_Fields = {
-  __typename?: 'authRefreshTokens_min_fields';
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  expiresAt?: Maybe<Scalars['timestamptz']>;
-  refreshToken?: Maybe<Scalars['uuid']>;
-  userId?: Maybe<Scalars['uuid']>;
-};
-
-/** order by min() on columns of table "auth.refresh_tokens" */
-export type AuthRefreshTokens_Min_Order_By = {
-  createdAt?: InputMaybe<Order_By>;
-  expiresAt?: InputMaybe<Order_By>;
-  refreshToken?: InputMaybe<Order_By>;
-  userId?: InputMaybe<Order_By>;
-};
-
-/** response of any mutation on the table "auth.refresh_tokens" */
-export type AuthRefreshTokens_Mutation_Response = {
-  __typename?: 'authRefreshTokens_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<AuthRefreshTokens>;
-};
-
-/** on_conflict condition type for table "auth.refresh_tokens" */
-export type AuthRefreshTokens_On_Conflict = {
-  constraint: AuthRefreshTokens_Constraint;
-  update_columns?: Array<AuthRefreshTokens_Update_Column>;
-  where?: InputMaybe<AuthRefreshTokens_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "auth.refresh_tokens". */
-export type AuthRefreshTokens_Order_By = {
-  createdAt?: InputMaybe<Order_By>;
-  expiresAt?: InputMaybe<Order_By>;
-  refreshToken?: InputMaybe<Order_By>;
-  user?: InputMaybe<Users_Order_By>;
-  userId?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: authRefreshTokens */
-export type AuthRefreshTokens_Pk_Columns_Input = {
-  refreshToken: Scalars['uuid'];
-};
-
-/** select columns of table "auth.refresh_tokens" */
-export enum AuthRefreshTokens_Select_Column {
-  /** column name */
-  CreatedAt = 'createdAt',
-  /** column name */
-  ExpiresAt = 'expiresAt',
-  /** column name */
-  RefreshToken = 'refreshToken',
-  /** column name */
-  UserId = 'userId',
-}
-
-/** input type for updating data in table "auth.refresh_tokens" */
-export type AuthRefreshTokens_Set_Input = {
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
-  expiresAt?: InputMaybe<Scalars['timestamptz']>;
-  refreshToken?: InputMaybe<Scalars['uuid']>;
-  userId?: InputMaybe<Scalars['uuid']>;
-};
-
-/** update columns of table "auth.refresh_tokens" */
-export enum AuthRefreshTokens_Update_Column {
-  /** column name */
-  CreatedAt = 'createdAt',
-  /** column name */
-  ExpiresAt = 'expiresAt',
-  /** column name */
-  RefreshToken = 'refreshToken',
-  /** column name */
-  UserId = 'userId',
-}
-
-/** columns and relationships of "auth.roles" */
-export type AuthRoles = {
-  __typename?: 'authRoles';
-  role: Scalars['String'];
-  /** An array relationship */
-  userRoles: Array<AuthUserRoles>;
-  /** An aggregate relationship */
-  userRoles_aggregate: AuthUserRoles_Aggregate;
-  /** An array relationship */
-  usersByDefaultRole: Array<Users>;
-  /** An aggregate relationship */
-  usersByDefaultRole_aggregate: Users_Aggregate;
-};
-
-
-/** columns and relationships of "auth.roles" */
-export type AuthRolesUserRolesArgs = {
-  distinct_on?: InputMaybe<Array<AuthUserRoles_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthUserRoles_Order_By>>;
-  where?: InputMaybe<AuthUserRoles_Bool_Exp>;
-};
-
-
-/** columns and relationships of "auth.roles" */
-export type AuthRolesUserRoles_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<AuthUserRoles_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthUserRoles_Order_By>>;
-  where?: InputMaybe<AuthUserRoles_Bool_Exp>;
-};
-
-
-/** columns and relationships of "auth.roles" */
-export type AuthRolesUsersByDefaultRoleArgs = {
-  distinct_on?: InputMaybe<Array<Users_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Users_Order_By>>;
-  where?: InputMaybe<Users_Bool_Exp>;
-};
-
-
-/** columns and relationships of "auth.roles" */
-export type AuthRolesUsersByDefaultRole_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Users_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Users_Order_By>>;
-  where?: InputMaybe<Users_Bool_Exp>;
-};
-
-/** aggregated selection of "auth.roles" */
-export type AuthRoles_Aggregate = {
-  __typename?: 'authRoles_aggregate';
-  aggregate?: Maybe<AuthRoles_Aggregate_Fields>;
-  nodes: Array<AuthRoles>;
-};
-
-/** aggregate fields of "auth.roles" */
-export type AuthRoles_Aggregate_Fields = {
-  __typename?: 'authRoles_aggregate_fields';
-  count: Scalars['Int'];
-  max?: Maybe<AuthRoles_Max_Fields>;
-  min?: Maybe<AuthRoles_Min_Fields>;
-};
-
-
-/** aggregate fields of "auth.roles" */
-export type AuthRoles_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<AuthRoles_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** Boolean expression to filter rows from the table "auth.roles". All fields are combined with a logical 'AND'. */
-export type AuthRoles_Bool_Exp = {
-  _and?: InputMaybe<Array<AuthRoles_Bool_Exp>>;
-  _not?: InputMaybe<AuthRoles_Bool_Exp>;
-  _or?: InputMaybe<Array<AuthRoles_Bool_Exp>>;
-  role?: InputMaybe<String_Comparison_Exp>;
-  userRoles?: InputMaybe<AuthUserRoles_Bool_Exp>;
-  usersByDefaultRole?: InputMaybe<Users_Bool_Exp>;
-};
-
-/** unique or primary key constraints on table "auth.roles" */
-export enum AuthRoles_Constraint {
-  /** unique or primary key constraint */
-  RolesPkey = 'roles_pkey',
-}
-
-/** input type for inserting data into table "auth.roles" */
-export type AuthRoles_Insert_Input = {
-  role?: InputMaybe<Scalars['String']>;
-  userRoles?: InputMaybe<AuthUserRoles_Arr_Rel_Insert_Input>;
-  usersByDefaultRole?: InputMaybe<Users_Arr_Rel_Insert_Input>;
-};
-
-/** aggregate max on columns */
-export type AuthRoles_Max_Fields = {
-  __typename?: 'authRoles_max_fields';
-  role?: Maybe<Scalars['String']>;
-};
-
-/** aggregate min on columns */
-export type AuthRoles_Min_Fields = {
-  __typename?: 'authRoles_min_fields';
-  role?: Maybe<Scalars['String']>;
-};
-
-/** response of any mutation on the table "auth.roles" */
-export type AuthRoles_Mutation_Response = {
-  __typename?: 'authRoles_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<AuthRoles>;
-};
-
-/** input type for inserting object relation for remote table "auth.roles" */
-export type AuthRoles_Obj_Rel_Insert_Input = {
-  data: AuthRoles_Insert_Input;
-  /** upsert condition */
-  on_conflict?: InputMaybe<AuthRoles_On_Conflict>;
-};
-
-/** on_conflict condition type for table "auth.roles" */
-export type AuthRoles_On_Conflict = {
-  constraint: AuthRoles_Constraint;
-  update_columns?: Array<AuthRoles_Update_Column>;
-  where?: InputMaybe<AuthRoles_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "auth.roles". */
-export type AuthRoles_Order_By = {
-  role?: InputMaybe<Order_By>;
-  userRoles_aggregate?: InputMaybe<AuthUserRoles_Aggregate_Order_By>;
-  usersByDefaultRole_aggregate?: InputMaybe<Users_Aggregate_Order_By>;
-};
-
-/** primary key columns input for table: authRoles */
-export type AuthRoles_Pk_Columns_Input = {
-  role: Scalars['String'];
-};
-
-/** select columns of table "auth.roles" */
-export enum AuthRoles_Select_Column {
-  /** column name */
-  Role = 'role',
-}
-
-/** input type for updating data in table "auth.roles" */
-export type AuthRoles_Set_Input = {
-  role?: InputMaybe<Scalars['String']>;
-};
-
-/** update columns of table "auth.roles" */
-export enum AuthRoles_Update_Column {
-  /** column name */
-  Role = 'role',
-}
-
-/** columns and relationships of "auth.user_providers" */
-export type AuthUserProviders = {
-  __typename?: 'authUserProviders';
-  accessToken: Scalars['String'];
-  createdAt: Scalars['timestamptz'];
-  id: Scalars['uuid'];
-  /** An object relationship */
-  provider: AuthProviders;
-  providerId: Scalars['String'];
-  providerUserId: Scalars['String'];
-  refreshToken?: Maybe<Scalars['String']>;
-  updatedAt: Scalars['timestamptz'];
-  /** An object relationship */
-  user: Users;
-  userId: Scalars['uuid'];
-};
-
-/** aggregated selection of "auth.user_providers" */
-export type AuthUserProviders_Aggregate = {
-  __typename?: 'authUserProviders_aggregate';
-  aggregate?: Maybe<AuthUserProviders_Aggregate_Fields>;
-  nodes: Array<AuthUserProviders>;
-};
-
-/** aggregate fields of "auth.user_providers" */
-export type AuthUserProviders_Aggregate_Fields = {
-  __typename?: 'authUserProviders_aggregate_fields';
-  count: Scalars['Int'];
-  max?: Maybe<AuthUserProviders_Max_Fields>;
-  min?: Maybe<AuthUserProviders_Min_Fields>;
-};
-
-
-/** aggregate fields of "auth.user_providers" */
-export type AuthUserProviders_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<AuthUserProviders_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** order by aggregate values of table "auth.user_providers" */
-export type AuthUserProviders_Aggregate_Order_By = {
-  count?: InputMaybe<Order_By>;
-  max?: InputMaybe<AuthUserProviders_Max_Order_By>;
-  min?: InputMaybe<AuthUserProviders_Min_Order_By>;
-};
-
-/** input type for inserting array relation for remote table "auth.user_providers" */
-export type AuthUserProviders_Arr_Rel_Insert_Input = {
-  data: Array<AuthUserProviders_Insert_Input>;
-  /** upsert condition */
-  on_conflict?: InputMaybe<AuthUserProviders_On_Conflict>;
-};
-
-/** Boolean expression to filter rows from the table "auth.user_providers". All fields are combined with a logical 'AND'. */
-export type AuthUserProviders_Bool_Exp = {
-  _and?: InputMaybe<Array<AuthUserProviders_Bool_Exp>>;
-  _not?: InputMaybe<AuthUserProviders_Bool_Exp>;
-  _or?: InputMaybe<Array<AuthUserProviders_Bool_Exp>>;
-  accessToken?: InputMaybe<String_Comparison_Exp>;
-  createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
-  id?: InputMaybe<Uuid_Comparison_Exp>;
-  provider?: InputMaybe<AuthProviders_Bool_Exp>;
-  providerId?: InputMaybe<String_Comparison_Exp>;
-  providerUserId?: InputMaybe<String_Comparison_Exp>;
-  refreshToken?: InputMaybe<String_Comparison_Exp>;
-  updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>;
-  user?: InputMaybe<Users_Bool_Exp>;
-  userId?: InputMaybe<Uuid_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "auth.user_providers" */
-export enum AuthUserProviders_Constraint {
-  /** unique or primary key constraint */
-  UserProvidersPkey = 'user_providers_pkey',
-  /** unique or primary key constraint */
-  UserProvidersProviderIdProviderUserIdKey = 'user_providers_provider_id_provider_user_id_key',
-  /** unique or primary key constraint */
-  UserProvidersUserIdProviderIdKey = 'user_providers_user_id_provider_id_key',
-}
-
-/** input type for inserting data into table "auth.user_providers" */
-export type AuthUserProviders_Insert_Input = {
-  accessToken?: InputMaybe<Scalars['String']>;
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  provider?: InputMaybe<AuthProviders_Obj_Rel_Insert_Input>;
-  providerId?: InputMaybe<Scalars['String']>;
-  providerUserId?: InputMaybe<Scalars['String']>;
-  refreshToken?: InputMaybe<Scalars['String']>;
-  updatedAt?: InputMaybe<Scalars['timestamptz']>;
-  user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
-  userId?: InputMaybe<Scalars['uuid']>;
-};
-
-/** aggregate max on columns */
-export type AuthUserProviders_Max_Fields = {
-  __typename?: 'authUserProviders_max_fields';
-  accessToken?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['uuid']>;
-  providerId?: Maybe<Scalars['String']>;
-  providerUserId?: Maybe<Scalars['String']>;
-  refreshToken?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
-  userId?: Maybe<Scalars['uuid']>;
-};
-
-/** order by max() on columns of table "auth.user_providers" */
-export type AuthUserProviders_Max_Order_By = {
-  accessToken?: InputMaybe<Order_By>;
-  createdAt?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  providerId?: InputMaybe<Order_By>;
-  providerUserId?: InputMaybe<Order_By>;
-  refreshToken?: InputMaybe<Order_By>;
-  updatedAt?: InputMaybe<Order_By>;
-  userId?: InputMaybe<Order_By>;
-};
-
-/** aggregate min on columns */
-export type AuthUserProviders_Min_Fields = {
-  __typename?: 'authUserProviders_min_fields';
-  accessToken?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['uuid']>;
-  providerId?: Maybe<Scalars['String']>;
-  providerUserId?: Maybe<Scalars['String']>;
-  refreshToken?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
-  userId?: Maybe<Scalars['uuid']>;
-};
-
-/** order by min() on columns of table "auth.user_providers" */
-export type AuthUserProviders_Min_Order_By = {
-  accessToken?: InputMaybe<Order_By>;
-  createdAt?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  providerId?: InputMaybe<Order_By>;
-  providerUserId?: InputMaybe<Order_By>;
-  refreshToken?: InputMaybe<Order_By>;
-  updatedAt?: InputMaybe<Order_By>;
-  userId?: InputMaybe<Order_By>;
-};
-
-/** response of any mutation on the table "auth.user_providers" */
-export type AuthUserProviders_Mutation_Response = {
-  __typename?: 'authUserProviders_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<AuthUserProviders>;
-};
-
-/** on_conflict condition type for table "auth.user_providers" */
-export type AuthUserProviders_On_Conflict = {
-  constraint: AuthUserProviders_Constraint;
-  update_columns?: Array<AuthUserProviders_Update_Column>;
-  where?: InputMaybe<AuthUserProviders_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "auth.user_providers". */
-export type AuthUserProviders_Order_By = {
-  accessToken?: InputMaybe<Order_By>;
-  createdAt?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  provider?: InputMaybe<AuthProviders_Order_By>;
-  providerId?: InputMaybe<Order_By>;
-  providerUserId?: InputMaybe<Order_By>;
-  refreshToken?: InputMaybe<Order_By>;
-  updatedAt?: InputMaybe<Order_By>;
-  user?: InputMaybe<Users_Order_By>;
-  userId?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: authUserProviders */
-export type AuthUserProviders_Pk_Columns_Input = {
-  id: Scalars['uuid'];
-};
-
-/** select columns of table "auth.user_providers" */
-export enum AuthUserProviders_Select_Column {
-  /** column name */
-  AccessToken = 'accessToken',
-  /** column name */
-  CreatedAt = 'createdAt',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  ProviderId = 'providerId',
-  /** column name */
-  ProviderUserId = 'providerUserId',
-  /** column name */
-  RefreshToken = 'refreshToken',
-  /** column name */
-  UpdatedAt = 'updatedAt',
-  /** column name */
-  UserId = 'userId',
-}
-
-/** input type for updating data in table "auth.user_providers" */
-export type AuthUserProviders_Set_Input = {
-  accessToken?: InputMaybe<Scalars['String']>;
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  providerId?: InputMaybe<Scalars['String']>;
-  providerUserId?: InputMaybe<Scalars['String']>;
-  refreshToken?: InputMaybe<Scalars['String']>;
-  updatedAt?: InputMaybe<Scalars['timestamptz']>;
-  userId?: InputMaybe<Scalars['uuid']>;
-};
-
-/** update columns of table "auth.user_providers" */
-export enum AuthUserProviders_Update_Column {
-  /** column name */
-  AccessToken = 'accessToken',
-  /** column name */
-  CreatedAt = 'createdAt',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  ProviderId = 'providerId',
-  /** column name */
-  ProviderUserId = 'providerUserId',
-  /** column name */
-  RefreshToken = 'refreshToken',
-  /** column name */
-  UpdatedAt = 'updatedAt',
-  /** column name */
-  UserId = 'userId',
-}
-
-/** columns and relationships of "auth.user_roles" */
-export type AuthUserRoles = {
-  __typename?: 'authUserRoles';
-  createdAt: Scalars['timestamptz'];
-  id: Scalars['uuid'];
-  role: Scalars['String'];
-  /** An object relationship */
-  roleByRole: AuthRoles;
-  /** An object relationship */
-  user: Users;
-  userId: Scalars['uuid'];
-};
-
-/** aggregated selection of "auth.user_roles" */
-export type AuthUserRoles_Aggregate = {
-  __typename?: 'authUserRoles_aggregate';
-  aggregate?: Maybe<AuthUserRoles_Aggregate_Fields>;
-  nodes: Array<AuthUserRoles>;
-};
-
-/** aggregate fields of "auth.user_roles" */
-export type AuthUserRoles_Aggregate_Fields = {
-  __typename?: 'authUserRoles_aggregate_fields';
-  count: Scalars['Int'];
-  max?: Maybe<AuthUserRoles_Max_Fields>;
-  min?: Maybe<AuthUserRoles_Min_Fields>;
-};
-
-
-/** aggregate fields of "auth.user_roles" */
-export type AuthUserRoles_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<AuthUserRoles_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** order by aggregate values of table "auth.user_roles" */
-export type AuthUserRoles_Aggregate_Order_By = {
-  count?: InputMaybe<Order_By>;
-  max?: InputMaybe<AuthUserRoles_Max_Order_By>;
-  min?: InputMaybe<AuthUserRoles_Min_Order_By>;
-};
-
-/** input type for inserting array relation for remote table "auth.user_roles" */
-export type AuthUserRoles_Arr_Rel_Insert_Input = {
-  data: Array<AuthUserRoles_Insert_Input>;
-  /** upsert condition */
-  on_conflict?: InputMaybe<AuthUserRoles_On_Conflict>;
-};
-
-/** Boolean expression to filter rows from the table "auth.user_roles". All fields are combined with a logical 'AND'. */
-export type AuthUserRoles_Bool_Exp = {
-  _and?: InputMaybe<Array<AuthUserRoles_Bool_Exp>>;
-  _not?: InputMaybe<AuthUserRoles_Bool_Exp>;
-  _or?: InputMaybe<Array<AuthUserRoles_Bool_Exp>>;
-  createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
-  id?: InputMaybe<Uuid_Comparison_Exp>;
-  role?: InputMaybe<String_Comparison_Exp>;
-  roleByRole?: InputMaybe<AuthRoles_Bool_Exp>;
-  user?: InputMaybe<Users_Bool_Exp>;
-  userId?: InputMaybe<Uuid_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "auth.user_roles" */
-export enum AuthUserRoles_Constraint {
-  /** unique or primary key constraint */
-  UserRolesPkey = 'user_roles_pkey',
-  /** unique or primary key constraint */
-  UserRolesUserIdRoleKey = 'user_roles_user_id_role_key',
-}
-
-/** input type for inserting data into table "auth.user_roles" */
-export type AuthUserRoles_Insert_Input = {
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  role?: InputMaybe<Scalars['String']>;
-  roleByRole?: InputMaybe<AuthRoles_Obj_Rel_Insert_Input>;
-  user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
-  userId?: InputMaybe<Scalars['uuid']>;
-};
-
-/** aggregate max on columns */
-export type AuthUserRoles_Max_Fields = {
-  __typename?: 'authUserRoles_max_fields';
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['uuid']>;
-  role?: Maybe<Scalars['String']>;
-  userId?: Maybe<Scalars['uuid']>;
-};
-
-/** order by max() on columns of table "auth.user_roles" */
-export type AuthUserRoles_Max_Order_By = {
-  createdAt?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  role?: InputMaybe<Order_By>;
-  userId?: InputMaybe<Order_By>;
-};
-
-/** aggregate min on columns */
-export type AuthUserRoles_Min_Fields = {
-  __typename?: 'authUserRoles_min_fields';
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['uuid']>;
-  role?: Maybe<Scalars['String']>;
-  userId?: Maybe<Scalars['uuid']>;
-};
-
-/** order by min() on columns of table "auth.user_roles" */
-export type AuthUserRoles_Min_Order_By = {
-  createdAt?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  role?: InputMaybe<Order_By>;
-  userId?: InputMaybe<Order_By>;
-};
-
-/** response of any mutation on the table "auth.user_roles" */
-export type AuthUserRoles_Mutation_Response = {
-  __typename?: 'authUserRoles_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<AuthUserRoles>;
-};
-
-/** on_conflict condition type for table "auth.user_roles" */
-export type AuthUserRoles_On_Conflict = {
-  constraint: AuthUserRoles_Constraint;
-  update_columns?: Array<AuthUserRoles_Update_Column>;
-  where?: InputMaybe<AuthUserRoles_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "auth.user_roles". */
-export type AuthUserRoles_Order_By = {
-  createdAt?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  role?: InputMaybe<Order_By>;
-  roleByRole?: InputMaybe<AuthRoles_Order_By>;
-  user?: InputMaybe<Users_Order_By>;
-  userId?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: authUserRoles */
-export type AuthUserRoles_Pk_Columns_Input = {
-  id: Scalars['uuid'];
-};
-
-/** select columns of table "auth.user_roles" */
-export enum AuthUserRoles_Select_Column {
-  /** column name */
-  CreatedAt = 'createdAt',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Role = 'role',
-  /** column name */
-  UserId = 'userId',
-}
-
-/** input type for updating data in table "auth.user_roles" */
-export type AuthUserRoles_Set_Input = {
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  role?: InputMaybe<Scalars['String']>;
-  userId?: InputMaybe<Scalars['uuid']>;
-};
-
-/** update columns of table "auth.user_roles" */
-export enum AuthUserRoles_Update_Column {
-  /** column name */
-  CreatedAt = 'createdAt',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Role = 'role',
-  /** column name */
-  UserId = 'userId',
-}
-
 /** Boolean expression to compare columns of type "bigint". All fields are combined with logical 'AND'. */
 export type Bigint_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['bigint']>;
@@ -1126,39 +106,6 @@ export type Bigint_Comparison_Exp = {
   _lte?: InputMaybe<Scalars['bigint']>;
   _neq?: InputMaybe<Scalars['bigint']>;
   _nin?: InputMaybe<Array<Scalars['bigint']>>;
-};
-
-/** Boolean expression to compare columns of type "citext". All fields are combined with logical 'AND'. */
-export type Citext_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars['citext']>;
-  _gt?: InputMaybe<Scalars['citext']>;
-  _gte?: InputMaybe<Scalars['citext']>;
-  /** does the column match the given case-insensitive pattern */
-  _ilike?: InputMaybe<Scalars['citext']>;
-  _in?: InputMaybe<Array<Scalars['citext']>>;
-  /** does the column match the given POSIX regular expression, case insensitive */
-  _iregex?: InputMaybe<Scalars['citext']>;
-  _is_null?: InputMaybe<Scalars['Boolean']>;
-  /** does the column match the given pattern */
-  _like?: InputMaybe<Scalars['citext']>;
-  _lt?: InputMaybe<Scalars['citext']>;
-  _lte?: InputMaybe<Scalars['citext']>;
-  _neq?: InputMaybe<Scalars['citext']>;
-  /** does the column NOT match the given case-insensitive pattern */
-  _nilike?: InputMaybe<Scalars['citext']>;
-  _nin?: InputMaybe<Array<Scalars['citext']>>;
-  /** does the column NOT match the given POSIX regular expression, case insensitive */
-  _niregex?: InputMaybe<Scalars['citext']>;
-  /** does the column NOT match the given pattern */
-  _nlike?: InputMaybe<Scalars['citext']>;
-  /** does the column NOT match the given POSIX regular expression, case sensitive */
-  _nregex?: InputMaybe<Scalars['citext']>;
-  /** does the column NOT match the given SQL regular expression */
-  _nsimilar?: InputMaybe<Scalars['citext']>;
-  /** does the column match the given POSIX regular expression, case sensitive */
-  _regex?: InputMaybe<Scalars['citext']>;
-  /** does the column match the given SQL regular expression */
-  _similar?: InputMaybe<Scalars['citext']>;
 };
 
 /** Boolean expression to compare columns of type "float8". All fields are combined with logical 'AND'. */
@@ -1289,21 +236,6 @@ export type Food_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
-/** order by aggregate values of table "food" */
-export type Food_Aggregate_Order_By = {
-  avg?: InputMaybe<Food_Avg_Order_By>;
-  count?: InputMaybe<Order_By>;
-  max?: InputMaybe<Food_Max_Order_By>;
-  min?: InputMaybe<Food_Min_Order_By>;
-  stddev?: InputMaybe<Food_Stddev_Order_By>;
-  stddev_pop?: InputMaybe<Food_Stddev_Pop_Order_By>;
-  stddev_samp?: InputMaybe<Food_Stddev_Samp_Order_By>;
-  sum?: InputMaybe<Food_Sum_Order_By>;
-  var_pop?: InputMaybe<Food_Var_Pop_Order_By>;
-  var_samp?: InputMaybe<Food_Var_Samp_Order_By>;
-  variance?: InputMaybe<Food_Variance_Order_By>;
-};
-
 /** columns and relationships of "food_attribute" */
 export type Food_Attribute = {
   __typename?: 'food_attribute';
@@ -1402,8 +334,8 @@ export type Food_Attribute_Bool_Exp = {
 
 /** unique or primary key constraints on table "food_attribute" */
 export enum Food_Attribute_Constraint {
-  /** unique or primary key constraint */
-  FoodAttributePkey = 'food_attribute_pkey',
+  /** unique or primary key constraint on columns "id" */
+  FoodAttributePkey = 'food_attribute_pkey'
 }
 
 /** input type for incrementing numeric columns in table "food_attribute" */
@@ -1512,7 +444,7 @@ export enum Food_Attribute_Select_Column {
   /** column name */
   SeqNum = 'seq_num',
   /** column name */
-  Value = 'value',
+  Value = 'value'
 }
 
 /** input type for updating data in table "food_attribute" */
@@ -1649,8 +581,8 @@ export type Food_Attribute_Type_Bool_Exp = {
 
 /** unique or primary key constraints on table "food_attribute_type" */
 export enum Food_Attribute_Type_Constraint {
-  /** unique or primary key constraint */
-  FoodAttributeTypePkey = 'food_attribute_type_pkey',
+  /** unique or primary key constraint on columns "id" */
+  FoodAttributeTypePkey = 'food_attribute_type_pkey'
 }
 
 /** input type for incrementing numeric columns in table "food_attribute_type" */
@@ -1723,7 +655,7 @@ export enum Food_Attribute_Type_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  Name = 'name',
+  Name = 'name'
 }
 
 /** input type for updating data in table "food_attribute_type" */
@@ -1764,7 +696,7 @@ export enum Food_Attribute_Type_Update_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  Name = 'name',
+  Name = 'name'
 }
 
 /** aggregate var_pop on columns */
@@ -1798,7 +730,7 @@ export enum Food_Attribute_Update_Column {
   /** column name */
   SeqNum = 'seq_num',
   /** column name */
-  Value = 'value',
+  Value = 'value'
 }
 
 /** aggregate var_pop on columns */
@@ -1857,12 +789,6 @@ export type Food_Avg_Fields = {
   __typename?: 'food_avg_fields';
   fdc_id?: Maybe<Scalars['Float']>;
   food_category_id?: Maybe<Scalars['Float']>;
-};
-
-/** order by avg() on columns of table "food" */
-export type Food_Avg_Order_By = {
-  fdc_id?: InputMaybe<Order_By>;
-  food_category_id?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "food". All fields are combined with a logical 'AND'. */
@@ -1939,8 +865,8 @@ export type Food_Category_Bool_Exp = {
 
 /** unique or primary key constraints on table "food_category" */
 export enum Food_Category_Constraint {
-  /** unique or primary key constraint */
-  FoodCategoryPkey = 'food_category_pkey',
+  /** unique or primary key constraint on columns "id" */
+  FoodCategoryPkey = 'food_category_pkey'
 }
 
 /** input type for incrementing numeric columns in table "food_category" */
@@ -2014,7 +940,7 @@ export enum Food_Category_Select_Column {
   /** column name */
   Description = 'description',
   /** column name */
-  Id = 'id',
+  Id = 'id'
 }
 
 /** input type for updating data in table "food_category" */
@@ -2059,7 +985,7 @@ export enum Food_Category_Update_Column {
   /** column name */
   Description = 'description',
   /** column name */
-  Id = 'id',
+  Id = 'id'
 }
 
 /** aggregate var_pop on columns */
@@ -2085,8 +1011,8 @@ export type Food_Category_Variance_Fields = {
 
 /** unique or primary key constraints on table "food" */
 export enum Food_Constraint {
-  /** unique or primary key constraint */
-  FoodPkey = 'food_pkey',
+  /** unique or primary key constraint on columns "fdc_id" */
+  FoodPkey = 'food_pkey'
 }
 
 /** Boolean expression to compare columns of type "food_data_type_enum". All fields are combined with logical 'AND'. */
@@ -2125,35 +1051,21 @@ export type Food_Insert_Input = {
 /** aggregate max on columns */
 export type Food_Max_Fields = {
   __typename?: 'food_max_fields';
+  data_type?: Maybe<Scalars['food_data_type_enum']>;
   description?: Maybe<Scalars['String']>;
   fdc_id?: Maybe<Scalars['Int']>;
   food_category_id?: Maybe<Scalars['Int']>;
   publication_date?: Maybe<Scalars['timestamp']>;
-};
-
-/** order by max() on columns of table "food" */
-export type Food_Max_Order_By = {
-  description?: InputMaybe<Order_By>;
-  fdc_id?: InputMaybe<Order_By>;
-  food_category_id?: InputMaybe<Order_By>;
-  publication_date?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
 export type Food_Min_Fields = {
   __typename?: 'food_min_fields';
+  data_type?: Maybe<Scalars['food_data_type_enum']>;
   description?: Maybe<Scalars['String']>;
   fdc_id?: Maybe<Scalars['Int']>;
   food_category_id?: Maybe<Scalars['Int']>;
   publication_date?: Maybe<Scalars['timestamp']>;
-};
-
-/** order by min() on columns of table "food" */
-export type Food_Min_Order_By = {
-  description?: InputMaybe<Order_By>;
-  fdc_id?: InputMaybe<Order_By>;
-  food_category_id?: InputMaybe<Order_By>;
-  publication_date?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "food" */
@@ -2285,8 +1197,8 @@ export type Food_Nutrient_Bool_Exp = {
 
 /** unique or primary key constraints on table "food_nutrient" */
 export enum Food_Nutrient_Constraint {
-  /** unique or primary key constraint */
-  FoodNutrientPkey = 'food_nutrient_pkey',
+  /** unique or primary key constraint on columns "id" */
+  FoodNutrientPkey = 'food_nutrient_pkey'
 }
 
 /** input type for incrementing numeric columns in table "food_nutrient" */
@@ -2441,7 +1353,7 @@ export enum Food_Nutrient_Select_Column {
   /** column name */
   MinYearAcquired = 'min_year_acquired',
   /** column name */
-  NutrientId = 'nutrient_id',
+  NutrientId = 'nutrient_id'
 }
 
 /** input type for updating data in table "food_nutrient" */
@@ -2598,7 +1510,7 @@ export enum Food_Nutrient_Update_Column {
   /** column name */
   MinYearAcquired = 'min_year_acquired',
   /** column name */
-  NutrientId = 'nutrient_id',
+  NutrientId = 'nutrient_id'
 }
 
 /** aggregate var_pop on columns */
@@ -2837,8 +1749,8 @@ export type Food_Portion_Bool_Exp = {
 
 /** unique or primary key constraints on table "food_portion" */
 export enum Food_Portion_Constraint {
-  /** unique or primary key constraint */
-  FoodPortionPkey = 'food_portion_pkey',
+  /** unique or primary key constraint on columns "id" */
+  FoodPortionPkey = 'food_portion_pkey'
 }
 
 /** input type for incrementing numeric columns in table "food_portion" */
@@ -2998,7 +1910,7 @@ export enum Food_Portion_Select_Column {
   /** column name */
   PortionDescription = 'portion_description',
   /** column name */
-  SeqNum = 'seq_num',
+  SeqNum = 'seq_num'
 }
 
 /** input type for updating data in table "food_portion" */
@@ -3139,7 +2051,7 @@ export enum Food_Portion_Update_Column {
   /** column name */
   PortionDescription = 'portion_description',
   /** column name */
-  SeqNum = 'seq_num',
+  SeqNum = 'seq_num'
 }
 
 /** aggregate var_pop on columns */
@@ -3230,7 +2142,7 @@ export enum Food_Select_Column {
   /** column name */
   FoodCategoryId = 'food_category_id',
   /** column name */
-  PublicationDate = 'publication_date',
+  PublicationDate = 'publication_date'
 }
 
 /** input type for updating data in table "food" */
@@ -3250,23 +2162,11 @@ export type Food_Stddev_Fields = {
   food_category_id?: Maybe<Scalars['Float']>;
 };
 
-/** order by stddev() on columns of table "food" */
-export type Food_Stddev_Order_By = {
-  fdc_id?: InputMaybe<Order_By>;
-  food_category_id?: InputMaybe<Order_By>;
-};
-
 /** aggregate stddev_pop on columns */
 export type Food_Stddev_Pop_Fields = {
   __typename?: 'food_stddev_pop_fields';
   fdc_id?: Maybe<Scalars['Float']>;
   food_category_id?: Maybe<Scalars['Float']>;
-};
-
-/** order by stddev_pop() on columns of table "food" */
-export type Food_Stddev_Pop_Order_By = {
-  fdc_id?: InputMaybe<Order_By>;
-  food_category_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -3276,23 +2176,11 @@ export type Food_Stddev_Samp_Fields = {
   food_category_id?: Maybe<Scalars['Float']>;
 };
 
-/** order by stddev_samp() on columns of table "food" */
-export type Food_Stddev_Samp_Order_By = {
-  fdc_id?: InputMaybe<Order_By>;
-  food_category_id?: InputMaybe<Order_By>;
-};
-
 /** aggregate sum on columns */
 export type Food_Sum_Fields = {
   __typename?: 'food_sum_fields';
   fdc_id?: Maybe<Scalars['Int']>;
   food_category_id?: Maybe<Scalars['Int']>;
-};
-
-/** order by sum() on columns of table "food" */
-export type Food_Sum_Order_By = {
-  fdc_id?: InputMaybe<Order_By>;
-  food_category_id?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "food" */
@@ -3308,7 +2196,7 @@ export enum Food_Update_Column {
   /** column name */
   FoodCategoryId = 'food_category_id',
   /** column name */
-  PublicationDate = 'publication_date',
+  PublicationDate = 'publication_date'
 }
 
 /** aggregate var_pop on columns */
@@ -3318,23 +2206,11 @@ export type Food_Var_Pop_Fields = {
   food_category_id?: Maybe<Scalars['Float']>;
 };
 
-/** order by var_pop() on columns of table "food" */
-export type Food_Var_Pop_Order_By = {
-  fdc_id?: InputMaybe<Order_By>;
-  food_category_id?: InputMaybe<Order_By>;
-};
-
 /** aggregate var_samp on columns */
 export type Food_Var_Samp_Fields = {
   __typename?: 'food_var_samp_fields';
   fdc_id?: Maybe<Scalars['Float']>;
   food_category_id?: Maybe<Scalars['Float']>;
-};
-
-/** order by var_samp() on columns of table "food" */
-export type Food_Var_Samp_Order_By = {
-  fdc_id?: InputMaybe<Order_By>;
-  food_category_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
@@ -3344,11 +2220,220 @@ export type Food_Variance_Fields = {
   food_category_id?: Maybe<Scalars['Float']>;
 };
 
-/** order by variance() on columns of table "food" */
-export type Food_Variance_Order_By = {
-  fdc_id?: InputMaybe<Order_By>;
-  food_category_id?: InputMaybe<Order_By>;
+/** columns and relationships of "identities" */
+export type Identities = {
+  __typename?: 'identities';
+  created_at: Scalars['timestamp'];
+  id: Scalars['uuid'];
+  nid?: Maybe<Scalars['uuid']>;
+  schema_id: Scalars['String'];
+  state: Scalars['String'];
+  state_changed_at?: Maybe<Scalars['timestamp']>;
+  traits: Scalars['jsonb'];
+  updated_at: Scalars['timestamp'];
 };
+
+
+/** columns and relationships of "identities" */
+export type IdentitiesTraitsArgs = {
+  path?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregated selection of "identities" */
+export type Identities_Aggregate = {
+  __typename?: 'identities_aggregate';
+  aggregate?: Maybe<Identities_Aggregate_Fields>;
+  nodes: Array<Identities>;
+};
+
+/** aggregate fields of "identities" */
+export type Identities_Aggregate_Fields = {
+  __typename?: 'identities_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Identities_Max_Fields>;
+  min?: Maybe<Identities_Min_Fields>;
+};
+
+
+/** aggregate fields of "identities" */
+export type Identities_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Identities_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** append existing jsonb value of filtered columns with new jsonb value */
+export type Identities_Append_Input = {
+  traits?: InputMaybe<Scalars['jsonb']>;
+};
+
+/** Boolean expression to filter rows from the table "identities". All fields are combined with a logical 'AND'. */
+export type Identities_Bool_Exp = {
+  _and?: InputMaybe<Array<Identities_Bool_Exp>>;
+  _not?: InputMaybe<Identities_Bool_Exp>;
+  _or?: InputMaybe<Array<Identities_Bool_Exp>>;
+  created_at?: InputMaybe<Timestamp_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  nid?: InputMaybe<Uuid_Comparison_Exp>;
+  schema_id?: InputMaybe<String_Comparison_Exp>;
+  state?: InputMaybe<String_Comparison_Exp>;
+  state_changed_at?: InputMaybe<Timestamp_Comparison_Exp>;
+  traits?: InputMaybe<Jsonb_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamp_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "identities" */
+export enum Identities_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  IdentitiesPkey = 'identities_pkey'
+}
+
+/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+export type Identities_Delete_At_Path_Input = {
+  traits?: InputMaybe<Array<Scalars['String']>>;
+};
+
+/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+export type Identities_Delete_Elem_Input = {
+  traits?: InputMaybe<Scalars['Int']>;
+};
+
+/** delete key/value pair or string element. key/value pairs are matched based on their key value */
+export type Identities_Delete_Key_Input = {
+  traits?: InputMaybe<Scalars['String']>;
+};
+
+/** input type for inserting data into table "identities" */
+export type Identities_Insert_Input = {
+  created_at?: InputMaybe<Scalars['timestamp']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  nid?: InputMaybe<Scalars['uuid']>;
+  schema_id?: InputMaybe<Scalars['String']>;
+  state?: InputMaybe<Scalars['String']>;
+  state_changed_at?: InputMaybe<Scalars['timestamp']>;
+  traits?: InputMaybe<Scalars['jsonb']>;
+  updated_at?: InputMaybe<Scalars['timestamp']>;
+};
+
+/** aggregate max on columns */
+export type Identities_Max_Fields = {
+  __typename?: 'identities_max_fields';
+  created_at?: Maybe<Scalars['timestamp']>;
+  id?: Maybe<Scalars['uuid']>;
+  nid?: Maybe<Scalars['uuid']>;
+  schema_id?: Maybe<Scalars['String']>;
+  state?: Maybe<Scalars['String']>;
+  state_changed_at?: Maybe<Scalars['timestamp']>;
+  updated_at?: Maybe<Scalars['timestamp']>;
+};
+
+/** aggregate min on columns */
+export type Identities_Min_Fields = {
+  __typename?: 'identities_min_fields';
+  created_at?: Maybe<Scalars['timestamp']>;
+  id?: Maybe<Scalars['uuid']>;
+  nid?: Maybe<Scalars['uuid']>;
+  schema_id?: Maybe<Scalars['String']>;
+  state?: Maybe<Scalars['String']>;
+  state_changed_at?: Maybe<Scalars['timestamp']>;
+  updated_at?: Maybe<Scalars['timestamp']>;
+};
+
+/** response of any mutation on the table "identities" */
+export type Identities_Mutation_Response = {
+  __typename?: 'identities_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Identities>;
+};
+
+/** input type for inserting object relation for remote table "identities" */
+export type Identities_Obj_Rel_Insert_Input = {
+  data: Identities_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Identities_On_Conflict>;
+};
+
+/** on_conflict condition type for table "identities" */
+export type Identities_On_Conflict = {
+  constraint: Identities_Constraint;
+  update_columns?: Array<Identities_Update_Column>;
+  where?: InputMaybe<Identities_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "identities". */
+export type Identities_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  nid?: InputMaybe<Order_By>;
+  schema_id?: InputMaybe<Order_By>;
+  state?: InputMaybe<Order_By>;
+  state_changed_at?: InputMaybe<Order_By>;
+  traits?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: identities */
+export type Identities_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** prepend existing jsonb value of filtered columns with new jsonb value */
+export type Identities_Prepend_Input = {
+  traits?: InputMaybe<Scalars['jsonb']>;
+};
+
+/** select columns of table "identities" */
+export enum Identities_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Nid = 'nid',
+  /** column name */
+  SchemaId = 'schema_id',
+  /** column name */
+  State = 'state',
+  /** column name */
+  StateChangedAt = 'state_changed_at',
+  /** column name */
+  Traits = 'traits',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "identities" */
+export type Identities_Set_Input = {
+  created_at?: InputMaybe<Scalars['timestamp']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  nid?: InputMaybe<Scalars['uuid']>;
+  schema_id?: InputMaybe<Scalars['String']>;
+  state?: InputMaybe<Scalars['String']>;
+  state_changed_at?: InputMaybe<Scalars['timestamp']>;
+  traits?: InputMaybe<Scalars['jsonb']>;
+  updated_at?: InputMaybe<Scalars['timestamp']>;
+};
+
+/** update columns of table "identities" */
+export enum Identities_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Nid = 'nid',
+  /** column name */
+  SchemaId = 'schema_id',
+  /** column name */
+  State = 'state',
+  /** column name */
+  StateChangedAt = 'state_changed_at',
+  /** column name */
+  Traits = 'traits',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
 
 /** columns and relationships of "ingredient_food_candidate" */
 export type Ingredient_Food_Candidate = {
@@ -3414,10 +2499,10 @@ export type Ingredient_Food_Candidate_Bool_Exp = {
 
 /** unique or primary key constraints on table "ingredient_food_candidate" */
 export enum Ingredient_Food_Candidate_Constraint {
-  /** unique or primary key constraint */
+  /** unique or primary key constraint on columns "food_candidate_id", "food_candidate_portion_id" */
   IngredientFoodCandidateFoodCandidateIdFoodCandidatePort = 'ingredient_food_candidate_food_candidate_id_food_candidate_port',
-  /** unique or primary key constraint */
-  RecipeIngredientFoodCandidatePkey = 'recipe_ingredient_food_candidate_pkey',
+  /** unique or primary key constraint on columns "id" */
+  RecipeIngredientFoodCandidatePkey = 'recipe_ingredient_food_candidate_pkey'
 }
 
 /** input type for incrementing numeric columns in table "ingredient_food_candidate" */
@@ -3496,7 +2581,7 @@ export enum Ingredient_Food_Candidate_Select_Column {
   /** column name */
   FoodCandidatePortionId = 'food_candidate_portion_id',
   /** column name */
-  Id = 'id',
+  Id = 'id'
 }
 
 /** input type for updating data in table "ingredient_food_candidate" */
@@ -3545,7 +2630,7 @@ export enum Ingredient_Food_Candidate_Update_Column {
   /** column name */
   FoodCandidatePortionId = 'food_candidate_portion_id',
   /** column name */
-  Id = 'id',
+  Id = 'id'
 }
 
 /** aggregate var_pop on columns */
@@ -3631,8 +2716,8 @@ export type Ingredient_Names_Bool_Exp = {
 
 /** unique or primary key constraints on table "ingredient_names" */
 export enum Ingredient_Names_Constraint {
-  /** unique or primary key constraint */
-  IngredientNamesPkey = 'ingredient_names_pkey',
+  /** unique or primary key constraint on columns "id" */
+  IngredientNamesPkey = 'ingredient_names_pkey'
 }
 
 /** input type for inserting data into table "ingredient_names" */
@@ -3709,7 +2794,7 @@ export enum Ingredient_Names_Select_Column {
   /** column name */
   IngredientId = 'ingredient_id',
   /** column name */
-  Name = 'name',
+  Name = 'name'
 }
 
 /** input type for updating data in table "ingredient_names" */
@@ -3726,15 +2811,13 @@ export enum Ingredient_Names_Update_Column {
   /** column name */
   IngredientId = 'ingredient_id',
   /** column name */
-  Name = 'name',
+  Name = 'name'
 }
 
 /** Ingredients used in recipes. */
 export type Ingredients = {
   __typename?: 'ingredients';
   food_candidate_id?: Maybe<Scalars['Int']>;
-  /** A computed field, executes function "food_candidates_for_ingredient" */
-  food_candidates?: Maybe<Array<Food>>;
   id: Scalars['uuid'];
   /** An object relationship */
   ingredient_food_candidate?: Maybe<Ingredient_Food_Candidate>;
@@ -3744,16 +2827,6 @@ export type Ingredients = {
   ingredient_names_aggregate: Ingredient_Names_Aggregate;
   name?: Maybe<Scalars['String']>;
   wiki_url?: Maybe<Scalars['String']>;
-};
-
-
-/** Ingredients used in recipes. */
-export type IngredientsFood_CandidatesArgs = {
-  distinct_on?: InputMaybe<Array<Food_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Food_Order_By>>;
-  where?: InputMaybe<Food_Bool_Exp>;
 };
 
 
@@ -3838,7 +2911,6 @@ export type Ingredients_Bool_Exp = {
   _not?: InputMaybe<Ingredients_Bool_Exp>;
   _or?: InputMaybe<Array<Ingredients_Bool_Exp>>;
   food_candidate_id?: InputMaybe<Int_Comparison_Exp>;
-  food_candidates?: InputMaybe<Food_Bool_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   ingredient_food_candidate?: InputMaybe<Ingredient_Food_Candidate_Bool_Exp>;
   ingredient_names?: InputMaybe<Ingredient_Names_Bool_Exp>;
@@ -3848,10 +2920,10 @@ export type Ingredients_Bool_Exp = {
 
 /** unique or primary key constraints on table "ingredients" */
 export enum Ingredients_Constraint {
-  /** unique or primary key constraint */
+  /** unique or primary key constraint on columns "name" */
   IngredientsNameKey = 'ingredients_name_key',
-  /** unique or primary key constraint */
-  IngredientsPkey = 'ingredients_pkey',
+  /** unique or primary key constraint on columns "id" */
+  IngredientsPkey = 'ingredients_pkey'
 }
 
 /** input type for incrementing numeric columns in table "ingredients" */
@@ -3929,7 +3001,6 @@ export type Ingredients_On_Conflict = {
 /** Ordering options when selecting data from "ingredients". */
 export type Ingredients_Order_By = {
   food_candidate_id?: InputMaybe<Order_By>;
-  food_candidates_aggregate?: InputMaybe<Food_Aggregate_Order_By>;
   id?: InputMaybe<Order_By>;
   ingredient_food_candidate?: InputMaybe<Ingredient_Food_Candidate_Order_By>;
   ingredient_names_aggregate?: InputMaybe<Ingredient_Names_Aggregate_Order_By>;
@@ -3951,7 +3022,7 @@ export enum Ingredients_Select_Column {
   /** column name */
   Name = 'name',
   /** column name */
-  WikiUrl = 'wiki_url',
+  WikiUrl = 'wiki_url'
 }
 
 /** input type for updating data in table "ingredients" */
@@ -4015,7 +3086,7 @@ export enum Ingredients_Update_Column {
   /** column name */
   Name = 'name',
   /** column name */
-  WikiUrl = 'wiki_url',
+  WikiUrl = 'wiki_url'
 }
 
 /** aggregate var_pop on columns */
@@ -4051,8 +3122,13 @@ export type Ingredients_Variance_Order_By = {
   food_candidate_id?: InputMaybe<Order_By>;
 };
 
+export type Jsonb_Cast_Exp = {
+  String?: InputMaybe<String_Comparison_Exp>;
+};
+
 /** Boolean expression to compare columns of type "jsonb". All fields are combined with logical 'AND'. */
 export type Jsonb_Comparison_Exp = {
+  _cast?: InputMaybe<Jsonb_Cast_Exp>;
   /** is the column contained in the given json value */
   _contained_in?: InputMaybe<Scalars['jsonb']>;
   /** does the column contain the given json value at the top level */
@@ -4131,8 +3207,8 @@ export type Measure_Unit_Bool_Exp = {
 
 /** unique or primary key constraints on table "measure_unit" */
 export enum Measure_Unit_Constraint {
-  /** unique or primary key constraint */
-  MeasureUnitPkey = 'measure_unit_pkey',
+  /** unique or primary key constraint on columns "id" */
+  MeasureUnitPkey = 'measure_unit_pkey'
 }
 
 /** input type for incrementing numeric columns in table "measure_unit" */
@@ -4206,7 +3282,7 @@ export enum Measure_Unit_Select_Column {
   /** column name */
   Ml = 'ml',
   /** column name */
-  Name = 'name',
+  Name = 'name'
 }
 
 /** input type for updating data in table "measure_unit" */
@@ -4251,7 +3327,7 @@ export enum Measure_Unit_Update_Column {
   /** column name */
   Ml = 'ml',
   /** column name */
-  Name = 'name',
+  Name = 'name'
 }
 
 /** aggregate var_pop on columns */
@@ -4363,7 +3439,7 @@ export enum Most_Common_Ingredients_Select_Column {
   /** column name */
   IngredientCount = 'ingredient_count',
   /** column name */
-  Name = 'name',
+  Name = 'name'
 }
 
 /** aggregate stddev on columns */
@@ -4411,34 +3487,6 @@ export type Most_Common_Ingredients_Variance_Fields = {
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
-  /** delete single row from the table: "auth.providers" */
-  deleteAuthProvider?: Maybe<AuthProviders>;
-  /** delete single row from the table: "auth.provider_requests" */
-  deleteAuthProviderRequest?: Maybe<AuthProviderRequests>;
-  /** delete data from the table: "auth.provider_requests" */
-  deleteAuthProviderRequests?: Maybe<AuthProviderRequests_Mutation_Response>;
-  /** delete data from the table: "auth.providers" */
-  deleteAuthProviders?: Maybe<AuthProviders_Mutation_Response>;
-  /** delete single row from the table: "auth.refresh_tokens" */
-  deleteAuthRefreshToken?: Maybe<AuthRefreshTokens>;
-  /** delete data from the table: "auth.refresh_tokens" */
-  deleteAuthRefreshTokens?: Maybe<AuthRefreshTokens_Mutation_Response>;
-  /** delete single row from the table: "auth.roles" */
-  deleteAuthRole?: Maybe<AuthRoles>;
-  /** delete data from the table: "auth.roles" */
-  deleteAuthRoles?: Maybe<AuthRoles_Mutation_Response>;
-  /** delete single row from the table: "auth.user_providers" */
-  deleteAuthUserProvider?: Maybe<AuthUserProviders>;
-  /** delete data from the table: "auth.user_providers" */
-  deleteAuthUserProviders?: Maybe<AuthUserProviders_Mutation_Response>;
-  /** delete single row from the table: "auth.user_roles" */
-  deleteAuthUserRole?: Maybe<AuthUserRoles>;
-  /** delete data from the table: "auth.user_roles" */
-  deleteAuthUserRoles?: Maybe<AuthUserRoles_Mutation_Response>;
-  /** delete single row from the table: "auth.users" */
-  deleteUser?: Maybe<Users>;
-  /** delete data from the table: "auth.users" */
-  deleteUsers?: Maybe<Users_Mutation_Response>;
   /** delete data from the table: "food" */
   delete_food?: Maybe<Food_Mutation_Response>;
   /** delete data from the table: "food_attribute" */
@@ -4463,6 +3511,10 @@ export type Mutation_Root = {
   delete_food_portion?: Maybe<Food_Portion_Mutation_Response>;
   /** delete single row from the table: "food_portion" */
   delete_food_portion_by_pk?: Maybe<Food_Portion>;
+  /** delete data from the table: "identities" */
+  delete_identities?: Maybe<Identities_Mutation_Response>;
+  /** delete single row from the table: "identities" */
+  delete_identities_by_pk?: Maybe<Identities>;
   /** delete data from the table: "ingredient_food_candidate" */
   delete_ingredient_food_candidate?: Maybe<Ingredient_Food_Candidate_Mutation_Response>;
   /** delete single row from the table: "ingredient_food_candidate" */
@@ -4531,34 +3583,6 @@ export type Mutation_Root = {
   delete_user_config?: Maybe<User_Config_Mutation_Response>;
   /** delete single row from the table: "user_config" */
   delete_user_config_by_pk?: Maybe<User_Config>;
-  /** insert a single row into the table: "auth.providers" */
-  insertAuthProvider?: Maybe<AuthProviders>;
-  /** insert a single row into the table: "auth.provider_requests" */
-  insertAuthProviderRequest?: Maybe<AuthProviderRequests>;
-  /** insert data into the table: "auth.provider_requests" */
-  insertAuthProviderRequests?: Maybe<AuthProviderRequests_Mutation_Response>;
-  /** insert data into the table: "auth.providers" */
-  insertAuthProviders?: Maybe<AuthProviders_Mutation_Response>;
-  /** insert a single row into the table: "auth.refresh_tokens" */
-  insertAuthRefreshToken?: Maybe<AuthRefreshTokens>;
-  /** insert data into the table: "auth.refresh_tokens" */
-  insertAuthRefreshTokens?: Maybe<AuthRefreshTokens_Mutation_Response>;
-  /** insert a single row into the table: "auth.roles" */
-  insertAuthRole?: Maybe<AuthRoles>;
-  /** insert data into the table: "auth.roles" */
-  insertAuthRoles?: Maybe<AuthRoles_Mutation_Response>;
-  /** insert a single row into the table: "auth.user_providers" */
-  insertAuthUserProvider?: Maybe<AuthUserProviders>;
-  /** insert data into the table: "auth.user_providers" */
-  insertAuthUserProviders?: Maybe<AuthUserProviders_Mutation_Response>;
-  /** insert a single row into the table: "auth.user_roles" */
-  insertAuthUserRole?: Maybe<AuthUserRoles>;
-  /** insert data into the table: "auth.user_roles" */
-  insertAuthUserRoles?: Maybe<AuthUserRoles_Mutation_Response>;
-  /** insert a single row into the table: "auth.users" */
-  insertUser?: Maybe<Users>;
-  /** insert data into the table: "auth.users" */
-  insertUsers?: Maybe<Users_Mutation_Response>;
   /** insert data into the table: "food" */
   insert_food?: Maybe<Food_Mutation_Response>;
   /** insert data into the table: "food_attribute" */
@@ -4583,6 +3607,10 @@ export type Mutation_Root = {
   insert_food_portion?: Maybe<Food_Portion_Mutation_Response>;
   /** insert a single row into the table: "food_portion" */
   insert_food_portion_one?: Maybe<Food_Portion>;
+  /** insert data into the table: "identities" */
+  insert_identities?: Maybe<Identities_Mutation_Response>;
+  /** insert a single row into the table: "identities" */
+  insert_identities_one?: Maybe<Identities>;
   /** insert data into the table: "ingredient_food_candidate" */
   insert_ingredient_food_candidate?: Maybe<Ingredient_Food_Candidate_Mutation_Response>;
   /** insert a single row into the table: "ingredient_food_candidate" */
@@ -4651,34 +3679,6 @@ export type Mutation_Root = {
   insert_user_config?: Maybe<User_Config_Mutation_Response>;
   /** insert a single row into the table: "user_config" */
   insert_user_config_one?: Maybe<User_Config>;
-  /** update single row of the table: "auth.providers" */
-  updateAuthProvider?: Maybe<AuthProviders>;
-  /** update single row of the table: "auth.provider_requests" */
-  updateAuthProviderRequest?: Maybe<AuthProviderRequests>;
-  /** update data of the table: "auth.provider_requests" */
-  updateAuthProviderRequests?: Maybe<AuthProviderRequests_Mutation_Response>;
-  /** update data of the table: "auth.providers" */
-  updateAuthProviders?: Maybe<AuthProviders_Mutation_Response>;
-  /** update single row of the table: "auth.refresh_tokens" */
-  updateAuthRefreshToken?: Maybe<AuthRefreshTokens>;
-  /** update data of the table: "auth.refresh_tokens" */
-  updateAuthRefreshTokens?: Maybe<AuthRefreshTokens_Mutation_Response>;
-  /** update single row of the table: "auth.roles" */
-  updateAuthRole?: Maybe<AuthRoles>;
-  /** update data of the table: "auth.roles" */
-  updateAuthRoles?: Maybe<AuthRoles_Mutation_Response>;
-  /** update single row of the table: "auth.user_providers" */
-  updateAuthUserProvider?: Maybe<AuthUserProviders>;
-  /** update data of the table: "auth.user_providers" */
-  updateAuthUserProviders?: Maybe<AuthUserProviders_Mutation_Response>;
-  /** update single row of the table: "auth.user_roles" */
-  updateAuthUserRole?: Maybe<AuthUserRoles>;
-  /** update data of the table: "auth.user_roles" */
-  updateAuthUserRoles?: Maybe<AuthUserRoles_Mutation_Response>;
-  /** update single row of the table: "auth.users" */
-  updateUser?: Maybe<Users>;
-  /** update data of the table: "auth.users" */
-  updateUsers?: Maybe<Users_Mutation_Response>;
   /** update data of the table: "food" */
   update_food?: Maybe<Food_Mutation_Response>;
   /** update data of the table: "food_attribute" */
@@ -4703,6 +3703,10 @@ export type Mutation_Root = {
   update_food_portion?: Maybe<Food_Portion_Mutation_Response>;
   /** update single row of the table: "food_portion" */
   update_food_portion_by_pk?: Maybe<Food_Portion>;
+  /** update data of the table: "identities" */
+  update_identities?: Maybe<Identities_Mutation_Response>;
+  /** update single row of the table: "identities" */
+  update_identities_by_pk?: Maybe<Identities>;
   /** update data of the table: "ingredient_food_candidate" */
   update_ingredient_food_candidate?: Maybe<Ingredient_Food_Candidate_Mutation_Response>;
   /** update single row of the table: "ingredient_food_candidate" */
@@ -4775,90 +3779,6 @@ export type Mutation_Root = {
 
 
 /** mutation root */
-export type Mutation_RootDeleteAuthProviderArgs = {
-  id: Scalars['String'];
-};
-
-
-/** mutation root */
-export type Mutation_RootDeleteAuthProviderRequestArgs = {
-  id: Scalars['uuid'];
-};
-
-
-/** mutation root */
-export type Mutation_RootDeleteAuthProviderRequestsArgs = {
-  where: AuthProviderRequests_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootDeleteAuthProvidersArgs = {
-  where: AuthProviders_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootDeleteAuthRefreshTokenArgs = {
-  refreshToken: Scalars['uuid'];
-};
-
-
-/** mutation root */
-export type Mutation_RootDeleteAuthRefreshTokensArgs = {
-  where: AuthRefreshTokens_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootDeleteAuthRoleArgs = {
-  role: Scalars['String'];
-};
-
-
-/** mutation root */
-export type Mutation_RootDeleteAuthRolesArgs = {
-  where: AuthRoles_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootDeleteAuthUserProviderArgs = {
-  id: Scalars['uuid'];
-};
-
-
-/** mutation root */
-export type Mutation_RootDeleteAuthUserProvidersArgs = {
-  where: AuthUserProviders_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootDeleteAuthUserRoleArgs = {
-  id: Scalars['uuid'];
-};
-
-
-/** mutation root */
-export type Mutation_RootDeleteAuthUserRolesArgs = {
-  where: AuthUserRoles_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootDeleteUserArgs = {
-  id: Scalars['uuid'];
-};
-
-
-/** mutation root */
-export type Mutation_RootDeleteUsersArgs = {
-  where: Users_Bool_Exp;
-};
-
-
-/** mutation root */
 export type Mutation_RootDelete_FoodArgs = {
   where: Food_Bool_Exp;
 };
@@ -4927,6 +3847,18 @@ export type Mutation_RootDelete_Food_PortionArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Food_Portion_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_IdentitiesArgs = {
+  where: Identities_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Identities_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -5135,104 +4067,6 @@ export type Mutation_RootDelete_User_Config_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootInsertAuthProviderArgs = {
-  object: AuthProviders_Insert_Input;
-  on_conflict?: InputMaybe<AuthProviders_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsertAuthProviderRequestArgs = {
-  object: AuthProviderRequests_Insert_Input;
-  on_conflict?: InputMaybe<AuthProviderRequests_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsertAuthProviderRequestsArgs = {
-  objects: Array<AuthProviderRequests_Insert_Input>;
-  on_conflict?: InputMaybe<AuthProviderRequests_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsertAuthProvidersArgs = {
-  objects: Array<AuthProviders_Insert_Input>;
-  on_conflict?: InputMaybe<AuthProviders_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsertAuthRefreshTokenArgs = {
-  object: AuthRefreshTokens_Insert_Input;
-  on_conflict?: InputMaybe<AuthRefreshTokens_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsertAuthRefreshTokensArgs = {
-  objects: Array<AuthRefreshTokens_Insert_Input>;
-  on_conflict?: InputMaybe<AuthRefreshTokens_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsertAuthRoleArgs = {
-  object: AuthRoles_Insert_Input;
-  on_conflict?: InputMaybe<AuthRoles_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsertAuthRolesArgs = {
-  objects: Array<AuthRoles_Insert_Input>;
-  on_conflict?: InputMaybe<AuthRoles_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsertAuthUserProviderArgs = {
-  object: AuthUserProviders_Insert_Input;
-  on_conflict?: InputMaybe<AuthUserProviders_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsertAuthUserProvidersArgs = {
-  objects: Array<AuthUserProviders_Insert_Input>;
-  on_conflict?: InputMaybe<AuthUserProviders_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsertAuthUserRoleArgs = {
-  object: AuthUserRoles_Insert_Input;
-  on_conflict?: InputMaybe<AuthUserRoles_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsertAuthUserRolesArgs = {
-  objects: Array<AuthUserRoles_Insert_Input>;
-  on_conflict?: InputMaybe<AuthUserRoles_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsertUserArgs = {
-  object: Users_Insert_Input;
-  on_conflict?: InputMaybe<Users_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsertUsersArgs = {
-  objects: Array<Users_Insert_Input>;
-  on_conflict?: InputMaybe<Users_On_Conflict>;
-};
-
-
-/** mutation root */
 export type Mutation_RootInsert_FoodArgs = {
   objects: Array<Food_Insert_Input>;
   on_conflict?: InputMaybe<Food_On_Conflict>;
@@ -5313,6 +4147,20 @@ export type Mutation_RootInsert_Food_PortionArgs = {
 export type Mutation_RootInsert_Food_Portion_OneArgs = {
   object: Food_Portion_Insert_Input;
   on_conflict?: InputMaybe<Food_Portion_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_IdentitiesArgs = {
+  objects: Array<Identities_Insert_Input>;
+  on_conflict?: InputMaybe<Identities_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Identities_OneArgs = {
+  object: Identities_Insert_Input;
+  on_conflict?: InputMaybe<Identities_On_Conflict>;
 };
 
 
@@ -5555,124 +4403,6 @@ export type Mutation_RootInsert_User_Config_OneArgs = {
 
 
 /** mutation root */
-export type Mutation_RootUpdateAuthProviderArgs = {
-  _set?: InputMaybe<AuthProviders_Set_Input>;
-  pk_columns: AuthProviders_Pk_Columns_Input;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdateAuthProviderRequestArgs = {
-  _append?: InputMaybe<AuthProviderRequests_Append_Input>;
-  _delete_at_path?: InputMaybe<AuthProviderRequests_Delete_At_Path_Input>;
-  _delete_elem?: InputMaybe<AuthProviderRequests_Delete_Elem_Input>;
-  _delete_key?: InputMaybe<AuthProviderRequests_Delete_Key_Input>;
-  _prepend?: InputMaybe<AuthProviderRequests_Prepend_Input>;
-  _set?: InputMaybe<AuthProviderRequests_Set_Input>;
-  pk_columns: AuthProviderRequests_Pk_Columns_Input;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdateAuthProviderRequestsArgs = {
-  _append?: InputMaybe<AuthProviderRequests_Append_Input>;
-  _delete_at_path?: InputMaybe<AuthProviderRequests_Delete_At_Path_Input>;
-  _delete_elem?: InputMaybe<AuthProviderRequests_Delete_Elem_Input>;
-  _delete_key?: InputMaybe<AuthProviderRequests_Delete_Key_Input>;
-  _prepend?: InputMaybe<AuthProviderRequests_Prepend_Input>;
-  _set?: InputMaybe<AuthProviderRequests_Set_Input>;
-  where: AuthProviderRequests_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdateAuthProvidersArgs = {
-  _set?: InputMaybe<AuthProviders_Set_Input>;
-  where: AuthProviders_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdateAuthRefreshTokenArgs = {
-  _set?: InputMaybe<AuthRefreshTokens_Set_Input>;
-  pk_columns: AuthRefreshTokens_Pk_Columns_Input;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdateAuthRefreshTokensArgs = {
-  _set?: InputMaybe<AuthRefreshTokens_Set_Input>;
-  where: AuthRefreshTokens_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdateAuthRoleArgs = {
-  _set?: InputMaybe<AuthRoles_Set_Input>;
-  pk_columns: AuthRoles_Pk_Columns_Input;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdateAuthRolesArgs = {
-  _set?: InputMaybe<AuthRoles_Set_Input>;
-  where: AuthRoles_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdateAuthUserProviderArgs = {
-  _set?: InputMaybe<AuthUserProviders_Set_Input>;
-  pk_columns: AuthUserProviders_Pk_Columns_Input;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdateAuthUserProvidersArgs = {
-  _set?: InputMaybe<AuthUserProviders_Set_Input>;
-  where: AuthUserProviders_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdateAuthUserRoleArgs = {
-  _set?: InputMaybe<AuthUserRoles_Set_Input>;
-  pk_columns: AuthUserRoles_Pk_Columns_Input;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdateAuthUserRolesArgs = {
-  _set?: InputMaybe<AuthUserRoles_Set_Input>;
-  where: AuthUserRoles_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdateUserArgs = {
-  _append?: InputMaybe<Users_Append_Input>;
-  _delete_at_path?: InputMaybe<Users_Delete_At_Path_Input>;
-  _delete_elem?: InputMaybe<Users_Delete_Elem_Input>;
-  _delete_key?: InputMaybe<Users_Delete_Key_Input>;
-  _prepend?: InputMaybe<Users_Prepend_Input>;
-  _set?: InputMaybe<Users_Set_Input>;
-  pk_columns: Users_Pk_Columns_Input;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdateUsersArgs = {
-  _append?: InputMaybe<Users_Append_Input>;
-  _delete_at_path?: InputMaybe<Users_Delete_At_Path_Input>;
-  _delete_elem?: InputMaybe<Users_Delete_Elem_Input>;
-  _delete_key?: InputMaybe<Users_Delete_Key_Input>;
-  _prepend?: InputMaybe<Users_Prepend_Input>;
-  _set?: InputMaybe<Users_Set_Input>;
-  where: Users_Bool_Exp;
-};
-
-
-/** mutation root */
 export type Mutation_RootUpdate_FoodArgs = {
   _inc?: InputMaybe<Food_Inc_Input>;
   _set?: InputMaybe<Food_Set_Input>;
@@ -5765,6 +4495,30 @@ export type Mutation_RootUpdate_Food_Portion_By_PkArgs = {
   _inc?: InputMaybe<Food_Portion_Inc_Input>;
   _set?: InputMaybe<Food_Portion_Set_Input>;
   pk_columns: Food_Portion_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_IdentitiesArgs = {
+  _append?: InputMaybe<Identities_Append_Input>;
+  _delete_at_path?: InputMaybe<Identities_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<Identities_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<Identities_Delete_Key_Input>;
+  _prepend?: InputMaybe<Identities_Prepend_Input>;
+  _set?: InputMaybe<Identities_Set_Input>;
+  where: Identities_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Identities_By_PkArgs = {
+  _append?: InputMaybe<Identities_Append_Input>;
+  _delete_at_path?: InputMaybe<Identities_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<Identities_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<Identities_Delete_Key_Input>;
+  _prepend?: InputMaybe<Identities_Prepend_Input>;
+  _set?: InputMaybe<Identities_Set_Input>;
+  pk_columns: Identities_Pk_Columns_Input;
 };
 
 
@@ -6117,8 +4871,8 @@ export type Nutrient_Bool_Exp = {
 
 /** unique or primary key constraints on table "nutrient" */
 export enum Nutrient_Constraint {
-  /** unique or primary key constraint */
-  NutrientPkey = 'nutrient_pkey',
+  /** unique or primary key constraint on columns "id" */
+  NutrientPkey = 'nutrient_pkey'
 }
 
 /** input type for incrementing numeric columns in table "nutrient" */
@@ -6205,7 +4959,7 @@ export enum Nutrient_Select_Column {
   /** column name */
   Rank = 'rank',
   /** column name */
-  UnitName = 'unit_name',
+  UnitName = 'unit_name'
 }
 
 /** input type for updating data in table "nutrient" */
@@ -6260,7 +5014,7 @@ export enum Nutrient_Update_Column {
   /** column name */
   Rank = 'rank',
   /** column name */
-  UnitName = 'unit_name',
+  UnitName = 'unit_name'
 }
 
 /** aggregate var_pop on columns */
@@ -6300,47 +5054,11 @@ export enum Order_By {
   /** in descending order, nulls first */
   DescNullsFirst = 'desc_nulls_first',
   /** in descending order, nulls last */
-  DescNullsLast = 'desc_nulls_last',
+  DescNullsLast = 'desc_nulls_last'
 }
 
 export type Query_Root = {
   __typename?: 'query_root';
-  /** fetch data from the table: "auth.providers" using primary key columns */
-  authProvider?: Maybe<AuthProviders>;
-  /** fetch data from the table: "auth.provider_requests" using primary key columns */
-  authProviderRequest?: Maybe<AuthProviderRequests>;
-  /** fetch data from the table: "auth.provider_requests" */
-  authProviderRequests: Array<AuthProviderRequests>;
-  /** fetch aggregated fields from the table: "auth.provider_requests" */
-  authProviderRequestsAggregate: AuthProviderRequests_Aggregate;
-  /** fetch data from the table: "auth.providers" */
-  authProviders: Array<AuthProviders>;
-  /** fetch aggregated fields from the table: "auth.providers" */
-  authProvidersAggregate: AuthProviders_Aggregate;
-  /** fetch data from the table: "auth.refresh_tokens" using primary key columns */
-  authRefreshToken?: Maybe<AuthRefreshTokens>;
-  /** fetch data from the table: "auth.refresh_tokens" */
-  authRefreshTokens: Array<AuthRefreshTokens>;
-  /** fetch aggregated fields from the table: "auth.refresh_tokens" */
-  authRefreshTokensAggregate: AuthRefreshTokens_Aggregate;
-  /** fetch data from the table: "auth.roles" using primary key columns */
-  authRole?: Maybe<AuthRoles>;
-  /** fetch data from the table: "auth.roles" */
-  authRoles: Array<AuthRoles>;
-  /** fetch aggregated fields from the table: "auth.roles" */
-  authRolesAggregate: AuthRoles_Aggregate;
-  /** fetch data from the table: "auth.user_providers" using primary key columns */
-  authUserProvider?: Maybe<AuthUserProviders>;
-  /** fetch data from the table: "auth.user_providers" */
-  authUserProviders: Array<AuthUserProviders>;
-  /** fetch aggregated fields from the table: "auth.user_providers" */
-  authUserProvidersAggregate: AuthUserProviders_Aggregate;
-  /** fetch data from the table: "auth.user_roles" using primary key columns */
-  authUserRole?: Maybe<AuthUserRoles>;
-  /** fetch data from the table: "auth.user_roles" */
-  authUserRoles: Array<AuthUserRoles>;
-  /** fetch aggregated fields from the table: "auth.user_roles" */
-  authUserRolesAggregate: AuthUserRoles_Aggregate;
   /** fetch data from the table: "food" */
   food: Array<Food>;
   /** fetch aggregated fields from the table: "food" */
@@ -6377,6 +5095,12 @@ export type Query_Root = {
   food_portion_aggregate: Food_Portion_Aggregate;
   /** fetch data from the table: "food_portion" using primary key columns */
   food_portion_by_pk?: Maybe<Food_Portion>;
+  /** fetch data from the table: "identities" */
+  identities: Array<Identities>;
+  /** fetch aggregated fields from the table: "identities" */
+  identities_aggregate: Identities_Aggregate;
+  /** fetch data from the table: "identities" using primary key columns */
+  identities_by_pk?: Maybe<Identities>;
   /** fetch data from the table: "ingredient_food_candidate" */
   ingredient_food_candidate: Array<Ingredient_Food_Candidate>;
   /** fetch aggregated fields from the table: "ingredient_food_candidate" */
@@ -6465,9 +5189,9 @@ export type Query_Root = {
   recipe_source_providers_aggregate: Recipe_Source_Providers_Aggregate;
   /** fetch data from the table: "recipe_source_providers" using primary key columns */
   recipe_source_providers_by_pk?: Maybe<Recipe_Source_Providers>;
-  /** fetch data from the table: "recipe_tags" */
+  /** An array relationship */
   recipe_tags: Array<Recipe_Tags>;
-  /** fetch aggregated fields from the table: "recipe_tags" */
+  /** An aggregate relationship */
   recipe_tags_aggregate: Recipe_Tags_Aggregate;
   /** fetch data from the table: "recipe_tags" using primary key columns */
   recipe_tags_by_pk?: Maybe<Recipe_Tags>;
@@ -6485,156 +5209,12 @@ export type Query_Root = {
   search_recipes: Array<Recipes>;
   /** execute function "search_recipes" and query aggregates on result of table type "recipes" */
   search_recipes_aggregate: Recipes_Aggregate;
-  /** fetch data from the table: "auth.users" using primary key columns */
-  user?: Maybe<Users>;
   /** fetch data from the table: "user_config" */
   user_config: Array<User_Config>;
   /** fetch aggregated fields from the table: "user_config" */
   user_config_aggregate: User_Config_Aggregate;
   /** fetch data from the table: "user_config" using primary key columns */
   user_config_by_pk?: Maybe<User_Config>;
-  /** fetch data from the table: "auth.users" */
-  users: Array<Users>;
-  /** fetch aggregated fields from the table: "auth.users" */
-  usersAggregate: Users_Aggregate;
-};
-
-
-export type Query_RootAuthProviderArgs = {
-  id: Scalars['String'];
-};
-
-
-export type Query_RootAuthProviderRequestArgs = {
-  id: Scalars['uuid'];
-};
-
-
-export type Query_RootAuthProviderRequestsArgs = {
-  distinct_on?: InputMaybe<Array<AuthProviderRequests_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthProviderRequests_Order_By>>;
-  where?: InputMaybe<AuthProviderRequests_Bool_Exp>;
-};
-
-
-export type Query_RootAuthProviderRequestsAggregateArgs = {
-  distinct_on?: InputMaybe<Array<AuthProviderRequests_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthProviderRequests_Order_By>>;
-  where?: InputMaybe<AuthProviderRequests_Bool_Exp>;
-};
-
-
-export type Query_RootAuthProvidersArgs = {
-  distinct_on?: InputMaybe<Array<AuthProviders_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthProviders_Order_By>>;
-  where?: InputMaybe<AuthProviders_Bool_Exp>;
-};
-
-
-export type Query_RootAuthProvidersAggregateArgs = {
-  distinct_on?: InputMaybe<Array<AuthProviders_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthProviders_Order_By>>;
-  where?: InputMaybe<AuthProviders_Bool_Exp>;
-};
-
-
-export type Query_RootAuthRefreshTokenArgs = {
-  refreshToken: Scalars['uuid'];
-};
-
-
-export type Query_RootAuthRefreshTokensArgs = {
-  distinct_on?: InputMaybe<Array<AuthRefreshTokens_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthRefreshTokens_Order_By>>;
-  where?: InputMaybe<AuthRefreshTokens_Bool_Exp>;
-};
-
-
-export type Query_RootAuthRefreshTokensAggregateArgs = {
-  distinct_on?: InputMaybe<Array<AuthRefreshTokens_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthRefreshTokens_Order_By>>;
-  where?: InputMaybe<AuthRefreshTokens_Bool_Exp>;
-};
-
-
-export type Query_RootAuthRoleArgs = {
-  role: Scalars['String'];
-};
-
-
-export type Query_RootAuthRolesArgs = {
-  distinct_on?: InputMaybe<Array<AuthRoles_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthRoles_Order_By>>;
-  where?: InputMaybe<AuthRoles_Bool_Exp>;
-};
-
-
-export type Query_RootAuthRolesAggregateArgs = {
-  distinct_on?: InputMaybe<Array<AuthRoles_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthRoles_Order_By>>;
-  where?: InputMaybe<AuthRoles_Bool_Exp>;
-};
-
-
-export type Query_RootAuthUserProviderArgs = {
-  id: Scalars['uuid'];
-};
-
-
-export type Query_RootAuthUserProvidersArgs = {
-  distinct_on?: InputMaybe<Array<AuthUserProviders_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthUserProviders_Order_By>>;
-  where?: InputMaybe<AuthUserProviders_Bool_Exp>;
-};
-
-
-export type Query_RootAuthUserProvidersAggregateArgs = {
-  distinct_on?: InputMaybe<Array<AuthUserProviders_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthUserProviders_Order_By>>;
-  where?: InputMaybe<AuthUserProviders_Bool_Exp>;
-};
-
-
-export type Query_RootAuthUserRoleArgs = {
-  id: Scalars['uuid'];
-};
-
-
-export type Query_RootAuthUserRolesArgs = {
-  distinct_on?: InputMaybe<Array<AuthUserRoles_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthUserRoles_Order_By>>;
-  where?: InputMaybe<AuthUserRoles_Bool_Exp>;
-};
-
-
-export type Query_RootAuthUserRolesAggregateArgs = {
-  distinct_on?: InputMaybe<Array<AuthUserRoles_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthUserRoles_Order_By>>;
-  where?: InputMaybe<AuthUserRoles_Bool_Exp>;
 };
 
 
@@ -6773,6 +5353,29 @@ export type Query_RootFood_Portion_AggregateArgs = {
 
 export type Query_RootFood_Portion_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+
+export type Query_RootIdentitiesArgs = {
+  distinct_on?: InputMaybe<Array<Identities_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Identities_Order_By>>;
+  where?: InputMaybe<Identities_Bool_Exp>;
+};
+
+
+export type Query_RootIdentities_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Identities_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Identities_Order_By>>;
+  where?: InputMaybe<Identities_Bool_Exp>;
+};
+
+
+export type Query_RootIdentities_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -7202,11 +5805,6 @@ export type Query_RootSearch_Recipes_AggregateArgs = {
 };
 
 
-export type Query_RootUserArgs = {
-  id: Scalars['uuid'];
-};
-
-
 export type Query_RootUser_ConfigArgs = {
   distinct_on?: InputMaybe<Array<User_Config_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7227,24 +5825,6 @@ export type Query_RootUser_Config_AggregateArgs = {
 
 export type Query_RootUser_Config_By_PkArgs = {
   user_id: Scalars['Int'];
-};
-
-
-export type Query_RootUsersArgs = {
-  distinct_on?: InputMaybe<Array<Users_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Users_Order_By>>;
-  where?: InputMaybe<Users_Bool_Exp>;
-};
-
-
-export type Query_RootUsersAggregateArgs = {
-  distinct_on?: InputMaybe<Array<Users_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Users_Order_By>>;
-  where?: InputMaybe<Users_Bool_Exp>;
 };
 
 /** columns and relationships of "recipe_direction_actions" */
@@ -7325,8 +5905,8 @@ export type Recipe_Direction_Actions_Bool_Exp = {
 
 /** unique or primary key constraints on table "recipe_direction_actions" */
 export enum Recipe_Direction_Actions_Constraint {
-  /** unique or primary key constraint */
-  RecipeDirectionActionsPkey = 'recipe_direction_actions_pkey',
+  /** unique or primary key constraint on columns "id" */
+  RecipeDirectionActionsPkey = 'recipe_direction_actions_pkey'
 }
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
@@ -7437,7 +6017,7 @@ export enum Recipe_Direction_Actions_Select_Column {
   /** column name */
   Quantity = 'quantity',
   /** column name */
-  Unit = 'unit',
+  Unit = 'unit'
 }
 
 /** input type for updating data in table "recipe_direction_actions" */
@@ -7502,7 +6082,7 @@ export enum Recipe_Direction_Actions_Update_Column {
   /** column name */
   Quantity = 'quantity',
   /** column name */
-  Unit = 'unit',
+  Unit = 'unit'
 }
 
 /** aggregate var_pop on columns */
@@ -7627,8 +6207,8 @@ export type Recipe_Direction_Durations_Bool_Exp = {
 
 /** unique or primary key constraints on table "recipe_direction_durations" */
 export enum Recipe_Direction_Durations_Constraint {
-  /** unique or primary key constraint */
-  RecipeDirectionDurationsPkey = 'recipe_direction_durations_pkey',
+  /** unique or primary key constraint on columns "id" */
+  RecipeDirectionDurationsPkey = 'recipe_direction_durations_pkey'
 }
 
 /** input type for incrementing numeric columns in table "recipe_direction_durations" */
@@ -7735,7 +6315,7 @@ export enum Recipe_Direction_Durations_Select_Column {
   /** column name */
   Type = 'type',
   /** column name */
-  UnitOfTime = 'unit_of_time',
+  UnitOfTime = 'unit_of_time'
 }
 
 /** input type for updating data in table "recipe_direction_durations" */
@@ -7829,7 +6409,7 @@ export enum Recipe_Direction_Durations_Update_Column {
   /** column name */
   Type = 'type',
   /** column name */
-  UnitOfTime = 'unit_of_time',
+  UnitOfTime = 'unit_of_time'
 }
 
 /** aggregate var_pop on columns */
@@ -7980,10 +6560,10 @@ export type Recipe_Directions_Bool_Exp = {
 
 /** unique or primary key constraints on table "recipe_directions" */
 export enum Recipe_Directions_Constraint {
-  /** unique or primary key constraint */
+  /** unique or primary key constraint on columns "id" */
   RecipeDirectionsPkey = 'recipe_directions_pkey',
-  /** unique or primary key constraint */
-  RecipeDirectionsRecipeIdSeqNumKey = 'recipe_directions_recipe_id_seq_num_key',
+  /** unique or primary key constraint on columns "recipe_id", "seq_num" */
+  RecipeDirectionsRecipeIdSeqNumKey = 'recipe_directions_recipe_id_seq_num_key'
 }
 
 /** input type for incrementing numeric columns in table "recipe_directions" */
@@ -8091,7 +6671,7 @@ export enum Recipe_Directions_Select_Column {
   /** column name */
   VideoTimestamp = 'video_timestamp',
   /** column name */
-  VideoTimestampEnd = 'video_timestamp_end',
+  VideoTimestampEnd = 'video_timestamp_end'
 }
 
 /** input type for updating data in table "recipe_directions" */
@@ -8193,7 +6773,7 @@ export enum Recipe_Directions_Update_Column {
   /** column name */
   VideoTimestamp = 'video_timestamp',
   /** column name */
-  VideoTimestampEnd = 'video_timestamp_end',
+  VideoTimestampEnd = 'video_timestamp_end'
 }
 
 /** aggregate var_pop on columns */
@@ -8314,8 +6894,8 @@ export type Recipe_Favorite_Bool_Exp = {
 
 /** unique or primary key constraints on table "recipe_favorite" */
 export enum Recipe_Favorite_Constraint {
-  /** unique or primary key constraint */
-  RecipeFavoritePkey = 'recipe_favorite_pkey',
+  /** unique or primary key constraint on columns "id" */
+  RecipeFavoritePkey = 'recipe_favorite_pkey'
 }
 
 /** input type for incrementing numeric columns in table "recipe_favorite" */
@@ -8385,7 +6965,7 @@ export enum Recipe_Favorite_Select_Column {
   /** column name */
   RecipeId = 'recipe_id',
   /** column name */
-  UserId = 'user_id',
+  UserId = 'user_id'
 }
 
 /** input type for updating data in table "recipe_favorite" */
@@ -8434,7 +7014,7 @@ export enum Recipe_Favorite_Update_Column {
   /** column name */
   RecipeId = 'recipe_id',
   /** column name */
-  UserId = 'user_id',
+  UserId = 'user_id'
 }
 
 /** aggregate var_pop on columns */
@@ -8578,10 +7158,10 @@ export type Recipe_Ingredient_Groups_Bool_Exp = {
 
 /** unique or primary key constraints on table "recipe_ingredient_groups" */
 export enum Recipe_Ingredient_Groups_Constraint {
-  /** unique or primary key constraint */
+  /** unique or primary key constraint on columns "id" */
   RecipeIngredientGroupsPkey = 'recipe_ingredient_groups_pkey',
-  /** unique or primary key constraint */
-  RecipeIngredientGroupsRecipeIdSeqNumKey = 'recipe_ingredient_groups_recipe_id_seq_num_key',
+  /** unique or primary key constraint on columns "recipe_id", "seq_num" */
+  RecipeIngredientGroupsRecipeIdSeqNumKey = 'recipe_ingredient_groups_recipe_id_seq_num_key'
 }
 
 /** input type for incrementing numeric columns in table "recipe_ingredient_groups" */
@@ -8682,7 +7262,7 @@ export enum Recipe_Ingredient_Groups_Select_Column {
   /** column name */
   RecipeId = 'recipe_id',
   /** column name */
-  SeqNum = 'seq_num',
+  SeqNum = 'seq_num'
 }
 
 /** input type for updating data in table "recipe_ingredient_groups" */
@@ -8762,7 +7342,7 @@ export enum Recipe_Ingredient_Groups_Update_Column {
   /** column name */
   RecipeId = 'recipe_id',
   /** column name */
-  SeqNum = 'seq_num',
+  SeqNum = 'seq_num'
 }
 
 /** aggregate var_pop on columns */
@@ -8817,9 +7397,11 @@ export type Recipe_Ingredients = {
   comment?: Maybe<Scalars['String']>;
   group_id?: Maybe<Scalars['Int']>;
   id: Scalars['Int'];
-  /** Get the ingredient for a recipe ingredient. */
-  ingredient?: Maybe<Array<Ingredients>>;
+  /** An object relationship */
+  ingredient?: Maybe<Ingredients>;
   name?: Maybe<Scalars['String']>;
+  /** A computed field, executes function "ingredient_for_recipe_ingredient" */
+  recipe_ingredient_food_candidates?: Maybe<Array<Ingredients>>;
   /** An object relationship */
   recipe_ingredient_group?: Maybe<Recipe_Ingredient_Groups>;
   seq_num?: Maybe<Scalars['Int']>;
@@ -8831,7 +7413,7 @@ export type Recipe_Ingredients = {
 
 
 /** columns and relationships of "recipe_ingredients" */
-export type Recipe_IngredientsIngredientArgs = {
+export type Recipe_IngredientsRecipe_Ingredient_Food_CandidatesArgs = {
   distinct_on?: InputMaybe<Array<Ingredients_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -8923,6 +7505,7 @@ export type Recipe_Ingredients_Bool_Exp = {
   id?: InputMaybe<Int_Comparison_Exp>;
   ingredient?: InputMaybe<Ingredients_Bool_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
+  recipe_ingredient_food_candidates?: InputMaybe<Ingredients_Bool_Exp>;
   recipe_ingredient_group?: InputMaybe<Recipe_Ingredient_Groups_Bool_Exp>;
   seq_num?: InputMaybe<Int_Comparison_Exp>;
   text?: InputMaybe<String_Comparison_Exp>;
@@ -8933,10 +7516,10 @@ export type Recipe_Ingredients_Bool_Exp = {
 
 /** unique or primary key constraints on table "recipe_ingredients" */
 export enum Recipe_Ingredients_Constraint {
-  /** unique or primary key constraint */
+  /** unique or primary key constraint on columns "group_id", "seq_num" */
   RecipeIngredientsGroupIdSeqNumKey = 'recipe_ingredients_group_id_seq_num_key',
-  /** unique or primary key constraint */
-  RecipeIngredientsPkey = 'recipe_ingredients_pkey',
+  /** unique or primary key constraint on columns "id" */
+  RecipeIngredientsPkey = 'recipe_ingredients_pkey'
 }
 
 /** input type for incrementing numeric columns in table "recipe_ingredients" */
@@ -8955,6 +7538,7 @@ export type Recipe_Ingredients_Insert_Input = {
   comment?: InputMaybe<Scalars['String']>;
   group_id?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['Int']>;
+  ingredient?: InputMaybe<Ingredients_Obj_Rel_Insert_Input>;
   name?: InputMaybe<Scalars['String']>;
   recipe_ingredient_group?: InputMaybe<Recipe_Ingredient_Groups_Obj_Rel_Insert_Input>;
   seq_num?: InputMaybe<Scalars['Int']>;
@@ -9044,8 +7628,9 @@ export type Recipe_Ingredients_Order_By = {
   comment?: InputMaybe<Order_By>;
   group_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  ingredient_aggregate?: InputMaybe<Ingredients_Aggregate_Order_By>;
+  ingredient?: InputMaybe<Ingredients_Order_By>;
   name?: InputMaybe<Order_By>;
+  recipe_ingredient_food_candidates_aggregate?: InputMaybe<Ingredients_Aggregate_Order_By>;
   recipe_ingredient_group?: InputMaybe<Recipe_Ingredient_Groups_Order_By>;
   seq_num?: InputMaybe<Order_By>;
   text?: InputMaybe<Order_By>;
@@ -9080,7 +7665,7 @@ export enum Recipe_Ingredients_Select_Column {
   /** column name */
   VideoTimestamp = 'video_timestamp',
   /** column name */
-  VideoTimestampEnd = 'video_timestamp_end',
+  VideoTimestampEnd = 'video_timestamp_end'
 }
 
 /** input type for updating data in table "recipe_ingredients" */
@@ -9202,7 +7787,7 @@ export enum Recipe_Ingredients_Update_Column {
   /** column name */
   VideoTimestamp = 'video_timestamp',
   /** column name */
-  VideoTimestampEnd = 'video_timestamp_end',
+  VideoTimestampEnd = 'video_timestamp_end'
 }
 
 /** aggregate var_pop on columns */
@@ -9365,8 +7950,8 @@ export type Recipe_List_Items_Bool_Exp = {
 
 /** unique or primary key constraints on table "recipe_list_items" */
 export enum Recipe_List_Items_Constraint {
-  /** unique or primary key constraint */
-  RecipeListItemsPkey = 'recipe_list_items_pkey',
+  /** unique or primary key constraint on columns "id" */
+  RecipeListItemsPkey = 'recipe_list_items_pkey'
 }
 
 /** input type for incrementing numeric columns in table "recipe_list_items" */
@@ -9461,7 +8046,7 @@ export enum Recipe_List_Items_Select_Column {
   /** column name */
   RecipeListId = 'recipe_list_id',
   /** column name */
-  SeqNum = 'seq_num',
+  SeqNum = 'seq_num'
 }
 
 /** input type for updating data in table "recipe_list_items" */
@@ -9549,7 +8134,7 @@ export enum Recipe_List_Items_Update_Column {
   /** column name */
   RecipeListId = 'recipe_list_id',
   /** column name */
-  SeqNum = 'seq_num',
+  SeqNum = 'seq_num'
 }
 
 /** aggregate var_pop on columns */
@@ -9607,6 +8192,8 @@ export type Recipe_List_Items_Variance_Order_By = {
 export type Recipe_Lists = {
   __typename?: 'recipe_lists';
   id: Scalars['Int'];
+  /** An object relationship */
+  identity: Identities;
   name?: Maybe<Scalars['String']>;
   /** An array relationship */
   recipe_list_items: Array<Recipe_List_Items>;
@@ -9677,6 +8264,7 @@ export type Recipe_Lists_Bool_Exp = {
   _not?: InputMaybe<Recipe_Lists_Bool_Exp>;
   _or?: InputMaybe<Array<Recipe_Lists_Bool_Exp>>;
   id?: InputMaybe<Int_Comparison_Exp>;
+  identity?: InputMaybe<Identities_Bool_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
   recipe_list_items?: InputMaybe<Recipe_List_Items_Bool_Exp>;
   user_id?: InputMaybe<Uuid_Comparison_Exp>;
@@ -9684,8 +8272,8 @@ export type Recipe_Lists_Bool_Exp = {
 
 /** unique or primary key constraints on table "recipe_lists" */
 export enum Recipe_Lists_Constraint {
-  /** unique or primary key constraint */
-  RecipeListsPkey = 'recipe_lists_pkey',
+  /** unique or primary key constraint on columns "id" */
+  RecipeListsPkey = 'recipe_lists_pkey'
 }
 
 /** input type for incrementing numeric columns in table "recipe_lists" */
@@ -9696,6 +8284,7 @@ export type Recipe_Lists_Inc_Input = {
 /** input type for inserting data into table "recipe_lists" */
 export type Recipe_Lists_Insert_Input = {
   id?: InputMaybe<Scalars['Int']>;
+  identity?: InputMaybe<Identities_Obj_Rel_Insert_Input>;
   name?: InputMaybe<Scalars['String']>;
   recipe_list_items?: InputMaybe<Recipe_List_Items_Arr_Rel_Insert_Input>;
   user_id?: InputMaybe<Scalars['uuid']>;
@@ -9743,6 +8332,7 @@ export type Recipe_Lists_On_Conflict = {
 /** Ordering options when selecting data from "recipe_lists". */
 export type Recipe_Lists_Order_By = {
   id?: InputMaybe<Order_By>;
+  identity?: InputMaybe<Identities_Order_By>;
   name?: InputMaybe<Order_By>;
   recipe_list_items_aggregate?: InputMaybe<Recipe_List_Items_Aggregate_Order_By>;
   user_id?: InputMaybe<Order_By>;
@@ -9760,7 +8350,7 @@ export enum Recipe_Lists_Select_Column {
   /** column name */
   Name = 'name',
   /** column name */
-  UserId = 'user_id',
+  UserId = 'user_id'
 }
 
 /** input type for updating data in table "recipe_lists" */
@@ -9801,7 +8391,7 @@ export enum Recipe_Lists_Update_Column {
   /** column name */
   Name = 'name',
   /** column name */
-  UserId = 'user_id',
+  UserId = 'user_id'
 }
 
 /** aggregate var_pop on columns */
@@ -9866,8 +8456,8 @@ export type Recipe_Source_Providers_Bool_Exp = {
 
 /** unique or primary key constraints on table "recipe_source_providers" */
 export enum Recipe_Source_Providers_Constraint {
-  /** unique or primary key constraint */
-  RecipeSourcesPkey = 'recipe_sources_pkey',
+  /** unique or primary key constraint on columns "id" */
+  RecipeSourcesPkey = 'recipe_sources_pkey'
 }
 
 /** input type for inserting data into table "recipe_source_providers" */
@@ -9941,7 +8531,7 @@ export enum Recipe_Source_Providers_Select_Column {
   /** column name */
   Name = 'name',
   /** column name */
-  Url = 'url',
+  Url = 'url'
 }
 
 /** input type for updating data in table "recipe_source_providers" */
@@ -9961,7 +8551,7 @@ export enum Recipe_Source_Providers_Update_Column {
   /** column name */
   Name = 'name',
   /** column name */
-  Url = 'url',
+  Url = 'url'
 }
 
 /** columns and relationships of "recipe_tags" */
@@ -10053,10 +8643,10 @@ export type Recipe_Tags_Bool_Exp = {
 
 /** unique or primary key constraints on table "recipe_tags" */
 export enum Recipe_Tags_Constraint {
-  /** unique or primary key constraint */
+  /** unique or primary key constraint on columns "id" */
   RecipeTagsPkey = 'recipe_tags_pkey',
-  /** unique or primary key constraint */
-  RecipeTagsRecipeIdNameKey = 'recipe_tags_recipe_id_name_key',
+  /** unique or primary key constraint on columns "name", "recipe_id" */
+  RecipeTagsRecipeIdNameKey = 'recipe_tags_recipe_id_name_key'
 }
 
 /** input type for incrementing numeric columns in table "recipe_tags" */
@@ -10146,7 +8736,7 @@ export enum Recipe_Tags_Select_Column {
   /** column name */
   RecipeId = 'recipe_id',
   /** column name */
-  SeqNum = 'seq_num',
+  SeqNum = 'seq_num'
 }
 
 /** input type for updating data in table "recipe_tags" */
@@ -10226,7 +8816,7 @@ export enum Recipe_Tags_Update_Column {
   /** column name */
   RecipeId = 'recipe_id',
   /** column name */
-  SeqNum = 'seq_num',
+  SeqNum = 'seq_num'
 }
 
 /** aggregate var_pop on columns */
@@ -10296,9 +8886,9 @@ export type Recipes = {
   recipe_ingredient_groups_aggregate: Recipe_Ingredient_Groups_Aggregate;
   /** An object relationship */
   recipe_source_provider?: Maybe<Recipe_Source_Providers>;
-  /** fetch data from the table: "recipe_tags" */
+  /** An array relationship */
   recipe_tags: Array<Recipe_Tags>;
-  /** fetch aggregated fields from the table: "recipe_tags" */
+  /** An aggregate relationship */
   recipe_tags_aggregate: Recipe_Tags_Aggregate;
   slug?: Maybe<Scalars['String']>;
   source: Scalars['String'];
@@ -10460,10 +9050,10 @@ export type Recipes_Bool_Exp = {
 
 /** unique or primary key constraints on table "recipes" */
 export enum Recipes_Constraint {
-  /** unique or primary key constraint */
+  /** unique or primary key constraint on columns "id" */
   RecipesPkey = 'recipes_pkey',
-  /** unique or primary key constraint */
-  RecipesSourceKey = 'recipes_source_key',
+  /** unique or primary key constraint on columns "source" */
+  RecipesSourceKey = 'recipes_source_key'
 }
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
@@ -10610,7 +9200,7 @@ export enum Recipes_Select_Column {
   /** column name */
   Video = 'video',
   /** column name */
-  Visible = 'visible',
+  Visible = 'visible'
 }
 
 /** input type for updating data in table "recipes" */
@@ -10675,7 +9265,7 @@ export enum Recipes_Update_Column {
   /** column name */
   Video = 'video',
   /** column name */
-  Visible = 'visible',
+  Visible = 'visible'
 }
 
 /** aggregate var_pop on columns */
@@ -10706,42 +9296,6 @@ export type Search_Recipes_Args = {
 
 export type Subscription_Root = {
   __typename?: 'subscription_root';
-  /** fetch data from the table: "auth.providers" using primary key columns */
-  authProvider?: Maybe<AuthProviders>;
-  /** fetch data from the table: "auth.provider_requests" using primary key columns */
-  authProviderRequest?: Maybe<AuthProviderRequests>;
-  /** fetch data from the table: "auth.provider_requests" */
-  authProviderRequests: Array<AuthProviderRequests>;
-  /** fetch aggregated fields from the table: "auth.provider_requests" */
-  authProviderRequestsAggregate: AuthProviderRequests_Aggregate;
-  /** fetch data from the table: "auth.providers" */
-  authProviders: Array<AuthProviders>;
-  /** fetch aggregated fields from the table: "auth.providers" */
-  authProvidersAggregate: AuthProviders_Aggregate;
-  /** fetch data from the table: "auth.refresh_tokens" using primary key columns */
-  authRefreshToken?: Maybe<AuthRefreshTokens>;
-  /** fetch data from the table: "auth.refresh_tokens" */
-  authRefreshTokens: Array<AuthRefreshTokens>;
-  /** fetch aggregated fields from the table: "auth.refresh_tokens" */
-  authRefreshTokensAggregate: AuthRefreshTokens_Aggregate;
-  /** fetch data from the table: "auth.roles" using primary key columns */
-  authRole?: Maybe<AuthRoles>;
-  /** fetch data from the table: "auth.roles" */
-  authRoles: Array<AuthRoles>;
-  /** fetch aggregated fields from the table: "auth.roles" */
-  authRolesAggregate: AuthRoles_Aggregate;
-  /** fetch data from the table: "auth.user_providers" using primary key columns */
-  authUserProvider?: Maybe<AuthUserProviders>;
-  /** fetch data from the table: "auth.user_providers" */
-  authUserProviders: Array<AuthUserProviders>;
-  /** fetch aggregated fields from the table: "auth.user_providers" */
-  authUserProvidersAggregate: AuthUserProviders_Aggregate;
-  /** fetch data from the table: "auth.user_roles" using primary key columns */
-  authUserRole?: Maybe<AuthUserRoles>;
-  /** fetch data from the table: "auth.user_roles" */
-  authUserRoles: Array<AuthUserRoles>;
-  /** fetch aggregated fields from the table: "auth.user_roles" */
-  authUserRolesAggregate: AuthUserRoles_Aggregate;
   /** fetch data from the table: "food" */
   food: Array<Food>;
   /** fetch aggregated fields from the table: "food" */
@@ -10778,6 +9332,12 @@ export type Subscription_Root = {
   food_portion_aggregate: Food_Portion_Aggregate;
   /** fetch data from the table: "food_portion" using primary key columns */
   food_portion_by_pk?: Maybe<Food_Portion>;
+  /** fetch data from the table: "identities" */
+  identities: Array<Identities>;
+  /** fetch aggregated fields from the table: "identities" */
+  identities_aggregate: Identities_Aggregate;
+  /** fetch data from the table: "identities" using primary key columns */
+  identities_by_pk?: Maybe<Identities>;
   /** fetch data from the table: "ingredient_food_candidate" */
   ingredient_food_candidate: Array<Ingredient_Food_Candidate>;
   /** fetch aggregated fields from the table: "ingredient_food_candidate" */
@@ -10866,9 +9426,9 @@ export type Subscription_Root = {
   recipe_source_providers_aggregate: Recipe_Source_Providers_Aggregate;
   /** fetch data from the table: "recipe_source_providers" using primary key columns */
   recipe_source_providers_by_pk?: Maybe<Recipe_Source_Providers>;
-  /** fetch data from the table: "recipe_tags" */
+  /** An array relationship */
   recipe_tags: Array<Recipe_Tags>;
-  /** fetch aggregated fields from the table: "recipe_tags" */
+  /** An aggregate relationship */
   recipe_tags_aggregate: Recipe_Tags_Aggregate;
   /** fetch data from the table: "recipe_tags" using primary key columns */
   recipe_tags_by_pk?: Maybe<Recipe_Tags>;
@@ -10886,156 +9446,12 @@ export type Subscription_Root = {
   search_recipes: Array<Recipes>;
   /** execute function "search_recipes" and query aggregates on result of table type "recipes" */
   search_recipes_aggregate: Recipes_Aggregate;
-  /** fetch data from the table: "auth.users" using primary key columns */
-  user?: Maybe<Users>;
   /** fetch data from the table: "user_config" */
   user_config: Array<User_Config>;
   /** fetch aggregated fields from the table: "user_config" */
   user_config_aggregate: User_Config_Aggregate;
   /** fetch data from the table: "user_config" using primary key columns */
   user_config_by_pk?: Maybe<User_Config>;
-  /** fetch data from the table: "auth.users" */
-  users: Array<Users>;
-  /** fetch aggregated fields from the table: "auth.users" */
-  usersAggregate: Users_Aggregate;
-};
-
-
-export type Subscription_RootAuthProviderArgs = {
-  id: Scalars['String'];
-};
-
-
-export type Subscription_RootAuthProviderRequestArgs = {
-  id: Scalars['uuid'];
-};
-
-
-export type Subscription_RootAuthProviderRequestsArgs = {
-  distinct_on?: InputMaybe<Array<AuthProviderRequests_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthProviderRequests_Order_By>>;
-  where?: InputMaybe<AuthProviderRequests_Bool_Exp>;
-};
-
-
-export type Subscription_RootAuthProviderRequestsAggregateArgs = {
-  distinct_on?: InputMaybe<Array<AuthProviderRequests_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthProviderRequests_Order_By>>;
-  where?: InputMaybe<AuthProviderRequests_Bool_Exp>;
-};
-
-
-export type Subscription_RootAuthProvidersArgs = {
-  distinct_on?: InputMaybe<Array<AuthProviders_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthProviders_Order_By>>;
-  where?: InputMaybe<AuthProviders_Bool_Exp>;
-};
-
-
-export type Subscription_RootAuthProvidersAggregateArgs = {
-  distinct_on?: InputMaybe<Array<AuthProviders_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthProviders_Order_By>>;
-  where?: InputMaybe<AuthProviders_Bool_Exp>;
-};
-
-
-export type Subscription_RootAuthRefreshTokenArgs = {
-  refreshToken: Scalars['uuid'];
-};
-
-
-export type Subscription_RootAuthRefreshTokensArgs = {
-  distinct_on?: InputMaybe<Array<AuthRefreshTokens_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthRefreshTokens_Order_By>>;
-  where?: InputMaybe<AuthRefreshTokens_Bool_Exp>;
-};
-
-
-export type Subscription_RootAuthRefreshTokensAggregateArgs = {
-  distinct_on?: InputMaybe<Array<AuthRefreshTokens_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthRefreshTokens_Order_By>>;
-  where?: InputMaybe<AuthRefreshTokens_Bool_Exp>;
-};
-
-
-export type Subscription_RootAuthRoleArgs = {
-  role: Scalars['String'];
-};
-
-
-export type Subscription_RootAuthRolesArgs = {
-  distinct_on?: InputMaybe<Array<AuthRoles_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthRoles_Order_By>>;
-  where?: InputMaybe<AuthRoles_Bool_Exp>;
-};
-
-
-export type Subscription_RootAuthRolesAggregateArgs = {
-  distinct_on?: InputMaybe<Array<AuthRoles_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthRoles_Order_By>>;
-  where?: InputMaybe<AuthRoles_Bool_Exp>;
-};
-
-
-export type Subscription_RootAuthUserProviderArgs = {
-  id: Scalars['uuid'];
-};
-
-
-export type Subscription_RootAuthUserProvidersArgs = {
-  distinct_on?: InputMaybe<Array<AuthUserProviders_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthUserProviders_Order_By>>;
-  where?: InputMaybe<AuthUserProviders_Bool_Exp>;
-};
-
-
-export type Subscription_RootAuthUserProvidersAggregateArgs = {
-  distinct_on?: InputMaybe<Array<AuthUserProviders_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthUserProviders_Order_By>>;
-  where?: InputMaybe<AuthUserProviders_Bool_Exp>;
-};
-
-
-export type Subscription_RootAuthUserRoleArgs = {
-  id: Scalars['uuid'];
-};
-
-
-export type Subscription_RootAuthUserRolesArgs = {
-  distinct_on?: InputMaybe<Array<AuthUserRoles_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthUserRoles_Order_By>>;
-  where?: InputMaybe<AuthUserRoles_Bool_Exp>;
-};
-
-
-export type Subscription_RootAuthUserRolesAggregateArgs = {
-  distinct_on?: InputMaybe<Array<AuthUserRoles_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthUserRoles_Order_By>>;
-  where?: InputMaybe<AuthUserRoles_Bool_Exp>;
 };
 
 
@@ -11174,6 +9590,29 @@ export type Subscription_RootFood_Portion_AggregateArgs = {
 
 export type Subscription_RootFood_Portion_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+
+export type Subscription_RootIdentitiesArgs = {
+  distinct_on?: InputMaybe<Array<Identities_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Identities_Order_By>>;
+  where?: InputMaybe<Identities_Bool_Exp>;
+};
+
+
+export type Subscription_RootIdentities_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Identities_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Identities_Order_By>>;
+  where?: InputMaybe<Identities_Bool_Exp>;
+};
+
+
+export type Subscription_RootIdentities_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -11603,11 +10042,6 @@ export type Subscription_RootSearch_Recipes_AggregateArgs = {
 };
 
 
-export type Subscription_RootUserArgs = {
-  id: Scalars['uuid'];
-};
-
-
 export type Subscription_RootUser_ConfigArgs = {
   distinct_on?: InputMaybe<Array<User_Config_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -11628,24 +10062,6 @@ export type Subscription_RootUser_Config_AggregateArgs = {
 
 export type Subscription_RootUser_Config_By_PkArgs = {
   user_id: Scalars['Int'];
-};
-
-
-export type Subscription_RootUsersArgs = {
-  distinct_on?: InputMaybe<Array<Users_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Users_Order_By>>;
-  where?: InputMaybe<Users_Bool_Exp>;
-};
-
-
-export type Subscription_RootUsersAggregateArgs = {
-  distinct_on?: InputMaybe<Array<Users_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Users_Order_By>>;
-  where?: InputMaybe<Users_Bool_Exp>;
 };
 
 /** Boolean expression to compare columns of type "timestamp". All fields are combined with logical 'AND'. */
@@ -11741,8 +10157,8 @@ export type User_Config_Bool_Exp = {
 
 /** unique or primary key constraints on table "user_config" */
 export enum User_Config_Constraint {
-  /** unique or primary key constraint */
-  UserConfigPkey = 'user_config_pkey',
+  /** unique or primary key constraint on columns "user_id" */
+  UserConfigPkey = 'user_config_pkey'
 }
 
 /** input type for incrementing numeric columns in table "user_config" */
@@ -11802,7 +10218,7 @@ export enum User_Config_Select_Column {
   /** column name */
   PrinterUrl = 'printer_url',
   /** column name */
-  UserId = 'user_id',
+  UserId = 'user_id'
 }
 
 /** input type for updating data in table "user_config" */
@@ -11840,7 +10256,7 @@ export enum User_Config_Update_Column {
   /** column name */
   PrinterUrl = 'printer_url',
   /** column name */
-  UserId = 'user_id',
+  UserId = 'user_id'
 }
 
 /** aggregate var_pop on columns */
@@ -11860,539 +10276,6 @@ export type User_Config_Variance_Fields = {
   __typename?: 'user_config_variance_fields';
   user_id?: Maybe<Scalars['Float']>;
 };
-
-/** columns and relationships of "auth.users" */
-export type Users = {
-  __typename?: 'users';
-  activeMfaType?: Maybe<Scalars['String']>;
-  avatarUrl: Scalars['String'];
-  createdAt: Scalars['timestamptz'];
-  defaultRole: Scalars['String'];
-  /** An object relationship */
-  defaultRoleByRole: AuthRoles;
-  disabled: Scalars['Boolean'];
-  displayName: Scalars['String'];
-  email?: Maybe<Scalars['citext']>;
-  emailVerified: Scalars['Boolean'];
-  id: Scalars['uuid'];
-  isAnonymous: Scalars['Boolean'];
-  lastSeen?: Maybe<Scalars['timestamptz']>;
-  locale: Scalars['String'];
-  metadata?: Maybe<Scalars['jsonb']>;
-  newEmail?: Maybe<Scalars['citext']>;
-  otpHash?: Maybe<Scalars['String']>;
-  otpHashExpiresAt: Scalars['timestamptz'];
-  otpMethodLastUsed?: Maybe<Scalars['String']>;
-  passwordHash?: Maybe<Scalars['String']>;
-  phoneNumber?: Maybe<Scalars['String']>;
-  phoneNumberVerified: Scalars['Boolean'];
-  /** An array relationship */
-  refreshTokens: Array<AuthRefreshTokens>;
-  /** An aggregate relationship */
-  refreshTokens_aggregate: AuthRefreshTokens_Aggregate;
-  /** An array relationship */
-  roles: Array<AuthUserRoles>;
-  /** An aggregate relationship */
-  roles_aggregate: AuthUserRoles_Aggregate;
-  ticket?: Maybe<Scalars['String']>;
-  ticketExpiresAt: Scalars['timestamptz'];
-  totpSecret?: Maybe<Scalars['String']>;
-  updatedAt: Scalars['timestamptz'];
-  /** An array relationship */
-  userProviders: Array<AuthUserProviders>;
-  /** An aggregate relationship */
-  userProviders_aggregate: AuthUserProviders_Aggregate;
-};
-
-
-/** columns and relationships of "auth.users" */
-export type UsersMetadataArgs = {
-  path?: InputMaybe<Scalars['String']>;
-};
-
-
-/** columns and relationships of "auth.users" */
-export type UsersRefreshTokensArgs = {
-  distinct_on?: InputMaybe<Array<AuthRefreshTokens_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthRefreshTokens_Order_By>>;
-  where?: InputMaybe<AuthRefreshTokens_Bool_Exp>;
-};
-
-
-/** columns and relationships of "auth.users" */
-export type UsersRefreshTokens_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<AuthRefreshTokens_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthRefreshTokens_Order_By>>;
-  where?: InputMaybe<AuthRefreshTokens_Bool_Exp>;
-};
-
-
-/** columns and relationships of "auth.users" */
-export type UsersRolesArgs = {
-  distinct_on?: InputMaybe<Array<AuthUserRoles_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthUserRoles_Order_By>>;
-  where?: InputMaybe<AuthUserRoles_Bool_Exp>;
-};
-
-
-/** columns and relationships of "auth.users" */
-export type UsersRoles_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<AuthUserRoles_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthUserRoles_Order_By>>;
-  where?: InputMaybe<AuthUserRoles_Bool_Exp>;
-};
-
-
-/** columns and relationships of "auth.users" */
-export type UsersUserProvidersArgs = {
-  distinct_on?: InputMaybe<Array<AuthUserProviders_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthUserProviders_Order_By>>;
-  where?: InputMaybe<AuthUserProviders_Bool_Exp>;
-};
-
-
-/** columns and relationships of "auth.users" */
-export type UsersUserProviders_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<AuthUserProviders_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AuthUserProviders_Order_By>>;
-  where?: InputMaybe<AuthUserProviders_Bool_Exp>;
-};
-
-/** aggregated selection of "auth.users" */
-export type Users_Aggregate = {
-  __typename?: 'users_aggregate';
-  aggregate?: Maybe<Users_Aggregate_Fields>;
-  nodes: Array<Users>;
-};
-
-/** aggregate fields of "auth.users" */
-export type Users_Aggregate_Fields = {
-  __typename?: 'users_aggregate_fields';
-  count: Scalars['Int'];
-  max?: Maybe<Users_Max_Fields>;
-  min?: Maybe<Users_Min_Fields>;
-};
-
-
-/** aggregate fields of "auth.users" */
-export type Users_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Users_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** order by aggregate values of table "auth.users" */
-export type Users_Aggregate_Order_By = {
-  count?: InputMaybe<Order_By>;
-  max?: InputMaybe<Users_Max_Order_By>;
-  min?: InputMaybe<Users_Min_Order_By>;
-};
-
-/** append existing jsonb value of filtered columns with new jsonb value */
-export type Users_Append_Input = {
-  metadata?: InputMaybe<Scalars['jsonb']>;
-};
-
-/** input type for inserting array relation for remote table "auth.users" */
-export type Users_Arr_Rel_Insert_Input = {
-  data: Array<Users_Insert_Input>;
-  /** upsert condition */
-  on_conflict?: InputMaybe<Users_On_Conflict>;
-};
-
-/** Boolean expression to filter rows from the table "auth.users". All fields are combined with a logical 'AND'. */
-export type Users_Bool_Exp = {
-  _and?: InputMaybe<Array<Users_Bool_Exp>>;
-  _not?: InputMaybe<Users_Bool_Exp>;
-  _or?: InputMaybe<Array<Users_Bool_Exp>>;
-  activeMfaType?: InputMaybe<String_Comparison_Exp>;
-  avatarUrl?: InputMaybe<String_Comparison_Exp>;
-  createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
-  defaultRole?: InputMaybe<String_Comparison_Exp>;
-  defaultRoleByRole?: InputMaybe<AuthRoles_Bool_Exp>;
-  disabled?: InputMaybe<Boolean_Comparison_Exp>;
-  displayName?: InputMaybe<String_Comparison_Exp>;
-  email?: InputMaybe<Citext_Comparison_Exp>;
-  emailVerified?: InputMaybe<Boolean_Comparison_Exp>;
-  id?: InputMaybe<Uuid_Comparison_Exp>;
-  isAnonymous?: InputMaybe<Boolean_Comparison_Exp>;
-  lastSeen?: InputMaybe<Timestamptz_Comparison_Exp>;
-  locale?: InputMaybe<String_Comparison_Exp>;
-  metadata?: InputMaybe<Jsonb_Comparison_Exp>;
-  newEmail?: InputMaybe<Citext_Comparison_Exp>;
-  otpHash?: InputMaybe<String_Comparison_Exp>;
-  otpHashExpiresAt?: InputMaybe<Timestamptz_Comparison_Exp>;
-  otpMethodLastUsed?: InputMaybe<String_Comparison_Exp>;
-  passwordHash?: InputMaybe<String_Comparison_Exp>;
-  phoneNumber?: InputMaybe<String_Comparison_Exp>;
-  phoneNumberVerified?: InputMaybe<Boolean_Comparison_Exp>;
-  refreshTokens?: InputMaybe<AuthRefreshTokens_Bool_Exp>;
-  roles?: InputMaybe<AuthUserRoles_Bool_Exp>;
-  ticket?: InputMaybe<String_Comparison_Exp>;
-  ticketExpiresAt?: InputMaybe<Timestamptz_Comparison_Exp>;
-  totpSecret?: InputMaybe<String_Comparison_Exp>;
-  updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>;
-  userProviders?: InputMaybe<AuthUserProviders_Bool_Exp>;
-};
-
-/** unique or primary key constraints on table "auth.users" */
-export enum Users_Constraint {
-  /** unique or primary key constraint */
-  UsersEmailKey = 'users_email_key',
-  /** unique or primary key constraint */
-  UsersPhoneNumberKey = 'users_phone_number_key',
-  /** unique or primary key constraint */
-  UsersPkey = 'users_pkey',
-}
-
-/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
-export type Users_Delete_At_Path_Input = {
-  metadata?: InputMaybe<Array<Scalars['String']>>;
-};
-
-/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
-export type Users_Delete_Elem_Input = {
-  metadata?: InputMaybe<Scalars['Int']>;
-};
-
-/** delete key/value pair or string element. key/value pairs are matched based on their key value */
-export type Users_Delete_Key_Input = {
-  metadata?: InputMaybe<Scalars['String']>;
-};
-
-/** input type for inserting data into table "auth.users" */
-export type Users_Insert_Input = {
-  activeMfaType?: InputMaybe<Scalars['String']>;
-  avatarUrl?: InputMaybe<Scalars['String']>;
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
-  defaultRole?: InputMaybe<Scalars['String']>;
-  defaultRoleByRole?: InputMaybe<AuthRoles_Obj_Rel_Insert_Input>;
-  disabled?: InputMaybe<Scalars['Boolean']>;
-  displayName?: InputMaybe<Scalars['String']>;
-  email?: InputMaybe<Scalars['citext']>;
-  emailVerified?: InputMaybe<Scalars['Boolean']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  isAnonymous?: InputMaybe<Scalars['Boolean']>;
-  lastSeen?: InputMaybe<Scalars['timestamptz']>;
-  locale?: InputMaybe<Scalars['String']>;
-  metadata?: InputMaybe<Scalars['jsonb']>;
-  newEmail?: InputMaybe<Scalars['citext']>;
-  otpHash?: InputMaybe<Scalars['String']>;
-  otpHashExpiresAt?: InputMaybe<Scalars['timestamptz']>;
-  otpMethodLastUsed?: InputMaybe<Scalars['String']>;
-  passwordHash?: InputMaybe<Scalars['String']>;
-  phoneNumber?: InputMaybe<Scalars['String']>;
-  phoneNumberVerified?: InputMaybe<Scalars['Boolean']>;
-  refreshTokens?: InputMaybe<AuthRefreshTokens_Arr_Rel_Insert_Input>;
-  roles?: InputMaybe<AuthUserRoles_Arr_Rel_Insert_Input>;
-  ticket?: InputMaybe<Scalars['String']>;
-  ticketExpiresAt?: InputMaybe<Scalars['timestamptz']>;
-  totpSecret?: InputMaybe<Scalars['String']>;
-  updatedAt?: InputMaybe<Scalars['timestamptz']>;
-  userProviders?: InputMaybe<AuthUserProviders_Arr_Rel_Insert_Input>;
-};
-
-/** aggregate max on columns */
-export type Users_Max_Fields = {
-  __typename?: 'users_max_fields';
-  activeMfaType?: Maybe<Scalars['String']>;
-  avatarUrl?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  defaultRole?: Maybe<Scalars['String']>;
-  displayName?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['citext']>;
-  id?: Maybe<Scalars['uuid']>;
-  lastSeen?: Maybe<Scalars['timestamptz']>;
-  locale?: Maybe<Scalars['String']>;
-  newEmail?: Maybe<Scalars['citext']>;
-  otpHash?: Maybe<Scalars['String']>;
-  otpHashExpiresAt?: Maybe<Scalars['timestamptz']>;
-  otpMethodLastUsed?: Maybe<Scalars['String']>;
-  passwordHash?: Maybe<Scalars['String']>;
-  phoneNumber?: Maybe<Scalars['String']>;
-  ticket?: Maybe<Scalars['String']>;
-  ticketExpiresAt?: Maybe<Scalars['timestamptz']>;
-  totpSecret?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
-};
-
-/** order by max() on columns of table "auth.users" */
-export type Users_Max_Order_By = {
-  activeMfaType?: InputMaybe<Order_By>;
-  avatarUrl?: InputMaybe<Order_By>;
-  createdAt?: InputMaybe<Order_By>;
-  defaultRole?: InputMaybe<Order_By>;
-  displayName?: InputMaybe<Order_By>;
-  email?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  lastSeen?: InputMaybe<Order_By>;
-  locale?: InputMaybe<Order_By>;
-  newEmail?: InputMaybe<Order_By>;
-  otpHash?: InputMaybe<Order_By>;
-  otpHashExpiresAt?: InputMaybe<Order_By>;
-  otpMethodLastUsed?: InputMaybe<Order_By>;
-  passwordHash?: InputMaybe<Order_By>;
-  phoneNumber?: InputMaybe<Order_By>;
-  ticket?: InputMaybe<Order_By>;
-  ticketExpiresAt?: InputMaybe<Order_By>;
-  totpSecret?: InputMaybe<Order_By>;
-  updatedAt?: InputMaybe<Order_By>;
-};
-
-/** aggregate min on columns */
-export type Users_Min_Fields = {
-  __typename?: 'users_min_fields';
-  activeMfaType?: Maybe<Scalars['String']>;
-  avatarUrl?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  defaultRole?: Maybe<Scalars['String']>;
-  displayName?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['citext']>;
-  id?: Maybe<Scalars['uuid']>;
-  lastSeen?: Maybe<Scalars['timestamptz']>;
-  locale?: Maybe<Scalars['String']>;
-  newEmail?: Maybe<Scalars['citext']>;
-  otpHash?: Maybe<Scalars['String']>;
-  otpHashExpiresAt?: Maybe<Scalars['timestamptz']>;
-  otpMethodLastUsed?: Maybe<Scalars['String']>;
-  passwordHash?: Maybe<Scalars['String']>;
-  phoneNumber?: Maybe<Scalars['String']>;
-  ticket?: Maybe<Scalars['String']>;
-  ticketExpiresAt?: Maybe<Scalars['timestamptz']>;
-  totpSecret?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
-};
-
-/** order by min() on columns of table "auth.users" */
-export type Users_Min_Order_By = {
-  activeMfaType?: InputMaybe<Order_By>;
-  avatarUrl?: InputMaybe<Order_By>;
-  createdAt?: InputMaybe<Order_By>;
-  defaultRole?: InputMaybe<Order_By>;
-  displayName?: InputMaybe<Order_By>;
-  email?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  lastSeen?: InputMaybe<Order_By>;
-  locale?: InputMaybe<Order_By>;
-  newEmail?: InputMaybe<Order_By>;
-  otpHash?: InputMaybe<Order_By>;
-  otpHashExpiresAt?: InputMaybe<Order_By>;
-  otpMethodLastUsed?: InputMaybe<Order_By>;
-  passwordHash?: InputMaybe<Order_By>;
-  phoneNumber?: InputMaybe<Order_By>;
-  ticket?: InputMaybe<Order_By>;
-  ticketExpiresAt?: InputMaybe<Order_By>;
-  totpSecret?: InputMaybe<Order_By>;
-  updatedAt?: InputMaybe<Order_By>;
-};
-
-/** response of any mutation on the table "auth.users" */
-export type Users_Mutation_Response = {
-  __typename?: 'users_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Users>;
-};
-
-/** input type for inserting object relation for remote table "auth.users" */
-export type Users_Obj_Rel_Insert_Input = {
-  data: Users_Insert_Input;
-  /** upsert condition */
-  on_conflict?: InputMaybe<Users_On_Conflict>;
-};
-
-/** on_conflict condition type for table "auth.users" */
-export type Users_On_Conflict = {
-  constraint: Users_Constraint;
-  update_columns?: Array<Users_Update_Column>;
-  where?: InputMaybe<Users_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "auth.users". */
-export type Users_Order_By = {
-  activeMfaType?: InputMaybe<Order_By>;
-  avatarUrl?: InputMaybe<Order_By>;
-  createdAt?: InputMaybe<Order_By>;
-  defaultRole?: InputMaybe<Order_By>;
-  defaultRoleByRole?: InputMaybe<AuthRoles_Order_By>;
-  disabled?: InputMaybe<Order_By>;
-  displayName?: InputMaybe<Order_By>;
-  email?: InputMaybe<Order_By>;
-  emailVerified?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  isAnonymous?: InputMaybe<Order_By>;
-  lastSeen?: InputMaybe<Order_By>;
-  locale?: InputMaybe<Order_By>;
-  metadata?: InputMaybe<Order_By>;
-  newEmail?: InputMaybe<Order_By>;
-  otpHash?: InputMaybe<Order_By>;
-  otpHashExpiresAt?: InputMaybe<Order_By>;
-  otpMethodLastUsed?: InputMaybe<Order_By>;
-  passwordHash?: InputMaybe<Order_By>;
-  phoneNumber?: InputMaybe<Order_By>;
-  phoneNumberVerified?: InputMaybe<Order_By>;
-  refreshTokens_aggregate?: InputMaybe<AuthRefreshTokens_Aggregate_Order_By>;
-  roles_aggregate?: InputMaybe<AuthUserRoles_Aggregate_Order_By>;
-  ticket?: InputMaybe<Order_By>;
-  ticketExpiresAt?: InputMaybe<Order_By>;
-  totpSecret?: InputMaybe<Order_By>;
-  updatedAt?: InputMaybe<Order_By>;
-  userProviders_aggregate?: InputMaybe<AuthUserProviders_Aggregate_Order_By>;
-};
-
-/** primary key columns input for table: users */
-export type Users_Pk_Columns_Input = {
-  id: Scalars['uuid'];
-};
-
-/** prepend existing jsonb value of filtered columns with new jsonb value */
-export type Users_Prepend_Input = {
-  metadata?: InputMaybe<Scalars['jsonb']>;
-};
-
-/** select columns of table "auth.users" */
-export enum Users_Select_Column {
-  /** column name */
-  ActiveMfaType = 'activeMfaType',
-  /** column name */
-  AvatarUrl = 'avatarUrl',
-  /** column name */
-  CreatedAt = 'createdAt',
-  /** column name */
-  DefaultRole = 'defaultRole',
-  /** column name */
-  Disabled = 'disabled',
-  /** column name */
-  DisplayName = 'displayName',
-  /** column name */
-  Email = 'email',
-  /** column name */
-  EmailVerified = 'emailVerified',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  IsAnonymous = 'isAnonymous',
-  /** column name */
-  LastSeen = 'lastSeen',
-  /** column name */
-  Locale = 'locale',
-  /** column name */
-  Metadata = 'metadata',
-  /** column name */
-  NewEmail = 'newEmail',
-  /** column name */
-  OtpHash = 'otpHash',
-  /** column name */
-  OtpHashExpiresAt = 'otpHashExpiresAt',
-  /** column name */
-  OtpMethodLastUsed = 'otpMethodLastUsed',
-  /** column name */
-  PasswordHash = 'passwordHash',
-  /** column name */
-  PhoneNumber = 'phoneNumber',
-  /** column name */
-  PhoneNumberVerified = 'phoneNumberVerified',
-  /** column name */
-  Ticket = 'ticket',
-  /** column name */
-  TicketExpiresAt = 'ticketExpiresAt',
-  /** column name */
-  TotpSecret = 'totpSecret',
-  /** column name */
-  UpdatedAt = 'updatedAt',
-}
-
-/** input type for updating data in table "auth.users" */
-export type Users_Set_Input = {
-  activeMfaType?: InputMaybe<Scalars['String']>;
-  avatarUrl?: InputMaybe<Scalars['String']>;
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
-  defaultRole?: InputMaybe<Scalars['String']>;
-  disabled?: InputMaybe<Scalars['Boolean']>;
-  displayName?: InputMaybe<Scalars['String']>;
-  email?: InputMaybe<Scalars['citext']>;
-  emailVerified?: InputMaybe<Scalars['Boolean']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  isAnonymous?: InputMaybe<Scalars['Boolean']>;
-  lastSeen?: InputMaybe<Scalars['timestamptz']>;
-  locale?: InputMaybe<Scalars['String']>;
-  metadata?: InputMaybe<Scalars['jsonb']>;
-  newEmail?: InputMaybe<Scalars['citext']>;
-  otpHash?: InputMaybe<Scalars['String']>;
-  otpHashExpiresAt?: InputMaybe<Scalars['timestamptz']>;
-  otpMethodLastUsed?: InputMaybe<Scalars['String']>;
-  passwordHash?: InputMaybe<Scalars['String']>;
-  phoneNumber?: InputMaybe<Scalars['String']>;
-  phoneNumberVerified?: InputMaybe<Scalars['Boolean']>;
-  ticket?: InputMaybe<Scalars['String']>;
-  ticketExpiresAt?: InputMaybe<Scalars['timestamptz']>;
-  totpSecret?: InputMaybe<Scalars['String']>;
-  updatedAt?: InputMaybe<Scalars['timestamptz']>;
-};
-
-/** update columns of table "auth.users" */
-export enum Users_Update_Column {
-  /** column name */
-  ActiveMfaType = 'activeMfaType',
-  /** column name */
-  AvatarUrl = 'avatarUrl',
-  /** column name */
-  CreatedAt = 'createdAt',
-  /** column name */
-  DefaultRole = 'defaultRole',
-  /** column name */
-  Disabled = 'disabled',
-  /** column name */
-  DisplayName = 'displayName',
-  /** column name */
-  Email = 'email',
-  /** column name */
-  EmailVerified = 'emailVerified',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  IsAnonymous = 'isAnonymous',
-  /** column name */
-  LastSeen = 'lastSeen',
-  /** column name */
-  Locale = 'locale',
-  /** column name */
-  Metadata = 'metadata',
-  /** column name */
-  NewEmail = 'newEmail',
-  /** column name */
-  OtpHash = 'otpHash',
-  /** column name */
-  OtpHashExpiresAt = 'otpHashExpiresAt',
-  /** column name */
-  OtpMethodLastUsed = 'otpMethodLastUsed',
-  /** column name */
-  PasswordHash = 'passwordHash',
-  /** column name */
-  PhoneNumber = 'phoneNumber',
-  /** column name */
-  PhoneNumberVerified = 'phoneNumberVerified',
-  /** column name */
-  Ticket = 'ticket',
-  /** column name */
-  TicketExpiresAt = 'ticketExpiresAt',
-  /** column name */
-  TotpSecret = 'totpSecret',
-  /** column name */
-  UpdatedAt = 'updatedAt',
-}
 
 /** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
 export type Uuid_Comparison_Exp = {
@@ -12522,7 +10405,7 @@ export type ViewRecipeQueryQueryVariables = Exact<{
 }>;
 
 
-export type ViewRecipeQueryQuery = { __typename?: 'query_root', recipes: Array<{ __typename?: 'recipes', id: number, slug?: string | null, name: string, created_at: any, source: string, updated_at: any, video?: string | null, recipe_ingredient_groups: Array<{ __typename?: 'recipe_ingredient_groups', id: number, name?: string | null, group_ingredients: Array<{ __typename?: 'recipe_ingredients', id: number, seq_num?: number | null, text: string, name?: string | null, amount?: number | null, comment?: string | null, units?: string | null, video_timestamp?: number | null, video_timestamp_end?: number | null, ingredient?: Array<{ __typename?: 'ingredients', id: any, name?: string | null, ingredient_food_candidate?: { __typename?: 'ingredient_food_candidate', food: { __typename?: 'food', description?: string | null }, food_portion?: { __typename?: 'food_portion', gram_weight?: any | null, amount?: any | null, portion_description?: string | null, modifier?: string | null, measure_unit?: { __typename?: 'measure_unit', name?: string | null } | null } | null } | null }> | null }> }>, recipe_directions: Array<{ __typename?: 'recipe_directions', id: number, seq_num: number, step: string, video_timestamp?: number | null, video_timestamp_end?: number | null }>, recipe_tags: Array<{ __typename?: 'recipe_tags', name: string, id: number }> }> };
+export type ViewRecipeQueryQuery = { __typename?: 'query_root', recipes: Array<{ __typename?: 'recipes', id: number, slug?: string | null, name: string, created_at: any, source: string, updated_at: any, video?: string | null, recipe_ingredient_groups: Array<{ __typename?: 'recipe_ingredient_groups', id: number, name?: string | null, group_ingredients: Array<{ __typename?: 'recipe_ingredients', id: number, seq_num?: number | null, text: string, name?: string | null, amount?: number | null, comment?: string | null, units?: string | null, video_timestamp?: number | null, video_timestamp_end?: number | null, ingredient?: { __typename?: 'ingredients', id: any, name?: string | null, ingredient_food_candidate?: { __typename?: 'ingredient_food_candidate', food: { __typename?: 'food', description?: string | null }, food_portion?: { __typename?: 'food_portion', gram_weight?: any | null, amount?: any | null, portion_description?: string | null, modifier?: string | null, measure_unit?: { __typename?: 'measure_unit', name?: string | null } | null } | null } | null } | null }> }>, recipe_directions: Array<{ __typename?: 'recipe_directions', id: number, seq_num: number, step: string, video_timestamp?: number | null, video_timestamp_end?: number | null }>, recipe_tags: Array<{ __typename?: 'recipe_tags', name: string, id: number }> }> };
 
 export type UpdateRecipeVideoMutationVariables = Exact<{
   id?: InputMaybe<Scalars['Int']>;
@@ -12570,13 +10453,13 @@ export const SearchFoodsDocument = gql`
  * });
  */
 export function useSearchFoodsQuery(baseOptions: Apollo.QueryHookOptions<SearchFoodsQuery, SearchFoodsQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<SearchFoodsQuery, SearchFoodsQueryVariables>(SearchFoodsDocument, options);
-}
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SearchFoodsQuery, SearchFoodsQueryVariables>(SearchFoodsDocument, options);
+      }
 export function useSearchFoodsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchFoodsQuery, SearchFoodsQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<SearchFoodsQuery, SearchFoodsQueryVariables>(SearchFoodsDocument, options);
-}
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SearchFoodsQuery, SearchFoodsQueryVariables>(SearchFoodsDocument, options);
+        }
 export type SearchFoodsQueryHookResult = ReturnType<typeof useSearchFoodsQuery>;
 export type SearchFoodsLazyQueryHookResult = ReturnType<typeof useSearchFoodsLazyQuery>;
 export type SearchFoodsQueryResult = Apollo.QueryResult<SearchFoodsQuery, SearchFoodsQueryVariables>;
@@ -12608,9 +10491,9 @@ export type UpsertIngredientMutationFn = Apollo.MutationFunction<UpsertIngredien
  * });
  */
 export function useUpsertIngredientMutation(baseOptions?: Apollo.MutationHookOptions<UpsertIngredientMutation, UpsertIngredientMutationVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<UpsertIngredientMutation, UpsertIngredientMutationVariables>(UpsertIngredientDocument, options);
-}
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpsertIngredientMutation, UpsertIngredientMutationVariables>(UpsertIngredientDocument, options);
+      }
 export type UpsertIngredientMutationHookResult = ReturnType<typeof useUpsertIngredientMutation>;
 export type UpsertIngredientMutationResult = Apollo.MutationResult<UpsertIngredientMutation>;
 export type UpsertIngredientMutationOptions = Apollo.BaseMutationOptions<UpsertIngredientMutation, UpsertIngredientMutationVariables>;
@@ -12646,9 +10529,9 @@ export type UpsertIngredientVideoTimestampMutationFn = Apollo.MutationFunction<U
  * });
  */
 export function useUpsertIngredientVideoTimestampMutation(baseOptions?: Apollo.MutationHookOptions<UpsertIngredientVideoTimestampMutation, UpsertIngredientVideoTimestampMutationVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<UpsertIngredientVideoTimestampMutation, UpsertIngredientVideoTimestampMutationVariables>(UpsertIngredientVideoTimestampDocument, options);
-}
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpsertIngredientVideoTimestampMutation, UpsertIngredientVideoTimestampMutationVariables>(UpsertIngredientVideoTimestampDocument, options);
+      }
 export type UpsertIngredientVideoTimestampMutationHookResult = ReturnType<typeof useUpsertIngredientVideoTimestampMutation>;
 export type UpsertIngredientVideoTimestampMutationResult = Apollo.MutationResult<UpsertIngredientVideoTimestampMutation>;
 export type UpsertIngredientVideoTimestampMutationOptions = Apollo.BaseMutationOptions<UpsertIngredientVideoTimestampMutation, UpsertIngredientVideoTimestampMutationVariables>;
@@ -12684,9 +10567,9 @@ export type UpsertDirectionVideoTimestampMutationFn = Apollo.MutationFunction<Up
  * });
  */
 export function useUpsertDirectionVideoTimestampMutation(baseOptions?: Apollo.MutationHookOptions<UpsertDirectionVideoTimestampMutation, UpsertDirectionVideoTimestampMutationVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<UpsertDirectionVideoTimestampMutation, UpsertDirectionVideoTimestampMutationVariables>(UpsertDirectionVideoTimestampDocument, options);
-}
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpsertDirectionVideoTimestampMutation, UpsertDirectionVideoTimestampMutationVariables>(UpsertDirectionVideoTimestampDocument, options);
+      }
 export type UpsertDirectionVideoTimestampMutationHookResult = ReturnType<typeof useUpsertDirectionVideoTimestampMutation>;
 export type UpsertDirectionVideoTimestampMutationResult = Apollo.MutationResult<UpsertDirectionVideoTimestampMutation>;
 export type UpsertDirectionVideoTimestampMutationOptions = Apollo.BaseMutationOptions<UpsertDirectionVideoTimestampMutation, UpsertDirectionVideoTimestampMutationVariables>;
@@ -12734,13 +10617,13 @@ export const RecipesQueryDocument = gql`
  * });
  */
 export function useRecipesQueryQuery(baseOptions: Apollo.QueryHookOptions<RecipesQueryQuery, RecipesQueryQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<RecipesQueryQuery, RecipesQueryQueryVariables>(RecipesQueryDocument, options);
-}
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<RecipesQueryQuery, RecipesQueryQueryVariables>(RecipesQueryDocument, options);
+      }
 export function useRecipesQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<RecipesQueryQuery, RecipesQueryQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<RecipesQueryQuery, RecipesQueryQueryVariables>(RecipesQueryDocument, options);
-}
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<RecipesQueryQuery, RecipesQueryQueryVariables>(RecipesQueryDocument, options);
+        }
 export type RecipesQueryQueryHookResult = ReturnType<typeof useRecipesQueryQuery>;
 export type RecipesQueryLazyQueryHookResult = ReturnType<typeof useRecipesQueryLazyQuery>;
 export type RecipesQueryQueryResult = Apollo.QueryResult<RecipesQueryQuery, RecipesQueryQueryVariables>;
@@ -12774,9 +10657,9 @@ export type InsertRecipeMutationFn = Apollo.MutationFunction<InsertRecipeMutatio
  * });
  */
 export function useInsertRecipeMutation(baseOptions?: Apollo.MutationHookOptions<InsertRecipeMutation, InsertRecipeMutationVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<InsertRecipeMutation, InsertRecipeMutationVariables>(InsertRecipeDocument, options);
-}
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<InsertRecipeMutation, InsertRecipeMutationVariables>(InsertRecipeDocument, options);
+      }
 export type InsertRecipeMutationHookResult = ReturnType<typeof useInsertRecipeMutation>;
 export type InsertRecipeMutationResult = Apollo.MutationResult<InsertRecipeMutation>;
 export type InsertRecipeMutationOptions = Apollo.BaseMutationOptions<InsertRecipeMutation, InsertRecipeMutationVariables>;
@@ -12805,13 +10688,13 @@ export const GetRecipeListsDocument = gql`
  * });
  */
 export function useGetRecipeListsQuery(baseOptions?: Apollo.QueryHookOptions<GetRecipeListsQuery, GetRecipeListsQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<GetRecipeListsQuery, GetRecipeListsQueryVariables>(GetRecipeListsDocument, options);
-}
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetRecipeListsQuery, GetRecipeListsQueryVariables>(GetRecipeListsDocument, options);
+      }
 export function useGetRecipeListsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetRecipeListsQuery, GetRecipeListsQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<GetRecipeListsQuery, GetRecipeListsQueryVariables>(GetRecipeListsDocument, options);
-}
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetRecipeListsQuery, GetRecipeListsQueryVariables>(GetRecipeListsDocument, options);
+        }
 export type GetRecipeListsQueryHookResult = ReturnType<typeof useGetRecipeListsQuery>;
 export type GetRecipeListsLazyQueryHookResult = ReturnType<typeof useGetRecipeListsLazyQuery>;
 export type GetRecipeListsQueryResult = Apollo.QueryResult<GetRecipeListsQuery, GetRecipeListsQueryVariables>;
@@ -12845,9 +10728,9 @@ export type InsertRecipeIntoListMutationFn = Apollo.MutationFunction<InsertRecip
  * });
  */
 export function useInsertRecipeIntoListMutation(baseOptions?: Apollo.MutationHookOptions<InsertRecipeIntoListMutation, InsertRecipeIntoListMutationVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<InsertRecipeIntoListMutation, InsertRecipeIntoListMutationVariables>(InsertRecipeIntoListDocument, options);
-}
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<InsertRecipeIntoListMutation, InsertRecipeIntoListMutationVariables>(InsertRecipeIntoListDocument, options);
+      }
 export type InsertRecipeIntoListMutationHookResult = ReturnType<typeof useInsertRecipeIntoListMutation>;
 export type InsertRecipeIntoListMutationResult = Apollo.MutationResult<InsertRecipeIntoListMutation>;
 export type InsertRecipeIntoListMutationOptions = Apollo.BaseMutationOptions<InsertRecipeIntoListMutation, InsertRecipeIntoListMutationVariables>;
@@ -12878,9 +10761,9 @@ export type HideRecipeMutationFn = Apollo.MutationFunction<HideRecipeMutation, H
  * });
  */
 export function useHideRecipeMutation(baseOptions?: Apollo.MutationHookOptions<HideRecipeMutation, HideRecipeMutationVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<HideRecipeMutation, HideRecipeMutationVariables>(HideRecipeDocument, options);
-}
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<HideRecipeMutation, HideRecipeMutationVariables>(HideRecipeDocument, options);
+      }
 export type HideRecipeMutationHookResult = ReturnType<typeof useHideRecipeMutation>;
 export type HideRecipeMutationResult = Apollo.MutationResult<HideRecipeMutation>;
 export type HideRecipeMutationOptions = Apollo.BaseMutationOptions<HideRecipeMutation, HideRecipeMutationVariables>;
@@ -12909,13 +10792,13 @@ export const GetRecipeSourceProvidersDocument = gql`
  * });
  */
 export function useGetRecipeSourceProvidersQuery(baseOptions?: Apollo.QueryHookOptions<GetRecipeSourceProvidersQuery, GetRecipeSourceProvidersQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<GetRecipeSourceProvidersQuery, GetRecipeSourceProvidersQueryVariables>(GetRecipeSourceProvidersDocument, options);
-}
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetRecipeSourceProvidersQuery, GetRecipeSourceProvidersQueryVariables>(GetRecipeSourceProvidersDocument, options);
+      }
 export function useGetRecipeSourceProvidersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetRecipeSourceProvidersQuery, GetRecipeSourceProvidersQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<GetRecipeSourceProvidersQuery, GetRecipeSourceProvidersQueryVariables>(GetRecipeSourceProvidersDocument, options);
-}
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetRecipeSourceProvidersQuery, GetRecipeSourceProvidersQueryVariables>(GetRecipeSourceProvidersDocument, options);
+        }
 export type GetRecipeSourceProvidersQueryHookResult = ReturnType<typeof useGetRecipeSourceProvidersQuery>;
 export type GetRecipeSourceProvidersLazyQueryHookResult = ReturnType<typeof useGetRecipeSourceProvidersLazyQuery>;
 export type GetRecipeSourceProvidersQueryResult = Apollo.QueryResult<GetRecipeSourceProvidersQuery, GetRecipeSourceProvidersQueryVariables>;
@@ -12968,13 +10851,13 @@ export const GetMostCommonIngredientsDocument = gql`
  * });
  */
 export function useGetMostCommonIngredientsQuery(baseOptions: Apollo.QueryHookOptions<GetMostCommonIngredientsQuery, GetMostCommonIngredientsQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<GetMostCommonIngredientsQuery, GetMostCommonIngredientsQueryVariables>(GetMostCommonIngredientsDocument, options);
-}
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetMostCommonIngredientsQuery, GetMostCommonIngredientsQueryVariables>(GetMostCommonIngredientsDocument, options);
+      }
 export function useGetMostCommonIngredientsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMostCommonIngredientsQuery, GetMostCommonIngredientsQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<GetMostCommonIngredientsQuery, GetMostCommonIngredientsQueryVariables>(GetMostCommonIngredientsDocument, options);
-}
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetMostCommonIngredientsQuery, GetMostCommonIngredientsQueryVariables>(GetMostCommonIngredientsDocument, options);
+        }
 export type GetMostCommonIngredientsQueryHookResult = ReturnType<typeof useGetMostCommonIngredientsQuery>;
 export type GetMostCommonIngredientsLazyQueryHookResult = ReturnType<typeof useGetMostCommonIngredientsLazyQuery>;
 export type GetMostCommonIngredientsQueryResult = Apollo.QueryResult<GetMostCommonIngredientsQuery, GetMostCommonIngredientsQueryVariables>;
@@ -13007,13 +10890,13 @@ export const RecipesWithIngredientDocument = gql`
  * });
  */
 export function useRecipesWithIngredientQuery(baseOptions: Apollo.QueryHookOptions<RecipesWithIngredientQuery, RecipesWithIngredientQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<RecipesWithIngredientQuery, RecipesWithIngredientQueryVariables>(RecipesWithIngredientDocument, options);
-}
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<RecipesWithIngredientQuery, RecipesWithIngredientQueryVariables>(RecipesWithIngredientDocument, options);
+      }
 export function useRecipesWithIngredientLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<RecipesWithIngredientQuery, RecipesWithIngredientQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<RecipesWithIngredientQuery, RecipesWithIngredientQueryVariables>(RecipesWithIngredientDocument, options);
-}
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<RecipesWithIngredientQuery, RecipesWithIngredientQueryVariables>(RecipesWithIngredientDocument, options);
+        }
 export type RecipesWithIngredientQueryHookResult = ReturnType<typeof useRecipesWithIngredientQuery>;
 export type RecipesWithIngredientLazyQueryHookResult = ReturnType<typeof useRecipesWithIngredientLazyQuery>;
 export type RecipesWithIngredientQueryResult = Apollo.QueryResult<RecipesWithIngredientQuery, RecipesWithIngredientQueryVariables>;
@@ -13050,13 +10933,13 @@ export const GetUserRecipeListsDocument = gql`
  * });
  */
 export function useGetUserRecipeListsQuery(baseOptions?: Apollo.QueryHookOptions<GetUserRecipeListsQuery, GetUserRecipeListsQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<GetUserRecipeListsQuery, GetUserRecipeListsQueryVariables>(GetUserRecipeListsDocument, options);
-}
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetUserRecipeListsQuery, GetUserRecipeListsQueryVariables>(GetUserRecipeListsDocument, options);
+      }
 export function useGetUserRecipeListsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserRecipeListsQuery, GetUserRecipeListsQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<GetUserRecipeListsQuery, GetUserRecipeListsQueryVariables>(GetUserRecipeListsDocument, options);
-}
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetUserRecipeListsQuery, GetUserRecipeListsQueryVariables>(GetUserRecipeListsDocument, options);
+        }
 export type GetUserRecipeListsQueryHookResult = ReturnType<typeof useGetUserRecipeListsQuery>;
 export type GetUserRecipeListsLazyQueryHookResult = ReturnType<typeof useGetUserRecipeListsLazyQuery>;
 export type GetUserRecipeListsQueryResult = Apollo.QueryResult<GetUserRecipeListsQuery, GetUserRecipeListsQueryVariables>;
@@ -13087,9 +10970,9 @@ export type InsertRecipeListMutationFn = Apollo.MutationFunction<InsertRecipeLis
  * });
  */
 export function useInsertRecipeListMutation(baseOptions?: Apollo.MutationHookOptions<InsertRecipeListMutation, InsertRecipeListMutationVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<InsertRecipeListMutation, InsertRecipeListMutationVariables>(InsertRecipeListDocument, options);
-}
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<InsertRecipeListMutation, InsertRecipeListMutationVariables>(InsertRecipeListDocument, options);
+      }
 export type InsertRecipeListMutationHookResult = ReturnType<typeof useInsertRecipeListMutation>;
 export type InsertRecipeListMutationResult = Apollo.MutationResult<InsertRecipeListMutation>;
 export type InsertRecipeListMutationOptions = Apollo.BaseMutationOptions<InsertRecipeListMutation, InsertRecipeListMutationVariables>;
@@ -13120,9 +11003,9 @@ export type DeleteRecipeListMutationFn = Apollo.MutationFunction<DeleteRecipeLis
  * });
  */
 export function useDeleteRecipeListMutation(baseOptions?: Apollo.MutationHookOptions<DeleteRecipeListMutation, DeleteRecipeListMutationVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<DeleteRecipeListMutation, DeleteRecipeListMutationVariables>(DeleteRecipeListDocument, options);
-}
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteRecipeListMutation, DeleteRecipeListMutationVariables>(DeleteRecipeListDocument, options);
+      }
 export type DeleteRecipeListMutationHookResult = ReturnType<typeof useDeleteRecipeListMutation>;
 export type DeleteRecipeListMutationResult = Apollo.MutationResult<DeleteRecipeListMutation>;
 export type DeleteRecipeListMutationOptions = Apollo.BaseMutationOptions<DeleteRecipeListMutation, DeleteRecipeListMutationVariables>;
@@ -13201,13 +11084,13 @@ export const ViewRecipeQueryDocument = gql`
  * });
  */
 export function useViewRecipeQueryQuery(baseOptions?: Apollo.QueryHookOptions<ViewRecipeQueryQuery, ViewRecipeQueryQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<ViewRecipeQueryQuery, ViewRecipeQueryQueryVariables>(ViewRecipeQueryDocument, options);
-}
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ViewRecipeQueryQuery, ViewRecipeQueryQueryVariables>(ViewRecipeQueryDocument, options);
+      }
 export function useViewRecipeQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ViewRecipeQueryQuery, ViewRecipeQueryQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<ViewRecipeQueryQuery, ViewRecipeQueryQueryVariables>(ViewRecipeQueryDocument, options);
-}
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ViewRecipeQueryQuery, ViewRecipeQueryQueryVariables>(ViewRecipeQueryDocument, options);
+        }
 export type ViewRecipeQueryQueryHookResult = ReturnType<typeof useViewRecipeQueryQuery>;
 export type ViewRecipeQueryLazyQueryHookResult = ReturnType<typeof useViewRecipeQueryLazyQuery>;
 export type ViewRecipeQueryQueryResult = Apollo.QueryResult<ViewRecipeQueryQuery, ViewRecipeQueryQueryVariables>;
@@ -13239,9 +11122,9 @@ export type UpdateRecipeVideoMutationFn = Apollo.MutationFunction<UpdateRecipeVi
  * });
  */
 export function useUpdateRecipeVideoMutation(baseOptions?: Apollo.MutationHookOptions<UpdateRecipeVideoMutation, UpdateRecipeVideoMutationVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<UpdateRecipeVideoMutation, UpdateRecipeVideoMutationVariables>(UpdateRecipeVideoDocument, options);
-}
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateRecipeVideoMutation, UpdateRecipeVideoMutationVariables>(UpdateRecipeVideoDocument, options);
+      }
 export type UpdateRecipeVideoMutationHookResult = ReturnType<typeof useUpdateRecipeVideoMutation>;
 export type UpdateRecipeVideoMutationResult = Apollo.MutationResult<UpdateRecipeVideoMutation>;
 export type UpdateRecipeVideoMutationOptions = Apollo.BaseMutationOptions<UpdateRecipeVideoMutation, UpdateRecipeVideoMutationVariables>;

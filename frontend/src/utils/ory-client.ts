@@ -12,10 +12,11 @@
  *
  */
 import { Configuration, V0alpha2Api } from '@ory/kratos-client';
+import { env } from '../env';
 
 const oryClient = new V0alpha2Api(
   new Configuration({
-    basePath: process.env.REACT_APP_KRATOS_URL || 'http://localhost:4455/api/kratos',
+    basePath: env.KRATOS_URL,
   }),
 );
 

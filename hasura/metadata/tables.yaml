@@ -121,9 +121,6 @@
           - min_year_acquired
         filter: {}
 - table:
-    name: identities
-    schema: public
-- table:
     name: ingredient_food_candidate
     schema: public
   object_relationships:
@@ -570,10 +567,6 @@
 - table:
     name: recipe_lists
     schema: public
-  object_relationships:
-    - name: identity
-      using:
-        foreign_key_constraint_on: user_id
   array_relationships:
     - name: recipe_list_items
       using:
@@ -730,12 +723,7 @@
           - updated_at
           - video
           - visible
-        filter:
-          _or:
-            - source:
-                _like: '%seriouseats%'
-            - source:
-                _like: '%epicurious%'
+        filter: {}
         allow_aggregations: true
     - role: user
       permission:

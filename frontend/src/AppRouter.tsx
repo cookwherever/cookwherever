@@ -4,11 +4,9 @@ import React, { FunctionComponent, Suspense, useContext, useEffect, useRef, useS
 import { BrowserRouter as Router, Link, Route, Switch, useHistory, useLocation } from 'react-router-dom'
 import { RecoilRoot } from 'recoil'
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
 import { Button, Container, Nav } from 'react-bootstrap';
 import RecoilizeDebugger from 'recoilize';
 import { Provider } from 'react-redux';
-import { ViewIngredientPage } from './pages/ViewIngredientPage';
 import { SaveRecipePage } from './pages/SaveRecipePage';
 import { HomePage } from './pages/HomePage';
 import { ViewRecipePage } from './pages/ViewRecipePage';
@@ -28,9 +26,10 @@ import { useAppSelector } from './hooks/useAppSelector';
 import useAppDispatch from './hooks/useAppDispatch';
 import { store } from './recoil/store';
 import { LoadSession } from './components/auth/LoadSession';
+import { env } from './env';
 
 const httpLink = createHttpLink({
-  uri: process.env.REACT_APP_GRAPHQL_URL,
+  uri: env.GRAPHQL_URL,
 });
 
 const client = new ApolloClient({
@@ -92,7 +91,6 @@ const AppRouter: FunctionComponent = () => {
                   <Route path="/login" component={LoginPage} />
                   <Route path="/register" component={RegisterPage} />
                   <Route path="/ingredient" component={IngredientsPage} />
-                  <Route path="/ingredient/:id" component={ViewIngredientPage} />
                   <Route path="/recipe/save" component={SaveRecipePage} />
                   <Route path="/recipe/visualize" component={RecipeVisualizerPage} />
                   <Route path="/recipe/:slug" component={ViewRecipePage} />

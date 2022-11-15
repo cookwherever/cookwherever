@@ -13,7 +13,13 @@ export const IngredientGroup: React.FunctionComponent<IngredientGroupProps> = ({
     <>
       <h5>{ingredientGroup.name}</h5>
       <ListGroup>
-        {ingredientGroup.group_ingredients.map((ingredient, idx) => (<IngredientGroupItem key={ingredient.id} ingredient={ingredient} />))}
+        {ingredientGroup.group_ingredients
+          .map(
+            (ingredient, idx) => (
+              <IngredientGroupItem key={ingredient.id} ingredient={ingredient} />
+            ),
+          )
+        }
       </ListGroup>
     </>
   )

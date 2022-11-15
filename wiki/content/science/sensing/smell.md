@@ -5,9 +5,11 @@ tags:
 - science
 - sensing
 ---
+  
+  
+- Smells that enter nose and are "tasted" are Orthonasal Olfaction (aka aroma)
+- Smells also can be tasted by the passageway from the back of the throat to the nose with Retronasal Olfaction (80% of what we perceive as flavor)
 
-* Smells that enter nose and are "tasted" are Orthonasal Olfaction (aka aroma)
-* Smells also can be tasted by the passageway from the back of the throat to the nose with Retronasal Olfaction (80% of what we perceive as flavor)
 
 > Experiment:
 > Hold your nose while you eat some food. Does the food taste different?

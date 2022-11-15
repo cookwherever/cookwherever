@@ -1,7 +1,7 @@
 ---
 title: seasons
 tags:
-- unreviewed
+- reviewed
 - ingredients
 ---
 Different seasons bring about different harvests of foods as they get to their peak ripeness and readiness to be eaten. Some foods are super delicate and immediately start to loose their flavor and appearance once they are picked (like [[corn]]).
