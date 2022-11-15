@@ -131,8 +131,10 @@
     "generate-react-cli": "^7.0.4"
   },
   "scripts": {
-    "start": "ts-node esbuild.js --serve",
-    "build": "ts-node esbuild.js",
+    "start": "react-scripts start",
+    "start:esbuild": "ts-node esbuild.js --serve",
+    "build": "REACT_APP_ENV=production react-scripts build",
+    "build:esbuild": "ts-node esbuild.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx ./",

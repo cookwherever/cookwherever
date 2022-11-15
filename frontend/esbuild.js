@@ -9,7 +9,7 @@ const init = () => {
     .build(
       {
         entryPoints: ['./src/index.tsx'],
-        outfile: './public/assets/app.js',
+        outfile: './esbuild-public/assets/app.js',
         bundle: true,
         watch: {
           onRebuild: () => {
@@ -36,7 +36,7 @@ const init = () => {
   if (process.argv.includes('--serve')) {
     start(
       {
-        root: 'public',
+        root: 'esbuild-public',
         port,
         file: 'index.html',
         noBrowser: true,
