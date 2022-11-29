@@ -7,7 +7,7 @@ import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@ap
 import { Button, Container, Nav } from 'react-bootstrap';
 import RecoilizeDebugger from 'recoilize';
 import { Provider } from 'react-redux';
-import { SaveRecipePage } from './pages/SaveRecipePage';
+import { SaveRecipePage } from './pages/SaveRecipe/SaveRecipePage';
 import { HomePage } from './pages/HomePage';
 import { ViewRecipePage } from './pages/ViewRecipePage';
 import { LoginPage } from './pages/LoginPage';
