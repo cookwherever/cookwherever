@@ -1,12 +1,14 @@
 services:
   postgres:
-    image: postgres
+    image: postgres:14
     restart: always
     volumes:
       - ./docker/data/db:/var/lib/postgresql/data
       - ./docker/initdb.d:/docker-entrypoint-initdb.d:ro
     ports:
       - '5432:5432'
+    environment:
+      POSTGRES_PASSWORD: password
   graphql-engine:
     env_file:
       - .env
