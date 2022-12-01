@@ -2,6 +2,8 @@
 
 [Cook Wherever](https://cookwherever.com) is an open source project to attempt to making cooking more accessible and engaging for everyone.
 
+[my latest progress video](https://player.twitch.tv/?video=1666744420)
+
 ## The Dream
 * Search for recipes from all of your favorite places, yes even grandma's cookbook.
 * Confidently make a recipe, even if you haven't made it before or don't have exactly all the ingredients.
