@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { Button, Col, Form, Row } from 'react-bootstrap';
-import { Recipe_Lists, Recipes } from '../generated/graphql';
+import { Recipe_Lists, Recipes } from '../generated/graphql.tsx.bak';
 
 const GET_RECIPE_LISTS = gql`
 query GetRecipeLists {

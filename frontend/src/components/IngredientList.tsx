@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
 import { gql } from '@apollo/client';
-import { Recipe_Ingredient_Groups } from '../generated/graphql';
+import { Recipe_Ingredient_Groups } from '../generated/graphql.tsx.bak';
 import { IngredientGroup } from './IngredientGroup';
 import { inputChangeHandler } from '../utils/hook-helpers';
 

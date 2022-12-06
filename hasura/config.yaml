@@ -1,6 +1,6 @@
 version: 2
 endpoint: http://localhost:8080
-admin_secret: ilikefood123
+admin_secret: password
 metadata_directory: metadata
 actions:
   kind: synchronous

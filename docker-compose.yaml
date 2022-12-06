@@ -1,6 +1,6 @@
 version: '3.6'
 services:
-  graphql-engine:
+  hasura:
     image: hasura/graphql-engine:v2.9.0
     depends_on:
       - postgres
@@ -13,7 +13,7 @@ services:
   kratos-migrate:
     image: oryd/kratos:v0.9.0-alpha.3
     environment:
-      - DSN=postgres://postgres:secretpgpassword@postgres:5432/postgres
+      - DSN=postgres://postgres:password@postgres:5432/postgres
     command: -c /config/kratos/config.yaml migrate sql -e --yes
     restart: on-failure
     volumes:
@@ -29,7 +29,7 @@ services:
       - '4434:4434' # admin
     restart: unless-stopped
     environment:
-      DSN: postgres://postgres:secretpgpassword@postgres:5432/postgres
+      DSN: postgres://postgres:password@postgres:5432/postgres
     command: serve -c /config/kratos/config.yaml --dev --watch-courier
     extra_hosts:
       - "host.docker.internal:host-gateway"

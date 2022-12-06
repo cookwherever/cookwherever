@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Col, ListGroup, Row, Form } from 'react-bootstrap';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { Recipe_Ingredients } from '../generated/graphql';
+import { Recipe_Ingredients } from '../generated/graphql.tsx.bak';
 import { viewModeState } from '../recoil/atoms/auth';
 import { recipeViewerState } from '../recoil/atoms/recipe';
 

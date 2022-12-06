@@ -1,4 +1,4 @@
-import { Recipe_Ingredient_Groups } from 'src/generated/graphql';
+import { Recipe_Ingredient_Groups } from 'src/generated/graphql.tsx.bak';
 import { ListGroup } from 'react-bootstrap';
 import React from 'react';
 import { IngredientGroupItem } from './IngredientGroupItem';

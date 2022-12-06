@@ -11,7 +11,7 @@ import {
   Ingredients_Update_Column,
   useSearchFoodsQuery,
   useUpsertIngredientMutation,
-} from '../generated/graphql';
+} from '../generated/graphql.tsx.bak';
 
 interface FoodCandidateListProps {
   name: string

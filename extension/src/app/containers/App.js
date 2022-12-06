@@ -54,7 +54,7 @@ export default class App extends Component {
     }
     `;
     const headers = {
-        "x-hasura-admin-secret": "ilikefood123",
+        "x-hasura-admin-secret": "password",
         "content-type": "application/json"
     }
     const body = {

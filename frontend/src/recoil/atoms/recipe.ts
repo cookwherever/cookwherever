@@ -1,7 +1,7 @@
 import { atom, selector } from 'recoil';
 import {
   Recipes,
-} from '../../generated/graphql';
+} from '../../generated/graphql.tsx.bak';
 
 export type TimestampPosition = 'start' | 'end';
 

@@ -3,7 +3,7 @@ import { Pagination } from '@mui/material';
 import { gql } from '@apollo/client';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
-import { Recipes_Bool_Exp, useRecipesQueryQuery } from '../generated/graphql';
+import { Recipes_Bool_Exp, useRecipesQueryQuery } from '../generated/graphql.tsx.bak';
 import { RecipeSearch } from '../types/component-types';
 import { getSourceHostname } from '../utils/format-recipe';
 

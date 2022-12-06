@@ -1,7 +1,7 @@
 apiVersion: v1
 data:
   HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
-  HASURA_GRAPHQL_GRAPHQL_URL: http://graphql-engine:8080/v1/graphql
+  HASURA_GRAPHQL_GRAPHQL_URL: http://hasura:8080/v1/graphql
   HASURA_GRAPHQL_JWT_SECRET: '{"type":"RS256","jwk_url":"http://oathkeeper:4456/.well-known/jwks.json","issuer":"http://oathkeeper:4455/"}'
   HASURA_GRAPHQL_LOG_LEVEL: debug
   HASURA_GRAPHQL_UNAUTHORIZED_ROLE: anonymous

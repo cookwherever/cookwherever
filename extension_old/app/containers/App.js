@@ -9,14 +9,14 @@ import { recipeProperties } from '../constants/RecipeProperties';
 
 function tell(message, data) {
   var data = data || {};
-  chrome.tabs.getSelected(null, function (tab){
-      if (!tab) return;
-      chrome.tabs.sendMessage(tab.id, {
-          message: message,
-          data: data
-      });
+  chrome.tabs.getSelected(null, (tab) => {
+    if (!tab) return;
+    chrome.tabs.sendMessage(tab.id, {
+      message,
+      data
+    });
   });
-};
+}
 
 @connect(
   state => ({
@@ -37,8 +37,8 @@ export default class App extends Component {
     const { actions } = this.props;
 
     try {
-      tell('settingProperty', property)
-    } catch(e) {
+      tell('settingProperty', property);
+    } catch (e) {
       console.log(e);
     }
 
@@ -54,21 +54,21 @@ export default class App extends Component {
     }
     `;
     const headers = {
-        "x-hasura-admin-secret": "ilikefood123",
-        "content-type": "application/json"
-    }
+      'x-hasura-admin-secret': 'password',
+      'content-type': 'application/json'
+    };
     const body = {
-        "query": query,
-        "variables": {
-          domain: `%${domain}%`
-        }
-    }
-    const data = await fetch("https://food.vanderpot.net/v1/graphql", {
-      method: "POST",
-      headers: headers,
+      query,
+      variables: {
+        domain: `%${domain}%`
+      }
+    };
+    const data = await fetch('https://food.vanderpot.net/v1/graphql', {
+      method: 'POST',
+      headers,
       body: JSON.stringify(body)
     })
-    .then(resp => resp.json())
+    .then(resp => resp.json());
     const recipe = data.data.recipes[0];
     if (recipe !== undefined) {
       const extractionMetadata = recipe.extraction_metadata;

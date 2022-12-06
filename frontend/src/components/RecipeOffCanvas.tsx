@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Col, Container, Form, Offcanvas, Row } from 'react-bootstrap';
-import { Recipes } from '../generated/graphql';
+import { Recipes } from '../generated/graphql.tsx.bak';
 import { SaveRecipeToList } from './SaveRecipeToList';
 import { ToggleRecipeVisible } from './ToggleRecipeVisible';
 import { useRecoilState } from 'recoil';

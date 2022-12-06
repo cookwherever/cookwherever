@@ -51,7 +51,7 @@ def execute_graphql_query(query, variables):
     graphql_url_env = os.environ.get('GRAPHQL_URL')
     graphql_url = graphql_url_env if graphql_url_env is not None else "http://localhost:8080/v1/graphql"
     graphql_secret_env = os.environ.get('GRAPHQL_SECRET')
-    graphql_secret = graphql_secret_env if graphql_secret_env is not None else "ilikefood123"
+    graphql_secret = graphql_secret_env if graphql_secret_env is not None else "password"
 
     headers = {
         "x-hasura-admin-secret": graphql_secret,

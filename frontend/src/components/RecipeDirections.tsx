@@ -7,7 +7,7 @@ import {
   Recipe_Ingredients,
   Recipes,
   useUpsertDirectionVideoTimestampMutation,
-} from '../generated/graphql';
+} from '../generated/graphql.tsx.bak';
 import { inDeveloperMode } from '../recoil/selectors/view-mode';
 import {
   recipeViewerState,

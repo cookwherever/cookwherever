@@ -1,4 +1,5 @@
 const esbuild = require('esbuild');
+const relay = require('esbuild-plugin-relay');
 const inlineImage = require('esbuild-plugin-inline-image');
 const { start } = require('live-server');
 
@@ -22,9 +23,9 @@ const init = () => {
           '.woff2': 'file',
           '.woff': 'file',
         },
-        plugins: [inlineImage()],
+        plugins: [relay(), inlineImage()],
         minify: false,
-        sourcemap: 'inline',
+        sourcemap: true,
         define: {
           'process.env.NODE_ENV': '"development"',
         },

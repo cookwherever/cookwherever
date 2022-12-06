@@ -9,7 +9,7 @@ import {
   Recipes, RecipesQueryDocument,
   UpsertDirectionVideoTimestampDocument,
   useUpsertDirectionVideoTimestampMutation,
-} from '../generated/graphql';
+} from '../generated/graphql.tsx.bak';
 
 interface VideoPlayerProps {
   recipe: Recipes;

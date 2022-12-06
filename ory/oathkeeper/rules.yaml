@@ -1,7 +1,7 @@
 - id: "ory:cookwherever:hasura:graphql"
   upstream:
     preserve_host: true
-    url: "http://graphql-engine:8080"
+    url: "http://hasura:8080"
     strip_path: "/api"
   match:
     url: "<https|http|ws>://<localhost:4455|recipes.cookwherever.com>/api/v1/graphql"

@@ -1,7 +1,7 @@
 import { gql, useMutation } from '@apollo/client';
 import { Button } from 'react-bootstrap';
 import React from 'react';
-import { Recipes } from '../generated/graphql';
+import { Recipes } from '../generated/graphql.tsx.bak';
 
 
 const HIDE_RECIPE = gql`
