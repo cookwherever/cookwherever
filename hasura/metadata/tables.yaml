@@ -1,0 +1,196 @@
+- table:
+    name: config
+    schema: equipment
+  object_relationships:
+    - name: equipment
+      using:
+        foreign_key_constraint_on: equipment_id
+- table:
+    name: equipment
+    schema: equipment
+  array_relationships:
+    - name: configs
+      using:
+        foreign_key_constraint_on:
+          column: equipment_id
+          table:
+            name: config
+            schema: equipment
+    - name: equipment
+      using:
+        foreign_key_constraint_on:
+          column: equipment_id
+          table:
+            name: equipment
+            schema: recipe
+- table:
+    name: food
+    schema: food
+- table:
+    name: food_measurement
+    schema: food
+- table:
+    name: measurement
+    schema: food
+- table:
+    name: unit
+    schema: food
+- table:
+    name: ingredient
+    schema: ingredient
+- table:
+    name: name
+    schema: ingredient
+- table:
+    name: direction
+    schema: recipe
+  object_relationships:
+    - name: recipe
+      using:
+        foreign_key_constraint_on: recipe_id
+    - name: video_timestamp
+      using:
+        foreign_key_constraint_on: video_timestamp_id
+  array_relationships:
+    - name: equipment
+      using:
+        foreign_key_constraint_on:
+          column: direction_id
+          table:
+            name: direction_equipment
+            schema: recipe
+    - name: ingredients
+      using:
+        foreign_key_constraint_on:
+          column: direction_id
+          table:
+            name: direction_ingredient
+            schema: recipe
+- table:
+    name: direction_equipment
+    schema: recipe
+  object_relationships:
+    - name: direction
+      using:
+        foreign_key_constraint_on: direction_id
+    - name: equipment
+      using:
+        foreign_key_constraint_on: equipment_id
+- table:
+    name: direction_ingredient
+    schema: recipe
+  object_relationships:
+    - name: direction
+      using:
+        foreign_key_constraint_on: direction_id
+    - name: ingredient
+      using:
+        foreign_key_constraint_on: ingredient_id
+- table:
+    name: equipment
+    schema: recipe
+  object_relationships:
+    - name: equipment
+      using:
+        foreign_key_constraint_on: equipment_id
+    - name: recipe
+      using:
+        foreign_key_constraint_on: recipe_id
+- table:
+    name: ingredient
+    schema: recipe
+  object_relationships:
+    - name: ingredient
+      using:
+        foreign_key_constraint_on: ingredient_id
+    - name: recipe
+      using:
+        foreign_key_constraint_on: recipe_id
+    - name: unit
+      using:
+        foreign_key_constraint_on: unit_id
+    - name: video_timestamp
+      using:
+        foreign_key_constraint_on: video_timestamp_id
+- table:
+    name: list
+    schema: recipe
+  array_relationships:
+    - name: list_items
+      using:
+        foreign_key_constraint_on:
+          column: list_id
+          table:
+            name: list_item
+            schema: recipe
+- table:
+    name: list_item
+    schema: recipe
+  object_relationships:
+    - name: list
+      using:
+        foreign_key_constraint_on: list_id
+    - name: recipe
+      using:
+        foreign_key_constraint_on: recipe_id
+- table:
+    name: recipe
+    schema: recipe
+  object_relationships:
+    - name: parent
+      using:
+        foreign_key_constraint_on: parent_id
+    - name: source_provider
+      using:
+        foreign_key_constraint_on: source_provider_id
+  array_relationships:
+    - name: directions
+      using:
+        foreign_key_constraint_on:
+          column: recipe_id
+          table:
+            name: direction
+            schema: recipe
+    - name: equipment
+      using:
+        foreign_key_constraint_on:
+          column: recipe_id
+          table:
+            name: equipment
+            schema: recipe
+    - name: ingredients
+      using:
+        foreign_key_constraint_on:
+          column: recipe_id
+          table:
+            name: ingredient
+            schema: ingredient
+- table:
+    name: source_provider
+    schema: recipe
+  array_relationships:
+    - name: recipes
+      using:
+        foreign_key_constraint_on:
+          column: source_provider_id
+          table:
+            name: recipe
+            schema: recipe
+- table:
+    name: video_timestamp
+    schema: recipe
+  array_relationships:
+    - name: directions
+      using:
+        foreign_key_constraint_on:
+          column: video_timestamp_id
+          table:
+            name: direction
+            schema: recipe
+    - name: ingredients
+      using:
+        foreign_key_constraint_on:
+          column: video_timestamp_id
+          table:
+            name: ingredient
+            schema: recipe

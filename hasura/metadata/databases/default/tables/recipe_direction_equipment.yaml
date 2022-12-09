@@ -1,0 +1,10 @@
+table:
+  name: direction_equipment
+  schema: recipe
+object_relationships:
+  - name: direction
+    using:
+      foreign_key_constraint_on: direction_id
+  - name: equipment
+    using:
+      foreign_key_constraint_on: equipment_id

@@ -1,0 +1,17 @@
+[  
+    {
+        "name": "BaseUI Components",
+        "components": [
+            {
+                "filePath": "baseui/button",
+                "exportName": "Button",
+                "name": "Button"
+            },
+            {
+                "filePath": "baseui/table-semantic",
+                "exportName": "Table",
+                "name": "Table"
+            }
+        ]
+    }
+]

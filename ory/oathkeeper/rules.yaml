@@ -2,9 +2,9 @@
   upstream:
     preserve_host: true
     url: "http://hasura:8080"
-    strip_path: "/api"
+    strip_path: "/api/hasura"
   match:
-    url: "<https|http|ws>://<localhost:4455|recipes.cookwherever.com>/api/v1/graphql"
+    url: "<https|http|ws>://<localhost:4455|recipes.cookwherever.com>/api/hasura/<v1beta1/relay|v1/graphql>"
     methods:
       - POST
   authenticators:
@@ -18,10 +18,10 @@
 - id: "ory:cookwherever:hasura:admin"
   upstream:
     preserve_host: true
-    strip_path: "/api/hasura"
-    url: "http://graphql-engine:8080"
+    strip_path: "/api/hasura/admin"
+    url: "http://hasura:8080"
   match:
-    url: "<https|http|ws>://<localhost:4455|recipes.cookwherever.com>/api/hasura/<.*>"
+    url: "<https|http|ws>://<localhost:4455|recipes.cookwherever.com>/api/hasura/admin/<.*>"
     methods:
       - GET
       - POST

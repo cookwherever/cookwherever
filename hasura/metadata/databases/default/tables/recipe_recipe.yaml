@@ -1,0 +1,73 @@
+table:
+  name: recipe
+  schema: recipe
+object_relationships:
+  - name: parent
+    using:
+      foreign_key_constraint_on: parent_id
+  - name: source_provider
+    using:
+      foreign_key_constraint_on: source_provider_id
+array_relationships:
+  - name: directions
+    using:
+      foreign_key_constraint_on:
+        column: recipe_id
+        table:
+          name: direction
+          schema: recipe
+  - name: equipment
+    using:
+      foreign_key_constraint_on:
+        column: recipe_id
+        table:
+          name: equipment
+          schema: recipe
+  - name: ingredients
+    using:
+      foreign_key_constraint_on:
+        column: recipe_id
+        table:
+          name: ingredient
+          schema: recipe
+  - name: tags
+    using:
+      foreign_key_constraint_on:
+        column: recipe_id
+        table:
+          name: tags
+          schema: recipe
+event_triggers:
+  - name: processRecipe
+    definition:
+      enable_manual: false
+      insert:
+        columns: '*'
+      update:
+        columns:
+          - extraction_metadata
+          - id
+    retry_conf:
+      interval_sec: 10
+      num_retries: 0
+      timeout_sec: 60
+    webhook: http://host.docker.internal:3001
+    request_transform:
+      body:
+        action: transform
+        template: |-
+          {
+            "table": {
+              "name": {{$body.table.name}},
+              "schema": {{$body.table.schema}}
+            }
+          }
+      template_engine: Kriti
+      version: 2
+    cleanup_config:
+      batch_size: 10000
+      clean_invocation_logs: false
+      clear_older_than: 168
+      paused: true
+      schedule: 0 0 * * *
+      timeout: 60

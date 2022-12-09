@@ -1,22 +1,15 @@
+import json
 import os
 
 import requests
-import json
 
 insert_recipes_one = """
-mutation CreateRecipe(
-  $recipes: [recipes_insert_input!]!
-) {
-  insert_recipes(
-    objects: $recipes
-    on_conflict: {
-        constraint: recipes_source_key,
-        update_columns: [name, image, extraction_metadata, updated_at, slug],
-    }
-  ) {
-    returning {
-        id
-    }
+mutation CreateRecipe($recipes: [RecipeRecipeInsertInput!]!) {
+  insertRecipeRecipe(object: $object, onConflict: {
+    constraint: recipe_name_source_path_source_provider_id_key,
+    update_columns: [name, image, extractionMetadata, updatedAt, sourcePath, imageUrl],
+  }) {
+    id
   }
 }
 """

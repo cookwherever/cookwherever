@@ -1,0 +1,10 @@
+table:
+  name: list_item
+  schema: recipe
+object_relationships:
+  - name: list
+    using:
+      foreign_key_constraint_on: list_id
+  - name: recipe
+    using:
+      foreign_key_constraint_on: recipe_id

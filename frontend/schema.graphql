@@ -13,25 +13,19 @@ directive @cached(
   refresh: Boolean! = false
 ) on QUERY
 
-"""
-Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'.
-"""
-input BooleanComparisonExp {
-  _eq: Boolean
-  _gt: Boolean
-  _gte: Boolean
-  _in: [Boolean!]
-  _isNull: Boolean
-  _lt: Boolean
-  _lte: Boolean
-  _neq: Boolean
-  _nin: [Boolean!]
+"""ordering argument of a cursor"""
+enum CursorOrdering {
+  """ascending ordering of the cursor"""
+  ASC
+
+  """descending ordering of the cursor"""
+  DESC
 }
 
 """
 columns and relationships of "equipment.config"
 """
-type EquipmentConfig implements Node {
+type EquipmentConfig {
   config(
     """JSON select path"""
     path: String
@@ -40,7 +34,7 @@ type EquipmentConfig implements Node {
   """An object relationship"""
   equipment: EquipmentEquipment
   equipmentId: uuid
-  id: ID!
+  id: uuid!
 }
 
 """
@@ -98,14 +92,6 @@ input EquipmentConfigBoolExp {
 }
 
 """
-A Relay connection object on "equipment.config"
-"""
-type EquipmentConfigConnection {
-  edges: [EquipmentConfigEdge!]!
-  pageInfo: PageInfo!
-}
-
-"""
 unique or primary key constraints on table "equipment.config"
 """
 enum EquipmentConfigConstraint {
@@ -134,11 +120,6 @@ delete key/value pair or string element. key/value pairs are matched based on th
 """
 input EquipmentConfigDeleteKeyInput {
   config: String
-}
-
-type EquipmentConfigEdge {
-  cursor: String!
-  node: EquipmentConfig!
 }
 
 """
@@ -268,7 +249,7 @@ input EquipmentConfigUpdates {
 """
 columns and relationships of "equipment.equipment"
 """
-type EquipmentEquipment implements Node {
+type EquipmentEquipment {
   """An array relationship"""
   configs(
     """distinct select on columns"""
@@ -305,23 +286,6 @@ type EquipmentEquipment implements Node {
     where: EquipmentConfigBoolExp
   ): EquipmentConfigAggregate!
 
-  """An array relationship connection"""
-  configs_connection(
-    after: String
-    before: String
-
-    """distinct select on columns"""
-    distinctOn: [EquipmentConfigSelectColumn!]
-    first: Int
-    last: Int
-
-    """sort the rows by one or more columns"""
-    orderBy: [EquipmentConfigOrderBy!]
-
-    """filter the rows returned"""
-    where: EquipmentConfigBoolExp
-  ): EquipmentConfigConnection!
-
   """An array relationship"""
   equipment(
     """distinct select on columns"""
@@ -357,25 +321,25 @@ type EquipmentEquipment implements Node {
     """filter the rows returned"""
     where: RecipeEquipmentBoolExp
   ): RecipeEquipmentAggregate!
-
-  """An array relationship connection"""
-  equipment_connection(
-    after: String
-    before: String
-
-    """distinct select on columns"""
-    distinctOn: [RecipeEquipmentSelectColumn!]
-    first: Int
-    last: Int
-
-    """sort the rows by one or more columns"""
-    orderBy: [RecipeEquipmentOrderBy!]
-
-    """filter the rows returned"""
-    where: RecipeEquipmentBoolExp
-  ): RecipeEquipmentConnection!
-  id: ID!
+  id: uuid!
   name: String
+}
+
+"""
+aggregated selection of "equipment.equipment"
+"""
+type EquipmentEquipmentAggregate {
+  aggregate: EquipmentEquipmentAggregateFields
+  nodes: [EquipmentEquipment!]!
+}
+
+"""
+aggregate fields of "equipment.equipment"
+"""
+type EquipmentEquipmentAggregateFields {
+  count(columns: [EquipmentEquipmentSelectColumn!], distinct: Boolean): Int!
+  max: EquipmentEquipmentMaxFields
+  min: EquipmentEquipmentMinFields
 }
 
 """
@@ -394,14 +358,6 @@ input EquipmentEquipmentBoolExp {
 }
 
 """
-A Relay connection object on "equipment.equipment"
-"""
-type EquipmentEquipmentConnection {
-  edges: [EquipmentEquipmentEdge!]!
-  pageInfo: PageInfo!
-}
-
-"""
 unique or primary key constraints on table "equipment.equipment"
 """
 enum EquipmentEquipmentConstraint {
@@ -411,17 +367,24 @@ enum EquipmentEquipmentConstraint {
   equipment_pkey
 }
 
-type EquipmentEquipmentEdge {
-  cursor: String!
-  node: EquipmentEquipment!
-}
-
 """
 input type for inserting data into table "equipment.equipment"
 """
 input EquipmentEquipmentInsertInput {
   configs: EquipmentConfigArrRelInsertInput
   equipment: RecipeEquipmentArrRelInsertInput
+  id: uuid
+  name: String
+}
+
+"""aggregate max on columns"""
+type EquipmentEquipmentMaxFields {
+  id: uuid
+  name: String
+}
+
+"""aggregate min on columns"""
+type EquipmentEquipmentMinFields {
   id: uuid
   name: String
 }
@@ -508,9 +471,39 @@ input EquipmentEquipmentUpdates {
 """
 columns and relationships of "food.food"
 """
-type FoodFood implements Node {
+type FoodFood {
   fdcId: Int
-  id: ID!
+  id: uuid!
+}
+
+"""
+aggregated selection of "food.food"
+"""
+type FoodFoodAggregate {
+  aggregate: FoodFoodAggregateFields
+  nodes: [FoodFood!]!
+}
+
+"""
+aggregate fields of "food.food"
+"""
+type FoodFoodAggregateFields {
+  avg: FoodFoodAvgFields
+  count(columns: [FoodFoodSelectColumn!], distinct: Boolean): Int!
+  max: FoodFoodMaxFields
+  min: FoodFoodMinFields
+  stddev: FoodFoodStddevFields
+  stddevPop: FoodFoodStddev_popFields
+  stddevSamp: FoodFoodStddev_sampFields
+  sum: FoodFoodSumFields
+  varPop: FoodFoodVar_popFields
+  varSamp: FoodFoodVar_sampFields
+  variance: FoodFoodVarianceFields
+}
+
+"""aggregate avg on columns"""
+type FoodFoodAvgFields {
+  fdcId: Float
 }
 
 """
@@ -525,14 +518,6 @@ input FoodFoodBoolExp {
 }
 
 """
-A Relay connection object on "food.food"
-"""
-type FoodFoodConnection {
-  edges: [FoodFoodEdge!]!
-  pageInfo: PageInfo!
-}
-
-"""
 unique or primary key constraints on table "food.food"
 """
 enum FoodFoodConstraint {
@@ -540,11 +525,6 @@ enum FoodFoodConstraint {
   unique or primary key constraint on columns "id"
   """
   food_pkey
-}
-
-type FoodFoodEdge {
-  cursor: String!
-  node: FoodFood!
 }
 
 """
@@ -562,13 +542,36 @@ input FoodFoodInsertInput {
   id: uuid
 }
 
+"""aggregate max on columns"""
+type FoodFoodMaxFields {
+  fdcId: Int
+  id: uuid
+}
+
 """
 columns and relationships of "food.food_measurement"
 """
-type FoodFoodMeasurement implements Node {
+type FoodFoodMeasurement {
   foodId: uuid
-  id: ID!
+  id: uuid!
   measurementId: uuid
+}
+
+"""
+aggregated selection of "food.food_measurement"
+"""
+type FoodFoodMeasurementAggregate {
+  aggregate: FoodFoodMeasurementAggregateFields
+  nodes: [FoodFoodMeasurement!]!
+}
+
+"""
+aggregate fields of "food.food_measurement"
+"""
+type FoodFoodMeasurementAggregateFields {
+  count(columns: [FoodFoodMeasurementSelectColumn!], distinct: Boolean): Int!
+  max: FoodFoodMeasurementMaxFields
+  min: FoodFoodMeasurementMinFields
 }
 
 """
@@ -584,14 +587,6 @@ input FoodFoodMeasurementBoolExp {
 }
 
 """
-A Relay connection object on "food.food_measurement"
-"""
-type FoodFoodMeasurementConnection {
-  edges: [FoodFoodMeasurementEdge!]!
-  pageInfo: PageInfo!
-}
-
-"""
 unique or primary key constraints on table "food.food_measurement"
 """
 enum FoodFoodMeasurementConstraint {
@@ -601,15 +596,24 @@ enum FoodFoodMeasurementConstraint {
   food_measurement_pkey
 }
 
-type FoodFoodMeasurementEdge {
-  cursor: String!
-  node: FoodFoodMeasurement!
-}
-
 """
 input type for inserting data into table "food.food_measurement"
 """
 input FoodFoodMeasurementInsertInput {
+  foodId: uuid
+  id: uuid
+  measurementId: uuid
+}
+
+"""aggregate max on columns"""
+type FoodFoodMeasurementMaxFields {
+  foodId: uuid
+  id: uuid
+  measurementId: uuid
+}
+
+"""aggregate min on columns"""
+type FoodFoodMeasurementMinFields {
   foodId: uuid
   id: uuid
   measurementId: uuid
@@ -690,6 +694,12 @@ input FoodFoodMeasurementUpdates {
   where: FoodFoodMeasurementBoolExp!
 }
 
+"""aggregate min on columns"""
+type FoodFoodMinFields {
+  fdcId: Int
+  id: uuid
+}
+
 """
 response of any mutation on the table "food.food"
 """
@@ -740,6 +750,26 @@ input FoodFoodSetInput {
   id: uuid
 }
 
+"""aggregate stddev on columns"""
+type FoodFoodStddevFields {
+  fdcId: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type FoodFoodStddev_popFields {
+  fdcId: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type FoodFoodStddev_sampFields {
+  fdcId: Float
+}
+
+"""aggregate sum on columns"""
+type FoodFoodSumFields {
+  fdcId: Int
+}
+
 """
 update columns of table "food.food"
 """
@@ -760,14 +790,60 @@ input FoodFoodUpdates {
   where: FoodFoodBoolExp!
 }
 
+"""aggregate var_pop on columns"""
+type FoodFoodVar_popFields {
+  fdcId: Float
+}
+
+"""aggregate var_samp on columns"""
+type FoodFoodVar_sampFields {
+  fdcId: Float
+}
+
+"""aggregate variance on columns"""
+type FoodFoodVarianceFields {
+  fdcId: Float
+}
+
 """
 columns and relationships of "food.measurement"
 """
-type FoodMeasurement implements Node {
+type FoodMeasurement {
   amount: Int
-  id: ID!
+  id: uuid!
   mass: Int
   unitId: uuid
+}
+
+"""
+aggregated selection of "food.measurement"
+"""
+type FoodMeasurementAggregate {
+  aggregate: FoodMeasurementAggregateFields
+  nodes: [FoodMeasurement!]!
+}
+
+"""
+aggregate fields of "food.measurement"
+"""
+type FoodMeasurementAggregateFields {
+  avg: FoodMeasurementAvgFields
+  count(columns: [FoodMeasurementSelectColumn!], distinct: Boolean): Int!
+  max: FoodMeasurementMaxFields
+  min: FoodMeasurementMinFields
+  stddev: FoodMeasurementStddevFields
+  stddevPop: FoodMeasurementStddev_popFields
+  stddevSamp: FoodMeasurementStddev_sampFields
+  sum: FoodMeasurementSumFields
+  varPop: FoodMeasurementVar_popFields
+  varSamp: FoodMeasurementVar_sampFields
+  variance: FoodMeasurementVarianceFields
+}
+
+"""aggregate avg on columns"""
+type FoodMeasurementAvgFields {
+  amount: Float
+  mass: Float
 }
 
 """
@@ -784,14 +860,6 @@ input FoodMeasurementBoolExp {
 }
 
 """
-A Relay connection object on "food.measurement"
-"""
-type FoodMeasurementConnection {
-  edges: [FoodMeasurementEdge!]!
-  pageInfo: PageInfo!
-}
-
-"""
 unique or primary key constraints on table "food.measurement"
 """
 enum FoodMeasurementConstraint {
@@ -799,11 +867,6 @@ enum FoodMeasurementConstraint {
   unique or primary key constraint on columns "id"
   """
   measurement_pkey
-}
-
-type FoodMeasurementEdge {
-  cursor: String!
-  node: FoodMeasurement!
 }
 
 """
@@ -818,6 +881,22 @@ input FoodMeasurementIncInput {
 input type for inserting data into table "food.measurement"
 """
 input FoodMeasurementInsertInput {
+  amount: Int
+  id: uuid
+  mass: Int
+  unitId: uuid
+}
+
+"""aggregate max on columns"""
+type FoodMeasurementMaxFields {
+  amount: Int
+  id: uuid
+  mass: Int
+  unitId: uuid
+}
+
+"""aggregate min on columns"""
+type FoodMeasurementMinFields {
   amount: Int
   id: uuid
   mass: Int
@@ -884,6 +963,30 @@ input FoodMeasurementSetInput {
   unitId: uuid
 }
 
+"""aggregate stddev on columns"""
+type FoodMeasurementStddevFields {
+  amount: Float
+  mass: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type FoodMeasurementStddev_popFields {
+  amount: Float
+  mass: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type FoodMeasurementStddev_sampFields {
+  amount: Float
+  mass: Float
+}
+
+"""aggregate sum on columns"""
+type FoodMeasurementSumFields {
+  amount: Int
+  mass: Int
+}
+
 """
 update columns of table "food.measurement"
 """
@@ -910,13 +1013,61 @@ input FoodMeasurementUpdates {
   where: FoodMeasurementBoolExp!
 }
 
+"""aggregate var_pop on columns"""
+type FoodMeasurementVar_popFields {
+  amount: Float
+  mass: Float
+}
+
+"""aggregate var_samp on columns"""
+type FoodMeasurementVar_sampFields {
+  amount: Float
+  mass: Float
+}
+
+"""aggregate variance on columns"""
+type FoodMeasurementVarianceFields {
+  amount: Float
+  mass: Float
+}
+
 """
 columns and relationships of "food.unit"
 """
-type FoodUnit implements Node {
+type FoodUnit {
   gramCoefficient: Int
-  id: ID!
+  id: uuid!
   name: String
+}
+
+"""
+aggregated selection of "food.unit"
+"""
+type FoodUnitAggregate {
+  aggregate: FoodUnitAggregateFields
+  nodes: [FoodUnit!]!
+}
+
+"""
+aggregate fields of "food.unit"
+"""
+type FoodUnitAggregateFields {
+  avg: FoodUnitAvgFields
+  count(columns: [FoodUnitSelectColumn!], distinct: Boolean): Int!
+  max: FoodUnitMaxFields
+  min: FoodUnitMinFields
+  stddev: FoodUnitStddevFields
+  stddevPop: FoodUnitStddev_popFields
+  stddevSamp: FoodUnitStddev_sampFields
+  sum: FoodUnitSumFields
+  varPop: FoodUnitVar_popFields
+  varSamp: FoodUnitVar_sampFields
+  variance: FoodUnitVarianceFields
+}
+
+"""aggregate avg on columns"""
+type FoodUnitAvgFields {
+  gramCoefficient: Float
 }
 
 """
@@ -932,14 +1083,6 @@ input FoodUnitBoolExp {
 }
 
 """
-A Relay connection object on "food.unit"
-"""
-type FoodUnitConnection {
-  edges: [FoodUnitEdge!]!
-  pageInfo: PageInfo!
-}
-
-"""
 unique or primary key constraints on table "food.unit"
 """
 enum FoodUnitConstraint {
@@ -947,11 +1090,6 @@ enum FoodUnitConstraint {
   unique or primary key constraint on columns "id"
   """
   unit_pkey
-}
-
-type FoodUnitEdge {
-  cursor: String!
-  node: FoodUnit!
 }
 
 """
@@ -965,6 +1103,20 @@ input FoodUnitIncInput {
 input type for inserting data into table "food.unit"
 """
 input FoodUnitInsertInput {
+  gramCoefficient: Int
+  id: uuid
+  name: String
+}
+
+"""aggregate max on columns"""
+type FoodUnitMaxFields {
+  gramCoefficient: Int
+  id: uuid
+  name: String
+}
+
+"""aggregate min on columns"""
+type FoodUnitMinFields {
   gramCoefficient: Int
   id: uuid
   name: String
@@ -1035,6 +1187,26 @@ input FoodUnitSetInput {
   name: String
 }
 
+"""aggregate stddev on columns"""
+type FoodUnitStddevFields {
+  gramCoefficient: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type FoodUnitStddev_popFields {
+  gramCoefficient: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type FoodUnitStddev_sampFields {
+  gramCoefficient: Float
+}
+
+"""aggregate sum on columns"""
+type FoodUnitSumFields {
+  gramCoefficient: Int
+}
+
 """
 update columns of table "food.unit"
 """
@@ -1058,13 +1230,27 @@ input FoodUnitUpdates {
   where: FoodUnitBoolExp!
 }
 
+"""aggregate var_pop on columns"""
+type FoodUnitVar_popFields {
+  gramCoefficient: Float
+}
+
+"""aggregate var_samp on columns"""
+type FoodUnitVar_sampFields {
+  gramCoefficient: Float
+}
+
+"""aggregate variance on columns"""
+type FoodUnitVarianceFields {
+  gramCoefficient: Float
+}
+
 """
 columns and relationships of "ingredient.ingredient"
 """
-type IngredientIngredient implements Node {
+type IngredientIngredient {
   foodId: uuid
-  id: ID!
-  recipeId: uuid
+  id: uuid!
   wikiUrl: String
 }
 
@@ -1086,25 +1272,6 @@ type IngredientIngredientAggregateFields {
 }
 
 """
-order by aggregate values of table "ingredient.ingredient"
-"""
-input IngredientIngredientAggregateOrderBy {
-  count: OrderBy
-  max: ingredient_ingredient_max_order_by
-  min: ingredient_ingredient_min_order_by
-}
-
-"""
-input type for inserting array relation for remote table "ingredient.ingredient"
-"""
-input IngredientIngredientArrRelInsertInput {
-  data: [IngredientIngredientInsertInput!]!
-
-  """upsert condition"""
-  onConflict: IngredientIngredientOnConflict
-}
-
-"""
 Boolean expression to filter rows from the table "ingredient.ingredient". All fields are combined with a logical 'AND'.
 """
 input IngredientIngredientBoolExp {
@@ -1113,16 +1280,7 @@ input IngredientIngredientBoolExp {
   _or: [IngredientIngredientBoolExp!]
   foodId: UuidComparisonExp
   id: UuidComparisonExp
-  recipeId: UuidComparisonExp
   wikiUrl: StringComparisonExp
-}
-
-"""
-A Relay connection object on "ingredient.ingredient"
-"""
-type IngredientIngredientConnection {
-  edges: [IngredientIngredientEdge!]!
-  pageInfo: PageInfo!
 }
 
 """
@@ -1135,18 +1293,12 @@ enum IngredientIngredientConstraint {
   ingredient_pkey
 }
 
-type IngredientIngredientEdge {
-  cursor: String!
-  node: IngredientIngredient!
-}
-
 """
 input type for inserting data into table "ingredient.ingredient"
 """
 input IngredientIngredientInsertInput {
   foodId: uuid
   id: uuid
-  recipeId: uuid
   wikiUrl: String
 }
 
@@ -1154,7 +1306,6 @@ input IngredientIngredientInsertInput {
 type IngredientIngredientMaxFields {
   foodId: uuid
   id: uuid
-  recipeId: uuid
   wikiUrl: String
 }
 
@@ -1162,7 +1313,6 @@ type IngredientIngredientMaxFields {
 type IngredientIngredientMinFields {
   foodId: uuid
   id: uuid
-  recipeId: uuid
   wikiUrl: String
 }
 
@@ -1200,7 +1350,6 @@ input IngredientIngredientOnConflict {
 input IngredientIngredientOrderBy {
   foodId: OrderBy
   id: OrderBy
-  recipeId: OrderBy
   wikiUrl: OrderBy
 }
 
@@ -1220,9 +1369,6 @@ enum IngredientIngredientSelectColumn {
   id
 
   """column name"""
-  recipeId
-
-  """column name"""
   wikiUrl
 }
 
@@ -1232,7 +1378,6 @@ input type for updating data in table "ingredient.ingredient"
 input IngredientIngredientSetInput {
   foodId: uuid
   id: uuid
-  recipeId: uuid
   wikiUrl: String
 }
 
@@ -1247,9 +1392,6 @@ enum IngredientIngredientUpdateColumn {
   id
 
   """column name"""
-  recipeId
-
-  """column name"""
   wikiUrl
 }
 
@@ -1262,10 +1404,27 @@ input IngredientIngredientUpdates {
 """
 columns and relationships of "ingredient.name"
 """
-type IngredientName implements Node {
-  id: ID!
+type IngredientName {
+  id: uuid!
   ingredientId: uuid
   name: String
+}
+
+"""
+aggregated selection of "ingredient.name"
+"""
+type IngredientNameAggregate {
+  aggregate: IngredientNameAggregateFields
+  nodes: [IngredientName!]!
+}
+
+"""
+aggregate fields of "ingredient.name"
+"""
+type IngredientNameAggregateFields {
+  count(columns: [IngredientNameSelectColumn!], distinct: Boolean): Int!
+  max: IngredientNameMaxFields
+  min: IngredientNameMinFields
 }
 
 """
@@ -1281,14 +1440,6 @@ input IngredientNameBoolExp {
 }
 
 """
-A Relay connection object on "ingredient.name"
-"""
-type IngredientNameConnection {
-  edges: [IngredientNameEdge!]!
-  pageInfo: PageInfo!
-}
-
-"""
 unique or primary key constraints on table "ingredient.name"
 """
 enum IngredientNameConstraint {
@@ -1298,15 +1449,24 @@ enum IngredientNameConstraint {
   name_pkey
 }
 
-type IngredientNameEdge {
-  cursor: String!
-  node: IngredientName!
-}
-
 """
 input type for inserting data into table "ingredient.name"
 """
 input IngredientNameInsertInput {
+  id: uuid
+  ingredientId: uuid
+  name: String
+}
+
+"""aggregate max on columns"""
+type IngredientNameMaxFields {
+  id: uuid
+  ingredientId: uuid
+  name: String
+}
+
+"""aggregate min on columns"""
+type IngredientNameMinFields {
   id: uuid
   ingredientId: uuid
   name: String
@@ -1437,12 +1597,6 @@ input JsonbComparisonExp {
   _nin: [jsonb!]
 }
 
-"""An object with globally unique ID"""
-interface Node {
-  """A globally unique identifier"""
-  id: ID!
-}
-
 """column ordering options"""
 enum OrderBy {
   """in ascending order, nulls last"""
@@ -1464,17 +1618,10 @@ enum OrderBy {
   DESC_NULLS_LAST
 }
 
-type PageInfo {
-  endCursor: String!
-  hasNextPage: Boolean!
-  hasPreviousPage: Boolean!
-  startCursor: String!
-}
-
 """
 columns and relationships of "recipe.direction"
 """
-type RecipeDirection implements Node {
+type RecipeDirection {
   action: String
 
   """An array relationship"""
@@ -1512,24 +1659,7 @@ type RecipeDirection implements Node {
     """filter the rows returned"""
     where: RecipeDirectionEquipmentBoolExp
   ): RecipeDirectionEquipmentAggregate!
-
-  """An array relationship connection"""
-  equipment_connection(
-    after: String
-    before: String
-
-    """distinct select on columns"""
-    distinctOn: [RecipeDirectionEquipmentSelectColumn!]
-    first: Int
-    last: Int
-
-    """sort the rows by one or more columns"""
-    orderBy: [RecipeDirectionEquipmentOrderBy!]
-
-    """filter the rows returned"""
-    where: RecipeDirectionEquipmentBoolExp
-  ): RecipeDirectionEquipmentConnection!
-  id: ID!
+  id: uuid!
 
   """An array relationship"""
   ingredients(
@@ -1566,23 +1696,6 @@ type RecipeDirection implements Node {
     """filter the rows returned"""
     where: RecipeDirectionIngredientBoolExp
   ): RecipeDirectionIngredientAggregate!
-
-  """An array relationship connection"""
-  ingredients_connection(
-    after: String
-    before: String
-
-    """distinct select on columns"""
-    distinctOn: [RecipeDirectionIngredientSelectColumn!]
-    first: Int
-    last: Int
-
-    """sort the rows by one or more columns"""
-    orderBy: [RecipeDirectionIngredientOrderBy!]
-
-    """filter the rows returned"""
-    where: RecipeDirectionIngredientBoolExp
-  ): RecipeDirectionIngredientConnection!
 
   """An object relationship"""
   recipe: RecipeRecipe
@@ -1674,14 +1787,6 @@ input RecipeDirectionBoolExp {
 }
 
 """
-A Relay connection object on "recipe.direction"
-"""
-type RecipeDirectionConnection {
-  edges: [RecipeDirectionEdge!]!
-  pageInfo: PageInfo!
-}
-
-"""
 unique or primary key constraints on table "recipe.direction"
 """
 enum RecipeDirectionConstraint {
@@ -1689,17 +1794,17 @@ enum RecipeDirectionConstraint {
   unique or primary key constraint on columns "id"
   """
   direction_pkey
-}
 
-type RecipeDirectionEdge {
-  cursor: String!
-  node: RecipeDirection!
+  """
+  unique or primary key constraint on columns "seq", "recipe_id"
+  """
+  direction_recipe_id_seq_key
 }
 
 """
 columns and relationships of "recipe.direction_equipment"
 """
-type RecipeDirectionEquipment implements Node {
+type RecipeDirectionEquipment {
   """An object relationship"""
   direction: RecipeDirection
   directionId: uuid
@@ -1707,7 +1812,7 @@ type RecipeDirectionEquipment implements Node {
   """An object relationship"""
   equipment: RecipeEquipment
   equipmentId: uuid
-  id: ID!
+  id: uuid!
 }
 
 """
@@ -1761,14 +1866,6 @@ input RecipeDirectionEquipmentBoolExp {
 }
 
 """
-A Relay connection object on "recipe.direction_equipment"
-"""
-type RecipeDirectionEquipmentConnection {
-  edges: [RecipeDirectionEquipmentEdge!]!
-  pageInfo: PageInfo!
-}
-
-"""
 unique or primary key constraints on table "recipe.direction_equipment"
 """
 enum RecipeDirectionEquipmentConstraint {
@@ -1776,11 +1873,6 @@ enum RecipeDirectionEquipmentConstraint {
   unique or primary key constraint on columns "id"
   """
   direction_equipment_pkey
-}
-
-type RecipeDirectionEquipmentEdge {
-  cursor: String!
-  node: RecipeDirectionEquipment!
 }
 
 """
@@ -1897,11 +1989,11 @@ input RecipeDirectionIncInput {
 """
 columns and relationships of "recipe.direction_ingredient"
 """
-type RecipeDirectionIngredient implements Node {
+type RecipeDirectionIngredient {
   """An object relationship"""
   direction: RecipeDirection
   directionId: uuid
-  id: ID!
+  id: uuid!
 
   """An object relationship"""
   ingredient: IngredientIngredient
@@ -1959,14 +2051,6 @@ input RecipeDirectionIngredientBoolExp {
 }
 
 """
-A Relay connection object on "recipe.direction_ingredient"
-"""
-type RecipeDirectionIngredientConnection {
-  edges: [RecipeDirectionIngredientEdge!]!
-  pageInfo: PageInfo!
-}
-
-"""
 unique or primary key constraints on table "recipe.direction_ingredient"
 """
 enum RecipeDirectionIngredientConstraint {
@@ -1974,11 +2058,6 @@ enum RecipeDirectionIngredientConstraint {
   unique or primary key constraint on columns "id"
   """
   direction_ingredient_pkey
-}
-
-type RecipeDirectionIngredientEdge {
-  cursor: String!
-  node: RecipeDirectionIngredient!
 }
 
 """
@@ -2275,11 +2354,11 @@ type RecipeDirectionVarianceFields {
 """
 columns and relationships of "recipe.equipment"
 """
-type RecipeEquipment implements Node {
+type RecipeEquipment {
   """An object relationship"""
   equipment: EquipmentEquipment
   equipmentId: uuid
-  id: ID!
+  id: uuid!
 
   """An object relationship"""
   recipe: RecipeRecipe
@@ -2337,14 +2416,6 @@ input RecipeEquipmentBoolExp {
 }
 
 """
-A Relay connection object on "recipe.equipment"
-"""
-type RecipeEquipmentConnection {
-  edges: [RecipeEquipmentEdge!]!
-  pageInfo: PageInfo!
-}
-
-"""
 unique or primary key constraints on table "recipe.equipment"
 """
 enum RecipeEquipmentConstraint {
@@ -2352,11 +2423,6 @@ enum RecipeEquipmentConstraint {
   unique or primary key constraint on columns "id"
   """
   equipment_pkey
-}
-
-type RecipeEquipmentEdge {
-  cursor: String!
-  node: RecipeEquipment!
 }
 
 """
@@ -2474,10 +2540,10 @@ input RecipeEquipmentUpdates {
 """
 columns and relationships of "recipe.ingredient"
 """
-type RecipeIngredient implements Node {
+type RecipeIngredient {
   amount: Int
   comment: String
-  id: ID!
+  id: uuid!
 
   """An object relationship"""
   ingredient: IngredientIngredient
@@ -2581,14 +2647,6 @@ input RecipeIngredientBoolExp {
 }
 
 """
-A Relay connection object on "recipe.ingredient"
-"""
-type RecipeIngredientConnection {
-  edges: [RecipeIngredientEdge!]!
-  pageInfo: PageInfo!
-}
-
-"""
 unique or primary key constraints on table "recipe.ingredient"
 """
 enum RecipeIngredientConstraint {
@@ -2596,11 +2654,11 @@ enum RecipeIngredientConstraint {
   unique or primary key constraint on columns "id"
   """
   ingredient_pkey
-}
 
-type RecipeIngredientEdge {
-  cursor: String!
-  node: RecipeIngredient!
+  """
+  unique or primary key constraint on columns "seq", "recipe_id"
+  """
+  ingredient_recipe_id_seq_key
 }
 
 """
@@ -2842,8 +2900,8 @@ type RecipeIngredientVarianceFields {
 """
 columns and relationships of "recipe.list"
 """
-type RecipeList implements Node {
-  id: ID!
+type RecipeList {
+  id: uuid!
 
   """An aggregate relationship"""
   listItemsAggregate(
@@ -2880,25 +2938,25 @@ type RecipeList implements Node {
     """filter the rows returned"""
     where: RecipeListItemBoolExp
   ): [RecipeListItem!]!
-
-  """An array relationship connection"""
-  list_items_connection(
-    after: String
-    before: String
-
-    """distinct select on columns"""
-    distinctOn: [RecipeListItemSelectColumn!]
-    first: Int
-    last: Int
-
-    """sort the rows by one or more columns"""
-    orderBy: [RecipeListItemOrderBy!]
-
-    """filter the rows returned"""
-    where: RecipeListItemBoolExp
-  ): RecipeListItemConnection!
   name: String
   userId: uuid
+}
+
+"""
+aggregated selection of "recipe.list"
+"""
+type RecipeListAggregate {
+  aggregate: RecipeListAggregateFields
+  nodes: [RecipeList!]!
+}
+
+"""
+aggregate fields of "recipe.list"
+"""
+type RecipeListAggregateFields {
+  count(columns: [RecipeListSelectColumn!], distinct: Boolean): Int!
+  max: RecipeListMaxFields
+  min: RecipeListMinFields
 }
 
 """
@@ -2916,14 +2974,6 @@ input RecipeListBoolExp {
 }
 
 """
-A Relay connection object on "recipe.list"
-"""
-type RecipeListConnection {
-  edges: [RecipeListEdge!]!
-  pageInfo: PageInfo!
-}
-
-"""
 unique or primary key constraints on table "recipe.list"
 """
 enum RecipeListConstraint {
@@ -2931,11 +2981,6 @@ enum RecipeListConstraint {
   unique or primary key constraint on columns "id"
   """
   list_pkey
-}
-
-type RecipeListEdge {
-  cursor: String!
-  node: RecipeList!
 }
 
 """
@@ -2951,8 +2996,8 @@ input RecipeListInsertInput {
 """
 columns and relationships of "recipe.list_item"
 """
-type RecipeListItem implements Node {
-  id: ID!
+type RecipeListItem {
+  id: uuid!
 
   """An object relationship"""
   list: RecipeList
@@ -3037,14 +3082,6 @@ input RecipeListItemBoolExp {
 }
 
 """
-A Relay connection object on "recipe.list_item"
-"""
-type RecipeListItemConnection {
-  edges: [RecipeListItemEdge!]!
-  pageInfo: PageInfo!
-}
-
-"""
 unique or primary key constraints on table "recipe.list_item"
 """
 enum RecipeListItemConstraint {
@@ -3052,11 +3089,6 @@ enum RecipeListItemConstraint {
   unique or primary key constraint on columns "id"
   """
   list_item_pkey
-}
-
-type RecipeListItemEdge {
-  cursor: String!
-  node: RecipeListItem!
 }
 
 """
@@ -3217,6 +3249,20 @@ type RecipeListItemVarianceFields {
   seq: Float
 }
 
+"""aggregate max on columns"""
+type RecipeListMaxFields {
+  id: uuid
+  name: String
+  userId: uuid
+}
+
+"""aggregate min on columns"""
+type RecipeListMinFields {
+  id: uuid
+  name: String
+  userId: uuid
+}
+
 """
 response of any mutation on the table "recipe.list"
 """
@@ -3306,7 +3352,7 @@ input RecipeListUpdates {
 """
 columns and relationships of "recipe.recipe"
 """
-type RecipeRecipe implements Node {
+type RecipeRecipe {
   createdAt: timestamp
 
   """User who created the recipe."""
@@ -3348,23 +3394,6 @@ type RecipeRecipe implements Node {
     where: RecipeDirectionBoolExp
   ): RecipeDirectionAggregate!
 
-  """An array relationship connection"""
-  directions_connection(
-    after: String
-    before: String
-
-    """distinct select on columns"""
-    distinctOn: [RecipeDirectionSelectColumn!]
-    first: Int
-    last: Int
-
-    """sort the rows by one or more columns"""
-    orderBy: [RecipeDirectionOrderBy!]
-
-    """filter the rows returned"""
-    where: RecipeDirectionBoolExp
-  ): RecipeDirectionConnection!
-
   """An array relationship"""
   equipment(
     """distinct select on columns"""
@@ -3400,35 +3429,17 @@ type RecipeRecipe implements Node {
     """filter the rows returned"""
     where: RecipeEquipmentBoolExp
   ): RecipeEquipmentAggregate!
-
-  """An array relationship connection"""
-  equipment_connection(
-    after: String
-    before: String
-
-    """distinct select on columns"""
-    distinctOn: [RecipeEquipmentSelectColumn!]
-    first: Int
-    last: Int
-
-    """sort the rows by one or more columns"""
-    orderBy: [RecipeEquipmentOrderBy!]
-
-    """filter the rows returned"""
-    where: RecipeEquipmentBoolExp
-  ): RecipeEquipmentConnection!
   extractionMetadata(
     """JSON select path"""
     path: String
   ): jsonb
-  hidden: Boolean
-  id: ID!
+  id: uuid!
   imageUrl: String
 
   """An array relationship"""
   ingredients(
     """distinct select on columns"""
-    distinctOn: [IngredientIngredientSelectColumn!]
+    distinctOn: [RecipeIngredientSelectColumn!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -3437,16 +3448,16 @@ type RecipeRecipe implements Node {
     offset: Int
 
     """sort the rows by one or more columns"""
-    orderBy: [IngredientIngredientOrderBy!]
+    orderBy: [RecipeIngredientOrderBy!]
 
     """filter the rows returned"""
-    where: IngredientIngredientBoolExp
-  ): [IngredientIngredient!]!
+    where: RecipeIngredientBoolExp
+  ): [RecipeIngredient!]!
 
   """An aggregate relationship"""
   ingredientsAggregate(
     """distinct select on columns"""
-    distinctOn: [IngredientIngredientSelectColumn!]
+    distinctOn: [RecipeIngredientSelectColumn!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -3455,39 +3466,57 @@ type RecipeRecipe implements Node {
     offset: Int
 
     """sort the rows by one or more columns"""
-    orderBy: [IngredientIngredientOrderBy!]
+    orderBy: [RecipeIngredientOrderBy!]
 
     """filter the rows returned"""
-    where: IngredientIngredientBoolExp
-  ): IngredientIngredientAggregate!
-
-  """An array relationship connection"""
-  ingredients_connection(
-    after: String
-    before: String
-
-    """distinct select on columns"""
-    distinctOn: [IngredientIngredientSelectColumn!]
-    first: Int
-    last: Int
-
-    """sort the rows by one or more columns"""
-    orderBy: [IngredientIngredientOrderBy!]
-
-    """filter the rows returned"""
-    where: IngredientIngredientBoolExp
-  ): IngredientIngredientConnection!
+    where: RecipeIngredientBoolExp
+  ): RecipeIngredientAggregate!
   name: String!
 
   """An object relationship"""
   parent: RecipeRecipe
   parentId: uuid
-  slug: String!
   sourcePath: String
-  sourceProviderId: uuid
+  sourceProviderId: uuid!
 
   """An object relationship"""
-  source_provider: RecipeSourceProvider
+  source_provider: RecipeSourceProvider!
+
+  """An array relationship"""
+  tags(
+    """distinct select on columns"""
+    distinctOn: [RecipeTagsSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [RecipeTagsOrderBy!]
+
+    """filter the rows returned"""
+    where: RecipeTagsBoolExp
+  ): [RecipeTags!]!
+
+  """An aggregate relationship"""
+  tagsAggregate(
+    """distinct select on columns"""
+    distinctOn: [RecipeTagsSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [RecipeTagsOrderBy!]
+
+    """filter the rows returned"""
+    where: RecipeTagsBoolExp
+  ): RecipeTagsAggregate!
   updatedAt: timestamp
   videoUrl: String
 }
@@ -3547,34 +3576,31 @@ input RecipeRecipeBoolExp {
   equipment: RecipeEquipmentBoolExp
   equipment_aggregate: recipe_equipment_aggregate_bool_exp
   extractionMetadata: JsonbComparisonExp
-  hidden: BooleanComparisonExp
   id: UuidComparisonExp
   imageUrl: StringComparisonExp
-  ingredients: IngredientIngredientBoolExp
-  ingredients_aggregate: ingredient_ingredient_aggregate_bool_exp
+  ingredients: RecipeIngredientBoolExp
+  ingredients_aggregate: recipe_ingredient_aggregate_bool_exp
   name: StringComparisonExp
   parent: RecipeRecipeBoolExp
   parentId: UuidComparisonExp
-  slug: StringComparisonExp
   sourcePath: StringComparisonExp
   sourceProviderId: UuidComparisonExp
   source_provider: RecipeSourceProviderBoolExp
+  tags: RecipeTagsBoolExp
+  tags_aggregate: recipe_tags_aggregate_bool_exp
   updatedAt: TimestampComparisonExp
   videoUrl: StringComparisonExp
-}
-
-"""
-A Relay connection object on "recipe.recipe"
-"""
-type RecipeRecipeConnection {
-  edges: [RecipeRecipeEdge!]!
-  pageInfo: PageInfo!
 }
 
 """
 unique or primary key constraints on table "recipe.recipe"
 """
 enum RecipeRecipeConstraint {
+  """
+  unique or primary key constraint on columns "name", "source_path", "source_provider_id"
+  """
+  recipe_name_source_path_source_provider_id_key
+
   """
   unique or primary key constraint on columns "id"
   """
@@ -3602,11 +3628,6 @@ input RecipeRecipeDeleteKeyInput {
   extractionMetadata: String
 }
 
-type RecipeRecipeEdge {
-  cursor: String!
-  node: RecipeRecipe!
-}
-
 """
 input type for inserting data into table "recipe.recipe"
 """
@@ -3618,17 +3639,16 @@ input RecipeRecipeInsertInput {
   directions: RecipeDirectionArrRelInsertInput
   equipment: RecipeEquipmentArrRelInsertInput
   extractionMetadata: jsonb
-  hidden: Boolean
   id: uuid
   imageUrl: String
-  ingredients: IngredientIngredientArrRelInsertInput
+  ingredients: RecipeIngredientArrRelInsertInput
   name: String
   parent: RecipeRecipeObjRelInsertInput
   parentId: uuid
-  slug: String
   sourcePath: String
   sourceProviderId: uuid
   source_provider: RecipeSourceProviderObjRelInsertInput
+  tags: RecipeTagsArrRelInsertInput
   updatedAt: timestamp
   videoUrl: String
 }
@@ -3643,7 +3663,6 @@ type RecipeRecipeMaxFields {
   imageUrl: String
   name: String
   parentId: uuid
-  slug: String
   sourcePath: String
   sourceProviderId: uuid
   updatedAt: timestamp
@@ -3660,7 +3679,6 @@ type RecipeRecipeMinFields {
   imageUrl: String
   name: String
   parentId: uuid
-  slug: String
   sourcePath: String
   sourceProviderId: uuid
   updatedAt: timestamp
@@ -3704,17 +3722,16 @@ input RecipeRecipeOrderBy {
   directionsAggregate: RecipeDirectionAggregateOrderBy
   equipmentAggregate: RecipeEquipmentAggregateOrderBy
   extractionMetadata: OrderBy
-  hidden: OrderBy
   id: OrderBy
   imageUrl: OrderBy
-  ingredientsAggregate: IngredientIngredientAggregateOrderBy
+  ingredientsAggregate: RecipeIngredientAggregateOrderBy
   name: OrderBy
   parent: RecipeRecipeOrderBy
   parentId: OrderBy
-  slug: OrderBy
   sourcePath: OrderBy
   sourceProviderId: OrderBy
   source_provider: RecipeSourceProviderOrderBy
+  tagsAggregate: RecipeTagsAggregateOrderBy
   updatedAt: OrderBy
   videoUrl: OrderBy
 }
@@ -3743,9 +3760,6 @@ enum RecipeRecipeSelectColumn {
   extractionMetadata
 
   """column name"""
-  hidden
-
-  """column name"""
   id
 
   """column name"""
@@ -3756,9 +3770,6 @@ enum RecipeRecipeSelectColumn {
 
   """column name"""
   parentId
-
-  """column name"""
-  slug
 
   """column name"""
   sourcePath
@@ -3782,12 +3793,10 @@ input RecipeRecipeSetInput {
   """User who created the recipe."""
   creatorId: uuid
   extractionMetadata: jsonb
-  hidden: Boolean
   id: uuid
   imageUrl: String
   name: String
   parentId: uuid
-  slug: String
   sourcePath: String
   sourceProviderId: uuid
   updatedAt: timestamp
@@ -3808,9 +3817,6 @@ enum RecipeRecipeUpdateColumn {
   extractionMetadata
 
   """column name"""
-  hidden
-
-  """column name"""
   id
 
   """column name"""
@@ -3821,9 +3827,6 @@ enum RecipeRecipeUpdateColumn {
 
   """column name"""
   parentId
-
-  """column name"""
-  slug
 
   """column name"""
   sourcePath
@@ -3868,9 +3871,9 @@ input RecipeRecipeUpdates {
 """
 columns and relationships of "recipe.source_provider"
 """
-type RecipeSourceProvider implements Node {
+type RecipeSourceProvider {
   description: String
-  id: ID!
+  id: uuid!
   name: String
 
   """An array relationship"""
@@ -3908,24 +3911,24 @@ type RecipeSourceProvider implements Node {
     """filter the rows returned"""
     where: RecipeRecipeBoolExp
   ): RecipeRecipeAggregate!
-
-  """An array relationship connection"""
-  recipes_connection(
-    after: String
-    before: String
-
-    """distinct select on columns"""
-    distinctOn: [RecipeRecipeSelectColumn!]
-    first: Int
-    last: Int
-
-    """sort the rows by one or more columns"""
-    orderBy: [RecipeRecipeOrderBy!]
-
-    """filter the rows returned"""
-    where: RecipeRecipeBoolExp
-  ): RecipeRecipeConnection!
   url: String
+}
+
+"""
+aggregated selection of "recipe.source_provider"
+"""
+type RecipeSourceProviderAggregate {
+  aggregate: RecipeSourceProviderAggregateFields
+  nodes: [RecipeSourceProvider!]!
+}
+
+"""
+aggregate fields of "recipe.source_provider"
+"""
+type RecipeSourceProviderAggregateFields {
+  count(columns: [RecipeSourceProviderSelectColumn!], distinct: Boolean): Int!
+  max: RecipeSourceProviderMaxFields
+  min: RecipeSourceProviderMinFields
 }
 
 """
@@ -3944,26 +3947,18 @@ input RecipeSourceProviderBoolExp {
 }
 
 """
-A Relay connection object on "recipe.source_provider"
-"""
-type RecipeSourceProviderConnection {
-  edges: [RecipeSourceProviderEdge!]!
-  pageInfo: PageInfo!
-}
-
-"""
 unique or primary key constraints on table "recipe.source_provider"
 """
 enum RecipeSourceProviderConstraint {
   """
+  unique or primary key constraint on columns "name"
+  """
+  source_provider_name_key
+
+  """
   unique or primary key constraint on columns "id"
   """
   source_provider_pkey
-}
-
-type RecipeSourceProviderEdge {
-  cursor: String!
-  node: RecipeSourceProvider!
 }
 
 """
@@ -3974,6 +3969,22 @@ input RecipeSourceProviderInsertInput {
   id: uuid
   name: String
   recipes: RecipeRecipeArrRelInsertInput
+  url: String
+}
+
+"""aggregate max on columns"""
+type RecipeSourceProviderMaxFields {
+  description: String
+  id: uuid
+  name: String
+  url: String
+}
+
+"""aggregate min on columns"""
+type RecipeSourceProviderMinFields {
+  description: String
+  id: uuid
+  name: String
   url: String
 }
 
@@ -4071,10 +4082,257 @@ input RecipeSourceProviderUpdates {
   where: RecipeSourceProviderBoolExp!
 }
 
+"""Tags of attributes about a recipe."""
+type RecipeTags {
+  id: uuid!
+  name: String!
+  recipeId: uuid!
+  seq: Int!
+}
+
+"""
+aggregated selection of "recipe.tags"
+"""
+type RecipeTagsAggregate {
+  aggregate: RecipeTagsAggregateFields
+  nodes: [RecipeTags!]!
+}
+
+"""
+aggregate fields of "recipe.tags"
+"""
+type RecipeTagsAggregateFields {
+  avg: RecipeTagsAvgFields
+  count(columns: [RecipeTagsSelectColumn!], distinct: Boolean): Int!
+  max: RecipeTagsMaxFields
+  min: RecipeTagsMinFields
+  stddev: RecipeTagsStddevFields
+  stddevPop: RecipeTagsStddev_popFields
+  stddevSamp: RecipeTagsStddev_sampFields
+  sum: RecipeTagsSumFields
+  varPop: RecipeTagsVar_popFields
+  varSamp: RecipeTagsVar_sampFields
+  variance: RecipeTagsVarianceFields
+}
+
+"""
+order by aggregate values of table "recipe.tags"
+"""
+input RecipeTagsAggregateOrderBy {
+  avg: recipe_tags_avg_order_by
+  count: OrderBy
+  max: recipe_tags_max_order_by
+  min: recipe_tags_min_order_by
+  stddev: recipe_tags_stddev_order_by
+  stddev_pop: recipe_tags_stddev_pop_order_by
+  stddev_samp: recipe_tags_stddev_samp_order_by
+  sum: recipe_tags_sum_order_by
+  var_pop: recipe_tags_var_pop_order_by
+  var_samp: recipe_tags_var_samp_order_by
+  variance: recipe_tags_variance_order_by
+}
+
+"""
+input type for inserting array relation for remote table "recipe.tags"
+"""
+input RecipeTagsArrRelInsertInput {
+  data: [RecipeTagsInsertInput!]!
+
+  """upsert condition"""
+  onConflict: RecipeTagsOnConflict
+}
+
+"""aggregate avg on columns"""
+type RecipeTagsAvgFields {
+  seq: Float
+}
+
+"""
+Boolean expression to filter rows from the table "recipe.tags". All fields are combined with a logical 'AND'.
+"""
+input RecipeTagsBoolExp {
+  _and: [RecipeTagsBoolExp!]
+  _not: RecipeTagsBoolExp
+  _or: [RecipeTagsBoolExp!]
+  id: UuidComparisonExp
+  name: StringComparisonExp
+  recipeId: UuidComparisonExp
+  seq: IntComparisonExp
+}
+
+"""
+unique or primary key constraints on table "recipe.tags"
+"""
+enum RecipeTagsConstraint {
+  """
+  unique or primary key constraint on columns "id"
+  """
+  tags_pkey
+
+  """
+  unique or primary key constraint on columns "name", "recipe_id"
+  """
+  tags_recipe_id_name_key
+}
+
+"""
+input type for incrementing numeric columns in table "recipe.tags"
+"""
+input RecipeTagsIncInput {
+  seq: Int
+}
+
+"""
+input type for inserting data into table "recipe.tags"
+"""
+input RecipeTagsInsertInput {
+  id: uuid
+  name: String
+  recipeId: uuid
+  seq: Int
+}
+
+"""aggregate max on columns"""
+type RecipeTagsMaxFields {
+  id: uuid
+  name: String
+  recipeId: uuid
+  seq: Int
+}
+
+"""aggregate min on columns"""
+type RecipeTagsMinFields {
+  id: uuid
+  name: String
+  recipeId: uuid
+  seq: Int
+}
+
+"""
+response of any mutation on the table "recipe.tags"
+"""
+type RecipeTagsMutationResponse {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [RecipeTags!]!
+}
+
+"""
+on_conflict condition type for table "recipe.tags"
+"""
+input RecipeTagsOnConflict {
+  constraint: RecipeTagsConstraint!
+  update_columns: [RecipeTagsUpdateColumn!]! = []
+  where: RecipeTagsBoolExp
+}
+
+"""Ordering options when selecting data from "recipe.tags"."""
+input RecipeTagsOrderBy {
+  id: OrderBy
+  name: OrderBy
+  recipeId: OrderBy
+  seq: OrderBy
+}
+
+"""primary key columns input for table: recipe.tags"""
+input RecipeTagsPkColumnsInput {
+  id: uuid!
+}
+
+"""
+select columns of table "recipe.tags"
+"""
+enum RecipeTagsSelectColumn {
+  """column name"""
+  id
+
+  """column name"""
+  name
+
+  """column name"""
+  recipeId
+
+  """column name"""
+  seq
+}
+
+"""
+input type for updating data in table "recipe.tags"
+"""
+input RecipeTagsSetInput {
+  id: uuid
+  name: String
+  recipeId: uuid
+  seq: Int
+}
+
+"""aggregate stddev on columns"""
+type RecipeTagsStddevFields {
+  seq: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type RecipeTagsStddev_popFields {
+  seq: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type RecipeTagsStddev_sampFields {
+  seq: Float
+}
+
+"""aggregate sum on columns"""
+type RecipeTagsSumFields {
+  seq: Int
+}
+
+"""
+update columns of table "recipe.tags"
+"""
+enum RecipeTagsUpdateColumn {
+  """column name"""
+  id
+
+  """column name"""
+  name
+
+  """column name"""
+  recipeId
+
+  """column name"""
+  seq
+}
+
+input RecipeTagsUpdates {
+  """increments the numeric columns with given value of the filtered values"""
+  _inc: RecipeTagsIncInput
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: RecipeTagsSetInput
+  where: RecipeTagsBoolExp!
+}
+
+"""aggregate var_pop on columns"""
+type RecipeTagsVar_popFields {
+  seq: Float
+}
+
+"""aggregate var_samp on columns"""
+type RecipeTagsVar_sampFields {
+  seq: Float
+}
+
+"""aggregate variance on columns"""
+type RecipeTagsVarianceFields {
+  seq: Float
+}
+
 """
 columns and relationships of "recipe.video_timestamp"
 """
-type RecipeVideoTimestamp implements Node {
+type RecipeVideoTimestamp {
   """An array relationship"""
   directions(
     """distinct select on columns"""
@@ -4110,25 +4368,8 @@ type RecipeVideoTimestamp implements Node {
     """filter the rows returned"""
     where: RecipeDirectionBoolExp
   ): RecipeDirectionAggregate!
-
-  """An array relationship connection"""
-  directions_connection(
-    after: String
-    before: String
-
-    """distinct select on columns"""
-    distinctOn: [RecipeDirectionSelectColumn!]
-    first: Int
-    last: Int
-
-    """sort the rows by one or more columns"""
-    orderBy: [RecipeDirectionOrderBy!]
-
-    """filter the rows returned"""
-    where: RecipeDirectionBoolExp
-  ): RecipeDirectionConnection!
   end: Int
-  id: ID!
+  id: uuid!
 
   """An array relationship"""
   ingredients(
@@ -4165,24 +4406,38 @@ type RecipeVideoTimestamp implements Node {
     """filter the rows returned"""
     where: RecipeIngredientBoolExp
   ): RecipeIngredientAggregate!
-
-  """An array relationship connection"""
-  ingredients_connection(
-    after: String
-    before: String
-
-    """distinct select on columns"""
-    distinctOn: [RecipeIngredientSelectColumn!]
-    first: Int
-    last: Int
-
-    """sort the rows by one or more columns"""
-    orderBy: [RecipeIngredientOrderBy!]
-
-    """filter the rows returned"""
-    where: RecipeIngredientBoolExp
-  ): RecipeIngredientConnection!
   start: Int
+}
+
+"""
+aggregated selection of "recipe.video_timestamp"
+"""
+type RecipeVideoTimestampAggregate {
+  aggregate: RecipeVideoTimestampAggregateFields
+  nodes: [RecipeVideoTimestamp!]!
+}
+
+"""
+aggregate fields of "recipe.video_timestamp"
+"""
+type RecipeVideoTimestampAggregateFields {
+  avg: RecipeVideoTimestampAvgFields
+  count(columns: [RecipeVideoTimestampSelectColumn!], distinct: Boolean): Int!
+  max: RecipeVideoTimestampMaxFields
+  min: RecipeVideoTimestampMinFields
+  stddev: RecipeVideoTimestampStddevFields
+  stddevPop: RecipeVideoTimestampStddev_popFields
+  stddevSamp: RecipeVideoTimestampStddev_sampFields
+  sum: RecipeVideoTimestampSumFields
+  varPop: RecipeVideoTimestampVar_popFields
+  varSamp: RecipeVideoTimestampVar_sampFields
+  variance: RecipeVideoTimestampVarianceFields
+}
+
+"""aggregate avg on columns"""
+type RecipeVideoTimestampAvgFields {
+  end: Float
+  start: Float
 }
 
 """
@@ -4202,14 +4457,6 @@ input RecipeVideoTimestampBoolExp {
 }
 
 """
-A Relay connection object on "recipe.video_timestamp"
-"""
-type RecipeVideoTimestampConnection {
-  edges: [RecipeVideoTimestampEdge!]!
-  pageInfo: PageInfo!
-}
-
-"""
 unique or primary key constraints on table "recipe.video_timestamp"
 """
 enum RecipeVideoTimestampConstraint {
@@ -4217,11 +4464,6 @@ enum RecipeVideoTimestampConstraint {
   unique or primary key constraint on columns "id"
   """
   video_timestamp_pkey
-}
-
-type RecipeVideoTimestampEdge {
-  cursor: String!
-  node: RecipeVideoTimestamp!
 }
 
 """
@@ -4240,6 +4482,20 @@ input RecipeVideoTimestampInsertInput {
   end: Int
   id: uuid
   ingredients: RecipeIngredientArrRelInsertInput
+  start: Int
+}
+
+"""aggregate max on columns"""
+type RecipeVideoTimestampMaxFields {
+  end: Int
+  id: uuid
+  start: Int
+}
+
+"""aggregate min on columns"""
+type RecipeVideoTimestampMinFields {
+  end: Int
+  id: uuid
   start: Int
 }
 
@@ -4310,6 +4566,30 @@ input RecipeVideoTimestampSetInput {
   start: Int
 }
 
+"""aggregate stddev on columns"""
+type RecipeVideoTimestampStddevFields {
+  end: Float
+  start: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type RecipeVideoTimestampStddev_popFields {
+  end: Float
+  start: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type RecipeVideoTimestampStddev_sampFields {
+  end: Float
+  start: Float
+}
+
+"""aggregate sum on columns"""
+type RecipeVideoTimestampSumFields {
+  end: Int
+  start: Int
+}
+
 """
 update columns of table "recipe.video_timestamp"
 """
@@ -4331,6 +4611,24 @@ input RecipeVideoTimestampUpdates {
   """sets the columns of the filtered rows to the given values"""
   _set: RecipeVideoTimestampSetInput
   where: RecipeVideoTimestampBoolExp!
+}
+
+"""aggregate var_pop on columns"""
+type RecipeVideoTimestampVar_popFields {
+  end: Float
+  start: Float
+}
+
+"""aggregate var_samp on columns"""
+type RecipeVideoTimestampVar_sampFields {
+  end: Float
+  start: Float
+}
+
+"""aggregate variance on columns"""
+type RecipeVideoTimestampVarianceFields {
+  end: Float
+  start: Float
 }
 
 """
@@ -4443,35 +4741,147 @@ input equipment_config_min_order_by {
   id: OrderBy
 }
 
-input ingredient_ingredient_aggregate_bool_exp {
-  count: ingredient_ingredient_aggregate_bool_exp_count
+"""
+Streaming cursor of the table "equipment_config"
+"""
+input equipment_config_streamCursorInput {
+  """Stream column input with initial value"""
+  initialValue: equipment_config_streamCursorValueInput!
+
+  """cursor ordering"""
+  ordering: CursorOrdering
 }
 
-input ingredient_ingredient_aggregate_bool_exp_count {
-  arguments: [IngredientIngredientSelectColumn!]
-  distinct: Boolean
-  filter: IngredientIngredientBoolExp
-  predicate: IntComparisonExp!
-}
-
-"""
-order by max() on columns of table "ingredient.ingredient"
-"""
-input ingredient_ingredient_max_order_by {
-  foodId: OrderBy
-  id: OrderBy
-  recipeId: OrderBy
-  wikiUrl: OrderBy
+"""Initial value of the column from where the streaming should start"""
+input equipment_config_streamCursorValueInput {
+  config: jsonb
+  equipmentId: uuid
+  id: uuid
 }
 
 """
-order by min() on columns of table "ingredient.ingredient"
+Streaming cursor of the table "equipment_equipment"
 """
-input ingredient_ingredient_min_order_by {
-  foodId: OrderBy
-  id: OrderBy
-  recipeId: OrderBy
-  wikiUrl: OrderBy
+input equipment_equipment_streamCursorInput {
+  """Stream column input with initial value"""
+  initialValue: equipment_equipment_streamCursorValueInput!
+
+  """cursor ordering"""
+  ordering: CursorOrdering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input equipment_equipment_streamCursorValueInput {
+  id: uuid
+  name: String
+}
+
+"""
+Streaming cursor of the table "food_food_measurement"
+"""
+input food_food_measurement_streamCursorInput {
+  """Stream column input with initial value"""
+  initialValue: food_food_measurement_streamCursorValueInput!
+
+  """cursor ordering"""
+  ordering: CursorOrdering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input food_food_measurement_streamCursorValueInput {
+  foodId: uuid
+  id: uuid
+  measurementId: uuid
+}
+
+"""
+Streaming cursor of the table "food_food"
+"""
+input food_food_streamCursorInput {
+  """Stream column input with initial value"""
+  initialValue: food_food_streamCursorValueInput!
+
+  """cursor ordering"""
+  ordering: CursorOrdering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input food_food_streamCursorValueInput {
+  fdcId: Int
+  id: uuid
+}
+
+"""
+Streaming cursor of the table "food_measurement"
+"""
+input food_measurement_streamCursorInput {
+  """Stream column input with initial value"""
+  initialValue: food_measurement_streamCursorValueInput!
+
+  """cursor ordering"""
+  ordering: CursorOrdering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input food_measurement_streamCursorValueInput {
+  amount: Int
+  id: uuid
+  mass: Int
+  unitId: uuid
+}
+
+"""
+Streaming cursor of the table "food_unit"
+"""
+input food_unit_streamCursorInput {
+  """Stream column input with initial value"""
+  initialValue: food_unit_streamCursorValueInput!
+
+  """cursor ordering"""
+  ordering: CursorOrdering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input food_unit_streamCursorValueInput {
+  gramCoefficient: Int
+  id: uuid
+  name: String
+}
+
+"""
+Streaming cursor of the table "ingredient_ingredient"
+"""
+input ingredient_ingredient_streamCursorInput {
+  """Stream column input with initial value"""
+  initialValue: ingredient_ingredient_streamCursorValueInput!
+
+  """cursor ordering"""
+  ordering: CursorOrdering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input ingredient_ingredient_streamCursorValueInput {
+  foodId: uuid
+  id: uuid
+  wikiUrl: String
+}
+
+"""
+Streaming cursor of the table "ingredient_name"
+"""
+input ingredient_name_streamCursorInput {
+  """Stream column input with initial value"""
+  initialValue: ingredient_name_streamCursorValueInput!
+
+  """cursor ordering"""
+  ordering: CursorOrdering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input ingredient_name_streamCursorValueInput {
+  id: uuid
+  ingredientId: uuid
+  name: String
 }
 
 scalar jsonb
@@ -4698,6 +5108,19 @@ type mutation_root {
   delete single row from the table: "recipe.source_provider"
   """
   deleteRecipeSourceProviderByPk(id: uuid!): RecipeSourceProvider
+
+  """
+  delete data from the table: "recipe.tags"
+  """
+  deleteRecipeTags(
+    """filter the rows which have to be deleted"""
+    where: RecipeTagsBoolExp!
+  ): RecipeTagsMutationResponse
+
+  """
+  delete single row from the table: "recipe.tags"
+  """
+  deleteRecipeTagsByPk(id: uuid!): RecipeTags
 
   """
   delete data from the table: "recipe.video_timestamp"
@@ -5085,6 +5508,28 @@ type mutation_root {
     """upsert condition"""
     onConflict: RecipeSourceProviderOnConflict
   ): RecipeSourceProvider
+
+  """
+  insert data into the table: "recipe.tags"
+  """
+  insertRecipeTags(
+    """the rows to be inserted"""
+    objects: [RecipeTagsInsertInput!]!
+
+    """upsert condition"""
+    onConflict: RecipeTagsOnConflict
+  ): RecipeTagsMutationResponse
+
+  """
+  insert a single row into the table: "recipe.tags"
+  """
+  insertRecipeTagsOne(
+    """the row to be inserted"""
+    object: RecipeTagsInsertInput!
+
+    """upsert condition"""
+    onConflict: RecipeTagsOnConflict
+  ): RecipeTags
 
   """
   insert data into the table: "recipe.video_timestamp"
@@ -5705,6 +6150,40 @@ type mutation_root {
   ): [RecipeSourceProviderMutationResponse]
 
   """
+  update data of the table: "recipe.tags"
+  """
+  updateRecipeTags(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: RecipeTagsIncInput
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: RecipeTagsSetInput
+
+    """filter the rows which have to be updated"""
+    where: RecipeTagsBoolExp!
+  ): RecipeTagsMutationResponse
+
+  """
+  update single row of the table: "recipe.tags"
+  """
+  updateRecipeTagsByPk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: RecipeTagsIncInput
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: RecipeTagsSetInput
+    pk_columns: RecipeTagsPkColumnsInput!
+  ): RecipeTags
+
+  """
+  update multiples rows of table: "recipe.tags"
+  """
+  updateRecipeTagsMany(
+    """updates to execute, in order"""
+    updates: [RecipeTagsUpdates!]!
+  ): [RecipeTagsMutationResponse]
+
+  """
   update data of the table: "recipe.video_timestamp"
   """
   updateRecipeVideoTimestamp(
@@ -5743,348 +6222,845 @@ type query_root {
   """
   fetch data from the table: "equipment.config"
   """
-  equipmentConfigConnection(
-    after: String
-    before: String
-
+  equipmentConfig(
     """distinct select on columns"""
     distinctOn: [EquipmentConfigSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [EquipmentConfigOrderBy!]
 
     """filter the rows returned"""
     where: EquipmentConfigBoolExp
-  ): EquipmentConfigConnection!
+  ): [EquipmentConfig!]!
+
+  """
+  fetch aggregated fields from the table: "equipment.config"
+  """
+  equipmentConfigAggregate(
+    """distinct select on columns"""
+    distinctOn: [EquipmentConfigSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [EquipmentConfigOrderBy!]
+
+    """filter the rows returned"""
+    where: EquipmentConfigBoolExp
+  ): EquipmentConfigAggregate!
+
+  """
+  fetch data from the table: "equipment.config" using primary key columns
+  """
+  equipmentConfigByPk(id: uuid!): EquipmentConfig
 
   """
   fetch data from the table: "equipment.equipment"
   """
-  equipmentEquipmentConnection(
-    after: String
-    before: String
-
+  equipmentEquipment(
     """distinct select on columns"""
     distinctOn: [EquipmentEquipmentSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [EquipmentEquipmentOrderBy!]
 
     """filter the rows returned"""
     where: EquipmentEquipmentBoolExp
-  ): EquipmentEquipmentConnection!
+  ): [EquipmentEquipment!]!
+
+  """
+  fetch aggregated fields from the table: "equipment.equipment"
+  """
+  equipmentEquipmentAggregate(
+    """distinct select on columns"""
+    distinctOn: [EquipmentEquipmentSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [EquipmentEquipmentOrderBy!]
+
+    """filter the rows returned"""
+    where: EquipmentEquipmentBoolExp
+  ): EquipmentEquipmentAggregate!
+
+  """
+  fetch data from the table: "equipment.equipment" using primary key columns
+  """
+  equipmentEquipmentByPk(id: uuid!): EquipmentEquipment
 
   """
   fetch data from the table: "food.food"
   """
-  foodFoodConnection(
-    after: String
-    before: String
-
+  foodFood(
     """distinct select on columns"""
     distinctOn: [FoodFoodSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [FoodFoodOrderBy!]
 
     """filter the rows returned"""
     where: FoodFoodBoolExp
-  ): FoodFoodConnection!
+  ): [FoodFood!]!
+
+  """
+  fetch aggregated fields from the table: "food.food"
+  """
+  foodFoodAggregate(
+    """distinct select on columns"""
+    distinctOn: [FoodFoodSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [FoodFoodOrderBy!]
+
+    """filter the rows returned"""
+    where: FoodFoodBoolExp
+  ): FoodFoodAggregate!
+
+  """fetch data from the table: "food.food" using primary key columns"""
+  foodFoodByPk(id: uuid!): FoodFood
 
   """
   fetch data from the table: "food.food_measurement"
   """
-  foodFoodMeasurementConnection(
-    after: String
-    before: String
-
+  foodFoodMeasurement(
     """distinct select on columns"""
     distinctOn: [FoodFoodMeasurementSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [FoodFoodMeasurementOrderBy!]
 
     """filter the rows returned"""
     where: FoodFoodMeasurementBoolExp
-  ): FoodFoodMeasurementConnection!
+  ): [FoodFoodMeasurement!]!
+
+  """
+  fetch aggregated fields from the table: "food.food_measurement"
+  """
+  foodFoodMeasurementAggregate(
+    """distinct select on columns"""
+    distinctOn: [FoodFoodMeasurementSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [FoodFoodMeasurementOrderBy!]
+
+    """filter the rows returned"""
+    where: FoodFoodMeasurementBoolExp
+  ): FoodFoodMeasurementAggregate!
+
+  """
+  fetch data from the table: "food.food_measurement" using primary key columns
+  """
+  foodFoodMeasurementByPk(id: uuid!): FoodFoodMeasurement
 
   """
   fetch data from the table: "food.measurement"
   """
-  foodMeasurementConnection(
-    after: String
-    before: String
-
+  foodMeasurement(
     """distinct select on columns"""
     distinctOn: [FoodMeasurementSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [FoodMeasurementOrderBy!]
 
     """filter the rows returned"""
     where: FoodMeasurementBoolExp
-  ): FoodMeasurementConnection!
+  ): [FoodMeasurement!]!
+
+  """
+  fetch aggregated fields from the table: "food.measurement"
+  """
+  foodMeasurementAggregate(
+    """distinct select on columns"""
+    distinctOn: [FoodMeasurementSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [FoodMeasurementOrderBy!]
+
+    """filter the rows returned"""
+    where: FoodMeasurementBoolExp
+  ): FoodMeasurementAggregate!
+
+  """
+  fetch data from the table: "food.measurement" using primary key columns
+  """
+  foodMeasurementByPk(id: uuid!): FoodMeasurement
 
   """
   fetch data from the table: "food.unit"
   """
-  foodUnitConnection(
-    after: String
-    before: String
-
+  foodUnit(
     """distinct select on columns"""
     distinctOn: [FoodUnitSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [FoodUnitOrderBy!]
 
     """filter the rows returned"""
     where: FoodUnitBoolExp
-  ): FoodUnitConnection!
+  ): [FoodUnit!]!
+
+  """
+  fetch aggregated fields from the table: "food.unit"
+  """
+  foodUnitAggregate(
+    """distinct select on columns"""
+    distinctOn: [FoodUnitSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [FoodUnitOrderBy!]
+
+    """filter the rows returned"""
+    where: FoodUnitBoolExp
+  ): FoodUnitAggregate!
+
+  """fetch data from the table: "food.unit" using primary key columns"""
+  foodUnitByPk(id: uuid!): FoodUnit
 
   """
   fetch data from the table: "ingredient.ingredient"
   """
-  ingredientIngredientConnection(
-    after: String
-    before: String
-
+  ingredientIngredient(
     """distinct select on columns"""
     distinctOn: [IngredientIngredientSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [IngredientIngredientOrderBy!]
 
     """filter the rows returned"""
     where: IngredientIngredientBoolExp
-  ): IngredientIngredientConnection!
+  ): [IngredientIngredient!]!
+
+  """
+  fetch aggregated fields from the table: "ingredient.ingredient"
+  """
+  ingredientIngredientAggregate(
+    """distinct select on columns"""
+    distinctOn: [IngredientIngredientSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [IngredientIngredientOrderBy!]
+
+    """filter the rows returned"""
+    where: IngredientIngredientBoolExp
+  ): IngredientIngredientAggregate!
+
+  """
+  fetch data from the table: "ingredient.ingredient" using primary key columns
+  """
+  ingredientIngredientByPk(id: uuid!): IngredientIngredient
 
   """
   fetch data from the table: "ingredient.name"
   """
-  ingredientNameConnection(
-    after: String
-    before: String
-
+  ingredientName(
     """distinct select on columns"""
     distinctOn: [IngredientNameSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [IngredientNameOrderBy!]
 
     """filter the rows returned"""
     where: IngredientNameBoolExp
-  ): IngredientNameConnection!
-  node(
-    """A globally unique id"""
-    id: ID!
-  ): Node
+  ): [IngredientName!]!
+
+  """
+  fetch aggregated fields from the table: "ingredient.name"
+  """
+  ingredientNameAggregate(
+    """distinct select on columns"""
+    distinctOn: [IngredientNameSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [IngredientNameOrderBy!]
+
+    """filter the rows returned"""
+    where: IngredientNameBoolExp
+  ): IngredientNameAggregate!
+
+  """fetch data from the table: "ingredient.name" using primary key columns"""
+  ingredientNameByPk(id: uuid!): IngredientName
 
   """
   fetch data from the table: "recipe.direction"
   """
-  recipeDirectionConnection(
-    after: String
-    before: String
-
+  recipeDirection(
     """distinct select on columns"""
     distinctOn: [RecipeDirectionSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [RecipeDirectionOrderBy!]
 
     """filter the rows returned"""
     where: RecipeDirectionBoolExp
-  ): RecipeDirectionConnection!
+  ): [RecipeDirection!]!
+
+  """
+  fetch aggregated fields from the table: "recipe.direction"
+  """
+  recipeDirectionAggregate(
+    """distinct select on columns"""
+    distinctOn: [RecipeDirectionSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [RecipeDirectionOrderBy!]
+
+    """filter the rows returned"""
+    where: RecipeDirectionBoolExp
+  ): RecipeDirectionAggregate!
+
+  """
+  fetch data from the table: "recipe.direction" using primary key columns
+  """
+  recipeDirectionByPk(id: uuid!): RecipeDirection
 
   """
   fetch data from the table: "recipe.direction_equipment"
   """
-  recipeDirectionEquipmentConnection(
-    after: String
-    before: String
-
+  recipeDirectionEquipment(
     """distinct select on columns"""
     distinctOn: [RecipeDirectionEquipmentSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [RecipeDirectionEquipmentOrderBy!]
 
     """filter the rows returned"""
     where: RecipeDirectionEquipmentBoolExp
-  ): RecipeDirectionEquipmentConnection!
+  ): [RecipeDirectionEquipment!]!
+
+  """
+  fetch aggregated fields from the table: "recipe.direction_equipment"
+  """
+  recipeDirectionEquipmentAggregate(
+    """distinct select on columns"""
+    distinctOn: [RecipeDirectionEquipmentSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [RecipeDirectionEquipmentOrderBy!]
+
+    """filter the rows returned"""
+    where: RecipeDirectionEquipmentBoolExp
+  ): RecipeDirectionEquipmentAggregate!
+
+  """
+  fetch data from the table: "recipe.direction_equipment" using primary key columns
+  """
+  recipeDirectionEquipmentByPk(id: uuid!): RecipeDirectionEquipment
 
   """
   fetch data from the table: "recipe.direction_ingredient"
   """
-  recipeDirectionIngredientConnection(
-    after: String
-    before: String
-
+  recipeDirectionIngredient(
     """distinct select on columns"""
     distinctOn: [RecipeDirectionIngredientSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [RecipeDirectionIngredientOrderBy!]
 
     """filter the rows returned"""
     where: RecipeDirectionIngredientBoolExp
-  ): RecipeDirectionIngredientConnection!
+  ): [RecipeDirectionIngredient!]!
+
+  """
+  fetch aggregated fields from the table: "recipe.direction_ingredient"
+  """
+  recipeDirectionIngredientAggregate(
+    """distinct select on columns"""
+    distinctOn: [RecipeDirectionIngredientSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [RecipeDirectionIngredientOrderBy!]
+
+    """filter the rows returned"""
+    where: RecipeDirectionIngredientBoolExp
+  ): RecipeDirectionIngredientAggregate!
+
+  """
+  fetch data from the table: "recipe.direction_ingredient" using primary key columns
+  """
+  recipeDirectionIngredientByPk(id: uuid!): RecipeDirectionIngredient
 
   """
   fetch data from the table: "recipe.equipment"
   """
-  recipeEquipmentConnection(
-    after: String
-    before: String
-
+  recipeEquipment(
     """distinct select on columns"""
     distinctOn: [RecipeEquipmentSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [RecipeEquipmentOrderBy!]
 
     """filter the rows returned"""
     where: RecipeEquipmentBoolExp
-  ): RecipeEquipmentConnection!
+  ): [RecipeEquipment!]!
+
+  """
+  fetch aggregated fields from the table: "recipe.equipment"
+  """
+  recipeEquipmentAggregate(
+    """distinct select on columns"""
+    distinctOn: [RecipeEquipmentSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [RecipeEquipmentOrderBy!]
+
+    """filter the rows returned"""
+    where: RecipeEquipmentBoolExp
+  ): RecipeEquipmentAggregate!
+
+  """
+  fetch data from the table: "recipe.equipment" using primary key columns
+  """
+  recipeEquipmentByPk(id: uuid!): RecipeEquipment
 
   """
   fetch data from the table: "recipe.ingredient"
   """
-  recipeIngredientConnection(
-    after: String
-    before: String
-
+  recipeIngredient(
     """distinct select on columns"""
     distinctOn: [RecipeIngredientSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [RecipeIngredientOrderBy!]
 
     """filter the rows returned"""
     where: RecipeIngredientBoolExp
-  ): RecipeIngredientConnection!
+  ): [RecipeIngredient!]!
+
+  """
+  fetch aggregated fields from the table: "recipe.ingredient"
+  """
+  recipeIngredientAggregate(
+    """distinct select on columns"""
+    distinctOn: [RecipeIngredientSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [RecipeIngredientOrderBy!]
+
+    """filter the rows returned"""
+    where: RecipeIngredientBoolExp
+  ): RecipeIngredientAggregate!
+
+  """
+  fetch data from the table: "recipe.ingredient" using primary key columns
+  """
+  recipeIngredientByPk(id: uuid!): RecipeIngredient
 
   """
   fetch data from the table: "recipe.list"
   """
-  recipeListConnection(
-    after: String
-    before: String
-
+  recipeList(
     """distinct select on columns"""
     distinctOn: [RecipeListSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [RecipeListOrderBy!]
 
     """filter the rows returned"""
     where: RecipeListBoolExp
-  ): RecipeListConnection!
+  ): [RecipeList!]!
+
+  """
+  fetch aggregated fields from the table: "recipe.list"
+  """
+  recipeListAggregate(
+    """distinct select on columns"""
+    distinctOn: [RecipeListSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [RecipeListOrderBy!]
+
+    """filter the rows returned"""
+    where: RecipeListBoolExp
+  ): RecipeListAggregate!
+
+  """fetch data from the table: "recipe.list" using primary key columns"""
+  recipeListByPk(id: uuid!): RecipeList
 
   """
   fetch data from the table: "recipe.list_item"
   """
-  recipeListItemConnection(
-    after: String
-    before: String
-
+  recipeListItem(
     """distinct select on columns"""
     distinctOn: [RecipeListItemSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [RecipeListItemOrderBy!]
 
     """filter the rows returned"""
     where: RecipeListItemBoolExp
-  ): RecipeListItemConnection!
+  ): [RecipeListItem!]!
+
+  """
+  fetch aggregated fields from the table: "recipe.list_item"
+  """
+  recipeListItemAggregate(
+    """distinct select on columns"""
+    distinctOn: [RecipeListItemSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [RecipeListItemOrderBy!]
+
+    """filter the rows returned"""
+    where: RecipeListItemBoolExp
+  ): RecipeListItemAggregate!
+
+  """
+  fetch data from the table: "recipe.list_item" using primary key columns
+  """
+  recipeListItemByPk(id: uuid!): RecipeListItem
 
   """
   fetch data from the table: "recipe.recipe"
   """
-  recipeRecipeConnection(
-    after: String
-    before: String
-
+  recipeRecipe(
     """distinct select on columns"""
     distinctOn: [RecipeRecipeSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [RecipeRecipeOrderBy!]
 
     """filter the rows returned"""
     where: RecipeRecipeBoolExp
-  ): RecipeRecipeConnection!
+  ): [RecipeRecipe!]!
+
+  """
+  fetch aggregated fields from the table: "recipe.recipe"
+  """
+  recipeRecipeAggregate(
+    """distinct select on columns"""
+    distinctOn: [RecipeRecipeSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [RecipeRecipeOrderBy!]
+
+    """filter the rows returned"""
+    where: RecipeRecipeBoolExp
+  ): RecipeRecipeAggregate!
+
+  """fetch data from the table: "recipe.recipe" using primary key columns"""
+  recipeRecipeByPk(id: uuid!): RecipeRecipe
 
   """
   fetch data from the table: "recipe.source_provider"
   """
-  recipeSourceProviderConnection(
-    after: String
-    before: String
-
+  recipeSourceProvider(
     """distinct select on columns"""
     distinctOn: [RecipeSourceProviderSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [RecipeSourceProviderOrderBy!]
 
     """filter the rows returned"""
     where: RecipeSourceProviderBoolExp
-  ): RecipeSourceProviderConnection!
+  ): [RecipeSourceProvider!]!
+
+  """
+  fetch aggregated fields from the table: "recipe.source_provider"
+  """
+  recipeSourceProviderAggregate(
+    """distinct select on columns"""
+    distinctOn: [RecipeSourceProviderSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [RecipeSourceProviderOrderBy!]
+
+    """filter the rows returned"""
+    where: RecipeSourceProviderBoolExp
+  ): RecipeSourceProviderAggregate!
+
+  """
+  fetch data from the table: "recipe.source_provider" using primary key columns
+  """
+  recipeSourceProviderByPk(id: uuid!): RecipeSourceProvider
+
+  """
+  fetch data from the table: "recipe.tags"
+  """
+  recipeTags(
+    """distinct select on columns"""
+    distinctOn: [RecipeTagsSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [RecipeTagsOrderBy!]
+
+    """filter the rows returned"""
+    where: RecipeTagsBoolExp
+  ): [RecipeTags!]!
+
+  """
+  fetch aggregated fields from the table: "recipe.tags"
+  """
+  recipeTagsAggregate(
+    """distinct select on columns"""
+    distinctOn: [RecipeTagsSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [RecipeTagsOrderBy!]
+
+    """filter the rows returned"""
+    where: RecipeTagsBoolExp
+  ): RecipeTagsAggregate!
+
+  """fetch data from the table: "recipe.tags" using primary key columns"""
+  recipeTagsByPk(id: uuid!): RecipeTags
 
   """
   fetch data from the table: "recipe.video_timestamp"
   """
-  recipeVideoTimestampConnection(
-    after: String
-    before: String
-
+  recipeVideoTimestamp(
     """distinct select on columns"""
     distinctOn: [RecipeVideoTimestampSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [RecipeVideoTimestampOrderBy!]
 
     """filter the rows returned"""
     where: RecipeVideoTimestampBoolExp
-  ): RecipeVideoTimestampConnection!
+  ): [RecipeVideoTimestamp!]!
+
+  """
+  fetch aggregated fields from the table: "recipe.video_timestamp"
+  """
+  recipeVideoTimestampAggregate(
+    """distinct select on columns"""
+    distinctOn: [RecipeVideoTimestampSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [RecipeVideoTimestampOrderBy!]
+
+    """filter the rows returned"""
+    where: RecipeVideoTimestampBoolExp
+  ): RecipeVideoTimestampAggregate!
+
+  """
+  fetch data from the table: "recipe.video_timestamp" using primary key columns
+  """
+  recipeVideoTimestampByPk(id: uuid!): RecipeVideoTimestamp
 }
 
 input recipe_direction_aggregate_bool_exp {
@@ -6134,6 +7110,24 @@ input recipe_direction_equipment_min_order_by {
   id: OrderBy
 }
 
+"""
+Streaming cursor of the table "recipe_direction_equipment"
+"""
+input recipe_direction_equipment_streamCursorInput {
+  """Stream column input with initial value"""
+  initialValue: recipe_direction_equipment_streamCursorValueInput!
+
+  """cursor ordering"""
+  ordering: CursorOrdering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input recipe_direction_equipment_streamCursorValueInput {
+  directionId: uuid
+  equipmentId: uuid
+  id: uuid
+}
+
 input recipe_direction_ingredient_aggregate_bool_exp {
   count: recipe_direction_ingredient_aggregate_bool_exp_count
 }
@@ -6161,6 +7155,24 @@ input recipe_direction_ingredient_min_order_by {
   directionId: OrderBy
   id: OrderBy
   ingredientId: OrderBy
+}
+
+"""
+Streaming cursor of the table "recipe_direction_ingredient"
+"""
+input recipe_direction_ingredient_streamCursorInput {
+  """Stream column input with initial value"""
+  initialValue: recipe_direction_ingredient_streamCursorValueInput!
+
+  """cursor ordering"""
+  ordering: CursorOrdering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input recipe_direction_ingredient_streamCursorValueInput {
+  directionId: uuid
+  id: uuid
+  ingredientId: uuid
 }
 
 """
@@ -6206,6 +7218,27 @@ order by stddev_samp() on columns of table "recipe.direction"
 """
 input recipe_direction_stddev_samp_order_by {
   seq: OrderBy
+}
+
+"""
+Streaming cursor of the table "recipe_direction"
+"""
+input recipe_direction_streamCursorInput {
+  """Stream column input with initial value"""
+  initialValue: recipe_direction_streamCursorValueInput!
+
+  """cursor ordering"""
+  ordering: CursorOrdering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input recipe_direction_streamCursorValueInput {
+  action: String
+  id: uuid
+  recipeId: uuid
+  seq: Int
+  text: String
+  videoTimestampId: uuid
 }
 
 """
@@ -6263,6 +7296,24 @@ input recipe_equipment_min_order_by {
   equipmentId: OrderBy
   id: OrderBy
   recipeId: OrderBy
+}
+
+"""
+Streaming cursor of the table "recipe_equipment"
+"""
+input recipe_equipment_streamCursorInput {
+  """Stream column input with initial value"""
+  initialValue: recipe_equipment_streamCursorValueInput!
+
+  """cursor ordering"""
+  ordering: CursorOrdering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input recipe_equipment_streamCursorValueInput {
+  equipmentId: uuid
+  id: uuid
+  recipeId: uuid
 }
 
 input recipe_ingredient_aggregate_bool_exp {
@@ -6338,6 +7389,31 @@ order by stddev_samp() on columns of table "recipe.ingredient"
 input recipe_ingredient_stddev_samp_order_by {
   amount: OrderBy
   seq: OrderBy
+}
+
+"""
+Streaming cursor of the table "recipe_ingredient"
+"""
+input recipe_ingredient_streamCursorInput {
+  """Stream column input with initial value"""
+  initialValue: recipe_ingredient_streamCursorValueInput!
+
+  """cursor ordering"""
+  ordering: CursorOrdering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input recipe_ingredient_streamCursorValueInput {
+  amount: Int
+  comment: String
+  id: uuid
+  ingredientId: uuid
+  name: String
+  recipeId: uuid
+  seq: Int
+  text: String
+  unitId: uuid
+  videoTimestampId: uuid
 }
 
 """
@@ -6432,6 +7508,25 @@ input recipe_list_item_stddev_samp_order_by {
 }
 
 """
+Streaming cursor of the table "recipe_list_item"
+"""
+input recipe_list_item_streamCursorInput {
+  """Stream column input with initial value"""
+  initialValue: recipe_list_item_streamCursorValueInput!
+
+  """cursor ordering"""
+  ordering: CursorOrdering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input recipe_list_item_streamCursorValueInput {
+  id: uuid
+  listId: uuid
+  recipeId: uuid
+  seq: Int
+}
+
+"""
 order by sum() on columns of table "recipe.list_item"
 """
 input recipe_list_item_sum_order_by {
@@ -6459,24 +7554,26 @@ input recipe_list_item_variance_order_by {
   seq: OrderBy
 }
 
+"""
+Streaming cursor of the table "recipe_list"
+"""
+input recipe_list_streamCursorInput {
+  """Stream column input with initial value"""
+  initialValue: recipe_list_streamCursorValueInput!
+
+  """cursor ordering"""
+  ordering: CursorOrdering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input recipe_list_streamCursorValueInput {
+  id: uuid
+  name: String
+  userId: uuid
+}
+
 input recipe_recipe_aggregate_bool_exp {
-  bool_and: recipe_recipe_aggregate_bool_exp_bool_and
-  bool_or: recipe_recipe_aggregate_bool_exp_bool_or
   count: recipe_recipe_aggregate_bool_exp_count
-}
-
-input recipe_recipe_aggregate_bool_exp_bool_and {
-  arguments: recipe_recipe_select_column_recipe_recipe_aggregate_bool_exp_bool_and_arguments_columns!
-  distinct: Boolean
-  filter: RecipeRecipeBoolExp
-  predicate: BooleanComparisonExp!
-}
-
-input recipe_recipe_aggregate_bool_exp_bool_or {
-  arguments: recipe_recipe_select_column_recipe_recipe_aggregate_bool_exp_bool_or_arguments_columns!
-  distinct: Boolean
-  filter: RecipeRecipeBoolExp
-  predicate: BooleanComparisonExp!
 }
 
 input recipe_recipe_aggregate_bool_exp_count {
@@ -6498,7 +7595,6 @@ input recipe_recipe_max_order_by {
   imageUrl: OrderBy
   name: OrderBy
   parentId: OrderBy
-  slug: OrderBy
   sourcePath: OrderBy
   sourceProviderId: OrderBy
   updatedAt: OrderBy
@@ -6517,7 +7613,6 @@ input recipe_recipe_min_order_by {
   imageUrl: OrderBy
   name: OrderBy
   parentId: OrderBy
-  slug: OrderBy
   sourcePath: OrderBy
   sourceProviderId: OrderBy
   updatedAt: OrderBy
@@ -6525,367 +7620,1285 @@ input recipe_recipe_min_order_by {
 }
 
 """
-select "recipe_recipe_aggregate_bool_exp_bool_and_arguments_columns" columns of table "recipe.recipe"
+Streaming cursor of the table "recipe_recipe"
 """
-enum recipe_recipe_select_column_recipe_recipe_aggregate_bool_exp_bool_and_arguments_columns {
-  """column name"""
-  hidden
+input recipe_recipe_streamCursorInput {
+  """Stream column input with initial value"""
+  initialValue: recipe_recipe_streamCursorValueInput!
+
+  """cursor ordering"""
+  ordering: CursorOrdering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input recipe_recipe_streamCursorValueInput {
+  createdAt: timestamp
+
+  """User who created the recipe."""
+  creatorId: uuid
+  extractionMetadata: jsonb
+  id: uuid
+  imageUrl: String
+  name: String
+  parentId: uuid
+  sourcePath: String
+  sourceProviderId: uuid
+  updatedAt: timestamp
+  videoUrl: String
 }
 
 """
-select "recipe_recipe_aggregate_bool_exp_bool_or_arguments_columns" columns of table "recipe.recipe"
+Streaming cursor of the table "recipe_source_provider"
 """
-enum recipe_recipe_select_column_recipe_recipe_aggregate_bool_exp_bool_or_arguments_columns {
-  """column name"""
-  hidden
+input recipe_source_provider_streamCursorInput {
+  """Stream column input with initial value"""
+  initialValue: recipe_source_provider_streamCursorValueInput!
+
+  """cursor ordering"""
+  ordering: CursorOrdering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input recipe_source_provider_streamCursorValueInput {
+  description: String
+  id: uuid
+  name: String
+  url: String
+}
+
+input recipe_tags_aggregate_bool_exp {
+  count: recipe_tags_aggregate_bool_exp_count
+}
+
+input recipe_tags_aggregate_bool_exp_count {
+  arguments: [RecipeTagsSelectColumn!]
+  distinct: Boolean
+  filter: RecipeTagsBoolExp
+  predicate: IntComparisonExp!
+}
+
+"""
+order by avg() on columns of table "recipe.tags"
+"""
+input recipe_tags_avg_order_by {
+  seq: OrderBy
+}
+
+"""
+order by max() on columns of table "recipe.tags"
+"""
+input recipe_tags_max_order_by {
+  id: OrderBy
+  name: OrderBy
+  recipeId: OrderBy
+  seq: OrderBy
+}
+
+"""
+order by min() on columns of table "recipe.tags"
+"""
+input recipe_tags_min_order_by {
+  id: OrderBy
+  name: OrderBy
+  recipeId: OrderBy
+  seq: OrderBy
+}
+
+"""
+order by stddev() on columns of table "recipe.tags"
+"""
+input recipe_tags_stddev_order_by {
+  seq: OrderBy
+}
+
+"""
+order by stddev_pop() on columns of table "recipe.tags"
+"""
+input recipe_tags_stddev_pop_order_by {
+  seq: OrderBy
+}
+
+"""
+order by stddev_samp() on columns of table "recipe.tags"
+"""
+input recipe_tags_stddev_samp_order_by {
+  seq: OrderBy
+}
+
+"""
+Streaming cursor of the table "recipe_tags"
+"""
+input recipe_tags_streamCursorInput {
+  """Stream column input with initial value"""
+  initialValue: recipe_tags_streamCursorValueInput!
+
+  """cursor ordering"""
+  ordering: CursorOrdering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input recipe_tags_streamCursorValueInput {
+  id: uuid
+  name: String
+  recipeId: uuid
+  seq: Int
+}
+
+"""
+order by sum() on columns of table "recipe.tags"
+"""
+input recipe_tags_sum_order_by {
+  seq: OrderBy
+}
+
+"""
+order by var_pop() on columns of table "recipe.tags"
+"""
+input recipe_tags_var_pop_order_by {
+  seq: OrderBy
+}
+
+"""
+order by var_samp() on columns of table "recipe.tags"
+"""
+input recipe_tags_var_samp_order_by {
+  seq: OrderBy
+}
+
+"""
+order by variance() on columns of table "recipe.tags"
+"""
+input recipe_tags_variance_order_by {
+  seq: OrderBy
+}
+
+"""
+Streaming cursor of the table "recipe_video_timestamp"
+"""
+input recipe_video_timestamp_streamCursorInput {
+  """Stream column input with initial value"""
+  initialValue: recipe_video_timestamp_streamCursorValueInput!
+
+  """cursor ordering"""
+  ordering: CursorOrdering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input recipe_video_timestamp_streamCursorValueInput {
+  end: Int
+  id: uuid
+  start: Int
 }
 
 type subscription_root {
   """
   fetch data from the table: "equipment.config"
   """
-  equipmentConfigConnection(
-    after: String
-    before: String
-
+  equipmentConfig(
     """distinct select on columns"""
     distinctOn: [EquipmentConfigSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [EquipmentConfigOrderBy!]
 
     """filter the rows returned"""
     where: EquipmentConfigBoolExp
-  ): EquipmentConfigConnection!
+  ): [EquipmentConfig!]!
+
+  """
+  fetch aggregated fields from the table: "equipment.config"
+  """
+  equipmentConfigAggregate(
+    """distinct select on columns"""
+    distinctOn: [EquipmentConfigSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [EquipmentConfigOrderBy!]
+
+    """filter the rows returned"""
+    where: EquipmentConfigBoolExp
+  ): EquipmentConfigAggregate!
+
+  """
+  fetch data from the table: "equipment.config" using primary key columns
+  """
+  equipmentConfigByPk(id: uuid!): EquipmentConfig
+
+  """
+  fetch data from the table in a streaming manner: "equipment.config"
+  """
+  equipmentConfigStream(
+    """maximum number of rows returned in a single batch"""
+    batchSize: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [equipment_config_streamCursorInput]!
+
+    """filter the rows returned"""
+    where: EquipmentConfigBoolExp
+  ): [EquipmentConfig!]!
 
   """
   fetch data from the table: "equipment.equipment"
   """
-  equipmentEquipmentConnection(
-    after: String
-    before: String
-
+  equipmentEquipment(
     """distinct select on columns"""
     distinctOn: [EquipmentEquipmentSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [EquipmentEquipmentOrderBy!]
 
     """filter the rows returned"""
     where: EquipmentEquipmentBoolExp
-  ): EquipmentEquipmentConnection!
+  ): [EquipmentEquipment!]!
+
+  """
+  fetch aggregated fields from the table: "equipment.equipment"
+  """
+  equipmentEquipmentAggregate(
+    """distinct select on columns"""
+    distinctOn: [EquipmentEquipmentSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [EquipmentEquipmentOrderBy!]
+
+    """filter the rows returned"""
+    where: EquipmentEquipmentBoolExp
+  ): EquipmentEquipmentAggregate!
+
+  """
+  fetch data from the table: "equipment.equipment" using primary key columns
+  """
+  equipmentEquipmentByPk(id: uuid!): EquipmentEquipment
+
+  """
+  fetch data from the table in a streaming manner: "equipment.equipment"
+  """
+  equipmentEquipmentStream(
+    """maximum number of rows returned in a single batch"""
+    batchSize: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [equipment_equipment_streamCursorInput]!
+
+    """filter the rows returned"""
+    where: EquipmentEquipmentBoolExp
+  ): [EquipmentEquipment!]!
 
   """
   fetch data from the table: "food.food"
   """
-  foodFoodConnection(
-    after: String
-    before: String
-
+  foodFood(
     """distinct select on columns"""
     distinctOn: [FoodFoodSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [FoodFoodOrderBy!]
 
     """filter the rows returned"""
     where: FoodFoodBoolExp
-  ): FoodFoodConnection!
+  ): [FoodFood!]!
+
+  """
+  fetch aggregated fields from the table: "food.food"
+  """
+  foodFoodAggregate(
+    """distinct select on columns"""
+    distinctOn: [FoodFoodSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [FoodFoodOrderBy!]
+
+    """filter the rows returned"""
+    where: FoodFoodBoolExp
+  ): FoodFoodAggregate!
+
+  """fetch data from the table: "food.food" using primary key columns"""
+  foodFoodByPk(id: uuid!): FoodFood
 
   """
   fetch data from the table: "food.food_measurement"
   """
-  foodFoodMeasurementConnection(
-    after: String
-    before: String
-
+  foodFoodMeasurement(
     """distinct select on columns"""
     distinctOn: [FoodFoodMeasurementSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [FoodFoodMeasurementOrderBy!]
 
     """filter the rows returned"""
     where: FoodFoodMeasurementBoolExp
-  ): FoodFoodMeasurementConnection!
+  ): [FoodFoodMeasurement!]!
+
+  """
+  fetch aggregated fields from the table: "food.food_measurement"
+  """
+  foodFoodMeasurementAggregate(
+    """distinct select on columns"""
+    distinctOn: [FoodFoodMeasurementSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [FoodFoodMeasurementOrderBy!]
+
+    """filter the rows returned"""
+    where: FoodFoodMeasurementBoolExp
+  ): FoodFoodMeasurementAggregate!
+
+  """
+  fetch data from the table: "food.food_measurement" using primary key columns
+  """
+  foodFoodMeasurementByPk(id: uuid!): FoodFoodMeasurement
+
+  """
+  fetch data from the table in a streaming manner: "food.food_measurement"
+  """
+  foodFoodMeasurementStream(
+    """maximum number of rows returned in a single batch"""
+    batchSize: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [food_food_measurement_streamCursorInput]!
+
+    """filter the rows returned"""
+    where: FoodFoodMeasurementBoolExp
+  ): [FoodFoodMeasurement!]!
+
+  """
+  fetch data from the table in a streaming manner: "food.food"
+  """
+  foodFoodStream(
+    """maximum number of rows returned in a single batch"""
+    batchSize: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [food_food_streamCursorInput]!
+
+    """filter the rows returned"""
+    where: FoodFoodBoolExp
+  ): [FoodFood!]!
 
   """
   fetch data from the table: "food.measurement"
   """
-  foodMeasurementConnection(
-    after: String
-    before: String
-
+  foodMeasurement(
     """distinct select on columns"""
     distinctOn: [FoodMeasurementSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [FoodMeasurementOrderBy!]
 
     """filter the rows returned"""
     where: FoodMeasurementBoolExp
-  ): FoodMeasurementConnection!
+  ): [FoodMeasurement!]!
+
+  """
+  fetch aggregated fields from the table: "food.measurement"
+  """
+  foodMeasurementAggregate(
+    """distinct select on columns"""
+    distinctOn: [FoodMeasurementSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [FoodMeasurementOrderBy!]
+
+    """filter the rows returned"""
+    where: FoodMeasurementBoolExp
+  ): FoodMeasurementAggregate!
+
+  """
+  fetch data from the table: "food.measurement" using primary key columns
+  """
+  foodMeasurementByPk(id: uuid!): FoodMeasurement
+
+  """
+  fetch data from the table in a streaming manner: "food.measurement"
+  """
+  foodMeasurementStream(
+    """maximum number of rows returned in a single batch"""
+    batchSize: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [food_measurement_streamCursorInput]!
+
+    """filter the rows returned"""
+    where: FoodMeasurementBoolExp
+  ): [FoodMeasurement!]!
 
   """
   fetch data from the table: "food.unit"
   """
-  foodUnitConnection(
-    after: String
-    before: String
-
+  foodUnit(
     """distinct select on columns"""
     distinctOn: [FoodUnitSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [FoodUnitOrderBy!]
 
     """filter the rows returned"""
     where: FoodUnitBoolExp
-  ): FoodUnitConnection!
+  ): [FoodUnit!]!
+
+  """
+  fetch aggregated fields from the table: "food.unit"
+  """
+  foodUnitAggregate(
+    """distinct select on columns"""
+    distinctOn: [FoodUnitSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [FoodUnitOrderBy!]
+
+    """filter the rows returned"""
+    where: FoodUnitBoolExp
+  ): FoodUnitAggregate!
+
+  """fetch data from the table: "food.unit" using primary key columns"""
+  foodUnitByPk(id: uuid!): FoodUnit
+
+  """
+  fetch data from the table in a streaming manner: "food.unit"
+  """
+  foodUnitStream(
+    """maximum number of rows returned in a single batch"""
+    batchSize: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [food_unit_streamCursorInput]!
+
+    """filter the rows returned"""
+    where: FoodUnitBoolExp
+  ): [FoodUnit!]!
 
   """
   fetch data from the table: "ingredient.ingredient"
   """
-  ingredientIngredientConnection(
-    after: String
-    before: String
-
+  ingredientIngredient(
     """distinct select on columns"""
     distinctOn: [IngredientIngredientSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [IngredientIngredientOrderBy!]
 
     """filter the rows returned"""
     where: IngredientIngredientBoolExp
-  ): IngredientIngredientConnection!
+  ): [IngredientIngredient!]!
+
+  """
+  fetch aggregated fields from the table: "ingredient.ingredient"
+  """
+  ingredientIngredientAggregate(
+    """distinct select on columns"""
+    distinctOn: [IngredientIngredientSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [IngredientIngredientOrderBy!]
+
+    """filter the rows returned"""
+    where: IngredientIngredientBoolExp
+  ): IngredientIngredientAggregate!
+
+  """
+  fetch data from the table: "ingredient.ingredient" using primary key columns
+  """
+  ingredientIngredientByPk(id: uuid!): IngredientIngredient
+
+  """
+  fetch data from the table in a streaming manner: "ingredient.ingredient"
+  """
+  ingredientIngredientStream(
+    """maximum number of rows returned in a single batch"""
+    batchSize: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [ingredient_ingredient_streamCursorInput]!
+
+    """filter the rows returned"""
+    where: IngredientIngredientBoolExp
+  ): [IngredientIngredient!]!
 
   """
   fetch data from the table: "ingredient.name"
   """
-  ingredientNameConnection(
-    after: String
-    before: String
-
+  ingredientName(
     """distinct select on columns"""
     distinctOn: [IngredientNameSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [IngredientNameOrderBy!]
 
     """filter the rows returned"""
     where: IngredientNameBoolExp
-  ): IngredientNameConnection!
-  node(
-    """A globally unique id"""
-    id: ID!
-  ): Node
+  ): [IngredientName!]!
+
+  """
+  fetch aggregated fields from the table: "ingredient.name"
+  """
+  ingredientNameAggregate(
+    """distinct select on columns"""
+    distinctOn: [IngredientNameSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [IngredientNameOrderBy!]
+
+    """filter the rows returned"""
+    where: IngredientNameBoolExp
+  ): IngredientNameAggregate!
+
+  """fetch data from the table: "ingredient.name" using primary key columns"""
+  ingredientNameByPk(id: uuid!): IngredientName
+
+  """
+  fetch data from the table in a streaming manner: "ingredient.name"
+  """
+  ingredientNameStream(
+    """maximum number of rows returned in a single batch"""
+    batchSize: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [ingredient_name_streamCursorInput]!
+
+    """filter the rows returned"""
+    where: IngredientNameBoolExp
+  ): [IngredientName!]!
 
   """
   fetch data from the table: "recipe.direction"
   """
-  recipeDirectionConnection(
-    after: String
-    before: String
-
+  recipeDirection(
     """distinct select on columns"""
     distinctOn: [RecipeDirectionSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [RecipeDirectionOrderBy!]
 
     """filter the rows returned"""
     where: RecipeDirectionBoolExp
-  ): RecipeDirectionConnection!
+  ): [RecipeDirection!]!
+
+  """
+  fetch aggregated fields from the table: "recipe.direction"
+  """
+  recipeDirectionAggregate(
+    """distinct select on columns"""
+    distinctOn: [RecipeDirectionSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [RecipeDirectionOrderBy!]
+
+    """filter the rows returned"""
+    where: RecipeDirectionBoolExp
+  ): RecipeDirectionAggregate!
+
+  """
+  fetch data from the table: "recipe.direction" using primary key columns
+  """
+  recipeDirectionByPk(id: uuid!): RecipeDirection
 
   """
   fetch data from the table: "recipe.direction_equipment"
   """
-  recipeDirectionEquipmentConnection(
-    after: String
-    before: String
-
+  recipeDirectionEquipment(
     """distinct select on columns"""
     distinctOn: [RecipeDirectionEquipmentSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [RecipeDirectionEquipmentOrderBy!]
 
     """filter the rows returned"""
     where: RecipeDirectionEquipmentBoolExp
-  ): RecipeDirectionEquipmentConnection!
+  ): [RecipeDirectionEquipment!]!
+
+  """
+  fetch aggregated fields from the table: "recipe.direction_equipment"
+  """
+  recipeDirectionEquipmentAggregate(
+    """distinct select on columns"""
+    distinctOn: [RecipeDirectionEquipmentSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [RecipeDirectionEquipmentOrderBy!]
+
+    """filter the rows returned"""
+    where: RecipeDirectionEquipmentBoolExp
+  ): RecipeDirectionEquipmentAggregate!
+
+  """
+  fetch data from the table: "recipe.direction_equipment" using primary key columns
+  """
+  recipeDirectionEquipmentByPk(id: uuid!): RecipeDirectionEquipment
+
+  """
+  fetch data from the table in a streaming manner: "recipe.direction_equipment"
+  """
+  recipeDirectionEquipmentStream(
+    """maximum number of rows returned in a single batch"""
+    batchSize: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [recipe_direction_equipment_streamCursorInput]!
+
+    """filter the rows returned"""
+    where: RecipeDirectionEquipmentBoolExp
+  ): [RecipeDirectionEquipment!]!
 
   """
   fetch data from the table: "recipe.direction_ingredient"
   """
-  recipeDirectionIngredientConnection(
-    after: String
-    before: String
-
+  recipeDirectionIngredient(
     """distinct select on columns"""
     distinctOn: [RecipeDirectionIngredientSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [RecipeDirectionIngredientOrderBy!]
 
     """filter the rows returned"""
     where: RecipeDirectionIngredientBoolExp
-  ): RecipeDirectionIngredientConnection!
+  ): [RecipeDirectionIngredient!]!
+
+  """
+  fetch aggregated fields from the table: "recipe.direction_ingredient"
+  """
+  recipeDirectionIngredientAggregate(
+    """distinct select on columns"""
+    distinctOn: [RecipeDirectionIngredientSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [RecipeDirectionIngredientOrderBy!]
+
+    """filter the rows returned"""
+    where: RecipeDirectionIngredientBoolExp
+  ): RecipeDirectionIngredientAggregate!
+
+  """
+  fetch data from the table: "recipe.direction_ingredient" using primary key columns
+  """
+  recipeDirectionIngredientByPk(id: uuid!): RecipeDirectionIngredient
+
+  """
+  fetch data from the table in a streaming manner: "recipe.direction_ingredient"
+  """
+  recipeDirectionIngredientStream(
+    """maximum number of rows returned in a single batch"""
+    batchSize: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [recipe_direction_ingredient_streamCursorInput]!
+
+    """filter the rows returned"""
+    where: RecipeDirectionIngredientBoolExp
+  ): [RecipeDirectionIngredient!]!
+
+  """
+  fetch data from the table in a streaming manner: "recipe.direction"
+  """
+  recipeDirectionStream(
+    """maximum number of rows returned in a single batch"""
+    batchSize: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [recipe_direction_streamCursorInput]!
+
+    """filter the rows returned"""
+    where: RecipeDirectionBoolExp
+  ): [RecipeDirection!]!
 
   """
   fetch data from the table: "recipe.equipment"
   """
-  recipeEquipmentConnection(
-    after: String
-    before: String
-
+  recipeEquipment(
     """distinct select on columns"""
     distinctOn: [RecipeEquipmentSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [RecipeEquipmentOrderBy!]
 
     """filter the rows returned"""
     where: RecipeEquipmentBoolExp
-  ): RecipeEquipmentConnection!
+  ): [RecipeEquipment!]!
+
+  """
+  fetch aggregated fields from the table: "recipe.equipment"
+  """
+  recipeEquipmentAggregate(
+    """distinct select on columns"""
+    distinctOn: [RecipeEquipmentSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [RecipeEquipmentOrderBy!]
+
+    """filter the rows returned"""
+    where: RecipeEquipmentBoolExp
+  ): RecipeEquipmentAggregate!
+
+  """
+  fetch data from the table: "recipe.equipment" using primary key columns
+  """
+  recipeEquipmentByPk(id: uuid!): RecipeEquipment
+
+  """
+  fetch data from the table in a streaming manner: "recipe.equipment"
+  """
+  recipeEquipmentStream(
+    """maximum number of rows returned in a single batch"""
+    batchSize: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [recipe_equipment_streamCursorInput]!
+
+    """filter the rows returned"""
+    where: RecipeEquipmentBoolExp
+  ): [RecipeEquipment!]!
 
   """
   fetch data from the table: "recipe.ingredient"
   """
-  recipeIngredientConnection(
-    after: String
-    before: String
-
+  recipeIngredient(
     """distinct select on columns"""
     distinctOn: [RecipeIngredientSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [RecipeIngredientOrderBy!]
 
     """filter the rows returned"""
     where: RecipeIngredientBoolExp
-  ): RecipeIngredientConnection!
+  ): [RecipeIngredient!]!
+
+  """
+  fetch aggregated fields from the table: "recipe.ingredient"
+  """
+  recipeIngredientAggregate(
+    """distinct select on columns"""
+    distinctOn: [RecipeIngredientSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [RecipeIngredientOrderBy!]
+
+    """filter the rows returned"""
+    where: RecipeIngredientBoolExp
+  ): RecipeIngredientAggregate!
+
+  """
+  fetch data from the table: "recipe.ingredient" using primary key columns
+  """
+  recipeIngredientByPk(id: uuid!): RecipeIngredient
+
+  """
+  fetch data from the table in a streaming manner: "recipe.ingredient"
+  """
+  recipeIngredientStream(
+    """maximum number of rows returned in a single batch"""
+    batchSize: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [recipe_ingredient_streamCursorInput]!
+
+    """filter the rows returned"""
+    where: RecipeIngredientBoolExp
+  ): [RecipeIngredient!]!
 
   """
   fetch data from the table: "recipe.list"
   """
-  recipeListConnection(
-    after: String
-    before: String
-
+  recipeList(
     """distinct select on columns"""
     distinctOn: [RecipeListSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [RecipeListOrderBy!]
 
     """filter the rows returned"""
     where: RecipeListBoolExp
-  ): RecipeListConnection!
+  ): [RecipeList!]!
+
+  """
+  fetch aggregated fields from the table: "recipe.list"
+  """
+  recipeListAggregate(
+    """distinct select on columns"""
+    distinctOn: [RecipeListSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [RecipeListOrderBy!]
+
+    """filter the rows returned"""
+    where: RecipeListBoolExp
+  ): RecipeListAggregate!
+
+  """fetch data from the table: "recipe.list" using primary key columns"""
+  recipeListByPk(id: uuid!): RecipeList
 
   """
   fetch data from the table: "recipe.list_item"
   """
-  recipeListItemConnection(
-    after: String
-    before: String
-
+  recipeListItem(
     """distinct select on columns"""
     distinctOn: [RecipeListItemSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [RecipeListItemOrderBy!]
 
     """filter the rows returned"""
     where: RecipeListItemBoolExp
-  ): RecipeListItemConnection!
+  ): [RecipeListItem!]!
+
+  """
+  fetch aggregated fields from the table: "recipe.list_item"
+  """
+  recipeListItemAggregate(
+    """distinct select on columns"""
+    distinctOn: [RecipeListItemSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [RecipeListItemOrderBy!]
+
+    """filter the rows returned"""
+    where: RecipeListItemBoolExp
+  ): RecipeListItemAggregate!
+
+  """
+  fetch data from the table: "recipe.list_item" using primary key columns
+  """
+  recipeListItemByPk(id: uuid!): RecipeListItem
+
+  """
+  fetch data from the table in a streaming manner: "recipe.list_item"
+  """
+  recipeListItemStream(
+    """maximum number of rows returned in a single batch"""
+    batchSize: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [recipe_list_item_streamCursorInput]!
+
+    """filter the rows returned"""
+    where: RecipeListItemBoolExp
+  ): [RecipeListItem!]!
+
+  """
+  fetch data from the table in a streaming manner: "recipe.list"
+  """
+  recipeListStream(
+    """maximum number of rows returned in a single batch"""
+    batchSize: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [recipe_list_streamCursorInput]!
+
+    """filter the rows returned"""
+    where: RecipeListBoolExp
+  ): [RecipeList!]!
 
   """
   fetch data from the table: "recipe.recipe"
   """
-  recipeRecipeConnection(
-    after: String
-    before: String
-
+  recipeRecipe(
     """distinct select on columns"""
     distinctOn: [RecipeRecipeSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [RecipeRecipeOrderBy!]
 
     """filter the rows returned"""
     where: RecipeRecipeBoolExp
-  ): RecipeRecipeConnection!
+  ): [RecipeRecipe!]!
+
+  """
+  fetch aggregated fields from the table: "recipe.recipe"
+  """
+  recipeRecipeAggregate(
+    """distinct select on columns"""
+    distinctOn: [RecipeRecipeSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [RecipeRecipeOrderBy!]
+
+    """filter the rows returned"""
+    where: RecipeRecipeBoolExp
+  ): RecipeRecipeAggregate!
+
+  """fetch data from the table: "recipe.recipe" using primary key columns"""
+  recipeRecipeByPk(id: uuid!): RecipeRecipe
+
+  """
+  fetch data from the table in a streaming manner: "recipe.recipe"
+  """
+  recipeRecipeStream(
+    """maximum number of rows returned in a single batch"""
+    batchSize: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [recipe_recipe_streamCursorInput]!
+
+    """filter the rows returned"""
+    where: RecipeRecipeBoolExp
+  ): [RecipeRecipe!]!
 
   """
   fetch data from the table: "recipe.source_provider"
   """
-  recipeSourceProviderConnection(
-    after: String
-    before: String
-
+  recipeSourceProvider(
     """distinct select on columns"""
     distinctOn: [RecipeSourceProviderSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [RecipeSourceProviderOrderBy!]
 
     """filter the rows returned"""
     where: RecipeSourceProviderBoolExp
-  ): RecipeSourceProviderConnection!
+  ): [RecipeSourceProvider!]!
+
+  """
+  fetch aggregated fields from the table: "recipe.source_provider"
+  """
+  recipeSourceProviderAggregate(
+    """distinct select on columns"""
+    distinctOn: [RecipeSourceProviderSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [RecipeSourceProviderOrderBy!]
+
+    """filter the rows returned"""
+    where: RecipeSourceProviderBoolExp
+  ): RecipeSourceProviderAggregate!
+
+  """
+  fetch data from the table: "recipe.source_provider" using primary key columns
+  """
+  recipeSourceProviderByPk(id: uuid!): RecipeSourceProvider
+
+  """
+  fetch data from the table in a streaming manner: "recipe.source_provider"
+  """
+  recipeSourceProviderStream(
+    """maximum number of rows returned in a single batch"""
+    batchSize: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [recipe_source_provider_streamCursorInput]!
+
+    """filter the rows returned"""
+    where: RecipeSourceProviderBoolExp
+  ): [RecipeSourceProvider!]!
+
+  """
+  fetch data from the table: "recipe.tags"
+  """
+  recipeTags(
+    """distinct select on columns"""
+    distinctOn: [RecipeTagsSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [RecipeTagsOrderBy!]
+
+    """filter the rows returned"""
+    where: RecipeTagsBoolExp
+  ): [RecipeTags!]!
+
+  """
+  fetch aggregated fields from the table: "recipe.tags"
+  """
+  recipeTagsAggregate(
+    """distinct select on columns"""
+    distinctOn: [RecipeTagsSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [RecipeTagsOrderBy!]
+
+    """filter the rows returned"""
+    where: RecipeTagsBoolExp
+  ): RecipeTagsAggregate!
+
+  """fetch data from the table: "recipe.tags" using primary key columns"""
+  recipeTagsByPk(id: uuid!): RecipeTags
+
+  """
+  fetch data from the table in a streaming manner: "recipe.tags"
+  """
+  recipeTagsStream(
+    """maximum number of rows returned in a single batch"""
+    batchSize: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [recipe_tags_streamCursorInput]!
+
+    """filter the rows returned"""
+    where: RecipeTagsBoolExp
+  ): [RecipeTags!]!
 
   """
   fetch data from the table: "recipe.video_timestamp"
   """
-  recipeVideoTimestampConnection(
-    after: String
-    before: String
-
+  recipeVideoTimestamp(
     """distinct select on columns"""
     distinctOn: [RecipeVideoTimestampSelectColumn!]
-    first: Int
-    last: Int
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
 
     """sort the rows by one or more columns"""
     orderBy: [RecipeVideoTimestampOrderBy!]
 
     """filter the rows returned"""
     where: RecipeVideoTimestampBoolExp
-  ): RecipeVideoTimestampConnection!
+  ): [RecipeVideoTimestamp!]!
+
+  """
+  fetch aggregated fields from the table: "recipe.video_timestamp"
+  """
+  recipeVideoTimestampAggregate(
+    """distinct select on columns"""
+    distinctOn: [RecipeVideoTimestampSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [RecipeVideoTimestampOrderBy!]
+
+    """filter the rows returned"""
+    where: RecipeVideoTimestampBoolExp
+  ): RecipeVideoTimestampAggregate!
+
+  """
+  fetch data from the table: "recipe.video_timestamp" using primary key columns
+  """
+  recipeVideoTimestampByPk(id: uuid!): RecipeVideoTimestamp
+
+  """
+  fetch data from the table in a streaming manner: "recipe.video_timestamp"
+  """
+  recipeVideoTimestampStream(
+    """maximum number of rows returned in a single batch"""
+    batchSize: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [recipe_video_timestamp_streamCursorInput]!
+
+    """filter the rows returned"""
+    where: RecipeVideoTimestampBoolExp
+  ): [RecipeVideoTimestamp!]!
 }
 
 scalar timestamp
