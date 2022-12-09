@@ -3,10 +3,11 @@ import React, {useState} from 'react';
 import {JSONSchema7} from 'json-schema';
 import {graphql} from 'relay-runtime';
 import {useMutation} from 'react-relay';
-import {RecipeFormMutation, RecipeRecipeInsertInput} from './__generated__/RecipeFormMutation.graphql';
 import {Spinner} from "baseui/spinner";
-import Form, {IChangeEvent} from "@rjsf/core";
+import {IChangeEvent} from "@rjsf/core";
 import validator from '@rjsf/validator-ajv6';
+import Form from '@rjsf/bootstrap-4';
+import {RecipeFormMutation, RecipeRecipeInsertInput} from "./__generated__/RecipeFormMutation.graphql";
 
 // https://www.npmjs.com/package/json-schema-to-typescript
 const recipeSchema: JSONSchema7 = {

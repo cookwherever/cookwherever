@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<4b37a46baa572aad4d5ba7d3953cf930>>
+ * @generated SignedSource<<f3f3f2d8af38cade1a9d103bbb4136e8>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -590,7 +590,6 @@ export type RecipeTagsOnConflict = {
 };
 export type RecipeFormMutation$variables = {
   object: RecipeRecipeInsertInput;
-  onConflict: RecipeRecipeOnConflict;
 };
 export type RecipeFormMutation$data = {
   readonly insertRecipeRecipeOne: {
@@ -608,11 +607,6 @@ var v0 = [
     "defaultValue": null,
     "kind": "LocalArgument",
     "name": "object"
-  },
-  {
-    "defaultValue": null,
-    "kind": "LocalArgument",
-    "name": "onConflict"
   }
 ],
 v1 = [
@@ -625,9 +619,16 @@ v1 = [
         "variableName": "object"
       },
       {
-        "kind": "Variable",
+        "kind": "Literal",
         "name": "onConflict",
-        "variableName": "onConflict"
+        "value": {
+          "constraint": "recipe_name_source_path_source_provider_id_key",
+          "update_columns": [
+            "name",
+            "sourcePath",
+            "imageUrl"
+          ]
+        }
       }
     ],
     "concreteType": "RecipeRecipe",
@@ -664,16 +665,16 @@ return {
     "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "8d1819bf4c7a4d8929db2863337aa91f",
+    "cacheID": "497d9d204cfd2f0d57db426e20efb631",
     "id": null,
     "metadata": {},
     "name": "RecipeFormMutation",
     "operationKind": "mutation",
-    "text": "mutation RecipeFormMutation(\n  $object: RecipeRecipeInsertInput!\n  $onConflict: RecipeRecipeOnConflict!\n) {\n  insertRecipeRecipeOne(object: $object, onConflict: $onConflict) {\n    id\n  }\n}\n"
+    "text": "mutation RecipeFormMutation(\n  $object: RecipeRecipeInsertInput!\n) {\n  insertRecipeRecipeOne(object: $object, onConflict: {constraint: recipe_name_source_path_source_provider_id_key, update_columns: [name, sourcePath, imageUrl]}) {\n    id\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "c1cbe0cc41e3dac7d8f767b9f9affb55";
+(node as any).hash = "d20fabb62ab779571c9332aa4f6d0fe8";
 
 export default node;
