@@ -1,7 +1,7 @@
+import json
 import os
 
 import requests
-import json
 
 insert_recipes_one = """
 mutation CreateRecipe(
@@ -31,9 +31,17 @@ mutation UpsertProviders($sources: [recipe_source_providers_insert_input!]!) {
 
 
 def execute_create_recipes(recipes):
-    return execute_graphql_query(insert_recipes_one, {
-        "recipes": recipes
-    })
+    body = recipes
+    headers = {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsYmx0aHcyZjAwMDBnaXIyMHY4cjhpN2kiLCJpYXQiOjE2NzA5MTE2NjN9.GpkYa6zYWhvSvTA4YFabRsemaKayr-FO_sXgMtHZFlo",
+        "content-type": "application/json"
+    }
+
+    resp = requests.post('http://localhost:3001/operations/create-recipe', headers=headers, data=json.dumps(body))
+    if resp.status_code != 200:
+        print(resp.status_code)
+        print(resp.text)
+        return None
 
 
 def upsert_providers(providers):
