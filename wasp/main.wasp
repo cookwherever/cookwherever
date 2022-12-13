@@ -1,0 +1,122 @@
+app cookwherever {
+  wasp: {
+    version: "^0.7.2"
+  },
+  title: "cookwherever",
+
+  auth: {
+    // Expects entity User to have (username:String) and (password:String) fields.
+    userEntity: User,
+    methods: {
+      // We also support Google, with more on the way!
+      usernameAndPassword: {}
+    },
+    // We'll see how this is used a bit later
+    onAuthFailedRedirectTo: "/login"
+  },
+
+  dependencies: [
+    ("baseui", "12.2.0"),
+    ("styletron-engine-atomic", "1.5.0"),
+    ("styletron-react", "6.1.0"),
+  ],
+
+  db: {
+    system: PostgreSQL
+  }
+}
+
+entity Recipe {=psl
+  id                 String             @id @unique @default(cuid())
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime?          @default(now()) @updatedAt
+  creator            User               @relation(fields: [userId], references: [id])
+  name               String
+  source             Source             @relation(fields: [sourceId], references: [id])
+  sourcePath         String
+  imageUrl           String?
+  videoUrl           String?
+  recipeDirections   RecipeDirection[]
+  recipeIngredients  RecipeIngredient[]
+  userId             String
+  sourceId           String
+  @@unique([name, sourceId])
+psl=}
+
+entity User {=psl
+  id       String   @id @unique @default(cuid())
+  username String  @unique
+  password String
+  Recipe   Recipe[]
+psl=}
+
+entity Source {=psl
+  id     String   @id @unique @default(cuid())
+  name   String   @unique
+  url    String?
+  Recipe Recipe[]
+psl=}
+
+entity RecipeIngredient {=psl
+  id       String  @id @unique @default(cuid())
+  sequence Int
+  text     String
+  Recipe   Recipe? @relation(fields: [recipeId], references: [id])
+  recipeId String?
+  @@unique([recipeId, sequence])
+psl=}
+
+entity RecipeDirection {=psl
+  id       String  @id @unique @default(cuid())
+  sequence Int
+  text     String
+  Recipe   Recipe? @relation(fields: [recipeId], references: [id])
+  recipeId String?
+  @@unique([recipeId, sequence])
+psl=}
+
+query listRecipes {
+    fn: import { listRecipes } from "@server/queries.js",
+    entities: [Recipe]
+}
+
+query viewRecipe {
+    fn: import { viewRecipe } from "@server/queries.js",
+    entities: [Recipe]
+}
+
+action createRecipe {
+    fn: import { createRecipe } from "@server/actions.js",
+    entities: [Recipe]
+}
+
+action updateRecipe {
+    fn: import { updateRecipe } from "@server/actions.js",
+    entities: [Recipe]
+}
+
+route RootRoute { path: "/", to: MainPage }
+page MainPage {
+  authRequired: true,
+  component: import Main from "@client/MainPage"
+}
+
+route SaveRecipeRoute { path: "/recipe/save", to: SaveRecipePage }
+page SaveRecipePage {
+  component: import SaveRecipePage from "@client/recipe/SaveRecipe"
+}
+
+route ViewRecipeRoute { path: "/recipe/view/:id", to: ViewRecipePage }
+page ViewRecipePage {
+  component: import ViewRecipePage from "@client/recipe/ViewRecipePage"
+}
+
+route SignupRoute { path: "/signup", to: SignupPage }
+page SignupPage {
+  component: import Signup from "@client/auth/SignupPage"
+}
+
+route LoginRoute { path: "/login", to: LoginPage }
+page LoginPage {
+  component: import Login from "@client/auth/LoginPage"
+}

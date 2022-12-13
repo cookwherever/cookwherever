@@ -1,23 +1,20 @@
 import bisect
+import concurrent.futures
 import json
-import time
-import traceback
-
-from warcio.capture_http import capture_http
-
 import os
 import sys
-import requests  # requests must be imported after capture_http
-import concurrent.futures
-from warcio.archiveiterator import ArchiveIterator
-
-from recipe.constants import providers
-from graphql import execute_create_recipes, upsert_providers
-from recipe.ingredients import save_parsed_ingredients, load_parsed_ingredients
-from util import debug, slugify
+import traceback
 from urllib.parse import urlparse
 
+import requests  # requests must be imported after capture_http
+from warcio.archiveiterator import ArchiveIterator
+from warcio.capture_http import capture_http
+
+from graphql import upsert_providers, execute_create_recipes
+from recipe.constants import providers
+from recipe.ingredients import save_parsed_ingredients, load_parsed_ingredients
 from recipe.providers import recipe_providers
+from util import debug, slugify
 
 
 def ensure_dir(d):
@@ -252,11 +249,43 @@ def format_recipe(recipe_file, recipe):
         "extraction_metadata": recipe.get("extraction_metadata")
     }
 
+def format_recipe_for_wasp(recipe_file, recipe):
+    try:
+        parsed_source = urlparse(recipe.get('source'))
+        source_name = parsed_source.hostname.split('.')[-2]
+    except Exception as e:
+        source_name = recipe.get('source')
+
+    directions = recipe.get('recipe_directions')
+    ingredient_groups = recipe.get('recipe_ingredient_groups')
+
+    if directions is None:
+        raise Exception(f'directions do not exist on {recipe_file}')
+
+    formatted_directions = [
+        {"text": step}
+        for i, step in enumerate(directions)
+    ]
+
+    formatted_ingredients = []
+    for ingredient_group in ingredient_groups:
+        for ingredient in ingredient_group.get('ingredients'):
+            formatted_ingredients.append(ingredient)
+
+    return {
+        "name": recipe.get("name"),
+        "source": recipe.get("source"),
+        "sourcePath": '',
+        "imageUrl": recipe.get("image"),
+        "directions": formatted_directions,
+        "ingredients": formatted_ingredients
+    }
+
 
 def process_recipe_file(recipe_file):
     recipe = json.load(open(recipe_file))
 
-    return format_recipe(recipe_file, recipe)
+    return format_recipe_for_wasp(recipe_file, recipe)
 
 
 def upsert_processed_recipes(provider, recipe_id):
@@ -266,28 +295,11 @@ def upsert_processed_recipes(provider, recipe_id):
     if recipe_id is not None:
         recipe_files = [f'{recipe_id}.json']
 
-    recipes_to_save = []
-
     for n, recipe_file in enumerate(recipe_files):
         print(f"processing {recipe_file}")
         recipe = process_recipe_file(os.path.join(recipe_folder, recipe_file))
 
-        recipes_to_save.append(recipe)
-
-        if n % 30 == 0:
-            ids = None
-            while True:
-                ids = execute_create_recipes(recipes_to_save)
-                if ids is not None:
-                    break
-                time.sleep(5)
-
-            print(f"inserted recipes: {ids}")
-            recipes_to_save = []
-
-    if len(recipes_to_save) > 0:
-        ids = execute_create_recipes(recipes_to_save)
-        print(f"inserted recipes: {ids}")
+        ids = execute_create_recipes(recipe)
 
 
 def verify_recipe_file(recipe_file):

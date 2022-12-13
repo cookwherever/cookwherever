@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+service IngredientParser {
+  rpc Parse(ParseRequest) returns (ParseResponse) {}
+}
+
+message ParseRequest {
+  string text = 1;
+}
+
+message ParseResponse {
+  string name = 1;
+  string amount = 2;
+}
