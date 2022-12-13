@@ -1,0 +1,16 @@
+table:
+  name: ingredient
+  schema: recipe
+object_relationships:
+  - name: ingredient
+    using:
+      foreign_key_constraint_on: ingredient_id
+  - name: recipe
+    using:
+      foreign_key_constraint_on: recipe_id
+  - name: unit
+    using:
+      foreign_key_constraint_on: unit_id
+  - name: video_timestamp
+    using:
+      foreign_key_constraint_on: video_timestamp_id

@@ -1,0 +1,11 @@
+table:
+  name: list
+  schema: recipe
+array_relationships:
+  - name: list_items
+    using:
+      foreign_key_constraint_on:
+        column: list_id
+        table:
+          name: list_item
+          schema: recipe

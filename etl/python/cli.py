@@ -1,23 +1,21 @@
 import bisect
+import concurrent.futures
 import json
-import time
-import traceback
-
-from warcio.capture_http import capture_http
-
 import os
 import sys
-import requests  # requests must be imported after capture_http
-import concurrent.futures
-from warcio.archiveiterator import ArchiveIterator
-
-from recipe.constants import providers
-from graphql import execute_create_recipes, upsert_providers
-from recipe.ingredients import save_parsed_ingredients, load_parsed_ingredients
-from util import debug, slugify
+import time
+import traceback
 from urllib.parse import urlparse
 
+import requests  # requests must be imported after capture_http
+from warcio.archiveiterator import ArchiveIterator
+from warcio.capture_http import capture_http
+
+from graphql import execute_create_recipes, upsert_providers
+from recipe.constants import providers
+from recipe.ingredients import save_parsed_ingredients, load_parsed_ingredients
 from recipe.providers import recipe_providers
+from util import debug, slugify
 
 
 def ensure_dir(d):
@@ -225,9 +223,8 @@ def format_recipe(recipe_file, recipe):
     return {
         "name": recipe.get("name"),
         "source": recipe.get("source"),
-        "image": recipe.get("image"),
-        "slug": recipe_slug,
-        "video": recipe.get("video"),
+        "image_url": recipe.get("image"),
+        "video_url": recipe.get("video"),
         "recipe_directions": {
             "data": formatted_directions,
             "on_conflict": {

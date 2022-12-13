@@ -1,0 +1,7 @@
+table:
+  name: config
+  schema: equipment
+object_relationships:
+  - name: equipment
+    using:
+      foreign_key_constraint_on: equipment_id

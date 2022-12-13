@@ -1,778 +1,196 @@
 - table:
-    name: food
-    schema: public
+    name: config
+    schema: equipment
   object_relationships:
-    - name: food_category
+    - name: equipment
       using:
-        manual_configuration:
-          column_mapping:
-            food_category_id: id
-          insertion_order: null
-          remote_table:
-            name: food_category
-            schema: public
+        foreign_key_constraint_on: equipment_id
+- table:
+    name: equipment
+    schema: equipment
   array_relationships:
-    - name: food_attributes
+    - name: configs
       using:
         foreign_key_constraint_on:
-          column: fdc_id
+          column: equipment_id
           table:
-            name: food_attribute
-            schema: public
-    - name: food_nutrients
-      using:
-        manual_configuration:
-          column_mapping:
-            fdc_id: fdc_id
-          insertion_order: null
-          remote_table:
-            name: food_nutrient
-            schema: public
-    - name: food_portions
+            name: config
+            schema: equipment
+    - name: equipment
       using:
         foreign_key_constraint_on:
-          column: fdc_id
+          column: equipment_id
           table:
-            name: food_portion
-            schema: public
-  select_permissions:
-    - role: anonymous
-      permission:
-        columns:
-          - fdc_id
-          - food_category_id
-          - description
-          - publication_date
-          - description_tsv
-          - data_type
-        filter: {}
-    - role: user
-      permission:
-        columns:
-          - fdc_id
-          - data_type
-          - description
-          - food_category_id
-          - publication_date
-          - description_tsv
-        filter: {}
+            name: equipment
+            schema: recipe
 - table:
-    name: food_attribute
-    schema: public
+    name: food
+    schema: food
+- table:
+    name: food_measurement
+    schema: food
+- table:
+    name: measurement
+    schema: food
+- table:
+    name: unit
+    schema: food
+- table:
+    name: ingredient
+    schema: ingredient
+- table:
+    name: name
+    schema: ingredient
+- table:
+    name: direction
+    schema: recipe
   object_relationships:
-    - name: food_attribute_type
+    - name: recipe
       using:
-        foreign_key_constraint_on: food_attribute_type_id
+        foreign_key_constraint_on: recipe_id
+    - name: video_timestamp
+      using:
+        foreign_key_constraint_on: video_timestamp_id
+  array_relationships:
+    - name: equipment
+      using:
+        foreign_key_constraint_on:
+          column: direction_id
+          table:
+            name: direction_equipment
+            schema: recipe
+    - name: ingredients
+      using:
+        foreign_key_constraint_on:
+          column: direction_id
+          table:
+            name: direction_ingredient
+            schema: recipe
 - table:
-    name: food_attribute_type
-    schema: public
-- table:
-    name: food_category
-    schema: public
-- table:
-    name: food_nutrient
-    schema: public
+    name: direction_equipment
+    schema: recipe
   object_relationships:
-    - name: nutrient
+    - name: direction
       using:
-        manual_configuration:
-          column_mapping:
-            nutrient_id: id
-          insertion_order: null
-          remote_table:
-            name: nutrient
-            schema: public
+        foreign_key_constraint_on: direction_id
+    - name: equipment
+      using:
+        foreign_key_constraint_on: equipment_id
 - table:
-    name: food_portion
-    schema: public
+    name: direction_ingredient
+    schema: recipe
   object_relationships:
-    - name: measure_unit
+    - name: direction
       using:
-        foreign_key_constraint_on: measure_unit_id
-  select_permissions:
-    - role: anonymous
-      permission:
-        columns:
-          - id
-          - fdc_id
-          - seq_num
-          - amount
-          - measure_unit_id
-          - portion_description
-          - modifier
-          - gram_weight
-          - data_points
-          - footnote
-          - min_year_acquired
-        filter: {}
-    - role: user
-      permission:
-        columns:
-          - id
-          - fdc_id
-          - seq_num
-          - amount
-          - measure_unit_id
-          - portion_description
-          - modifier
-          - gram_weight
-          - data_points
-          - footnote
-          - min_year_acquired
-        filter: {}
-- table:
-    name: ingredient_food_candidate
-    schema: public
-  object_relationships:
-    - name: food
-      using:
-        foreign_key_constraint_on: food_candidate_id
-    - name: food_portion
-      using:
-        manual_configuration:
-          column_mapping:
-            food_candidate_id: fdc_id
-            food_candidate_portion_id: id
-          insertion_order: null
-          remote_table:
-            name: food_portion
-            schema: public
-  insert_permissions:
-    - role: user
-      permission:
-        check: {}
-        columns:
-          - food_candidate_id
-          - food_candidate_portion_id
-          - id
-  select_permissions:
-    - role: anonymous
-      permission:
-        columns:
-          - food_candidate_id
-          - food_candidate_portion_id
-          - id
-        filter: {}
-    - role: user
-      permission:
-        columns:
-          - food_candidate_id
-          - food_candidate_portion_id
-          - id
-        filter: {}
-  update_permissions:
-    - role: user
-      permission:
-        columns:
-          - food_candidate_id
-          - id
-          - food_candidate_portion_id
-        filter: {}
-        check: {}
-- table:
-    name: ingredient_names
-    schema: public
-  object_relationships:
+        foreign_key_constraint_on: direction_id
     - name: ingredient
       using:
         foreign_key_constraint_on: ingredient_id
 - table:
-    name: ingredients
-    schema: public
+    name: equipment
+    schema: recipe
   object_relationships:
-    - name: ingredient_food_candidate
+    - name: equipment
       using:
-        foreign_key_constraint_on: food_candidate_id
-  array_relationships:
-    - name: ingredient_names
+        foreign_key_constraint_on: equipment_id
+    - name: recipe
       using:
-        foreign_key_constraint_on:
-          column: ingredient_id
-          table:
-            name: ingredient_names
-            schema: public
-  insert_permissions:
-    - role: user
-      permission:
-        check: {}
-        columns:
-          - food_candidate_id
-          - id
-          - name
-          - wiki_url
-  select_permissions:
-    - role: anonymous
-      permission:
-        columns:
-          - food_candidate_id
-          - id
-          - name
-          - wiki_url
-        filter: {}
-    - role: user
-      permission:
-        columns:
-          - food_candidate_id
-          - id
-          - name
-          - wiki_url
-        filter: {}
-  update_permissions:
-    - role: user
-      permission:
-        columns:
-          - food_candidate_id
-          - id
-          - name
-          - wiki_url
-        filter: {}
-        check: {}
+        foreign_key_constraint_on: recipe_id
 - table:
-    name: measure_unit
-    schema: public
-  select_permissions:
-    - role: anonymous
-      permission:
-        columns:
-          - name
-          - ml
-          - id
-        filter: {}
-    - role: user
-      permission:
-        columns:
-          - id
-          - name
-          - ml
-        filter: {}
-- table:
-    name: most_common_ingredients
-    schema: public
+    name: ingredient
+    schema: recipe
   object_relationships:
     - name: ingredient
       using:
-        manual_configuration:
-          column_mapping:
-            id: id
-          insertion_order: null
-          remote_table:
-            name: ingredients
-            schema: public
-  select_permissions:
-    - role: anonymous
-      permission:
-        columns:
-          - ingredient_count
-          - name
-          - id
-        filter: {}
-        allow_aggregations: true
-    - role: user
-      permission:
-        columns:
-          - name
-          - ingredient_count
-          - id
-        filter: {}
-        allow_aggregations: true
-- table:
-    name: nutrient
-    schema: public
-- table:
-    name: recipe_direction_actions
-    schema: public
-  select_permissions:
-    - role: user
-      permission:
-        columns:
-          - id
-          - action
-          - name
-          - quantity
-          - unit
-          - duration
-          - direction_id
-        filter: {}
-- table:
-    name: recipe_direction_durations
-    schema: public
-  select_permissions:
-    - role: user
-      permission:
-        columns:
-          - id
-          - type
-          - duration
-          - unit_of_time
-          - seq_num
-          - recipe_id
-        filter: {}
-- table:
-    name: recipe_directions
-    schema: public
-  insert_permissions:
-    - role: user
-      permission:
-        check: {}
-        columns:
-          - id
-          - seq_num
-          - step
-          - recipe_id
-  select_permissions:
-    - role: anonymous
-      permission:
-        columns:
-          - id
-          - recipe_id
-          - seq_num
-          - video_timestamp
-          - video_timestamp_end
-          - step
-        filter: {}
-    - role: user
-      permission:
-        columns:
-          - id
-          - recipe_id
-          - seq_num
-          - step
-          - video_timestamp
-          - video_timestamp_end
-        filter: {}
-  update_permissions:
-    - role: user
-      permission:
-        columns:
-          - id
-          - seq_num
-          - step
-          - recipe_id
-          - video_timestamp
-          - video_timestamp_end
-        filter: {}
-        check: null
-- table:
-    name: recipe_favorite
-    schema: public
-  object_relationships:
+        foreign_key_constraint_on: ingredient_id
     - name: recipe
       using:
         foreign_key_constraint_on: recipe_id
-  insert_permissions:
-    - role: user
-      permission:
-        check:
-          user_id:
-            _eq: X-Hasura-User-Id
-        columns: []
-  select_permissions:
-    - role: user
-      permission:
-        columns:
-          - id
-          - recipe_id
-          - user_id
-        filter:
-          user_id:
-            _eq: X-Hasura-User-Id
-  delete_permissions:
-    - role: user
-      permission:
-        backend_only: false
-        filter:
-          user_id:
-            _eq: X-Hasura-User-Id
-- table:
-    name: recipe_ingredient_groups
-    schema: public
-  object_relationships:
-    - name: recipe
+    - name: unit
       using:
-        foreign_key_constraint_on: recipe_id
+        foreign_key_constraint_on: unit_id
+    - name: video_timestamp
+      using:
+        foreign_key_constraint_on: video_timestamp_id
+- table:
+    name: list
+    schema: recipe
   array_relationships:
-    - name: group_ingredients
+    - name: list_items
       using:
         foreign_key_constraint_on:
-          column: group_id
+          column: list_id
           table:
-            name: recipe_ingredients
-            schema: public
-  insert_permissions:
-    - role: user
-      permission:
-        check: {}
-        columns:
-          - id
-          - name
-          - recipe_id
-          - seq_num
-  select_permissions:
-    - role: anonymous
-      permission:
-        columns:
-          - id
-          - recipe_id
-          - seq_num
-          - name
-        filter: {}
-    - role: user
-      permission:
-        columns:
-          - id
-          - name
-          - recipe_id
-          - seq_num
-        filter: {}
-  update_permissions:
-    - role: user
-      permission:
-        columns:
-          - id
-          - name
-          - recipe_id
-          - seq_num
-        filter: {}
-        check: null
+            name: list_item
+            schema: recipe
 - table:
-    name: recipe_ingredients
-    schema: public
+    name: list_item
+    schema: recipe
   object_relationships:
-    - name: ingredient
+    - name: list
       using:
-        manual_configuration:
-          column_mapping:
-            name: name
-          insertion_order: null
-          remote_table:
-            name: ingredients
-            schema: public
-    - name: recipe_ingredient_group
-      using:
-        foreign_key_constraint_on: group_id
-  computed_fields:
-    - name: recipe_ingredient_food_candidates
-      definition:
-        function:
-          name: ingredient_for_recipe_ingredient
-          schema: public
-        table_argument: search
-  insert_permissions:
-    - role: user
-      permission:
-        check: {}
-        columns:
-          - amount
-          - comment
-          - group_id
-          - id
-          - name
-          - seq_num
-          - text
-          - units
-          - video_timestamp
-          - video_timestamp_end
-  select_permissions:
-    - role: anonymous
-      permission:
-        columns:
-          - amount
-          - comment
-          - group_id
-          - id
-          - name
-          - seq_num
-          - text
-          - units
-          - video_timestamp
-          - video_timestamp_end
-        filter: {}
-    - role: user
-      permission:
-        columns:
-          - amount
-          - comment
-          - group_id
-          - id
-          - name
-          - seq_num
-          - text
-          - units
-          - video_timestamp
-          - video_timestamp_end
-        filter: {}
-  update_permissions:
-    - role: user
-      permission:
-        columns:
-          - id
-          - name
-          - amount
-          - units
-          - comment
-          - text
-          - seq_num
-          - group_id
-          - video_timestamp
-          - video_timestamp_end
-        filter: {}
-        check: {}
-- table:
-    name: recipe_list_items
-    schema: public
-  object_relationships:
+        foreign_key_constraint_on: list_id
     - name: recipe
       using:
         foreign_key_constraint_on: recipe_id
-    - name: recipe_list
-      using:
-        foreign_key_constraint_on: recipe_list_id
-  insert_permissions:
-    - role: user
-      permission:
-        check:
-          recipe_list:
-            user_id:
-              _eq: X-Hasura-User-Id
-        columns:
-          - id
-          - seq_num
-          - recipe_list_id
-          - recipe_id
-  select_permissions:
-    - role: user
-      permission:
-        columns:
-          - id
-          - seq_num
-          - recipe_list_id
-          - recipe_id
-        filter:
-          recipe_list:
-            user_id:
-              _eq: X-Hasura-User-Id
-  update_permissions:
-    - role: user
-      permission:
-        columns:
-          - id
-          - recipe_id
-          - recipe_list_id
-          - seq_num
-        filter:
-          recipe_list:
-            user_id:
-              _eq: X-Hasura-User-Id
-        check: null
 - table:
-    name: recipe_lists
-    schema: public
-  array_relationships:
-    - name: recipe_list_items
-      using:
-        foreign_key_constraint_on:
-          column: recipe_list_id
-          table:
-            name: recipe_list_items
-            schema: public
-  insert_permissions:
-    - role: user
-      permission:
-        check: {}
-        set:
-          user_id: x-hasura-User-Id
-        columns:
-          - name
-          - user_id
-  select_permissions:
-    - role: user
-      permission:
-        columns:
-          - id
-          - name
-          - user_id
-        filter:
-          user_id:
-            _eq: X-Hasura-User-Id
-  delete_permissions:
-    - role: user
-      permission:
-        backend_only: false
-        filter:
-          user_id:
-            _eq: X-Hasura-User-Id
-- table:
-    name: recipe_source_providers
-    schema: public
-  select_permissions:
-    - role: anonymous
-      permission:
-        columns:
-          - description
-          - name
-          - url
-          - id
-        filter: {}
-    - role: user
-      permission:
-        columns:
-          - description
-          - name
-          - url
-          - id
-        filter: {}
-- table:
-    name: recipe_tags
-    schema: public
-  insert_permissions:
-    - role: user
-      permission:
-        check: {}
-        columns:
-          - id
-          - name
-          - recipe_id
-          - seq_num
-  select_permissions:
-    - role: anonymous
-      permission:
-        columns:
-          - id
-          - recipe_id
-          - seq_num
-          - name
-        filter: {}
-    - role: user
-      permission:
-        columns:
-          - id
-          - name
-          - recipe_id
-          - seq_num
-        filter: {}
-  update_permissions:
-    - role: user
-      permission:
-        columns:
-          - id
-          - name
-          - recipe_id
-          - seq_num
-        filter: {}
-        check: null
-- table:
-    name: recipes
-    schema: public
+    name: recipe
+    schema: recipe
   object_relationships:
-    - name: recipe_source_provider
+    - name: parent
+      using:
+        foreign_key_constraint_on: parent_id
+    - name: source_provider
       using:
         foreign_key_constraint_on: source_provider_id
   array_relationships:
-    - name: recipe_direction_durations
+    - name: directions
       using:
         foreign_key_constraint_on:
           column: recipe_id
           table:
-            name: recipe_direction_durations
-            schema: public
-    - name: recipe_directions
+            name: direction
+            schema: recipe
+    - name: equipment
       using:
         foreign_key_constraint_on:
           column: recipe_id
           table:
-            name: recipe_directions
-            schema: public
-    - name: recipe_ingredient_groups
+            name: equipment
+            schema: recipe
+    - name: ingredients
       using:
         foreign_key_constraint_on:
           column: recipe_id
           table:
-            name: recipe_ingredient_groups
-            schema: public
-    - name: recipe_tags
-      using:
-        foreign_key_constraint_on:
-          column: recipe_id
-          table:
-            name: recipe_tags
-            schema: public
-  insert_permissions:
-    - role: user
-      permission:
-        check: {}
-        columns:
-          - id
-          - created_at
-          - updated_at
-          - name
-          - source
-          - image
-          - extraction_metadata
-  select_permissions:
-    - role: anonymous
-      permission:
-        columns:
-          - created_at
-          - extraction_metadata
-          - id
-          - image
-          - name
-          - slug
-          - source
-          - source_provider_id
-          - updated_at
-          - video
-          - visible
-        filter: {}
-        allow_aggregations: true
-    - role: user
-      permission:
-        columns:
-          - created_at
-          - extraction_metadata
-          - id
-          - image
-          - name
-          - slug
-          - source
-          - source_provider_id
-          - updated_at
-          - video
-          - visible
-        filter: {}
-        allow_aggregations: true
-  update_permissions:
-    - role: user
-      permission:
-        columns:
-          - created_at
-          - extraction_metadata
-          - id
-          - image
-          - name
-          - source
-          - updated_at
-          - video
-          - visible
-        filter: {}
-        check: null
+            name: ingredient
+            schema: ingredient
 - table:
-    name: user_config
-    schema: public
-  insert_permissions:
-    - role: user
-      permission:
-        check: {}
-        set:
-          user_id: x-hasura-User-Id
-        columns:
-          - printer_url
-  select_permissions:
-    - role: user
-      permission:
-        columns:
-          - printer_url
-          - user_id
-        filter:
-          user_id:
-            _eq: X-Hasura-User-Id
+    name: source_provider
+    schema: recipe
+  array_relationships:
+    - name: recipes
+      using:
+        foreign_key_constraint_on:
+          column: source_provider_id
+          table:
+            name: recipe
+            schema: recipe
+- table:
+    name: video_timestamp
+    schema: recipe
+  array_relationships:
+    - name: directions
+      using:
+        foreign_key_constraint_on:
+          column: video_timestamp_id
+          table:
+            name: direction
+            schema: recipe
+    - name: ingredients
+      using:
+        foreign_key_constraint_on:
+          column: video_timestamp_id
+          table:
+            name: ingredient
+            schema: recipe

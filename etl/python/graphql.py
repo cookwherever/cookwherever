@@ -1,22 +1,15 @@
+import json
 import os
 
 import requests
-import json
 
 insert_recipes_one = """
-mutation CreateRecipe(
-  $recipes: [recipes_insert_input!]!
-) {
-  insert_recipes(
-    objects: $recipes
-    on_conflict: {
-        constraint: recipes_source_key,
-        update_columns: [name, image, extraction_metadata, updated_at, slug],
-    }
-  ) {
-    returning {
-        id
-    }
+mutation CreateRecipe($recipes: [RecipeRecipeInsertInput!]!) {
+  insertRecipeRecipe(object: $object, onConflict: {
+    constraint: recipe_name_source_path_source_provider_id_key,
+    update_columns: [name, image, extractionMetadata, updatedAt, sourcePath, imageUrl],
+  }) {
+    id
   }
 }
 """
@@ -51,7 +44,7 @@ def execute_graphql_query(query, variables):
     graphql_url_env = os.environ.get('GRAPHQL_URL')
     graphql_url = graphql_url_env if graphql_url_env is not None else "http://localhost:8080/v1/graphql"
     graphql_secret_env = os.environ.get('GRAPHQL_SECRET')
-    graphql_secret = graphql_secret_env if graphql_secret_env is not None else "ilikefood123"
+    graphql_secret = graphql_secret_env if graphql_secret_env is not None else "password"
 
     headers = {
         "x-hasura-admin-secret": graphql_secret,
