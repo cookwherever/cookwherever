@@ -1,0 +1,46 @@
+model Recipe {
+  id                 String             @id @unique @default(cuid())
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime?          @default(now()) @updatedAt
+  creator            User               @relation(fields: [userId], references: [id])
+  name               String
+  source             Source             @relation(fields: [sourceId], references: [id])
+  sourcePath         String
+  imageUrl           String?
+  videoUrl           String?
+  extractionMetadata Json?
+  recipeDirections   RecipeDirection[]
+  recipeIngredients  RecipeIngredient[]
+  userId             String
+  sourceId           String
+}
+
+model User {
+  id       String   @id @unique @default(cuid())
+  username String?  @unique
+  password String?
+  Recipe   Recipe[]
+}
+
+model Source {
+  id     String   @id @unique @default(cuid())
+  name   String   @unique
+  url    String?
+  Recipe Recipe[]
+}
+
+model RecipeIngredient {
+  id       String  @id @unique @default(cuid())
+  sequence Int
+  text     String
+  Recipe   Recipe? @relation(fields: [recipeId], references: [id])
+  recipeId String?
+}
+
+model RecipeDirection {
+  id       String  @id @unique @default(cuid())
+  sequence Int
+  text     String
+  Recipe   Recipe? @relation(fields: [recipeId], references: [id])
+  recipeId String?
+}
