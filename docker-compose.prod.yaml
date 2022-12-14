@@ -23,7 +23,7 @@ services:
       - .env
       - .env.prod
   graphql-engine:
-    image: hasura/graphql-engine:v2.9.0
+    image: hasura/graphql-engine:v2.16.1
     # image: ghcr.io/cookwherever/hasura:latest
     env_file:
       - .env
