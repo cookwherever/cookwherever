@@ -79,8 +79,8 @@ jobs:
           BACKEND_IMAGE_ID=ghcr.io/cookwherever/backend
           
           # Change all uppercase to lowercase
-          FRONTEND_IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-          BACKEND_IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+          FRONTEND_IMAGE_ID=$(echo $FRONTEND_IMAGE_ID | tr '[A-Z]' '[a-z]')
+          BACKEND_IMAGE_ID=$(echo $BACKEND_IMAGE_ID | tr '[A-Z]' '[a-z]')
           
           # Strip git ref prefix from version
           VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
