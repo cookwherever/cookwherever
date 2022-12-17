@@ -16,7 +16,7 @@ spec:
   tls: # < placing a host in the TLS config will indicate a certificate should be created
     - hosts:
       - cookwherever.com
-      - recipes.cookwherever.com
+      - api.cookwherever.com
       secretName: cookwherever-tls-secret
   rules:
     - host: cookwherever.com
@@ -24,19 +24,19 @@ spec:
         paths:
           - backend:
               service:
-                name: wiki
+                name: frontend
                 port:
                   number: 80
             path: /
             pathType: Prefix
-    - host: recipes.cookwherever.com
+    - host: api.cookwherever.com
       http:
         paths:
           - backend:
               service:
-                name: oathkeeper
+                name: backend
                 port:
-                  number: 4455
+                  number: 3001
             path: /
             pathType: Prefix
 status:

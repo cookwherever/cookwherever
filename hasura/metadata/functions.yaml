@@ -1,6 +1,0 @@
-- function:
-    name: search_foods
-    schema: public
-- function:
-    name: search_recipes
-    schema: public
