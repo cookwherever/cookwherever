@@ -9,14 +9,3 @@ services:
       - '5432:5432'
     environment:
       POSTGRES_PASSWORD: password
-  graphql-engine:
-    env_file:
-      - .env
-      - .env.dev
-  kratos:
-    env_file:
-      - .env.dev.secrets
-  oathkeeper:
-    env_file:
-      - .env
-      - .env.dev

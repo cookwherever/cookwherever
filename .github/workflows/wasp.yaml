@@ -100,15 +100,15 @@ jobs:
           docker push $FRONTEND_IMAGE_ID:$VERSION
           docker push $BACKEND_IMAGE_ID:$VERSION
           
-          yq -i e ".services.frontend.image |= \"$(docker inspect --format='{{index .RepoDigests 0}}' $FRONTEND_IMAGE_ID:$VERSION)\"" docker-compose.wasp.yaml
-          yq -i e ".services.backend.image |= \"$(docker inspect --format='{{index .RepoDigests 0}}' $BACKEND_IMAGE_ID:$VERSION)\"" docker-compose.wasp.yaml
+          yq -i e ".services.frontend.image |= \"$(docker inspect --format='{{index .RepoDigests 0}}' $FRONTEND_IMAGE_ID:$VERSION)\"" docker-compose.prod.yaml
+          yq -i e ".services.backend.image |= \"$(docker inspect --format='{{index .RepoDigests 0}}' $BACKEND_IMAGE_ID:$VERSION)\"" docker-compose.prod.yaml
 
       - name: Create commit
         id: create-commit
         if: steps.branch-name.outputs.current_branch == 'master'
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          file_pattern: docker-compose.wasp.yaml
+          file_pattern: docker-compose.prod.yaml
           commit_message: "chore: update container hash [skip ci]"
 
       - run: sleep 10

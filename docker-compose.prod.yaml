@@ -1,8 +1,20 @@
 version: '3.6'
 services:
   frontend:
-    image: ghcr.io/cookwherever/frontend@sha256:a7bfc0a98b36222292d579eac94106ae9c4da56ebbacc32c30ee827d6e96a9c4
+    image: ghcr.io/cookwherever/wiki@sha256:c161954d8912b232a2b0fa89a0624ab1a272f45e6efd10f2dc679749ce614859
     restart: always
+    ports:
+      - '80:80'
+    labels:
+      kompose.image-pull-secret: "ghcr-pull-secret"
+  backend:
+    image: ghcr.io/cookwherever/wiki@sha256:c161954d8912b232a2b0fa89a0624ab1a272f45e6efd10f2dc679749ce614859
+    restart: always
+    environment:
+      PORT: 80
+      WASP_WEB_CLIENT_URL: https://cookwherever.com
+    env_file:
+      - .env.prod.secrets
     ports:
       - '80:80'
     labels:
@@ -14,17 +26,3 @@ services:
       - '80:80'
     labels:
       kompose.image-pull-secret: "ghcr-pull-secret"
-  kratos:
-    command: serve -c /config/kratos/config.yaml -c /config/kratos/config.production.yaml
-    env_file:
-      - .env.prod.secrets
-  oathkeeper:
-    env_file:
-      - .env
-      - .env.prod
-  graphql-engine:
-    image: hasura/graphql-engine:v2.9.0
-    # image: ghcr.io/cookwherever/hasura:latest
-    env_file:
-      - .env
-      - .env.prod.secrets
