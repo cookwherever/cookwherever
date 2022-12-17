@@ -36,7 +36,7 @@ spec:
               service:
                 name: backend
                 port:
-                  number: 3001
+                  number: 80
             path: /
             pathType: Prefix
 status:
