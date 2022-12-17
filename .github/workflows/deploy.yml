@@ -27,12 +27,8 @@ jobs:
         with:
           path: .env.prod.secrets
           contents: |
-            POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
-            HASURA_GRAPHQL_DATABASE_URL=${{ secrets.HASURA_GRAPHQL_DATABASE_URL }}
-            HASURA_GRAPHQL_JWT_SECRET=${{ secrets.HASURA_GRAPHQL_JWT_SECRET }}
-            HASURA_GRAPHQL_ADMIN_SECRET=${{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}
-            SELFSERVICE_METHODS_OIDC_CONFIG_PROVIDERS_0_CLIENT_ID=${{ secrets.AUTH_PROVIDER_GOOGLE_CLIENT_ID }}
-            SELFSERVICE_METHODS_OIDC_CONFIG_PROVIDERS_0_CLIENT_SECRET=${{ secrets.AUTH_PROVIDER_GOOGLE_CLIENT_SECRET }}
+            DATABASE_URL=${{ secrets.HASURA_GRAPHQL_DATABASE_URL }}
+            JWT_SECRET=${{ secrets.HASURA_GRAPHQL_JWT_SECRET }}
           write-mode: overwrite
       - run: curl -L https://github.com/kubernetes/kompose/releases/download/v1.26.1/kompose-linux-amd64 -o kompose && chmod +x kompose
         name: Install kompose
