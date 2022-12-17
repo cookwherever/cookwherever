@@ -1,14 +1,14 @@
 version: '3.6'
 services:
   frontend:
-    image: ghcr.io/cookwherever/frontend@sha256:ed6d85c3a34e47d44e4db6baeb0563afa23b4aebb65b03dc88f0b91ff4e702e5
+    image: ghcr.io/cookwherever/frontend@sha256:61a306f45c2160ae49527121f082c0ec1b229a0edd35a9494f72b65d3bcb9b00
     restart: always
     ports:
       - '80:80'
     labels:
       kompose.image-pull-secret: "ghcr-pull-secret"
   backend:
-    image: ghcr.io/cookwherever/backend@sha256:dd218a5e05181abfca5cdf61ac26164f09b5d2bcd504b0e28e20042fef63ba4b
+    image: ghcr.io/cookwherever/backend@sha256:f16d0f6eef233eeb1e2d3ede5db1fdccd994c96cdfcf6510288f372e74bb6feb
     restart: always
     environment:
       PORT: 80
