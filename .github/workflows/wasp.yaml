@@ -28,6 +28,10 @@ jobs:
         uses: actions/setup-node@v2-beta
         with:
           node-version: '18'
+
+      - name: Install Wasp
+        run: curl -sSL https://get.wasp-lang.dev/installer.sh | sh
+
 #      - uses: actions/cache@v2
 #        id: npm-cache
 #        with:
