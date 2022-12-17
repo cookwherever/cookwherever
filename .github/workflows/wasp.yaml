@@ -59,8 +59,8 @@ jobs:
           cp nginx.conf wasp/.wasp/build/web-app
           cd wasp/.wasp/build/web-app
           npm install
-          REACT_APP_API_URL="https://api.cookwherever.com" npm run build
-          docker build . -e CI false --file Dockerfile --tag frontend
+          CI=false REACT_APP_API_URL="https://api.cookwherever.com" npm run build
+          docker build . --file Dockerfile --tag frontend
         name: "Build frontend image"
         env:
           REACT_APP_GIT_SHA: ${{ github.SHA }}
