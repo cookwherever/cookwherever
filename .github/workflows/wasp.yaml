@@ -56,7 +56,7 @@ jobs:
 
       - run: |
           cp Dockerfile wasp/.wasp/build/web-app
-          cp nginx.config wasp/.wasp/build/web-app
+          cp nginx.conf wasp/.wasp/build/web-app
           cd wasp/.wasp/build/web-app
           npm install
           REACT_APP_API_URL="https://api.cookwherever.com" npm run build
