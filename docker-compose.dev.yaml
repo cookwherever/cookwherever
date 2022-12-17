@@ -3,8 +3,7 @@ services:
     image: postgres:14
     restart: always
     volumes:
-      - ./docker/data/db:/var/lib/postgresql/data
-      - ./docker/initdb.d:/docker-entrypoint-initdb.d:ro
+      - ./docker/data:/var/lib/postgresql/data
     ports:
       - '5432:5432'
     environment:
