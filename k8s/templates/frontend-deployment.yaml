@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: ./kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert --volumes=configMap -c -o k8s
+    kompose.cmd: ./kompose -f docker-compose.prod.yaml convert --volumes=configMap -c -o k8s
     kompose.image-pull-secret: ghcr-pull-secret
     kompose.version: 1.26.1 (a9d05d509)
   creationTimestamp: null
@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: ./kompose -f docker-compose.yaml -f docker-compose.prod.yaml convert --volumes=configMap -c -o k8s
+        kompose.cmd: ./kompose -f docker-compose.prod.yaml convert --volumes=configMap -c -o k8s
         kompose.image-pull-secret: ghcr-pull-secret
         kompose.version: 1.26.1 (a9d05d509)
       creationTimestamp: null
@@ -26,7 +26,7 @@ spec:
         io.kompose.service: frontend
     spec:
       containers:
-        - image: ghcr.io/cookwherever/frontend@sha256:a7bfc0a98b36222292d579eac94106ae9c4da56ebbacc32c30ee827d6e96a9c4
+        - image: ghcr.io/cookwherever/wiki@sha256:c161954d8912b232a2b0fa89a0624ab1a272f45e6efd10f2dc679749ce614859
           name: frontend
           ports:
             - containerPort: 80
