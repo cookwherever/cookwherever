@@ -32,12 +32,21 @@ mutation UpsertProviders($sources: [recipe_source_providers_insert_input!]!) {
 
 def execute_create_recipes(recipes):
     body = recipes
+    """
     headers = {
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsYmx0aHcyZjAwMDBnaXIyMHY4cjhpN2kiLCJpYXQiOjE2NzA5MTE2NjN9.GpkYa6zYWhvSvTA4YFabRsemaKayr-FO_sXgMtHZFlo",
+        "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsYnM4OW00cjAwMDBsczVtaTN3M3ZiZTciLCJpYXQiOjE2NzEyOTg5OTB9.o8099H9CBG5VOa_OyPE-Hl1z7vPqiRiVcypGbEdl8PE",
         "content-type": "application/json"
     }
+    url = 'https://api.cookwherever.com/operations/create-recipe'
+    """
 
-    resp = requests.post('http://localhost:3001/operations/create-recipe', headers=headers, data=json.dumps(body))
+    headers = {
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsYzVlYWJ5cTAwMDBnaXlhcjV0ejZ4ZTAiLCJpYXQiOjE2NzIwOTUxNjF9.I3HErr3zvnFRdYrWozFFmnqa7E0CLTOdGBxgHt4C50I',
+        "content-type": "application/json"
+    }
+    url = 'http://localhost:3001/operations/create-recipe'
+
+    resp = requests.post(url, headers=headers, data=json.dumps(body))
     if resp.status_code != 200:
         print(resp.status_code)
         print(resp.text)

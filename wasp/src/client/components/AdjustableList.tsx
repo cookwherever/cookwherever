@@ -26,7 +26,7 @@ export const AdjustableList: React.FC<Props> = ({ name, list, setList }) => {
 			<div
 				className={css({
 					display: "flex",
-					marginBottom: theme.sizing.scale800,
+					marginBottom: 0
 				})}
 			>
 				<div

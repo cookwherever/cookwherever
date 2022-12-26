@@ -1,9 +1,9 @@
 import React from "react";
-import { ListRecipesRecipe } from "@wasp/shared/types/recipe";
-import { Link, useHistory } from "react-router-dom";
-import { FlexGrid, FlexGridItem } from "baseui/flex-grid";
-import { MessageCard } from "baseui/message-card";
-import { useStyletron } from "baseui";
+import {ListRecipesRecipe} from "@wasp/shared/types/recipe";
+import {Link, useHistory} from "react-router-dom";
+import {FlexGrid, FlexGridItem} from "baseui/flex-grid";
+import {MessageCard} from "baseui/message-card";
+import {useStyletron} from "baseui";
 
 interface Props {
 	recipes: ListRecipesRecipe[];
@@ -27,7 +27,7 @@ const RecipeList: React.FC<Props> = ({ recipes }) => {
 	};
 
 	return (
-		<FlexGrid flexGridColumnCount={3}>
+		<FlexGrid flexGridColumnCount={[1, 2, 2, 4]}>
 			{recipes.map((r) => (
 				<FlexGridItem key={r.id}>
 					<div

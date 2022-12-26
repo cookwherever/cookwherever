@@ -5,4 +5,4 @@ metadata:
 spec:
   domains:
     - cookwherever.com
-    - recipes.cookwherever.com
+    - api.cookwherever.com

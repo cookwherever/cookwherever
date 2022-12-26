@@ -7,11 +7,13 @@ import {Input} from "baseui/input";
 import {Button} from "baseui/button";
 import {AdjustableList} from "./components/AdjustableList";
 import {Cell, Grid} from "baseui/layout-grid";
+import {useStyletron} from "baseui";
 
 const MainPage: React.FC = () => {
 	const [search, setSearch] = useState("");
 	const [ingredients, setIngredients] = useState<string[]>([]);
 	const [cursor, setCursor] = useState<string | undefined>(undefined);
+	const [css, theme] = useStyletron();
 
 	// TODO (cthompson) figure out why input box flashes when entering in text
 	const [doSearch, setDoSearch] = useState("");
@@ -24,12 +26,12 @@ const MainPage: React.FC = () => {
 
 	return (
 		<>
-			<Grid gridMargins={[0]}>
+			<Grid gridMargins={[1]} gridGaps={[10]}>
 				<Cell span={[4]}>
 					<Input
 						value={search}
 						onChange={(e) => setSearch(e.target.value)}
-						placeholder="recipes with the name..."
+						placeholder="recipes named..."
 						autoFocus
 						clearable
 						clearOnEscape
@@ -37,7 +39,7 @@ const MainPage: React.FC = () => {
 				</Cell>
 				<Cell span={[7]}>
 					<AdjustableList
-						name={"recipes with the ingredient..."}
+						name={"recipes with..."}
 						list={ingredients}
 						setList={setIngredients}
 					/>
