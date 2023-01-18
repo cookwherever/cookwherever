@@ -41,7 +41,7 @@ spec:
               value: "80"
             - name: WASP_WEB_CLIENT_URL
               value: https://cookwherever.com
-          image: ghcr.io/cookwherever/backend@sha256:7a042933e6744472e2cd7e2ccb8f0415d54a0c64d2914cf1c7270e9fe2a5df4a
+          image: ghcr.io/cookwherever/backend@sha256:3df663f9fb6cab039887a5e82356fd4d12618883cddb1d0973874c7f716b7b31
           name: backend
           ports:
             - containerPort: 80
