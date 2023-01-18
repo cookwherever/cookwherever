@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="src" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/wasp/.wasp/out/server/node_modules" />
+        <item url="file://$PROJECT_DIR$/wasp/.wasp/out/web-app/node_modules" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/wasp/.wasp/out/server/node_modules" />
+      <root url="file://$PROJECT_DIR$/wasp/.wasp/out/web-app/node_modules" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

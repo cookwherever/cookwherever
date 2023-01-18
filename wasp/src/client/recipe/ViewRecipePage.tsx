@@ -34,9 +34,9 @@ const ViewRecipePage: React.FC<Props> = ({ match: { params: { id } } }) => {
 				<Cell span={[4]}>
 					<Block
 						height={["20px", "40px", "80px", "160px"]}
-						backgroundImage={`url(${
-							recipe.imageUrl || "https://picsum.photos/id/292/800/800"
-						})`}
+						backgroundImage={`url("${
+							encodeURI(recipe.imageUrl || "https://picsum.photos/id/292/800/800")
+						}")`}
 						backgroundSize={"contain"}
 						backgroundRepeat={"no-repeat"}
 					/>
@@ -46,20 +46,21 @@ const ViewRecipePage: React.FC<Props> = ({ match: { params: { id } } }) => {
 					overrides={{ Cell: { style: { alignSelf: "center" } } }}
 				>
 					<DisplayMedium>{recipe.name}</DisplayMedium>
+					<p>from <a href={recipe.sourcePath}>{recipe.source.name}</a></p>
 				</Cell>
 			</Grid>
 			<Grid gridMargins={[0]}>
 				<Cell span={[4]}>
 					<HeadingMedium>Ingredients</HeadingMedium>
-					{recipe.recipeIngredients.map((i) => (
+					{recipe.recipeIngredients.sort((a, b) => a.sequence - b.sequence).map((i) => (
 						<ListItem key={i.id}>
-							<ListItemLabel>{i.text}</ListItemLabel>
+							<ListItemLabel>{i.text}{i.calculatedMass ? (<> | {i.calculatedMass.toFixed(2)} grams</>) : null}</ListItemLabel>
 						</ListItem>
 					))}
 				</Cell>
 				<Cell span={[8]}>
 					<HeadingMedium>Directions</HeadingMedium>
-					{recipe.recipeDirections.map((i) => (
+					{recipe.recipeDirections.sort((a, b) => a.sequence - b.sequence).map((i) => (
 						<ListItem key={i.id} overrides={{ Content: { style: { padding: theme.sizing.scale200 } }}}>
 							<ListItemLabel>{i.text}</ListItemLabel>
 						</ListItem>

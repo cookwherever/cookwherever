@@ -1,6 +1,17 @@
 import HttpError from "@wasp/core/HttpError.js";
 import {Prisma} from "@prisma/client";
-import {ListRecipesRequest, ListRecipesResponse, ViewRecipeRequest, ViewRecipeResponse,} from "../shared/types/queries";
+import {
+  AdminIngredientsRequest,
+  AdminIngredientsResponse,
+  ListRecipesRequest,
+  ListRecipesResponse,
+  ViewRecipeRequest,
+  ViewRecipeResponse,
+} from "../shared/types/queries";
+
+export function notEmpty<TValue>(value: TValue | null | undefined): value is TValue {
+  return value !== null && value !== undefined;
+}
 
 export const listRecipes = async (
   args: ListRecipesRequest,
@@ -41,6 +52,7 @@ export const listRecipes = async (
     where: {
       OR: {
         name: {
+          mode: 'insensitive',
           contains: args.search,
         },
         ...getIngredientFilter(),
@@ -82,7 +94,34 @@ export const viewRecipe = async (
       sourceId: true,
       source: true,
       recipeDirections: true,
-      recipeIngredients: true,
+      recipeIngredients: {
+        select: {
+          id: true,
+          sequence: true,
+          text: true,
+          amount: true,
+          name: true,
+          comment: true,
+          unit: true,
+          ingredient: {
+            select: {
+              food: {
+                select: {
+                  description: true,
+                  measurements: {
+                    select: {
+                      amount: true,
+                      unit: true,
+                      comment: true,
+                      mass: true
+                    }
+                  }
+                }
+              }
+            }
+          },
+        }
+      },
     },
     where: {
       id: args.id,
@@ -93,7 +132,111 @@ export const viewRecipe = async (
     throw new HttpError(404, "recipe not found");
   }
 
+  const measuredIngredients = recipe.recipeIngredients.map(ingredient => {
+    const ingredientUnit = ingredient.unit;
+    const ingredientAmount = ingredient.amount;
+    const unitGramCoefficient = ingredientUnit?.gramCoefficient;
+    const foodIngredient = ingredient.ingredient;
+
+    if (!ingredientUnit || !ingredientAmount || !unitGramCoefficient) {
+      return ingredient;
+    }
+    console.log(ingredient);
+    console.log(foodIngredient?.food.measurements);
+
+    // TODO (cthompson) a specific measurement should be used instead of searching
+    const findMeasurement = () => {
+      const food = foodIngredient?.food;
+      if (!food || food.measurements.length === 0) {
+        return null;
+      }
+
+      const measurement = food.measurements.find(m => m.unit.name === ingredientUnit.name);
+      if (measurement) {
+        return measurement
+      }
+      return food.measurements[0];
+    }
+
+    const measurement = findMeasurement();
+    const measurementGramCoeff = measurement?.unit.gramCoefficient;
+    if (!measurement || !measurementGramCoeff) {
+      return ingredient;
+    }
+
+    // ingredient: 2 garlic cloves
+    // food: 1 garlic clove == 3 grams
+
+    // ingredient: 3 tbsp flour
+    // food: 1 cup flour == 100 grams
+
+    console.log(`${ingredientAmount} * ${unitGramCoefficient} / ${measurement.amount} * ${measurementGramCoeff} * ${measurement.mass}`)
+
+    const calculatedMass = (
+      (measurement.amount * measurementGramCoeff) / (ingredientAmount * unitGramCoefficient)
+    ) * measurement.mass;
+    return {
+      ...ingredient,
+      calculatedMass,
+    }
+  }).map(i => ({
+    ...i,
+    ingredient: undefined
+  }));
+
   return {
-    recipe,
+    recipe: {
+      ...recipe,
+      recipeIngredients: measuredIngredients
+    },
   };
 };
+
+export const adminIngredients = async (
+  args: AdminIngredientsRequest,
+  context: any,
+): Promise<AdminIngredientsResponse> => {
+  const delegate = context.entities.RecipeIngredient as Prisma.RecipeIngredientDelegate<{}>;
+  const ingredientNameDelegate = context.entities.IngredientName as Prisma.IngredientNameDelegate<{}>;
+  const recipeIngredients = await delegate.groupBy({
+    by: [
+      'name'
+    ],
+    orderBy: {
+      _count: {
+        name: 'desc'
+      }
+    },
+    _count: true,
+    take: 100,
+  });
+
+  const ingredients = await Promise.all(recipeIngredients.map(async i => {
+    if (!i.name) {
+      return
+    }
+
+    const ingredient = await ingredientNameDelegate.findUnique({
+      where: {
+        name: i.name
+      },
+      select: {
+        ingredient: {
+          select: {
+            food: true
+          }
+        }
+      }
+    });
+
+    return {
+      name: i.name,
+      count: i._count,
+      ingredient: ingredient?.ingredient?.food.description,
+    }
+  }));
+
+  return {
+    ingredients: ingredients.filter(notEmpty),
+  }
+}

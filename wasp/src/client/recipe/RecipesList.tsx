@@ -41,7 +41,7 @@ const RecipeList: React.FC<Props> = ({ recipes }) => {
 							onClick={() => viewRecipe(r.id)}
 							paragraph={r.source.name}
 							image={{
-								src: r.imageUrl || "https://picsum.photos/id/292/800/800",
+								src: `"${encodeURI(r.imageUrl || "https://picsum.photos/id/292/800/800")}"`,
 								ariaLabel: "recipe image",
 							}}
 						/>

@@ -256,29 +256,58 @@ def format_recipe_for_wasp(recipe_file, recipe):
     except Exception as e:
         source_name = recipe.get('source')
 
+    source_url = None
+    if source_name == "americastestkitchen":
+        source_name = "America's Test Kitchen"
+        source_url = "https://americastestkichen.com"
+    if source_name == "seriouseats":
+        source_name = "Serious Eats"
+        source_url = "https://seriouseats.com"
+    if source_name == "nytimes":
+        source_name = "New York Times"
+        source_url = "https://cooking.nytimes.com"
+    if source_name == "epicurious":
+        source_name = "Epicurious"
+        source_url = "https://epicurious.com"
+    if source_name == "joshuaweissman":
+        source_name = "Joshua Weissman"
+        source_url = "https://joshuaweissman.com"
+
     directions = recipe.get('recipe_directions')
     ingredient_groups = recipe.get('recipe_ingredient_groups')
 
     if directions is None:
         raise Exception(f'directions do not exist on {recipe_file}')
 
+    extended_directions = []
+    for direction in directions:
+        extended_directions.extend(direction.split('. '))
+
     formatted_directions = [
         {"text": step}
-        for i, step in enumerate(directions)
+        for i, step in enumerate(extended_directions)
     ]
 
     formatted_ingredients = []
     for ingredient_group in ingredient_groups:
         for ingredient in ingredient_group.get('ingredients'):
-            formatted_ingredients.append(ingredient)
+            formatted_ingredients.append({
+                "text": ingredient.get('text'),
+                "name": ingredient.get('name'),
+                "amount": ingredient.get('amount'),
+                "unit": ingredient.get('units'),
+                "comment": ingredient.get('comment'),
+            })
 
     return {
         "name": recipe.get("name"),
-        "source": recipe.get("source"),
-        "sourcePath": '',
+        "source": source_name,
+        "sourceUrl": source_url,
+        "sourcePath": recipe.get('source'),
         "imageUrl": recipe.get("image"),
         "directions": formatted_directions,
-        "ingredients": formatted_ingredients
+        "ingredients": formatted_ingredients,
+        "videoUrl": recipe.get('video')
     }
 
 

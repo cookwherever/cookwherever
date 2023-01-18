@@ -30,21 +30,27 @@ mutation UpsertProviders($sources: [recipe_source_providers_insert_input!]!) {
 """
 
 
+def api_url_and_headers(action):
+    env = os.environ.get('ENV')
+    if env == 'production':
+        headers = {
+            "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsYnM4OW00cjAwMDBsczVtaTN3M3ZiZTciLCJpYXQiOjE2NzEyOTg5OTB9.o8099H9CBG5VOa_OyPE-Hl1z7vPqiRiVcypGbEdl8PE",
+            "content-type": "application/json"
+        }
+        url = f"https://api.cookwherever.com/operations/{action}"
+        return url, headers
+    headers = {
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsY3kyNmU3djAwMDBnaXA1bWJ0ZmkzdTYiLCJpYXQiOjE2NzM4MjgzNDF9.mMFlnKZYlCxkD1DmCA4VBIpzsoYJGh8PjvMU-t-ba0E',
+        "content-type": "application/json"
+    }
+    url = f"http://localhost:3001/operations/{action}"
+    return url, headers
+
+
 def execute_create_recipes(recipes):
     body = recipes
-    """
-    headers = {
-        "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsYnM4OW00cjAwMDBsczVtaTN3M3ZiZTciLCJpYXQiOjE2NzEyOTg5OTB9.o8099H9CBG5VOa_OyPE-Hl1z7vPqiRiVcypGbEdl8PE",
-        "content-type": "application/json"
-    }
-    url = 'https://api.cookwherever.com/operations/create-recipe'
-    """
 
-    headers = {
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsYzVlYWJ5cTAwMDBnaXlhcjV0ejZ4ZTAiLCJpYXQiOjE2NzIwOTUxNjF9.I3HErr3zvnFRdYrWozFFmnqa7E0CLTOdGBxgHt4C50I',
-        "content-type": "application/json"
-    }
-    url = 'http://localhost:3001/operations/create-recipe'
+    url, headers = api_url_and_headers('create-recipe')
 
     resp = requests.post(url, headers=headers, data=json.dumps(body))
     if resp.status_code != 200:

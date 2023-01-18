@@ -40,7 +40,7 @@ entity Recipe {=psl
   recipeIngredients  RecipeIngredient[]
   userId             String
   sourceId           String
-  @@unique([name, sourceId])
+  @@unique([name, sourcePath])
 psl=}
 
 entity User {=psl
@@ -58,21 +58,73 @@ entity Source {=psl
 psl=}
 
 entity RecipeIngredient {=psl
-  id       String  @id @unique @default(cuid())
-  sequence Int
-  text     String
-  Recipe   Recipe? @relation(fields: [recipeId], references: [id])
-  recipeId String?
+  id           String      @id @unique @default(cuid())
+  sequence     Int
+  text         String
+  amount       Float?
+  name         String?
+  comment      String?
+  unit         FoodUnit?   @relation(fields: [foodUnitId], references: [id])
+  ingredient   Ingredient? @relation(fields: [ingredientId], references: [id])
+  Recipe       Recipe?     @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  recipeId     String?
+  foodUnitId   String?
+  ingredientId String?
   @@unique([recipeId, sequence])
+psl=}
+
+entity FoodUnit {=psl
+  id               String             @id @unique @default(cuid())
+  name             String
+  gramCoefficient  Float?
+  RecipeIngredient RecipeIngredient[]
+  FoodMeasurement  FoodMeasurement[]
+  @@unique([name])
+psl=}
+
+entity FoodMeasurement {=psl
+  id         String   @id @unique @default(cuid())
+  amount     Int
+  unit       FoodUnit @relation(fields: [foodUnitId], references: [id])
+  comment          String?
+  mass       Float
+  food       Food     @relation(fields: [foodId], references: [id], onDelete: Cascade)
+  foodUnitId String
+  foodId     String
+  @@unique([foodId, foodUnitId])
+psl=}
+
+entity Food {=psl
+  id           String            @id @unique @default(cuid())
+  description  String            @unique
+  fdcId        Int?
+  measurements FoodMeasurement[]
+  ingredient   Ingredient[]
 psl=}
 
 entity RecipeDirection {=psl
   id       String  @id @unique @default(cuid())
   sequence Int
   text     String
-  Recipe   Recipe? @relation(fields: [recipeId], references: [id])
+  Recipe   Recipe? @relation(fields: [recipeId], references: [id], onDelete: Cascade)
   recipeId String?
   @@unique([recipeId, sequence])
+psl=}
+
+entity Ingredient {=psl
+  id               String             @id @unique @default(cuid())
+  food             Food               @relation(fields: [foodId], references: [id])
+  RecipeIngredient RecipeIngredient[]
+  foodId           String
+  IngredientName   IngredientName[]
+psl=}
+
+entity IngredientName {=psl
+  id           String     @id @unique @default(cuid())
+  name         String
+  ingredient   Ingredient? @relation(fields: [ingredientId], references: [id])
+  ingredientId String?
+  @@unique([name])
 psl=}
 
 query listRecipes {
@@ -85,14 +137,34 @@ query viewRecipe {
     entities: [Recipe]
 }
 
+query adminIngredients {
+    fn: import { adminIngredients } from "@server/queries.js",
+    entities: [RecipeIngredient, IngredientName]
+}
+
+action searchFoodForIngredient {
+    fn: import { searchFoodForIngredient } from "@server/actions.js",
+    entities: [Food]
+}
+
 action createRecipe {
     fn: import { createRecipe } from "@server/actions.js",
-    entities: [Recipe]
+    entities: [Recipe, RecipeIngredient, RecipeDirection, FoodUnit, IngredientName]
 }
 
 action updateRecipe {
     fn: import { updateRecipe } from "@server/actions.js",
     entities: [Recipe]
+}
+
+action upsertFdcFood {
+    fn: import { upsertFdcFood } from "@server/actions.js",
+    entities: [Food, FoodUnit, FoodMeasurement]
+}
+
+action upsertIngredientFood {
+    fn: import { upsertIngredientFood } from "@server/actions.js",
+    entities: [Ingredient, IngredientName, RecipeIngredient, Food]
 }
 
 route RootRoute { path: "/", to: MainPage }
@@ -109,6 +181,11 @@ page SaveRecipePage {
 route ViewRecipeRoute { path: "/recipe/view/:id", to: ViewRecipePage }
 page ViewRecipePage {
   component: import ViewRecipePage from "@client/recipe/ViewRecipePage"
+}
+
+route AdminIngredientsRoute { path: "/admin/ingredients", to: AdminIngredientsPage }
+page AdminIngredientsPage {
+  component: import AdminIngredientsPage from "@client/admin/IngredientsPage"
 }
 
 route SignupRoute { path: "/signup", to: SignupPage }

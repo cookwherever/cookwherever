@@ -9,6 +9,7 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/wasp/.wasp/build/web-app/node_modules" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/backend" />
       <excludeFolder url="file://$MODULE_DIR$/docker" />
       <excludeFolder url="file://$MODULE_DIR$/gocook/data" />
@@ -22,10 +23,13 @@
       <excludeFolder url="file://$MODULE_DIR$/etl/python/data" />
       <excludeFolder url="file://$MODULE_DIR$/frontend/public/assets" />
       <excludeFolder url="file://$MODULE_DIR$/wasp/.wasp" />
+      <excludeFolder url="file://$MODULE_DIR$/wasp/.wasp/build/server/node_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/frontend" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.9 (food-data)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Python 3.9 (food-data) interpreter library" level="application" />
+    <orderEntry type="library" name="src" level="project" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_FOLDERS">
