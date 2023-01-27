@@ -12,7 +12,7 @@
 
 I have a rant about recipes [here](https://gist.github.com/breadchris/e09c92c46c6af9a96028a945108ef7d4) if you are interested in learning more about why I feel this project needs to exist.
 
-To see the best example of this guy in action, check out this [recipe](https://recipes.cookwherever.com/recipe/seriouseats-no-waste-tacos-de-carnitas-with-salsa-verde-recipe-56562).
+
 
 ## What do we got in the repo
 * **Wiki** (in progress) This [wiki](wiki/content/) is an abitious project and any contributes are very welcome. This wiki is an attempt to capture everything and anything about cooking. Whether it is a fast food burger recipe or chemical equations for acidic reactions, substitutes for buttermilk or frequency of cow milking, this wiki will capture everything. This will always need some love and over time more information will be captured and organized better. In the future, I hope to have a schema for every ingredient so that things such as important temperatures or common substitutions can be surfaced on a recipe page. 
