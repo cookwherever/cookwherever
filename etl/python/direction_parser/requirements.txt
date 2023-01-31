@@ -1,0 +1,5 @@
+textblob
+grpcio
+grpcio-tools
+grpcio-reflection
+spacy

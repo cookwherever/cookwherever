@@ -20,6 +20,7 @@ def c():
             for portion in food['foodPortions']:
                 mass = float(portion['gramWeight'])
                 name = portion.get('modifier')
+                sequence = portion.get('sequenceNumber')
                 comment = None
 
                 matches = re.match(r'^(oz|cup|lb), (.*)$', name)
@@ -35,6 +36,7 @@ def c():
                     continue
 
                 portions.append({
+                    "sequence": sequence,
                     "amount": 1,
                     "unit": {
                         "name": name,
@@ -67,12 +69,14 @@ def b():
             portions = []
             for portion in food['foodPortions']:
                 measureUnit = portion["measureUnit"]
+                sequence = portion.get('sequenceNumber')
 
                 mass = float(portion['gramWeight'])
                 comment = portion.get('modifier')
                 name = measureUnit['abbreviation']
 
                 portions.append({
+                    "sequence": sequence,
                     "amount": 1,
                     "unit": {
                         "name": name,
@@ -106,6 +110,7 @@ def a():
             portions = []
             for portion in food['foodPortions']:
                 portion_description = portion["portionDescription"]
+                sequence = portion.get('sequenceNumber')
 
                 matches = re.match(r'^(\d+) (.*)$', portion_description)
                 if matches is None:
@@ -121,6 +126,7 @@ def a():
                     comment = matches.group(1)
 
                 portions.append({
+                    "sequence": sequence,
                     "amount": amount,
                     "unit": {
                         "name": unit,
@@ -142,5 +148,6 @@ def a():
                 print(resp.status_code)
                 print(resp.text)
 
-a()
-b()
+#a()
+#b()
+c()

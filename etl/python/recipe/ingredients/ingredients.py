@@ -1,9 +1,10 @@
 import json
+from fractions import Fraction
+from unicodedata import normalize
 
 from .constants import fractions
 from .parse_ingredients import parse_ingredients, ingredients_file
-from unicodedata import normalize
-from fractions import Fraction
+
 
 def save_parsed_ingredients(ingredients = None):
     parsed_ingredients = []
@@ -87,9 +88,12 @@ def normalize_ingredient_groups(ingredient_groups, parsed_ingredients=[]):
                 if extra_comment is not None:
                     comment += extra_comment
 
+                # TODO (breadchris) normalize ingredient name http://agailloty.rbind.io/project/nlp_clean-text/
+                normalized_name = parsed_ingredient.get("name").lower() if parsed_ingredient.get("name") is not None else None
+
                 new_ingredients.append({
                     "text": ingredient,
-                    "name": parsed_ingredient.get("name"),
+                    "name": normalized_name,
                     "amount": qty,
                     "units": parsed_ingredient.get("unit"),
                     "comment": comment

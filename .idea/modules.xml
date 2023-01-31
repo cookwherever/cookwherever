@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/cookwherever.iml" filepath="$PROJECT_DIR$/.idea/cookwherever.iml" />
+      <module fileurl="file://$PROJECT_DIR$/etl/python/direction_parser/direction_parser.iml" filepath="$PROJECT_DIR$/etl/python/direction_parser/direction_parser.iml" />
     </modules>
   </component>
 </project>

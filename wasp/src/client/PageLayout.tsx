@@ -9,6 +9,7 @@ import {useHistory} from "react-router-dom";
 import {Provider as StyletronProvider} from "styletron-react";
 import {Client as Styletron} from "styletron-engine-atomic";
 import logout from "@wasp/auth/logout.js";
+import {SnackbarProvider} from 'baseui/snackbar';
 
 const engine = new Styletron();
 
@@ -38,6 +39,7 @@ const Nav: React.FC = ({ children }) => {
 	});
 
 	const mainItems = [
+		controlledNavItem("Groceries", "/grocery/list"),
 		controlledNavItem("Admin", "/admin/ingredients"),
 		controlledNavItem("Save", "/recipe/save"),
 		{ label: "Logout" },
@@ -92,7 +94,9 @@ export const PageLayout: React.FC = ({ children }) => {
 	return (
 		<StyletronProvider value={engine}>
 			<BaseProvider theme={LightTheme}>
-				<Nav children={children} />
+				<SnackbarProvider>
+					<Nav children={children} />
+				</SnackbarProvider>
 			</BaseProvider>
 		</StyletronProvider>
 	);

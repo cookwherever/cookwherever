@@ -39,6 +39,7 @@ export interface UpsertFdcFoodRequestPortionUnit {
 }
 
 export interface UpsertFdcFoodRequestPortion {
+  sequence: number;
   amount: number;
   unit: UpsertFdcFoodRequestPortionUnit;
   mass: number;
@@ -59,9 +60,9 @@ export interface SearchFoodForIngredientRequest {
 }
 
 export interface IngredientSearchResponseFood {
-  id: string
-  description: string
-  fdcId: number | null
+  id: string;
+  description: string;
+  fdcId: number | null;
 }
 
 export interface SearchFoodForIngredientResponse {
@@ -75,4 +76,20 @@ export interface UpsertIngredientFoodRequest {
 
 export interface UpsertIngredientFoodResponse {
   id: string;
+}
+
+export interface SaveGroceryListItemRequest {
+  text: string;
+  recipeIngredientId?: string;
+}
+
+export interface SaveGroceryListItemResponse {
+  existingItem: boolean;
+}
+
+export interface MarkGroceryListItemRequest {
+  groceryListItemId: string;
+}
+
+export interface MarkGroceryListItemResponse {
 }

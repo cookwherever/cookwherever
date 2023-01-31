@@ -1,8 +1,8 @@
-import React, {useState} from "react";
-import {arrayMove, arrayRemove, List} from "baseui/dnd-list";
-import {Input} from "baseui/input";
-import {Button, KIND} from "baseui/button";
-import {useStyletron} from "baseui";
+import React, { useState } from "react";
+import { arrayMove, arrayRemove, List } from "baseui/dnd-list";
+import { Input } from "baseui/input";
+import { Button, KIND } from "baseui/button";
+import { useStyletron } from "baseui";
 
 interface Props {
 	name: string;
@@ -26,7 +26,7 @@ export const AdjustableList: React.FC<Props> = ({ name, list, setList }) => {
 			<div
 				className={css({
 					display: "flex",
-					marginBottom: 0
+					marginBottom: 0,
 				})}
 			>
 				<div

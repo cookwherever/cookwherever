@@ -40,7 +40,7 @@ def api_url_and_headers(action):
         url = f"https://api.cookwherever.com/operations/{action}"
         return url, headers
     headers = {
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsY3kyNmU3djAwMDBnaXA1bWJ0ZmkzdTYiLCJpYXQiOjE2NzM4MjgzNDF9.mMFlnKZYlCxkD1DmCA4VBIpzsoYJGh8PjvMU-t-ba0E',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsZDFleHFwNjAwMDBnaWZ4ejZrNmg3dWMiLCJpYXQiOjE2NzQwMzExNzF9.5SOBANe7v3Sgm01LbnYn8dWjm2r8XNVVU6b0g0xjaDA',
         "content-type": "application/json"
     }
     url = f"http://localhost:3001/operations/{action}"

@@ -19,6 +19,11 @@ app cookwherever {
     ("baseui", "12.2.0"),
     ("styletron-engine-atomic", "1.5.0"),
     ("styletron-react", "6.1.0"),
+    ("wink-nlp", "1.13.0"),
+    ("wink-eng-lite-web-model", "1.4.3"),
+    ("@types/mocha", "10.0.1"),
+    ("react-markdown", "8.0.5"),
+    ("html-react-parser", "3.0.8")
   ],
 
   db: {
@@ -48,6 +53,7 @@ entity User {=psl
   username String  @unique
   password String
   Recipe   Recipe[]
+  groceryListItems GroceryListItem[]
 psl=}
 
 entity Source {=psl
@@ -70,6 +76,8 @@ entity RecipeIngredient {=psl
   recipeId     String?
   foodUnitId   String?
   ingredientId String?
+  directionIngredients DirectionIngredient[]
+  groceryListItems GroceryListItem[]
   @@unique([recipeId, sequence])
 psl=}
 
@@ -84,14 +92,15 @@ psl=}
 
 entity FoodMeasurement {=psl
   id         String   @id @unique @default(cuid())
+  sequence     Int
   amount     Int
-  unit       FoodUnit @relation(fields: [foodUnitId], references: [id])
+  unit       FoodUnit @relation(fields: [foodUnitId], references: [id], onDelete: Cascade)
   comment          String?
   mass       Float
   food       Food     @relation(fields: [foodId], references: [id], onDelete: Cascade)
   foodUnitId String
   foodId     String
-  @@unique([foodId, foodUnitId])
+  @@unique([foodId, sequence])
 psl=}
 
 entity Food {=psl
@@ -106,8 +115,15 @@ entity RecipeDirection {=psl
   id       String  @id @unique @default(cuid())
   sequence Int
   text     String
+  formattedText String?
   Recipe   Recipe? @relation(fields: [recipeId], references: [id], onDelete: Cascade)
   recipeId String?
+  ingredients  DirectionIngredient[]
+  measurements DirectionMeasurement[]
+  actions      DirectionAction[]
+  equipment    DirectionEquipment[]
+  durations    DirectionDuration[]
+  temperatures DirectionTemperature[]
   @@unique([recipeId, sequence])
 psl=}
 
@@ -117,6 +133,7 @@ entity Ingredient {=psl
   RecipeIngredient RecipeIngredient[]
   foodId           String
   IngredientName   IngredientName[]
+  groceryListItems GroceryListItem[]
 psl=}
 
 entity IngredientName {=psl
@@ -127,44 +144,121 @@ entity IngredientName {=psl
   @@unique([name])
 psl=}
 
+entity DirectionIngredient {=psl
+  id                 String            @id @unique @default(cuid())
+  name               String
+  ingredient         RecipeIngredient? @relation(fields: [recipeIngredientId], references: [id], onDelete: Cascade)
+  direction          RecipeDirection   @relation(fields: [recipeDirectionId], references: [id], onDelete: Cascade)
+  recipeIngredientId String?
+  recipeDirectionId  String
+psl=}
+
+entity DirectionMeasurement {=psl
+  id                String          @id @unique @default(cuid())
+  text              String
+  direction         RecipeDirection @relation(fields: [recipeDirectionId], references: [id], onDelete: Cascade)
+  recipeDirectionId String
+psl=}
+
+entity DirectionAction {=psl
+  id                String          @id @unique @default(cuid())
+  text              String
+  direction         RecipeDirection @relation(fields: [recipeDirectionId], references: [id], onDelete: Cascade)
+  recipeDirectionId String
+psl=}
+
+entity DirectionEquipment {=psl
+  id                String          @id @unique @default(cuid())
+  text              String
+  direction         RecipeDirection @relation(fields: [recipeDirectionId], references: [id], onDelete: Cascade)
+  recipeDirectionId String
+psl=}
+
+entity DirectionDuration {=psl
+  id                String          @id @unique @default(cuid())
+  text              String
+  direction         RecipeDirection @relation(fields: [recipeDirectionId], references: [id], onDelete: Cascade)
+  recipeDirectionId String
+psl=}
+
+entity DirectionTemperature {=psl
+  id                String          @id @unique @default(cuid())
+  text              String
+  direction         RecipeDirection @relation(fields: [recipeDirectionId], references: [id], onDelete: Cascade)
+  recipeDirectionId String
+psl=}
+
+entity GroceryListItem {=psl
+  id           String      @id @unique @default(cuid())
+  ingredient   Ingredient? @relation(fields: [ingredientId], references: [id])
+  recipeIngredient RecipeIngredient? @relation(fields: [recipeIngredientId], references: [id])
+  user         User        @relation(fields: [userId], references: [id])
+  createdAt    DateTime    @default(now())
+  text         String
+  ingredientId String?
+  recipeIngredientId String? @unique
+  userId       String
+  obtainedAt       DateTime?
+psl=}
+
+query getSearchProperties {
+    fn: import { getSearchProperties } from "@server/queries/get-search-properties.js",
+    entities: [Source]
+}
+
 query listRecipes {
-    fn: import { listRecipes } from "@server/queries.js",
+    fn: import { listRecipes } from "@server/queries/list-recipes.js",
     entities: [Recipe]
 }
 
 query viewRecipe {
-    fn: import { viewRecipe } from "@server/queries.js",
+    fn: import { viewRecipe } from "@server/queries/view-recipe.js",
     entities: [Recipe]
 }
 
 query adminIngredients {
-    fn: import { adminIngredients } from "@server/queries.js",
+    fn: import { adminIngredients } from "@server/queries/admin-ingredients.js",
     entities: [RecipeIngredient, IngredientName]
 }
 
+query viewGroceryList {
+    fn: import { viewGroceryList } from "@server/queries/view-grocery-list.js",
+    entities: [GroceryListItem]
+}
+
 action searchFoodForIngredient {
-    fn: import { searchFoodForIngredient } from "@server/actions.js",
+    fn: import { searchFoodForIngredient } from "@server/actions/search-food-for-ingredient.js",
     entities: [Food]
 }
 
 action createRecipe {
-    fn: import { createRecipe } from "@server/actions.js",
-    entities: [Recipe, RecipeIngredient, RecipeDirection, FoodUnit, IngredientName]
-}
-
-action updateRecipe {
-    fn: import { updateRecipe } from "@server/actions.js",
-    entities: [Recipe]
+    fn: import { createRecipe } from "@server/actions/create-recipe.js",
+    entities: [Recipe, RecipeIngredient, RecipeDirection, FoodUnit, IngredientName, DirectionIngredient, DirectionMeasurement, DirectionAction, DirectionEquipment, DirectionDuration, DirectionTemperature]
 }
 
 action upsertFdcFood {
-    fn: import { upsertFdcFood } from "@server/actions.js",
+    fn: import { upsertFdcFood } from "@server/actions/upsert-fdc-food.js",
     entities: [Food, FoodUnit, FoodMeasurement]
 }
 
 action upsertIngredientFood {
-    fn: import { upsertIngredientFood } from "@server/actions.js",
+    fn: import { upsertIngredientFood } from "@server/actions/upsert-ingredient-food.js",
     entities: [Ingredient, IngredientName, RecipeIngredient, Food]
+}
+
+action parseDirections {
+    fn: import { parseDirections } from "@server/parsing/parse-direction.js",
+    entities: []
+}
+
+action saveGroceryListItem {
+    fn: import { saveGroceryListItem } from "@server/actions/save-grocery-list-item.js",
+    entities: [GroceryListItem]
+}
+
+action markGroceryListItem {
+    fn: import { markGroceryListItem } from "@server/actions/mark-grocery-list-item.js",
+    entities: [GroceryListItem]
 }
 
 route RootRoute { path: "/", to: MainPage }
@@ -178,9 +272,9 @@ page SaveRecipePage {
   component: import SaveRecipePage from "@client/recipe/SaveRecipe"
 }
 
-route ViewRecipeRoute { path: "/recipe/view/:id", to: ViewRecipePage }
+route ViewRecipeRoute { path: "/recipe/:id", to: ViewRecipePage }
 page ViewRecipePage {
-  component: import ViewRecipePage from "@client/recipe/ViewRecipePage"
+  component: import ViewRecipePage from "@client/recipe/ViewRecipe/ViewRecipePage"
 }
 
 route AdminIngredientsRoute { path: "/admin/ingredients", to: AdminIngredientsPage }
@@ -196,4 +290,9 @@ page SignupPage {
 route LoginRoute { path: "/login", to: LoginPage }
 page LoginPage {
   component: import Login from "@client/auth/LoginPage"
+}
+
+route GroceryListRoute { path: "/grocery/list", to: GroceryListPage }
+page GroceryListPage {
+  component: import GroceryListPage from "@client/grocery/GroceryListPage"
 }

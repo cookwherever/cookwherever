@@ -1,9 +1,9 @@
 import React from "react";
-import {ListRecipesRecipe} from "@wasp/shared/types/recipe";
-import {Link, useHistory} from "react-router-dom";
-import {FlexGrid, FlexGridItem} from "baseui/flex-grid";
-import {MessageCard} from "baseui/message-card";
-import {useStyletron} from "baseui";
+import { ListRecipesRecipe } from "@wasp/shared/types/recipe";
+import { Link, useHistory } from "react-router-dom";
+import { FlexGrid, FlexGridItem } from "baseui/flex-grid";
+import { MessageCard } from "baseui/message-card";
+import { useStyletron } from "baseui";
 
 interface Props {
 	recipes: ListRecipesRecipe[];
@@ -23,11 +23,11 @@ const RecipeList: React.FC<Props> = ({ recipes }) => {
 	}
 
 	const viewRecipe = (id: string) => {
-		history.push(`/recipe/view/${id}`);
+		history.push(`/recipe/${id}`);
 	};
 
 	return (
-		<FlexGrid flexGridColumnCount={[1, 2, 2, 4]}>
+		<FlexGrid flexGridColumnCount={[1, 1, 4]}>
 			{recipes.map((r) => (
 				<FlexGridItem key={r.id}>
 					<div
@@ -41,7 +41,9 @@ const RecipeList: React.FC<Props> = ({ recipes }) => {
 							onClick={() => viewRecipe(r.id)}
 							paragraph={r.source.name}
 							image={{
-								src: `"${encodeURI(r.imageUrl || "https://picsum.photos/id/292/800/800")}"`,
+								src: `"${encodeURI(
+									r.imageUrl || "https://picsum.photos/id/292/800/800",
+								)}"`,
 								ariaLabel: "recipe image",
 							}}
 						/>

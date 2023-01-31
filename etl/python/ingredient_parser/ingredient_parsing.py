@@ -5,7 +5,7 @@ import subprocess
 import tempfile
 import warnings
 
-from etl.python.ingredient_parser import service_pb2_grpc, service_pb2
+from bottle import run, request, post
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
@@ -21,16 +21,53 @@ def _exec_crf_test(input_text, model_path):
             ['crf_test', '--verbose=1', '--model', model_path,
              input_file.name]).decode('utf-8')
 
-class Greeter(service_pb2_grpc.IngredientParserServicer):
-  def Parse(self, request, context):
-    ingredient = request.text.strip()
+# class RecipeService(service_pb2_grpc.IngredientParserServicer):
+#   def Parse(self, request, context):
+#     ingredient = request.text.strip()
+#
+#     crf_output = _exec_crf_test([ingredient], model_file)
+#
+#     lines = utils.import_data(crf_output.split('\n'))
+#     return service_pb2.ParseResponse(name='', amount='')
+
+def from_stdin():
+    for line in fileinput.input():
+        ingredient = line.strip()
+
+        crf_output = _exec_crf_test([ingredient], model_file)
+
+        lines = utils.import_data(crf_output.split('\n'))
+
+        print(json.dumps(lines))
+
+@post('/parse')
+def hello_world():
+    body = request.json
+
+    ingredient = body.get('ingredient').strip()
 
     crf_output = _exec_crf_test([ingredient], model_file)
 
     lines = utils.import_data(crf_output.split('\n'))
-    return service_pb2.ParseResponse(name='', amount='')
+
+    formatted_lines = []
+    for line in lines:
+        name = line.get('name')
+        formatted_lines.append({
+            **line,
+            "name": name.lower() if name is not None else None
+        })
+
+    return {
+        'ingredients': formatted_lines
+    }
 
 def main():
+    run_type = os.environ['RUN']
+    if run_type == "SERVER":
+        run(host='0.0.0.0', port=8080)
+    else:
+        from_stdin()
 
 if __name__ == '__main__':
     main()

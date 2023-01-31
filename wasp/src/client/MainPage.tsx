@@ -1,28 +1,39 @@
-import {useQuery} from "@wasp/queries";
+import { useQuery } from "@wasp/queries";
 import RecipesList from "./recipe/RecipesList";
-import {typedListRecipes} from "./types/queries";
-import {PageLayout} from "./PageLayout";
-import React, {useState} from "react";
-import {Input} from "baseui/input";
-import {Button} from "baseui/button";
-import {AdjustableList} from "./components/AdjustableList";
-import {Cell, Grid} from "baseui/layout-grid";
-import {useStyletron} from "baseui";
+import { typedGetSearchProperties, typedListRecipes } from "./types/queries";
+import { PageLayout } from "./PageLayout";
+import React, { useState } from "react";
+import { Input } from "baseui/input";
+import { Button } from "baseui/button";
+import { AdjustableList } from "./components/AdjustableList";
+import { Cell, Grid } from "baseui/layout-grid";
+import { Combobox } from "baseui/combobox";
+import { useStyletron } from "baseui";
 
-const MainPage: React.FC = () => {
+const anySource = "Any Source";
+
+interface SearchPropertiesProps {
+	setDoSearch: (search: string) => void;
+	ingredients: string[];
+	setIngredients: (ingredients: string[]) => void;
+	source: string;
+	setSource: (source: string) => void;
+}
+
+const SearchProperties: React.FC<SearchPropertiesProps> = ({
+	setDoSearch,
+	ingredients,
+	setIngredients,
+	source,
+	setSource,
+}) => {
 	const [search, setSearch] = useState("");
-	const [ingredients, setIngredients] = useState<string[]>([]);
-	const [cursor, setCursor] = useState<string | undefined>(undefined);
-	const [css, theme] = useStyletron();
 
-	// TODO (cthompson) figure out why input box flashes when entering in text
-	const [doSearch, setDoSearch] = useState("");
+	const { data, isFetching, error } = useQuery(typedGetSearchProperties, {});
 
-	const { data, isFetching, error } = useQuery(typedListRecipes, {
-		search: doSearch,
-		ingredients,
-		cursor,
-	});
+	if (!data) {
+		return <>Unable to load search properties!: {error}</>;
+	}
 
 	return (
 		<>
@@ -37,17 +48,62 @@ const MainPage: React.FC = () => {
 						clearOnEscape
 					/>
 				</Cell>
-				<Cell span={[7]}>
+				<Cell span={[5]}>
 					<AdjustableList
 						name={"recipes with..."}
 						list={ingredients}
 						setList={setIngredients}
 					/>
 				</Cell>
+				<Cell span={[3]}>
+					<Combobox
+						value={source}
+						onChange={(nextValue) => setSource(nextValue)}
+						options={[
+							...data.sources.map((s) => ({
+								id: s.id,
+								label: s.name,
+							})),
+							{ id: "empty", label: anySource },
+						]}
+						mapOptionToString={(option) => option.label}
+					/>
+				</Cell>
+			</Grid>
+			<Grid gridMargins={[1]} gridGaps={[10]}>
 				<Cell span={[1]}>
 					<Button onClick={() => setDoSearch(search)}>Search</Button>
 				</Cell>
 			</Grid>
+		</>
+	);
+};
+
+const MainPage: React.FC = () => {
+	const [ingredients, setIngredients] = useState<string[]>([]);
+	const [source, setSource] = useState<string>(anySource);
+	const [cursor, setCursor] = useState<string | undefined>(undefined);
+	const [css, theme] = useStyletron();
+
+	// TODO (cthompson) figure out why input box flashes when entering in text
+	const [doSearch, setDoSearch] = useState("");
+
+	const { data, isFetching, error } = useQuery(typedListRecipes, {
+		search: doSearch,
+		source: source === anySource ? undefined : source,
+		ingredients,
+		cursor,
+	});
+
+	return (
+		<>
+			<SearchProperties
+				setDoSearch={setDoSearch}
+				ingredients={ingredients}
+				setIngredients={setIngredients}
+				source={source}
+				setSource={setSource}
+			/>
 			{data?.recipes && (
 				<>
 					<RecipesList recipes={data.recipes} />
