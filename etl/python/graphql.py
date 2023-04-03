@@ -29,12 +29,25 @@ mutation UpsertProviders($sources: [recipe_source_providers_insert_input!]!) {
 }
 """
 
+gotten_jwt = None
+def get_jwt():
+    global gotten_jwt
+
+    if gotten_jwt is not None:
+        return gotten_jwt
+
+    resp = requests.post('https://api.cookwherever.com/auth/login', headers={
+        "content-type": "application/json"
+    }, data=json.dumps({"username":"breadchris","password":"aaAA11!!"}))
+    gotten_jwt = resp.json()['token']
+    return gotten_jwt
 
 def api_url_and_headers(action):
     env = os.environ.get('ENV')
     if env == 'production':
+        jwt = get_jwt()
         headers = {
-            "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsYnM4OW00cjAwMDBsczVtaTN3M3ZiZTciLCJpYXQiOjE2NzEyOTg5OTB9.o8099H9CBG5VOa_OyPE-Hl1z7vPqiRiVcypGbEdl8PE",
+            "authorization": "Bearer " + jwt,
             "content-type": "application/json"
         }
         url = f"https://api.cookwherever.com/operations/{action}"

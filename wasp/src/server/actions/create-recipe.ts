@@ -80,11 +80,18 @@ export const createRecipe = async (
 			const ingredientNameDelegate = context.entities
 				.IngredientName as Prisma.IngredientNameDelegate<{}>;
 
-			const processedIngredientName = ingredient.name
-				? nlp.readDoc(ingredient.name)
-				: undefined;
+			const normalizedIngName = (() => {
+				try {
+					const processedIngredientName = ingredient.name
+						? nlp.readDoc(ingredient.name)
+						: undefined;
 
-			const normalizedIngName = processedIngredientName?.out(nlp.its.lemma);
+					return processedIngredientName?.out(nlp.its.lemma);
+				} catch (e) {
+					console.error(e);
+					return undefined;
+				}
+			})()
 
 			const createUnit = async (): Promise<
 				Prisma.FoodUnitCreateNestedOneWithoutRecipeIngredientInput | undefined
@@ -182,164 +189,170 @@ export const createRecipe = async (
 	);
 
 	// Parse and insert directions
-	const parsedDirections = await parseDirections({
-		directions: args.directions.map((d) => d.text),
-		ingredients: args.ingredients.map((i) => i.name).filter(notEmpty),
-	});
+	/*
+	try {
+		const parsedDirections = await parseDirections({
+			directions: args.directions.map((d) => d.text),
+			ingredients: args.ingredients.map((i) => i.name).filter(notEmpty),
+		});
 
-	await Promise.all(
-		parsedDirections.directions.map(async (parsedDirection, idx) => {
-			const createUpdate: Prisma.RecipeDirectionCreateInput = {
-				sequence: idx,
-				text: parsedDirection.originalText,
-				formattedText: parsedDirection.text,
-				Recipe: {
-					connect: {
-						id: createdRecipe.id,
+		await Promise.all(
+			parsedDirections.directions.map(async (parsedDirection, idx) => {
+				const createUpdate: Prisma.RecipeDirectionCreateInput = {
+					sequence: idx,
+					text: parsedDirection.originalText,
+					formattedText: parsedDirection.text,
+					Recipe: {
+						connect: {
+							id: createdRecipe.id,
+						},
 					},
-				},
-			};
-			const recipeDirectionUpsertArgs: Prisma.RecipeDirectionUpsertArgs = {
-				where: {
-					recipeId_sequence: {
-						recipeId: createdRecipe.id,
-						sequence: idx,
+				};
+				const recipeDirectionUpsertArgs: Prisma.RecipeDirectionUpsertArgs = {
+					where: {
+						recipeId_sequence: {
+							recipeId: createdRecipe.id,
+							sequence: idx,
+						},
 					},
-				},
-				create: createUpdate,
-				update: createUpdate,
-				select: {
-					id: true,
-				},
-			};
-			const delegate = context.entities
-				.RecipeDirection as Prisma.RecipeDirectionDelegate<{}>;
-			const direction = await delegate.upsert(recipeDirectionUpsertArgs);
+					create: createUpdate,
+					update: createUpdate,
+					select: {
+						id: true,
+					},
+				};
+				const delegate = context.entities
+					.RecipeDirection as Prisma.RecipeDirectionDelegate<{}>;
+				const direction = await delegate.upsert(recipeDirectionUpsertArgs);
 
-			// Delete all direction metadata and re-insert it.
-			// It does not seem possible to upsert here.
-			const directionIngredient = context.entities
-				.DirectionIngredient as Prisma.DirectionIngredientDelegate<{}>;
-			await directionIngredient.deleteMany({
-				where: {
-					recipeDirectionId: direction.id,
-				},
-			});
+				// Delete all direction metadata and re-insert it.
+				// It does not seem possible to upsert here.
+				const directionIngredient = context.entities
+					.DirectionIngredient as Prisma.DirectionIngredientDelegate<{}>;
+				await directionIngredient.deleteMany({
+					where: {
+						recipeDirectionId: direction.id,
+					},
+				});
 
-			await Promise.all(
-				parsedDirection.ingredients.map(async (ingredient) => {
-					const recipeIngredient = insertedIngredients.filter(
-						(ing) => ingredient === ing.name,
-					);
-					await directionIngredient.create({
-						data: {
-							recipeDirectionId: direction.id,
-							recipeIngredientId:
-								recipeIngredient.length > 0
-									? recipeIngredient[0].id
-									: undefined,
-							name: ingredient,
-						},
-					});
-				}),
-			);
+				await Promise.all(
+					parsedDirection.ingredients.map(async (ingredient) => {
+						const recipeIngredient = insertedIngredients.filter(
+							(ing) => ingredient === ing.name,
+						);
+						await directionIngredient.create({
+							data: {
+								recipeDirectionId: direction.id,
+								recipeIngredientId:
+									recipeIngredient.length > 0
+										? recipeIngredient[0].id
+										: undefined,
+								name: ingredient,
+							},
+						});
+					}),
+				);
 
-			const directionMeasurement = context.entities
-				.DirectionMeasurement as Prisma.DirectionMeasurementDelegate<{}>;
-			await directionMeasurement.deleteMany({
-				where: {
-					recipeDirectionId: direction.id,
-				},
-			});
+				const directionMeasurement = context.entities
+					.DirectionMeasurement as Prisma.DirectionMeasurementDelegate<{}>;
+				await directionMeasurement.deleteMany({
+					where: {
+						recipeDirectionId: direction.id,
+					},
+				});
 
-			await Promise.all(
-				parsedDirection.measurements.map(async (measurement) => {
-					await directionMeasurement.create({
-						data: {
-							recipeDirectionId: direction.id,
-							text: measurement,
-						},
-					});
-				}),
-			);
+				await Promise.all(
+					parsedDirection.measurements.map(async (measurement) => {
+						await directionMeasurement.create({
+							data: {
+								recipeDirectionId: direction.id,
+								text: measurement,
+							},
+						});
+					}),
+				);
 
-			const directionAction = context.entities
-				.DirectionAction as Prisma.DirectionActionDelegate<{}>;
-			await directionAction.deleteMany({
-				where: {
-					recipeDirectionId: direction.id,
-				},
-			});
+				const directionAction = context.entities
+					.DirectionAction as Prisma.DirectionActionDelegate<{}>;
+				await directionAction.deleteMany({
+					where: {
+						recipeDirectionId: direction.id,
+					},
+				});
 
-			await Promise.all(
-				parsedDirection.actions.map(async (action) => {
-					await directionAction.create({
-						data: {
-							recipeDirectionId: direction.id,
-							text: action,
-						},
-					});
-				}),
-			);
+				await Promise.all(
+					parsedDirection.actions.map(async (action) => {
+						await directionAction.create({
+							data: {
+								recipeDirectionId: direction.id,
+								text: action,
+							},
+						});
+					}),
+				);
 
-			const directionEquipment = context.entities
-				.DirectionEquipment as Prisma.DirectionEquipmentDelegate<{}>;
-			await directionEquipment.deleteMany({
-				where: {
-					recipeDirectionId: direction.id,
-				},
-			});
+				const directionEquipment = context.entities
+					.DirectionEquipment as Prisma.DirectionEquipmentDelegate<{}>;
+				await directionEquipment.deleteMany({
+					where: {
+						recipeDirectionId: direction.id,
+					},
+				});
 
-			await Promise.all(
-				parsedDirection.equipment.map(async (equipment) => {
-					await directionEquipment.create({
-						data: {
-							recipeDirectionId: direction.id,
-							text: equipment,
-						},
-					});
-				}),
-			);
+				await Promise.all(
+					parsedDirection.equipment.map(async (equipment) => {
+						await directionEquipment.create({
+							data: {
+								recipeDirectionId: direction.id,
+								text: equipment,
+							},
+						});
+					}),
+				);
 
-			const directionDuration = context.entities
-				.DirectionDuration as Prisma.DirectionDurationDelegate<{}>;
-			await directionDuration.deleteMany({
-				where: {
-					recipeDirectionId: direction.id,
-				},
-			});
+				const directionDuration = context.entities
+					.DirectionDuration as Prisma.DirectionDurationDelegate<{}>;
+				await directionDuration.deleteMany({
+					where: {
+						recipeDirectionId: direction.id,
+					},
+				});
 
-			await Promise.all(
-				parsedDirection.durations.map(async (duration) => {
-					await directionDuration.create({
-						data: {
-							recipeDirectionId: direction.id,
-							text: duration,
-						},
-					});
-				}),
-			);
+				await Promise.all(
+					parsedDirection.durations.map(async (duration) => {
+						await directionDuration.create({
+							data: {
+								recipeDirectionId: direction.id,
+								text: duration,
+							},
+						});
+					}),
+				);
 
-			const directionTemperature = context.entities
-				.DirectionTemperature as Prisma.DirectionTemperatureDelegate<{}>;
-			await directionTemperature.deleteMany({
-				where: {
-					recipeDirectionId: direction.id,
-				},
-			});
+				const directionTemperature = context.entities
+					.DirectionTemperature as Prisma.DirectionTemperatureDelegate<{}>;
+				await directionTemperature.deleteMany({
+					where: {
+						recipeDirectionId: direction.id,
+					},
+				});
 
-			await Promise.all(
-				parsedDirection.temperatures.map(async (temperature) => {
-					await directionTemperature.create({
-						data: {
-							recipeDirectionId: direction.id,
-							text: temperature,
-						},
-					});
-				}),
-			);
-		}),
-	);
+				await Promise.all(
+					parsedDirection.temperatures.map(async (temperature) => {
+						await directionTemperature.create({
+							data: {
+								recipeDirectionId: direction.id,
+								text: temperature,
+							},
+						});
+					}),
+				);
+			}),
+		);
+	} catch (e) {
+		console.error(e);
+	}
+	*/
 
 	return {
 		id: createdRecipe.id,
