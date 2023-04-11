@@ -189,8 +189,36 @@ export const createRecipe = async (
 	);
 
 	// Parse and insert directions
-	/*
 	try {
+		await Promise.all(
+			args.directions.map(async (direction, idx) => {
+				const createUpdate: Prisma.RecipeDirectionCreateInput = {
+					sequence: idx,
+					text: direction.text,
+					Recipe: {
+						connect: {
+							id: createdRecipe.id,
+						},
+					},
+				};
+				const recipeDirectionUpsertArgs: Prisma.RecipeDirectionUpsertArgs = {
+					where: {
+						recipeId_sequence: {
+							recipeId: createdRecipe.id,
+							sequence: idx,
+						},
+					},
+					create: createUpdate,
+					update: createUpdate,
+					select: {
+						id: true,
+					},
+				};
+				const delegate = context.entities
+					.RecipeDirection as Prisma.RecipeDirectionDelegate<{}>;
+				await delegate.upsert(recipeDirectionUpsertArgs);
+		}));
+		/*
 		const parsedDirections = await parseDirections({
 			directions: args.directions.map((d) => d.text),
 			ingredients: args.ingredients.map((i) => i.name).filter(notEmpty),
@@ -347,12 +375,10 @@ export const createRecipe = async (
 						});
 					}),
 				);
-			}),
-		);
+			*/
 	} catch (e) {
 		console.error(e);
 	}
-	*/
 
 	return {
 		id: createdRecipe.id,
