@@ -26,7 +26,7 @@ spec:
         io.kompose.service: frontend
     spec:
       containers:
-        - image: ghcr.io/cookwherever/frontend@sha256:d1bee2517a58cbbf04588d3c5f1d39249c9062b55cb46943204bf2bb366070cd
+        - image: ghcr.io/cookwherever/frontend@sha256:9d3263df612fd08b0b59d513bc1af5956bce03d2a595082df1c0f55ec7be49cc
           name: frontend
           ports:
             - containerPort: 80
