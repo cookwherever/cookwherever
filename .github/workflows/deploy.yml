@@ -19,7 +19,7 @@ jobs:
       branch_name: ${{ steps.branch-name.outputs.current_branch }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Get branch name
         id: branch-name
         uses: tj-actions/branch-names@v5.2
@@ -55,7 +55,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.GH_TOKEN }}
           ref: ${{needs.kompose.outputs.commit_hash}}
