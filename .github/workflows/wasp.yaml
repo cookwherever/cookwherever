@@ -27,7 +27,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2-beta
         with:
-          node-version: '18'
+          node-version: '22'
 
       - name: Install Wasp
         run: curl -sSL https://get.wasp-lang.dev/installer.sh | sh
